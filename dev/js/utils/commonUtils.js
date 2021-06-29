@@ -1,4 +1,3 @@
-import HealthIdSuccessView from "../components/HealthIdSuccessView";
 
 var CryptoJS = require("crypto-js");
 

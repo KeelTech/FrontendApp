@@ -9,6 +9,7 @@ const queryString = require('query-string');
 
 require('../css/style.css')
 require('../css/snackbar.css')
+require('../css/dashboard.css')
 
 const logPageView = () => {
 };

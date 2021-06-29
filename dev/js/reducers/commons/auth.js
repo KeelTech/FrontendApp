@@ -10,7 +10,8 @@ const defaultState = {
     phoneNumber: '',
     submit_otp: false,
     submit_otp_success: false,
-    submit_otp_fail: false
+    submit_otp_fail: false,
+    counter: 0
 }
 
 export default function (state = defaultState, action) {
@@ -68,6 +69,12 @@ export default function (state = defaultState, action) {
             newState.submit_otp_success = false
             newState.error_message = action.payload.error_message
             return newState
+        }
+
+        case 'TEST_DEMO': {
+            let newState = {...state};
+            newState.counter++;
+            return newState;
         }
 
         case RESET_AUTH: {

@@ -181,6 +181,11 @@ const client_base = {
                 ]
             }
         ]
+    },
+    resolve: {
+        alias: {
+            '@components': path.resolve(__dirname, 'dev/js/components')
+          }
     }
 
 }

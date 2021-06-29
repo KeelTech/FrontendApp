@@ -14,7 +14,7 @@ const persistConfig = {
 const AUTH_PERSIST = {
     key: 'AUTH',
     storage: storage,
-    whitelist: []
+    whitelist: ['counter']
 }
 
 const USER_PERSIST = {
