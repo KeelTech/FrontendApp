@@ -1,0 +1,13 @@
+/node_modules
+node_modules
+./node_modules
+/dist
+dist
+./dist
+server.js
+.env
+/server
+server
+./server
+deploy.sh
+package-lock.json
