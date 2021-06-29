@@ -32,10 +32,10 @@ class LeftMenu extends React.Component {
 		return (
             	<div className={"health-id-dashboard-navigation "+this.props.classprop}>
                     <div onClick={this.handleCloseClick.bind(this)} className="close hide-desktop">
-                    	<img src={ASSETS_BASE_URL+"/images/icon-cross.svg"} alt="DocprimeNDHM" />
+                    	<img src={ASSETS_BASE_URL+"/images/icon-cross.svg"} alt="Keel" />
                     </div>
                     <div className="logo">
-                    	<a href="/"><img src={ASSETS_BASE_URL+"/images/doc-prime-logo-mobile.svg"} alt="DocprimeNDHM" /></a>
+                    	<a href="/"><img src={ASSETS_BASE_URL+"/images/logo-mobile.svg"} alt="Keel" /></a>
                     </div>
                     <div className="health-id-details">
 						<div className="health-id-details-initials">
@@ -48,16 +48,14 @@ class LeftMenu extends React.Component {
 						</div>
                     </div>
                     <ul className="navigation">
-						<li><img src={ASSETS_BASE_URL+"/images/navigation/nav-icon-kyc-verification.svg"} alt="DocprimeDHM" /><a href="/"> Dashboard</a></li>
 						<li className="disabled">
-							<img src={ASSETS_BASE_URL+"/images/navigation/nav-icon-dashboard-active.svg"} alt="DocprimeDHM" className="active" />
-							<img src={ASSETS_BASE_URL+"/images/navigation/nav-icon-dashboard.svg"} alt="DocprimeDHM" className="not-active" />Your Health IDs
+							<img src={ASSETS_BASE_URL+"/images/navigation/nav-icon-dashboard-active.svg"} alt="Keel" className="active" />
+							<img src={ASSETS_BASE_URL+"/images/navigation/nav-icon-dashboard.svg"} alt="Keel" className="not-active" />Your Health IDs
 						</li>
-						<li className="disabled"><img src={ASSETS_BASE_URL+"/images/navigation/nav-icon-kyc-verification.svg"} alt="DocprimeDHM" />KYC Verification</li>
-						<li className="disabled"><img src={ASSETS_BASE_URL+"/images/navigation/nav-icon-health-docs.svg"} alt="DocprimeDHM" />Health Docs</li>
-						<li className="disabled"><img src={ASSETS_BASE_URL+"/images/navigation/nav-icon-permissions.svg"} alt="DocprimeDHM" />Permissions</li>
-						<li><img src={ASSETS_BASE_URL+"/images/navigation/nav-icon-help.svg"} alt="DocprimeDHM" />Need Help</li>
-						<li onClick={this.logout.bind(this)}><img src={ASSETS_BASE_URL+"/images/navigation/nav-icon-logout.svg"} alt="DocprimeDHM" />Logout</li>
+						<li className="disabled"><img src={ASSETS_BASE_URL+"/images/navigation/nav-icon-health-docs.svg"} alt="Keel" />Health Docs</li>
+						<li className="disabled"><img src={ASSETS_BASE_URL+"/images/navigation/nav-icon-permissions.svg"} alt="Keel" />Permissions</li>
+						<li><img src={ASSETS_BASE_URL+"/images/navigation/nav-icon-help.svg"} alt="Keel" />Need Help</li>
+						<li onClick={this.logout.bind(this)}><img src={ASSETS_BASE_URL+"/images/navigation/nav-icon-logout.svg"} alt="Keel" />Logout</li>
                     </ul>
                 </div>
 		);

@@ -102,7 +102,7 @@ class UserLoginView extends React.Component {
 		return (
 				<section className="health-id-login-section">
 					<div className="health-id-login-section-left">
-						<img src={ASSETS_BASE_URL+"/images/health-login-graphic-desktop.svg"} alt="DocprimeDHM" />
+						<img src={ASSETS_BASE_URL+"/images/health-login-graphic-desktop.svg"} alt="Keel" />
 						<div className="health-id-login-banner">
 							<h1>Manage Health Records</h1>
 							<p>You can manage health id and create new health id for family</p>
@@ -140,7 +140,7 @@ class UserLoginView extends React.Component {
 									<img src={ASSETS_BASE_URL+"/images/icon-mobile.svg"} alt="mobile" className="icon-mobile" />
 									<span>+91</span>
 									<span name="customer-mobile" id="customer-mobile" > {this.state.phoneNumber} </span>
-									<img  src={ASSETS_BASE_URL+"/images/icon-edit.svg"} alt="DocprimeDHM" className="icon-edit" />
+									<img  src={ASSETS_BASE_URL+"/images/icon-edit.svg"} alt="Keel" className="icon-edit" />
 								</div>
 								<div className="otp-section">
 									<div className="otpContainer">
