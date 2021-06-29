@@ -1,9 +1,10 @@
 import React from 'react';
+import { style } from './style.js';
 
 const LoginView = ()=>{
 
     return(
-        <div>Login Page</div>
+        <div className={style}>Login Page</div>
     )
 }
 
