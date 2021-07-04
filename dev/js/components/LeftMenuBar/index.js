@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { cx } from '@emotion/css';
+import { SET_MENUBAR_STATE } from '@constants/types';
 import { leftBarCont, container, menuOptions, mobileView} from './style.js';
 
 const LeftMenuBar = ({ isMobileView, toggleMenuBar })=>{
-    const [activeWidget, setWidget] = useState('dashboard');
+    const dispatch = useDispatch();
+    const state = useSelector(state=>state.COMMON);
+    const { activeWidget } = state;
+
     const handleMenuOptionsClick = (value)=>{
-        setWidget(value);
+        dispatch(
+            {
+                type: SET_MENUBAR_STATE,
+                payload: {
+                    activeWidget: value
+                }
+            }
+        )
     }
 
     const mainClass = cx({

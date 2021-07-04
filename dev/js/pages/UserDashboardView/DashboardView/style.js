@@ -82,6 +82,7 @@ export const pendingTasks = css`
 `
 export const scheduleCallCta = css`
     display: flex;
+    margin-right: 20px;
     cursor: pointer;
     align-items: center;
     padding: 16px 58px;
@@ -111,18 +112,6 @@ export const scheduleCallCta = css`
             width: 10px;
             height: 10px;
         }
-    }
-`
-
-export const body = css`
-    background: rgba(252, 252, 252, 0.5);
-    display: flex;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    .mainView{
-        width: 100%;
-        background: rgba(252,252,252,0.5);
     }
 `
 
