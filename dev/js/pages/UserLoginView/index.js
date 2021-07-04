@@ -5,6 +5,7 @@ import { LinkedIn as LinkedInLogin } from 'react-linkedin-login-oauth2';
 import { googleButtonStyle } from './style.js';
 import { useSelector, useDispatch } from 'react-redux';
 import { userLogin } from '../../actions/index.js';
+import { Link } from 'react-router-dom';
 import { style } from './style.js';
 
 const LoginView = () => {
@@ -111,11 +112,13 @@ const LoginView = () => {
         <p className="signup-divider">
           <span>Or</span>
         </p>
-        <button className="sign-up-button">Sign Up</button>
+        <Link to='/signup'>
+          <button className="sign-up-button">Sign Up</button>
+          </Link>
       </div>
       <img
         className="passport-image"
-        src={ASSETS_BASE_URL + '/images/login/visa-image.png'}
+        src={ASSETS_BASE_URL + '/images/login/visa-image.jpeg'}
         alt="pasport-image"
       />
     </div>

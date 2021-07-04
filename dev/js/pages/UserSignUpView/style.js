@@ -3,9 +3,11 @@ import { css } from '@emotion/css';
 export const style = (props) => css`
   min-height: 100vh;
   display: flex;
+  overflow: hidden;
   .passport-image {
     position: relative;
     width: 50vw;
+    overflow: hidden;
     .bg-image {
       position: absolute;
       width: 50vw;
@@ -26,7 +28,7 @@ export const style = (props) => css`
     .header-text {
       position: absolute;
       right: 280px;
-      top: 110px;
+      top: 90px;
       font-size: 28px;
       line-height: 27px;
       letter-spacing: 0.05em;
@@ -38,7 +40,7 @@ export const style = (props) => css`
       width: 450px;
       height: 70px;
       right: 195px;
-      top: 235px;
+      top: 215px;
       background: #f6f5fa;
       border-radius: 20px;
       border-color: #f6f5fa;
@@ -58,7 +60,7 @@ export const style = (props) => css`
       width: 450px;
       height: 70px;
       right: 195px;
-      top: 315px;
+      top: 295px;
       background: #f6f5fa;
       border-radius: 20px;
       border-color: #f6f5fa;
@@ -78,7 +80,7 @@ export const style = (props) => css`
       width: 450px;
       height: 70px;
       right: 195px;
-      top: 395px;
+      top: 375px;
       background: #f6f5fa;
       border-radius: 20px;
       border-color: #f6f5fa;
@@ -99,7 +101,7 @@ export const style = (props) => css`
       width: 450px;
       height: 70px;
       right: 170px;
-      top: 515px;
+      top: 495px;
       border-radius: 20px;
       font-family: Poppins sans-serif;
       font-size: 20px;
@@ -107,18 +109,24 @@ export const style = (props) => css`
       color: #fffdfd;
       font-weight: bolder;
       cursor: pointer;
+      opacity: 0.6;
+       transition: 0.5s;
+       :hover{
+         opacity: 1;
+         background: #ef4f4f;
+       }
     }
     .password-validation {
       position: absolute;
       right: 485px;
-      top: 455px;
+      top: 435px;
       font-family: Poppins sans-serif;
       font-size: 15px;
       color: #ef4f4f;
     }
     .login-divider {
       position: absolute;
-      top: 650px;
+      top: 630px;
       right: 190px;
       width: 25%;
       color: #959595;
@@ -135,7 +143,7 @@ export const style = (props) => css`
     }
     .facebook-button {
       position: absolute;
-      top: 705px;
+      top: 685px;
       width: 100px;
       height: 70px;
       right: 175px;
@@ -146,10 +154,14 @@ export const style = (props) => css`
       font-size: 40px;
       cursor: pointer;
       font-family: Poppins;
+      transition: 0.5s;
+      :hover{
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
     }
     .linkedin-button {
       position: absolute;
-      top: 705px;
+      top: 685px;
       width: 100px;
       height: 70px;
       right: 510px;
@@ -160,10 +172,14 @@ export const style = (props) => css`
       font-size: 40px;
       cursor: pointer;
       font-weight: 900;
+      transition: 0.5s;
+      :hover{
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
     }
     .signup-divider {
       position: absolute;
-      top: 820px;
+      top: 800px;
       right: 190px;
       width: 25%;
       text-align: center;
@@ -184,7 +200,7 @@ export const style = (props) => css`
       width: 450px;
       height: 70px;
       right: 170px;
-      top: 895px;
+      top: 875px;
       border-radius: 20px;
       border: 1px solid #ef4f4f;
       font-family: Poppins sans-serif;
@@ -193,13 +209,20 @@ export const style = (props) => css`
       font-weight: bolder;
       line-height: 22px;
       cursor: pointer;
+      transition: 0.5s;
+       :hover{
+        opacity: 1;
+        background: #ef4f4f;
+        color: #fffdfd;
+        font-weight: bolder;
+       }
     }
   }
 `;
 
 export const googleButtonStyle = {
   position: 'absolute',
-  top: '705px',
+  top: '685px',
   width: '100px',
   height: '70px',
   right: '340px',

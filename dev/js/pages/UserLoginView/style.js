@@ -3,6 +3,7 @@ import { css } from '@emotion/css';
 export const style = (props) => css`
   min-height: 100vh;
   display: flex;
+  overflow: hidden;
   .container {
     width: 50vw;
     .keel-logo {
@@ -75,6 +76,12 @@ export const style = (props) => css`
       color: #fffdfd;
       font-weight: bolder;
       cursor: pointer;
+      opacity: 0.6;
+       transition: 0.5s;
+       :hover{
+         opacity: 1;
+         background: #ef4f4f;
+       }
     }
     .password-reset {
       position: absolute;
@@ -115,6 +122,10 @@ export const style = (props) => css`
       font-size: 40px;
       cursor: pointer;
       font-family: Poppins;
+      transition: 0.5s;
+      :hover{
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
     }
     .linkedin-button {
       position: absolute;
@@ -129,6 +140,10 @@ export const style = (props) => css`
       font-size: 40px;
       cursor: pointer;
       font-weight: 900;
+      transition: 0.5s;
+      :hover{
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
     }
     .signup-divider {
       position: absolute;
@@ -162,10 +177,18 @@ export const style = (props) => css`
       font-weight: bolder;
       line-height: 22px;
       cursor: pointer;
+      transition: 0.5s;
+       :hover{
+        opacity: 1;
+        background: #ef4f4f;
+        color: #fffdfd;
+        font-weight: bolder;
+       }
     }
   }
   .passport-image {
     width: 50vw;
+    overflow: hidden;
   }
 `;
 

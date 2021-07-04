@@ -5,6 +5,7 @@ import { LinkedIn as LinkedInLogin } from 'react-linkedin-login-oauth2';
 import { googleButtonStyle } from './style.js';
 import { userSignUp } from '../../actions/index.js';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { style } from './style.js';
 
 function SignUp() {
@@ -103,7 +104,7 @@ function SignUp() {
           <p className="password-validation">Passwords do not match</p>
         )}
         <p className="login-divider">
-          <span>Or Login with </span>
+          <span>Or sign up with </span>
         </p>
         <GoogleLogin
           clientId="194271428747-v7t3bjqu3cea8jq734pd9o950kolco0o.apps.googleusercontent.com"
@@ -136,9 +137,11 @@ function SignUp() {
           <button className="linkedin-button">in</button>
         </LinkedInLogin>
         <p className="signup-divider">
-          <span>Or</span>
+          <span>If you're already a member!</span>
         </p>
-        <button className="sign-up-button">Sign Up</button>
+        <Link to='/'>
+          <button className="sign-up-button">Log In</button>
+          </Link>
       </div>
     </div>
   );
