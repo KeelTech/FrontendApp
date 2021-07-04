@@ -57,6 +57,7 @@ export const pendingTasks = css`
         max-width: 100%;
         height: 100%;
         padding-bottom: 84px;
+        padding-right: 0px;
         .taskHeading{
             text-align: start;
             font-weight: 500;
@@ -114,12 +115,14 @@ export const scheduleCallCta = css`
 `
 
 export const body = css`
+    background: rgba(252, 252, 252, 0.5);
     display: flex;
     width: 100%;
     height: 100vh;
     overflow: hidden;
     .mainView{
         width: 100%;
+        background: rgba(252,252,252,0.5);
     }
 `
 

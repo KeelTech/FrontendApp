@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 
-export const primaryFont = "'Poppins', sans-serif";
+export const primaryFont = "sans-serif";
 export const mobileScreenWidth = "600px";
 export const tabScreenWidth = "1100px";
 
