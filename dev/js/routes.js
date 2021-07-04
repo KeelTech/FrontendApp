@@ -1,38 +1,33 @@
-
 import React, { Component } from 'react';
-import CONFIG from './config'
+import CONFIG from './config';
 
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 const queryString = require('query-string');
-import UserLoginView from './pages/UserLoginView'
-import UserDashboardView from './pages/UserDashboardView'
+import UserLoginView from './pages/UserLoginView';
+import UserDashboardView from './pages/UserDashboardView';
+import UserSignUpView from './pages/UserSignUpView';
 
 let routes = [
-
-    { path: '/', exact: true, component: UserLoginView },
-    { path: '/dashboard', exact: true, component: UserDashboardView },
-    { path: '/login', exact: true, component: UserLoginView },
-]
+  { path: '/', exact: true, component: UserLoginView },
+  { path: '/dashboard', exact: true, component: UserDashboardView },
+  { path: '/login', exact: true, component: UserLoginView },
+  { path: '/signup', exact: true, component: UserSignUpView },
+];
 
 // routes.push({ path: '*', component: NotFound, NO_MATCH: true })
 
 class RouterConfig extends Component {
+  static ROUTES = routes;
 
-
-    static ROUTES = routes
-
-
-    render() {
-        return (
-            <Switch location={location}>
-            {routes.map((route, i) => (
-                <Route {...route} key={i} />
-            ))}
-            </Switch>
-        )
-    }
-
+  render() {
+    return (
+      <Switch location={location}>
+        {routes.map((route, i) => (
+          <Route {...route} key={i} />
+        ))}
+      </Switch>
+    );
+  }
 }
 
-
-export default RouterConfig
+export default RouterConfig;

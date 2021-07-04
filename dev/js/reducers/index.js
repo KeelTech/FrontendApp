@@ -1,33 +1,41 @@
 import { combineReducers } from 'redux';
-import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-import AUTH from './commons/auth.js'
-import USER from './commons/user.js'
+import AUTH from './commons/auth.js';
+import USER from './commons/user.js';
+import LOGIN from './commons/login.js';
 
 const persistConfig = {
-    key: 'root',
-    storage,
-    whitelist: []
-}
+  key: 'root',
+  storage,
+  whitelist: [],
+};
 
 const AUTH_PERSIST = {
-    key: 'AUTH',
-    storage: storage,
-    whitelist: ['counter']
-}
+  key: 'AUTH',
+  storage: storage,
+  whitelist: ['counter'],
+};
 
 const USER_PERSIST = {
-    key: 'USER',
-    storage: storage,
-    whitelist: ['userObj']
-}
+  key: 'USER',
+  storage: storage,
+  whitelist: ['userObj'],
+};
+
+const USER_LOGIN = {
+  key: 'USER_LOGIN',
+  storage: storage,
+  whitelist: ['IsloggedIn'],
+};
 
 const allReducers = combineReducers({
-    AUTH: persistReducer(AUTH_PERSIST, AUTH),
-    USER: persistReducer(USER_PERSIST, USER),
+  AUTH: persistReducer(AUTH_PERSIST, AUTH),
+  USER: persistReducer(USER_PERSIST, USER),
+  LOGIN: persistReducer(USER_LOGIN, LOGIN),
 });
 
-const persistedReducer = persistReducer(persistConfig, allReducers)
+const persistedReducer = persistReducer(persistConfig, allReducers);
 
-export default persistedReducer
+export default persistedReducer;
