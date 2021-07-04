@@ -2,6 +2,7 @@ import { css } from '@emotion/css'
 import { tabScreenWidth } from '@constants';
 
 export const leftBarCont = css`
+    background: rgba(252, 252, 252, 0.5);
     .overlay{
         position: fixed;
         z-index: 1;
@@ -21,12 +22,11 @@ export const container = css`
     top: 0;
     height: 100vh;
     display: flex;
+    background: rgba(252,252,252,0.5);
     .openWidgetView{
         position: relative;
         padding: 34px 46px;
         min-height: 100vh;
-        border-right: 2px solid #EBEBEB;
-        background: #FCFCFC;
     }
     .widgetView{
         display: flex;
@@ -105,6 +105,9 @@ export const menuOptions = css`
         .icon{
             filter: brightness(0.5) !important;
         }
+        .heading{
+            color: #363B64;
+        }
     }
 `
 
@@ -112,6 +115,7 @@ export const mobileView = css`
     position: absolute !important;
     display: block !important;
     min-width: 200px;
+    background: rgba(252,252,252);
     .openWidgetView{
         position: relative;
         padding: 21px 14px;

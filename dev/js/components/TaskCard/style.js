@@ -3,7 +3,6 @@ import { mobileScreenWidth } from '@constants';
 
 export const card = css`
     background: #FCFCFC;
-    box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
     border-radius: 20px;
     padding: 17px 40px;
     margin-bottom: 20px;
