@@ -13,3 +13,5 @@ deploy.sh
 package-lock.json
 .DS_Store
 .prettierrc
+.DS_Store
+.prettierrc
