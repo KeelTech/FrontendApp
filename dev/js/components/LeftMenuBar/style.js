@@ -3,6 +3,7 @@ import { tabScreenWidth } from '@constants';
 
 export const leftBarCont = css`
     background: rgba(252, 252, 252, 0.5);
+    z-index: 10;
     .overlay{
         position: fixed;
         z-index: 1;
@@ -26,6 +27,7 @@ export const container = css`
     .openWidgetView{
         position: relative;
         padding: 34px 46px;
+        padding-right: 0px;
         min-height: 100vh;
     }
     .widgetView{

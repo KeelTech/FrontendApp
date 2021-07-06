@@ -9,6 +9,7 @@ export const container = css`
     padding-bottom: 200px;
     .taskInfo{
         width: 50%;
+        overflow-y: auto;
     }
     @media(max-width: ${tabScreenWidth}){
         padding: 20px;
