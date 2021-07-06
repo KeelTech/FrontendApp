@@ -58,6 +58,7 @@ export const chatWidget = props=>css`
     ${props.floatingChat && `
         padding: 13px 21px;
         height: calc(100% - 136px);
+        z-index: 10;
     `};
 }
 `
@@ -216,6 +217,7 @@ export const mobileChatView = css`
     overflow: hidden;
     border-radius: 0px;
     padding-top: 16px;
+    z-index: 10;
     .header{
         padding: 0px 21px;
         padding-bottom: 12px;

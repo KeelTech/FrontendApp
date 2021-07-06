@@ -1,7 +1,6 @@
 import React from 'react';
 import TaskCard from '@components/TaskCard';
 import ChatWidget from '@components/ChatWidget';
-import FloatingChatWidget from '@components/FloatingChatWidget';
 import Header from '@components/Header';
 import NotificationWidget from '@components/NotificationWidget';
 import ProfileWidget from '@components/ProfileWidget';
@@ -39,7 +38,6 @@ const DashboardView = ()=>{
                     <div className="chat">
                         <ChatWidget/>
                     </div>
-                    <FloatingChatWidget/>
                 </div>
             </div>
             <div className={upcomingSchedules}></div>

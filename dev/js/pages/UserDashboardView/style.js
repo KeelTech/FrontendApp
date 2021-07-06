@@ -38,3 +38,7 @@ export const body = css`
         align-items: center;
     }
 `
+
+export const mobileScrollView = css`
+    height: unset;
+`

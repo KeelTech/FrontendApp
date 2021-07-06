@@ -1,7 +1,7 @@
 import { SET_MENUBAR_STATE } from '@constants/types';
 
 const defaultState = {
-    activeWidget: 'tasks'
+    activeWidget: 'dashboard'
 }
 
 export default function (state = defaultState, action) {

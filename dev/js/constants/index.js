@@ -25,4 +25,12 @@ export const inputField = css`
     }
 `
 
+export const isMobileView = ()=>{
+
+    if(typeof document==="object" && document.body.clientWidth){
+        return document.body.clientWidth<=1100
+    }
+    return false;
+}
+
 

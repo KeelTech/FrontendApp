@@ -1,22 +1,34 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import TaskCard from '@components/TaskCard';
-import ChatWidget from '@components/ChatWidget';
 import Header from '@components/Header';
 import NotificationWidget from '@components/NotificationWidget';
 import ProfileWidget from '@components/ProfileWidget';
+import TaskDetail from '@pages/TaskDetail';
+import { isMobileView } from '@constants';
 import { container, tasksView } from './style.js';
 import { body } from '../style.js';
 
 const TaskView = ()=>{
+    const history = useHistory();
     const [activeWidget, setActiveWidget] = useState('pending');
-    const [activeTask, setActiveTask] = useState(1);
+    const [activeTask, setActiveTask] = useState(()=>{
+        if(isMobileView()){
+            return ''
+        }
+        return 1
+    });
 
     const handleCtaClick = (val)=>{
         setActiveWidget(val);
     }
 
     const taskClickHandler = (val)=>{
-        setActiveTask(val);
+        if(isMobileView()){
+            history.push('/task/detail/123');
+        }else{
+            setActiveTask(val);
+        }
     }
 
     return(
@@ -48,7 +60,7 @@ const TaskView = ()=>{
                         </div>
                     </div>
                     <div className="taskInfo">
-                        <ChatWidget/>
+                        <TaskDetail/>
                     </div>
                 </div>
             </div>
