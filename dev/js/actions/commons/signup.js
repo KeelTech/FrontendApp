@@ -4,6 +4,7 @@ import {
   USER_SIGNUP_SUCCESS,
 } from '../../constants/types';
 import { API_POST } from '../../api/api.js';
+import STORAGE from '@helpers/storage/storage.js';
 
 export const userSignUp = (data, dispatch, cb) => {
   dispatch({
@@ -12,7 +13,7 @@ export const userSignUp = (data, dispatch, cb) => {
       loading: true,
     },
   });
-  API_POST('https://getkeel.com/api/v1/user/signup', {
+  API_POST(API_BASE_URL + 'v1/user/signup', {
     email: data.email,
     password: data.password,
   })
@@ -24,20 +25,19 @@ export const userSignUp = (data, dispatch, cb) => {
             loading: false,
           },
         });
+        STORAGE.setAuthToken(response.message.token);
+        let message = 'User Signed Up Successfully';
+        dispatch({
+          type: USER_SIGNUP_SUCCESS,
+          payload: {
+            signUp_message: message,
+          },
+        });
         if (cb) cb(null, response);
       }
     })
-    .then(function () {
-      let message = 'User Signed Up Successfully';
-      dispatch({
-        type: USER_SIGNUP_SUCCESS,
-        payload: {
-          signUp_message: message,
-        },
-      });
-    })
     .catch(function (error) {
-      let message = 'Error Signing up';
+      let message = error.message;
       dispatch({
         type: USER_SIGNUP_FAIL,
         payload: {

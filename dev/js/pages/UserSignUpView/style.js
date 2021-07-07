@@ -1,4 +1,5 @@
 import { css } from '@emotion/css';
+import { tabScreenWidth } from '@constants';
 
 export const style = (props) => css`
   min-height: 100vh;
@@ -15,32 +16,54 @@ export const style = (props) => css`
       left: 0;
       z-index: 1;
     }
-    .logo {
-      position: absolute;
-      margin-top: 30px;
-      margin-left: 40px;
-      z-index: 3;
+    @media (max-width: ${tabScreenWidth}) {
+      .passport-image {
+        width: 0vw;
+      }
+      .bg-image {
+        width: 0vw;
+      }
     }
   }
   .container {
     width: 50vw;
-    font-family: Poppins;
+    @media (max-width: ${tabScreenWidth}) {
+      width: 100vw;
+      margin-right: 25%;
+    }
+    .logo {
+      margin-top: 3%;
+      margin-right: 80%;
+      margin-left: 3%;
+    }
     .header-text {
-      position: absolute;
-      right: 280px;
-      top: 90px;
+      display: flex;
+      justify-content: center;
       font-size: 28px;
       line-height: 27px;
       letter-spacing: 0.05em;
       color: #181818;
       font-weight: 700;
     }
+    @media (max-width: ${tabScreenWidth}) {
+      .header-text {
+        font-size: 20px;
+      }
+    }
+    .form-wrapper {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 5%;
+    }
     input[type='email'] {
-      position: absolute;
+      display: flex;
+      justify-content: center;
+      margin-top: 4%;
+      margin-bottom: 1%;
       width: 450px;
       height: 70px;
-      right: 195px;
-      top: 215px;
       background: #f6f5fa;
       border-radius: 20px;
       border-color: #f6f5fa;
@@ -56,12 +79,12 @@ export const style = (props) => css`
       }
     }
     .password-field {
-      position: absolute;
+      display: flex;
+      justify-content: center;
       width: 450px;
       height: 70px;
-      right: 195px;
-      top: 295px;
       background: #f6f5fa;
+      margin-bottom: 1%;
       border-radius: 20px;
       border-color: #f6f5fa;
       border: none;
@@ -76,11 +99,10 @@ export const style = (props) => css`
       }
     }
     .confirm-password-field {
-      position: absolute;
+      display: flex;
+      justify-content: center;
       width: 450px;
       height: 70px;
-      right: 195px;
-      top: 375px;
       background: #f6f5fa;
       border-radius: 20px;
       border-color: #f6f5fa;
@@ -96,12 +118,14 @@ export const style = (props) => css`
       }
     }
     .log-in-button {
-      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 4%;
+      margin-left: 3%;
       background: #ef4f4f;
       width: 450px;
       height: 70px;
-      right: 170px;
-      top: 495px;
       border-radius: 20px;
       font-family: Poppins sans-serif;
       font-size: 20px;
@@ -109,44 +133,93 @@ export const style = (props) => css`
       color: #fffdfd;
       font-weight: bolder;
       cursor: pointer;
-      opacity: 0.6;
-       transition: 0.5s;
-       :hover{
-         opacity: 1;
-         background: #ef4f4f;
-       }
+    }
+    @media (max-width: ${tabScreenWidth}) {
+      input[type='email'] {
+        width: 300px;
+        height: 40px;
+        font-size: 15px;
+        ::placeholder {
+          font-size: 10px;
+        }
+      }
+      input[type='password'] {
+        width: 300px;
+        height: 40px;
+        font-size: 15px;
+        ::placeholder {
+          font-size: 10px;
+        }
+      }
+      .log-in-button {
+        width: 300px;
+        height: 40px;
+        font-size: 15px;
+      }
     }
     .password-validation {
-      position: absolute;
-      right: 485px;
-      top: 435px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 30%;
       font-family: Poppins sans-serif;
       font-size: 15px;
       color: #ef4f4f;
     }
+    @media (max-width: ${tabScreenWidth}) {
+      .password-validation {
+        font-size: 14px;
+      }
+    }
     .login-divider {
-      position: absolute;
-      top: 630px;
-      right: 190px;
-      width: 25%;
+      width: 50%;
       color: #959595;
       text-align: center;
       border-bottom: 1px solid #000;
       line-height: 0.1em;
-      margin: 10px 0 20px;
-      font-size: 25px;
+      margin-top: 5%;
+      margin-left: 25%;
+      font-size: 15px;
       font-family: Poppins;
     }
     .login-divider span {
       background: #fff;
       padding: 0 10px;
     }
-    .facebook-button {
-      position: absolute;
-      top: 685px;
+    @media (max-width: ${tabScreenWidth}) {
+      .login-divider {
+        width: 50%;
+        font-size: 10px;
+      }
+    }
+    .social-button-wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      margin-top: 3%;
+    }
+    .google-button {
       width: 100px;
       height: 70px;
-      right: 175px;
+      background: #ffffff;
+      border-radius: 10px;
+      color: #ffffff;
+      border-color: #f6f5fa;
+      font-size: 40px;
+      cursor: pointer;
+      transition: 0.5s;
+      :hover {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
+    }
+    .google-button-image {
+      height: 70%;
+    }
+    .facebook-button {
+      width: 100px;
+      height: 70px;
       background: #4267b2;
       border-radius: 10px;
       color: #ffffff;
@@ -155,16 +228,14 @@ export const style = (props) => css`
       cursor: pointer;
       font-family: Poppins;
       transition: 0.5s;
-      :hover{
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      :hover {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
       }
     }
     .linkedin-button {
-      position: absolute;
-      top: 685px;
       width: 100px;
       height: 70px;
-      right: 510px;
       background: #0077b5;
       border-radius: 10px;
       color: #ffffff;
@@ -173,20 +244,36 @@ export const style = (props) => css`
       cursor: pointer;
       font-weight: 900;
       transition: 0.5s;
-      :hover{
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      :hover {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
+    }
+    @media (max-width: ${tabScreenWidth}) {
+      .google-button {
+        font-size: 20px;
+        height: 40px;
+        width: 60px;
+      }
+      .facebook-button {
+        font-size: 30px;
+        height: 40px;
+        width: 60px;
+      }
+      .linkedin-button {
+        font-size: 30px;
+        height: 40px;
+        width: 60px;
       }
     }
     .signup-divider {
-      position: absolute;
-      top: 800px;
-      right: 190px;
-      width: 25%;
+      width: 50%;
       text-align: center;
       border-bottom: 1px solid #000;
       line-height: 0.1em;
-      margin: 10px 0 20px;
-      font-size: 25px;
+      margin-left: 25%;
+      margin-top: 5%;
+      font-size: 15px;
       font-family: Poppins;
       color: #959595;
     }
@@ -194,13 +281,26 @@ export const style = (props) => css`
       background: #fff;
       padding: 0 10px;
     }
+    @media (max-width: ${tabScreenWidth}) {
+      .signup-divider {
+        width: 50%;
+        font-size: 10px;
+      }
+    }
+    .signup-button-wrapper {
+      display: flex;
+      justify-content: center;
+      text-decoration: none;
+    }
     .sign-up-button {
-      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background: #fffdfd;
       width: 450px;
       height: 70px;
-      right: 170px;
-      top: 875px;
+      margin-top: 4%;
+      margin-left: 3%;
       border-radius: 20px;
       border: 1px solid #ef4f4f;
       font-family: Poppins sans-serif;
@@ -210,26 +310,18 @@ export const style = (props) => css`
       line-height: 22px;
       cursor: pointer;
       transition: 0.5s;
-       :hover{
+      :hover {
         opacity: 1;
         background: #ef4f4f;
         color: #fffdfd;
         font-weight: bolder;
-       }
+      }
+    }
+    @media (max-width: ${tabScreenWidth}) {
+      .sign-up-button {
+        width: 300px;
+        height: 40px;
+      }
     }
   }
 `;
-
-export const googleButtonStyle = {
-  position: 'absolute',
-  top: '685px',
-  width: '100px',
-  height: '70px',
-  right: '340px',
-  background: '#4285F4',
-  borderRadius: '10px',
-  color: '#FFFFFF',
-  border: 'none',
-  fontSize: '40px',
-  cursor: 'pointer',
-};
