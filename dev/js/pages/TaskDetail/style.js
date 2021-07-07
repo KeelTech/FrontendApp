@@ -6,6 +6,8 @@ export const container = css`
     background: #FCFCFC;
     border-radius: 20px;
     padding: 33px 40px;
+    height: 100%;
+    overflow-y: auto;
     .statusCont{
         display: flex;
         align-items: center;
