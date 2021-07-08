@@ -27,6 +27,9 @@ let routes = [
   { path: "/agent/customer", exact: true, component: AgentCustomerList },
   { path: '/reset-password', exact: true, component: PasswordReset },
   { path: '/confirm-email', exact: true, component: EmailVerification },
+  { path: '/tasks', exact: true, component: UserDashboardView },
+  { path: '/vault', exact: true, component: UserDashboardView },
+  { path: '/billing', exact: true, component: UserDashboardView },
 ];
 
 // routes.push({ path: '*', component: NotFound, NO_MATCH: true })
