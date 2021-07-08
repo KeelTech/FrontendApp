@@ -6,9 +6,10 @@ export const container = css`
     width: 100%;
     height: 100%;
     padding: 0px 26px;
-    padding-bottom: 200px;
+    height: calc(100% - 160px);
     .chat{
         width: 60%;
+        height: 100%;
     }
     @media(max-width: ${tabScreenWidth}){
         padding: 20px;
@@ -26,14 +27,14 @@ export const pendingTasks = css`
     min-width: 40%;
     height: 100%;
     .taskList{
-        margin-top: 20px;
+        margin-top: 14px;
         overflow-y: auto;
         max-height: calc(100% - 120px);
     }
     .taskHeading{
         width: 100%;
-        font-size: 24px;
-        line-height: 36px;
+        font-size: 16px;
+        line-height: 24px;
         color: #363B64;
         text-align: center;
         margin-bottom: 8px;
@@ -50,6 +51,8 @@ export const pendingTasks = css`
         color: #FCFCFC;
         justify-content: center;
         cursor: pointer;
+        font-size: 12px;
+        line-height: 18px;
     }
     @media(max-width: ${tabScreenWidth}){
         margin: 0px;
@@ -83,22 +86,21 @@ export const pendingTasks = css`
 `
 export const scheduleCallCta = css`
     display: flex;
-    margin-right: 20px;
     cursor: pointer;
     align-items: center;
-    padding: 16px 58px;
+    padding: 11px 38px;
     background: #363B64;
-    border-radius: 20px;
+    border-radius: 14px;
     color: #FCFCFC;
     span{
         margin-right: 10px;
         color: #FCFCFC;
         font-weight: 600;
-        font-size: 18px;
+        font-size: 11px;
     }
     img{
-        height: 21px;
-        width: 21px;
+        height: 14px;
+        width: 14px;
     }
     @media(max-width: ${tabScreenWidth}){
         padding: 6px 15px;
@@ -119,9 +121,58 @@ export const scheduleCallCta = css`
 export const upcomingSchedules = css`
     min-width: 240px;
     min-height: 100vh;
-    background: grey;
+    margin-top: 30px;
+    padding: 0px 22px;
     display: none;
     @media(min-width: 1200px){
-        display: none;
+        display: block;
+        .headerView{
+            display: flex;
+            justify-content: flex-end;
+        }
+        .upcomingTitle{
+            margin-bottom: 8px;
+            font-size: 12px;
+            line-height: 18px;
+        }
+        .upcoming{
+            display: flex;
+            margin-top: 26px;
+            margin-bottom: 14px;
+            span{
+                display: inline-block;
+                background: #FCFCFC;
+                border-radius: 14px;
+                font-size: 12px;
+                line-height: 18px;
+                color: #363B64;
+                padding: 10px 27px;
+                cursor: pointer;
+                font-weight: bold;
+            }
+        }
+        .info{
+            margin-top: 20px;
+            font-size: 18px;
+            line-height: 27px;
+            color: #363B64;
+            display: flex;
+            flex-direction: column;
+        }
+        .taskName{
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            img{
+                height: 12px;
+                width: 12px;
+                margin-right: 17px;
+            }
+            span{
+                font-size: 10px;
+                line-height: 15px;
+                color: #A098AE;
+            }
+        }
     }
 `

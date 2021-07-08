@@ -5,18 +5,18 @@ export const container = css`
     height: 100%;
     background: #FCFCFC;
     box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
-    border-radius: 20px;
-    padding-top: 32px;
+    border-radius: 14px;
+    padding-top: 24px;
     .header{
         display: flex;
-        padding: 0px 42px;
-        padding-bottom: 27px;
+        padding: 0px 28px;
+        padding-bottom: 18px;
         .profile{
             background: #DBDBDB;
-            border-radius: 20px;
-            height: 64px;
-            width: 64px;
-            margin-right: 24px;
+            border-radius: 14px;
+            height: 42px;
+            width: 42px;
+            margin-right: 16px;
         }
         .close{
             display: none;
@@ -26,8 +26,8 @@ export const container = css`
             flex-direction: column;
             .name{
                 font-weight: 600;
-                font-size: 24px;
-                line-height: 36px;
+                font-size: 16px;
+                line-height: 24px;
                 color: #363B64;
             }
             .user{
@@ -37,13 +37,13 @@ export const container = css`
             .activeUser{
                 background: #4CBC9A;
                 border-radius: 50%;
-                height: 16px;
-                width: 16px;
-                margin-right: 8px;
+                height: 11px;
+                width: 11px;
+                margin-right: 5px;
             }
             .status{
-                font-size: 18px;
-                line-height: 27px;
+                font-size: 12px;
+                line-height: 18px;
                 color: #A098AE;
             }
         }
@@ -52,9 +52,9 @@ export const container = css`
 export const chatWidget = props=>css`
     border-bottom: 1px solid #EBEBEB;
     border-top: 1px solid #EBEBEB;
-    padding: 29px 42px;
+    padding: 19px 28px;
     overflow: auto;
-    height: calc(100% - 230px);
+    height: calc(100% - 160px);
     ${props.floatingChat && `
         padding: 13px 21px;
         height: calc(100% - 136px);
@@ -64,11 +64,11 @@ export const chatWidget = props=>css`
 `
 export const msgWidget = props =>css`
     display: flex;
-    padding: 29px 34px;
+    padding: 19px 22px;
     .chatbox{
         border: 2px solid #DBDBDB;
         box-sizing: border-box;
-        border-radius: 20px;
+        border-radius: 14px;
         display: flex;
         width: 100%;
         padding: 9px 10px;
@@ -77,8 +77,8 @@ export const msgWidget = props =>css`
     }
     input{
         border: 0px;
-        font-size: 18px;
-        line-height: 27px;
+        font-size: 12px;
+        line-height: 18px;
         color: #A098AE;
         min-width: 100px;
         ${inputField};
@@ -88,26 +88,26 @@ export const msgWidget = props =>css`
         align-items: center;
     }
     .attachment{
-        height: 27px;
-        width: 27px;
-        margin-right: 20px;
+        height: 17px;
+        width: 17px;
+        margin-right: 14px;
         cursor: pointer;
     }
     .sendBtn{
         display: flex;
-        padding: 13px 25px;
+        padding: 10px 16px;
         background: #363B64;
-        border-radius: 20px;
-        font-size: 18px;
-        line-height: 27px;
+        border-radius: 14px;
+        font-size: 12px;
+        line-height: 18px;
         color: #FCFCFC;
         align-items: center;
         cursor: pointer;
         font-weight: 600;
         img{
-            margin-left: 8px;
-            height: 23px;
-            width: 23px;
+            margin-left: 6px;
+            height: 16px;
+            width: 16px;
         }
     }
     ${props.floatingChat && `
@@ -142,11 +142,11 @@ export const msgWidget = props =>css`
 
 export const chatBox = props=>css`
     .msgTime{
-        font-size: 14px;
-        line-height: 26px;
+        font-size: 10px;
+        line-height: 17px;
         color: #A098AE;
         display: inline-block;
-        margin-left: 12px;
+        margin-left: 10px;
     }
     .sender{
         display: flex;
@@ -159,18 +159,18 @@ export const chatBox = props=>css`
         align-items: flex-start;
     }
     .receiver .chatMsg{
-        font-size: 18px;
-        line-height: 27px;
+        font-size: 12px;
+        line-height: 18px;
         color: #363B64;
-        margin-bottom: 14px;
-        padding: 15px 26px;
+        margin-bottom: 10px;
+        padding: 10px 17px;
         background: #EBEBEB;
-        border-radius: 20px;
+        border-radius: 14px;
         display: inline-block;
         
     }
     .receiver .msgTime{
-        margin-left: 12px;
+        margin-left: 10px;
     }
     .sender .msg{
         width: 80%;
@@ -179,17 +179,17 @@ export const chatBox = props=>css`
         align-items: flex-end;
     }
     .sender .chatMsg{
-        font-size: 18px;
-        line-height: 27px;
-        margin-bottom: 14px;
-        padding: 15px 26px;
-        border-radius: 20px;
+        font-size: 12px;
+        line-height: 18px;
+        margin-bottom: 10px;
+        padding: 10px 17px;
+        border-radius: 14px;
         background: #363B64;
         color: #FCFCFC;
         display: inline-block;   
     }
     .sender .msgTime{
-        margin-right: 12px;
+        margin-right: 10px;
     }
     ${props.floatingChat &&`
         .msgTime{

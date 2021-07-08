@@ -1,11 +1,11 @@
 import { css } from '@emotion/css'
-import { primaryFont, mobileScreenWidth, tabScreenWidth } from '@constants';
+import { primaryFont, tabScreenWidth } from '@constants';
 
 export const container = css`
     width: 100%;
 `
 export const desktopView = css`
-    margin: 50px 26px;
+    margin: 30px 26px;
     font-family: ${primaryFont};
     display: flex;
     justify-content: space-between;
@@ -17,8 +17,8 @@ export const desktopView = css`
     }
     .heading{
         font-weight: bold;
-        font-size: 36px;
-        line-height: 54px;
+        font-size: 24px;
+        line-height: 36px;
         color: #363B64;
         justify-content: space-between;
     }

@@ -28,7 +28,7 @@ const persistConfig = {
 const COMMON_REDUCER_PERSIST = {
     key: 'COMMON',
     storage: storage,
-    whitelist: ['']
+    whitelist: ['activeWidget']
 }
 
 

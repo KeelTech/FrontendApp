@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { string } from 'prop-types';
 import LeftMenuBar from '@components/LeftMenuBar';
-import NotificationWidget from '@components/NotificationWidget';
-import ProfileWidget from '@components/ProfileWidget';
 import { container, desktopView, mobileView, mobileHeading } from './style.js';
 
 const Header = (props)=>{

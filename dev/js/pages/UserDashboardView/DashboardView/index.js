@@ -18,8 +18,6 @@ const DashboardView = ()=>{
                             <span>Schedule Call</span>
                             <img src={ASSETS_BASE_URL+"/images/common/callIcon.svg"} alt="home"/>
                         </div>
-                        <NotificationWidget/>
-                        <ProfileWidget/>
                     </div>
                     
                 </Header>
@@ -40,7 +38,24 @@ const DashboardView = ()=>{
                     </div>
                 </div>
             </div>
-            <div className={upcomingSchedules}></div>
+            <div className={upcomingSchedules}>
+                <div className="headerView">
+                        <NotificationWidget/>
+                        <ProfileWidget/>
+                </div>
+                <div className="upcoming"><span>Upcoming Schedule</span></div>
+                <div className="info">
+                    <span className="upcomingTitle">This is the title of meeting </span>
+                    <div className="taskName">
+                        <img className="icon" src={ASSETS_BASE_URL+"/images/common/calendar.svg"} alt="time"/>
+                        <span>March 20, 2021</span>
+                    </div>
+                    <div className="taskName">
+                        <img className="icon" src={ASSETS_BASE_URL+"/images/common/clock.svg"} alt="clock"/>
+                        <span>09.00 - 10.00 AM</span>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

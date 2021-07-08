@@ -5,7 +5,7 @@ export const container = css`
     position: relative;
     background: #FCFCFC;
     border-radius: 20px;
-    padding: 33px 40px;
+    padding: 22px 26px;
     height: 100%;
     overflow-y: auto;
     .statusCont{
@@ -16,9 +16,12 @@ export const container = css`
     }
     .statusText{
         font-weight: 600;
-        font-size: 18px;
-        line-height: 27px;
+        font-size: 12px;
+        line-height: 18px;
         color: #A098AE;
+        border: 1px solid #A098AE;
+        padding: 7px 11px;
+        border-radius: 6px;
     }
     .status{
         display: inline-block;
@@ -26,36 +29,35 @@ export const container = css`
         right: 47px;
         color: #FCFCFC;
         font-weight: 600;
-        font-size: 18px;
-        line-height: 27px;
+        font-size: 12px;
+        line-height: 18px;
         padding: 2px 8px;
         background: #CF3030;
         border-radius: 5px;
     }
     .taskName{
         img{
-            width: 15px;
-            height: 13px;
-            margin-right: 8px;
+            width: 12px;
+            height: 12px;
+            margin-right: 4px;
         }
         display: flex;
         align-items: center;
         color: #A098AE;
         font-weight: 600;
-        font-size: 16px;
-        line-height: 24px;
-        margin-bottom: 12px;
+        font-size: 10px;
+        line-height: 15px;
+        margin-bottom: 8px;
     }
     .dueDate{
-        font-size: 18px;
-        line-height: 27px;
+        font-size: 12px;
+        line-height: 18px;
         color: #363B64;
     }
     .signDoc{
         display: flex;
         font-weight: 600;
-        font-size: 20px;
-        padding-bottom: 50px;
+        font-size: 14px;
         color: #363B64;
         .backBtn{
             display: none;
@@ -69,11 +71,11 @@ export const container = css`
             display: inline-block;
             display: flex;
             font-weight: 600;
-            font-size: 20px;
-            line-height: 39px;
+            font-size: 16px;
+            line-height: 24px;
             color: #363B64;
-            min-width: 40px;
-            min-height: 40px;
+            min-width: 33px;
+            min-height: 33px;
             justify-content: center;
             align-items: center;
             border-radius: 50%;
@@ -89,7 +91,7 @@ export const container = css`
     }
     @media(max-width: ${tabScreenWidth}){
         background: unset;
-        padding: 0px;
+        padding: 0px 4px;
         .statusCont{
             display: none;
         }
@@ -173,10 +175,10 @@ export const taskStatus = css`
 `
 
 export const discussionSection = css`
-    margin-top: 46px;
+    margin-top: 30px;
     .discussionTxt{
-        font-size: 18px;
-        line-height: 27px;
+        font-size: 12px;
+        line-height: 18px;
         color: #363B64;
         display: inline-block;
     }
@@ -189,7 +191,7 @@ export const discussionSection = css`
     }
 `
 export const attachmentSection = css`
-    margin-top: 46px;
+    margin-top: 30px;
     .attachmentHeader{
         display: flex;
         justify-content: space-between;
@@ -204,21 +206,21 @@ export const attachmentSection = css`
 `
 
 export const checklistSection = props=> css`
-    margin-top: 46px;
+    margin-top: 30px;
     width: 100%;
     .progress{
-        margin-top: 20px;
-        margin-bottom: 12px;
+        margin-top: 16px;
+        margin-bottom: 8px;
         display: flex;
         align-items: center;
     }
     .progressNo{
-        font-size: 12px;
-        line-height: 18px;
+        font-size: 8px;
+        line-height: 12px;
         display: flex;
         align-items: center;
         color: #363B64;
-        padding-right: 8px;
+        padding-right: 5px;
     }
     .percent{
         position: relative;
@@ -241,13 +243,13 @@ export const checklistSection = props=> css`
         align-items: center;
         margin-bottom: 4px;
         img{
-            margin-right: 8px;
-            width: 18px;
-            height: 18px;
+            margin-right: 4px;
+            width: 16px;
+            height: 16px;
         }
         .checkedText{
-            font-size: 18px;
-            line-height: 27px;
+            font-size: 12px;
+            line-height: 18px;
             color: #363B64;
         }
     }
@@ -282,7 +284,7 @@ export const checklistSection = props=> css`
 `
 
 export const messageSection = css`
-    margin-top: 46px;
+    margin-top: 30px;
     .msgView{
         display: flex;
         align-items: flex-start;
@@ -293,24 +295,24 @@ export const messageSection = css`
         input{
             ${inputField};
             width: 100%;
-            padding: 10px;
-            font-size: 14px;
-            line-height: 21px;
+            padding: 8px;
+            font-size: 10px;
+            line-height: 15px;
             border: 0.5px solid #A098AE;
-            border-radius: 10px;
+            border-radius: 7px;
         }
     }
     .profile{
-        margin-right: 8px;
-        min-height: 40px;
-        min-width: 40px;
+        margin-right: 6px;
+        min-height: 26px;
+        min-width: 26px;
         border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
         background: #363B64;
-        font-size: 18px;
-        line-height: 27px;
+        font-size: 12px;
+        line-height: 18px;
         color: #DBDBDB;
     }
     .info{
@@ -319,21 +321,21 @@ export const messageSection = css`
     }
     .name{
         font-weight: 600;
-        font-size: 14px;
-        line-height: 21px;
+        font-size: 10px;
+        line-height: 16px;
         color: #363B64;
     }
     .time{
         font-weight: 600;
-        font-size: 12px;
-        line-height: 18px;
+        font-size: 8px;
+        line-height: 12px;
         color: #A098AE;
-        padding-left: 6px;
+        padding-left: 4px;
     }
     .msg{
-        margin-top: 6px;
-        font-size: 14px;
-        line-height: 21px;
+        margin-top: 4px;
+        font-size: 10px;
+        line-height: 15px;
         color: #363B64
     }
     @media(max-width: ${tabScreenWidth}){

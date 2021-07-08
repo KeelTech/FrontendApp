@@ -3,23 +3,23 @@ import { tabScreenWidth } from '@constants';
 
 export const container = css`
     display: flex;
-    padding: 12px;
-    margin-right: 10px;
-    margin-bottom: 12px;
+    padding: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
     align-items: center;
-    border: 2px solid #EAEAEF;
-    border-radius: 8px;
+    border: 1px solid #EAEAEF;
+    border-radius: 5px;
     position: relative;
     .docIcon{
-        padding: 11px;
+        padding: 8px;
         background: #ECECF1;
-        border-radius: 8px;
-        margin-right: 17px;
+        border-radius: 5px;
+        margin-right: 13px;
     }
     .docx{
         font-weight: 600;
-        font-size: 14px;
-        line-height: 21px;
+        font-size: 8px;
+        line-height: 12px;
         color: #363B64;
     }
     .dotMenu{
@@ -52,11 +52,11 @@ export const menuBar = css`
     span{
         display: block;
         font-weight: 600;
-        font-size: 14px;
-        line-height: 21px;
+        font-size: 12px;
+        line-height: 18px;
         color: #FFFDFD;
         border-bottom: 1px solid #A098AE;
-        padding: 2px 0px;
+        padding: 1px 0px;
         cursor: pointer;
         &:last-child{
             border: 0px;
