@@ -1,16 +1,15 @@
 import React from 'react';
 import { container } from './style.js';
-import DashboardView from './DashboardView';
+import DocumentView from './DocumentView';
 import LeftMenuBar from '@components/LeftMenuBar';
 
-const UserDashboardView = ()=>{
-    
-    return(
-        <div className={container}>
-            <LeftMenuBar/>
-            <DashboardView/>
-        </div>
-    )
-}
+const UserDashboardView = () => {
+  return (
+    <div className={container}>
+      <LeftMenuBar />
+      <DocumentView />
+    </div>
+  );
+};
 
 export default UserDashboardView;
