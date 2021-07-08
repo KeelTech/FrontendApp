@@ -20,8 +20,8 @@ export const body = css`
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* number of lines to show */
-    line-height: 1em; /* fallback */
+    -webkit-line-clamp: 2;
+    line-height: 1em;
     margin-left: 4%;
   }
   .user-name {
@@ -55,19 +55,26 @@ export const body = css`
   }
   .options-menu {
     border-radius: 10px;
-    width: 110px;
+    width: 130px;
     height: 32px;
     padding-left: 10px;
+    font-size: 17px;
     margin-left: 10px;
     border: none;
   }
   .search-docs-wrapper {
     display: flex;
-    margin-left: 35%;
+    margin-left: 30%;
   }
+  .search-icon {
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 20px;
+  }
+
   .search-docs {
     border-radius: 15px;
-    width: 250px;
+    width: 280px;
     height: 48px;
     background: #fcfcfc;
     border: none;
@@ -76,9 +83,9 @@ export const body = css`
     font-family: Poppins;
     font-style: normal;
     font-weight: normal;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 27px;
-    padding-left: 15%;
+    padding-left: 20%;
   }
   .upload-docs {
     display: flex;
@@ -95,9 +102,17 @@ export const body = css`
     font-weight: 600;
     font-size: 18px;
     line-height: 20px;
+    padding-right: 28px;
+  }
+  .upload-icon {
+    position: absolute;
+    margin-left: 205px;
+    margin-top: 10px;
   }
   .uploaded-docs-wrapper {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    margin-left: 4%;
+    margin-top: 5%;
   }
 `;
