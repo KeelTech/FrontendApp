@@ -16,6 +16,9 @@ let routes = [
   { path: '/signup', exact: true, component: UserSignUpView },
   { path: '/linkedin', exact: true, component: LinkedInPopUp },
   { path: '/task/detail/:id', exact: true, component: TaskDetailMobileEntry },
+  { path: '/tasks', exact: true, component: UserDashboardView },
+  { path: '/vault', exact: true, component: UserDashboardView },
+  { path: '/billing', exact: true, component: UserDashboardView },
 ];
 
 // routes.push({ path: '*', component: NotFound, NO_MATCH: true })

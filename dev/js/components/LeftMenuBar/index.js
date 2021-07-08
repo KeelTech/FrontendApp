@@ -20,7 +20,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar })=>{
                 }
             }
         )
-        history.push('/dashboard');
+        history.push(`/${value}`);
     }
 
     const mainClass = cx({
@@ -57,7 +57,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar })=>{
                                 <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/billingIcon.svg"} alt="billing"/>
                                 <span className="heading">Billing</span>
                             </div>
-                            <div className={`widget ${activeWidget==='logout'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('logout')}>
+                            <div className={`widget ${activeWidget==='logout'?'activeWidget':''}`} onClick={()=>history.push('/')}>
                                 <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/logoutIcon.svg"} alt="logout"/>
                                 <span className="heading">Logout</span>
                             </div>
