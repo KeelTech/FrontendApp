@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 
-export const primaryFont = "'Poppins', sans-serif";
+export const primaryFont = "sans-serif";
 export const mobileScreenWidth = "600px";
 export const tabScreenWidth = "1100px";
 
@@ -24,5 +24,13 @@ export const inputField = css`
         color: #A098AE;
     }
 `
+
+export const isMobileView = ()=>{
+
+    if(typeof document==="object" && document.body.clientWidth){
+        return document.body.clientWidth<=1100
+    }
+    return false;
+}
 
 

@@ -23,12 +23,6 @@ const Header = (props)=>{
                 <img className="homeIcon" src={ASSETS_BASE_URL+"/images/leftmenubar/hamburgerMenu.svg"} alt="home" onClick={toggleMenuBar}/>
                 <div className="rightView">
                     {props.children}
-                    <div className="notification">
-                        <img src={ASSETS_BASE_URL+"/images/common/notificationIcon.svg"} alt="notification" onClick={()=>{}}/>
-                    </div>
-                    <div className="profile">
-
-                    </div>
                 </div>
             </div>
             <div className={mobileHeading}>{headerText}</div>
