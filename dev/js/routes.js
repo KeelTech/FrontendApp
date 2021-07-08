@@ -20,6 +20,9 @@ let routes = [
   { path: '/task/detail/:id', exact: true, component: TaskDetailMobileEntry },
   { path: '/reset-password', exact: true, component: PasswordReset },
   { path: '/confirm-email', exact: true, component: EmailVerification },
+  { path: '/tasks', exact: true, component: UserDashboardView },
+  { path: '/vault', exact: true, component: UserDashboardView },
+  { path: '/billing', exact: true, component: UserDashboardView },
 ];
 
 // routes.push({ path: '*', component: NotFound, NO_MATCH: true })
