@@ -33,9 +33,9 @@ const USER_LOGIN = {
 };
 
 const COMMON_REDUCER_PERSIST = {
-  key: 'COMMON',
-  storage: storage,
-  whitelist: ['']
+    key: 'COMMON',
+    storage: storage,
+    whitelist: ['activeWidget']
 }
 
 const allReducers = combineReducers({

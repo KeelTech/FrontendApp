@@ -1,10 +1,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { cx } from '@emotion/css';
+import { useHistory } from 'react-router-dom';
 import { SET_MENUBAR_STATE } from '@constants/types';
 import { leftBarCont, container, menuOptions, mobileView} from './style.js';
 
 const LeftMenuBar = ({ isMobileView, toggleMenuBar })=>{
+    const history = useHistory();
     const dispatch = useDispatch();
     const state = useSelector(state=>state.COMMON);
     const { activeWidget } = state;
@@ -18,6 +20,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar })=>{
                 }
             }
         )
+        history.push('/dashboard');
     }
 
     const mainClass = cx({
@@ -34,7 +37,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar })=>{
                 <div className="openWidgetView">
                     <div className="widgetView">
                         <div className="homeWidget">
-                            <img className="homeIcon" src={ASSETS_BASE_URL+"/images/common/keelIcon.svg"} alt="home"/>
+                            <img className="homeIcon" src={ASSETS_BASE_URL+"/images/common/keelIcon.svg"} alt="home" onClick={()=>history.push('/dashboard')}/>
                             <img className="crossIcon" src={ASSETS_BASE_URL+"/images/common/crossIcon.svg"} alt="home" onClick={toggleMenuBar}/>
                         </div>
                         <div className={menuOptions}>

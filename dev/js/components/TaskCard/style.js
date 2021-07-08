@@ -4,8 +4,8 @@ import { mobileScreenWidth } from '@constants';
 export const card = props=>css`
     background: #FCFCFC;
     border-radius: 20px;
-    padding: 17px 40px;
-    margin-bottom: 20px;
+    padding: 12px 26px;
+    margin-bottom: 14px;
     ${props.isView && `
         cursor: pointer;
         border: 3px solid #FCFCFC;
@@ -17,7 +17,10 @@ export const card = props=>css`
         margin-bottom: 0px;
     }
     .text{
-        margin-bottom: 8px;
+        margin-bottom: 6px;
+        font-size: 12px;
+        line-height: 18px;
+        color: #363B64;
     }
     .optionList{
         display: flex;
@@ -28,22 +31,22 @@ export const card = props=>css`
             align-items: center;
         }
         .calendar{
-            height: 20px;
-            width: 20px;
-            margin-right: 18px;
+            height: 13px;
+            width: 13px;
+            margin-right: 12px;
         }
         .date{
-            font-size: 14px;
-            line-height: 21px;
+            font-size: 10px;
+            line-height: 15px;
             color: #A098AE;
         }
         .status{
             background: #CF3030;
-            border-radius: 5px;
+            border-radius: 4px;
             padding: 2px 6px;
             font-weight: 500;
-            font-size: 14px;
-            line-height: 21px;
+            font-size: 10px;
+            line-height: 15px;
             text-align: center;
             color: #FCFCFC;
         }

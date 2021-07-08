@@ -18,7 +18,7 @@ export const leftBarCont = css`
 
 export const container = css`
     position: relative;
-    min-width: 354px;
+    min-width: 210px;
     z-index: 2;
     top: 0;
     height: 100vh;
@@ -26,7 +26,7 @@ export const container = css`
     background: rgba(252,252,252,0.5);
     .openWidgetView{
         position: relative;
-        padding: 34px 46px;
+        padding: 30px 32px;
         padding-right: 0px;
         min-height: 100vh;
     }
@@ -42,8 +42,8 @@ export const container = css`
         margin-bottom: 52px;
     }
     .homeIcon{
-        width: 157px;
-        height: 50px;
+        width: 104px;
+        height: 37px;
         cursor: pointer;
     }
     .crossIcon{
@@ -62,20 +62,20 @@ export const menuOptions = css`
         display: flex;
         cursor: pointer;
         align-items: center;
-        padding: 15px 27px;
+        padding: 10px 17px;
         margin-bottom: 8px;
         .icon{
-            width: 33px;
-            height: 33px;
-            max-width: 33px;
-            min-width: 33px;
+            width: 20px;
+            height: 20px;
+            max-width: 20px;
+            min-width: 20px;
         }
         .heading{
             font-weight: 500;
-            font-size: 18px;
-            line-height: 27px;
+            font-size: 12px;
+            line-height: 18px;
             color: #A098AE;
-            margin-left: 27px;
+            margin-left: 17px;
         }
     }
     .degreeWidget{
@@ -83,10 +83,10 @@ export const menuOptions = css`
         flex-direction: column;
         align-items: center;
         margin-top: 35px;
-        margin-left: 27px;
+        margin-left: 17px;
         background: #363B64;
         box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
-        border-radius: 20px;
+        border-radius: 13px;
         padding: 26px 36px;
         font-weight: 700;
         img{
@@ -95,15 +95,15 @@ export const menuOptions = css`
             width: 35px;
         }
         span{
-            font-size: 18px;
-            line-height: 27px;
+            font-size: 12px;
+            line-height: 18px;
             color: #FFFDFD;
         }
     }
     .activeWidget{
         background: #FCFCFC;
         box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
-        border-radius: 20px;
+        border-radius: 13px;
         .icon{
             filter: brightness(0.5) !important;
         }
