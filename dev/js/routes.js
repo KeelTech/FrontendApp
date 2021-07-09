@@ -8,6 +8,7 @@ import UserDashboardView from './pages/UserDashboardView';
 import UserSignUpView from './pages/UserSignUpView';
 import { LinkedInPopUp } from 'react-linkedin-login-oauth2';
 import TaskDetailMobileEntry from './pages/TaskDetail/TaskDetailMobileEntry.js';
+import AgentDashBoardView from './pages/AgentViews';
 
 let routes = [
   { path: '/', exact: true, component: UserLoginView },
@@ -19,6 +20,7 @@ let routes = [
   { path: '/tasks', exact: true, component: UserDashboardView },
   { path: '/vault', exact: true, component: UserDashboardView },
   { path: '/billing', exact: true, component: UserDashboardView },
+  { path: '/agent/dashboard', exact: true, component: AgentDashBoardView },
 ];
 
 // routes.push({ path: '*', component: NotFound, NO_MATCH: true })

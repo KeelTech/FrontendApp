@@ -19,7 +19,6 @@ const DashboardView = ()=>{
                             <img src={ASSETS_BASE_URL+"/images/common/callIcon.svg"} alt="home"/>
                         </div>
                     </div>
-                    
                 </Header>
                 <div className={container}>
                     <div className={pendingTasks}>
