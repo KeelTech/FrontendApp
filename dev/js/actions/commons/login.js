@@ -35,17 +35,18 @@ export const userLogin = (data, dispatch, cb) => {
         });
         if (cb) cb(null, response);
       } else {
-        let message = 'Error Logging In frontend';
+        let message = 'Failing to log in the user';
         dispatch({
           type: USER_LOGIN_FAIL,
           payload: {
             error_message: message,
           },
         });
+        if (cb) cb(message, null);
       }
     })
     .catch(function (error) {
-      let message = 'Error Logging In backend';
+      let message = error.non_field_errors[0];
       dispatch({
         type: USER_LOGIN_FAIL,
         payload: {
@@ -84,17 +85,18 @@ export const googleLogin = (data, dispatch, cb) => {
         });
         if (cb) cb(null, response);
       } else {
-        let message = 'Error Logging In frontend';
+        let message = 'Failing to log in the user';
         dispatch({
           type: USER_LOGIN_FAIL,
           payload: {
             error_message: message,
           },
         });
+        if (cb) cb(message, null);
       }
     })
     .catch(function (error) {
-      let message = 'Error Logging In backend';
+      let message = error.non_field_errors[0];
       dispatch({
         type: USER_LOGIN_FAIL,
         payload: {
@@ -133,17 +135,18 @@ export const linkedinLogin = (data, dispatch, cb) => {
         });
         if (cb) cb(null, response);
       } else {
-        let message = 'Error Logging In frontend';
+        let message = 'Failing to log in the user';
         dispatch({
           type: USER_LOGIN_FAIL,
           payload: {
             error_message: message,
           },
         });
+        if (cb) cb(message, null);
       }
     })
     .catch(function (error) {
-      let message = 'Error Logging In backend';
+      let message = error.non_field_errors[0];
       dispatch({
         type: USER_LOGIN_FAIL,
         payload: {
@@ -182,17 +185,18 @@ export const facebookLogin = (data, dispatch, cb) => {
         });
         if (cb) cb(null, response);
       } else {
-        let message = 'Error Logging In frontend';
+        let message = 'Failing to log in the user';
         dispatch({
           type: USER_LOGIN_FAIL,
           payload: {
             error_message: message,
           },
         });
+        if (cb) cb(message, null);
       }
     })
     .catch(function (error) {
-      let message = 'Error Logging In backend';
+      let message = error.non_field_errors[0];
       dispatch({
         type: USER_LOGIN_FAIL,
         payload: {

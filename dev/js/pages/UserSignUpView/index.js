@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { style } from './style.js';
 
-function SignUp() {
+function SignUp(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -46,8 +46,7 @@ function SignUp() {
           setEmail('');
           setPassword('');
           setConfirmPassword('');
-          window.location.href =
-            'http://' + window.location.host + '/dashboard';
+          props.history.push('/dashboard');
         }
         if (err) {
           console.log(err);
@@ -60,7 +59,7 @@ function SignUp() {
     const { accessToken } = response;
     googleLogin({ accessToken }, dispatch, (err, data) => {
       if (data) {
-        window.location.href = 'http://' + window.location.host + '/dashboard';
+        props.history.push('/dashboard');
       }
       if (err) {
         console.log(err);
@@ -73,7 +72,7 @@ function SignUp() {
     console.log('accessToken', accessToken);
     facebookLogin({ accessToken }, dispatch, (err, data) => {
       if (data) {
-        console.log(data);
+        props.history.push('/dashboard');
       }
       if (err) {
         console.log(err);
@@ -87,13 +86,11 @@ function SignUp() {
 
   return (
     <div className={style({})}>
-      <div className="passport-image">
-        <img
-          className="bg-image"
-          src={ASSETS_BASE_URL + '/images/Signup/passport-image.jpeg'}
-          alt="keel-logo"
-        />
-      </div>
+      <img
+        className="passport-image"
+        src={ASSETS_BASE_URL + '/images/Signup/passport-image.jpeg'}
+        alt="passport-image"
+      />
       <div className="container">
         <img
           className="logo"
@@ -139,8 +136,8 @@ function SignUp() {
               <button onClick={renderProps.onClick} className="google-button">
                 <img
                   className="google-button-image"
-                  src="https://images.theconversation.com/files/93616/original/image-20150902-6700-t2axrz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1000&fit=clip"
-                  alt="g-image"
+                  src={ASSETS_BASE_URL + '/images/Signup/google-logo.jpeg'}
+                  alt="google"
                 />
               </button>
             )}

@@ -17,7 +17,6 @@ export const style = (props) => css`
     .header-text {
       display: flex;
       justify-content: center;
-      font-family: Poppins;
       margin-top: 6%;
       font-size: 28px;
       line-height: 27px;
@@ -77,6 +76,11 @@ export const style = (props) => css`
         font-size: 20px;
       }
     }
+    .login-fail-msg {
+      display: flex;
+      color: red;
+      font-size: 15px;
+    }
     .log-in-button {
       display: flex;
       justify-content: center;
@@ -130,6 +134,7 @@ export const style = (props) => css`
       font-family: Poppins;
       margin-left: 95px;
       color: #959595;
+      text-decoration: none;
       :hover {
         color: #000;
         text-decoration: underline;
@@ -137,7 +142,8 @@ export const style = (props) => css`
     }
     @media (max-width: ${tabScreenWidth}) {
       .password-reset {
-        font-size: 14px;
+        font-size: 10px;
+        /* margin-left: 15px; */
       }
     }
     .login-divider {

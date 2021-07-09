@@ -6,30 +6,18 @@ export const style = (props) => css`
   display: flex;
   overflow: hidden;
   .passport-image {
-    position: relative;
     width: 50vw;
     overflow: hidden;
-    .bg-image {
-      position: absolute;
-      width: 50vw;
-      top: 0;
-      left: 0;
-      z-index: 1;
-    }
-    @media (max-width: ${tabScreenWidth}) {
-      .passport-image {
-        width: 0vw;
-      }
-      .bg-image {
-        width: 0vw;
-      }
+  }
+  @media (max-width: ${tabScreenWidth}) {
+    .passport-image {
+      width: 0vw;
     }
   }
   .container {
     width: 50vw;
     @media (max-width: ${tabScreenWidth}) {
       width: 100vw;
-      margin-right: 25%;
     }
     .logo {
       margin-top: 3%;
@@ -194,12 +182,13 @@ export const style = (props) => css`
     }
     .social-button-wrapper {
       display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
+      justify-content: space-evenly;
       margin-top: 3%;
     }
     .google-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: 100px;
       height: 70px;
       background: #ffffff;
@@ -208,6 +197,7 @@ export const style = (props) => css`
       border-color: #f6f5fa;
       font-size: 40px;
       cursor: pointer;
+      margin-left: 160px;
       transition: 0.5s;
       :hover {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
@@ -243,6 +233,7 @@ export const style = (props) => css`
       font-size: 40px;
       cursor: pointer;
       font-weight: 900;
+      margin-right: 130px;
       transition: 0.5s;
       :hover {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),

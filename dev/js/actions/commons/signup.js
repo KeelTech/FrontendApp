@@ -34,6 +34,15 @@ export const userSignUp = (data, dispatch, cb) => {
           },
         });
         if (cb) cb(null, response);
+      } else {
+        let message = 'Failing to sign up the user';
+        dispatch({
+          type: USER_SIGNUP_FAIL,
+          payload: {
+            error_message: message,
+          },
+        });
+        if (cb) cb(message, null);
       }
     })
     .catch(function (error) {

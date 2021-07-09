@@ -13,9 +13,10 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { style } from './style.js';
 
-const LoginView = () => {
+const LoginView = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginFail, setLoginFail] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -34,12 +35,13 @@ const LoginView = () => {
     }
     userLogin({ email, password }, dispatch, (err, data) => {
       if (data) {
+        setLoginFail(false);
         setEmail('');
         setPassword('');
-        window.location.href = 'http://' + window.location.host + '/dashboard';
+        props.history.push('/dashboard');
       }
       if (err) {
-        alert('incorrect email or password');
+        setLoginFail(true);
       }
     });
   };
@@ -48,7 +50,7 @@ const LoginView = () => {
     const { accessToken } = response;
     googleLogin({ accessToken }, dispatch, (err, data) => {
       if (data) {
-        window.location.href = 'http://' + window.location.host + '/dashboard';
+        props.history.push('/dashboard');
       }
       if (err) {
         console.log(err);
@@ -61,7 +63,7 @@ const LoginView = () => {
     console.log('accessToken', accessToken);
     facebookLogin({ accessToken }, dispatch, (err, data) => {
       if (data) {
-        console.log(data);
+        props.history.push('/dashboard');
       }
       if (err) {
         console.log(err);
@@ -70,7 +72,6 @@ const LoginView = () => {
   };
 
   const responseLinkedin = (response) => {
-    console.log('faltu', response);
     axios
       .post('https://www.linkedin.com/oauth/v2/accessToken', {
         grant_type: 'client_credentials',
@@ -103,6 +104,11 @@ const LoginView = () => {
             value={password}
             onChange={passwordLoginHandler}
           />
+          {loginFail && (
+            <p className="login-fail-msg">
+              Invalid credentials, Please try Again!
+            </p>
+          )}
           <button className="log-in-button">Log in</button>
         </form>
         <Link className="password-reset-wrapper" to="#">
@@ -120,7 +126,7 @@ const LoginView = () => {
               <button onClick={renderProps.onClick} className="google-button">
                 <img
                   className="google-button-image"
-                  src="https://images.theconversation.com/files/93616/original/image-20150902-6700-t2axrz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1000&fit=clip"
+                  src={ASSETS_BASE_URL + '/images/Signup/google-logo.jpeg'}
                   alt="g-image"
                 />
               </button>
