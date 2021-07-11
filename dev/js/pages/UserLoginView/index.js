@@ -87,7 +87,7 @@ const LoginView = (props) => {
       <div className="container">
         <img
           className="keel-logo"
-          src={ASSETS_BASE_URL + '/images/login/keel-logo.svg'}
+          src={ASSETS_BASE_URL + '/images/Login/keel-logo.svg'}
           alt="keel-logo"
         />
         <p className="header-text">Log in to Continue</p>
@@ -155,7 +155,7 @@ const LoginView = (props) => {
       </div>
       <img
         className="passport-image"
-        src={ASSETS_BASE_URL + '/images/login/visa-image.jpeg'}
+        src={ASSETS_BASE_URL + '/images/Login/visa-image.jpeg'}
         alt="pasport-image"
       />
     </div>
