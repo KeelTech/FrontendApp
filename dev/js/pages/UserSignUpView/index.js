@@ -94,7 +94,7 @@ function SignUp(props) {
       <div className="container">
         <img
           className="logo"
-          src={ASSETS_BASE_URL + '/images/login/keel-logo.svg'}
+          src={ASSETS_BASE_URL + '/images/Login/keel-logo.svg'}
           alt="keel-logo"
         />
         <p className="header-text">Sign Up to Continue</p>
