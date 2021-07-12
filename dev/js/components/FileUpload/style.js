@@ -1,6 +1,5 @@
 import { css } from '@emotion/css';
 import { mobileScreenWidth } from '@constants';
-import { primaryFont } from '@constants'
 
 export const fileUpload = css`
     opacity:0;
@@ -14,13 +13,8 @@ export const fileUploadWrapper = css`
     background-image:url("./../../../assets/images/common/file.svg");
     background-color:transparent;
     background-repeat: no-repeat;
-    background-size: cover;
     margin-left: auto;
     margin-right: auto;
-    @media(max-width: ${mobileScreenWidth}){
-        width:50px;
-        height:50px;
-    };
 `
 
 export const ddContainer = css`
@@ -35,7 +29,6 @@ export const ddContainer = css`
     @media(max-width: ${mobileScreenWidth}){
         width: 100%;
         font-size:14px;
-        height: 32px;
     };
 `
 export const ddContainerItem = css`
@@ -43,13 +36,12 @@ export const ddContainerItem = css`
     border: none;
     width: 100%;
     border-bottom:0.8px solid #EAEAEF;
-    font-family: ${primaryFont};
+    font-family: Poppins;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
     line-height: 27px;
     cursor:pointer;
-    
     :hover{
         border:none;
         background: none;
@@ -69,7 +61,7 @@ export const ddContainerItem = css`
 
 export const ddContainerItemHeader = css`
     background: #FCFCFC;
-    font-family: ${primaryFont};
+    font-family: Poppins;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -78,12 +70,9 @@ export const ddContainerItemHeader = css`
     padding-top:3px;
     cursor:pointer;
     outline:none;
-    @media(max-width: ${mobileScreenWidth}){
-        padding-top:0px;
-    };
 `
 export const selectedFileText = css`
-    font-family: ${primaryFont};
+    font-family: Poppins;
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
@@ -101,15 +90,12 @@ export const outerShell = css`
     background: white;
     position:absolute;
     top:25%;
-    width:60vw;
+    width:80vw;
     max-width: 890px;
     box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
     text-align:center;
     border-radius: 8px;
     z-index:99;
-    @media(max-width: ${mobileScreenWidth}){
-        width:90vw;
-    };
 `
 export const innerShell = css`
     background: #EAEAEF;
@@ -118,9 +104,7 @@ export const innerShell = css`
     border-radius: 8px;
     padding-top:40px;
     margin:4%;
-    @media(max-width: ${mobileScreenWidth}){
-        padding-top:20px;
-    };
+    max-height: 300px;
 `
 export const closeWrapper = css`
     float: right;
@@ -130,8 +114,7 @@ export const closeWrapper = css`
     color:#363B64;
     cursor:pointer;
     @media(max-width: ${mobileScreenWidth}){
-        font-size: 10px;
-        line-height: 15px;
+        font-size: 12px;
     };
 `
 export const chevronDown = css`
@@ -155,10 +138,7 @@ export const fileButton = css`
     border:none;
     border-radius: 20px;
     cursor:pointer;
-    @media(max-width: ${mobileScreenWidth}){
-        width:132px;
-        height:32px;
-    };
+    margin-right:auto;
 `
 export const fileData = css`
     width: 100%;
@@ -166,16 +146,13 @@ export const fileData = css`
     height: 60px;
     justify-content: center;
     margin-top:15px;
-    @media(max-width: ${mobileScreenWidth}){
-        height:25px;
-    };
 `
 export const optionMenu = css`
     height: 32px;
     font-size: 17px;
     border: none;
     background: #FCFCFC;
-    font-family: ${primaryFont};
+    font-family: Poppins;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -184,10 +161,16 @@ export const optionMenu = css`
     padding-top: 3px;
     cursor: pointer;
     outline:none;
-    @media(max-width: ${mobileScreenWidth}){
-        padding-top:0px;
-        height: 25px;
-    };
+    :after {
+        position: absolute;
+        content: "";
+        top: 14px;
+        right: 10px;
+        width: 0;
+        height: 0;
+        border: 6px solid transparent;
+        border-color: #fff transparent transparent transparent;
+    }
     :hover{
         border:none;
         background-color: none;

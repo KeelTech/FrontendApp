@@ -1,10 +1,29 @@
 import React, { Component } from 'react';
 import { fileUpload, fileUploadWrapper, ddContainer, ddContainerItem, ddContainerItemHeader, selectedFileText, outerShell, innerShell, closeWrapper, chevronDown, fileButton, fileData, optionMenu } from './style.js';
+import CustomDropDown from '@components/CustomDropDown';
 
 class FileUpload extends Component {
     state = {
         selectedFile: null,
         selectedFileType: null,
+        options: [
+            {
+                value: 1,
+                displayName: "Aadhar Card"
+            },
+            {
+                value: 2,
+                displayName: "PAN Card"
+            },
+            {
+                value: 3,
+                displayName: "Driving License"
+            },
+            {
+                value: 4,
+                displayName: "Other"
+            }
+        ]
     };
     close = () => {
         this.props.fileUploadModalClosed({
@@ -24,12 +43,11 @@ class FileUpload extends Component {
             this.props.fileUploaded(formData);
         }
     };
-    onOptionChange = event => {
-        console.log(event.target.value)
-        this.setState({ selectedFileType: event.target.value });
-    }
     btnClickedUpload = () => {
         document.getElementById("file").click();
+    }
+    handleOptionChange = (item) => {
+        this.setState({ selectedFileType: item });
     }
     fileData = () => {
         if (this.state.selectedFile) {
@@ -56,17 +74,7 @@ class FileUpload extends Component {
                         <input id="file" className={fileUpload} type="file" onChange={this.onFileChange} />
                     </div>
                     <div className={fileData}>{this.fileData()}</div>
-                    <div className={ddContainer}>
-                        <div className={ddContainerItemHeader}>
-                            <select onChange={this.onOptionChange} className={optionMenu}>
-                                <option className={ddContainerItem} value="">Search or Select Type</option>
-                                <option className={ddContainerItem} value="Aadhar Card">Aadhar Card</option>
-                                <option className={ddContainerItem} value="PAN Card">PAN Card</option>
-                                <option className={ddContainerItem} value="Driving License">Driving License</option>
-                                <option className={ddContainerItem} value="Other">Other</option>
-                            </select>
-                        </div>
-                    </div>
+                    <CustomDropDown list={this.state.options} optionSelected={this.handleOptionChange}></CustomDropDown>
                 </div>
             </div>
         );
