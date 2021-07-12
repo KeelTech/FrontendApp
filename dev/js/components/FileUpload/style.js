@@ -34,6 +34,7 @@ export const ddContainer = css`
     @media(max-width: ${mobileScreenWidth}){
         width: 100%;
         font-size:14px;
+        height: 32px;
     };
 `
 export const ddContainerItem = css`
@@ -41,12 +42,13 @@ export const ddContainerItem = css`
     border: none;
     width: 100%;
     border-bottom:0.8px solid #EAEAEF;
-    font-family: Poppins;
+    font-family: ${primaryFont};
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
     line-height: 27px;
     cursor:pointer;
+    
     :hover{
         border:none;
         background: none;
@@ -66,7 +68,7 @@ export const ddContainerItem = css`
 
 export const ddContainerItemHeader = css`
     background: #FCFCFC;
-    font-family: Poppins;
+    font-family: ${primaryFont};
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -75,9 +77,12 @@ export const ddContainerItemHeader = css`
     padding-top:3px;
     cursor:pointer;
     outline:none;
+    @media(max-width: ${mobileScreenWidth}){
+        padding-top:0px;
+    };
 `
 export const selectedFileText = css`
-    font-family: Poppins;
+    font-family: ${primaryFont};
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
@@ -169,7 +174,7 @@ export const optionMenu = css`
     font-size: 17px;
     border: none;
     background: #FCFCFC;
-    font-family: Poppins;
+    font-family: ${primaryFont};
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -178,16 +183,10 @@ export const optionMenu = css`
     padding-top: 3px;
     cursor: pointer;
     outline:none;
-    :after {
-        position: absolute;
-        content: "";
-        top: 14px;
-        right: 10px;
-        width: 0;
-        height: 0;
-        border: 6px solid transparent;
-        border-color: #fff transparent transparent transparent;
-    }
+    @media(max-width: ${mobileScreenWidth}){
+        padding-top:0px;
+        height: 25px;
+    };
     :hover{
         border:none;
         background-color: none;
