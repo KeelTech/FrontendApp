@@ -8,8 +8,11 @@ import TaskDetail from './index.js';
 import { container, body, mobileScrollView } from '@pages/UserDashboardView/style.js';
 import { taskMobileCont } from './style.js';
 
-const TaskDetailMobileView = ()=>{
-
+const TaskDetailMobileView = (props)=>{
+    let taskId = '';
+    if(props && props.match && props.match && props.match.params.id){
+        taskId = props.match.params.id;
+    }
     return(
         <div className={container}>
             <LeftMenuBar/>
@@ -22,7 +25,7 @@ const TaskDetailMobileView = ()=>{
                         </div>
                     </Header>
                     <div className={taskMobileCont}>
-                        <TaskDetail/>
+                        <TaskDetail activeTask={taskId}/>
                     </div>
                 </div>
             </div>

@@ -8,6 +8,7 @@ export const container = css`
     height: 100%;
     padding: 0px 26px;
     height: calc(100% - 160px);
+    flex-direction: column;
     .performance{
         display: flex;
         align-items: flex-start;
@@ -16,6 +17,7 @@ export const container = css`
         padding: 22px 36px;
         background: #FCFCFC;
         border-radius: 14px;
+        max-width: 260px;
         .profileName{
             display: block;
             font-size: 36px;
@@ -54,11 +56,29 @@ export const container = css`
 `
 
 export const rightBar = css`
-    min-width: 430px;
+    min-width: 400px;
     min-height: 100vh;
     margin-top: 30px;
     padding: 0px 22px;
     display: none;
+    .mainCont{
+        margin-top: 30px;
+    }
+    .upcoming{
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 27px;
+        color: #363B64;
+        background: #FCFCFC;
+        border-radius: 14px;
+        padding: 12px 0px;
+        width: 100%;
+        text-align: center;
+    }
+    .calendar{
+        width: 100%;
+        padding-top: 30px;
+    }
     @media(min-width: 1200px){
         display: block;
         .headerView{
@@ -73,10 +93,12 @@ export const widgets = css`
     display: flex;
     flex-wrap: wrap;
     .widget{
-        min-width: 250px;
+        min-width: 240px;
         min-height: 150px;
+        padding: 18px;
         background-size: cover;
         padding: 18px;
+        font-weight: bold;
         span{
             display: block;
             text-align: right;
@@ -94,6 +116,20 @@ export const widgets = css`
         }
     }
     .cover{
-
+    }
+    .progress{
+        .no{
+            color: #BC8710;
+        }
+    }
+    .completed{
+        .no{
+            color: #108604;
+        }
+    }
+    .revenue{
+        .no{
+            color: #097236;
+        }
     }
 `
