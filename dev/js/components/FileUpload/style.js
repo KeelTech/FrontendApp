@@ -1,5 +1,6 @@
 import { css } from '@emotion/css';
 import { mobileScreenWidth } from '@constants';
+import { primaryFont } from '@constants'
 
 export const fileUpload = css`
     opacity:0;
