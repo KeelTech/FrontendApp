@@ -2,14 +2,11 @@ import React from 'react';
 import TaskCard from '@components/TaskCard';
 import ChatWidget from '@components/ChatWidget';
 import FloatingChatWidget from '@components/FloatingChatWidget';
-import FileUpload from '@components/FileUpload';
 import Header from '@components/Header';
 import { container, pendingTasks, scheduleCallCta, body, upcomingSchedules } from './style.js';
 
 const DashboardView = () => {
-    function abc(val) {
-        console.log(val)
-    }
+
     return (
         <div className={body}>
             <div className="mainView">
@@ -21,7 +18,6 @@ const DashboardView = () => {
                 </Header>
                 <div className={container}>
                     <div className={pendingTasks}>
-                        <FileUpload fileUploaded={abc}></FileUpload>
                         <div className="taskHeading">PENDING TASKS</div>
                         <div className="taskList">
                             <TaskCard />
