@@ -63,5 +63,8 @@ export const tasksView = css`
             border-radius: 10px;
             margin: 0px 8px 8px 0px;
         }
+        .taskList{
+            max-height: 100%;
+        }
     }
 `

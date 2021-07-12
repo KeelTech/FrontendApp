@@ -1,17 +1,19 @@
 import React from 'react';
+import { getFormattedDate } from '@helpers/utils.js';
 import { card } from './style.js';
 
-const TaskCard = ({ active=false, isView=false, clickHandler=()=>{}})=>{
+const TaskCard = ({ data={}, active=false, isView=false, clickHandler=()=>{}})=>{
 
+    const { title='', status_name='',  created_at=''} = data;
     return(
         <div className={card({active, isView})} onClick={clickHandler}>
-            <div className="text">This is a task and the title can be as long as you want, like it can be really really big!</div>
+            <div className="text">{title}</div>
             <div className="optionList">
                 <div className="timePeriod">
                     <img className="calendar" src={ASSETS_BASE_URL+"/images/common/calendar.svg"} alt="date"/>
-                    <span className="date">March 20, 2021</span>
+                    <span className="date">{getFormattedDate(created_at)}</span>
                 </div>
-                <div className="status">Overdue</div>
+                <div className="status">{status_name}</div>
             </div>
         </div>
     )

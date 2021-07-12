@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import Header from '@components/Header';
 import NotificationWidget from '@components/NotificationWidget';
 import ProfileWidget from '@components/ProfileWidget';
+import DatePicker from '@components/DatePicker';
 import { container, rightBar, widgets } from './style.js';
 const CompletedImg = `${ASSETS_BASE_URL}/images/AgentDashboard/completed.svg`;
 const PendingImg = `${ASSETS_BASE_URL}/images/AgentDashboard/pending.svg`;
@@ -30,13 +31,25 @@ const AgentDashboardView = ()=>{
                                 </div>
                             </div>
                             <div className="widget" style={{backgroundImage: `url(${ReviewImg})`}}>
-
+                                <div className="cover progress">
+                                    <span className="no">12</span>
+                                    <span className="value">In Progress</span>
+                                    <span className="value">Applications</span>
+                                </div>
                             </div>
                             <div className="widget" style={{backgroundImage: `url(${CompletedImg})`}}>
-
+                                <div className="cover completed">
+                                    <span className="no">20</span>
+                                    <span className="value">Completed</span>
+                                    <span className="value">Applications</span>
+                                </div>
                             </div>
                             <div className="widget" style={{backgroundImage: `url(${RevenueImg})`}}>
-
+                                <div className="cover revenue">
+                                    <span className="no">$20,000</span>
+                                    <span className="value">Total</span>
+                                    <span className="value">Applications</span>
+                                </div>
                             </div>
 
                         </div>
@@ -49,6 +62,12 @@ const AgentDashboardView = ()=>{
                 <div className="headerView">
                     <NotificationWidget/>
                     <ProfileWidget/>
+                </div>
+                <div className="mainCont">
+                    <div className="upcoming">Upcoming Schedule</div>
+                    <div className="calendar">
+                        <DatePicker/>
+                    </div>
                 </div>
             </div>
         </Fragment>
