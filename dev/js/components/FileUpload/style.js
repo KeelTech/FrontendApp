@@ -13,8 +13,13 @@ export const fileUploadWrapper = css`
     background-image:url("./../../../assets/images/common/file.svg");
     background-color:transparent;
     background-repeat: no-repeat;
+    background-size: cover;
     margin-left: auto;
     margin-right: auto;
+    @media(max-width: ${mobileScreenWidth}){
+        width:50px;
+        height:50px;
+    };
 `
 
 export const ddContainer = css`
@@ -90,12 +95,15 @@ export const outerShell = css`
     background: white;
     position:absolute;
     top:25%;
-    width:80vw;
+    width:60vw;
     max-width: 890px;
     box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
     text-align:center;
     border-radius: 8px;
     z-index:99;
+    @media(max-width: ${mobileScreenWidth}){
+        width:90vw;
+    };
 `
 export const innerShell = css`
     background: #EAEAEF;
@@ -103,7 +111,10 @@ export const innerShell = css`
     padding:20px;
     border-radius: 8px;
     padding-top:40px;
-    margin:4%
+    margin:4%;
+    @media(max-width: ${mobileScreenWidth}){
+        padding-top:20px;
+    };
 `
 export const closeWrapper = css`
     float: right;
@@ -113,7 +124,8 @@ export const closeWrapper = css`
     color:#363B64;
     cursor:pointer;
     @media(max-width: ${mobileScreenWidth}){
-        font-size: 12px;
+        font-size: 10px;
+        line-height: 15px;
     };
 `
 export const chevronDown = css`
@@ -136,7 +148,11 @@ export const fileButton = css`
     color:white;
     border:none;
     border-radius: 20px;
-    cursor:pointer
+    cursor:pointer;
+    @media(max-width: ${mobileScreenWidth}){
+        width:132px;
+        height:32px;
+    };
 `
 export const fileData = css`
     width: 100%;
@@ -144,6 +160,9 @@ export const fileData = css`
     height: 60px;
     justify-content: center;
     margin-top:15px;
+    @media(max-width: ${mobileScreenWidth}){
+        height:25px;
+    };
 `
 export const optionMenu = css`
     height: 32px;
