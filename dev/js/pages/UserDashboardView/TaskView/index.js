@@ -8,7 +8,11 @@ import NotificationWidget from '@components/NotificationWidget';
 import ProfileWidget from '@components/ProfileWidget';
 import TaskDetail from '@pages/TaskDetail';
 import { isMobileView } from '@constants';
+<<<<<<< HEAD
 import { getTaskList } from '@actions';
+=======
+import { getTaskList, getTaskDetail } from '@actions';
+>>>>>>> added task list api
 import { container, tasksView } from './style.js';
 import { body } from '../style.js';
 
@@ -33,6 +37,7 @@ const TaskView = ()=>{
     }
 
     useEffect(()=>{
+<<<<<<< HEAD
         dispatch(
             {
                 type: SET_MENUBAR_STATE,
@@ -44,6 +49,8 @@ const TaskView = ()=>{
     },[])
 
     useEffect(()=>{
+=======
+>>>>>>> added task list api
         getTaskList({status: activeWidget}, dispatch, (resp, error)=>{
             if(resp && resp.length && !isMobileView()){
                 setActiveTask(resp[0].task_id);
