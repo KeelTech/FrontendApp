@@ -1,5 +1,5 @@
 import { css } from '@emotion/css';
-import { mobileScreenWidth } from '@constants';
+import { tabScreenWidth } from '@constants';
 
 export const floatingChat = css`
     position: fixed;
@@ -15,7 +15,7 @@ export const floatingChat = css`
         height: 32px;
         width: 32px;
     }
-    @media(max-width: ${mobileScreenWidth}){
+    @media(max-width: ${tabScreenWidth}){
         display: flex;
     }
 `

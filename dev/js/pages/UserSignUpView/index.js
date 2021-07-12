@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import { LinkedIn as LinkedInLogin } from 'react-linkedin-login-oauth2';
-import { googleButtonStyle } from './style.js';
+import {
+  googleLogin,
+  linkedinLogin,
+  facebookLogin,
+} from '../../actions/index.js';
 import { userSignUp } from '../../actions/index.js';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { style } from './style.js';
 
-function SignUp() {
+function SignUp(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -30,31 +34,50 @@ function SignUp() {
 
   const signUpSubmitHnadler = (event) => {
     event.preventDefault();
+    if (email === '' || password === '') {
+      return;
+    }
     if (password !== confirmPassword) {
       setPasswordValidation(true);
     } else {
       setPasswordValidation(false);
       userSignUp({ email, password }, dispatch, (err, data) => {
         if (data) {
-          console.log('data', data);
+          setEmail('');
+          setPassword('');
+          setConfirmPassword('');
+          props.history.push('/dashboard');
         }
         if (err) {
           console.log(err);
         }
       });
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
     }
   };
 
   const responseGoogle = (response) => {
-    console.log(response);
-    console.log(response.profileObj);
+    const { accessToken } = response;
+    googleLogin({ accessToken }, dispatch, (err, data) => {
+      if (data) {
+        props.history.push('/dashboard');
+      }
+      if (err) {
+        console.log(err);
+      }
+    });
   };
 
   const responseFacebook = (response) => {
-    console.log(response);
+    const { accessToken } = response;
+    console.log('accessToken', accessToken);
+    facebookLogin({ accessToken }, dispatch, (err, data) => {
+      if (data) {
+        props.history.push('/dashboard');
+      }
+      if (err) {
+        console.log(err);
+      }
+    });
   };
 
   const responseLinkedin = (response) => {
@@ -63,21 +86,19 @@ function SignUp() {
 
   return (
     <div className={style({})}>
-      <div className="passport-image">
-        <img
-          className="bg-image"
-          src={ASSETS_BASE_URL + '/images/Signup/passport-image.jpeg'}
-          alt="keel-logo"
-        />
+      <img
+        className="passport-image"
+        src={ASSETS_BASE_URL + '/images/Signup/passport-image.jpeg'}
+        alt="passport-image"
+      />
+      <div className="container">
         <img
           className="logo"
-          src={ASSETS_BASE_URL + '/images/login/keel-logo.svg'}
+          src={ASSETS_BASE_URL + '/images/Login/keel-logo.svg'}
           alt="keel-logo"
         />
-      </div>
-      <div className="container">
         <p className="header-text">Sign Up to Continue</p>
-        <form onSubmit={signUpSubmitHnadler}>
+        <form className="form-wrapper" onSubmit={signUpSubmitHnadler}>
           <input
             placeholder="E-mail / username"
             type="email"
@@ -106,42 +127,45 @@ function SignUp() {
         <p className="login-divider">
           <span>Or sign up with </span>
         </p>
-        <GoogleLogin
-          clientId="194271428747-v7t3bjqu3cea8jq734pd9o950kolco0o.apps.googleusercontent.com"
-          buttonText="Login"
-          theme="dark"
-          render={(renderProps) => (
-            <button onClick={renderProps.onClick} style={googleButtonStyle}>
-              G
-            </button>
-          )}
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          cookiePolicy={'single_host_origin'}
-        />
-        <FacebookLogin
-          appId="1088597931155576"
-          autoLoad={true}
-          fields="name,email,picture"
-          textButton=""
-          callback={responseFacebook}
-          cssClass="facebook-button"
-          icon="fa-facebook"
-        />
-        <LinkedInLogin
-          clientId="81lx5we2omq9xh"
-          onFailure={responseLinkedin}
-          onSuccess={responseLinkedin}
-          redirectUri="http://localhost:3000/linkedin"
-        >
-          <button className="linkedin-button">in</button>
-        </LinkedInLogin>
+        <div className="social-button-wrapper">
+          <GoogleLogin
+            clientId="194271428747-v7t3bjqu3cea8jq734pd9o950kolco0o.apps.googleusercontent.com"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            render={(renderProps) => (
+              <button onClick={renderProps.onClick} className="google-button">
+                <img
+                  className="google-button-image"
+                  src={ASSETS_BASE_URL + '/images/Signup/google-logo.jpeg'}
+                  alt="google"
+                />
+              </button>
+            )}
+          />
+          <FacebookLogin
+            appId="1088597931155576"
+            autoLoad={true}
+            fields="name,email,picture"
+            textButton=""
+            callback={responseFacebook}
+            cssClass="facebook-button"
+            icon="fa-facebook"
+          />
+          <LinkedInLogin
+            clientId="81lx5we2omq9xh"
+            onFailure={responseLinkedin}
+            onSuccess={responseLinkedin}
+            redirectUri="http://localhost:3000/linkedin"
+          >
+            <button className="linkedin-button">in</button>
+          </LinkedInLogin>
+        </div>
         <p className="signup-divider">
           <span>If you're already a member!</span>
         </p>
-        <Link to='/'>
+        <Link className="signup-button-wrapper" to="/">
           <button className="sign-up-button">Log In</button>
-          </Link>
+        </Link>
       </div>
     </div>
   );

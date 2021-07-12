@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { cx } from '@emotion/css';
 import ChatCard from './ChatCard.js';
 import { container, chatWidget, msgWidget, mobileChatView } from './style.js';
@@ -9,6 +9,15 @@ const ChatWidget = ({ floatingChat=false, toggleChat })=>{
         [container]: true,
         [mobileChatView]: floatingChat,
     })
+
+    useEffect(()=>{
+        if(floatingChat){
+            document.body.style.overflow="hidden";
+        }
+        return ()=>{
+            document.body.style.overflow="";
+        }
+    },[floatingChat])
 
     return(
         <div className={mainClass}>
