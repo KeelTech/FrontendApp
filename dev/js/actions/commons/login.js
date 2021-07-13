@@ -2,6 +2,9 @@ import {
   SEND_USER_LOGIN_CREDENTIALS,
   USER_LOGIN_FAIL,
   USER_LOGIN_SUCCESS,
+  SEND_USER_LOGIN_RESET_CREDENTIALS,
+  USER_LOGIN_RESET_FAIL,
+  USER_LOGIN_RESET_SUCCESS,
 } from '../../constants/types';
 import { API_POST } from '../../api/api.js';
 import STORAGE from '@helpers/storage/storage.js';
@@ -199,6 +202,55 @@ export const facebookLogin = (data, dispatch, cb) => {
       let message = error.non_field_errors[0];
       dispatch({
         type: USER_LOGIN_FAIL,
+        payload: {
+          error_message: message,
+        },
+      });
+      if (cb) cb(message, null);
+    });
+};
+
+export const resetPasswordLink = (data, dispatch, cb) => {
+  dispatch({
+    type: SEND_USER_LOGIN_RESET_CREDENTIALS,
+    payload: {
+      loading: true,
+    },
+  });
+  API_POST(API_BASE_URL + '/v1/user/reset-password', {
+    email: data.email,
+  })
+    .then(function (response) {
+      if (response && response.status == 1) {
+        dispatch({
+          type: SEND_USER_LOGIN_RESET_CREDENTIALS,
+          payload: {
+            loading: false,
+          },
+        });
+        const message = 'Successfully sent the user email';
+        dispatch({
+          type: USER_LOGIN_RESET_SUCCESS,
+          payload: {
+            login_message: message,
+          },
+        });
+        if (cb) cb(null, response);
+      } else {
+        let message = 'Failing to send user email address';
+        dispatch({
+          type: USER_LOGIN_RESET_FAIL,
+          payload: {
+            error_message: message,
+          },
+        });
+        if (cb) cb(message, null);
+      }
+    })
+    .catch(function (error) {
+      let message = error.message;
+      dispatch({
+        type: USER_LOGIN_RESET_FAIL,
         payload: {
           error_message: message,
         },

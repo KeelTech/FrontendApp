@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import { LinkedIn as LinkedInLogin } from 'react-linkedin-login-oauth2';
-import {
-  googleLogin,
-  linkedinLogin,
-  facebookLogin,
-} from '../../actions/index.js';
+import { googleLogin, facebookLogin } from '../../actions/index.js';
 import { userSignUp } from '../../actions/index.js';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -17,10 +13,11 @@ function SignUp(props) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordValidation, setPasswordValidation] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
 
   const dispatch = useDispatch();
 
-  const emailSignUpHnadler = (event) => {
+  const emailSignUpHandler = (event) => {
     setEmail(event.target.value);
   };
 
@@ -32,7 +29,7 @@ function SignUp(props) {
     setConfirmPassword(event.target.value);
   };
 
-  const signUpSubmitHnadler = (event) => {
+  const signUpSubmitHandler = (event) => {
     event.preventDefault();
     if (email === '' || password === '') {
       return;
@@ -43,13 +40,14 @@ function SignUp(props) {
       setPasswordValidation(false);
       userSignUp({ email, password }, dispatch, (err, data) => {
         if (data) {
+          setErrorMessage(false);
           setEmail('');
           setPassword('');
           setConfirmPassword('');
           props.history.push('/dashboard');
         }
         if (err) {
-          console.log(err);
+          setErrorMessage(true);
         }
       });
     }
@@ -94,16 +92,16 @@ function SignUp(props) {
       <div className="container">
         <img
           className="logo"
-          src={ASSETS_BASE_URL + '/images/Login/keel-logo.svg'}
+          src={ASSETS_BASE_URL + '/images/common/keelIcon.svg'}
           alt="keel-logo"
         />
         <p className="header-text">Sign Up to Continue</p>
-        <form className="form-wrapper" onSubmit={signUpSubmitHnadler}>
+        <form className="form-wrapper" onSubmit={signUpSubmitHandler}>
           <input
             placeholder="E-mail / username"
             type="email"
             value={email}
-            onChange={emailSignUpHnadler}
+            onChange={emailSignUpHandler}
           />
           <input
             className="password-field"
@@ -123,6 +121,9 @@ function SignUp(props) {
         </form>
         {passwordValidation && (
           <p className="password-validation">Passwords do not match</p>
+        )}
+        {errorMessage && (
+          <p className="password-validation">E-mail already exists</p>
         )}
         <p className="login-divider">
           <span>Or sign up with </span>
