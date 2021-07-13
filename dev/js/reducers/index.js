@@ -6,7 +6,7 @@ import AUTH from './commons/auth.js';
 import USER from './commons/user.js';
 import LOGIN from './commons/login.js';
 import COMMON_REDUCER from './common.js'
-
+import TASK_INFO from './consumerTaskInfo.js'
 
 const persistConfig = {
   key: 'root',
@@ -38,11 +38,18 @@ const COMMON_REDUCER_PERSIST = {
     whitelist: ['activeWidget']
 }
 
+const TASK_INFO_PERSIST = {
+    key: 'TASK_INFO',
+    storage: storage,
+    whitelist: ['']
+}
+
 const allReducers = combineReducers({
   AUTH: persistReducer(AUTH_PERSIST, AUTH),
   USER: persistReducer(USER_PERSIST, USER),
   LOGIN: persistReducer(USER_LOGIN, LOGIN),
-  COMMON: persistReducer(COMMON_REDUCER_PERSIST, COMMON_REDUCER)
+  COMMON: persistReducer(COMMON_REDUCER_PERSIST, COMMON_REDUCER),
+  TASK_INFO: persistReducer(TASK_INFO_PERSIST, TASK_INFO)
 });
 
 const persistedReducer = persistReducer(persistConfig, allReducers);

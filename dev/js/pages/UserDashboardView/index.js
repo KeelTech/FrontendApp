@@ -1,33 +1,29 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import FloatingChatWidget from '@components/FloatingChatWidget';
 import LeftMenuBar from '@components/LeftMenuBar';
 import { container } from './style.js';
 import DashboardView from './DashboardView';
 import TaskView from './TaskView';
 
-const UserDashboardView = ()=>{
-    const state = useSelector(state=>state.COMMON);
-    const { activeWidget } = state;
-
-    
+const UserDashboardView = (props)=>{
+    const url  = props.match.path;
     return(
         <div className={container}>
             <LeftMenuBar/>
             {
-                activeWidget==='dashboard' && <DashboardView/>
+                (url.includes('dashboard') || url==='/') && <DashboardView/>
             }
             {
-                activeWidget==='tasks' && <TaskView/>
+                url.includes('tasks') && <TaskView/>
             }
             {
-                activeWidget==='vault' && <DashboardView/>
+                url.includes('vault') && <DashboardView/>
             }
             {
-                activeWidget==='billing' && <DashboardView/>
+                url.includes('billing') && <DashboardView/>
             }
             {
-                activeWidget==='logout' && <DashboardView/>
+                url.includes('logout') && <DashboardView/>
             }
             <FloatingChatWidget/>
         </div>
