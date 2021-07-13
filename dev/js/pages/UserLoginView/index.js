@@ -87,18 +87,20 @@ const LoginView = (props) => {
       <div className="container">
         <img
           className="keel-logo"
-          src={ASSETS_BASE_URL + '/images/login/keel-logo.svg'}
+          src={ASSETS_BASE_URL + '/images/common/keelIcon.svg'}
           alt="keel-logo"
         />
         <p className="header-text">Log in to Continue</p>
         <form className="form-wrapper" onSubmit={loginSubmitHnadler}>
           <input
+            className="login-email-input"
             placeholder="E-mail"
             type="email"
             value={email}
             onChange={emailLoginHnadler}
           />
           <input
+            className="login-password-input"
             placeholder="Password"
             type="password"
             value={password}
@@ -110,10 +112,10 @@ const LoginView = (props) => {
             </p>
           )}
           <button className="log-in-button">Log in</button>
+          <Link to="/confirm-email" className="password-reset-wrapper">
+            <button className="password-reset">Forgot your password?</button>
+          </Link>
         </form>
-        <Link className="password-reset-wrapper" to="#">
-          <p className="password-reset">Forgot your password?</p>
-        </Link>
         <p className="login-divider">
           <span>Or Login with </span>
         </p>
@@ -127,14 +129,13 @@ const LoginView = (props) => {
                 <img
                   className="google-button-image"
                   src={ASSETS_BASE_URL + '/images/Signup/google-logo.jpeg'}
-                  alt="g-image"
+                  alt="google-image"
                 />
               </button>
             )}
           />
           <FacebookLogin
             appId="966069997563073"
-            autoLoad={true}
             fields="name,email,picture"
             textButton=""
             callback={responseFacebook}
