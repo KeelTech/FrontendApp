@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { SET_MENUBAR_STATE } from '@constants/types';
 import TaskCard from '@components/TaskCard';
 import Header from '@components/Header';
 import NotificationWidget from '@components/NotificationWidget';
 import ProfileWidget from '@components/ProfileWidget';
 import TaskDetail from '@pages/TaskDetail';
 import { isMobileView } from '@constants';
-import { getTaskList, getTaskDetail } from '@actions';
+import { getTaskList } from '@actions';
 import { container, tasksView } from './style.js';
 import { body } from '../style.js';
 
@@ -30,6 +31,17 @@ const TaskView = ()=>{
             setActiveTask(val);
         }
     }
+
+    useEffect(()=>{
+        dispatch(
+            {
+                type: SET_MENUBAR_STATE,
+                payload: {
+                    activeWidget: 'tasks'
+                }
+            }
+        )
+    },[])
 
     useEffect(()=>{
         getTaskList({status: activeWidget}, dispatch, (resp, error)=>{
@@ -65,7 +77,7 @@ const TaskView = ()=>{
                             {
                                 taskList.map((val)=>{
                                     const { task_id } = val;
-                                    return(<TaskCard isView active={activeTask===task_id} clickHandler={()=>taskClickHandler(task_id)} data={val}/>)
+                                    return(<TaskCard key={task_id} isView active={activeTask===task_id} clickHandler={()=>taskClickHandler(task_id)} data={val}/>)
                                 })
                             }
                         </div>

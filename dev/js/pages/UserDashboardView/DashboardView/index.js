@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { SET_MENUBAR_STATE } from '@constants/types';
+import { getTaskList } from '@actions';
 import TaskCard from '@components/TaskCard';
 import ChatWidget from '@components/ChatWidget';
 import Header from '@components/Header';
@@ -8,6 +12,35 @@ import { container, pendingTasks, scheduleCallCta, upcomingSchedules } from './s
 import { body } from '../style.js';
 
 const DashboardView = ()=>{
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const taskInfo = useSelector(state=>state.TASK_INFO);
+    const { taskList=[] } = taskInfo||{};
+
+    const [activeTask, setActiveTask] = useState('');
+
+    useEffect(()=>{
+        dispatch(
+            {
+                type: SET_MENUBAR_STATE,
+                payload: {
+                    activeWidget: 'dashboard'
+                }
+            }
+        )
+    },[])
+
+    useEffect(()=>{
+        getTaskList({status: 0}, dispatch, (resp, error)=>{
+            if(resp && resp.length){
+                setActiveTask(resp[0].task_id);
+            }
+        });
+    },[dispatch])
+
+    const redirectToTaskList = ()=>{
+        history.push('/tasks');
+    }
 
     return(
         <div className={body}>
@@ -24,13 +57,20 @@ const DashboardView = ()=>{
                     <div className={pendingTasks}>
                         <div className="taskHeading">PENDING TASKS</div>
                         <div className="taskList">
-                            <TaskCard/>
-                            <TaskCard/>
-                            <TaskCard/>
+                            {
+                                taskList.slice(0, 3).map((val)=>{
+                                    const { task_id } = val;
+                                    return(<TaskCard key={task_id} clickHandler={()=>{}} data={val}/>)
+                                })
+                            }
                         </div>
-                        <div className="allTasks">
-                            <div className="moreTasks">Show All</div>
-                        </div>
+                        {
+                            taskList.length>3?
+                            <div className="allTasks">
+                                <div className="moreTasks" onClick={redirectToTaskList}>Show All</div>
+                            </div>
+                            :null
+                        }
                     </div>
                     <div className="chat">
                         <ChatWidget/>
