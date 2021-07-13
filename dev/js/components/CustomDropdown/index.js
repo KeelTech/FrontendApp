@@ -3,10 +3,13 @@ import { ddContainer, ddContainerItem, ddContainerItemHeader, optionMenu, innerW
 
 
 class CustomDropDown extends Component {
-    state = {
-        selectedOption: null,
-        isDropdownExpanded: false
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedOption: null,
+            isDropdownExpanded: false
+        };
+    }
     onOptionSelect = item => {
         this.setState({ selectedOption: item, isDropdownExpanded: false });
         this.props.optionSelected(item);
@@ -33,9 +36,9 @@ class CustomDropDown extends Component {
 
                         <div className={optionMenu}>
                             {
-                                this.props.list.map(function (item, index) {
+                                this.props.list.map((item, index) => {
                                     return (
-                                        <button onClick={() => { vm.onOptionSelect(item) }} key={index} className={ddContainerItem}>{item.displayName.substring(0, 25)}</button>
+                                        <button onClick={() => this.onOptionSelect(item)} key={index} className={ddContainerItem}>{item.displayName.substring(0, 25)}</button>
                                     );
                                 })
                             }

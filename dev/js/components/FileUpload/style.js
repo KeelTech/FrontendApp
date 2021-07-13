@@ -11,7 +11,7 @@ export const fileUpload = css`
 export const fileUploadWrapper = css`
     width:95px;
     height:95px;
-    background-image:url(ASSETS_BASE_URL+"/assets/images/common/file.svg");
+    background-image:url("${ASSETS_BASE_URL}/images/common/file.svg");
     background-color:transparent;
     background-repeat: no-repeat;
     margin-left: auto;

@@ -3,28 +3,31 @@ import { fileUpload, fileUploadWrapper, selectedFileText, outerShell, innerShell
 import CustomDropDown from '@components/CustomDropDown';
 
 class FileUpload extends Component {
-    state = {
-        selectedFile: null,
-        selectedFileType: null,
-        options: [
-            {
-                value: 1,
-                displayName: "Aadhar Card"
-            },
-            {
-                value: 2,
-                displayName: "PAN Card"
-            },
-            {
-                value: 3,
-                displayName: "Driving License"
-            },
-            {
-                value: 4,
-                displayName: "Other"
-            }
-        ]
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedFile: null,
+            selectedFileType: null,
+            options: [
+                {
+                    value: 1,
+                    displayName: "Aadhar Card"
+                },
+                {
+                    value: 2,
+                    displayName: "PAN Card"
+                },
+                {
+                    value: 3,
+                    displayName: "Driving License"
+                },
+                {
+                    value: 4,
+                    displayName: "Other"
+                }
+            ]
+        };
+    }
     close = () => {
         this.props.fileUploadModalClosed({
             selectedFile: this.state.selectedFile,

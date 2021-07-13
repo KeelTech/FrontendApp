@@ -64,7 +64,7 @@ line-height: 27px;
 cursor:pointer;
 color: #A098AE;
 text-align:left;
-background-image:url(ASSETS_BASE_URL+"/images/common/chevron-down.svg");
+background-image:url("${ASSETS_BASE_URL}/images/common/chevron-down.svg");
 background-repeat: no-repeat;
 background-position: right;
 margin-right:0px;
