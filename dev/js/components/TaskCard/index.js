@@ -1,10 +1,10 @@
 import React from 'react';
 import { card } from './style.js';
 
-const TaskCard = ()=>{
+const TaskCard = ({ active=false, isView=false, clickHandler=()=>{}})=>{
 
     return(
-        <div className={card}>
+        <div className={card({active, isView})} onClick={clickHandler}>
             <div className="text">This is a task and the title can be as long as you want, like it can be really really big!</div>
             <div className="optionList">
                 <div className="timePeriod">
