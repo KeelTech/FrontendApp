@@ -28,7 +28,9 @@ export const userLogin = (data, dispatch, cb) => {
             loading: false,
           },
         });
-        STORAGE.setAuthToken(response.message.token);
+        STORAGE.setAuthToken(response.message.token).then((resolve)=>{
+          if (cb) cb(null, response);
+        });
         const message = 'Successfully Logged In';
         dispatch({
           type: USER_LOGIN_SUCCESS,
@@ -36,7 +38,6 @@ export const userLogin = (data, dispatch, cb) => {
             login_message: message,
           },
         });
-        if (cb) cb(null, response);
       } else {
         let message = 'Failing to log in the user';
         dispatch({
