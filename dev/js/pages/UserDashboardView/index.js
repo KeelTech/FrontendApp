@@ -7,12 +7,11 @@ import TaskView from './TaskView';
 
 const UserDashboardView = (props)=>{
     const url  = props.match.path;
-
     return(
         <div className={container}>
             <LeftMenuBar/>
             {
-                url.includes('dashboard') && <DashboardView/>
+                (url.includes('dashboard') || url==='/') && <DashboardView/>
             }
             {
                 url.includes('tasks') && <TaskView/>
