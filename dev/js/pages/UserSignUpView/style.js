@@ -7,6 +7,7 @@ export const style = (props) => css`
   overflow: hidden;
   .passport-image {
     width: 50vw;
+    height: 100vh;
     overflow: hidden;
   }
   @media (max-width: ${tabScreenWidth}) {
@@ -20,9 +21,8 @@ export const style = (props) => css`
       width: 100vw;
     }
     .logo {
-      margin-top: 3%;
-      margin-right: 80%;
-      margin-left: 3%;
+      margin-top: 30px;
+      margin-left: 40px;
     }
     .header-text {
       display: flex;

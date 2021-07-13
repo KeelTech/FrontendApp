@@ -36,7 +36,7 @@ export const style = (props) => css`
       align-items: center;
       margin-top: 5%;
     }
-    input[type='email'] {
+    .login-email-input {
       display: flex;
       justify-content: center;
       margin-top: 4%;
@@ -57,7 +57,7 @@ export const style = (props) => css`
         font-size: 20px;
       }
     }
-    input[type='password'] {
+    .login-password-input {
       display: flex;
       justify-content: center;
       width: 450px;
@@ -99,7 +99,7 @@ export const style = (props) => css`
       cursor: pointer;
     }
     @media (max-width: ${tabScreenWidth}) {
-      input[type='email'] {
+      .login-email-input {
         width: 300px;
         height: 40px;
         font-size: 15px;
@@ -107,7 +107,7 @@ export const style = (props) => css`
           font-size: 10px;
         }
       }
-      input[type='password'] {
+      .login-password-input {
         width: 300px;
         height: 40px;
         font-size: 15px;
@@ -123,18 +123,14 @@ export const style = (props) => css`
     }
     .password-reset-wrapper {
       display: flex;
-      flex-direction: row;
-      justify-content: space-around;
     }
     .password-reset {
-      display: flex;
-      align-items: flex-start;
-      margin-right: 38%;
       font-size: medium;
       font-family: Poppins;
-      margin-left: 95px;
+      margin-top: 3%;
       color: #959595;
-      text-decoration: none;
+      background: white;
+      border: none;
       :hover {
         color: #000;
         text-decoration: underline;
@@ -143,7 +139,6 @@ export const style = (props) => css`
     @media (max-width: ${tabScreenWidth}) {
       .password-reset {
         font-size: 10px;
-        /* margin-left: 15px; */
       }
     }
     .login-divider {
@@ -305,6 +300,7 @@ export const style = (props) => css`
   }
   .passport-image {
     width: 50vw;
+    height: 100vh;
     overflow: hidden;
   }
   @media (max-width: ${tabScreenWidth}) {

@@ -10,6 +10,8 @@ import { LinkedInPopUp } from "react-linkedin-login-oauth2";
 import TaskDetailMobileEntry from "./pages/TaskDetail/TaskDetailMobileEntry.js";
 import AgentDashBoardView from "./pages/AgentViews";
 import AgentCustomerList from "./pages/AgentViews";
+import PasswordReset from './pages/PasswordReset';
+import EmailVerification from './pages/UserLoginView/EmailConfirmation';
 
 let routes = [
   { path: "/", exact: true, component: UserLoginView },
@@ -23,6 +25,8 @@ let routes = [
   { path: "/billing", exact: true, component: UserDashboardView },
   { path: "/agent/dashboard", exact: true, component: AgentDashBoardView },
   { path: "/agent/customer", exact: true, component: AgentCustomerList },
+  { path: '/reset-password', exact: true, component: PasswordReset },
+  { path: '/confirm-email', exact: true, component: EmailVerification },
 ];
 
 // routes.push({ path: '*', component: NotFound, NO_MATCH: true })
