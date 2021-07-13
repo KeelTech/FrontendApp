@@ -40,7 +40,10 @@ function SignUp(props) {
       setPasswordValidation(false);
       userSignUp({ email, password }, dispatch, (err, data) => {
         if (data) {
+<<<<<<< HEAD
           setErrorMessage(false);
+=======
+>>>>>>> a56b77106d99ed1c1f8a1bf0339ccc71e1731e7a
           setEmail('');
           setPassword('');
           setConfirmPassword('');
@@ -92,11 +95,19 @@ function SignUp(props) {
       <div className="container">
         <img
           className="logo"
+<<<<<<< HEAD
           src={ASSETS_BASE_URL + '/images/common/keelIcon.svg'}
           alt="keel-logo"
         />
         <p className="header-text">Sign Up to Continue</p>
         <form className="form-wrapper" onSubmit={signUpSubmitHandler}>
+=======
+          src={ASSETS_BASE_URL + '/images/Login/keel-logo.svg'}
+          alt="keel-logo"
+        />
+        <p className="header-text">Sign Up to Continue</p>
+        <form className="form-wrapper" onSubmit={signUpSubmitHnadler}>
+>>>>>>> a56b77106d99ed1c1f8a1bf0339ccc71e1731e7a
           <input
             placeholder="E-mail / username"
             type="email"

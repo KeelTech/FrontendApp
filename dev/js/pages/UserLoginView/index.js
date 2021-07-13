@@ -156,7 +156,7 @@ const LoginView = (props) => {
       </div>
       <img
         className="passport-image"
-        src={ASSETS_BASE_URL + '/images/login/visa-image.jpeg'}
+        src={ASSETS_BASE_URL + '/images/Login/visa-image.jpeg'}
         alt="pasport-image"
       />
     </div>
