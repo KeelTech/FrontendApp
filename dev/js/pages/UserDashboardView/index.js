@@ -3,6 +3,7 @@ import FloatingChatWidget from '@components/FloatingChatWidget';
 import LeftMenuBar from '@components/LeftMenuBar';
 import { container } from './style.js';
 import DashboardView from './DashboardView';
+import DocumentView from './DocumentView';
 import TaskView from './TaskView';
 
 const UserDashboardView = (props)=>{
@@ -17,7 +18,7 @@ const UserDashboardView = (props)=>{
                 url.includes('tasks') && <TaskView/>
             }
             {
-                url.includes('vault') && <DashboardView/>
+                url.includes('vault') && <DocumentView/>
             }
             {
                 url.includes('billing') && <DashboardView/>

@@ -1,10 +1,29 @@
 import React, { useState } from 'react';
 import Header from '@components/Header';
 import UploadedDocument from './UploadedDocument/index';
+import NotificationWidget from '@components/NotificationWidget';
+import ProfileWidget from '@components/ProfileWidget';
+import { getUserDocuments } from '../../../actions/index.js';
+import { useSelector, useDispatch } from 'react-redux';
 import { body } from './style.js';
 
 function DocumentView() {
   const [searchDoc, setSearchDoc] = useState('');
+
+  const userDocuments = useSelector((state) => state.DOCUMENTS.userDocuments);
+
+  const dispatch = useDispatch();
+
+  const fetchuserDocuments = () => {
+    getUserDocuments(dispatch, (err, data) => {
+      if (data) {
+        console.log('data is', data);
+      }
+      if (err) {
+        console.log(err);
+      }
+    });
+  };
 
   const handleSearchDoc = (event) => {
     setSearchDoc(event.target.value);
@@ -83,47 +102,32 @@ function DocumentView() {
     <div className={body}>
       <div className="mainView">
         <Header headerText="All Your Documents Are safe with us!">
-          <div className="notification">
-            <span>Notification button</span>
+          <div className="headerView">
+            <NotificationWidget />
+            <ProfileWidget />
           </div>
-          <div className="user-info">
-            <b className="user-name">shubh wadekar </b>
-            <br />
-            <b className="user-package">premium user</b>
-          </div>
-          <button className="user"></button>
         </Header>
-        <div className="upload-section">
-          <form className="uploaded-by">
-            <label className="upload-text">Uploaded By</label>
-            <select className="options-menu">
+        <div className="uploadSection">
+          <form className="uploadedBy">
+            <label className="uploadText">Uploaded By</label>
+            <select className="optionsMenu">
               <option value="you">You</option>
               <option value="consultant">Consultatnt</option>
             </select>
           </form>
-          <form className="search-docs-wrapper">
-            <img
-              className="search-icon"
-              src={ASSETS_BASE_URL + '/images/common/search.svg'}
-              alt="search"
-            />
+          <form className="searchDocsWrapper">
             <input
-              className="search-docs"
+              className="searchDocs"
               placeholder="Search Documents"
               value={searchDoc}
               onChange={handleSearchDoc}
             />
           </form>
-          <div className="upload-docs">
-            <button className="upload-button">Upload Document</button>
-            <img
-              className="upload-icon"
-              src={ASSETS_BASE_URL + '/images/common/uploadDoc.svg'}
-              alt="upload"
-            />
-          </div>
+          <button onClick={fetchuserDocuments} className="uploadButton">
+            Upload Document
+          </button>
         </div>
-        <div className="uploaded-docs-wrapper">
+        <div className="uploadedDocsWrapper">
           {uploadedDocuments.map((doc) => {
             return (
               <UploadedDocument

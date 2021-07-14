@@ -8,6 +8,7 @@ import LOGIN from './commons/login.js';
 import COMMON_REDUCER from './common.js'
 import TASK_INFO from './consumerTaskInfo.js'
 import AGENT_STORE from './agentTask.js'
+import DOCUMENTS from './commons/document.js';
 
 const persistConfig = {
   key: 'root',
@@ -34,10 +35,15 @@ const USER_LOGIN = {
 };
 
 const COMMON_REDUCER_PERSIST = {
-    key: 'COMMON',
-    storage: storage,
-    whitelist: ['activeWidget']
-}
+  key: 'COMMON',
+  storage: storage,
+  whitelist: ['activeWidget'],
+};
+
+const USER_DOCUMENTS = {
+  key: 'DOCUMENTS',
+  storage: storage,
+};
 
 const TASK_INFO_PERSIST = {
     key: 'TASK_INFO',
@@ -57,7 +63,8 @@ const allReducers = combineReducers({
   LOGIN: persistReducer(USER_LOGIN, LOGIN),
   COMMON: persistReducer(COMMON_REDUCER_PERSIST, COMMON_REDUCER),
   TASK_INFO: persistReducer(TASK_INFO_PERSIST, TASK_INFO),
-  AGENT_STORE: persistReducer(AGENT_STORE_PERSIST, AGENT_STORE)
+  AGENT_STORE: persistReducer(AGENT_STORE_PERSIST, AGENT_STORE),
+  DOCUMENTS: persistReducer(USER_DOCUMENTS, DOCUMENTS),
 });
 
 const persistedReducer = persistReducer(persistConfig, allReducers);

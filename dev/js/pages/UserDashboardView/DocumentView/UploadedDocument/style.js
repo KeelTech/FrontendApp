@@ -10,6 +10,11 @@ export const wrapper = css`
   margin-left: 5%;
   margin-top: 5%;
   overflow: hidden;
+  @media (max-width: ${tabScreenWidth}) {
+    width: 150px;
+    height: 100px;
+    margin-top: 10%;
+  }
   .header {
     display: flex;
   }
