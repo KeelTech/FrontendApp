@@ -31,6 +31,7 @@ export const container = css`
 export const notification = css`
   color: #363b64;
   cursor: default;
+  z-index: 99;
   background-color: #fcfcfc;
   position: absolute;
   top: 56px;

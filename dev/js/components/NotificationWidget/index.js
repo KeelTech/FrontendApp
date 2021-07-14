@@ -29,13 +29,15 @@ const NotificationWidget = () => {
   const [isClicked, setIsClicked] = useState(false);
 
   return (
-    <div className={container}>
+    <div
+      className={container}
+      onClick={() => {
+        setIsClicked(!isClicked);
+      }}
+    >
       <img
         src={ASSETS_BASE_URL + "/images/common/notificationIcon.svg"}
         alt="notification"
-        onClick={() => {
-          setIsClicked(!isClicked);
-        }}
       />
       {isClicked && <NotificationDropdown notifications={notificationsList} />}
     </div>
