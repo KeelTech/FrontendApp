@@ -92,7 +92,7 @@ function PasswordReset(props) {
       </div>
       <img
         className="globe-image"
-        src={ASSETS_BASE_URL + '/images/login/globe-image.jpeg'}
+        src={ASSETS_BASE_URL + '/images/Login/globe-image.jpeg'}
         alt="globe"
       />
     </div>
