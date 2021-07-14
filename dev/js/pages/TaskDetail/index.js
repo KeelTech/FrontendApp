@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AttachmentCard from '@components/AttachmentCard';
 import { SET_MENUBAR_STATE } from '@constants/types';
+import { getTaskDetail } from '@actions';
 import { container, taskStatus, discussionSection, memberCard, attachmentSection, checklistSection, messageSection } from './style.js';
 
-const TaskDetail = ()=>{
+const TaskDetail = ({ activeTask })=>{
     const history = useHistory();
     const dispatch = useDispatch();
-
+    const taskInfo = useSelector(state=>state.TASK_INFO);
+    const { taskDetail={} } = taskInfo||{};
     const handleBackBtnClick = ()=>{
         dispatch(
             {
@@ -20,6 +22,17 @@ const TaskDetail = ()=>{
         )
        history.push('/dashboard');
     }
+
+    useEffect(()=>{
+        if(activeTask){
+            if(!(taskDetail && taskDetail[activeTask])){
+                getTaskDetail({taskId: activeTask}, dispatch);
+            }
+        }
+
+    },[activeTask, dispatch]);
+
+    const { name='' } = taskDetail && taskDetail[activeTask] || {};
 
     return(
         <div className={container}>
