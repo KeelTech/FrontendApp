@@ -4,6 +4,7 @@ import FloatingChatWidget from '@components/FloatingChatWidget';
 import LeftMenuBar from '@components/LeftMenuBar';
 import { container } from './style.js';
 import DashboardView from './DashboardView';
+import DocumentView from './DocumentView';
 import TaskView from './TaskView';
 
 const UserDashboardView = ()=>{
@@ -21,7 +22,7 @@ const UserDashboardView = ()=>{
                 activeWidget==='tasks' && <TaskView/>
             }
             {
-                activeWidget==='vault' && <DashboardView/>
+                activeWidget==='vault' && <DocumentView/>
             }
             {
                 activeWidget==='billing' && <DashboardView/>
