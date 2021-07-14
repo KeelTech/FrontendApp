@@ -8,6 +8,7 @@ export const container = css`
     padding: 22px 26px;
     height: 100%;
     overflow-y: auto;
+    width: 100%;
     .statusCont{
         display: flex;
         align-items: center;

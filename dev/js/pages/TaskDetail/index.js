@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AttachmentCard from '@components/AttachmentCard';
 import { SET_MENUBAR_STATE } from '@constants/types';
 import { getTaskDetail } from '@actions';
+import { getNameInitialHelper, getFormattedTime, getFormattedDate, capitalizeFirstLetter } from '@helpers/utils';
 import { container, taskStatus, discussionSection, memberCard, attachmentSection, checklistSection, messageSection } from './style.js';
 
 const TaskDetail = ({ activeTask })=>{
@@ -32,21 +33,21 @@ const TaskDetail = ({ activeTask })=>{
 
     },[activeTask, dispatch]);
 
-    const { name='' } = taskDetail && taskDetail[activeTask] || {};
+    const { title, priority_name, status_name, description, tasks_comment=[], tasks_docs=[], check_list=[] } = taskDetail && taskDetail[activeTask] || {};
 
     return(
         <div className={container}>
             <div className="statusCont">
                 <span className="statusText">Mark as completed</span>
-                <span className="status">Overdue</span>
+                <span className="status">{status_name}</span>
             </div>
             <div className="taskName">
                 <img className="icon" src={ASSETS_BASE_URL+"/images/common/task.svg"} alt="task"/>
                 <span>Task Name</span>
-                <span className="status mobileView">Overdue</span>
+                <span className="status mobileView">{status_name}</span>
             </div>
             <div className="signDoc">
-                <span className="sign">Submit Signed Document</span>
+                <span className="sign">{title}</span>
                 <span className="backBtn" onClick={handleBackBtnClick}>Back</span>
             </div>
             <div className="taskStatus">Mark as completed</div>
@@ -67,7 +68,7 @@ const TaskDetail = ({ activeTask })=>{
                         <img className="icon" src={ASSETS_BASE_URL+"/images/common/chevron.svg"} alt="home"/>
                         <span>Priority</span>
                     </div>
-                    <span className="status">High</span>
+                    <span className="status">{priority_name}</span>
                 </div>
                 <div className="view">
                     <div className="taskName">
@@ -82,7 +83,7 @@ const TaskDetail = ({ activeTask })=>{
                     <img className="icon" src={ASSETS_BASE_URL+"/images/common/description.svg"} alt="discuss"/>
                     <span>Description</span>
                 </div>
-                <span className="discussionTxt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquam egestas mauris, volutpat commodo turpis viverra vitae. Fusce nec nunc eget purus euismod consectetur eu quis justo. Vivamus condimentum elementum ex et egestas. Ut id urna eros. Curabitur efficitur, tortor vel vestibulum sollicitudin, ex nibh tristique sem, vitae commodo felis purus et lacus. Vestibulum condimentum condimentum ultricies..</span>
+                <span className="discussionTxt">{description}</span>
             </div>
             <div className={attachmentSection}>
                 <div className="attachmentHeader">
@@ -96,11 +97,11 @@ const TaskDetail = ({ activeTask })=>{
                     </div>
                 </div>
                 <div className="attachmentList">
-                    <AttachmentCard/>
-                    <AttachmentCard/>
-                    <AttachmentCard/>
-                    <AttachmentCard/>
-                    <AttachmentCard/>
+                    {
+                        tasks_docs.map((val)=>{
+                            return <AttachmentCard data={val} key={val.doc_id}/>
+                        })
+                    }
                 </div>
             </div>
             
@@ -114,26 +115,16 @@ const TaskDetail = ({ activeTask })=>{
                     <span className="percent"></span>
                 </div>
                 <div className="checklistItems">
-                    <div className="item checkedItem">
-                        <img src={ASSETS_BASE_URL+"/images/common/checkedTicker.svg"} alt="discuss"/>
-                        <span className="checkedText">Upload this document</span>
-                    </div>
-                    <div className="item checkedItem">
-                        <img src={ASSETS_BASE_URL+"/images/common/checkedTicker.svg"} alt="discuss"/>
-                        <span className="checkedText">Upload this document</span>
-                    </div>
-                    <div className="item">
-                        <img src={ASSETS_BASE_URL+"/images/common/emptyTicker.svg"} alt="discuss"/>
-                        <span className="checkedText">This is unchecked checklist item</span>
-                    </div>
-                    <div className="item">
-                        <img src={ASSETS_BASE_URL+"/images/common/emptyTicker.svg"} alt="discuss"/>
-                        <span className="checkedText">This is unchecked checklist item</span>
-                    </div>
-                    <div className="item">
-                        <img src={ASSETS_BASE_URL+"/images/common/emptyTicker.svg"} alt="discuss"/>
-                        <span className="checkedText">This is unchecked checklist item</span>
-                    </div>
+                    {
+                        Object.entries(check_list).map((val, key)=>{
+                            const checked = val[1];
+                            const icon = checked?`${ASSETS_BASE_URL}/images/common/checkedTicker.svg`:`${ASSETS_BASE_URL}/images/common/emptyTicker.svg`;
+                            return <div className={`item ${checked?'checkedItem':''}`} key={key}>
+                                <img src={icon} alt="discuss"/>
+                                <span className="checkedText">{val[0]}</span>
+                            </div>
+                        })
+                    }
                 </div>
             </div>
 
@@ -147,18 +138,22 @@ const TaskDetail = ({ activeTask })=>{
                         <span className="profile">SW</span>
                         <input type="text" placeholder="Write a Comment"/>
                     </div>
-                    <div className="msgView">
-                        <span className="profile">SW</span>
-                        <div className="commentSection">
-                            <div className="info">
-                                <span className="name">Shubh Wadekar </span>
-                                <span className="time">8:53pm, 27 June 2021</span> 
+                    {
+                        tasks_comment.map((val, key)=>{
+                            const { user_details, user_name, msg, created_at, } = val;
+                            return <div className="msgView" key={key}>
+                                <span className="profile">{getNameInitialHelper(user_details.user_name)}</span>
+                                <div className="commentSection">
+                                    <div className="info">
+                                        <span className="name">{capitalizeFirstLetter(user_details.user_name)}</span>
+                                        <span className="time">{`${getFormattedTime(created_at)}, ${getFormattedDate(created_at)}`}</span> 
+                                    </div>
+                                    <div className="msg">{msg}</div>
+                                </div>
                             </div>
-                            <div className="msg">
-                                This is some comment which is relevant to the above task. It can be as big as we want it to be. It can consist of more than one lines and is designed in such a way that it won’t disturb other UI elements.
-                            </div>
-                        </div>
-                    </div>
+                        })
+                    }
+                    
                 </div>
             </div>
         </div>

@@ -22,13 +22,14 @@ const TaskView = ()=>{
 
     const handleCtaClick = (val)=>{
         setActiveWidget(val);
+        setActiveTask('');
     }
 
     const taskClickHandler = (taskId)=>{
         if(isMobileView()){
             history.push(`/task/detail/${taskId}`);
         }else{
-            setActiveTask(val);
+            setActiveTask(taskId);
         }
     }
 
@@ -83,7 +84,9 @@ const TaskView = ()=>{
                         </div>
                     </div>
                     <div className="taskInfo">
-                        <TaskDetail activeTask={activeTask}/>
+                        {
+                            activeTask?<TaskDetail activeTask={activeTask}/>:null
+                        }                        
                     </div>
                 </div>
             </div>
