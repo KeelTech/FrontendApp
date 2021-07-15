@@ -25,7 +25,7 @@ let routes = [
   { path: '/tasks', exact: true, component: UserDashboardView, isPrivate: true },
   { path: '/vault', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/billing', exact: true, component: UserDashboardView, isPrivate: true  },
-  { path: '/agent/dashboard', exact: true, component: AgentDashBoardView, isPrivate: true  },
+  { path: '/agent', component: AgentDashBoardView, isPrivate: true  },
 ];
 
 // routes.push({ path: '*', component: NotFound, NO_MATCH: true })
