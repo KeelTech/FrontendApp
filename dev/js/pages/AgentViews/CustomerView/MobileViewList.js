@@ -46,7 +46,6 @@ const MobileViewList = () => {
   ];
   return (
     <div>
-      <p>Search Bar</p>
       {customerLists.map((list) => (
         <ul key={list.caseId} className={lists}>
           <li>

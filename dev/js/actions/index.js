@@ -4,7 +4,6 @@ import * as LOGIN_ACTIONS from './commons/login.js';
 import * as SIGNUP_ACTIONS from './commons/signup.js';
 import * as CONSUMER_TASKS from './commons/consumerTaskInfo.js';
 import * as PASSWORD_RESET_ACTIONS from './commons/passwordReset';
-import * as CONSUMER_TASKS from './commons/consumerTaskInfo.js';
 
 module.exports = Object.assign(
   {},

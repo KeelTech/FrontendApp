@@ -11,7 +11,7 @@ import CustomButton from '@components/CustomButton';
 import CreateTask from '@components/CreateTask';
 import { isMobileView } from '@constants';
 import { getTaskList } from '@actions';
-import { container, tasksView } from './style.js';
+import { container, tasksView, mainCont } from './style.js';
 import { body } from '../style.js';
 
 const TaskView = ()=>{
@@ -68,7 +68,7 @@ const TaskView = ()=>{
     }
 
     return(
-        <div className={body}>
+        <div className={`${body} ${mainCont}`}>
             <div className="mainView">
                 <Header headerText="Task">
                     <div className="headerView">
