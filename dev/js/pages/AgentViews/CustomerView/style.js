@@ -21,7 +21,7 @@ color:#363B64;
 font-weight: 700;
 font-size: 12px;
 line-height: 18px;
-width: 86px
+width: 90px
 `;
 
 export const values = css`
@@ -36,7 +36,6 @@ line-height: 18px;
 export const status = css`
 display: inline-block;
 margin: 0;
-text-align: center;
 border-radius: 3px;
 padding: 2px 8px;
 background: #CF3030;

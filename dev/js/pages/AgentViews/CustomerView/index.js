@@ -4,11 +4,6 @@ import NotificationWidget from "@components/NotificationWidget";
 import ProfileWidget from "@components/ProfileWidget";
 import {head} from "./style.js";
 import MobileViewList from './MobileViewList'
-// const CompletedImg = `${ASSETS_BASE_URL}/images/AgentDashboard/completed.svg`;
-// const PendingImg = `${ASSETS_BASE_URL}/images/AgentDashboard/pending.svg`;
-// const RevenueImg = `${ASSETS_BASE_URL}/images/AgentDashboard/revenue.svg`;
-// const ReviewImg = `${ASSETS_BASE_URL}/images/AgentDashboard/review.svg`;
-// import DatePicker from "@components/DatePicker";
 
 const CustomerView = () => {
   return (
@@ -21,7 +16,6 @@ const CustomerView = () => {
           </div>
         </Header>
         <div>
-        <p>Search bar</p>
         <MobileViewList />
         </div>
       </div>
