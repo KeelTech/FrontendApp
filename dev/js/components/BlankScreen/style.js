@@ -4,6 +4,7 @@ import { primaryFont } from "@constants";
 export const container = css`
   background-color: #f5f7fa;
   width: 100%;
+  height: 100%;
   position: relative;
   border: 1px solid #363b64;
   box-sizing: border-box;
