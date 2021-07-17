@@ -1,6 +1,13 @@
 import { css } from '@emotion/css';
 import { tabScreenWidth, inputField } from '@constants';
 
+export const mainCont = css`
+    @media(min-width: ${tabScreenWidth}){
+        height: 100vh;
+        overflow: hidden;
+    }
+`
+
 export const container = css`
     display: flex;
     width: 100%;

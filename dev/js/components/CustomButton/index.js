@@ -13,13 +13,14 @@ export const container = props => css`
     font-size: ${props.fontSize};
     @media(max-width: ${tabScreenWidth}){
         display: flex;
+        font-size: ${props.mFontSize?props.mFontSize:props.fontSize};
     }
 `
 
-const CustomButton = ({text="", clickHandler=()=>{}, borderRadius="10px", backgroundColor="#363B64", fontColor="#FCFCFC", fontSize="12px", fontWeight="bold", padding="10px 30px", margin=""})=>{
+const CustomButton = ({text="", clickHandler=()=>{}, borderRadius="10px", backgroundColor="#363B64", fontColor="#FCFCFC", fontSize="12px", fontWeight="bold", padding="10px 30px", margin="", mFontSize=""})=>{
 
     return(
-        <div className={container({borderRadius, backgroundColor, fontColor, fontSize, fontWeight, padding, margin})} onClick={clickHandler}>
+        <div className={container({borderRadius, backgroundColor, fontColor, fontSize, fontWeight, padding, margin, mFontSize})} onClick={clickHandler}>
             {text}
         </div>
     )

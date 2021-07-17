@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import DetectClickOutside from '@helpers/DetectClickOutside.js'
 import { container } from "./style.js";
 import NotificationDropdown from "./NotificationDropdown.js";
 
@@ -27,9 +28,10 @@ const NotificationWidget = () => {
   ];
 
   const [isClicked, setIsClicked] = useState(false);
+  const modalRef = useRef();
 
   return (
-    <div className={container}>
+    <div className={container} ref={modalRef}>
       <img
         src={ASSETS_BASE_URL + "/images/common/notificationIcon.svg"}
         alt="notification"
@@ -37,7 +39,12 @@ const NotificationWidget = () => {
           setIsClicked(!isClicked);
         }}
       />
-      {isClicked && <NotificationDropdown notifications={notificationsList} />}
+      {
+      isClicked && 
+      <DetectClickOutside targetRef={modalRef} clickOutside={()=>setIsClicked(false)}>
+          <NotificationDropdown notifications={notificationsList} />
+      </DetectClickOutside>
+      }
     </div>
   );
 };
