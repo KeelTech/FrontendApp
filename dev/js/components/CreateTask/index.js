@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import CustomSelect from '@components/CustomSelect';
 import CustomButton from '@components/CustomButton';
+import { createTask } from '@actions';
 import { container, taskStatus, messageSection, checkListCont, attachmentCont, cta } from './style.js';
 
 
@@ -19,15 +21,38 @@ const PriorityList = [
     }
 ]
 
-const CreateTask = ({ toggleAddTaskView })=>{
-     
-    const[description, setDescription] = useState('');
+const CreateTask = ({ toggleAddTaskView, caseId })=>{
+    const dispatch = useDispatch();
+    const [dataParams, setDataParams] = useState({
+        title: '',
+        description: '',
+        priority: 0,
+        due_date: '',
+        check_list : {},
+        tags: '',
+        case: ''
+    })
+
+    const { title, description, priority, due_date, check_list, tags } = dataParams;
+    const[aa, setDescription] = useState('');
+
     const handlePriorityChange = (val)=>{
 
     }
 
     const addMember = ()=>{
 
+    }
+
+    const setDataValues = (dataVal)=>{
+        setDataParams();
+    }
+
+    const createTaskClicked = ()=>{
+        const dataParams = {};
+        createTask(dataParams, dispatch, (resp, err)=>{
+
+        })   
     }
 
     return(
@@ -48,7 +73,7 @@ const CreateTask = ({ toggleAddTaskView })=>{
                             <span>Members</span>
                         </div>
                         <div className="member">
-                            <CustomButton text="Add Member" clickHandler={addMember} margin="0px" padding="9px" borderRadius="5px"/>
+                            <CustomButton text="Add Member" clickHandler={addMember} margin="0px" padding="9px" borderRadius="5px" mFontSize="10px"/>
                             {/*<span>S</span>
                              <span className={memberCard({val: 1, bgcolor: '#C1E0B6'})}>M</span>
                             <span className={memberCard({val: 2, bgcolor: '#B8D4D6'})}>C</span> */}
@@ -57,7 +82,7 @@ const CreateTask = ({ toggleAddTaskView })=>{
                     <div className="view">
                         <div className="taskName">
                             <img className="icon" src={ASSETS_BASE_URL+"/images/common/chevron.svg"} alt="home"/>
-                            <span>Select Priority</span>
+                            <span className="hideMobile">Select</span><span>Priority</span>
                         </div>
                         {/* <span className="status">
 
@@ -67,7 +92,7 @@ const CreateTask = ({ toggleAddTaskView })=>{
                     <div className="view">
                         <div className="taskName">
                             <img className="icon" src={ASSETS_BASE_URL+"/images/common/blueCalendar.svg"} alt="home"/>
-                            <span>Select Due Date</span>
+                            <span className="hideMobile">Select</span><span>Due Date</span>
                         </div>
                         <input type="date" id="dueDate" name="dueDate"/>
                     </div>
@@ -114,7 +139,7 @@ const CreateTask = ({ toggleAddTaskView })=>{
 
                 <div className={cta}>
                     <CustomButton text="Cancel" clickHandler={toggleAddTaskView} margin="0px 8px 0px 0px" padding="10px 16px" borderRadius="4px" backgroundColor="#DC3545" fontColor="16px" fontWeight="600" fontColor="#FFFFFF"/>
-                    <CustomButton text="Save Task" clickHandler={addMember} margin="0px" padding="10px 16px" borderRadius="4px" backgroundColor="#28A745" fontColor="16px" fontWeight="600" fontColor="#FFFFFF"/>
+                    <CustomButton text="Save Task" clickHandler={createTaskClicked} margin="0px" padding="10px 16px" borderRadius="4px" backgroundColor="#28A745" fontColor="16px" fontWeight="600" fontColor="#FFFFFF"/>
                 </div>
 
             </div>        

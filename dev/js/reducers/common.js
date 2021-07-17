@@ -18,8 +18,8 @@ export default function (state = defaultState, action) {
 
         case SET_AGENT_MENUBAR_STATE: {
             let newState = { ...state}
-            const { agentActiveWidget } = action.payload
-            newState.agentActiveWidget = agentActiveWidget;
+            const { activeWidget } = action.payload
+            newState.agentActiveWidget = activeWidget;
             return newState
         }
 

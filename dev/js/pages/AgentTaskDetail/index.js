@@ -38,15 +38,7 @@ const TaskDetail = ({ activeTask })=>{
     },[activeTask, dispatch]);
 
     const handleBackBtnClick = ()=>{
-        dispatch(
-            {
-                type: SET_AGENT_MENUBAR_STATE,
-                payload: {
-                    activeWidget: 'tasks'
-                }
-            }
-        )
-       history.push('/dashboard');
+       history.push('/agent/tasks/1234');
     }
 
     const handlePriorityChange = (val)=>{
@@ -86,7 +78,7 @@ const TaskDetail = ({ activeTask })=>{
                 <div className="view">
                     <div className="taskName">
                         <img className="icon" src={ASSETS_BASE_URL+"/images/common/chevron.svg"} alt="home"/>
-                        <span>Select Priority</span>
+                        <span className="hideMobile">Select</span><span>Priority</span>
                     </div>
                     {/* <span className="status">
 
@@ -96,7 +88,7 @@ const TaskDetail = ({ activeTask })=>{
                 <div className="view">
                     <div className="taskName">
                         <img className="icon" src={ASSETS_BASE_URL+"/images/common/blueCalendar.svg"} alt="home"/>
-                        <span>Select Due Date</span>
+                        <span className="hideMobile">Select</span><span>Due Date</span>
                     </div>
                     <input type="date" id="dueDate" name="dueDate"/>
                 </div>

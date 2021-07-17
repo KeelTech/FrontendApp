@@ -11,7 +11,7 @@ import CustomButton from '@components/CustomButton';
 import CreateTask from '@components/CreateTask';
 import { isMobileView } from '@constants';
 import { getTaskList } from '@actions';
-import { container, tasksView } from './style.js';
+import { mainCont, container, tasksView } from './style.js';
 import { body } from '../style.js';
 
 const TaskView = ()=>{
@@ -57,7 +57,7 @@ const TaskView = ()=>{
 
     const addMoreTasks = ()=>{
         if(isMobileView()){
-            history.push('/agent/task/create');
+            history.push('/agent/task/create/1234');
         }else{
             setAddTaskView(true);
         }
@@ -68,9 +68,9 @@ const TaskView = ()=>{
     }
 
     return(
-        <div className={body}>
+        <div className={`${body} ${mainCont}`}>
             <div className="mainView">
-                <Header headerText="Task">
+                <Header headerText="Task" isAgent>
                     <div className="headerView">
                         <CustomButton text="Add New Task" clickHandler={addMoreTasks} margin="0px 16px 0px 0px"/>
                         <NotificationWidget/>

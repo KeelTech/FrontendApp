@@ -1,7 +1,7 @@
 import React,{Fragment} from "react";
 import {lists, customer} from "./style.js";
 
-const MobileViewList = () => {
+const MobileViewList = ({ handleCustomerClick }) => {
   const customerLists = [
     {
       caseId: "#1290968",
@@ -47,7 +47,7 @@ const MobileViewList = () => {
   return (
     <Fragment>
       {customerLists.map((list) => (
-        <ul key={list.caseId} className={lists}>
+        <ul key={list.caseId} className={lists} onClick={()=>handleCustomerClick('1290968')}>
           <li className={customer}>
             <h2 className='key'>Case Id:</h2>
             <h2 className='value'>{list.caseId}</h2>

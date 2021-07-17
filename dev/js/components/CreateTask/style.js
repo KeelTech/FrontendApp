@@ -10,6 +10,7 @@ export const container = css`
         font-size: 18px;
         line-height: 27px;
         color: #363B64;
+        margin: 0px;
         margin-bottom: 12px;
     }
     .formView{
@@ -54,10 +55,30 @@ export const container = css`
     }
     ${textAreaPlaceholder({color: '#A098AE'})};
     @media(max-width: ${tabScreenWidth}){
+        background: unset;
+        padding: 0px;
+        h2{
+            font-size: 20px;
+            line-height: 30px;
+        }
         .taskName{
+            img{
+                height: 14px;
+                width: 14px;
+            }
             font-size: 14px;
             line-height: 21px;
-            margin-bottom: 4px;
+            margin-bottom: 10px;
+        }
+        input{
+            font-size: 10px;
+            line-height: 14px;
+        }
+        .hideMobile{
+            display: none;
+        }
+        .view{
+            margin-bottom: 12px;
         }
     }
 `
@@ -70,6 +91,10 @@ export const taskStatus = css`
         display: flex;
         flex-direction: column;
         align-items: start;
+    }
+    @media(max-width: ${tabScreenWidth}){
+        margin-top: 26px;
+        flex-wrap: wrap;
     }
 `
 export const messageSection = css`
@@ -128,7 +153,7 @@ export const messageSection = css`
         color: #363B64
     }
     @media(max-width: ${tabScreenWidth}){
-        margin-top: 20px;
+        margin-top: 26px;
         .profile{
             width: 28px;
             height: 28px;
@@ -150,6 +175,9 @@ export const checkListCont = css`
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    @media(max-width: ${tabScreenWidth}){
+        margin-top: 26px;
+    }
 `
 
 export const attachmentCont = css`
@@ -157,9 +185,15 @@ export const attachmentCont = css`
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    @media(max-width: ${tabScreenWidth}){
+        margin-top: 26px;
+    }
 `
 export const cta = css`
     display: flex;
     justify-content: flex-end;
     margin-top: 20px;
+    @media(max-width: ${tabScreenWidth}){
+        margin-top: 26px;
+    }
 `
