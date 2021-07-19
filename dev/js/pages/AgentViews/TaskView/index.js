@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { SET_MENUBAR_STATE } from '@constants/types';
+import { SET_AGENT_MENUBAR_STATE } from '@constants/types';
 import TaskCard from '@components/TaskCard';
 import Header from '@components/Header';
 import NotificationWidget from '@components/NotificationWidget';
 import ProfileWidget from '@components/ProfileWidget';
-import TaskDetail from '@pages/TaskDetail';
+import AgentTaskDetail from '@pages/AgentTaskDetail';
+import CustomButton from '@components/CustomButton';
+import CreateTask from '@components/CreateTask';
 import { isMobileView } from '@constants';
 import { getTaskList } from '@actions';
-import { container, tasksView } from './style.js';
+import { mainCont, container, tasksView } from './style.js';
 import { body } from '../style.js';
 
 const TaskView = ()=>{
@@ -19,6 +21,7 @@ const TaskView = ()=>{
     const { taskList=[] } = taskInfo||{};
     const [activeWidget, setActiveWidget] = useState(0);
     const [activeTask, setActiveTask] = useState('');
+    const [showAddTaskView, setAddTaskView] = useState(false);
 
     const handleCtaClick = (val)=>{
         setActiveWidget(val);
@@ -27,7 +30,7 @@ const TaskView = ()=>{
 
     const taskClickHandler = (taskId)=>{
         if(isMobileView()){
-            history.push(`/task/detail/${taskId}`);
+            history.push(`/agent/task/detail/${taskId}`);
         }else{
             setActiveTask(taskId);
         }
@@ -36,7 +39,7 @@ const TaskView = ()=>{
     useEffect(()=>{
         dispatch(
             {
-                type: SET_MENUBAR_STATE,
+                type: SET_AGENT_MENUBAR_STATE,
                 payload: {
                     activeWidget: 'tasks'
                 }
@@ -52,11 +55,24 @@ const TaskView = ()=>{
         });
     },[dispatch, activeWidget])
 
+    const addMoreTasks = ()=>{
+        if(isMobileView()){
+            history.push('/agent/task/create/1234');
+        }else{
+            setAddTaskView(true);
+        }
+    }
+
+    const toggleAddTaskView = ()=>{
+        setAddTaskView(val=>!val);
+    }
+
     return(
-        <div className={body}>
+        <div className={`${body} ${mainCont}`}>
             <div className="mainView">
-                <Header headerText="Task">
+                <Header headerText="Task" isAgent>
                     <div className="headerView">
+                        <CustomButton text="Add New Task" clickHandler={addMoreTasks} margin="0px 16px 0px 0px"/>
                         <NotificationWidget/>
                         <ProfileWidget/>
                     </div>
@@ -78,15 +94,18 @@ const TaskView = ()=>{
                             {
                                 taskList.map((val)=>{
                                     const { task_id } = val;
-                                    return(<TaskCard key={task_id} isView active={activeTask===task_id} clickHandler={()=>taskClickHandler(task_id)} data={val}/>)
+                                    return(<TaskCard key={task_id} isView active={!showAddTaskView && activeTask===task_id} clickHandler={()=>taskClickHandler(task_id)} data={val}/>)
                                 })
                             }
                         </div>
                     </div>
                     <div className="taskInfo">
                         {
-                            activeTask?<TaskDetail activeTask={activeTask}/>:null
-                        }                        
+                            !showAddTaskView && activeTask?<AgentTaskDetail activeTask={activeTask}/>:null
+                        }
+                        {
+                            showAddTaskView && <CreateTask toggleAddTaskView={toggleAddTaskView}/>
+                        }                     
                     </div>
                 </div>
             </div>

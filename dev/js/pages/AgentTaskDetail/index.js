@@ -2,27 +2,31 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import AttachmentCard from '@components/AttachmentCard';
-import { SET_MENUBAR_STATE } from '@constants/types';
+import CustomSelect from '@components/CustomSelect';
+import { SET_AGENT_MENUBAR_STATE } from '@constants/types';
 import { getTaskDetail } from '@actions';
 import { getNameInitialHelper, getFormattedTime, getFormattedDate, capitalizeFirstLetter } from '@helpers/utils';
 import { container, taskStatus, discussionSection, memberCard, attachmentSection, checklistSection, messageSection } from './style.js';
 
+const PriorityList = [
+    {
+        id: 1,
+        val: 'High'
+    },
+    {
+        id: 2,
+        val: 'Medium'
+    },
+    {
+        id: 3,
+        val: 'Low'
+    }
+]
 const TaskDetail = ({ activeTask })=>{
     const history = useHistory();
     const dispatch = useDispatch();
     const taskInfo = useSelector(state=>state.TASK_INFO);
     const { taskDetail={} } = taskInfo||{};
-    const handleBackBtnClick = ()=>{
-        dispatch(
-            {
-                type: SET_MENUBAR_STATE,
-                payload: {
-                    activeWidget: 'tasks'
-                }
-            }
-        )
-       history.push('/dashboard');
-    }
 
     useEffect(()=>{
         if(activeTask){
@@ -32,6 +36,14 @@ const TaskDetail = ({ activeTask })=>{
         }
 
     },[activeTask, dispatch]);
+
+    const handleBackBtnClick = ()=>{
+       history.push('/agent/tasks/1234');
+    }
+
+    const handlePriorityChange = (val)=>{
+
+    }
 
     const { title, priority_name, status_name, description, tasks_comment=[], tasks_docs=[], check_list=[] } = taskDetail && taskDetail[activeTask] || {};
 
@@ -66,16 +78,19 @@ const TaskDetail = ({ activeTask })=>{
                 <div className="view">
                     <div className="taskName">
                         <img className="icon" src={ASSETS_BASE_URL+"/images/common/chevron.svg"} alt="home"/>
-                        <span>Priority</span>
+                        <span className="hideMobile">Select</span><span>Priority</span>
                     </div>
-                    <span className="status">{priority_name}</span>
+                    {/* <span className="status">
+
+                    </span> */}
+                    <CustomSelect options={PriorityList} defaultOption={PriorityList[0]} clickHandler={handlePriorityChange}/>
                 </div>
                 <div className="view">
                     <div className="taskName">
                         <img className="icon" src={ASSETS_BASE_URL+"/images/common/blueCalendar.svg"} alt="home"/>
-                        <span>Due Date</span>
+                        <span className="hideMobile">Select</span><span>Due Date</span>
                     </div>
-                    <span className="dueDate">29 Feb 2020</span>
+                    <input type="date" id="dueDate" name="dueDate"/>
                 </div>
             </div>
             <div className={discussionSection}>
@@ -83,7 +98,9 @@ const TaskDetail = ({ activeTask })=>{
                     <img className="icon" src={ASSETS_BASE_URL+"/images/common/description.svg"} alt="discuss"/>
                     <span>Description</span>
                 </div>
-                <span className="discussionTxt">{description}</span>
+                <span className="discussionTxt">
+                    <textarea cols="50" rows="10" value={description}></textarea>
+                </span>
             </div>
             <div className={attachmentSection}>
                 <div className="attachmentHeader">

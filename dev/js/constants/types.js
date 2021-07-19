@@ -31,6 +31,7 @@ export const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 //KEEL TYPES
 export const SET_MENUBAR_STATE = 'SET_MENUBAR_STATE';
+export const SET_AGENT_MENUBAR_STATE = 'SET_AGENT_MENUBAR_STATE';
 
 //Task View Consumer Dashboard
 export const TASK_LIST_LOADING = 'TASK_LIST_LOADING';

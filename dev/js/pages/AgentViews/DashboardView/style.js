@@ -95,9 +95,11 @@ export const widgets = css`
     .widget{
         min-width: 240px;
         min-height: 150px;
+        margin: 8px;
         padding: 18px;
+        background: #8686EA;
+        border-radius: 20px;
         background-size: cover;
-        padding: 18px;
         font-weight: bold;
         span{
             display: block;
@@ -116,6 +118,7 @@ export const widgets = css`
         }
     }
     .cover{
+
     }
     .progress{
         .no{
