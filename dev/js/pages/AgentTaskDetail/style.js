@@ -168,23 +168,48 @@ export const taskStatus = css`
     display: flex;
     justify-content: space-between;
     margin-top: 23px;
+    display: flex;
+    flex-wrap: wrap;
     .view{
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
+        margin-bottom: 10px;
+    }
+    input{
+        ${inputField};
+        background: #F6F5FA;
+        border: 1px solid #A098AE;
+        border-radius: 10px;
+        width: 100%;
+        padding: 8px;
+        font-size: 12px;
+        line-height: 18px;
+        color: #363B64;
+    }
+    @media(max-width: ${tabScreenWidth}){
+        .hideMobile{
+            display: none;
+        }
     }
 `
 
 export const discussionSection = css`
     margin-top: 30px;
     .discussionTxt{
-        font-size: 12px;
-        line-height: 18px;
-        color: #363B64;
         display: inline-block;
+        textarea{
+            width: 100%;
+            border: 1px solid #A098AE;
+            background: #F6F5FA;
+            font-size: 12px;
+            line-height: 18px;
+            color: #A098AE;
+            padding: 8px;
+        }
     }
     @media(max-width: ${tabScreenWidth}){
-        margin-top: 20px;
+        margin-top: 16px;
         .discussionTxt{
             font-size: 12px;
             line-height: 18px;
@@ -355,24 +380,4 @@ export const messageSection = css`
             line-height: 18px;
         }
     }
-`
-
-export const taskMobileCont = css`
-    display: flex;
-    width: 100%;
-    height: 100%;
-    padding: 0px 26px;
-    overflow-y: auto;
-    padding-bottom: 200px;
-    .taskInfo{
-        width: 50%;
-        overflow-y: auto;
-    }
-    @media(max-width: ${tabScreenWidth}){
-        padding: 20px;
-        margin: 0px;
-        .taskInfo{
-            display: none;
-        }
-    }   
 `

@@ -1,8 +1,10 @@
-import React, { Fragment } from 'react';
+import React, { useEffect, Fragment } from 'react';
+import { useDispatch } from 'react-redux';
 import Header from '@components/Header';
 import NotificationWidget from '@components/NotificationWidget';
 import ProfileWidget from '@components/ProfileWidget';
 import DatePicker from '@components/DatePicker';
+import { SET_AGENT_MENUBAR_STATE } from '@constants/types';
 import { container, rightBar, widgets } from './style.js';
 const CompletedImg = `${ASSETS_BASE_URL}/images/AgentDashboard/completed.svg`;
 const PendingImg = `${ASSETS_BASE_URL}/images/AgentDashboard/pending.svg`;
@@ -10,11 +12,23 @@ const RevenueImg = `${ASSETS_BASE_URL}/images/AgentDashboard/revenue.svg`;
 const ReviewImg = `${ASSETS_BASE_URL}/images/AgentDashboard/review.svg`;
 
 const AgentDashboardView = ()=>{
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+        dispatch(
+            {
+                type: SET_AGENT_MENUBAR_STATE,
+                payload: {
+                    activeWidget: 'dashboard'
+                }
+            }
+        )
+      },[])
 
     return(
         <Fragment>
             <div className="mainView">
-                <Header headerText="Dashboard"></Header>
+                <Header headerText="Dashboard" isAgent></Header>
                 <div className={container}>
                     <div className="performance">
                         <div className="intro">
@@ -65,9 +79,9 @@ const AgentDashboardView = ()=>{
                 </div>
                 <div className="mainCont">
                     <div className="upcoming">Upcoming Schedule</div>
-                    <div className="calendar">
+                    {/* <div className="calendar">
                         <DatePicker/>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </Fragment>

@@ -25,6 +25,31 @@ export const inputField = css`
     }
 `
 
+export const textAreaPlaceholder = props => css`
+    ::placeholder{
+        color: ${props.color};     
+    }
+    textarea::-webkit-input-placeholder {
+        color: ${props.color};
+    }
+
+    textarea:-moz-placeholder { /* Firefox 18- */
+        color: ${props.color};  
+    }
+
+    textarea::-moz-placeholder {  /* Firefox 19+ */
+        color: ${props.color};  
+    }
+
+    textarea:-ms-input-placeholder {
+        color: ${props.color};  
+    }
+
+    textarea::placeholder {
+        color: ${props.color};
+    }
+`
+
 export const isMobileView = ()=>{
 
     if(typeof document==="object" && document.body.clientWidth){

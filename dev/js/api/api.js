@@ -52,6 +52,7 @@ const API_POST = (url, data) => {
   return STORAGE.getAuthToken({ url: url }).then((token) => {
     return new Promise((resolve, reject) => {
       let headers = {};
+      if (token) headers['AUTHORIZATION'] = `bearer ${token}`;
       //   if (token) headers['X-CID'] = token;
       axiosInstance({
         method: 'post',
