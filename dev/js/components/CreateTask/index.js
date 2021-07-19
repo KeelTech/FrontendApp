@@ -29,8 +29,8 @@ const CreateTask = ({ toggleAddTaskView, caseId })=>{
         priority: 0,
         due_date: '',
         check_list : {},
-        tags: '',
-        case: ''
+        tags: 'important',
+        case: caseId||''
     })
 
     const { title, description, priority, due_date, check_list, tags } = dataParams;
@@ -45,16 +45,15 @@ const CreateTask = ({ toggleAddTaskView, caseId })=>{
     }
 
     const setDataValues = (dataVal)=>{
-        setDataParams();
+        setDataParams((val)=>{ return {...val, ...dataVal} });
     }
 
     const createTaskClicked = ()=>{
-        const dataParams = {};
         createTask(dataParams, dispatch, (resp, err)=>{
 
         })   
     }
-
+console.log(dataParams);
     return(
         <div className={container}>
             <h2>New Task</h2>
@@ -64,7 +63,7 @@ const CreateTask = ({ toggleAddTaskView, caseId })=>{
                         <img className="icon" src={ASSETS_BASE_URL+"/images/common/task.svg"} alt="task"/>
                         <span>Task Name</span>
                     </div>
-                    <input type="text" placeholder="Enter Task Name"/>
+                    <input type="text" placeholder="Enter Task Name" value={title} onChange={(e)=>setDataValues({title: e.target.value})}/>
                 </div>
                 <div className={taskStatus}>
                     <div className="view">
@@ -73,7 +72,7 @@ const CreateTask = ({ toggleAddTaskView, caseId })=>{
                             <span>Members</span>
                         </div>
                         <div className="member">
-                            <CustomButton text="Add Member" clickHandler={addMember} margin="0px" padding="9px" borderRadius="5px" mFontSize="10px"/>
+                            {/* <CustomButton text="Add Member" clickHandler={addMember} margin="0px" padding="9px" borderRadius="5px" mFontSize="10px"/> */}
                             {/*<span>S</span>
                              <span className={memberCard({val: 1, bgcolor: '#C1E0B6'})}>M</span>
                             <span className={memberCard({val: 2, bgcolor: '#B8D4D6'})}>C</span> */}
@@ -94,7 +93,7 @@ const CreateTask = ({ toggleAddTaskView, caseId })=>{
                             <img className="icon" src={ASSETS_BASE_URL+"/images/common/blueCalendar.svg"} alt="home"/>
                             <span className="hideMobile">Select</span><span>Due Date</span>
                         </div>
-                        <input type="date" id="dueDate" name="dueDate"/>
+                        <input type="date" id="dueDate" name="dueDate" onChange={(e)=>{console.log(e);setDataValues({due_date: new Date(e.target.value)})} }/>
                     </div>
                 </div>
 
@@ -104,7 +103,7 @@ const CreateTask = ({ toggleAddTaskView, caseId })=>{
                         <span>Description</span>
                     </div>
                     <span className="discussionTxt">
-                        <textarea cols="50" rows="10" value={description} placeholder="Enter Description" onChange={(e)=>setDescription(e.target.value)}></textarea>
+                        <textarea cols="50" rows="10" value={description} placeholder="Enter Description" onChange={(e)=>setDataValues({description: e.target.value})}></textarea>
                     </span>
                 </div>
 
@@ -132,7 +131,7 @@ const CreateTask = ({ toggleAddTaskView, caseId })=>{
                     <div className="messageSection">
                         <div className="msgView">
                             <span className="profile">SW</span>
-                            <input type="text" placeholder="Enter Task Name"/>
+                            <input type="text" placeholder="Enter Task Name" onChange={(e)=>setDataValues({title: e.target.value})}/>
                         </div>
                     </div>
                 </div>
