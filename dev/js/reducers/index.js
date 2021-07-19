@@ -5,7 +5,8 @@ import storage from 'redux-persist/lib/storage';
 import AUTH from './commons/auth.js';
 import USER from './commons/user.js';
 import LOGIN from './commons/login.js';
-import COMMON_REDUCER from './common.js'
+import COMMON_REDUCER from './common.js';
+import DOCUMENTS from './commons/document.js';
 import TASK_INFO from './consumerTaskInfo.js'
 import AGENT_STORE from './agentTask.js'
 import DOCUMENTS from './commons/document.js';
