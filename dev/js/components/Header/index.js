@@ -6,7 +6,7 @@ import { container, desktopView, mobileView, mobileHeading } from './style.js';
 const Header = (props)=>{
     const [showMobileMenuBar, setMobileMenuBar] = useState(false);
 
-    const { headerText } = props;
+    const { headerText, isAgent=false } = props;
 
     const toggleMenuBar = ()=>{
         setMobileMenuBar(val=>!val);
@@ -27,7 +27,7 @@ const Header = (props)=>{
             </div>
             <div className={mobileHeading}>{headerText}</div>
             {
-                showMobileMenuBar && <LeftMenuBar isMobileView toggleMenuBar={toggleMenuBar}/>
+                showMobileMenuBar && <LeftMenuBar isMobileView toggleMenuBar={toggleMenuBar} isAgent={isAgent}/>
             }
         </div>
     )

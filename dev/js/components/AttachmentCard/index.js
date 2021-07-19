@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { container, menuBar } from './style.js';
 
-const AttachmentCard = ()=>{
+const AttachmentCard = ({ data })=>{
     const [showMenuBar, setMenuBar] = useState(false);
-
+    const { doc_type, id } = data;
     return(
         <div className={container}>
             <img className="docIcon" src={ASSETS_BASE_URL+"/images/common/document.svg"} alt="document"/>
-            <span className="docx">Aadhar Card</span>
+            <span className="docx">{doc_type}</span>
             <img className="dotMenu" src={ASSETS_BASE_URL+"/images/common/dotMenu.svg"} alt="menu" onClick={()=>setMenuBar(val=>!val)}/>
             {
                 showMenuBar && <div className={menuBar}>
