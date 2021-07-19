@@ -102,6 +102,7 @@ function SignUp(props) {
             type="email"
             value={email}
             onChange={emailSignUpHandler}
+            autocomplete="off"
           />
           <input
             className="password-field"
@@ -109,6 +110,7 @@ function SignUp(props) {
             type="password"
             value={password}
             onChange={passwordSignUpHandler}
+            autocomplete="off"
           />
           <input
             className="confirm-password-field"
@@ -116,6 +118,7 @@ function SignUp(props) {
             type="password"
             value={confirmPassword}
             onChange={confirmPasswordHandler}
+            autocomplete="off"
           />
           <button className="log-in-button">Sign Up</button>
         </form>

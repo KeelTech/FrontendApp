@@ -9,6 +9,7 @@ function PasswordReset(props) {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordValidation, setPasswordValidation] = useState(false);
   const [successMessage, setSuccessMessage] = useState(false);
+  const [showInputFields, setShowInputFields] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -35,6 +36,7 @@ function PasswordReset(props) {
       setPasswordValidation(false);
       resetPassword({ otp, password }, dispatch, (err, data) => {
         if (data) {
+          setShowInputFields(false);
           setSuccessMessage(true);
           setOtp('');
           setPassword('');
@@ -59,36 +61,42 @@ function PasswordReset(props) {
           alt="keel-logo"
         />
         <h1 className="header-text">Reset Password</h1>
-        <form className="form-wrapper" onSubmit={submitHandler}>
-          <input
-            placeholder="Enter OTP"
-            type="text"
-            value={otp}
-            onChange={otpHandler}
-          />
-          <input
-            placeholder="New Password"
-            type="password"
-            value={password}
-            onChange={passwordHandler}
-          />
-          <input
-            placeholder="Confirm New Password"
-            type="password"
-            value={confirmPassword}
-            onChange={confirmPasswordHandler}
-          />
-          {passwordValidation && (
-            <p className="password-match">Passwords do not match</p>
-          )}
-          {successMessage && (
-            <p className="password-success">
-              New Password has been successfully set up. Please log in with the
-              new password
-            </p>
-          )}
-          <button className="reset-pass-button">Reset Password</button>
-        </form>
+
+        {showInputFields && (
+          <form className="form-wrapper" onSubmit={submitHandler}>
+            <input
+              placeholder="Enter OTP"
+              type="text"
+              value={otp}
+              onChange={otpHandler}
+              autocomplete="off"
+            />
+            <input
+              placeholder="New Password"
+              type="password"
+              value={password}
+              onChange={passwordHandler}
+              autocomplete="off"
+            />
+            <input
+              placeholder="Confirm New Password"
+              type="password"
+              value={confirmPassword}
+              onChange={confirmPasswordHandler}
+              autocomplete="off"
+            />
+            {passwordValidation && (
+              <p className="password-match">Passwords do not match</p>
+            )}
+            <button className="reset-pass-button">Reset Password</button>
+          </form>
+        )}
+        {successMessage && (
+          <p className="password-success">
+            New Password has been successfully set up. Please log in with the
+            new password
+          </p>
+        )}
       </div>
       <img
         className="globe-image"

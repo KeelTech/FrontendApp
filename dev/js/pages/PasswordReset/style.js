@@ -72,18 +72,20 @@ export const style = css`
       color: #ef4f4f;
     }
     .password-success {
-      display: flex;
-      font-family: Poppins sans-serif;
-      font-size: 15px;
       color: green;
+      margin-left: 15%;
+      font-size: 20px;
+      margin-top: 40px;
+      margin-right: 14%;
+      line-height: 2rem;
+      font-family: Poppins;
     }
     @media (max-width: ${tabScreenWidth}) {
       .password-match {
         font-size: 14px;
       }
       .password-success {
-        font-size: 14px;
-        width: 70%;
+        width: 75%;
       }
     }
     .reset-pass-button {
