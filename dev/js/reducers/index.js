@@ -7,7 +7,6 @@ import USER from './commons/user.js';
 import LOGIN from './commons/login.js';
 import COMMON_REDUCER from './common.js';
 import DOCUMENTS from './commons/document.js';
-import COMMON_REDUCER from './common.js'
 import TASK_INFO from './consumerTaskInfo.js'
 
 const persistConfig = {

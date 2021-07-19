@@ -4,15 +4,25 @@ import UploadedDocument from './UploadedDocument/index';
 import NotificationWidget from '@components/NotificationWidget';
 import ProfileWidget from '@components/ProfileWidget';
 import { getUserDocuments } from '../../../actions/index.js';
+import FileUpload from '@components/FileUpload';
 import { useSelector, useDispatch } from 'react-redux';
+import { uploadedDocuments } from './MockData.js';
 import { body } from './style.js';
 
 function DocumentView() {
   const [searchDoc, setSearchDoc] = useState('');
+  const [documentOwner, setDocumentOwner] = useState('');
+  const [openFileUpload, setOpenFileUpload] = useState(false);
+  const [userAddedDocs, setUserAddedDocs] = useState(uploadedDocuments);
 
   const userDocuments = useSelector((state) => state.DOCUMENTS.userDocuments);
 
   const dispatch = useDispatch();
+
+  const documentOwnerHandler = (event) => {
+    console.log(documentOwner);
+    setDocumentOwner(event.target.value);
+  };
 
   const fetchuserDocuments = () => {
     getUserDocuments(dispatch, (err, data) => {
@@ -25,78 +35,42 @@ function DocumentView() {
     });
   };
 
+  const deleteDocument = () => {
+    setUserAddedDocs((prevState) => {
+      console.log(prevState.data);
+      //   prevState.filter((val) => {
+      //     val.data.doc_id != val.data.doc_id;
+      //   });
+    });
+  };
+
+  const UploadedDocumentNew = (doc) => {
+    return (
+      <UploadedDocument
+        key={doc.doc_id}
+        title={doc.doc_type}
+        date={doc.created_at}
+        content={doc.content}
+        deleteDocument={deleteDocument}
+      />
+    );
+  };
+
   const handleSearchDoc = (event) => {
     setSearchDoc(event.target.value);
   };
 
-  const uploadedDocuments = [
-    {
-      id: 1,
-      title: 'Aadhar Card',
-      date: '2 March 2021, 12:30 PM',
-      content: 'pdf file',
-    },
-    {
-      id: 1,
-      title: 'Aadhar Card',
-      date: '2 March 2021, 12:30 PM',
-      content: 'pdf file',
-    },
-    {
-      id: 1,
-      title: 'Aadhar Card',
-      date: '2 March 2021, 12:30 PM',
-      content: 'pdf file',
-    },
-    {
-      id: 1,
-      title: 'Aadhar Card',
-      date: '2 March 2021, 12:30 PM',
-      content: 'pdf file',
-    },
-    {
-      id: 1,
-      title: 'Aadhar Card',
-      date: '2 March 2021, 12:30 PM',
-      content: 'pdf file',
-    },
-    {
-      id: 1,
-      title: 'Aadhar Card',
-      date: '2 March 2021, 12:30 PM',
-      content: 'pdf file',
-    },
-    {
-      id: 1,
-      title: 'Aadhar Card',
-      date: '2 March 2021, 12:30 PM',
-      content: 'pdf file',
-    },
-    {
-      id: 1,
-      title: 'Aadhar Card',
-      date: '2 March 2021, 12:30 PM',
-      content: 'pdf file',
-    },
-    {
-      id: 1,
-      title: 'Aadhar Card',
-      date: '2 March 2021, 12:30 PM',
-      content: 'pdf file',
-    },
-    {
-      id: 1,
-      title: 'Aadhar Card',
-      date: '2 March 2021, 12:30 PM',
-      content: 'pdf file',
-    },
-    {
-      id: 1,
-      title: 'Aadhar Card',
-      date: '2 March 2021, 12:30 PM',
-      content: 'pdf file',
-    },
-  ];
+  const openFileUploadModal = () => {
+    setOpenFileUpload(true);
+  };
+
+  const fileUploadDone = (value) => {
+    console.log('value is : ', value);
+  };
+
+  const fileuploadclosed = () => {
+    setOpenFileUpload(false);
+  };
 
   return (
     <div className={body}>
@@ -110,7 +84,14 @@ function DocumentView() {
         <div className="uploadSection">
           <form className="uploadedBy">
             <label className="uploadText">Uploaded By</label>
-            <select className="optionsMenu">
+            <select
+              className="optionsMenu"
+              onChange={documentOwnerHandler}
+              required
+            >
+              <option value="none" selected disabled hidden>
+                All
+              </option>
               <option value="you">You</option>
               <option value="consultant">Consultatnt</option>
             </select>
@@ -123,21 +104,35 @@ function DocumentView() {
               onChange={handleSearchDoc}
             />
           </form>
-          <button onClick={fetchuserDocuments} className="uploadButton">
+          <button onClick={openFileUploadModal} className="uploadButton">
             Upload Document
           </button>
+          {openFileUpload && (
+            <FileUpload
+              fileUploadModalClosed={fileuploadclosed}
+              fileUploaded={fileUploadDone}
+            />
+          )}
         </div>
         <div className="uploadedDocsWrapper">
-          {uploadedDocuments.map((doc) => {
-            return (
-              <UploadedDocument
-                key={doc.id}
-                title={doc.title}
-                date={doc.date}
-                content={doc.content}
-              />
-            );
-          })}
+          {userAddedDocs.data
+            .filter((val) => {
+              if (searchDoc === '') {
+                return val;
+              } else if (
+                val.doc_type.toLowerCase().includes(searchDoc.toLowerCase())
+              ) {
+                return val;
+              }
+            })
+            .map((doc) => {
+              if (documentOwner === '') {
+                return <UploadedDocumentNew key={doc.doc_id} {...doc} />;
+              }
+              if (documentOwner === 'you' && doc.user_id) {
+                return <UploadedDocumentNew key={doc.doc_id} {...doc} />;
+              }
+            })}
         </div>
       </div>
     </div>

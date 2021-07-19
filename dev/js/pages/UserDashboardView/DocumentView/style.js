@@ -5,8 +5,7 @@ export const body = css`
   background: rgba(252, 252, 252, 0.5);
   display: flex;
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
   .mainView {
     width: 100%;
     background: rgba(252, 252, 252, 0.5);

@@ -3,57 +3,49 @@ import { tabScreenWidth } from '@constants';
 
 export const wrapper = css`
   background: #fcfcfc;
-  width: 280px;
-  height: 200px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-auto-rows: minmax(20px, auto);
+  grid-gap: 1px;
+  margin-left: inherit;
+  margin-top: inherit;
+  margin-right: 60px;
+  background: #fcfcfc;
   box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
   border-radius: 14px;
-  margin-left: 5%;
-  margin-top: 5%;
-  overflow: hidden;
-  @media (max-width: ${tabScreenWidth}) {
-    width: 150px;
-    height: 100px;
-    margin-top: 10%;
-  }
-  .header {
-    display: flex;
-  }
   .title {
-    position: absolute;
-    margin-left: 20px;
+    grid-column: 1/2;
+    padding-left: 20px;
+    margin-bottom: 0px;
     font-family: Poppins;
-    font-style: bold;
-    font-weight: 900;
-    font-size: 25px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 27px;
     line-height: 27px;
     color: #363b64;
   }
   .dotMenu {
-    position: absolute;
-    margin-left: 13%;
-    margin-top: 36px;
-    cursor: pointer;
-    height: 9px;
+    margin-top: 26px;
+    justify-self: end;
+    margin-right: 15px;
   }
   .date {
-    display: flex;
-    justify-content: flex-start;
-    margin-left: 20px;
-    margin-top: 45px;
-  }
-  .date p {
+    grid-column: 1/4;
+    padding-left: 25px;
+    font-size: 10px;
     font-family: Poppins;
-    font-weight: 600;
+    font-style: normal;
+    font-weight: normal;
     font-size: 10px;
     line-height: 15px;
     color: #a098ae;
   }
-  .content {
-    margin-left: 8%;
-    width: 235px;
-    height: 100px;
-    background: rgba(54, 59, 100, 0.1);
-    border-radius: 8px;
+  button {
+    cursor: pointer;
+  }
+  a {
+    margin-left: 14%;
+    margin-bottom: 9%;
   }
 `;
 
