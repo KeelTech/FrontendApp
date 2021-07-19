@@ -31,7 +31,9 @@ const NotificationWidget = () => {
   const modalRef = useRef();
 
   return (
-    <div className={container} ref={modalRef}>
+    <div className={container} ref={modalRef} onClick={() => {
+      setIsClicked(!isClicked);
+    }}>
       <img
         src={ASSETS_BASE_URL + "/images/common/notificationIcon.svg"}
         alt="notification"

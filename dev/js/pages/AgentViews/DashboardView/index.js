@@ -79,9 +79,9 @@ const AgentDashboardView = ()=>{
                 </div>
                 <div className="mainCont">
                     <div className="upcoming">Upcoming Schedule</div>
-                    <div className="calendar">
+                    {/* <div className="calendar">
                         <DatePicker/>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </Fragment>
