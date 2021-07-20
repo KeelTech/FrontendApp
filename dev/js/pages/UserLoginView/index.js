@@ -98,6 +98,7 @@ const LoginView = (props) => {
             type="email"
             value={email}
             onChange={emailLoginHnadler}
+            autocomplete="off"
           />
           <input
             className="login-password-input"
@@ -105,6 +106,7 @@ const LoginView = (props) => {
             type="password"
             value={password}
             onChange={passwordLoginHandler}
+            autocomplete="off"
           />
           {loginFail && (
             <p className="login-fail-msg">

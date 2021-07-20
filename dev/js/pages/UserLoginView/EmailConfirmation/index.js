@@ -7,6 +7,7 @@ function EmailConfirmation(props) {
   const [email, setEmail] = useState('');
   const [successMessage, setSuccessMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
+  const [showInputFields, setShowInputFields] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -21,6 +22,7 @@ function EmailConfirmation(props) {
     }
     resetPasswordLink({ email }, dispatch, (err, data) => {
       if (data) {
+        setShowInputFields(false);
         setErrorMessage(false);
         setSuccessMessage(true);
         setEmail('');
@@ -47,27 +49,30 @@ function EmailConfirmation(props) {
         <p className="sub-heading">
           Please enter your registered e-mail address
         </p>
-        <form className="form-wrapper" onSubmit={loginSubmitHnadler}>
-          <input
-            className="login-email-input"
-            placeholder="E-mail"
-            type="email"
-            value={email}
-            onChange={emailLoginHnadler}
-          />
-          {successMessage && (
-            <p className="email-success-msg">
-              A verification OTP has been sent to your email address. Use that
-              to reset your password.
-            </p>
-          )}
-          {errorMessage && (
-            <p className="email-fail-msg">
-              This is not a registered email address
-            </p>
-          )}
-          <button className="submit-button">Submit</button>
-        </form>
+        {showInputFields && (
+          <form className="form-wrapper" onSubmit={loginSubmitHnadler}>
+            <input
+              className="login-email-input"
+              placeholder="E-mail"
+              type="email"
+              value={email}
+              onChange={emailLoginHnadler}
+              autocomplete="off"
+            />
+            <button className="submit-button">Submit</button>
+          </form>
+        )}
+        {successMessage && (
+          <p className="email-success-msg">
+            A verification OTP has been sent to your email address. Use that to
+            reset your password.
+          </p>
+        )}
+        {errorMessage && (
+          <p className="email-fail-msg">
+            This is not a registered email address
+          </p>
+        )}
       </div>
       <img
         className="passport-image"
