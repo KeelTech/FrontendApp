@@ -17,6 +17,13 @@ export const fileUploadWrapper = css`
     margin-left: auto;
     margin-right: auto;
 `
+export const submitButtonWrapper = css`
+    min-height:60px;
+    padding-top:15px;
+    display:flex;
+    justify-content:center;
+    max-width:88vw
+`
 
 export const selectedFileText = css`
     font-family: ${primaryFont};
@@ -36,8 +43,9 @@ export const alignCenter = css`
 export const outerShell = css`
     background: white;
     position:absolute;
-    top:25%;
-    width:80vw;
+    top:15%;
+    width:90vw;
+    margin-left: 5vw;
     max-width: 890px;
     box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
     text-align:center;
@@ -51,7 +59,7 @@ export const innerShell = css`
     border-radius: 8px;
     padding-top:40px;
     margin:4%;
-    max-height: 300px;
+    max-height: 600px;
 `
 export const closeWrapper = css`
     float: right;
@@ -79,6 +87,27 @@ export const fileButton = css`
     border-radius: 20px;
     cursor:pointer;
     margin-right:auto;
+`
+export const submitButton = css`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 9px 9px;
+    position: absolute;
+    width: 230px ;
+    height: 40px;
+    background-color: #363B64;
+    color:white;
+    border:none;
+    border-radius: 6.74px;
+    cursor:pointer;
+    margin-right:auto;
+    @media(max-width: ${mobileScreenWidth}){
+        width: 72vw;
+        font-size:14px;
+        height: 32px;
+    };
 `
 export const fileData = css`
     width: 100%;
