@@ -74,20 +74,27 @@ export const style = (props) => css`
       }
     }
     .email-fail-msg {
-      display: flex;
       color: red;
-      font-size: 15px;
+      margin-left: 15%;
+      font-size: 20px;
+      margin-top: 40px;
+      margin-right: 14%;
+      line-height: 2rem;
     }
     .email-success-msg {
-      display: flex;
       color: green;
-      font-size: 15px;
+      margin-left: 15%;
+      font-size: 20px;
+      margin-top: 40px;
+      margin-right: 14%;
+      line-height: 2rem;
     }
     @media (max-width: ${tabScreenWidth}) {
       .email-success-msg {
-        font-size: 12px;
-        width: 70%;
-        line-height: 1rem;
+        width: 75%;
+      }
+      .email-fail-msg {
+        width: 75%;
       }
     }
     .submit-button {
