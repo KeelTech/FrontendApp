@@ -24,10 +24,20 @@ export const wrapper = css`
     line-height: 27px;
     color: #363b64;
   }
+  @media (max-width: ${tabScreenWidth}) {
+    .title {
+      font-size: 10px;
+    }
+  }
   .dotMenu {
     margin-top: 26px;
     justify-self: end;
     margin-right: 15px;
+  }
+  @media (max-width: ${tabScreenWidth}) {
+    .dotMenu {
+      margin-top: 20px;
+    }
   }
   .date {
     grid-column: 1/4;
@@ -40,20 +50,29 @@ export const wrapper = css`
     line-height: 15px;
     color: #a098ae;
   }
+  @media (max-width: ${tabScreenWidth}) {
+    .date {
+      padding-left: 20px;
+    }
+  }
   button {
     cursor: pointer;
   }
   a {
-    margin-left: 14%;
+    margin-left: 13%;
     margin-bottom: 9%;
+  }
+  @media (max-width: ${tabScreenWidth}) {
+    a {
+      margin-left: 20%;
+    }
   }
 `;
 
 export const menuBar = css`
   position: absolute;
-  margin-top: 55px;
-  margin-left: 199px;
   z-index: 1;
+
   padding: 6px;
   background: #363b64;
   border-radius: 5px;

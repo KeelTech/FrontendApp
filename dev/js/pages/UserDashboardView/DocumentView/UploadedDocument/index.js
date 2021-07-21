@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { wrapper, menuBar } from './style';
 
 function UploadedDocument(props) {
-  const { title, date, content, deleteDocument } = props;
+  const { title, date, content, deleteDocument, downloadDocument, id } = props;
 
   const [showMenuBar, setMenuBar] = useState(false);
 
@@ -15,21 +15,20 @@ function UploadedDocument(props) {
         alt="menu"
         onClick={() => setMenuBar((val) => !val)}
       />
-      {showMenuBar && (
-        <div className={menuBar}>
-          <span>Download</span>
-          <span onClick={deleteDocument}>Delete</span>
-        </div>
-      )}
       <p className="date">{date}</p>
       <a
         href="http://www.africau.edu/images/default/sample.pdf"
         target="_blank"
         rel="noreferrer noopener"
-        download
       >
         {title}.pdf
       </a>
+      {showMenuBar && (
+        <div className={menuBar}>
+          <span onClick={downloadDocument}>Download</span>
+          <span onClick={() => deleteDocument(id)}>Delete</span>
+        </div>
+      )}
     </div>
   );
 }
