@@ -13,7 +13,7 @@ function DocumentView() {
   const [searchDoc, setSearchDoc] = useState('');
   const [documentOwner, setDocumentOwner] = useState('');
   const [openFileUpload, setOpenFileUpload] = useState(false);
-  const [userAddedDocs, setUserAddedDocs] = useState(uploadedDocuments);
+  const [userAddedDocs, setUserAddedDocs] = useState(uploadedDocuments.data);
 
   const userDocuments = useSelector((state) => state.DOCUMENTS.userDocuments);
 
@@ -35,13 +35,16 @@ function DocumentView() {
     });
   };
 
-  const deleteDocument = () => {
+  const deleteDocument = (id) => {
     setUserAddedDocs((prevState) => {
-      console.log(prevState.data);
-      //   prevState.filter((val) => {
-      //     val.data.doc_id != val.data.doc_id;
-      //   });
+      return prevState.filter((val) => {
+        return id != val.doc_id;
+      });
     });
+  };
+
+  const downloadDocument = () => {
+    console.log('downloading');
   };
 
   const UploadedDocumentNew = (doc) => {
@@ -52,6 +55,8 @@ function DocumentView() {
         date={doc.created_at}
         content={doc.content}
         deleteDocument={deleteDocument}
+        downloadDocument={downloadDocument}
+        id={doc.doc_id}
       />
     );
   };
@@ -115,7 +120,7 @@ function DocumentView() {
           )}
         </div>
         <div className="uploadedDocsWrapper">
-          {userAddedDocs.data
+          {userAddedDocs
             .filter((val) => {
               if (searchDoc === '') {
                 return val;
