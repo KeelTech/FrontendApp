@@ -6,32 +6,33 @@ import NotificationWidget from "@components/NotificationWidget";
 import ProfileWidget from "@components/ProfileWidget";
 import { getCaseList } from '@actions';
 import { SET_AGENT_MENUBAR_STATE } from '@constants/types';
-import {head} from "./style.js";
-import MobileViewList from './MobileViewList'
+import { head } from "./style.js";
+import MobileViewList from './MobileViewList';
+import { mobileScreenWidth } from '@constants';
 
 const CustomerView = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  useEffect(()=>{
-    getCaseList({}, dispatch, (resp, err)=>{
-      if(resp){
+  useEffect(() => {
+    getCaseList({}, dispatch, (resp, err) => {
+      if (resp) {
         console.log(resp);
       }
     })
-  },[]);
+  }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(
-        {
-            type: SET_AGENT_MENUBAR_STATE,
-            payload: {
-                activeWidget: 'customer'
-            }
+      {
+        type: SET_AGENT_MENUBAR_STATE,
+        payload: {
+          activeWidget: 'customer'
         }
+      }
     )
-  },[])
+  }, [])
 
-  const handleCustomerClick = (caseId)=>{
+  const handleCustomerClick = (caseId) => {
     history.push(`/agent/tasks/${caseId}`)
   }
 
@@ -45,7 +46,14 @@ const CustomerView = () => {
           </div>
         </Header>
         <div>
-        <MobileViewList handleCustomerClick={handleCustomerClick}/>
+          {
+            (window.innerWidth > mobileScreenWidth) && <MobileViewList handleCustomerClick={handleCustomerClick} />
+          }
+        </div>
+        <div>
+          {
+            (window.innerWidth <= mobileScreenWidth) && <MobileViewList handleCustomerClick={handleCustomerClick} />
+          }
         </div>
       </div>
     </Fragment>
