@@ -23,7 +23,7 @@ const NotFoundPage = () => {
         <div className={content}>
           <img src={ASSETS_BASE_URL + "/images/common/NotFoundIcon.svg"} alt="404"></img>
           <span>Sorry! We couldn’t find this page.</span>
-          <button onClick={()=>history.push('/dashboard')}>Redirect to dashboard</button>
+          <button onClick={()=>history.push('/')}>Redirect to dashboard</button>
         </div>
       </div>
       </div>
