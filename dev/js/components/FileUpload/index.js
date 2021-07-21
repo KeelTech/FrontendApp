@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fileUpload, fileUploadWrapper, selectedFileText, outerShell, innerShell, closeWrapper, fileButton, fileData } from './style.js';
+import { fileUpload, fileUploadWrapper, selectedFileText, outerShell, innerShell, closeWrapper, fileButton, submitButtonWrapper, submitButton, fileData } from './style.js';
 import CustomDropDown from '@components/CustomDropDown';
 
 class FileUpload extends Component {
@@ -29,28 +29,24 @@ class FileUpload extends Component {
         };
     }
     close = () => {
-        this.props.fileUploadModalClosed({
-            selectedFile: this.state.selectedFile,
-            selectedFileType: this.state.selectedFileType,
-        })
+        this.props.fileUploadModalClosed(false);
     }
     onFileChange = event => {
         this.setState({ selectedFile: event.target.files[0] });
-        if (event.target.files[0]) {
-            const formData = new FormData();
-            formData.append(
-                "myFile",
-                event.target.files[0],
-                event.target.files[0].name
-            );
-            this.props.fileUploaded(formData);
-        }
+        this.setState({ selectedFileName: event.target.files[0].name });
     };
     btnClickedUpload = () => {
         document.getElementById("file").click();
     }
     handleOptionChange = (item) => {
         this.setState({ selectedFileType: item });
+    }
+    uploadFile = () => {
+        this.props.uploadFile({
+            selectedFile: this.state.selectedFile,
+            selectedFileName: this.state.selectedFileName,
+            selectedFileType: this.state.selectedFileType,
+        })
     }
     fileData = () => {
         if (this.state.selectedFile) {
@@ -78,6 +74,11 @@ class FileUpload extends Component {
                     </div>
                     <div className={fileData}>{this.fileData()}</div>
                     <CustomDropDown list={this.state.options} optionSelected={this.handleOptionChange}></CustomDropDown>
+                    <div className={submitButtonWrapper}>
+                        <button onClick={this.uploadFile} className={submitButton}>
+                            Upload
+                        </button>
+                    </div>
                 </div>
             </div>
         );
