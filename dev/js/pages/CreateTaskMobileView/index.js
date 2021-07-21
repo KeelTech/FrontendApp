@@ -4,7 +4,7 @@ import TaskDetail from '@components/CreateTask';
 
 const CreateTaskMobileView = (props)=>{
     let caseId = '';
-    if(props && props.match && props.match && props.match.params){
+    if(props && props.match && props.match.params){
         caseId = props.match.params.caseId;
     }
     return(

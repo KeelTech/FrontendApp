@@ -14,7 +14,12 @@ import { getTaskList } from '@actions';
 import { mainCont, container, tasksView } from './style.js';
 import { body } from '../style.js';
 
-const TaskView = ()=>{
+const TaskView = (props)=>{
+    let caseId = '';
+    if(props && props.match && props.match.params){
+        caseId = props.match.params.caseId;
+    }
+
     const history = useHistory();
     const dispatch = useDispatch();
     const taskInfo = useSelector(state=>state.TASK_INFO);
@@ -48,7 +53,7 @@ const TaskView = ()=>{
     },[])
 
     useEffect(()=>{
-        getTaskList({status: activeWidget}, dispatch, (resp, error)=>{
+        getTaskList({status: activeWidget, case: caseId}, dispatch, (resp, error)=>{
             if(resp && resp.length && !isMobileView()){
                 setActiveTask(resp[0].task_id);
             }
@@ -57,7 +62,7 @@ const TaskView = ()=>{
 
     const addMoreTasks = ()=>{
         if(isMobileView()){
-            history.push('/agent/task/create/1234');
+            history.push(`/agent/task/create/${caseId}`);
         }else{
             setAddTaskView(true);
         }
@@ -104,7 +109,7 @@ const TaskView = ()=>{
                             !showAddTaskView && activeTask?<AgentTaskDetail activeTask={activeTask}/>:null
                         }
                         {
-                            showAddTaskView && <CreateTask toggleAddTaskView={toggleAddTaskView}/>
+                            showAddTaskView && <CreateTask toggleAddTaskView={toggleAddTaskView} caseId={caseId}/>
                         }                     
                     </div>
                 </div>
