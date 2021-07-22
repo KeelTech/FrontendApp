@@ -8,6 +8,7 @@ import { getCaseList } from '@actions';
 import { SET_AGENT_MENUBAR_STATE } from '@constants/types';
 import { head } from "./style.js";
 import MobileViewList from './MobileViewList';
+import DesktopViewList from './DesktopViewList';
 import { mobileScreenWidth } from '@constants';
 
 const CustomerView = () => {
@@ -52,7 +53,7 @@ const CustomerView = () => {
         </div>
         <div>
           {
-            (window.innerWidth <= mobileScreenWidth) && <MobileViewList handleCustomerClick={handleCustomerClick} />
+            (window.innerWidth <= mobileScreenWidth) && <DesktopViewList handleCustomerClick={handleCustomerClick} />
           }
         </div>
       </div>
