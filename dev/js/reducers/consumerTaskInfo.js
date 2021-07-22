@@ -24,9 +24,12 @@ export default function (state = defaultState, action) {
 
         case TASK_DETAIL_INFO: {
             let newState = { ...state}
-            let newTaskDetail = {[action.taskId]: action.payload}
-            newState.taskDetail = Object.assign({}, newState.taskDetail, newTaskDetail);
-            console.log(newState.taskDetail);
+            newState.taskDetail = {...newState.taskDetail};
+            if(action.taskId){
+                newState.taskDetail[action.taskId] = {};
+                //JSON.parse(JSON.stringify(action.payload));
+                newState.taskDetail[action.taskId] = {...action.payload, tasks_comment: [...action.payload.tasks_comment]};
+            }
             return newState
         }
 

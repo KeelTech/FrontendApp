@@ -3,18 +3,22 @@ const MONTH = ['January', 'February', 'March', 'April', 'May', 'June', 'July', '
 
 export const getFormattedDate = (date)=>{
     let formattedDate ='';
+    let fullYear = '';
+    let day='';
+    let month = 0;
     if(date){
         try{
             let dateObj = new Date(date);
-            let month = dateObj.getMonth();
-            let fullYear = dateObj.getFullYear();
-            let day = dateObj.getDate();
+            month = dateObj.getMonth();
+            fullYear = dateObj.getFullYear();
+            day = dateObj.getDate();
             formattedDate = `${MONTH[month]} ${day}, ${fullYear}`;
         }catch(e){
+            console.log('error in parsing date', e);
             formattedDate ='';
         }
     }
-    return formattedDate;
+    return { formattedDate, fullYear, day, month, formatMonth: MONTH[month]};
 }
 
 export const getFormattedTime = (val)=>{

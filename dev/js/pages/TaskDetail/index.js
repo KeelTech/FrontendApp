@@ -146,7 +146,7 @@ const TaskDetail = ({ activeTask })=>{
                                 <div className="commentSection">
                                     <div className="info">
                                         <span className="name">{capitalizeFirstLetter(user_details.user_name)}</span>
-                                        <span className="time">{`${getFormattedTime(created_at)}, ${getFormattedDate(created_at)}`}</span> 
+                                        <span className="time">{`${getFormattedTime(created_at)}, ${getFormattedDate(created_at).formattedDate}`}</span> 
                                     </div>
                                     <div className="msg">{msg}</div>
                                 </div>

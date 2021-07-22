@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { isMobileView } from '@constants';
 import CustomSelect from '@components/CustomSelect';
 import CustomButton from '@components/CustomButton';
 import { createTask } from '@actions';
+import LoadingWidget from '@components/LoadingWidget';
 import { container, taskStatus, messageSection, checkListCont, attachmentCont, cta } from './style.js';
-
 
 const PriorityList = [
     {
@@ -16,29 +18,29 @@ const PriorityList = [
         val: 'Medium'
     },
     {
-        id: 3,
+        id: 0,
         val: 'Low'
     }
 ]
 
 const CreateTask = ({ toggleAddTaskView, caseId })=>{
     const dispatch = useDispatch();
+    const history = useHistory();
     const [dataParams, setDataParams] = useState({
         title: '',
         description: '',
-        priority: 0,
+        priority: 1,
         due_date: '',
         check_list : {},
         tags: 'important',
         case: caseId||''
     })
+    const [loading, setLoading] = useState(false);
+    const [checkList, setCheckList] = useState('');
+    const [showAddCheckList, setShowChecklist] = useState(false);
 
-    const { title, description, priority, due_date, check_list, tags } = dataParams;
-    const[aa, setDescription] = useState('');
+    const { title, description, check_list, tags } = dataParams;
 
-    const handlePriorityChange = (val)=>{
-
-    }
 
     const addMember = ()=>{
 
@@ -48,14 +50,53 @@ const CreateTask = ({ toggleAddTaskView, caseId })=>{
         setDataParams((val)=>{ return {...val, ...dataVal} });
     }
 
-    const createTaskClicked = ()=>{
-        createTask(dataParams, dispatch, (resp, err)=>{
+    const handlePriorityChange = (val)=>{
+        setDataValues({priority: val.id})
+    }
 
+    const createTaskClicked = ()=>{
+        setLoading(true);
+        createTask(dataParams, dispatch, (resp, err)=>{
+            setLoading(false);
+            if(resp){
+                alert('added successfuly');
+                if(isMobileView()){
+                    history.push(`/agent/tasks/${caseId}`);
+                }else{
+                    toggleAddTaskView(true);
+                }
+            }
         })   
     }
-console.log(dataParams);
+
+    const addCheckList = ()=>{
+        if(checkList){
+            let newCheckList = {...check_list};
+            newCheckList[checkList] = {
+                action: false,
+                updated_at: new Date()
+            }
+            setCheckList('');
+            setDataValues({check_list: newCheckList});
+        }
+    }
+
+    const updateCheckList = (id, isDelete=false) =>{
+        let newCheckList = {...check_list};
+        if(isDelete){
+            delete newCheckList[id];
+
+        }else{
+            newCheckList[id] = {...newCheckList[id], action: !newCheckList[id].action};   
+        }
+        setDataValues({check_list: newCheckList});
+    }
+
     return(
         <div className={container}>
+            {
+                loading && <LoadingWidget/>
+            }
             <h2>New Task</h2>
             <div className="formView">
                 <div className="field">
@@ -83,9 +124,6 @@ console.log(dataParams);
                             <img className="icon" src={ASSETS_BASE_URL+"/images/common/chevron.svg"} alt="home"/>
                             <span className="hideMobile">Select</span><span>Priority</span>
                         </div>
-                        {/* <span className="status">
-
-                        </span> */}
                         <CustomSelect options={PriorityList} defaultOption={PriorityList[0]} clickHandler={handlePriorityChange}/>
                     </div>
                     <div className="view">
@@ -93,7 +131,7 @@ console.log(dataParams);
                             <img className="icon" src={ASSETS_BASE_URL+"/images/common/blueCalendar.svg"} alt="home"/>
                             <span className="hideMobile">Select</span><span>Due Date</span>
                         </div>
-                        <input type="date" id="dueDate" name="dueDate" onChange={(e)=>{console.log(e);setDataValues({due_date: new Date(e.target.value)})} }/>
+                        <input type="date" id="dueDate" name="dueDate" onChange={(e)=>setDataValues({due_date: new Date(e.target.value)})}/>
                     </div>
                 </div>
 
@@ -116,11 +154,39 @@ console.log(dataParams);
                 </div>
 
                 <div className={checkListCont}>
-                    <div className="taskName">
-                        <img className="icon" src={ASSETS_BASE_URL+"/images/common/checklist.svg"} alt="discuss"/>
-                        <span>Checklist</span>
+                    <div className="checklist">
+                        <div className="taskName">
+                            <img className="icon" src={ASSETS_BASE_URL+"/images/common/checklist.svg"} alt="discuss"/>
+                            <span>Checklist</span>
+                        </div>
+                        {
+                            !showAddCheckList && <CustomButton text="Add an item" clickHandler={()=>setShowChecklist(true)} margin="0px" padding="9px" borderRadius="5px"/>
+                        }
                     </div>
-                    <CustomButton text="Add an item" clickHandler={addMember} margin="0px" padding="9px" borderRadius="5px"/>
+                    {
+                        showAddCheckList?
+                        <div className="checklistItems">
+                        {
+                            Object.entries(check_list).map((val, key)=>{
+                                const checked = val[1].action||false;
+                                const icon = checked?`${ASSETS_BASE_URL}/images/common/checkedTicker.svg`:`${ASSETS_BASE_URL}/images/common/emptyTicker.svg`;
+                                return <div className={`item ${checked?'checkedItem':''}`} key={key}>
+                                    <div className="checkItem" onClick={()=>updateCheckList(val[0])}>
+                                        <img src={icon} alt="discuss"/>
+                                        <span className="checkedText">{val[0]}</span>
+                                    </div>
+                                    <img src={`${ASSETS_BASE_URL}/images/common/delete.svg`} className="deleteIcon" onClick={()=>updateCheckList(val[0], true)}/>
+                                </div>
+                            })
+                        }
+                            <input type="text" placeholder="Add an item" value={checkList} onChange={(e)=>setCheckList(e.target.value)}/>
+                            <div className="checklistCta">
+                                <CustomButton text="Add" clickHandler={addCheckList} margin="0px 8px 0px 0px" padding="9px" borderRadius="5px" backgroundColor="#747BB4"/>
+                                <CustomButton text="Cancel" clickHandler={()=>setCheckList('')} margin="0px" padding="9px" borderRadius="5px" backgroundColor="#FE9874"/>
+                            </div>
+                        </div>
+                        :null
+                    }
                 </div>
 
                 <div className={messageSection}>
@@ -137,7 +203,7 @@ console.log(dataParams);
                 </div>
 
                 <div className={cta}>
-                    <CustomButton text="Cancel" clickHandler={toggleAddTaskView} margin="0px 8px 0px 0px" padding="10px 16px" borderRadius="4px" backgroundColor="#DC3545" fontColor="16px" fontWeight="600" fontColor="#FFFFFF"/>
+                    <CustomButton text="Cancel" clickHandler={()=>toggleAddTaskView(false)} margin="0px 8px 0px 0px" padding="10px 16px" borderRadius="4px" backgroundColor="#DC3545" fontColor="16px" fontWeight="600" fontColor="#FFFFFF"/>
                     <CustomButton text="Save Task" clickHandler={createTaskClicked} margin="0px" padding="10px 16px" borderRadius="4px" backgroundColor="#28A745" fontColor="16px" fontWeight="600" fontColor="#FFFFFF"/>
                 </div>
 
