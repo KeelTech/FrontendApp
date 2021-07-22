@@ -41,6 +41,14 @@ const TaskView = (props)=>{
         }
     }
 
+    const refetchTaskList = ()=>{
+        getTaskList({status: activeWidget, case: caseId}, dispatch, (resp, error)=>{
+            if(resp && resp.length && !isMobileView()){
+                setActiveTask(resp[0].task_id);
+            }
+        });
+    }
+
     useEffect(()=>{
         dispatch(
             {
@@ -53,12 +61,8 @@ const TaskView = (props)=>{
     },[])
 
     useEffect(()=>{
-        getTaskList({status: activeWidget, case: caseId}, dispatch, (resp, error)=>{
-            if(resp && resp.length && !isMobileView()){
-                setActiveTask(resp[0].task_id);
-            }
-        });
-    },[dispatch, activeWidget])
+        refetchTaskList();
+    },[])
 
     const addMoreTasks = ()=>{
         if(isMobileView()){
@@ -68,7 +72,10 @@ const TaskView = (props)=>{
         }
     }
 
-    const toggleAddTaskView = ()=>{
+    const toggleAddTaskView = (isCreateNew=false)=>{
+        if(!isMobileView() && isCreateNew){
+            refetchTaskList();
+        }
         setAddTaskView(val=>!val);
     }
 

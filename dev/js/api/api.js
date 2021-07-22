@@ -109,7 +109,7 @@ const API_DELETE = (url) => {
   return STORAGE.getAuthToken({ url: url }).then((token) => {
     return new Promise((resolve, reject) => {
       let headers = {};
-      if (token) headers['X-CID'] = token;
+      if (token) headers['AUTHORIZATION'] = `bearer ${token}`;
       axiosInstance({
         method: 'delete',
         url: url,

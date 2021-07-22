@@ -1,11 +1,12 @@
 import React, { Fragment, useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { updateTask } from '@actions';
+import { updateTask, deleteComment } from '@actions';
 import AttachmentCard from '@components/AttachmentCard';
 import CustomButton from '@components/CustomButton';
 import CustomSelect from '@components/CustomSelect';
 import LoadingWidget from '@components/LoadingWidget';
+import PostCommentView from '@components/PostCommentView';
 import { getNameInitialHelper, getFormattedTime, getFormattedDate, capitalizeFirstLetter } from '@helpers/utils';
 import { container, taskStatus, discussionSection, memberCard, attachmentSection, checklistSection, messageSection } from './style.js';
 
@@ -24,14 +25,14 @@ const PriorityList = [
     }
 ]
 
-const TaskInfo = ({taskDetail})=>{
+const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
     const history = useHistory();
     const dispatch = useDispatch();
 
     const [dataParams, setDataParams] = useState({
         ...taskDetail
     });
-    const { title, priority_name, due_date, status_name, description, tasks_comment=[], tasks_docs=[], check_list={}, case_id } = dataParams || {};
+    const { title, priority_name, due_date, status_name, description, tasks_docs=[], check_list={}, case_id } = dataParams || {};
     const [checkList, setCheckList] = useState('');
     const [loading, setLoading] = useState(false);
     const [showAddCheckList, setShowChecklist] = useState(false);
@@ -110,6 +111,25 @@ const TaskInfo = ({taskDetail})=>{
                 handleBackBtnClick();
             }else{
                 alert('failed to update');
+            }
+        })
+    }
+
+    const updateTaskStatus = (success, error)=>{
+        if(success){
+            refetchTaskDetail();
+        }else if(error){
+
+        }
+    }
+
+    const deleteCommentClicked = (id)=>{
+        const postParams = {
+            commentId: id
+        }
+        deleteComment(postParams, dispatch, (resp, err)=>{
+            if(resp){
+                refetchTaskDetail();
             }
         })
     }
@@ -248,13 +268,10 @@ const TaskInfo = ({taskDetail})=>{
                     <span>Activity</span>
                 </div>
                 <div className="messageSection">
-                    <div className="msgView">
-                        <span className="profile">SW</span>
-                        <input type="text" placeholder="Write a Comment"/>
-                    </div>
+                    <PostCommentView taskId={dataParams.task_id} updateTaskStatus={updateTaskStatus}/>
                     {
-                        tasks_comment.map((val, key)=>{
-                            const { user_details, user_name, msg, created_at, } = val;
+                        dataParams.tasks_comment.map((val, key)=>{
+                            const { user_details, msg, created_at, id } = val;
                             return <div className="msgView" key={key}>
                                 <span className="profile">{getNameInitialHelper(user_details.user_name)}</span>
                                 <div className="commentSection">
@@ -263,6 +280,9 @@ const TaskInfo = ({taskDetail})=>{
                                         <span className="time">{`${getFormattedTime(created_at)}, ${getFormattedDate(created_at).formattedDate}`}</span> 
                                     </div>
                                     <div className="msg">{msg}</div>
+                                    <div className="deleteComment">
+                                        <CustomButton text="Delete" clickHandler={()=>deleteCommentClicked(id)} margin="0px 0px 8px 0px" padding="10px 30px" borderRadius="5px" backgroundColor="#CF3030"/>
+                                    </div>
                                 </div>
                             </div>
                         })

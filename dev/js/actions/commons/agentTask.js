@@ -1,5 +1,5 @@
 import { ADD_CASE_LIST, CASE_LIST_LOADING } from '@constants/types';
-import { API_GET, API_POST, API_PUT } from '../../api/api.js';
+import { API_GET, API_POST, API_PUT, API_DELETE } from '../../api/api.js';
 
 export const createTask = (dataParams, dispatch, cb=null)=>{
     API_POST(`${API_BASE_URL}/v1/tasks/create`, {
@@ -14,6 +14,27 @@ export const createTask = (dataParams, dispatch, cb=null)=>{
 export const updateTask = (dataParams, dispatch, cb=null)=>{
     const { task_id } = dataParams;
     API_PUT(`${API_BASE_URL}/v1/tasks/edit/${task_id}`, {
+        ...dataParams
+    }).then((response)=>{
+        if(cb)cb(response, null);
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}
+
+export const createComment = (dataParams, dispatch, cb=null)=>{
+    API_POST(`${API_BASE_URL}/v1/tasks/comments/create`, {
+        ...dataParams
+    }).then((response)=>{
+        if(cb)cb(response, null);
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}
+
+export const deleteComment = (dataParams, dispatch, cb=null)=>{
+    const commentId = dataParams.commentId;
+    API_DELETE(`${API_BASE_URL}/v1/tasks/comments/${commentId}`, {
         ...dataParams
     }).then((response)=>{
         if(cb)cb(response, null);

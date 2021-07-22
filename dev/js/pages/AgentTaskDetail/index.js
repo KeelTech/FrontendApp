@@ -1,27 +1,25 @@
 import React, { Fragment, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { getTaskDetail } from '@actions';
 import TaskInfo from './TaskInfo.js';
 
 const TaskDetail = ({ activeTask })=>{
     const dispatch = useDispatch();
-    const taskInfo = useSelector(state=>state.TASK_INFO);
-    const { taskDetail={} } = taskInfo||{};
-
+    const taskDetail = useSelector(state=>state.TASK_INFO.taskDetail, shallowEqual);
 
     useEffect(()=>{
-        if(activeTask){
-            if(!(taskDetail && taskDetail[activeTask])){
-                getTaskDetail({taskId: activeTask}, dispatch);
-            }
+        if(activeTask && !(taskDetail && taskDetail[activeTask])){
+            refetchTaskDetail();
         }
+    },[activeTask]);
 
-    },[activeTask, dispatch]);
-
+    const refetchTaskDetail = ()=>{
+        getTaskDetail({taskId: activeTask}, dispatch);
+    }
     return(
         <Fragment>
             {
-                taskDetail && taskDetail[activeTask]?<TaskInfo taskDetail={taskDetail[activeTask]}/>:null
+                taskDetail && taskDetail[activeTask]?<TaskInfo taskDetail={taskDetail[activeTask]} refetchTaskDetail={refetchTaskDetail}/>:null
             }
         </Fragment>
     )

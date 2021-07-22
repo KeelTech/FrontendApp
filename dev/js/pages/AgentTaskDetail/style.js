@@ -372,6 +372,13 @@ export const messageSection = css`
             border-radius: 7px;
         }
     }
+    .commentSection{
+        width: 100%;
+    }
+    .deleteComment{
+        display: flex;
+        justify-content: flex-end;
+    }
     .profile{
         margin-right: 6px;
         min-height: 26px;
