@@ -80,11 +80,8 @@ const API_POST = (url, data) => {
 const API_PUT = (url, data) => {
   return STORAGE.getAuthToken({ url: url }).then((token) => {
     return new Promise((resolve, reject) => {
-      let headers = {
-        'X-CLIENT-KEY': CONFIG.API_CLIENT_KEY,
-        'X-AUTH-KEY': CONFIG.API_AUTH_KEY,
-      };
-      if (token) headers['X-CID'] = token;
+      let headers = {};
+      if (token) headers['AUTHORIZATION'] = `bearer ${token}`;
       axiosInstance({
         method: 'put',
         url: url,
@@ -112,7 +109,7 @@ const API_DELETE = (url) => {
   return STORAGE.getAuthToken({ url: url }).then((token) => {
     return new Promise((resolve, reject) => {
       let headers = {};
-      if (token) headers['X-CID'] = token;
+      if (token) headers['AUTHORIZATION'] = `bearer ${token}`;
       axiosInstance({
         method: 'delete',
         url: url,

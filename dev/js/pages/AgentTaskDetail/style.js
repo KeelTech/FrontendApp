@@ -9,6 +9,21 @@ export const container = css`
     height: 100%;
     overflow-y: auto;
     width: 100%;
+    .loadingScrn{
+        position: absolute;
+        display: flex;
+        left: 50%;
+        top: 50%;
+        justify-content: center;
+        align-items: center;
+    }
+    .submitCta{
+        margin: 20px 0px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        bottom: 100px;
+    }
     .statusCont{
         display: flex;
         align-items: center;
@@ -95,6 +110,9 @@ export const container = css`
         padding: 0px 4px;
         .statusCont{
             display: none;
+        }
+        .loadingScrn{
+            top: calc(50% - 100px);
         }
         .status{
             font-size: 10px;
@@ -234,6 +252,27 @@ export const attachmentSection = css`
 export const checklistSection = props=> css`
     margin-top: 30px;
     width: 100%;
+    .checklist{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .delete{
+        cursor: pointer;
+    }
+    input{
+        ${inputField};
+        margin: 8px 0px;
+        width: 100%;
+        padding: 8px;
+        font-size: 10px;
+        line-height: 15px;
+        border: 0.5px solid #A098AE;
+        border-radius: 7px;
+    }
+    .checklistCta{
+        display: flex;
+    }
     .progress{
         margin-top: 16px;
         margin-bottom: 8px;
@@ -247,6 +286,10 @@ export const checklistSection = props=> css`
         align-items: center;
         color: #363B64;
         padding-right: 5px;
+    }
+    .checkItem{
+        display: flex;
+        align-items: center;
     }
     .percent{
         position: relative;
@@ -267,6 +310,7 @@ export const checklistSection = props=> css`
     .item{
         display: flex;
         align-items: center;
+        justify-content: space-between;
         margin-bottom: 4px;
         img{
             margin-right: 4px;
@@ -327,6 +371,13 @@ export const messageSection = css`
             border: 0.5px solid #A098AE;
             border-radius: 7px;
         }
+    }
+    .commentSection{
+        width: 100%;
+    }
+    .deleteComment{
+        display: flex;
+        justify-content: flex-end;
     }
     .profile{
         margin-right: 6px;

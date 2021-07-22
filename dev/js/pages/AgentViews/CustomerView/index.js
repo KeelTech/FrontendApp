@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Header from "@components/Header";
 import NotificationWidget from "@components/NotificationWidget";
@@ -11,13 +11,11 @@ import MobileViewList from './MobileViewList'
 
 const CustomerView = () => {
   const dispatch = useDispatch();
+  const agentStore = useSelector((store)=>store.AGENT_STORE);
+  const { caseList } = agentStore||{};
   const history = useHistory();
   useEffect(()=>{
-    getCaseList({}, dispatch, (resp, err)=>{
-      if(resp){
-        console.log(resp);
-      }
-    })
+    getCaseList({}, dispatch);
   },[]);
 
   useEffect(()=>{
@@ -45,7 +43,7 @@ const CustomerView = () => {
           </div>
         </Header>
         <div>
-        <MobileViewList handleCustomerClick={handleCustomerClick}/>
+        <MobileViewList handleCustomerClick={handleCustomerClick} caseList={caseList}/>
         </div>
       </div>
     </Fragment>
