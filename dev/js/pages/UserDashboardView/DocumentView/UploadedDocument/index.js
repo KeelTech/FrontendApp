@@ -1,20 +1,30 @@
 import React, { useState } from 'react';
-import { wrapper, menuBar } from './style';
+import DeleteModal from './DeleteModal/index';
+import { wrapper } from './style';
 
 function UploadedDocument(props) {
-  const { title, date, content, deleteDocument, downloadDocument, id } = props;
+  const { title, date, deleteDocument, id } = props;
 
-  const [showMenuBar, setMenuBar] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
 
   return (
     <div className={wrapper}>
-      <h3 className="title">{title}</h3>
-      <img
-        className="dotMenu"
-        src={ASSETS_BASE_URL + '/images/common/dotMenu.svg'}
-        alt="menu"
-        onClick={() => setMenuBar((val) => !val)}
-      />
+      <div className="header">
+        <h3 className="title">{title}</h3>
+        <button className="dotMenu" onClick={openModal}>
+          X
+        </button>
+        <DeleteModal
+          deleteDocument={deleteDocument}
+          id={id}
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
+      </div>
       <p className="date">{date}</p>
       <a
         href="http://www.africau.edu/images/default/sample.pdf"
@@ -23,12 +33,6 @@ function UploadedDocument(props) {
       >
         {title}.pdf
       </a>
-      {showMenuBar && (
-        <div className={menuBar}>
-          <span onClick={downloadDocument}>Download</span>
-          <span onClick={() => deleteDocument(id)}>Delete</span>
-        </div>
-      )}
     </div>
   );
 }
