@@ -3,7 +3,7 @@ import { css } from '@emotion/css';
 import { tabScreenWidth } from '@constants';
 
 export const container = css`
-    position: fixed;
+    display: flex;
     .overlay{
         position: fixed;
         z-index: 99;
@@ -15,9 +15,6 @@ export const container = css`
         opacity: 0.3;
     }
     .loader{
-        position: fixed;
-        left: 49%;
-        top: 47%;
         animation: rotate 3s infinite linear;
         img{
             height: 70px;
