@@ -11,6 +11,9 @@ export const wrapper = css`
   background: #fcfcfc;
   box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
   border-radius: 14px;
+  @media (max-width: ${tabScreenWidth}) {
+    margin-right: 30px;
+  }
   .header {
     display: flex;
     flex-direction: row;
@@ -34,7 +37,7 @@ export const wrapper = css`
     }
   }
   .dotMenu {
-    margin-top: 26px;
+    margin-top: 20px;
     justify-content: flex-end;
     margin-right: 15px;
     cursor: pointer;
@@ -68,50 +71,23 @@ export const wrapper = css`
       padding-left: 20px;
     }
   }
-  a {
-    justify-content: flex-start;
-    margin-left: 7%;
-    margin-bottom: 9%;
-  }
-  @media (max-width: ${tabScreenWidth}) {
-    a {
-      margin-left: 20%;
+  .docButton {
+    display: flex;
+    margin-left: 15px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: red;
+    :hover {
+      text-decoration: underline;
+      color: black;
     }
   }
+  .docIcon {
+    margin-top: 5%;
+    margin-right: 5%;
+  }
+  .pdfTitle {
+    margin-top: 7%;
+  }
 `;
-
-// export const menuBar = css`
-//   position: absolute;
-//   z-index: 1;
-//   padding: 6px;
-//   background: #363b64;
-//   border-radius: 5px;
-//   @media (max-width: ${tabScreenWidth}) {
-//     margin-left: 50px;
-//     margin-top: 25px;
-//   }
-//   span {
-//     display: block;
-//     font-weight: 600;
-//     font-size: 12px;
-//     line-height: 18px;
-//     color: #fffdfd;
-//     border-bottom: 1px solid #a098ae;
-//     padding: 1px 0px;
-//     cursor: pointer;
-//     &:last-child {
-//       border: 0px;
-//     }
-//   }
-//   &:after {
-//     content: '';
-//     width: 0;
-//     height: 0;
-//     position: absolute;
-//     top: -8px;
-//     right: 14px;
-//     border-left: 6px solid transparent;
-//     border-right: 6px solid transparent;
-//     border-bottom: 10px solid #363b64;
-//   }
-// `;
