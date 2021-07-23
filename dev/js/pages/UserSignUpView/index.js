@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
-import { LinkedIn as LinkedInLogin } from 'react-linkedin-login-oauth2';
 import { googleLogin, facebookLogin } from '../../actions/index.js';
 import { userSignUp } from '../../actions/index.js';
 import { useDispatch } from 'react-redux';
@@ -78,10 +77,6 @@ function SignUp(props) {
     });
   };
 
-  const responseLinkedin = (response) => {
-    console.log(response);
-  };
-
   return (
     <div className={style({})}>
       <img
@@ -155,14 +150,6 @@ function SignUp(props) {
             cssClass="facebook-button"
             icon="fa-facebook"
           />
-          <LinkedInLogin
-            clientId="81lx5we2omq9xh"
-            onFailure={responseLinkedin}
-            onSuccess={responseLinkedin}
-            redirectUri="http://localhost:3000/linkedin"
-          >
-            <button className="linkedin-button">in</button>
-          </LinkedInLogin>
         </div>
         <p className="signup-divider">
           <span>If you're already a member!</span>

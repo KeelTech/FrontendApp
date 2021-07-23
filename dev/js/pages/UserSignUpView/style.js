@@ -184,6 +184,10 @@ export const style = (props) => css`
       display: flex;
       justify-content: space-evenly;
       margin-top: 3%;
+      margin-right: 9%;
+      @media (max-width: ${tabScreenWidth}) {
+        margin-right: 15%;
+      }
     }
     .google-button {
       display: flex;
@@ -197,7 +201,7 @@ export const style = (props) => css`
       border-color: #f6f5fa;
       font-size: 40px;
       cursor: pointer;
-      margin-left: 160px;
+      margin-left: 110px;
       transition: 0.5s;
       :hover {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
@@ -223,35 +227,14 @@ export const style = (props) => css`
           0 6px 20px 0 rgba(0, 0, 0, 0.19);
       }
     }
-    .linkedin-button {
-      width: 100px;
-      height: 70px;
-      background: #0077b5;
-      border-radius: 10px;
-      color: #ffffff;
-      border: none;
-      font-size: 40px;
-      cursor: pointer;
-      font-weight: 900;
-      margin-right: 130px;
-      transition: 0.5s;
-      :hover {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-          0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      }
-    }
     @media (max-width: ${tabScreenWidth}) {
       .google-button {
         font-size: 20px;
         height: 40px;
         width: 60px;
+        margin-left: 100px;
       }
       .facebook-button {
-        font-size: 30px;
-        height: 40px;
-        width: 60px;
-      }
-      .linkedin-button {
         font-size: 30px;
         height: 40px;
         width: 60px;

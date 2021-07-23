@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
-import { LinkedIn as LinkedInLogin } from 'react-linkedin-login-oauth2';
 import { useDispatch } from 'react-redux';
-import {
-  userLogin,
-  googleLogin,
-  linkedinLogin,
-  facebookLogin,
-} from '../../actions/index.js';
+import { userLogin, googleLogin, facebookLogin } from '../../actions/index.js';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { style } from './style.js';
@@ -69,17 +63,6 @@ const LoginView = (props) => {
         console.log(err);
       }
     });
-  };
-
-  const responseLinkedin = (response) => {
-    axios
-      .post('https://www.linkedin.com/oauth/v2/accessToken', {
-        grant_type: 'client_credentials',
-        client_id: '86o0duq76z6yqk',
-        client_secret: 'OlFL5VXTWGY2ovwM',
-      })
-      .then((response) => console.log('link response', response))
-      .catch((error) => console.log('link error', error));
   };
 
   return (
@@ -144,10 +127,6 @@ const LoginView = (props) => {
             cssClass="facebook-button"
             icon="fa-facebook"
           />
-
-          <button onClick={responseLinkedin} className="linkedin-button">
-            in
-          </button>
         </div>
         <p className="signup-divider">
           <span>Or</span>
