@@ -11,6 +11,10 @@ export const Background = css`
   align-items: center;
   margin-top: 7%;
   box-shadow: 0 5px 16px rgb(0 0 0 / 20%);
+  @media (max-width: ${tabScreenWidth}) {
+    left: 45%;
+    top: 48%;
+  }
   .ModalWrapper {
     width: 100%;
     height: 100%;
@@ -47,5 +51,10 @@ export const Background = css`
     display: flex;
     justify-content: space-between;
     margin-bottom: 25px;
+  }
+  @media (max-width: ${tabScreenWidth}) {
+    .btn-wrapper {
+      margin-left: 20px;
+    }
   }
 `;

@@ -32,7 +32,6 @@ function DocumentView() {
   }, []);
 
   const documentOwnerHandler = (event) => {
-    console.log(documentOwner);
     setDocumentOwner(event.target.value);
   };
 
@@ -44,10 +43,6 @@ function DocumentView() {
     });
   };
 
-  const downloadDocument = () => {
-    console.log('downloading');
-  };
-
   const UploadedDocumentNew = (doc) => {
     return (
       <UploadedDocument
@@ -56,7 +51,6 @@ function DocumentView() {
         date={doc.created_at}
         content={doc.content}
         deleteDocument={deleteDocument}
-        downloadDocument={downloadDocument}
         id={doc.doc_id}
       />
     );
@@ -83,6 +77,7 @@ function DocumentView() {
       }
       if (err) {
         console.log(err);
+        setOpenFileUpload(true);
       }
     });
   };

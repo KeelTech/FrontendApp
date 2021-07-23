@@ -6,9 +6,12 @@ import {
   UPLOAD_USER_DOCUMENT_FAIL,
   GET_DOC_TYPES,
   GET_DOC_TYPES_FAIL,
+  GET_SINGLE_DOC,
+  GET_SINGLE_DOC_FAIL,
+  GET_SINGLE_DOC_LOADING,
 } from '../../constants/types';
+import STORAGE from '../../helpers/storage';
 import { API_POST, API_GET } from '../../api/api.js';
-import { useSelector } from 'react-redux';
 
 export const getUserDocuments = (dispatch, cb) => {
   API_GET(API_BASE_URL + '/v1/user/get-user-doc')
@@ -125,5 +128,45 @@ export const getDocTypeList = (dispatch, cb) => {
         },
       });
       if (cb) cb(message, null);
+    });
+};
+
+export const getSingleDocLink = (dataParams, dispatch, cb = null) => {
+  const doc_id = dataParams.doc_id;
+  dispatch({
+    type: GET_SINGLE_DOC_LOADING,
+    payload: {
+      status: true,
+    },
+  });
+  API_GET(API_BASE_URL + '/v1/doc/get-single-doc/' + doc_id)
+    .then(function (response) {
+      dispatch({
+        type: GET_SINGLE_DOC_LOADING,
+        payload: {
+          status: false,
+        },
+      });
+      dispatch({
+        type: GET_SINGLE_DOC,
+        payload: response || '',
+        doc_id,
+      });
+      const file = new Blob([response], {
+        type: 'application/pdf',
+      });
+      const fileURL = window.URL.createObjectURL(file);
+      window.open(fileURL);
+      if (cb) cb(data, null);
+    })
+    .catch((e) => {
+      let message = e.message;
+      dispatch({
+        type: GET_SINGLE_DOC_FAIL,
+        payload: {
+          error_message: message,
+        },
+      });
+      if (cb) cb(null, message);
     });
 };
