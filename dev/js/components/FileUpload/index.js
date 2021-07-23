@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { fileUpload, fileUploadWrapper, selectedFileText, outerShell, innerShell, closeWrapper, fileButton, submitButtonWrapper, submitButton, fileData } from './style.js';
 import CustomDropDown from '@components/CustomDropDown';
-
 class FileUpload extends Component {
     constructor(props) {
         super(props);

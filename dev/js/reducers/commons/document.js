@@ -3,10 +3,12 @@ import {
   UPLOAD_USER_DOCUMENT,
   UPLOAD_USER_DOCUMENT_SUCCESS,
   UPLOAD_USER_DOCUMENT_FAIL,
+  GET_DOC_TYPES,
 } from '../../constants/types';
 
 const defaultState = {
   userDocuments: [],
+  docTypes: [],
 };
 
 export default function (state = defaultState, action) {
@@ -15,6 +17,10 @@ export default function (state = defaultState, action) {
       let newState = { ...state };
       return newState;
     }
+    case GET_DOC_TYPES: {
+      let newState = { ...state };
+      return newState;
+      }
   }
   return state;
 }

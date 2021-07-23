@@ -1,38 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '@components/Header';
 import UploadedDocument from './UploadedDocument/index';
 import NotificationWidget from '@components/NotificationWidget';
 import ProfileWidget from '@components/ProfileWidget';
-import { getUserDocuments } from '../../../actions/index.js';
+import {
+  getUserDocuments,
+  uploadUserDocument,
+} from '../../../actions/index.js';
 import FileUpload from '@components/FileUpload';
 import { useSelector, useDispatch } from 'react-redux';
-import { uploadedDocuments } from './MockData.js';
 import { body } from './style.js';
 
 function DocumentView() {
+  const userDocuments = useSelector((state) => state.DOCUMENTS.userDocuments);
   const [searchDoc, setSearchDoc] = useState('');
   const [documentOwner, setDocumentOwner] = useState('');
   const [openFileUpload, setOpenFileUpload] = useState(false);
-  const [userAddedDocs, setUserAddedDocs] = useState(uploadedDocuments.data);
-
-  const userDocuments = useSelector((state) => state.DOCUMENTS.userDocuments);
+  const [userAddedDocs, setUserAddedDocs] = useState(userDocuments);
 
   const dispatch = useDispatch();
 
-  const documentOwnerHandler = (event) => {
-    console.log(documentOwner);
-    setDocumentOwner(event.target.value);
-  };
-
-  const fetchuserDocuments = () => {
+  useEffect(() => {
     getUserDocuments(dispatch, (err, data) => {
       if (data) {
-        console.log('data is', data);
+        setUserAddedDocs(data);
       }
       if (err) {
         console.log(err);
       }
     });
+  }, []);
+
+  const documentOwnerHandler = (event) => {
+    console.log(documentOwner);
+    setDocumentOwner(event.target.value);
   };
 
   const deleteDocument = (id) => {
@@ -69,12 +70,21 @@ function DocumentView() {
     setOpenFileUpload(true);
   };
 
-  const fileUploadDone = (value) => {
-    console.log('value is : ', value);
-  };
-
   const fileuploadclosed = () => {
     setOpenFileUpload(false);
+  };
+
+  const fileUploadDone = (document) => {
+    const { selectedFile, selectedFileType } = document;
+    const { value } = selectedFileType;
+    uploadUserDocument({ selectedFile, value }, dispatch, (err, data) => {
+      if (data) {
+        setOpenFileUpload(false);
+      }
+      if (err) {
+        console.log(err);
+      }
+    });
   };
 
   return (
@@ -115,7 +125,7 @@ function DocumentView() {
           {openFileUpload && (
             <FileUpload
               fileUploadModalClosed={fileuploadclosed}
-              fileUploaded={fileUploadDone}
+              uploadFile={fileUploadDone}
             />
           )}
         </div>
