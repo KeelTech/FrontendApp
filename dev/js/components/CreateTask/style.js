@@ -172,11 +172,68 @@ export const messageSection = css`
 
 export const checkListCont = css`
     margin-top: 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    .checklist{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    input{
+        ${inputField};
+        margin: 8px 0px;
+    }
+    .checklistCta{
+        display: flex;
+    }
+    .item{
+        display: flex;
+        align-items: center;
+        margin-bottom: 4px;
+        justify-content: space-between;
+        img{
+            margin-right: 4px;
+            width: 16px;
+            height: 16px;
+        }
+        .checkedText{
+            font-size: 12px;
+            line-height: 18px;
+            color: #363B64;
+        }
+        .delete{
+            cursor: pointer;
+        }
+    }
+    .checkItem{
+        display: flex;
+        align-items: center;
+    }
+    .checkedItem{
+        .checkedText{
+            color: #A098AE;
+            position: relative;
+            &:after{
+                content: '';
+                position: absolute;
+                height: 1px;
+                top: 50%;
+                left: 0px;
+                width: 100%;
+                background: #A098AE;
+            }
+        }
+    }
     @media(max-width: ${tabScreenWidth}){
         margin-top: 26px;
+        .progressNo{
+            font-size: 10px;
+            line-height: 15px;
+        }
+        .item{
+            .checkedText{
+                font-size: 12px;
+                line-height: 18px;
+            }
+        }
     }
 `
 

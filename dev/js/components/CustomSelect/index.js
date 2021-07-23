@@ -65,7 +65,7 @@ const CustomSelect = ({options=[], defaultOption={}, clickHandler=()=>{}, border
         clickHandler(val);
     }
     return(
-        <div className={container({borderRadius, backgroundColor, fontColor, fontSize, fontWeight, padding, margin})} onClick={clickHandler} ref={optionListRef}>
+        <div className={container({borderRadius, backgroundColor, fontColor, fontSize, fontWeight, padding, margin})} ref={optionListRef}>
             <div className="selectedOption" onClick={toggleOptionList}>
                 <span>{selectedOption.val}</span>
                 <img className="icon" src={ASSETS_BASE_URL+"/images/common/arrowDown.svg"} alt="open"/>

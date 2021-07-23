@@ -12,6 +12,7 @@ import PasswordReset from './pages/PasswordReset';
 import EmailVerification from './pages/UserLoginView/EmailConfirmation';
 import AgentDashBoardView from './pages/AgentViews';
 import HomePageView from './HomePageView.js';
+import NotFoundPage from './pages/NotFoundPage';
 
 let routes = [
   { path: '/', exact: true, component: HomePageView },
@@ -26,6 +27,7 @@ let routes = [
   { path: '/vault', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/billing', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/agent', component: AgentDashBoardView, isPrivate: true  },
+  { path: '*', component: NotFoundPage, isPrivate: false  },
 ];
 
 // routes.push({ path: '*', component: NotFound, NO_MATCH: true })
