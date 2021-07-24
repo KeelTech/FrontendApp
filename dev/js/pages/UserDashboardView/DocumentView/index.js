@@ -3,10 +3,7 @@ import Header from '@components/Header';
 import UploadedDocument from './UploadedDocument/index';
 import NotificationWidget from '@components/NotificationWidget';
 import ProfileWidget from '@components/ProfileWidget';
-import {
-  getUserDocuments,
-  uploadUserDocument,
-} from '../../../actions/index.js';
+import { getUserDocuments, uploadUserDocument } from '@actions/index.js';
 import FileUpload from '@components/FileUpload';
 import { useSelector, useDispatch } from 'react-redux';
 import { body } from './style.js';
@@ -136,10 +133,10 @@ function DocumentView() {
               }
             })
             .map((doc) => {
-              if (documentOwner === '') {
-                return <UploadedDocumentNew key={doc.doc_id} {...doc} />;
-              }
-              if (documentOwner === 'you' && doc.user_id) {
+              if (
+                documentOwner === '' ||
+                (documentOwner === 'you' && doc.user_id)
+              ) {
                 return <UploadedDocumentNew key={doc.doc_id} {...doc} />;
               }
             })}

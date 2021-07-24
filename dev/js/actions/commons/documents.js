@@ -19,6 +19,7 @@ export const getUserDocuments = (dispatch, cb) => {
       if (response) {
         dispatch({
           type: GET_USER_DOCUMENTS,
+          payload: response.data,
         });
         const { data } = response;
         if (cb) cb(null, data);

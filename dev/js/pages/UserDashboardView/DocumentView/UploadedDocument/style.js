@@ -1,5 +1,6 @@
 import { css } from '@emotion/css';
 import { tabScreenWidth } from '@constants';
+import { primaryFont } from '@constants';
 
 export const wrapper = css`
   background: #fcfcfc;
@@ -24,7 +25,7 @@ export const wrapper = css`
     width: 100%;
     padding-left: 20px;
     margin-bottom: 0px;
-    font-family: Poppins;
+    font-family: ${primaryFont};
     font-weight: 600;
     font-size: 18px;
     line-height: 27px;
@@ -53,13 +54,13 @@ export const wrapper = css`
     font-size: 16px;
     padding: 20px 20px;
     line-height: 1.5rem;
-    font-family: 'Poppins';
+    font-family: ${primaryFont};
   }
   .date {
     justify-content: flex-start;
     padding-left: 25px;
     font-size: 10px;
-    font-family: Poppins;
+    font-family: ${primaryFont};
     font-style: normal;
     font-weight: normal;
     font-size: 10px;
