@@ -10,7 +10,6 @@ import {
   facebookLogin,
 } from '../../actions/index.js';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { style } from './style.js';
 
 const LoginView = (props) => {
@@ -71,16 +70,17 @@ const LoginView = (props) => {
     });
   };
 
-  const responseLinkedin = (response) => {
-    axios
-      .post('https://www.linkedin.com/oauth/v2/accessToken', {
-        grant_type: 'client_credentials',
-        client_id: '86o0duq76z6yqk',
-        client_secret: 'OlFL5VXTWGY2ovwM',
-      })
-      .then((response) => console.log('link response', response))
-      .catch((error) => console.log('link error', error));
-  };
+  // Function for linkedin Login
+  // const responseLinkedin = (response) => {
+  //   axios
+  //     .post('https://www.linkedin.com/oauth/v2/accessToken', {
+  //       grant_type: 'client_credentials',
+  //       client_id: '86o0duq76z6yqk',
+  //       client_secret: 'OlFL5VXTWGY2ovwM',
+  //     })
+  //     .then((response) => console.log('link response', response))
+  //     .catch((error) => console.log('link error', error));
+  // };
 
   return (
     <div className={style({})}>
@@ -145,9 +145,9 @@ const LoginView = (props) => {
             icon="fa-facebook"
           />
 
-          <button onClick={responseLinkedin} className="linkedin-button">
+          {/* <button onClick={responseLinkedin} className="linkedin-button">
             in
-          </button>
+          </button> */}
         </div>
         <p className="signup-divider">
           <span>Or</span>

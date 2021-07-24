@@ -78,9 +78,9 @@ function SignUp(props) {
     });
   };
 
-  const responseLinkedin = (response) => {
-    console.log(response);
-  };
+  // const responseLinkedin = (response) => {
+  //   console.log(response);
+  // };
 
   return (
     <div className={style({})}>
@@ -155,14 +155,14 @@ function SignUp(props) {
             cssClass="facebook-button"
             icon="fa-facebook"
           />
-          <LinkedInLogin
+          {/* <LinkedInLogin
             clientId="81lx5we2omq9xh"
             onFailure={responseLinkedin}
             onSuccess={responseLinkedin}
             redirectUri="http://localhost:3000/linkedin"
           >
             <button className="linkedin-button">in</button>
-          </LinkedInLogin>
+          </LinkedInLogin> */}
         </div>
         <p className="signup-divider">
           <span>If you're already a member!</span>

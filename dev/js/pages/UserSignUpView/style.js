@@ -182,8 +182,11 @@ export const style = (props) => css`
     }
     .social-button-wrapper {
       display: flex;
-      justify-content: space-evenly;
       margin-top: 3%;
+      justify-content: center;
+      @media (max-width: ${tabScreenWidth}) {
+        justify-content: space-evenly;
+      }
     }
     .google-button {
       display: flex;
@@ -197,7 +200,8 @@ export const style = (props) => css`
       border-color: #f6f5fa;
       font-size: 40px;
       cursor: pointer;
-      margin-left: 160px;
+      margin-right: 60px;
+      margin-left: 25px;
       transition: 0.5s;
       :hover {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
@@ -218,12 +222,13 @@ export const style = (props) => css`
       cursor: pointer;
       font-family: Poppins;
       transition: 0.5s;
+      margin-left: 75px;
       :hover {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
           0 6px 20px 0 rgba(0, 0, 0, 0.19);
       }
     }
-    .linkedin-button {
+    /* .linkedin-button {
       width: 100px;
       height: 70px;
       background: #0077b5;
@@ -239,23 +244,27 @@ export const style = (props) => css`
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
           0 6px 20px 0 rgba(0, 0, 0, 0.19);
       }
-    }
+    } */
     @media (max-width: ${tabScreenWidth}) {
       .google-button {
         font-size: 20px;
         height: 40px;
         width: 60px;
+        margin-right: 0px;
+        margin-left: 35px;
       }
       .facebook-button {
         font-size: 30px;
         height: 40px;
         width: 60px;
+        margin-left: 0px;
+        margin-right: 35px;
       }
-      .linkedin-button {
+      /* .linkedin-button {
         font-size: 30px;
         height: 40px;
         width: 60px;
-      }
+      } */
     }
     .signup-divider {
       width: 50%;
