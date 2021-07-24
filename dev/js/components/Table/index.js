@@ -7,11 +7,34 @@ class Table extends Component {
         this.state = {
         };
     }
+    decideRendering = (row, key) => {
+        let list = this.props.children;
+        console.log(list)
+        if (list.length > 2) {
+            let output = list.find((item) => {
+                return item.type == "template" && item.props.id == key
+            })
+            if (output) {
+                return <td className={rowItemClass} key={key}>{React.cloneElement(output.props.children, {})}</td>
+            }
+            else {
+                return <td className={rowItemClass} key={key}>{row[key]}</td>
+            }
+        }
+        else {
+            if (list.type == "template" && list.props.id == key) {
+                return <td className={rowItemClass} key={key}>{React.cloneElement(list.props.children, {})}</td>
+            }
+            else {
+                return <td className={rowItemClass} key={key}>{row[key]}</td>
+            }
+        }
+    }
     renderData = (data, cols) =>
         data.map(row =>
             <tr className={rowClass} key={row.key}>
                 {cols.map(col =>
-                    <td className={rowItemClass} key={col.key}>{row[col.key]}</td>
+                    this.decideRendering(row, col.key)
                 )}
             </tr>
         );

@@ -1,7 +1,7 @@
 import { css } from '@emotion/css';
 
 export const headerClass = css`
-    height: 57px;
+    height: 47px;
     
     display: table-header-group;
     vertical-align: middle;
@@ -32,7 +32,7 @@ export const tableClass = css`
 `
 export const rowClass = css`
     background-color:white;
-    height:60px;
+    height:40px;
 `
 export const rowItemClass = css`
     background-color:white;
@@ -74,7 +74,7 @@ export const hrClass = css`
     
     background: #363B64;
     text-align: left;
-    padding: 20px;
+    padding: 10px 20px;
     :first-child{
         border-radius:10px 0px 0px 10px;
     }

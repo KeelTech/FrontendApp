@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { getFormattedTime, getFormattedDate } from '@helpers/utils';
-import { lists, customer } from "./style.js";
+import { greenBtnClass, redBtnClass } from "./style.js";
 import Table from "@components/Table";
 
 const DesktopViewList = ({ handleCustomerClick, caseList }) => {
@@ -8,6 +8,9 @@ const DesktopViewList = ({ handleCustomerClick, caseList }) => {
   return (
     <Fragment>
       <Table data={caseList} cols={columnList}>
+        <template id="is_active">
+          <button className={greenBtnClass}>Pending on you</button>
+        </template>
       </Table>
     </Fragment>
   );
