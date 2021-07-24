@@ -1,5 +1,6 @@
 import { css } from '@emotion/css';
 import { tabScreenWidth } from '@constants';
+import { primaryFont } from '@constants';
 
 export const body = css`
   background: rgba(252, 252, 252, 0.5);
@@ -22,7 +23,7 @@ export const body = css`
   .uploadText {
     font-size: 25px;
     line-height: 2.5rem;
-    font-family: Poppins;
+    font-family: ${primaryFont};
   }
   .uploadedBy {
     display: flex;
@@ -46,7 +47,7 @@ export const body = css`
     padding-left: 5%;
   }
   .searchDocs::placeholder {
-    font-family: Poppins;
+    font-family: ${primaryFont};
     font-style: normal;
     font-weight: normal;
     font-size: 15px;
@@ -59,7 +60,7 @@ export const body = css`
     background: #363b64;
     cursor: pointer;
     color: #ffff;
-    font-family: Poppins;
+    font-family: ${primaryFont};
     font-style: normal;
     font-weight: 600;
     font-size: 18px;

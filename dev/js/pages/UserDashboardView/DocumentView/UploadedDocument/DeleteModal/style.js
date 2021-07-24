@@ -1,5 +1,6 @@
 import { css } from '@emotion/css';
 import { tabScreenWidth } from '@constants';
+import { primaryFont } from '@constants';
 
 export const Background = css`
   left: 54%;
@@ -37,7 +38,7 @@ export const Background = css`
       font-size: 16px;
       padding: 20px 20px;
       line-height: 1.5rem;
-      font-family: 'Poppins';
+      font-family: ${primaryFont};
     }
     button {
       padding: 10px 24px;
