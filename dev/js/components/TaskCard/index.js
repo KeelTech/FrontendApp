@@ -11,7 +11,7 @@ const TaskCard = ({ data={}, active=false, isView=false, clickHandler=()=>{}})=>
             <div className="optionList">
                 <div className="timePeriod">
                     <img className="calendar" src={ASSETS_BASE_URL+"/images/common/calendar.svg"} alt="date"/>
-                    <span className="date">{getFormattedDate(created_at)}</span>
+                    <span className="date">{getFormattedDate(created_at).formattedDate}</span>
                 </div>
                 <div className="status">{status_name}</div>
             </div>
