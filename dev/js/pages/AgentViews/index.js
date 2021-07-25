@@ -8,24 +8,44 @@ import TaskView from './TaskView';
 import AgentTaskDetail from '@pages/AgentTaskDetail/TaskDetailMobileEntry.js';
 import CreateTaskMobileView from '@pages/CreateTaskMobileView';
 import CustomerView from './CustomerView';
+import CustomerInfoView from './CustomerView/CustomerInfoView';
 
-const UserDashboardView = ({ match })=>{
-
-    return(
-        <div className={container}>
-            <LeftMenuBar isAgent/>
-            <div className={body}>
-                <Switch>
-                    <Route exact path={`${match.path}/dashboard`} component={DashboardView}/>
-                    <Route exact path={`${match.path}/tasks/:caseId`} component={TaskView}/>
-                    <Route exact path={`${match.path}/task/create/:caseId`} component={CreateTaskMobileView}/>
-                    <Route exact path={`${match.path}/task/detail/:taskId`} component={AgentTaskDetail}/>
-                    <Route exact path={`${match.path}/customer`} component={CustomerView}/>
-                </Switch>
-            </div>
-            <FloatingChatWidget/>
-        </div>
-    )
-}
+const UserDashboardView = ({ match }) => {
+  return (
+    <div className={container}>
+      <LeftMenuBar isAgent />
+      <div className={body}>
+        <Switch>
+          <Route
+            exact
+            path={`${match.path}/dashboard`}
+            component={DashboardView}
+          />
+          <Route
+            exact
+            path={`${match.path}/tasks/:caseId`}
+            component={TaskView}
+          />
+          <Route
+            exact
+            path={`${match.path}/task/create/:caseId`}
+            component={CreateTaskMobileView}
+          />
+          <Route
+            exact
+            path={`${match.path}/task/detail/:taskId`}
+            component={AgentTaskDetail}
+          />
+          <Route
+            exact
+            path={`${match.path}/customer`}
+            component={CustomerInfoView}
+          />
+        </Switch>
+      </div>
+      <FloatingChatWidget />
+    </div>
+  );
+};
 
 export default UserDashboardView;
