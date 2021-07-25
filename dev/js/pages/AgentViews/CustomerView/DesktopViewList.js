@@ -4,7 +4,14 @@ import { greenBtnClass, redBtnClass } from "./style.js";
 import Table from "@components/Table";
 
 const DesktopViewList = ({ handleCustomerClick, caseList }) => {
-  const columnList = [{ key: 'case_id' }, { key: 'user' }, { key: 'plan' }, { key: 'start_date' }, { key: 'updated_at' }, { key: 'is_active' }]
+  const columnList = [
+    { key: 'case_id', label: 'Case ID' },
+    { key: 'user', label: 'Name' },
+    { key: 'plan', label: 'Case Type' },
+    { key: 'start_date', label: 'Start Date' },
+    { key: 'updated_at', label: 'Last Update' },
+    { key: 'is_active', label: 'Task Status' }
+  ]
   return (
     <Fragment>
       <Table data={caseList} cols={columnList}>

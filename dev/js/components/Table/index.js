@@ -9,7 +9,6 @@ class Table extends Component {
     }
     decideRendering = (row, key) => {
         let list = this.props.children;
-        console.log(list)
         if (list.length > 2) {
             let output = list.find((item) => {
                 return item.type == "template" && item.props.id == key
@@ -47,7 +46,7 @@ class Table extends Component {
                 <thead className={headerClass}>
                     <tr className={headerRowClass}>
                         {this.props.cols.map(col =>
-                            <th className={hrClass} key={col.key}>{col.key}</th>
+                            <th className={hrClass} key={col.key}>{col.label}</th>
                         )}
                     </tr>
                 </thead>
