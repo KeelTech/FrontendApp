@@ -12,12 +12,10 @@ export const body = css`
     display: flex;
   }
   .basicInfo {
-    background: #fcfcfc;
+    background: #f8f9fa;
     border-radius: 10px;
-    padding: 20px 0px;
-    @media (max-width: ${tabScreenWidth}) {
-      margin-top: 2%;
-    }
+    width: 45%;
+    height: 16%;
   }
   .infoWrapper {
     display: flex;
@@ -69,7 +67,7 @@ export const body = css`
     margin-left: 20px;
   }
   .taskButton {
-    background: #363b64;
+    background: #212529;
     box-shadow: 0px 11.2949px 28.2373px rgba(191, 21, 108, 0.05);
     border-radius: 5px;
     width: 124px;
@@ -84,7 +82,7 @@ export const body = css`
     }
   }
   .docButton {
-    background: #363b64;
+    background: #212529;
     box-shadow: 0px 11.2949px 28.2373px rgba(191, 21, 108, 0.05);
     border-radius: 5px;
     width: 124px;
@@ -92,42 +90,28 @@ export const body = css`
     padding: 9.03593px 13.5539px;
     color: #fcfcfc;
     cursor: pointer;
-    @media (max-width: ${tabScreenWidth}) {
-      height: 30px;
-      width: 110px;
-      font-size: 9px;
-    }
   }
   .meetingInfoWrapper {
-    background: #fcfcfc;
+    background: #f8f9fa;
     border-radius: 10px;
-    margin: 16px 0px;
-    padding: 16px;
-    @media (max-width: ${tabScreenWidth}) {
-    }
+    width: 45%;
+    height: 6%;
+    margin-top: 2%;
   }
   .meetingInfoFlexWrapper {
     display: flex;
     flex-direction: row;
-    margin-top: 6px;
-    @media (max-width: ${tabScreenWidth}) {
-      flex-direction: column;
-      margin-top: 0px;
-    }
   }
   .meetingTextWrapper {
     display: flex;
     flex-direction: column;
-    width: 50%;
-    @media (max-width: ${tabScreenWidth}) {
-      width: 100%;
-    }
   }
   .meetingHeader {
     font-family: Inter;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 12px;
     margin-bottom: 0px;
+    margin-left: 15px;
     line-height: 15px;
   }
   .meetingDateWrapper {
@@ -135,6 +119,7 @@ export const body = css`
     flex-direction: row;
   }
   .calendarImg {
+    margin-left: 15px;
     height: 14px;
     margin-top: 5px;
   }
@@ -146,92 +131,27 @@ export const body = css`
     margin-left: 6px;
     line-height: 15px;
   }
-  .meetingBtnWrapper {
-    display: flex;
-    flex-direction: row;
-    margin-top: 4px;
-    @media (max-width: ${tabScreenWidth}) {
-      margin-left: 20px;
-    }
-  }
   .joinBtn {
-    background: #363b64;
+    background: #212529;
     box-shadow: 0px 11.2949px 28.2373px rgba(191, 21, 108, 0.05);
     border-radius: 5px;
     padding: 9.03593px 13.5539px;
     color: #fcfcfc;
     height: 37px;
-    width: 150px;
+    margin-left: 30%;
+    width: 20%;
     margin-top: 2%;
     cursor: pointer;
-    @media (max-width: ${tabScreenWidth}) {
-      height: 30px;
-      width: 110px;
-      font-size: 9px;
-    }
   }
   .scheduleBtn {
-    background: #363b64;
+    background: #212529;
     box-shadow: 0px 11.2949px 28.2373px rgba(191, 21, 108, 0.05);
     border-radius: 5px;
     padding: 9.03593px 13.5539px;
     color: #fcfcfc;
     height: 37px;
-    width: 150px;
+    width: 20%;
     margin-top: 2%;
     cursor: pointer;
-    @media (max-width: ${tabScreenWidth}) {
-      height: 30px;
-      width: 110px;
-      font-size: 9px;
-    }
-  }
-  .completeInfoWrapper {
-    background: #fcfcfc;
-    border-radius: 10px;
-    margin-top: 2%;
-    overflow: scroll;
-    display: flex;
-    flex-direction: row;
-    @media (max-width: ${tabScreenWidth}) {
-    }
-  }
-  .keyWrapper {
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    color: #363b64;
-    margin-left: 2%;
-    font-weight: 900;
-    font-size: 20px;
-  }
-  .valueWrapper {
-    display: flex;
-    flex-direction: column;
-    font-family: Inter;
-    width: 70%;
-    font-size: 20px;
   }
 `;
-
-
-export const container = css`
-  display: flex;
-  .leftWidget{
-    width: 60%;
-    padding-right: 20px;
-  }
-  .chat{
-    width: 38%;
-    max-height: 700px;
-  }
-  @media(max-width: ${tabScreenWidth}){
-    .chat{
-        display: none;
-    }
-    .leftWidget{
-      width: 100%;
-      padding: 0px 20px;
-    }
-}
-`
