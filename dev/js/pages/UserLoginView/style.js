@@ -166,6 +166,7 @@ export const style = (props) => css`
       display: flex;
       justify-content: space-evenly;
       margin-top: 3%;
+      margin-right: 15%;
     }
     .google-button {
       display: flex;
@@ -205,7 +206,7 @@ export const style = (props) => css`
           0 6px 20px 0 rgba(0, 0, 0, 0.19);
       }
     }
-    .linkedin-button {
+    /* .linkedin-button {
       width: 100px;
       height: 70px;
       margin-right: 20%;
@@ -221,7 +222,7 @@ export const style = (props) => css`
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
           0 6px 20px 0 rgba(0, 0, 0, 0.19);
       }
-    }
+    } */
     @media (max-width: ${tabScreenWidth}) {
       .google-button {
         font-size: 20px;
@@ -233,11 +234,11 @@ export const style = (props) => css`
         height: 40px;
         width: 60px;
       }
-      .linkedin-button {
+      /* .linkedin-button {
         font-size: 30px;
         height: 40px;
         width: 60px;
-      }
+      } */
     }
     .signup-divider {
       width: 50%;
