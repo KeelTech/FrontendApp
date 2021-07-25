@@ -26,9 +26,7 @@ export default function (state = defaultState, action) {
             let newState = { ...state}
             newState.taskDetail = {...newState.taskDetail};
             if(action.taskId){
-                newState.taskDetail[action.taskId] = {};
-                //JSON.parse(JSON.stringify(action.payload));
-                newState.taskDetail[action.taskId] = {...action.payload, tasks_comment: [...action.payload.tasks_comment]};
+                newState.taskDetail[action.taskId] = {...action.payload};
             }
             return newState
         }
