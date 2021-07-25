@@ -10,14 +10,14 @@ const DesktopViewList = ({ handleCustomerClick, caseList }) => {
     { key: 'plan', label: 'Case Type' },
     { key: 'start_date', label: 'Start Date' },
     { key: 'updated_at', label: 'Last Update' },
-    { key: 'is_active', label: 'Task Status' }
+    { key: 'is_active', label: 'Task Status', CustomView: 'TaskStatusRow' }
   ]
   return (
     <Fragment>
       <Table data={caseList} cols={columnList}>
-        <template id="is_active">
+        {/* <template id="is_active">
           <button className={greenBtnClass}>Pending on you</button>
-        </template>
+        </template> */}
       </Table>
     </Fragment>
   );

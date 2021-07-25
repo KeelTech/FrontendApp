@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TableCustomRows from '@components/TableCustomRows';
 import { headerClass, headerRowClass, tableClass, rowClass, hrClass, rowItemClass, rowItemClassEmpty } from './style.js';
 
 class Table extends Component {
@@ -8,32 +9,36 @@ class Table extends Component {
         };
     }
     decideRendering = (row, key) => {
-        let list = this.props.children;
-        if (list.length > 2) {
-            let output = list.find((item) => {
-                return item.type == "template" && item.props.id == key
-            })
-            if (output) {
-                return <td className={rowItemClass} key={key}>{React.cloneElement(output.props.children, {})}</td>
-            }
-            else {
-                return <td className={rowItemClass} key={key}>{row[key]}</td>
-            }
+        // let list = this.props.children;
+        // if (list.length > 2) {
+        //     let output = list.find((item) => {
+        //         return item.type == "template" && item.props.id == key
+        //     })
+        //     if (output) {
+        //         return <td className={rowItemClass} key={key}>{React.cloneElement(output.props.children, {})}</td>
+        //     }
+        //     else {
+        //         return <td className={rowItemClass} key={key}>{row[key]}</td>
+        //     }
+        // }
+        // else {
+        //     if (list.type == "template" && list.props.id == key) {
+        //         return <td className={rowItemClass} key={key}>{React.cloneElement(list.props.children, {})}</td>
+        //     }
+        //     else {
+        //         return <td className={rowItemClass} key={key}>{row[key]}</td>
+        //     }
+        // }
+        if(key.CustomView){
+            return <td className={rowItemClass} key={key.key}><TableCustomRows id={key.CustomView}/></td>
         }
-        else {
-            if (list.type == "template" && list.props.id == key) {
-                return <td className={rowItemClass} key={key}>{React.cloneElement(list.props.children, {})}</td>
-            }
-            else {
-                return <td className={rowItemClass} key={key}>{row[key]}</td>
-            }
-        }
+        return <td className={rowItemClass} key={key.key}>{row[key.key]}</td>
     }
     renderData = (data, cols) =>
         data.map(row =>
             <tr className={rowClass} key={row.key}>
                 {cols.map(col =>
-                    this.decideRendering(row, col.key)
+                    this.decideRendering(row, col)
                 )}
             </tr>
         );
