@@ -57,6 +57,14 @@ function DocumentView() {
     setSearchDoc(event.target.value);
   };
 
+  const newDocumentList = userAddedDocs.filter((docNmae) => {
+    if (searchDoc !== '') {
+      return docNmae.doc_type.toLowerCase().includes(searchDoc.toLowerCase());
+    } else {
+      return docNmae;
+    }
+  });
+
   const openFileUploadModal = () => {
     setOpenFileUpload(true);
   };
@@ -122,24 +130,20 @@ function DocumentView() {
           )}
         </div>
         <div className="uploadedDocsWrapper">
-          {userAddedDocs
-            .filter((val) => {
-              if (searchDoc === '') {
-                return val;
-              } else if (
-                val.doc_type.toLowerCase().includes(searchDoc.toLowerCase())
-              ) {
-                return val;
-              }
-            })
-            .map((doc) => {
-              if (
-                documentOwner === '' ||
-                (documentOwner === 'you' && doc.user_id)
-              ) {
-                return <UploadedDocumentNew key={doc.doc_id} {...doc} />;
-              }
-            })}
+          {newDocumentList.map((doc) => {
+            if (
+              documentOwner === '' ||
+              (documentOwner === 'you' && doc.user_id)
+            ) {
+              return <UploadedDocumentNew key={doc.doc_id} {...doc} />;
+            } else {
+              return (
+                <div>
+                  <h1>Cunsoltant Documents</h1>
+                </div>
+              );
+            }
+          })}
         </div>
       </div>
     </div>
