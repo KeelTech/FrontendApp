@@ -207,7 +207,7 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
                 <span className="sign">{title}</span>
                 <span className="backBtn" onClick={handleBackBtnClick}>Back</span>
             </div>
-            <div className="taskStatus">Mark as completed</div>
+            {/* <div className="taskStatus">Mark as completed</div> */}
             <div className={taskStatus}>
                 <div className="view">
                     <div className="taskName">

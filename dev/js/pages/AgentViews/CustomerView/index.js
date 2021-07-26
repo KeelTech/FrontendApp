@@ -6,10 +6,9 @@ import NotificationWidget from "@components/NotificationWidget";
 import ProfileWidget from "@components/ProfileWidget";
 import { getCaseList } from '@actions';
 import { SET_AGENT_MENUBAR_STATE } from '@constants/types';
-import { head } from "./style.js";
+import { head, view } from "./style.js";
 import DesktopViewList from './DesktopViewList'
 import MobileViewList from './MobileViewList'
-import { isMobileView } from '@constants';
 
 const CustomerView = () => {
   const dispatch = useDispatch();
@@ -44,15 +43,13 @@ const CustomerView = () => {
             <ProfileWidget />
           </div>
         </Header>
-        <div>
-          {
-            isMobileView && <DesktopViewList handleCustomerClick={handleCustomerClick} caseList={caseList} />
-          }
-        </div>
-        <div>
-          {
-            !isMobileView && <MobileViewList handleCustomerClick={handleCustomerClick} caseList={caseList} />
-          }
+        <div className={view}>
+          <div className="desktopView">
+            <DesktopViewList handleCustomerClick={handleCustomerClick} caseList={caseList} />
+          </div>
+          <div className="mobileView">
+            <MobileViewList handleCustomerClick={handleCustomerClick} caseList={caseList} />
+          </div>
         </div>
       </div>
     </Fragment>

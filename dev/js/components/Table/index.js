@@ -30,7 +30,7 @@ class Table extends Component {
         //     }
         // }
         if(key.CustomView){
-            return <td className={rowItemClass} key={key.key}><TableCustomRows id={key.CustomView}/></td>
+            return <td className={rowItemClass} key={key.key}><TableCustomRows id={key.CustomView} clickHandler={this.props.handleCustomerClick} optionId={row.case_id}/></td>
         }
         return <td className={rowItemClass} key={key.key}>{row[key.key]}</td>
     }
