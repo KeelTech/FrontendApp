@@ -38,6 +38,7 @@ const TaskView = (props)=>{
             history.push(`/agent/task/detail/${taskId}`);
         }else{
             setActiveTask(taskId);
+            setAddTaskView(false);
         }
     }
 

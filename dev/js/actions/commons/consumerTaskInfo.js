@@ -41,8 +41,8 @@ export const getTaskDetail = (dataParams, dispatch, cb=null)=>{
             payload: response && response.data||{},
             taskId
         })
-        if(cb)cb(data, null);
+        if(cb)cb(true, null);
     }).catch((e)=>{
-        
+        if(cb)cb(null, true);
     })
 }

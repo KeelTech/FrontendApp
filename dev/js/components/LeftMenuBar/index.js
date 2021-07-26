@@ -4,6 +4,7 @@ import { cx } from '@emotion/css';
 import { useHistory } from 'react-router-dom';
 import { SET_MENUBAR_STATE, SET_AGENT_MENUBAR_STATE } from '@constants/types';
 import STORAGE from '@helpers/storage';
+import { loaderView } from '@constants';
 import LoadingWidget from '@components/LoadingWidget';
 import { leftBarCont, container, menuOptions, mobileView} from './style.js';
 
@@ -66,7 +67,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
             {
                 isMobileView && <div className="overlay"></div>
             }
-            {showLoader && <LoadingWidget/> }
+            {showLoader && <div className={loaderView}><LoadingWidget/></div> }
             <div className={mainClass}>
                 <div className="openWidgetView">
                     <div className="widgetView">

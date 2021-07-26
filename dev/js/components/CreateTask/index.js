@@ -6,6 +6,8 @@ import CustomSelect from '@components/CustomSelect';
 import CustomButton from '@components/CustomButton';
 import { createTask } from '@actions';
 import LoadingWidget from '@components/LoadingWidget';
+import CustomToaster from '@components/CustomToaster';
+import { loaderView } from '@constants';
 import { container, taskStatus, messageSection, checkListCont, attachmentCont, cta } from './style.js';
 
 const PriorityList = [
@@ -41,6 +43,12 @@ const CreateTask = ({ toggleAddTaskView, caseId })=>{
 
     const { title, description, check_list, tags } = dataParams;
 
+    const [toasterInfo, setToasterInfo] = useState({
+        isVisible: false,
+        isError: false,
+        isSuccess: false,
+        msg: ''
+    })
 
     const addMember = ()=>{
 
@@ -54,17 +62,40 @@ const CreateTask = ({ toggleAddTaskView, caseId })=>{
         setDataValues({priority: val.id})
     }
 
+    const hideToaster = ()=>{
+        setToasterInfo({
+            isVisible: false
+        })
+    }
+
     const createTaskClicked = ()=>{
         setLoading(true);
         createTask(dataParams, dispatch, (resp, err)=>{
             setLoading(false);
             if(resp){
-                alert('added successfuly');
+                setToasterInfo({
+                    isVisible: true,
+                    isError: false,
+                    isSuccess: true,
+                    msg: 'Created Successfully'
+                });
                 if(isMobileView()){
-                    history.push(`/agent/tasks/${caseId}`);
+                    setTimeout(() => {
+                        history.push(`/agent/tasks/${caseId}`);                        
+                    }, 1000);
                 }else{
                     toggleAddTaskView(true);
                 }
+            }else{
+                setToasterInfo({
+                    isVisible: true,
+                    isError: true,
+                    isSuccess: false,
+                    msg: 'Failed, Try again later'
+                });
+                setTimeout(() => {
+                    hideToaster();
+                }, 1000);
             }
         })   
     }
@@ -78,6 +109,16 @@ const CreateTask = ({ toggleAddTaskView, caseId })=>{
             }
             setCheckList('');
             setDataValues({check_list: newCheckList});
+        }else{
+            setToasterInfo({
+                isVisible: true,
+                isSuccess: false,
+                isError: true,
+                msg: 'Please add checklist items'
+            })
+            setTimeout(() => {
+                hideToaster();
+            }, 1000);
         }
     }
 
@@ -95,8 +136,9 @@ const CreateTask = ({ toggleAddTaskView, caseId })=>{
     return(
         <div className={container}>
             {
-                loading && <LoadingWidget/>
+                loading && <div className={loaderView}><LoadingWidget/></div>
             }
+            <CustomToaster {...toasterInfo} hideToaster={hideToaster}/>
             <h2>New Task</h2>
             <div className="formView">
                 <div className="field">
@@ -182,14 +224,17 @@ const CreateTask = ({ toggleAddTaskView, caseId })=>{
                             <input type="text" placeholder="Add an item" value={checkList} onChange={(e)=>setCheckList(e.target.value)}/>
                             <div className="checklistCta">
                                 <CustomButton text="Add" clickHandler={addCheckList} margin="0px 8px 0px 0px" padding="9px" borderRadius="5px" backgroundColor="#747BB4"/>
-                                <CustomButton text="Cancel" clickHandler={()=>setCheckList('')} margin="0px" padding="9px" borderRadius="5px" backgroundColor="#FE9874"/>
+                                <CustomButton text="Cancel" clickHandler={()=>{
+                                    setCheckList('');
+                                    setShowChecklist(false);
+                                }} margin="0px" padding="9px" borderRadius="5px" backgroundColor="#FE9874"/>
                             </div>
                         </div>
                         :null
                     }
                 </div>
 
-                <div className={messageSection}>
+                {/* <div className={messageSection}>
                     <div className="taskName">
                         <img className="icon" src={ASSETS_BASE_URL+"/images/common/message.svg"} alt="discuss"/>
                         <span>Activity</span>
@@ -200,7 +245,7 @@ const CreateTask = ({ toggleAddTaskView, caseId })=>{
                             <input type="text" placeholder="Enter Task Name" onChange={(e)=>setDataValues({title: e.target.value})}/>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 <div className={cta}>
                     <CustomButton text="Cancel" clickHandler={()=>toggleAddTaskView(false)} margin="0px 8px 0px 0px" padding="10px 16px" borderRadius="4px" backgroundColor="#DC3545" fontColor="16px" fontWeight="600" fontColor="#FFFFFF"/>
