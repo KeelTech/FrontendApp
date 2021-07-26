@@ -83,6 +83,8 @@ export const tasksView = css`
         }
         .taskList{
             max-height: 100%;
+            overflow-y: hidden;
+            padding-bottom: 40px;
         }
     }
 `

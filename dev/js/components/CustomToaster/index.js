@@ -21,6 +21,7 @@ const container = props => css`
         height: 12px;
         width: 12px;
         margin-left: 30px;
+        cursor: pointer;
     }
     
 `
@@ -28,37 +29,46 @@ export const toasterMsg = props =>css`
     position: fixed;
     display: flex;
     justify-content: flex-end;
-    top: 118px;
     width: 100%;
     right: 40px;
-    transition: all 2s ease-out;
+    top: ${props.isVisible?'118px':'-200px'};
+    transition: all 0.6s ease-out;
+    z-index: 99;
     @media(max-width: ${tabScreenWidth}){
         justify-content: center;
         right: 0;
-        top: 10px;
+        top: ${props.isVisible?'10px':'-200px'};
     }
 `
+//Plz use this type of state in your Component to render toaster
+// const [toasterInfo, setToasterInfo] = useState({
+//     isVisible: false,
+//     isError: false,
+//     isSuccess: false,
+//     msg: ''
+// })
 
-const CustomToaster = ({ msg="", isError, isVisible, isSuccess, fontColor="#152536", fontSize="12px", padding="20px", backgroundColor="#E9ECEF", border="1px solid #DEE2E6"  })=>{
-    
+const CustomToaster = ({ msg="", hideToaster=()=>{}, isError, isVisible, isSuccess, fontColor="#152536", fontSize="12px", padding="20px", backgroundColor="#E9ECEF", border="1px solid #DEE2E6"  })=>{
+    let fontC = fontColor;
+    let bgColor = backgroundColor;
+    let borderVal = border;
     if(isError){
-
+        fontC='#842029';
+        bgColor ='#F8D7DA';
+        borderVal = '1px solid #F1AEB5'
     }else if(isSuccess){
-
+        fontC='#0F5132';
+        bgColor ='#D1E7DD';
+        borderVal = '1px solid #75B798'
     }
-    //console.log(isVi)
     return(
-        <div className={toasterMsg({isVisible: true})}>
-            {
-                isVisible?
-                <div className={container({fontColor, fontSize, padding, border, backgroundColor})}>
-                    <div className="toaster">
-                        <span>{msg}</span>
-                        <img className="icon" src={ASSETS_BASE_URL+"/images/common/crossIcon.svg"} alt="task"/>
-                    </div>
+        <div className={toasterMsg({isVisible})}>
+            <div className={container({fontColor: fontC, fontSize, padding, border: borderVal, backgroundColor: bgColor})}>
+                <div className="toaster">
+                    <span>{msg}</span>
+                    <img className="icon" src={ASSETS_BASE_URL+"/images/common/crossIcon.svg"} alt="close" onClick={hideToaster}/>
                 </div>
-                :null
-            }
+            </div>
         </div>
         
     )
