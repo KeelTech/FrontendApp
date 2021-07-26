@@ -200,7 +200,7 @@ export const taskStatus = css`
         border: 1px solid #A098AE;
         border-radius: 10px;
         width: 100%;
-        padding: 8px;
+        padding: 8px !important;
         font-size: 12px;
         line-height: 18px;
         color: #363B64;
@@ -215,7 +215,7 @@ export const taskStatus = css`
 export const discussionSection = css`
     margin-top: 30px;
     .discussionTxt{
-        display: inline-block;
+        display: block;
         textarea{
             width: 100%;
             border: 1px solid #A098AE;

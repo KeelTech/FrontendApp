@@ -14,7 +14,7 @@ const DesktopViewList = ({ handleCustomerClick, caseList }) => {
   ]
   return (
     <Fragment>
-      <Table data={caseList} cols={columnList}>
+      <Table data={caseList} cols={columnList} handleCustomerClick={handleCustomerClick}>
         {/* <template id="is_active">
           <button className={greenBtnClass}>Pending on you</button>
         </template> */}
