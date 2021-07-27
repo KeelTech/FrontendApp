@@ -9,7 +9,9 @@ import ProfileWidget from '@components/ProfileWidget';
 import AgentTaskDetail from '@pages/AgentTaskDetail';
 import CustomButton from '@components/CustomButton';
 import CreateTask from '@components/CreateTask';
-import { isMobileView } from '@constants';
+import BlankScreen from '@components/BlankScreen';
+import LoadingWidget from '@components/LoadingWidget';
+import { isMobileView, loaderView } from '@constants';
 import { getTaskList } from '@actions';
 import { mainCont, container, tasksView } from './style.js';
 import { body } from '../style.js';
@@ -27,6 +29,7 @@ const TaskView = (props)=>{
     const [activeWidget, setActiveWidget] = useState(0);
     const [activeTask, setActiveTask] = useState('');
     const [showAddTaskView, setAddTaskView] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleCtaClick = (val)=>{
         setActiveWidget(val);
@@ -43,9 +46,13 @@ const TaskView = (props)=>{
     }
 
     const refetchTaskList = ()=>{
+        setLoading(true);
         getTaskList({status: activeWidget, case: caseId}, dispatch, (resp, error)=>{
+            setLoading(false);
             if(resp && resp.length && !isMobileView()){
                 setActiveTask(resp[0].task_id);
+            }else{
+                setActiveTask('');
             }
         });
     }
@@ -63,7 +70,7 @@ const TaskView = (props)=>{
 
     useEffect(()=>{
         refetchTaskList();
-    },[])
+    },[activeWidget])
 
     const addMoreTasks = ()=>{
         if(isMobileView()){
@@ -103,18 +110,23 @@ const TaskView = (props)=>{
                                 <span>Completed</span>
                             </div>
                         </div>
-                        <div className="taskList">
-                            {
-                                taskList.map((val)=>{
-                                    const { task_id } = val;
-                                    return(<TaskCard key={task_id} isView active={!showAddTaskView && activeTask===task_id} clickHandler={()=>taskClickHandler(task_id)} data={val}/>)
-                                })
-                            }
-                        </div>
+                        {
+                            loading?<div className={loaderView}><LoadingWidget/></div>
+                            :<div className="taskList">
+                                {
+                                    taskList.length?
+                                    taskList.map((val)=>{
+                                        const { task_id } = val;
+                                        return(<TaskCard key={task_id} isView active={!showAddTaskView && activeTask===task_id} clickHandler={()=>taskClickHandler(task_id)} data={val}/>)
+                                    })
+                                    :<div className="emptyData"><BlankScreen message="You have no pending tasks"/></div>
+                                }
+                            </div>
+                        }
                     </div>
                     <div className="taskInfo">
                         {
-                            !showAddTaskView && activeTask?<AgentTaskDetail activeTask={activeTask}/>:null
+                            !loading && !showAddTaskView && activeTask?<AgentTaskDetail activeTask={activeTask}/>:null
                         }
                         {
                             showAddTaskView && <CreateTask toggleAddTaskView={toggleAddTaskView} caseId={caseId}/>

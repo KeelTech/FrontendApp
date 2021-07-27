@@ -12,11 +12,11 @@ export const container = css`
   display: flex;
   justify-content: center;
   align-items: center;
-
+  min-height: 300px;
   span {
     font-family: ${primaryFont};
     position: absolute;
-    margin: 0px 20%;
+    margin: 0px 20px;
     top: 68%;
     font-size: 18px;
     line-height: 27px;

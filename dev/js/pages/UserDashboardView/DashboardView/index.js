@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_MENUBAR_STATE } from '@constants/types';
@@ -8,6 +8,9 @@ import ChatWidget from '@components/ChatWidget';
 import Header from '@components/Header';
 import NotificationWidget from '@components/NotificationWidget';
 import ProfileWidget from '@components/ProfileWidget';
+import BlankScreen from '@components/BlankScreen';
+import LoadingWidget from '@components/LoadingWidget';
+import { loaderView } from '@constants';
 import { container, pendingTasks, scheduleCallCta, upcomingSchedules } from './style.js';
 import { body } from '../style.js';
 
@@ -15,7 +18,7 @@ const DashboardView = ()=>{
     const history = useHistory();
     const dispatch = useDispatch();
     const taskInfo = useSelector(state=>state.TASK_INFO);
-    const { taskList=[] } = taskInfo||{};
+    const { taskList=[], taskListLoading } = taskInfo||{};
 
     const [activeTask, setActiveTask] = useState('');
 
@@ -56,21 +59,29 @@ const DashboardView = ()=>{
                 <div className={container}>
                     <div className={pendingTasks}>
                         <div className="taskHeading">PENDING TASKS</div>
-                        <div className="taskList">
-                            {
-                                taskList.slice(0, 3).map((val)=>{
-                                    const { task_id } = val;
-                                    return(<TaskCard key={task_id} clickHandler={()=>{}} data={val}/>)
-                                })
-                            }
-                        </div>
                         {
-                            taskList.length>3?
-                            <div className="allTasks">
-                                <div className="moreTasks" onClick={redirectToTaskList}>Show All</div>
-                            </div>
-                            :null
+                            taskListLoading?<div className={loaderView}><LoadingWidget/></div>
+                            :<Fragment>
+                                <div className="taskList">
+                                    {
+                                        taskList.length?
+                                        taskList.slice(0, 3).map((val)=>{
+                                            const { task_id } = val;
+                                            return(<TaskCard key={task_id} clickHandler={()=>{}} data={val}/>)
+                                        })
+                                        :<BlankScreen message="You have no pending tasks"/>
+                                    }
+                                </div>
+                                {
+                                    taskList.length>3?
+                                    <div className="allTasks">
+                                        <div className="moreTasks" onClick={redirectToTaskList}>Show All</div>
+                                    </div>
+                                    :null
+                                }
+                            </Fragment>
                         }
+                        
                     </div>
                     <div className="chat">
                         <ChatWidget/>
