@@ -333,7 +333,7 @@ export const style = (props) => css`
 export const Loader = css`
   position: absolute;
   display: flex;
-  left: 25%;
+  left: 72%;
   top: 40%;
   justify-content: center;
   align-items: center;
