@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { SET_MENUBAR_STATE } from '@constants/types';
@@ -7,7 +7,9 @@ import Header from '@components/Header';
 import NotificationWidget from '@components/NotificationWidget';
 import ProfileWidget from '@components/ProfileWidget';
 import TaskDetail from '@pages/TaskDetail';
-import { isMobileView } from '@constants';
+import { isMobileView, loaderView } from '@constants';
+import BlankScreen from '@components/BlankScreen';
+import LoadingWidget from '@components/LoadingWidget';
 import { getTaskList } from '@actions';
 import { container, tasksView } from './style.js';
 import { body } from '../style.js';
@@ -16,7 +18,7 @@ const TaskView = ()=>{
     const history = useHistory();
     const dispatch = useDispatch();
     const taskInfo = useSelector(state=>state.TASK_INFO);
-    const { taskList=[] } = taskInfo||{};
+    const { taskList=[], taskListLoading } = taskInfo||{};
     const [activeWidget, setActiveWidget] = useState(0);
     const [activeTask, setActiveTask] = useState('');
 
@@ -76,10 +78,17 @@ const TaskView = ()=>{
                         </div>
                         <div className="taskList">
                             {
-                                taskList.map((val)=>{
-                                    const { task_id } = val;
-                                    return(<TaskCard key={task_id} isView active={activeTask===task_id} clickHandler={()=>taskClickHandler(task_id)} data={val}/>)
-                                })
+                                taskListLoading?<div className={loaderView}><LoadingWidget/></div>
+                                :<Fragment>
+                                    {
+                                        taskList.length?
+                                        taskList.map((val)=>{
+                                            const { task_id } = val;
+                                            return(<TaskCard key={task_id} isView active={activeTask===task_id} clickHandler={()=>taskClickHandler(task_id)} data={val}/>)
+                                        })
+                                        :<BlankScreen message="You have no pending tasks"/>
+                                    }
+                                </Fragment>
                             }
                         </div>
                     </div>
