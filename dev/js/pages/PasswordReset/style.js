@@ -13,6 +13,10 @@ export const style = css`
     .keel-logo {
       margin-top: 30px;
       margin-left: 40px;
+      cursor: pointer;
+      @media (max-width: ${tabScreenWidth}) {
+        max-width: 120px;
+      }
     }
     .header-text {
       display: flex;
@@ -51,7 +55,6 @@ export const style = css`
         outline: none;
       }
       ::placeholder {
-        font-family: Poppins;
         font-size: 20px;
       }
     }
@@ -67,22 +70,66 @@ export const style = css`
     }
     .password-match {
       display: flex;
-      font-family: Poppins sans-serif;
       font-size: 15px;
       color: #ef4f4f;
     }
     .password-success {
       color: green;
       margin-left: 15%;
-      font-size: 20px;
+      font-size: 15px;
       margin-top: 40px;
       margin-right: 14%;
       line-height: 2rem;
-      font-family: Poppins;
+    }
+    .errorMsg {
+      display: flex;
+      justify-content: center;
+      color: red;
+      font-size: 20px;
+      margin-top: 40px;
+      line-height: 2rem;
+    }
+    .emailSuccessBtnMsg {
+      color: #1d733d;
+      display: flex;
+      justify-content: center;
+      font-size: 15px;
+      margin-top: 40px;
+      margin-right: 40px;
+      line-height: 2rem;
+      @media (max-width: ${tabScreenWidth}) {
+        margin-right: 0px;
+      }
+    }
+    .BtnLink {
+      display: flex;
+      justify-content: center;
+      text-decoration: none;
+    }
+    .LinkBtn {
+      border-radius: 8%;
+      background: black;
+      color: white;
+      height: 35px;
+      width: 147px;
+      cursor: pointer;
+      margin-right: 20px;
+      @media (max-width: ${tabScreenWidth}) {
+        margin-right: 0px;
+      }
+    }
+    .timer {
+      color: #333;
+      margin-left: 5px;
+      margin-right: 5px;
     }
     @media (max-width: ${tabScreenWidth}) {
       .password-match {
         font-size: 14px;
+      }
+      .errorMsg {
+        width: 75%;
+        margin-left: 15%;
       }
       .password-success {
         width: 75%;
@@ -122,5 +169,17 @@ export const style = css`
     .globe-image {
       width: 0;
     }
+  }
+`;
+
+export const Loader = css`
+  position: absolute;
+  display: flex;
+  left: 25%;
+  top: 40%;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: ${tabScreenWidth}) {
+    left: 45%;
   }
 `;

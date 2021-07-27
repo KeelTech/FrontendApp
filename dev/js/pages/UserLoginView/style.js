@@ -13,6 +13,10 @@ export const style = (props) => css`
     .keel-logo {
       margin-top: 30px;
       margin-left: 40px;
+      cursor: pointer;
+      @media (max-width: ${tabScreenWidth}) {
+        max-width: 120px;
+      }
     }
     .header-text {
       display: flex;
@@ -123,6 +127,7 @@ export const style = (props) => css`
     }
     .password-reset-wrapper {
       display: flex;
+      text-decoration: none;
     }
     .password-reset {
       font-size: medium;
@@ -131,9 +136,9 @@ export const style = (props) => css`
       color: #959595;
       background: white;
       border: none;
+      cursor: pointer;
       :hover {
         color: #000;
-        text-decoration: underline;
       }
     }
     @media (max-width: ${tabScreenWidth}) {
@@ -308,5 +313,17 @@ export const style = (props) => css`
     .passport-image {
       width: 0;
     }
+  }
+`;
+
+export const Loader = css`
+  position: absolute;
+  display: flex;
+  left: 25%;
+  top: 40%;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: ${tabScreenWidth}) {
+    left: 45%;
   }
 `;

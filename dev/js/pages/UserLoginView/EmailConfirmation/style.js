@@ -13,6 +13,10 @@ export const style = (props) => css`
     .keel-logo {
       margin-top: 30px;
       margin-left: 40px;
+      cursor: pointer;
+      @media (max-width: ${tabScreenWidth}) {
+        max-width: 120px;
+      }
     }
     .header-text {
       display: flex;
@@ -74,20 +78,66 @@ export const style = (props) => css`
       }
     }
     .email-fail-msg {
+      display: flex;
+      justify-content: center;
       color: red;
-      margin-left: 15%;
       font-size: 20px;
+      margin-top: 40px;
+      line-height: 2rem;
+    }
+    .email-success-msg {
+      color: #1d733d;
+      margin-left: 15%;
+      font-size: 15px;
       margin-top: 40px;
       margin-right: 14%;
       line-height: 2rem;
     }
-    .email-success-msg {
-      color: green;
-      margin-left: 15%;
-      font-size: 20px;
+    .emailSuccessBtnMsg {
+      color: #1d733d;
+      display: flex;
+      justify-content: center;
+      font-size: 15px;
       margin-top: 40px;
-      margin-right: 14%;
+      margin-right: 40px;
       line-height: 2rem;
+      @media (max-width: ${tabScreenWidth}) {
+        margin-right: 0px;
+      }
+    }
+    .BtnLink {
+      display: flex;
+      justify-content: center;
+      text-decoration: none;
+    }
+    .LinkBtn {
+      border-radius: 8%;
+      background: black;
+      color: white;
+      height: 35px;
+      width: 147px;
+      cursor: pointer;
+      margin-right: 20px;
+      @media (max-width: ${tabScreenWidth}) {
+        margin-right: 0px;
+      }
+    }
+    .timerMsg {
+      color: #1d733d;
+      display: flex;
+      justify-content: center;
+      margin-right: 40px;
+      font-size: 15px;
+      margin-top: 40px;
+      line-height: 2rem;
+      @media (max-width: ${tabScreenWidth}) {
+        margin-right: 0px;
+      }
+    }
+    .timer {
+      color: #333;
+      margin-left: 5px;
+      margin-right: 5px;
     }
     @media (max-width: ${tabScreenWidth}) {
       .email-success-msg {
@@ -95,6 +145,7 @@ export const style = (props) => css`
       }
       .email-fail-msg {
         width: 75%;
+        margin-left: 12%;
       }
     }
     .submit-button {
@@ -139,5 +190,17 @@ export const style = (props) => css`
     .passport-image {
       width: 0;
     }
+  }
+`;
+
+export const Loader = css`
+  position: absolute;
+  display: flex;
+  left: 25%;
+  top: 40%;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: ${tabScreenWidth}) {
+    left: 45%;
   }
 `;
