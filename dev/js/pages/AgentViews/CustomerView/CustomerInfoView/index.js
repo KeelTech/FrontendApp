@@ -61,8 +61,32 @@ function CustomerInfoView() {
               <p className="meetingDate">8:30pm, 28th March, 2021</p>
             </div>
           </div>
-          <button className="joinBtn">Join Meeting</button>
-          <button className="scheduleBtn">Reschedule</button>
+          <div className="meetingBtnWrapper">
+            <button className="joinBtn">Join Meeting</button>
+            <button className="scheduleBtn">Reschedule</button>
+          </div>
+        </div>
+      </div>
+      <div className="completeInfoWrapper">
+        <div className="keyWrapper">
+          <p>Date Of Birth:</p>
+          <p>Age:</p>
+          <p>Address:</p>
+          <p>Qualification:</p>
+          <p>College Name:</p>
+          <p>College Address:</p>
+          <p>Father's Name:</p>
+          <p>Mother's Name:</p>
+        </div>
+        <div className="valueWrapper">
+          <p>05/01/1996</p>
+          <p>23</p>
+          <p>4053 Sector 23A, Gurgaon, Haryana, 122017</p>
+          <p>B.Tech(Information Technology)</p>
+          <p>SRM University</p>
+          <p>SRM University, Ramapuram, Chennai, 600111</p>
+          <p>John Cena</p>
+          <p>Pamela Anderson</p>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { css } from '@emotion/css';
 import { primaryFont } from '@constants';
+import { tabScreenWidth } from '@constants';
 
 export const body = css`
   background: rgba(252, 252, 252, 0.5);
@@ -11,10 +12,16 @@ export const body = css`
     display: flex;
   }
   .basicInfo {
-    background: #f8f9fa;
+    background: #fcfcfc;
     border-radius: 10px;
-    width: 45%;
+    width: 60%;
     height: 16%;
+    margin-left: 3%;
+    @media (max-width: ${tabScreenWidth}) {
+      margin-top: 2%;
+      width: 90%;
+      height: 17%;
+    }
   }
   .infoWrapper {
     display: flex;
@@ -66,7 +73,7 @@ export const body = css`
     margin-left: 20px;
   }
   .taskButton {
-    background: #212529;
+    background: #363b64;
     box-shadow: 0px 11.2949px 28.2373px rgba(191, 21, 108, 0.05);
     border-radius: 5px;
     width: 124px;
@@ -74,9 +81,14 @@ export const body = css`
     padding: 9.03593px 13.5539px;
     color: #fcfcfc;
     cursor: pointer;
+    @media (max-width: ${tabScreenWidth}) {
+      height: 30px;
+      width: 110px;
+      font-size: 9px;
+    }
   }
   .docButton {
-    background: #212529;
+    background: #363b64;
     box-shadow: 0px 11.2949px 28.2373px rgba(191, 21, 108, 0.05);
     border-radius: 5px;
     width: 124px;
@@ -84,26 +96,46 @@ export const body = css`
     padding: 9.03593px 13.5539px;
     color: #fcfcfc;
     cursor: pointer;
+    @media (max-width: ${tabScreenWidth}) {
+      height: 30px;
+      width: 110px;
+      font-size: 9px;
+    }
   }
   .meetingInfoWrapper {
-    background: #f8f9fa;
+    background: #fcfcfc;
     border-radius: 10px;
-    width: 45%;
-    height: 6%;
+    width: 60%;
+    height: 7%;
     margin-top: 2%;
+    margin-left: 3%;
+    @media (max-width: ${tabScreenWidth}) {
+      width: 90%;
+      height: 15%;
+    }
   }
   .meetingInfoFlexWrapper {
     display: flex;
     flex-direction: row;
+    margin-top: 6px;
+    @media (max-width: ${tabScreenWidth}) {
+      flex-direction: column;
+      margin-top: 0px;
+    }
   }
   .meetingTextWrapper {
     display: flex;
     flex-direction: column;
+    width: 50%;
+    @media (max-width: ${tabScreenWidth}) {
+      width: 100%;
+      margin-left: 10px;
+    }
   }
   .meetingHeader {
     font-family: Inter;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 18px;
     margin-bottom: 0px;
     margin-left: 15px;
     line-height: 15px;
@@ -125,27 +157,74 @@ export const body = css`
     margin-left: 6px;
     line-height: 15px;
   }
+  .meetingBtnWrapper {
+    display: flex;
+    flex-direction: row;
+    margin-top: 4px;
+    @media (max-width: ${tabScreenWidth}) {
+      margin-left: 20px;
+    }
+  }
   .joinBtn {
-    background: #212529;
+    background: #363b64;
     box-shadow: 0px 11.2949px 28.2373px rgba(191, 21, 108, 0.05);
     border-radius: 5px;
     padding: 9.03593px 13.5539px;
     color: #fcfcfc;
     height: 37px;
-    margin-left: 30%;
-    width: 20%;
+    width: 150px;
     margin-top: 2%;
     cursor: pointer;
+    @media (max-width: ${tabScreenWidth}) {
+      height: 30px;
+      width: 110px;
+      font-size: 9px;
+    }
   }
   .scheduleBtn {
-    background: #212529;
+    background: #363b64;
     box-shadow: 0px 11.2949px 28.2373px rgba(191, 21, 108, 0.05);
     border-radius: 5px;
     padding: 9.03593px 13.5539px;
     color: #fcfcfc;
     height: 37px;
-    width: 20%;
+    width: 150px;
     margin-top: 2%;
     cursor: pointer;
+    @media (max-width: ${tabScreenWidth}) {
+      height: 30px;
+      width: 110px;
+      font-size: 9px;
+    }
+  }
+  .completeInfoWrapper {
+    background: #fcfcfc;
+    border-radius: 10px;
+    height: 55%;
+    width: 60%;
+    margin-top: 2%;
+    overflow: scroll;
+    display: flex;
+    flex-direction: row;
+    margin-left: 3%;
+    @media (max-width: ${tabScreenWidth}) {
+      width: 90%;
+    }
+  }
+  .keyWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    color: #363b64;
+    margin-left: 2%;
+    font-weight: 900;
+    font-size: 20px;
+  }
+  .valueWrapper {
+    display: flex;
+    flex-direction: column;
+    font-family: Inter;
+    width: 70%;
+    font-size: 20px;
   }
 `;
