@@ -23,6 +23,10 @@ export const style = (props) => css`
     .logo {
       margin-top: 30px;
       margin-left: 40px;
+      cursor: pointer;
+      @media (max-width: ${tabScreenWidth}) {
+        max-width: 120px;
+      }
     }
     .header-text {
       display: flex;
@@ -323,5 +327,17 @@ export const style = (props) => css`
         height: 40px;
       }
     }
+  }
+`;
+
+export const Loader = css`
+  position: absolute;
+  display: flex;
+  left: 25%;
+  top: 40%;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: ${tabScreenWidth}) {
+    left: 45%;
   }
 `;
