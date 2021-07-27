@@ -50,6 +50,18 @@ export const textAreaPlaceholder = props => css`
     }
 `
 
+export const loaderView = css`
+    position: absolute;
+    display: flex;
+    left: 50%;
+    top: 50%;
+    justify-content: center;
+    align-items: center;
+    @media(max-width: ${tabScreenWidth}){
+        top: calc(50% - 100px);
+    }    
+`
+
 export const isMobileView = ()=>{
 
     if(typeof document==="object" && document.body.clientWidth){

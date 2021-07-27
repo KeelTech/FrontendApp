@@ -200,7 +200,7 @@ export const taskStatus = css`
         border: 1px solid #A098AE;
         border-radius: 10px;
         width: 100%;
-        padding: 8px;
+        padding: 8px !important;
         font-size: 12px;
         line-height: 18px;
         color: #363B64;
@@ -215,7 +215,7 @@ export const taskStatus = css`
 export const discussionSection = css`
     margin-top: 30px;
     .discussionTxt{
-        display: inline-block;
+        display: block;
         textarea{
             width: 100%;
             border: 1px solid #A098AE;
@@ -289,11 +289,11 @@ export const checklistSection = props=> css`
     }
     .checkItem{
         display: flex;
-        align-items: center;
+        align-items: flex-start;
     }
     .percent{
         position: relative;
-        width: 100%;
+        width: calc(100% - 30px);
         border-radius: 6px;
         background: #ECECF1;
         height: 6px;
@@ -327,15 +327,7 @@ export const checklistSection = props=> css`
         .checkedText{
             color: #A098AE;
             position: relative;
-            &:after{
-                content: '';
-                position: absolute;
-                height: 1px;
-                top: 50%;
-                left: 0px;
-                width: 100%;
-                background: #A098AE;
-            }
+            text-decoration: line-through;
         }
     }
     @media(max-width: ${tabScreenWidth}){

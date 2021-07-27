@@ -7,6 +7,7 @@ import CustomButton from '@components/CustomButton';
 import CustomSelect from '@components/CustomSelect';
 import LoadingWidget from '@components/LoadingWidget';
 import PostCommentView from '@components/PostCommentView';
+import CustomToaster from '@components/CustomToaster';
 import { getNameInitialHelper, getFormattedTime, getFormattedDate, capitalizeFirstLetter } from '@helpers/utils';
 import { container, taskStatus, discussionSection, memberCard, attachmentSection, checklistSection, messageSection } from './style.js';
 
@@ -44,6 +45,13 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
         return PriorityList[0];
     });
 
+    const [toasterInfo, setToasterInfo] = useState({
+        isVisible: false,
+        isError: false,
+        isSuccess: false,
+        msg: ''
+    })
+
     const setDataValues = (dataVal)=>{
         setDataParams((val)=>{ return {...val, ...dataVal} });
     }
@@ -65,6 +73,16 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
             }
             setCheckList('');
             setDataValues({check_list: newCheckList});
+        }else{
+            setToasterInfo({
+                isVisible: true,
+                isSuccess: false,
+                isError: true,
+                msg: 'Please add checklist items'
+            })
+            setTimeout(() => {
+                hideToaster();
+            }, 1000);
         }
     }
 
@@ -107,20 +125,47 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
         updateTask(postDataParams, dispatch, (resp, err)=>{
             setLoading(false);
             if(resp){
-                alert('updated successfully');
-                handleBackBtnClick();
+                setToasterInfo({
+                    isVisible: true,
+                    isError: false,
+                    isSuccess: true,
+                    msg: 'Task Updated successfully'
+                });
+                //handleBackBtnClick();
             }else{
-                alert('failed to update');
+                setToasterInfo({
+                    isVisible: true,
+                    isError: true,
+                    isSuccess: false,
+                    msg: 'Failed, Try again later'
+                });
             }
+            setTimeout(() => {
+                hideToaster();
+            }, 1000);
         })
     }
 
-    const updateTaskStatus = (success, error)=>{
+    const updateTaskStatus = (success, error, msg='')=>{
         if(success){
             refetchTaskDetail();
+            setToasterInfo({
+                isVisible: true,
+                isSuccess: true,
+                isError: false,
+                msg: 'Comment Added Successfully'
+            })
         }else if(error){
-
+            setToasterInfo({
+                isVisible: true,
+                isSuccess: false,
+                isError: true,
+                msg: msg||'Failed, Try again later'
+            })
         }
+        setTimeout(() => {
+            hideToaster();
+        }, 1000);
     }
 
     const deleteCommentClicked = (id)=>{
@@ -134,6 +179,12 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
         })
     }
 
+    const hideToaster = ()=>{
+        setToasterInfo({
+            isVisible: false
+        })
+    }
+
     let { fullYear, day, month } = getFormattedDate(due_date);
     let defaultDueDate = `${fullYear}-${month<10?`0${month}`:month}-${day<10?`0${day}`:day}`;
 
@@ -142,6 +193,7 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
             {
                 loading && <div className="loadingScrn"><LoadingWidget/></div>
             }
+            <CustomToaster {...toasterInfo} hideToaster={hideToaster}/>
             <div className="statusCont">
                 <span className="statusText">Mark as completed</span>
                 <span className="status">{status_name}</span>
@@ -155,7 +207,7 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
                 <span className="sign">{title}</span>
                 <span className="backBtn" onClick={handleBackBtnClick}>Back</span>
             </div>
-            <div className="taskStatus">Mark as completed</div>
+            {/* <div className="taskStatus">Mark as completed</div> */}
             <div className={taskStatus}>
                 <div className="view">
                     <div className="taskName">
@@ -249,7 +301,10 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
                             <input type="text" placeholder="Add an item" value={checkList} onChange={(e)=>setCheckList(e.target.value)}/>
                             <div className="checklistCta">
                                 <CustomButton text="Add" clickHandler={addCheckList} margin="0px 8px 0px 0px" padding="9px" borderRadius="5px" backgroundColor="#747BB4"/>
-                                <CustomButton text="Cancel" clickHandler={()=>setCheckList('')} margin="0px" padding="9px" borderRadius="5px" backgroundColor="#FE9874"/>
+                                <CustomButton text="Cancel" clickHandler={()=>{
+                                    setCheckList('');
+                                    setShowChecklist(false);
+                                }} margin="0px" padding="9px" borderRadius="5px" backgroundColor="#FE9874"/>
                             </div>
                         </Fragment>
                         :null

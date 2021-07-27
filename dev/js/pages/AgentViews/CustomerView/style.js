@@ -1,5 +1,5 @@
 import { css } from "@emotion/css";
-import { primaryFont } from "@constants";
+import { primaryFont, tabScreenWidth } from "@constants";
 
 export const head = css`
   display: flex;
@@ -43,4 +43,58 @@ export const customer = css`
     line-height: 15px;
     color: #fcfcfc;
   }
-`;
+`
+
+export const greenBtnClass = css`
+  font-family: ${primaryFont};
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #FCFCFC;
+  background: #10B759;
+  border-radius: 5px;
+  outline: none;
+    border: none;
+    cursor:pointer
+}
+`
+export const redBtnClass = css`
+  font-family: ${primaryFont};
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #FCFCFC;
+  background: #CF3030;
+  border-radius: 5px;
+  outline: none;
+    border: none;
+    cursor:pointer
+}
+`
+  ;
+
+
+export const view = css`
+  .desktopView{
+    display: block
+  }
+  .mobileView{
+    display: none;
+  }
+  @media(max-width: ${tabScreenWidth}){
+    .mobileView{
+      display: block;
+    }
+    .desktopView{
+      display: none
+    }
+  }
+`

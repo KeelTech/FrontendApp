@@ -6,30 +6,31 @@ import NotificationWidget from "@components/NotificationWidget";
 import ProfileWidget from "@components/ProfileWidget";
 import { getCaseList } from '@actions';
 import { SET_AGENT_MENUBAR_STATE } from '@constants/types';
-import {head} from "./style.js";
+import { head, view } from "./style.js";
+import DesktopViewList from './DesktopViewList'
 import MobileViewList from './MobileViewList'
 
 const CustomerView = () => {
   const dispatch = useDispatch();
-  const agentStore = useSelector((store)=>store.AGENT_STORE);
-  const { caseList } = agentStore||{};
+  const agentStore = useSelector((store) => store.AGENT_STORE);
+  const { caseList } = agentStore || {};
   const history = useHistory();
-  useEffect(()=>{
+  useEffect(() => {
     getCaseList({}, dispatch);
-  },[]);
+  }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(
-        {
-            type: SET_AGENT_MENUBAR_STATE,
-            payload: {
-                activeWidget: 'customer'
-            }
+      {
+        type: SET_AGENT_MENUBAR_STATE,
+        payload: {
+          activeWidget: 'customer'
         }
+      }
     )
-  },[])
+  }, [])
 
-  const handleCustomerClick = (caseId)=>{
+  const handleCustomerClick = (caseId) => {
     history.push(`/agent/tasks/${caseId}`)
   }
 
@@ -42,8 +43,13 @@ const CustomerView = () => {
             <ProfileWidget />
           </div>
         </Header>
-        <div>
-        <MobileViewList handleCustomerClick={handleCustomerClick} caseList={caseList}/>
+        <div className={view}>
+          <div className="desktopView">
+            <DesktopViewList handleCustomerClick={handleCustomerClick} caseList={caseList} />
+          </div>
+          <div className="mobileView">
+            <MobileViewList handleCustomerClick={handleCustomerClick} caseList={caseList} />
+          </div>
         </div>
       </div>
     </Fragment>
