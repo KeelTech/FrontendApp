@@ -47,6 +47,7 @@ function PasswordReset(props) {
       resetPassword({ otp, password }, dispatch, (err, data) => {
         if (data) {
           setShowInputFields(false);
+          setErrorMessage(false);
           setSuccessMessage(true);
           setOtp('');
           setPassword('');
