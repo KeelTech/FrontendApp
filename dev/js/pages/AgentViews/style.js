@@ -7,6 +7,7 @@ export const container = css`
     background: #DFEAF4;
     min-width: 100vw;
     min-height: 100vh;
+    overflow-wrap: anywhere;
     font-family: ${primaryFont};
     &:after{
         content: '';

@@ -69,6 +69,9 @@ export const tasksView = css`
         overflow-y: auto;
         max-height: calc(100% - 120px);
     }
+    .emptyData{
+        margin-top: 16px;
+    }
     @media(max-width: ${tabScreenWidth}){
         margin: 0px;
         width: 100%;
@@ -83,6 +86,8 @@ export const tasksView = css`
         }
         .taskList{
             max-height: 100%;
+            overflow-y: hidden;
+            padding-bottom: 40px;
         }
     }
 `

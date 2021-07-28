@@ -5,6 +5,7 @@ export const container = css`
     background: #FCFCFC;
     border-radius: 10px;
     padding: 22px;
+    max-width: 100%;
     h2{
         font-weight: bold;
         font-size: 18px;
@@ -186,7 +187,7 @@ export const checkListCont = css`
     }
     .item{
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         margin-bottom: 4px;
         justify-content: space-between;
         img{
@@ -205,21 +206,13 @@ export const checkListCont = css`
     }
     .checkItem{
         display: flex;
-        align-items: center;
+        align-items: flex-start;
     }
     .checkedItem{
         .checkedText{
             color: #A098AE;
             position: relative;
-            &:after{
-                content: '';
-                position: absolute;
-                height: 1px;
-                top: 50%;
-                left: 0px;
-                width: 100%;
-                background: #A098AE;
-            }
+            text-decoration: line-through;
         }
     }
     @media(max-width: ${tabScreenWidth}){

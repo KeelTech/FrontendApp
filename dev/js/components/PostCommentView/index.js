@@ -9,6 +9,10 @@ const PostComments = ({ taskId, updateTaskStatus })=>{
     const [comment, setComment] = useState('');
 
     const addComment = ()=>{
+        if(!comment){
+            updateTaskStatus(null, true, 'Please add some comments');
+            return;
+        }
         const dataParams = {
             msg: comment,
             task: taskId

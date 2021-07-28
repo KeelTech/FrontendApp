@@ -19,6 +19,7 @@ export const container = css`
         img{
             height: 70px;
             width: 70px;
+            z-index: 99;
         }
     }
     @keyframes rotate{

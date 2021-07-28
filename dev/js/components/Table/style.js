@@ -29,6 +29,8 @@ export const tableClass = css`
     margin: 20px;
     overflow-x:scroll;
     min-width:875px;
+    width: 100%;
+    padding-right: 40px;
 `
 export const rowClass = css`
     background-color:white;

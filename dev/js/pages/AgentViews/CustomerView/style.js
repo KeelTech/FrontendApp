@@ -1,5 +1,5 @@
 import { css } from "@emotion/css";
-import { primaryFont } from "@constants";
+import { primaryFont, tabScreenWidth } from "@constants";
 
 export const head = css`
   display: flex;
@@ -80,3 +80,21 @@ export const redBtnClass = css`
 }
 `
   ;
+
+
+export const view = css`
+  .desktopView{
+    display: block
+  }
+  .mobileView{
+    display: none;
+  }
+  @media(max-width: ${tabScreenWidth}){
+    .mobileView{
+      display: block;
+    }
+    .desktopView{
+      display: none
+    }
+  }
+`
