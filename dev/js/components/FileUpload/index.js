@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { fileUpload, fileUploadWrapper, selectedFileText, outerShell, innerShell, closeWrapper, fileButton, submitButtonWrapper, submitButton, fileData } from './style.js';
 import CustomDropDown from '@components/CustomDropDown';
+import { useDispatch, useSelector } from 'react-redux';
 
 const FileUpload = (props) => {
 
