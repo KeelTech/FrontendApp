@@ -1,0 +1,43 @@
+import React, { useEffect, useState, Fragment } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Header from '@components/Header';
+import NotificationWidget from '@components/NotificationWidget';
+import ProfileWidget from '@components/ProfileWidget';
+import CreateProfile from '@components/CreateProfile';
+import { SET_MENUBAR_STATE } from '@constants/types';
+import { body } from '../style.js';
+import { container } from './style.js';
+
+const CustomerView = ()=>{
+    const dispatch = useDispatch();
+    
+    useEffect(()=>{
+        dispatch(
+            {
+                type: SET_MENUBAR_STATE,
+                payload: {
+                    activeWidget: 'profile'
+                }
+            }
+        )
+    },[])
+
+    return(
+        <div className={`${body} ${container}`}>
+            <div className="mainView">
+                <Header headerText="Profile">
+                    <div className="headerView">
+                        <NotificationWidget/>
+                        <ProfileWidget/>
+                    </div>
+                </Header>
+                <div className="customerView">
+                    <CreateProfile/>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default CustomerView;

@@ -5,6 +5,7 @@ import { container } from './style.js';
 import DashboardView from './DashboardView';
 import TaskView from './TaskView';
 import DocumentValutView from './DocumentValutView';
+import CustomerView from './CustomerView';
 
 const UserDashboardView = (props)=>{
     const url  = props.match.path;
@@ -19,6 +20,9 @@ const UserDashboardView = (props)=>{
             }
             {
                 url.includes('vault') && <DocumentValutView/>
+            }
+            {
+                url.includes('profile') && <CustomerView/>
             }
             {
                 url.includes('billing') && <DashboardView/>
