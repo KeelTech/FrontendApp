@@ -13,7 +13,7 @@ export const wrapper = css`
   box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
   border-radius: 14px;
   @media (max-width: ${tabScreenWidth}) {
-    margin-right: 30px;
+    margin-right: 7px;
   }
   .header {
     display: flex;
@@ -34,7 +34,7 @@ export const wrapper = css`
   }
   @media (max-width: ${tabScreenWidth}) {
     .title {
-      font-size: 10px;
+      font-size: 13px;
     }
   }
   .dotMenu {
@@ -47,7 +47,10 @@ export const wrapper = css`
   }
   @media (max-width: ${tabScreenWidth}) {
     .dotMenu {
-      margin-top: 20px;
+      margin-top: 6px;
+    }
+    .trashIcon {
+      width: 15px;
     }
   }
   .modalHeaderText {
@@ -58,13 +61,14 @@ export const wrapper = css`
   }
   .date {
     justify-content: flex-start;
-    padding-left: 25px;
+    padding-left: 20px;
     font-size: 10px;
     font-family: ${primaryFont};
     font-style: normal;
     font-weight: normal;
     font-size: 10px;
     line-height: 15px;
+    margin-top: 0px;
     color: #a098ae;
   }
   @media (max-width: ${tabScreenWidth}) {
@@ -90,5 +94,9 @@ export const wrapper = css`
   }
   .pdfTitle {
     margin-top: 7%;
+    overflow: hidden;
+    @media (max-width: ${tabScreenWidth}) {
+      overflow: hidden;
+    }
   }
 `;

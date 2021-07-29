@@ -20,7 +20,7 @@ class CustomDropDown extends Component {
     render() {
         let selectedItem = {};
         if (this.state.selectedOption) {
-            selectedItem = <span>{this.state.selectedOption.displayName.substring(0, 25)}</span>
+            selectedItem = <span>{this.state.selectedOption.doc_type_name}</span>
         }
         else {
             selectedItem = <span>Search or Select type</span>
@@ -38,7 +38,7 @@ class CustomDropDown extends Component {
                             {
                                 this.props.list.map((item, index) => {
                                     return (
-                                        <button onClick={() => this.onOptionSelect(item)} key={index} className={ddContainerItem}>{item.displayName.substring(0, 25)}</button>
+                                        <button onClick={() => this.onOptionSelect(item)} key={index} className={ddContainerItem}>{item.doc_type_name}</button>
                                     );
                                 })
                             }

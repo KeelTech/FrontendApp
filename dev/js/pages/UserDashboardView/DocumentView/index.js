@@ -3,7 +3,11 @@ import Header from '@components/Header';
 import UploadedDocument from './UploadedDocument/index';
 import NotificationWidget from '@components/NotificationWidget';
 import ProfileWidget from '@components/ProfileWidget';
-import { getUserDocuments, uploadUserDocument } from '@actions/index.js';
+import {
+  getUserDocuments,
+  uploadUserDocument,
+  deleteUserDocument,
+} from '@actions/index.js';
 import FileUpload from '@components/FileUpload';
 import { useSelector, useDispatch } from 'react-redux';
 import { body } from './style.js';
@@ -13,30 +17,29 @@ function DocumentView() {
   const [searchDoc, setSearchDoc] = useState('');
   const [documentOwner, setDocumentOwner] = useState('');
   const [openFileUpload, setOpenFileUpload] = useState(false);
-  const [userAddedDocs, setUserAddedDocs] = useState(userDocuments);
+  const [updatedDocList, setUpdatedDocList] = useState(false);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getUserDocuments(dispatch, (err, data) => {
-      if (data) {
-        setUserAddedDocs(data);
-      }
-      if (err) {
-        console.log(err);
-      }
-    });
-  }, []);
+    getUserDocuments(dispatch, () => {});
+    return () => {
+      setUpdatedDocList(false);
+    };
+  }, [updatedDocList]);
 
   const documentOwnerHandler = (event) => {
     setDocumentOwner(event.target.value);
   };
 
-  const deleteDocument = (id) => {
-    setUserAddedDocs((prevState) => {
-      return prevState.filter((val) => {
-        return id != val.doc_id;
-      });
+  const deleteDocument = (id, deleteDocId) => {
+    deleteUserDocument({ doc_id: deleteDocId }, dispatch, (err, data) => {
+      if (data) {
+        setUpdatedDocList(true);
+      }
+      if (err) {
+        setUpdatedDocList(false);
+      }
     });
   };
 
@@ -46,9 +49,10 @@ function DocumentView() {
         key={doc.doc_id}
         title={doc.doc_type}
         date={doc.created_at}
-        content={doc.content}
+        orignal_file_name={doc.orignal_file_name}
         deleteDocument={deleteDocument}
         id={doc.doc_id}
+        deleteDocId={doc.id}
       />
     );
   };
@@ -57,7 +61,7 @@ function DocumentView() {
     setSearchDoc(event.target.value);
   };
 
-  const newDocumentList = userAddedDocs.filter((docNmae) => {
+  const newDocumentList = userDocuments.filter((docNmae) => {
     if (searchDoc !== '') {
       return docNmae.doc_type.toLowerCase().includes(searchDoc.toLowerCase());
     } else {
@@ -74,17 +78,19 @@ function DocumentView() {
   };
 
   const fileUploadDone = (document) => {
+    console.log(document);
     const { selectedFile, selectedFileType } = document;
-    const { value } = selectedFileType;
-    uploadUserDocument({ selectedFile, value }, dispatch, (err, data) => {
-      if (data) {
-        setOpenFileUpload(false);
-      }
-      if (err) {
-        console.log(err);
-        setOpenFileUpload(true);
-      }
-    });
+    const { id } = selectedFileType;
+    // uploadUserDocument({ selectedFile, id }, dispatch, (err, data) => {
+    //   if (data) {
+    //     setUpdatedDocList(true);
+    //     setOpenFileUpload(false);
+    //   }
+    //   if (err) {
+    //     setUpdatedDocList(false);
+    //     setOpenFileUpload(true);
+    //   }
+    // });
   };
 
   return (
