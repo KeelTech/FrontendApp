@@ -1,31 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { fileUpload, fileUploadWrapper, selectedFileText, outerShell, innerShell, closeWrapper, fileButton, submitButtonWrapper, submitButton, fileData } from './style.js';
 import CustomDropDown from '@components/CustomDropDown';
 import { useDispatch, useSelector } from 'react-redux';
+import { getDocTypeList } from '@actions';
 
 const FileUpload = (props) => {
 
+    const docTypes = useSelector(state => state.DOCUMENTS.docTypes);
     const [selectedFile, setSelectedFile] = useState('');
     const [selectedFileType, setSelectedFileType] = useState('');
     const [selectedFileName, setSelectedFileName] = useState('');
-    const [options, setOptions] = useState([
-        {
-            value: 1,
-            displayName: "Aadhar Card"
-        },
-        {
-            value: 2,
-            displayName: "PAN Card"
-        },
-        {
-            value: 3,
-            displayName: "Driving License"
-        },
-        {
-            value: 4,
-            displayName: "Other"
-        }
-    ]);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        getDocTypeList(dispatch, () => {})
+    }, []);
+
     const close = () => {
         props.fileUploadModalClosed(false);
     }
@@ -75,7 +65,7 @@ const FileUpload = (props) => {
                     <input id="file" className={fileUpload} type="file" onChange={onFileChange} />
                 </div>
                 <div className={fileData}>{displayFileData()}</div>
-                <CustomDropDown list={options} optionSelected={handleOptionChange}></CustomDropDown>
+                <CustomDropDown list={docTypes} optionSelected={handleOptionChange}></CustomDropDown>
                 <div className={submitButtonWrapper}>
                     <button onClick={uploadFile} className={submitButton}>
                         Upload

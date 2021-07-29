@@ -35,6 +35,7 @@ export const body = css`
     font-size: 14px;
     margin-left: 15px;
     border: none;
+    outline: none;
   }
   .searchDocsWrapper {
     display: flex;
@@ -45,6 +46,7 @@ export const body = css`
     background: #fcfcfc;
     border: none;
     padding-left: 5%;
+    outline: none;
   }
   .searchDocs::placeholder {
     font-family: ${primaryFont};
@@ -68,7 +70,7 @@ export const body = css`
   }
   @media (max-width: ${tabScreenWidth}) {
     .uploadSection {
-      flex-direction: column;
+      flex-direction: column-reverse;
       align-items: center;
       margin-top: 17%;
     }
@@ -81,13 +83,25 @@ export const body = css`
     }
     .searchDocsWrapper {
       margin-top: 5%;
+      width: 100%;
+    }
+    .searchDocs {
+      padding: 7px 10px;
+      border-radius: 10px;
+      width: 100%;
+    }
+    .uploadedBy {
+      width: 100%;
+      margin-left: 5%;
     }
     .searchDocs::placeholder {
-      font-size: 10px;
+      font-size: 15px;
     }
     .uploadButton {
-      margin-top: 5%;
       font-size: 14px;
+      margin-bottom: 50px;
+      background: #363b64;
+      border-radius: 10px;
     }
   }
   .uploadedDocsWrapper {
@@ -99,7 +113,8 @@ export const body = css`
   @media (max-width: ${tabScreenWidth}) {
     .uploadedDocsWrapper {
       grid-template-columns: 50% 50%;
-      margin-top: 15%;
+      margin-top: 10%;
+      margin-left: 1%;
     }
   }
 `;

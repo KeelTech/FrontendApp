@@ -9,13 +9,17 @@ import {
   GET_SINGLE_DOC,
   GET_SINGLE_DOC_FAIL,
   GET_SINGLE_DOC_LOADING,
+  DELETE_DOC_SUCCESS,
+  DELETE_DOC_FAILURE,
+  DELETE_DOC_LOADING,
 } from '../../constants/types';
 import STORAGE from '../../helpers/storage';
-import { API_POST, API_GET } from '../../api/api.js';
+import { API_POST, API_GET, API_DELETE } from '../../api/api.js';
 
 export const getUserDocuments = (dispatch, cb) => {
   API_GET(API_BASE_URL + '/v1/user/get-user-doc')
     .then(function (response) {
+      console.log(response);
       if (response) {
         dispatch({
           type: GET_USER_DOCUMENTS,
@@ -55,7 +59,7 @@ export const uploadUserDocument = (data, dispatch, cb) => {
   });
   const formData = new FormData();
   formData.append('doc_file', data.selectedFile);
-  formData.append('doc_type', data.value);
+  formData.append('doc_type', data.id);
   API_POST(API_BASE_URL + '/v1/user/upload-doc', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -103,12 +107,14 @@ export const uploadUserDocument = (data, dispatch, cb) => {
 export const getDocTypeList = (dispatch, cb) => {
   API_GET(API_BASE_URL + '/v1/doc/doc-type-list')
     .then(function (response) {
+      console.log('fetched doc type', response);
       if (response) {
-        console.log('fetched doc type', response);
         dispatch({
           type: GET_DOC_TYPES,
+          payload: response.data,
         });
-        if (cb) cb(null, response);
+        const { data } = response;
+        if (cb) cb(null, data);
       } else {
         let message = 'Failing to fetch doc types';
         dispatch({
@@ -164,6 +170,41 @@ export const getSingleDocLink = (dataParams, dispatch, cb = null) => {
       let message = e.message;
       dispatch({
         type: GET_SINGLE_DOC_FAIL,
+        payload: {
+          error_message: message,
+        },
+      });
+      if (cb) cb(null, message);
+    });
+};
+
+export const deleteUserDocument = (dataParams, dispatch, cb = null) => {
+  const doc_id = dataParams.doc_id;
+  dispatch({
+    type: DELETE_DOC_LOADING,
+    payload: {
+      status: true,
+    },
+  });
+  API_DELETE(API_BASE_URL + '/v1/user/delete-doc/' + doc_id)
+    .then(function (response) {
+      dispatch({
+        type: DELETE_DOC_LOADING,
+        payload: {
+          status: false,
+        },
+      });
+      dispatch({
+        type: DELETE_DOC_SUCCESS,
+        payload: response || '',
+        doc_id,
+      });
+      if (cb) cb(null, data);
+    })
+    .catch((e) => {
+      let message = e.message;
+      dispatch({
+        type: DELETE_DOC_FAILURE,
         payload: {
           error_message: message,
         },

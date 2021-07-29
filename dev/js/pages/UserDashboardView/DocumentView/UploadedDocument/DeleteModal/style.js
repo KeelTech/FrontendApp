@@ -11,14 +11,13 @@ export const Background = css`
   justify-content: center;
   align-items: center;
   margin-top: 7%;
-  box-shadow: 0 5px 16px rgb(0 0 0 / 20%);
+  width: 100%;
+  height: 100%;
   @media (max-width: ${tabScreenWidth}) {
-    left: 45%;
-    top: 48%;
+    left: 50%;
+    top: 50%;
   }
   .ModalWrapper {
-    width: 100%;
-    height: 100%;
     box-shadow: 0 5px 16px rgb(0 0 0 / 20%);
     background: #fffefe;
     color: #000;
