@@ -22,6 +22,7 @@ function DocumentView() {
   const [updatedDocList, setUpdatedDocList] = useState(false);
   const [showLoader, setLoader] = useState(false);
   const [showLoaderModal, setShowLoaderModal] = useState(false);
+  const [fileSizeExceeded, setFileSizeExceede] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -92,11 +93,16 @@ function DocumentView() {
   const fileUploadDone = (document) => {
     const { selectedFile, selectedFileType } = document;
     const { id } = selectedFileType;
+    if (!selectedFile || !selectedFileType) {
+      return;
+    }
     const { size } = selectedFile;
     const filesize = size / (1024 * 1000);
     if (filesize > 10) {
+      setFileSizeExceede(true);
       return;
     }
+    setFileSizeExceede(false);
     setShowLoaderModal(true);
     uploadUserDocument({ selectedFile, id }, dispatch, (err, data) => {
       if (data) {
@@ -162,6 +168,7 @@ function DocumentView() {
           <FileUpload
             fileUploadModalClosed={fileuploadclosed}
             uploadFile={fileUploadDone}
+            maxFileSize={fileSizeExceeded}
           />
         </div>
       )}
