@@ -17,7 +17,7 @@ export const body = css`
   }
   .uploadSection {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     height: 40px;
   }
   .uploadText {
@@ -27,6 +27,7 @@ export const body = css`
   }
   .uploadedBy {
     display: flex;
+    margin-left: 75px;
   }
   .optionsMenu {
     border-radius: 10px;
@@ -36,6 +37,10 @@ export const body = css`
     margin-left: 15px;
     border: none;
     outline: none;
+  }
+  .searchUploadWrapper {
+    display: flex;
+    margin-right: 50px;
   }
   .searchDocsWrapper {
     display: flex;
@@ -58,7 +63,7 @@ export const body = css`
   .uploadButton {
     border-radius: 15px;
     margin-left: 5%;
-    width: 250px;
+    width: 280px;
     background: #363b64;
     cursor: pointer;
     color: #ffff;
@@ -72,7 +77,7 @@ export const body = css`
     .uploadSection {
       flex-direction: column-reverse;
       align-items: center;
-      margin-top: 17%;
+      margin-top: 30%;
     }
     .uploadText {
       font-size: 17px;
@@ -80,6 +85,11 @@ export const body = css`
     .optionsMenu {
       margin-top: 10px;
       height: 17px;
+    }
+    .searchUploadWrapper {
+      display: flex;
+      flex-direction: column-reverse;
+      width: 109%;
     }
     .searchDocsWrapper {
       margin-top: 5%;
@@ -89,6 +99,8 @@ export const body = css`
       padding: 7px 10px;
       border-radius: 10px;
       width: 100%;
+      margin-left: 8%;
+      margin-top: 10%;
     }
     .uploadedBy {
       width: 100%;
@@ -99,9 +111,10 @@ export const body = css`
     }
     .uploadButton {
       font-size: 14px;
-      margin-bottom: 50px;
       background: #363b64;
       border-radius: 10px;
+      width: 40%;
+      margin-left: 35%;
     }
   }
   .uploadedDocsWrapper {
@@ -113,8 +126,41 @@ export const body = css`
   @media (max-width: ${tabScreenWidth}) {
     .uploadedDocsWrapper {
       grid-template-columns: 50% 50%;
-      margin-top: 10%;
+      margin-top: 2%;
       margin-left: 1%;
     }
+  }
+  .noDocsHeader {
+    position: absolute;
+    left: 30%;
+    @media (max-width: ${tabScreenWidth}) {
+      left: 5%;
+    }
+  }
+`;
+
+export const loaderModalView = css`
+  position: absolute;
+  display: flex;
+  left: 57%;
+  top: 34%;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  @media (max-width: ${tabScreenWidth}) {
+    left: 20%;
+    top: 20%;
+  }
+`;
+
+export const fileUploadModal = css`
+  position: absolute;
+  display: flex;
+  left: 50%;
+  top: 20%;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  @media (max-width: ${tabScreenWidth}) {
   }
 `;
