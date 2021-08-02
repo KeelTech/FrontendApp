@@ -13,13 +13,11 @@ import {
   DELETE_DOC_FAILURE,
   DELETE_DOC_LOADING,
 } from '../../constants/types';
-import STORAGE from '../../helpers/storage';
 import { API_POST, API_GET, API_DELETE } from '../../api/api.js';
 
 export const getUserDocuments = (dispatch, cb) => {
   API_GET(API_BASE_URL + '/v1/user/get-user-doc')
     .then(function (response) {
-      console.log(response);
       if (response) {
         dispatch({
           type: GET_USER_DOCUMENTS,
@@ -107,7 +105,6 @@ export const uploadUserDocument = (data, dispatch, cb) => {
 export const getDocTypeList = (dispatch, cb) => {
   API_GET(API_BASE_URL + '/v1/doc/doc-type-list')
     .then(function (response) {
-      console.log('fetched doc type', response);
       if (response) {
         dispatch({
           type: GET_DOC_TYPES,

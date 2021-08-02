@@ -1,8 +1,4 @@
-import {
-  GET_USER_DOCUMENTS,
-  GET_DOC_TYPES,
-  DELETE_DOC_SUCCESS,
-} from '../../constants/types';
+import { GET_USER_DOCUMENTS, GET_DOC_TYPES } from '../../constants/types';
 
 const defaultState = {
   userDocuments: [],
@@ -18,8 +14,7 @@ export default function (state = defaultState, action) {
     }
     case GET_DOC_TYPES: {
       let newState = { ...state };
-      newState.docTypes.push(...action.payload);
-      console.log(newState);
+      newState.docTypes = [...action.payload];
       return newState;
     }
   }
