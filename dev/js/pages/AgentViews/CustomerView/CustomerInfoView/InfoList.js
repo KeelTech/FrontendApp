@@ -15,7 +15,7 @@ const InfoList = () => {
       <li className="infofield">
         <span className="key">Address:</span>
         <span className="value">
-          Flat No. T4, HSR Layout, Sector 1, Bangalore - 660001
+          Flat No. T4, HSR Layout, Sector 1, Bangalore-660001
         </span>
       </li>
       <li className="infofield">
