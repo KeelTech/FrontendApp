@@ -5,6 +5,7 @@ import * as SIGNUP_ACTIONS from './commons/signup.js';
 import * as PASSWORD_RESET_ACTIONS from './commons/passwordReset';
 import * as CONSUMER_TASKS from './commons/consumerTaskInfo.js';
 import * as AGENT_TASKS from './commons/agentTask.js';
+import * as DOCUMENT_VAULT from './commons/documentVault.js';
 
 module.exports = Object.assign(
   {},
@@ -14,5 +15,6 @@ module.exports = Object.assign(
   SIGNUP_ACTIONS,
   PASSWORD_RESET_ACTIONS,
   CONSUMER_TASKS,
-  AGENT_TASKS
+  AGENT_TASKS,
+  DOCUMENT_VAULT
 );
