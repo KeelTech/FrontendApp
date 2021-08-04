@@ -8,8 +8,14 @@ const DocumentCardModal = ({ id, docId, toggle, deleteDocumentClicked, downloadD
         <div className={container} ref={modalRef}>
             <DetectClickOutside targetRef={modalRef} clickOutside={toggle}>
                 <div className={menuBar}>
-                    <span onClick={()=>downloadDocumentClicked({id, docId})}>Download</span>
-                    <span onClick={()=>deleteDocumentClicked({id})}>Delete</span>
+                    <span onClick={()=>{
+                        toggle();
+                        downloadDocumentClicked({id, docId})
+                    }}>Download</span>
+                    <span onClick={()=>{
+                        toggle();
+                        deleteDocumentClicked({id})
+                    }}>Delete</span>
                 </div>
             </DetectClickOutside>
         </div>

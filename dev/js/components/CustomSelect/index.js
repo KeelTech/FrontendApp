@@ -47,10 +47,19 @@ export const container = props => css`
     }
     @media(max-width: ${tabScreenWidth}){
         display: flex;
+        .selectedOption{
+            padding: ${props.mpadding};
+            font-size: ${props.mfontSize?props.mfontSize:props.fontSize};
+        }
+        .optionList{
+            span{
+                font-size: ${props.mfontSize?props.mfontSize:props.fontSize};
+            }
+        }
     }
 `
 
-const CustomSelect = ({border="0px" ,options=[], defaultOption={}, clickHandler=()=>{}, borderRadius="8px", backgroundColor="#FFF", fontColor="#363B64", fontSize="16px", fontWeight="normal", padding="10px 16px", margin="4px 0px", borderBottom="0.8px solid #EAEAEF"})=>{
+const CustomSelect = ({border="0px" ,mpadding="8px 20px", mfontSize, options=[], defaultOption={}, clickHandler=()=>{}, borderRadius="8px", backgroundColor="#FFF", fontColor="#363B64", fontSize="16px", fontWeight="normal", padding="10px 16px", margin="4px 0px", borderBottom="0.8px solid #EAEAEF"})=>{
     const [showOptions, setOptionsVisibility] = useState(false);
     const [selectedOption, setOptions] = useState(defaultOption);
 
@@ -66,7 +75,7 @@ const CustomSelect = ({border="0px" ,options=[], defaultOption={}, clickHandler=
         clickHandler(val);
     }
     return(
-        <div className={container({border, borderBottom, borderRadius, backgroundColor, fontColor, fontSize, fontWeight, padding, margin})} ref={optionListRef}>
+        <div className={container({border, mpadding, mfontSize, borderBottom, borderRadius, backgroundColor, fontColor, fontSize, fontWeight, padding, margin})} ref={optionListRef}>
             <div className="selectedOption" onClick={toggleOptionList}>
                 <span>{selectedOption.val}</span>
                 <img className="icon" src={ASSETS_BASE_URL+"/images/common/arrowDown.svg"} alt="open"/>

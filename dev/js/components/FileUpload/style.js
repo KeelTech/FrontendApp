@@ -45,7 +45,6 @@ export const outerShell = css`
     position:absolute;
     top:15%;
     width:90vw;
-    margin-left: 5vw;
     max-width: 890px;
     box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
     text-align:center;

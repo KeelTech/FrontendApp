@@ -33,6 +33,11 @@ export const container = props => css`
     }
     @media(max-width: ${tabScreenWidth}){
         display: flex;
+        padding: 5px 20px;
+        font-size: 14px;
+        input{
+            font-size: 14px;
+        }
     }
 `
 

@@ -16,7 +16,7 @@ import DocumentCard from '@components/DocumentCard';
 import FileUpload from '@components/FileUpload';
 import CustomToaster from '@components/CustomToaster';
 import DeleteConfirmationPopup from '@components/DeleteConfirmationPopup';
-import { container, filters } from './style.js';
+import { container, filters, uploadMobileCta } from './style.js';
 import { body } from '../style.js';
 
 const PriorityList = [
@@ -52,7 +52,8 @@ const TaskView = ()=>{
         msg: ''
     })
     const [loading, setLoading] = useState('');
-
+    const [selectedDeleteDocument, setDeleteDocument] = useState('');
+    const [filterList, setFilterList] = useState([]);
 
     const taskClickHandler = (taskId)=>{
         if(isMobileView()){
@@ -93,9 +94,24 @@ const TaskView = ()=>{
 
     const handleUploadedByChange = (val)=>{
         setUploadedBy(val);
+        const { id } = val;
+        let selectedDocList = [...documentList];
+        if(searchVal){
+            selectedDocList = [...filterList];
+        }
+        const newFilterList = selectedDocList.filter((doc)=>{
+            const { user_id } = doc;
+            if(id==0){
+                return !user_id
+            }else if(id==2){
+                return !!user_id;
+            }
+            return true;
+        });
+        setFilterList(newFilterList);
     }
 
-    const handleResponse = (resp, msg='Uploaded Successfully')=>{
+    const handleResponse = (resp, msg='Uploaded Successfully', fetchNewData = true)=>{
         if(resp){
             setToasterInfo({
                 isVisible: true,
@@ -103,7 +119,9 @@ const TaskView = ()=>{
                 isSuccess: true,
                 msg
             });
-            fetchDocuments();
+            if(fetchNewData){
+                fetchDocuments();
+            }
         }else{
             setToasterInfo({
                 isVisible: true,
@@ -118,13 +136,13 @@ const TaskView = ()=>{
     }
 
     const uploadFile = (val)=>{
+        toggleUploadModal();
+        setLoading(true);
         const { selectedFile,  selectedFileType } = val;
         const formData = new FormData();
         formData.append('doc_file', selectedFile);
-        formData.append('doc_type', 4);
-        setLoading(true);
+        formData.append('doc_type', selectedFileType && selectedFileType.value);
         uploadDocument(formData, dispatch, (resp, error)=>{
-            toggleUploadModal();
             handleResponse(resp);
             setLoading(false);
         })
@@ -136,6 +154,27 @@ const TaskView = ()=>{
 
     const handleSearch = (val)=>{
         setSearchVal(val);
+        try{
+            let filterList = [];
+            documentList.map((doc)=>{
+                const { doc_type } = doc;
+                let name = doc_type.toLowerCase();
+                let searchString = val.toLowerCase();
+                if(name.includes(searchString)){
+                    let index = name.indexOf(searchString);
+                    filterList.push({
+                        ...doc,
+                        rank: index
+                    })
+                }
+            })
+            filterList = filterList.sort((x,y)=>{
+                return x.rank-y.rank
+            })
+            setFilterList(filterList);
+        }catch(e) {
+
+        }
     }
 
     const hideToaster = ()=>{
@@ -145,30 +184,54 @@ const TaskView = ()=>{
     }
 
     const deleteDocumentClicked = ({id})=>{
+        setDeleteDocument(id);
         toggleDeletePopup()
-        // setLoading(true);
-        // deleteDocument({id}, dispatch, (resp, err)=>{
-        //     setLoading(false);
-        //     handleResponse(resp, 'Deleted Successfully');
-        // })
+    }
+
+    const deletePopupHandler = ()=>{
+        toggleDeletePopup();
+        setLoading(true);
+        deleteDocument({id: selectedDeleteDocument}, dispatch, (resp, err)=>{
+            setLoading(false);
+            handleResponse(resp, 'Deleted Successfully');
+        })
     }
 
     const downloadDocumentClicked = ({id, docId})=>{
         setLoading(true);
         downloadDocument({ docId }, dispatch, (resp, err)=>{
             setLoading(false);
-            console.log('resp is', resp);
-            var blob=new Blob([resp]);
-            var link=document.createElement('a');
-            link.href=window.URL.createObjectURL(blob);
-            link.download="myFileName.png";
-            link.click();
-            handleResponse(resp, 'Downloaded Successfully');
+            // console.log('resp is', resp);
+            // var blob=new Blob([resp]);
+            // var link=document.createElement('a');
+            // link.href=window.URL.createObjectURL(blob);
+            // link.download="new.png";
+            // link.click();
+            // var img = document.createElement('img');
+            // img.classList.add('demo');
+            // img.id="demo";
+            // img.src = 'data:image/jpeg;base64,' + btoa(resp);
+            // document.body.appendChild(img);
+            // handleResponse(resp, 'Downloaded Successfully', false);
+            // resp.blob().then(blob => {
+            //     let url = window.URL.createObjectURL(blob);
+            //     let a = document.createElement("a");
+            //     console.log(url);
+            //     a.href = url;
+            //     a.download = 'filename';
+            //     a.click();
+            // });
         })
     }
 
     const toggleDeletePopup = ()=>{
         setDeleteConfirmation(val=>!val);
+    }
+
+    const { id =1 } = uploadedBy;
+    let documentListFiltered = [...documentList];
+    if(id!==1 || searchVal){
+        documentListFiltered = [...filterList];
     }
      
     return(
@@ -176,6 +239,9 @@ const TaskView = ()=>{
             <div className="mainView">
                 <Header headerText="All your documents are safe with us!">
                     <div className="headerView">
+                        <div className={uploadMobileCta}>
+                            <CustomButton text="Upload Document" icon={`${ASSETS_BASE_URL}/images/common/uploadedDocs.svg`} clickHandler={toggleUploadModal} margin="0px 8px 0px 0px" padding="6px 20px" borderRadius="10px" backgroundColor="#363B64" fontSize="12px"/>
+                        </div>
                         <NotificationWidget/>
                         <ProfileWidget/>
                     </div>
@@ -186,28 +252,34 @@ const TaskView = ()=>{
                         openUploadDocumentModal && documentTypes.length?<FileUpload documentTypes={documentTypes} fileUploadModalClosed={toggleUploadModal} uploadFile={uploadFile}/>:null
                     }
                     {
-                        showDeleteConfirmation?<DeleteConfirmationPopup togglePopup={toggleDeletePopup}/>:null
+                        showDeleteConfirmation?<DeleteConfirmationPopup togglePopup={toggleDeletePopup} deletePopupHandler={deletePopupHandler}/>:null
                     }
                     <div className={filters}>
                         <div className="uploadBy">
                             <span className="btn">Uploaded By</span>
-                            <CustomSelect options={PriorityList} defaultOption={uploadedBy} clickHandler={handleUploadedByChange}/>
+                            <CustomSelect options={PriorityList} defaultOption={uploadedBy} clickHandler={handleUploadedByChange} mpadding="2px 12px" mfontSize="14px"/>
 
                         </div>
                         <div className="documentCta">
                             <div className="searchBar">
-                                <CustomSearch handleChange={handleSearch} value={searchVal} padding="10px 16px"/>
+                                <CustomSearch handleChange={handleSearch} value={searchVal} padding="6px 16px"/>
                             </div>
-                            <CustomButton text="Upload Document" icon={`${ASSETS_BASE_URL}/images/common/uploadedDocs.svg`} clickHandler={toggleUploadModal} margin="0px 8px 0px 0px" padding="10px 16px" borderRadius="16px" backgroundColor="#363B64" fontSize="16px"/>
+                            <div className="uploadCTA">
+                                <CustomButton text="Upload Document" icon={`${ASSETS_BASE_URL}/images/common/uploadedDocs.svg`} clickHandler={toggleUploadModal} margin="0px 8px 0px 0px" padding="10px 28px" borderRadius="16px" backgroundColor="#363B64" fontSize="12px"/>
+                            </div>
+                        </div>
+                        <div className="mobileDropDown">
+                            <span className="btn">Uploaded By</span>
+                            <CustomSelect options={PriorityList} defaultOption={uploadedBy} clickHandler={handleUploadedByChange}/>
                         </div>
                     </div>
                     {
                         documentListLoading || loading?<div className={loaderView}><LoadingWidget/></div>:
                         <div className="documentList">
                             {
-                                documentList.length?
-                                documentList.map((document)=>{
-                                    return <DocumentCard documentData={document} deleteDocumentClicked={deleteDocumentClicked} downloadDocumentClicked={downloadDocumentClicked}/>
+                                documentListFiltered.length?
+                                documentListFiltered.map((document)=>{
+                                    return <DocumentCard key={document.id} documentData={document} deleteDocumentClicked={deleteDocumentClicked} downloadDocumentClicked={downloadDocumentClicked}/>
                                 })
                                 :<BlankScreen message="You have no documents"/>
                             }

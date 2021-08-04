@@ -61,8 +61,7 @@ export const deleteDocument = (dataParams, dispatch, cb=null)=>{
 
 export const downloadDocument = (dataParams, dispatch, cb=null)=>{
     const { docId } = dataParams;
-    API_GET(`${API_BASE_URL}/v1/doc/get-single-doc/${docId}`,
-        dataParams
+    API_GET(`${API_BASE_URL}/v1/doc/get-single-doc/${docId}`
     ).then((response)=>{
         if(cb)cb(response, null);
     }).catch((e)=>{
