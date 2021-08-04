@@ -153,10 +153,15 @@ const TaskView = ()=>{
     }
 
     const handleSearch = (val)=>{
+        const { id =1 } = uploadedBy;
+        let selectedDocList = [...documentList];
+        if(id!==1){
+            selectedDocList = [...filterList];
+        }
         setSearchVal(val);
         try{
             let filterList = [];
-            documentList.map((doc)=>{
+            selectedDocList.map((doc)=>{
                 const { doc_type } = doc;
                 let name = doc_type.toLowerCase();
                 let searchString = val.toLowerCase();
