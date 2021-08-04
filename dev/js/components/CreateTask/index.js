@@ -7,8 +7,9 @@ import CustomButton from '@components/CustomButton';
 import { createTask } from '@actions';
 import LoadingWidget from '@components/LoadingWidget';
 import CustomToaster from '@components/CustomToaster';
+import FileUpload from '@components/FileUpload';
 import { loaderView } from '@constants';
-import { container, taskStatus, messageSection, checkListCont, attachmentCont, cta } from './style.js';
+import { container, taskStatus, checkListCont, attachmentCont, cta } from './style.js';
 
 const PriorityList = [
     {
@@ -49,6 +50,11 @@ const CreateTask = ({ toggleAddTaskView, caseId })=>{
         isSuccess: false,
         msg: ''
     })
+    const [openUploadDocumentModal, setOpenUploadModal] = useState(false);
+
+    const toggleUploadModal = ()=>{
+        setOpenUploadModal(val=>!val);
+    }
 
     const addMember = ()=>{
 
@@ -133,10 +139,36 @@ const CreateTask = ({ toggleAddTaskView, caseId })=>{
         setDataValues({check_list: newCheckList});
     }
 
+    const uploadFile = (val, resp)=>{
+        toggleUploadModal();
+        if(resp){
+            setToasterInfo({
+                isVisible: true,
+                isError: false,
+                isSuccess: true,
+                msg: 'Uploaded Successfully'
+            });
+        }else{
+            setToasterInfo({
+                isVisible: true,
+                isError: true,
+                isSuccess: false,
+                msg: 'Failed, Try again later'
+            });
+        }
+
+        setTimeout(() => {
+            hideToaster();
+        }, 1000);
+    }
+
     return(
         <div className={container}>
             {
                 loading && <div className={loaderView}><LoadingWidget/></div>
+            }
+            {
+                openUploadDocumentModal ?<FileUpload fileUploadModalClosed={toggleUploadModal} uploadFile={uploadFile} isUploadToServer/>:null
             }
             <CustomToaster {...toasterInfo} hideToaster={hideToaster}/>
             <h2>New Task</h2>
@@ -192,7 +224,7 @@ const CreateTask = ({ toggleAddTaskView, caseId })=>{
                         <img className="icon" src={ASSETS_BASE_URL+"/images/common/attachment.svg"} alt="discuss"/>
                         <span>Attachments</span>
                     </div>
-                    <CustomButton text="Add a document" clickHandler={addMember} margin="0px" padding="9px" borderRadius="5px"/>
+                    <CustomButton text="Add a document" clickHandler={toggleUploadModal} margin="0px" padding="9px" borderRadius="5px"/>
                 </div>
 
                 <div className={checkListCont}>

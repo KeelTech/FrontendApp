@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { fileUpload, fileUploadWrapper, selectedFileText, outerShell, innerShell, closeWrapper, fileButton, submitButtonWrapper, submitButton, fileData } from './style.js';
 import CustomDropDown from '@components/CustomDropDown';
+import { uploadDocument, getDocumentTypes } from '@actions';
+import LoadingWidget from '@components/LoadingWidget';
+import { loaderView } from '@constants';
 import CustomToaster from '@components/CustomToaster';
 
-const FileUpload = ({ documentTypes=[], fileUploadModalClosed, uploadFile }) => {
-
+const FileUpload = ({ fileUploadModalClosed, uploadFile, isUploadToServer=false, taskId }) => {
+    const dispatch = useDispatch();
     const [selectedFile, setSelectedFile] = useState('');
     const [selectedFileType, setSelectedFileType] = useState({});
     const [selectedFileName, setSelectedFileName] = useState('');
@@ -14,27 +18,29 @@ const FileUpload = ({ documentTypes=[], fileUploadModalClosed, uploadFile }) => 
         isSuccess: false,
         msg: ''
     })
-    const [options, setOptions] = useState([
-        {
-            value: 1,
-            displayName: "Aadhar Card"
-        },
-        {
-            value: 2,
-            displayName: "PAN Card"
-        },
-        {
-            value: 3,
-            displayName: "Driving License"
-        },
-        {
-            value: 4,
-            displayName: "Other"
-        }
-    ]);
+    const [loading, setLoading] = useState(false);
+    const [documentTypes, setDocumentTypes] = useState([]);
+
+    useEffect(()=>{
+        setLoading(true);
+        getDocumentTypes({}, dispatch, (resp, err)=>{
+            setLoading(false);
+            if(resp && resp.data && resp.data.length){
+                const filterData = resp.data.map((val)=>{
+                    return {
+                        value: val.id,
+                        displayName: val.doc_type_name
+                    }
+                })
+                setDocumentTypes(filterData);
+            }
+        })
+    },[])
+
     const close = () => {
         fileUploadModalClosed(false);
     }
+
     const onFileChange = event => {
         setSelectedFile(event.target.files[0]);
         if (event.target.files[0]) {
@@ -44,12 +50,30 @@ const FileUpload = ({ documentTypes=[], fileUploadModalClosed, uploadFile }) => 
             setSelectedFileName('');
         }
     };
+
     const btnClickedUpload = () => {
         document.getElementById("file").click();
     }
+    
     const handleOptionChange = (item) => {
         setSelectedFileType(item);
     }
+
+    const uploadFileToServer = (val)=>{
+        setLoading(true);
+        const { selectedFile,  selectedFileType } = val;
+        const formData = new FormData();
+        formData.append('doc_file', selectedFile);
+        formData.append('doc_type', selectedFileType && selectedFileType.value);
+        if(taskId){
+            formData.append('task_id', taskId);            
+        }
+        uploadDocument(formData, dispatch, (resp, error)=>{
+            setLoading(false);
+            uploadFile({}, resp);
+        })
+    }
+
     const handleUploadFile = () => {
         let errorMsg = '';
         if(!selectedFile){
@@ -69,11 +93,16 @@ const FileUpload = ({ documentTypes=[], fileUploadModalClosed, uploadFile }) => 
             }, 1000);
             return;
         }
-        uploadFile({
+        const dataParams = {
             selectedFile: selectedFile,
             selectedFileName: selectedFileName,
             selectedFileType: selectedFileType,
-        })
+        }
+        if(isUploadToServer){
+            uploadFileToServer(dataParams);
+        }else{
+            uploadFile(dataParams);
+        }
     }
     const displayFileData = () => {
         if (selectedFile) {
@@ -100,6 +129,9 @@ const FileUpload = ({ documentTypes=[], fileUploadModalClosed, uploadFile }) => 
 
     return (
         <div className={outerShell}>
+            {
+                loading && <div className={loaderView}><LoadingWidget/></div>
+            }
             <CustomToaster {...toasterInfo} hideToaster={hideToaster}/>
             <span onClick={close} className={closeWrapper}>x</span>
             <div className={innerShell}>
@@ -107,7 +139,7 @@ const FileUpload = ({ documentTypes=[], fileUploadModalClosed, uploadFile }) => 
                     <input id="file" className={fileUpload} type="file" onChange={onFileChange} />
                 </div>
                 <div className={fileData}>{displayFileData()}</div>
-                <CustomDropDown list={documentTypes && documentTypes.length?documentTypes:options} optionSelected={handleOptionChange}></CustomDropDown>
+                <CustomDropDown list={documentTypes} optionSelected={handleOptionChange}></CustomDropDown>
                 <div className={submitButtonWrapper}>
                     <button onClick={handleUploadFile} className={submitButton}>
                         Upload

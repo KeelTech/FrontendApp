@@ -1,13 +1,15 @@
 import React, { Fragment, useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { updateTask, deleteComment } from '@actions';
+import { updateTask, deleteComment, deleteDocument } from '@actions';
 import AttachmentCard from '@components/AttachmentCard';
 import CustomButton from '@components/CustomButton';
 import CustomSelect from '@components/CustomSelect';
 import LoadingWidget from '@components/LoadingWidget';
 import PostCommentView from '@components/PostCommentView';
 import CustomToaster from '@components/CustomToaster';
+import FileUpload from '@components/FileUpload';
+import DeleteConfirmationPopup from '@components/DeleteConfirmationPopup';
 import { getNameInitialHelper, getFormattedTime, getFormattedDate, capitalizeFirstLetter } from '@helpers/utils';
 import { container, taskStatus, discussionSection, memberCard, attachmentSection, checklistSection, messageSection } from './style.js';
 
@@ -51,6 +53,37 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
         isSuccess: false,
         msg: ''
     })
+    const [openUploadDocumentModal, setOpenUploadModal] = useState(false);
+    const [showDeleteConfirmation, setDeleteConfirmation] = useState(false);
+    const [selectedDeleteDocument, setDeleteDocument] = useState('');
+
+    const toggleUploadModal = ()=>{
+        setOpenUploadModal(val=>!val);
+    }
+
+    const uploadFile = (val, resp)=>{
+        toggleUploadModal();
+        if(resp){
+            setToasterInfo({
+                isVisible: true,
+                isError: false,
+                isSuccess: true,
+                msg: 'Uploaded Successfully'
+            });
+            refetchTaskDetail();
+        }else{
+            setToasterInfo({
+                isVisible: true,
+                isError: true,
+                isSuccess: false,
+                msg: 'Failed, Try again later'
+            });
+        }
+
+        setTimeout(() => {
+            hideToaster();
+        }, 1000);
+    }
 
     const setDataValues = (dataVal)=>{
         setDataParams((val)=>{ return {...val, ...dataVal} });
@@ -146,21 +179,21 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
         })
     }
 
-    const updateTaskStatus = (success, error, msg='')=>{
+    const updateTaskStatus = (success, error, errorMsg='', successMsg='')=>{
         if(success){
             refetchTaskDetail();
             setToasterInfo({
                 isVisible: true,
                 isSuccess: true,
                 isError: false,
-                msg: 'Comment Added Successfully'
+                msg: successMsg||'Comment Added Successfully'
             })
         }else if(error){
             setToasterInfo({
                 isVisible: true,
                 isSuccess: false,
                 isError: true,
-                msg: msg||'Failed, Try again later'
+                msg: errorMsg||'Failed, Try again later'
             })
         }
         setTimeout(() => {
@@ -185,6 +218,24 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
         })
     }
 
+    const toggleDeletePopup = ()=>{
+        setDeleteConfirmation(val=>!val);
+    }
+
+    const deleteDocumentClicked = ({id})=>{
+        setDeleteDocument(id);
+        toggleDeletePopup()
+    }
+
+    const deletePopupHandler = ()=>{
+        toggleDeletePopup();
+        setLoading(true);
+        deleteDocument({id: selectedDeleteDocument}, dispatch, (resp, err)=>{
+            setLoading(false);
+            updateTaskStatus(resp, true, '', 'Deleted Successfully');
+        })
+    }
+
     let { fullYear, day, month } = getFormattedDate(due_date);
     let defaultDueDate = `${fullYear}-${month<10?`0${month}`:month}-${day<10?`0${day}`:day}`;
 
@@ -192,6 +243,12 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
         <div className={container}>
             {
                 loading && <div className="loadingScrn"><LoadingWidget/></div>
+            }
+            {
+                openUploadDocumentModal ?<FileUpload fileUploadModalClosed={toggleUploadModal} uploadFile={uploadFile} taskId={dataParams && dataParams.task_id} isUploadToServer/>:null
+            }
+            {
+                showDeleteConfirmation?<DeleteConfirmationPopup togglePopup={toggleDeletePopup} deletePopupHandler={deletePopupHandler}/>:null
             }
             <CustomToaster {...toasterInfo} hideToaster={hideToaster}/>
             <div className="statusCont">
@@ -255,13 +312,13 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
                     </div>
                     <div className="taskName">
                         <img className="icon" src={ASSETS_BASE_URL+"/images/common/addIcon.svg"} alt="attachment"/>
-                        <span>Add an attachment</span>
+                        <span onClick={toggleUploadModal}>Add an attachment</span>
                     </div>
                 </div>
                 <div className="attachmentList">
                     {
                         tasks_docs.map((val)=>{
-                            return <AttachmentCard data={val} key={val.doc_id}/>
+                            return <AttachmentCard data={val} key={val.doc_id} deleteDocumentClicked={deleteDocumentClicked}/>
                         })
                     }
                 </div>
