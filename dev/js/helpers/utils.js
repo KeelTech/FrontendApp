@@ -25,9 +25,20 @@ export const getFormattedTime = (val)=>{
     let timeString='';
     try{
         const date = new Date(val);
-        const hours = date.getHours();
-        const minutes = date.getMinutes();
-        timeString = `${hours>12?`${24-hours}:${minutes}PM`:`${hours}:${minutes}AM`}`;
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let timeSuffix = 'AM';
+        if(hours>12){
+            hours = hours-12;
+            timeSuffix = 'PM';
+        }
+        if(hours<10){
+            hours = `0${hours}`;
+        }
+        if(minutes<10){
+            minutes = `0${minutes}`;
+        }
+        timeString = `${hours}:${minutes} ${timeSuffix}`;
     }catch(e){
         timeString ='';
     }
