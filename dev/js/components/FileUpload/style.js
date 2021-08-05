@@ -40,12 +40,12 @@ export const alignCenter = css`
     align-items:center
 `
 
-export const outerShell = css`
+export const outerShell = props=> css`
     background: white;
     position:absolute;
     top:15%;
     width:90vw;
-    max-width: 890px;
+    max-width: ${props.maxWidth};
     box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
     text-align:center;
     border-radius: 8px;

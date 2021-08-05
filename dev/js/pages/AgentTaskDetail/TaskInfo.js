@@ -1,13 +1,15 @@
 import React, { Fragment, useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { updateTask, deleteComment } from '@actions';
+import { updateTask, deleteComment, downloadDocument, deleteDocument } from '@actions';
 import AttachmentCard from '@components/AttachmentCard';
 import CustomButton from '@components/CustomButton';
 import CustomSelect from '@components/CustomSelect';
 import LoadingWidget from '@components/LoadingWidget';
 import PostCommentView from '@components/PostCommentView';
 import CustomToaster from '@components/CustomToaster';
+import FileUpload from '@components/FileUpload';
+import DeleteConfirmationPopup from '@components/DeleteConfirmationPopup';
 import { getNameInitialHelper, getFormattedTime, getFormattedDate, capitalizeFirstLetter } from '@helpers/utils';
 import { container, taskStatus, discussionSection, memberCard, attachmentSection, checklistSection, messageSection } from './style.js';
 
@@ -44,13 +46,15 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
         }
         return PriorityList[0];
     });
-
+    const [openUploadDocumentModal, setOpenUploadModal] = useState(false);
     const [toasterInfo, setToasterInfo] = useState({
         isVisible: false,
         isError: false,
         isSuccess: false,
         msg: ''
     })
+    const [showDeleteConfirmation, setDeleteConfirmation] = useState(false);
+    const [selectedDeleteDocument, setDeleteDocument] = useState('');
 
     const setDataValues = (dataVal)=>{
         setDataParams((val)=>{ return {...val, ...dataVal} });
@@ -146,21 +150,23 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
         })
     }
 
-    const updateTaskStatus = (success, error, msg='')=>{
+    const updateTaskStatus = (success, error, errorMsg='Failed, Try again later', msg='Comment Added Successfully')=>{
         if(success){
-            refetchTaskDetail();
             setToasterInfo({
                 isVisible: true,
                 isSuccess: true,
                 isError: false,
-                msg: 'Comment Added Successfully'
+                msg: msg
             })
+            setTimeout(() => {
+                refetchTaskDetail();
+            }, 1000);
         }else if(error){
             setToasterInfo({
                 isVisible: true,
                 isSuccess: false,
                 isError: true,
-                msg: msg||'Failed, Try again later'
+                msg: errorMsg
             })
         }
         setTimeout(() => {
@@ -185,6 +191,60 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
         })
     }
 
+    const uploadFile = (val, resp)=>{
+        toggleUploadModal();
+        updateTaskStatus(resp, !resp, 'Failed, Please try again later', 'Document Uploaded Successfully');
+    }
+
+    const toggleUploadModal = ()=>{
+        setOpenUploadModal(val=>!val);
+    }
+
+    const deleteDocumentClicked = ({id})=>{
+        setDeleteDocument(id);
+        toggleDeletePopup()
+    }
+
+    const deletePopupHandler = ()=>{
+        toggleDeletePopup();
+        setLoading(true);
+        deleteDocument({id: selectedDeleteDocument}, dispatch, (resp, err)=>{
+            setLoading(false);
+            updateTaskStatus(resp, !resp, 'Failed, Please try again later', 'Deleted Successfully');
+        })
+    }
+
+    const downloadDocumentClicked = ({id, docId})=>{
+        setLoading(true);
+        downloadDocument({ docId }, dispatch, (resp, err)=>{
+            setLoading(false);
+            // console.log('resp is', resp);
+            // var blob=new Blob([resp]);
+            // var link=document.createElement('a');
+            // link.href=window.URL.createObjectURL(blob);
+            // link.download="new.png";
+            // link.click();
+            // var img = document.createElement('img');
+            // img.classList.add('demo');
+            // img.id="demo";
+            // img.src = 'data:image/jpeg;base64,' + btoa(resp);
+            // document.body.appendChild(img);
+            // handleResponse(resp, 'Downloaded Successfully', false);
+            // resp.blob().then(blob => {
+            //     let url = window.URL.createObjectURL(blob);
+            //     let a = document.createElement("a");
+            //     console.log(url);
+            //     a.href = url;
+            //     a.download = 'filename';
+            //     a.click();
+            // });
+        })
+    }
+
+    const toggleDeletePopup = ()=>{
+        setDeleteConfirmation(val=>!val);
+    }
+
     let { fullYear, day, month } = getFormattedDate(due_date);
     let defaultDueDate = `${fullYear}-${month<10?`0${month}`:month}-${day<10?`0${day}`:day}`;
 
@@ -192,6 +252,12 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
         <div className={container}>
             {
                 loading && <div className="loadingScrn"><LoadingWidget/></div>
+            }
+            {
+                openUploadDocumentModal ?<FileUpload maxWidth="600px" isUploadToServer fileUploadModalClosed={toggleUploadModal} uploadFile={uploadFile} task_id={dataParams && dataParams.task_id}/>:null
+            }
+            {
+                showDeleteConfirmation?<DeleteConfirmationPopup togglePopup={toggleDeletePopup} deletePopupHandler={deletePopupHandler}/>:null
             }
             <CustomToaster {...toasterInfo} hideToaster={hideToaster}/>
             <div className="statusCont">
@@ -255,13 +321,13 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
                     </div>
                     <div className="taskName">
                         <img className="icon" src={ASSETS_BASE_URL+"/images/common/addIcon.svg"} alt="attachment"/>
-                        <span>Add an attachment</span>
+                        <span onClick={toggleUploadModal} className="addAttachment">Add an attachment</span>
                     </div>
                 </div>
                 <div className="attachmentList">
                     {
                         tasks_docs.map((val)=>{
-                            return <AttachmentCard data={val} key={val.doc_id}/>
+                            return <AttachmentCard data={val} key={val.id} deleteDocumentClicked={deleteDocumentClicked} downloadDocumentClicked={downloadDocumentClicked}/>
                         })
                     }
                 </div>

@@ -244,6 +244,9 @@ export const attachmentSection = css`
         display: flex;
         flex-wrap: wrap;
     }
+    .addAttachment{
+        cursor: pointer;
+    }
     @media(max-width: ${tabScreenWidth}){
         margin-top: 20px;
     }
