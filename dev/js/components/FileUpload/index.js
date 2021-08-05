@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { fileUpload, fileUploadWrapper, selectedFileText, outerShell, innerShell, closeWrapper, fileButton, submitButtonWrapper, submitButton, fileData } from './style.js';
-import CustomDropDown from '@components/CustomDropDown';
+import CustomDropDown from '@components/CustomDropdown';
 import CustomToaster from '@components/CustomToaster';
 
 const FileUpload = ({ documentTypes=[], fileUploadModalClosed, uploadFile }) => {
