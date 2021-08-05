@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
 import { fileUpload, fileUploadWrapper, selectedFileText, outerShell, innerShell, closeWrapper, fileButton, submitButtonWrapper, submitButton, fileData } from './style.js';
 import CustomDropDown from '@components/CustomDropDown';
+import CustomToaster from '@components/CustomToaster';
 
-const FileUpload = (props) => {
+const FileUpload = ({ documentTypes=[], fileUploadModalClosed, uploadFile }) => {
 
     const [selectedFile, setSelectedFile] = useState('');
-    const [selectedFileType, setSelectedFileType] = useState('');
+    const [selectedFileType, setSelectedFileType] = useState({});
     const [selectedFileName, setSelectedFileName] = useState('');
+    const [toasterInfo, setToasterInfo] = useState({
+        isVisible: false,
+        isError: false,
+        isSuccess: false,
+        msg: ''
+    })
     const [options, setOptions] = useState([
         {
             value: 1,
@@ -26,7 +33,7 @@ const FileUpload = (props) => {
         }
     ]);
     const close = () => {
-        props.fileUploadModalClosed(false);
+        fileUploadModalClosed(false);
     }
     const onFileChange = event => {
         setSelectedFile(event.target.files[0]);
@@ -43,8 +50,26 @@ const FileUpload = (props) => {
     const handleOptionChange = (item) => {
         setSelectedFileType(item);
     }
-    const uploadFile = () => {
-        props.uploadFile({
+    const handleUploadFile = () => {
+        let errorMsg = '';
+        if(!selectedFile){
+            errorMsg= 'Please Select File';
+        }else if(!(selectedFileType && selectedFileType.value)){
+            errorMsg = 'Please Select Document Type';
+        }
+        if(errorMsg){
+            setToasterInfo({
+                isVisible: true,
+                isError: true,
+                isSuccess: false,
+                msg: errorMsg
+            });
+            setTimeout(() => {
+                hideToaster();
+            }, 1000);
+            return;
+        }
+        uploadFile({
             selectedFile: selectedFile,
             selectedFileName: selectedFileName,
             selectedFileType: selectedFileType,
@@ -66,17 +91,25 @@ const FileUpload = (props) => {
             );
         }
     };
+
+    const hideToaster = ()=>{
+        setToasterInfo({
+            isVisible: false
+        })
+    }
+
     return (
         <div className={outerShell}>
+            <CustomToaster {...toasterInfo} hideToaster={hideToaster}/>
             <span onClick={close} className={closeWrapper}>x</span>
             <div className={innerShell}>
                 <div className={fileUploadWrapper}>
                     <input id="file" className={fileUpload} type="file" onChange={onFileChange} />
                 </div>
                 <div className={fileData}>{displayFileData()}</div>
-                <CustomDropDown list={options} optionSelected={handleOptionChange}></CustomDropDown>
+                <CustomDropDown list={documentTypes && documentTypes.length?documentTypes:options} optionSelected={handleOptionChange}></CustomDropDown>
                 <div className={submitButtonWrapper}>
-                    <button onClick={uploadFile} className={submitButton}>
+                    <button onClick={handleUploadFile} className={submitButton}>
                         Upload
                     </button>
                 </div>

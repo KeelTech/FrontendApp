@@ -15,6 +15,7 @@ const CustomerView = () => {
   const agentStore = useSelector((store) => store.AGENT_STORE);
   const { caseList } = agentStore || {};
   const history = useHistory();
+  
   useEffect(() => {
     getCaseList({}, dispatch);
   }, []);

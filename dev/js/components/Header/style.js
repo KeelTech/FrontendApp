@@ -46,7 +46,7 @@ export const mobileHeading = css`
     font-size: 20px;
     line-height: 30px;
     color: #363B64;
-    padding-left: 20px;
+    padding: 0px 20px;
     @media(max-width: ${tabScreenWidth}){
         display: flex;
     }

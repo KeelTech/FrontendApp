@@ -23,10 +23,9 @@ function rejectHandler(response, urlInfo, callback) {
   callback(response);
 }
 
-const API_GET = (url) => {
+const API_GET = (url, headers={}) => {
   return STORAGE.getAuthToken().then((token) => {
     return new Promise((resolve, reject) => {
-      let headers = {};
       if (token) headers['AUTHORIZATION'] = `bearer ${token}`;
       axiosInstance({
         method: 'get',
@@ -48,10 +47,9 @@ const API_GET = (url) => {
     });
   });
 };
-const API_POST = (url, data) => {
+const API_POST = (url, data, headers={}) => {
   return STORAGE.getAuthToken({ url: url }).then((token) => {
     return new Promise((resolve, reject) => {
-      let headers = {};
       if (token) headers['AUTHORIZATION'] = `bearer ${token}`;
       //   if (token) headers['X-CID'] = token;
       axiosInstance({

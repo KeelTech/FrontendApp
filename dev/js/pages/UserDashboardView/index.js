@@ -4,6 +4,7 @@ import LeftMenuBar from '@components/LeftMenuBar';
 import { container } from './style.js';
 import DashboardView from './DashboardView';
 import TaskView from './TaskView';
+import DocumentValutView from './DocumentValutView';
 
 const UserDashboardView = (props)=>{
     const url  = props.match.path;
@@ -17,7 +18,7 @@ const UserDashboardView = (props)=>{
                 url.includes('tasks') && <TaskView/>
             }
             {
-                url.includes('vault') && <DashboardView/>
+                url.includes('vault') && <DocumentValutView/>
             }
             {
                 url.includes('billing') && <DashboardView/>

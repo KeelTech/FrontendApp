@@ -96,6 +96,8 @@ export const optionMenu = css`
     outline:none;
     max-height: 150px;
     overflow-y: auto;
+    position: absolute;
+    z-index: 99;
     ::-webkit-scrollbar {
         width: 7px;
     }
@@ -125,5 +127,6 @@ export const optionMenu = css`
 `
 
 export const innerWrapper = css`
-    padding:5px
+    padding: 5px;
+    position: relative;
 `

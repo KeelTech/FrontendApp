@@ -8,6 +8,7 @@ import LOGIN from './commons/login.js';
 import COMMON_REDUCER from './common.js'
 import TASK_INFO from './consumerTaskInfo.js'
 import AGENT_STORE from './agentTask.js'
+import DOCUMENT_VAULT from './documentVault.js';
 
 const persistConfig = {
   key: 'root',
@@ -51,13 +52,20 @@ const AGENT_STORE_PERSIST = {
   whitelist: ['']
 }
 
+const DOCUMENT_VAULT_PERSIST = {
+  key: 'DOCUMENT_VAULT',
+  storage: storage,
+  whitelist: ['']
+}
+
 const allReducers = combineReducers({
   AUTH: persistReducer(AUTH_PERSIST, AUTH),
   USER: persistReducer(USER_PERSIST, USER),
   LOGIN: persistReducer(USER_LOGIN, LOGIN),
   COMMON: persistReducer(COMMON_REDUCER_PERSIST, COMMON_REDUCER),
   TASK_INFO: persistReducer(TASK_INFO_PERSIST, TASK_INFO),
-  AGENT_STORE: persistReducer(AGENT_STORE_PERSIST, AGENT_STORE)
+  AGENT_STORE: persistReducer(AGENT_STORE_PERSIST, AGENT_STORE),
+  DOCUMENT_VAULT: persistReducer(DOCUMENT_VAULT_PERSIST, DOCUMENT_VAULT)
 });
 
 const persistedReducer = persistReducer(persistConfig, allReducers);
