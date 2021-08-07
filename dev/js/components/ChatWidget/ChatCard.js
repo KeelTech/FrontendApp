@@ -1,54 +1,12 @@
 import React from 'react';
 import { chatBox } from './style.js';
 
-const chat = [
-    {
-        text: 'Hello John!',
-        isReceiver: true,
-        time: ''
-    },
-    {
-        text: 'Can you arrange schedule for next meeting?',
-        isReceiver: true,
-        time: '12:45 PM, 12 Jun 2021'
-    },
-    {
-        text: 'Hello Jordan!',
-        isReceiver: false,
-        time: ''
-    },
-    {
-        text: 'Okay, I’ll arrange it soon. i noftify you when it’s done',
-        isReceiver: false,
-        time: '12:45 PM, 12 Jun 2021'
-    },
-    {
-        text: 'Hello John!',
-        isReceiver: true,
-        time: ''
-    },
-    {
-        text: 'Can you arrange schedule for next meeting?',
-        isReceiver: true,
-        time: '12:45 PM, 12 Jun 2021'
-    },
-    {
-        text: 'Hello Jordan!',
-        isReceiver: false,
-        time: ''
-    },
-    {
-        text: 'Okay, I’ll arrange it soon. i noftify you when it’s done',
-        isReceiver: false,
-        time: '12:45 PM, 12 Jun 2021'
-    }
-]
-const ChatCard = ({ floatingChat =false})=>{
+const ChatCard = ({ floatingChat = false, messages = [] })=>{
 
     return(
         <div className={chatBox({floatingChat})}>
             {
-                chat.map((val, key)=>{
+                messages.map((val, key)=>{
                     const { isReceiver, text, time } = val;
                     return (
                         <div className={isReceiver?'receiver':'sender'} key={key}>

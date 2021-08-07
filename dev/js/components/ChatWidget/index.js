@@ -3,6 +3,130 @@ import { cx } from '@emotion/css';
 import ChatCard from './ChatCard.js';
 import { container, chatWidget, msgWidget, mobileChatView } from './style.js';
 
+const chat = [
+    {
+        text: 'Hello John!',
+        isReceiver: true,
+        time: ''
+    },
+    {
+        text: 'Can you arrange schedule for next meeting?',
+        isReceiver: true,
+        time: '12:45 PM, 12 Jun 2021'
+    },
+    {
+        text: 'Hello Jordan!',
+        isReceiver: false,
+        time: ''
+    },
+    {
+        text: 'Okay, I’ll arrange it soon. i noftify you when it’s done',
+        isReceiver: false,
+        time: '12:45 PM, 12 Jun 2021'
+    },
+    {
+        text: 'Hello John!',
+        isReceiver: true,
+        time: ''
+    },
+    {
+        text: 'Can you arrange schedule for next meeting?',
+        isReceiver: true,
+        time: '12:45 PM, 12 Jun 2021'
+    },
+    {
+        text: 'Hello Jordan!',
+        isReceiver: false,
+        time: ''
+    },
+    {
+        text: 'Okay, I’ll arrange it soon. i noftify you when it’s done',
+        isReceiver: false,
+        time: '12:45 PM, 12 Jun 2021'
+    },
+    {
+        text: 'Hello John!',
+        isReceiver: true,
+        time: ''
+    },
+    {
+        text: 'Can you arrange schedule for next meeting?',
+        isReceiver: true,
+        time: '12:45 PM, 12 Jun 2021'
+    },
+    {
+        text: 'Hello Jordan!',
+        isReceiver: false,
+        time: ''
+    },
+    {
+        text: 'Okay, I’ll arrange it soon. i noftify you when it’s done',
+        isReceiver: false,
+        time: '12:45 PM, 12 Jun 2021'
+    },
+    {
+        text: 'Hello John!',
+        isReceiver: true,
+        time: ''
+    },
+    {
+        text: 'Can you arrange schedule for next meeting?',
+        isReceiver: true,
+        time: '12:45 PM, 12 Jun 2021'
+    },
+    {
+        text: 'Hello Jordan!',
+        isReceiver: false,
+        time: ''
+    },
+    {
+        text: 'Okay, I’ll arrange it soon. i noftify you when it’s done',
+        isReceiver: false,
+        time: '12:45 PM, 12 Jun 2021'
+    },
+    {
+        text: 'Hello John!',
+        isReceiver: true,
+        time: ''
+    },
+    {
+        text: 'Can you arrange schedule for next meeting?',
+        isReceiver: true,
+        time: '12:45 PM, 12 Jun 2021'
+    },
+    {
+        text: 'Hello Jordan!',
+        isReceiver: false,
+        time: ''
+    },
+    {
+        text: 'Okay, I’ll arrange it soon. i noftify you when it’s done',
+        isReceiver: false,
+        time: '12:45 PM, 12 Jun 2021'
+    },
+    {
+        text: 'Hello John!',
+        isReceiver: true,
+        time: ''
+    },
+    {
+        text: 'Can you arrange schedule for next meeting?',
+        isReceiver: true,
+        time: '12:45 PM, 12 Jun 2021'
+    },
+    {
+        text: 'Hello Jordan!',
+        isReceiver: false,
+        time: ''
+    },
+    {
+        text: 'Okay, I’ll arrange it soon. i noftify you when it’s done',
+        isReceiver: false,
+        time: '12:45 PM, 12 Jun 2021'
+    }
+]
+
+
 const ChatWidget = ({ floatingChat=false, toggleChat })=>{
 
     const mainClass = cx({
@@ -33,7 +157,7 @@ const ChatWidget = ({ floatingChat=false, toggleChat })=>{
                 <img className="close" src={ASSETS_BASE_URL+"/images/common/crossIcon.svg"} alt="close" onClick={toggleChat}/>
             </div>
             <div className={chatWidget({floatingChat})}>
-                <ChatCard floatingChat={floatingChat}/>
+                <ChatCard floatingChat={floatingChat} messages={chat}/>
             </div>
             <div className={msgWidget({floatingChat})}>
                 <div className="chatbox">
