@@ -38,6 +38,7 @@ export const container = css`
         border: 1px solid #A098AE;
         padding: 7px 11px;
         border-radius: 6px;
+        cursor: pointer;
     }
     .status{
         display: inline-block;

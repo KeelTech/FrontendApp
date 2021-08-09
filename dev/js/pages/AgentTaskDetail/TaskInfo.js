@@ -1,7 +1,7 @@
 import React, { Fragment, useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { updateTask, deleteComment, downloadDocument, deleteDocument } from '@actions';
+import { updateTask, deleteComment, downloadDocument, deleteDocument, updateCurrentTaskStatus } from '@actions';
 import AttachmentCard from '@components/AttachmentCard';
 import CustomButton from '@components/CustomButton';
 import CustomSelect from '@components/CustomSelect';
@@ -128,25 +128,7 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
         }
         updateTask(postDataParams, dispatch, (resp, err)=>{
             setLoading(false);
-            if(resp){
-                setToasterInfo({
-                    isVisible: true,
-                    isError: false,
-                    isSuccess: true,
-                    msg: 'Task Updated successfully'
-                });
-                //handleBackBtnClick();
-            }else{
-                setToasterInfo({
-                    isVisible: true,
-                    isError: true,
-                    isSuccess: false,
-                    msg: 'Failed, Try again later'
-                });
-            }
-            setTimeout(() => {
-                hideToaster();
-            }, 1000);
+            updateTaskStatus(resp, err, 'Failed, Try again later', 'Task Updated successfully');
         })
     }
 
@@ -172,6 +154,17 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
         setTimeout(() => {
             hideToaster();
         }, 1000);
+    }
+
+    const handleTaskStatusUpdate = ()=>{
+        const postDataParams = {
+            task_id: dataParams.task_id,
+            status: 2
+        }
+        updateCurrentTaskStatus(postDataParams, dispatch, (resp, err)=>{
+            setLoading(false);
+            updateTaskStatus(resp, err, 'Failed, Try again later', 'Task Updated successfully');
+        })
     }
 
     const deleteCommentClicked = (id)=>{
@@ -261,7 +254,7 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
             }
             <CustomToaster {...toasterInfo} hideToaster={hideToaster}/>
             <div className="statusCont">
-                <span className="statusText">Mark as completed</span>
+                <span className="statusText" onClick={handleTaskStatusUpdate}>Mark as completed</span>
                 <span className="status">{status_name}</span>
             </div>
             <div className="taskName">

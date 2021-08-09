@@ -174,14 +174,14 @@ const TaskView = ()=>{
 
     const downloadDocumentClicked = ({id, docId})=>{
         setLoading(true);
-        downloadDocument({ docId }, dispatch, (resp, err)=>{
+        downloadDocument({ docId:'doc_50b576b22c7e4600b523ed012b521109' }, dispatch, (resp, err)=>{
             setLoading(false);
-            // console.log('resp is', resp);
-            // var blob=new Blob([resp]);
-            // var link=document.createElement('a');
-            // link.href=window.URL.createObjectURL(blob);
-            // link.download="new.png";
-            // link.click();
+            console.log('resp is', resp);
+            var blob=new Blob([resp]);
+            var link=document.createElement('a');
+            link.href=window.URL.createObjectURL(blob);
+            link.download="new.pdf";
+            link.click();
             // var img = document.createElement('img');
             // img.classList.add('demo');
             // img.id="demo";
