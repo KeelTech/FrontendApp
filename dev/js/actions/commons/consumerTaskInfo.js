@@ -1,6 +1,5 @@
-import { TASK_LIST_LOADING, SET_TASK_LIST, TASK_DETAIL_INFO } from '@constants/types';
+import { TASK_LIST_LOADING, SET_TASK_LIST, TASK_DETAIL_INFO, GET_USER_PROFILE, LOADING_USER_PROFILE } from '@constants/types';
 import { API_POST, API_GET } from '../../api/api.js';
-import STORAGE from '@helpers/storage/storage.js';
 
 export const getTaskList = (dataParams, dispatch, cb=null)=>{
     const status = dataParams.status;
@@ -44,5 +43,30 @@ export const getTaskDetail = (dataParams, dispatch, cb=null)=>{
         if(cb)cb(true, null);
     }).catch((e)=>{
         if(cb)cb(null, true);
+    })
+}
+
+export const getUserProfile = (dataParams={}, dispatch, cb=null)=>{
+    dispatch({
+        type: LOADING_USER_PROFILE,
+        payload: true
+    })
+    API_GET(`${API_BASE_URL}/v1/user/get-profile`).then((response)=>{
+        dispatch({
+            type: GET_USER_PROFILE,
+            payload: response && response.data||{},
+            taskId
+        })
+        dispatch({
+            type: LOADING_USER_PROFILE,
+            payload: false
+        })
+        if(cb)cb(true, null);
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+        dispatch({
+            type: LOADING_USER_PROFILE,
+            payload: false
+        })
     })
 }

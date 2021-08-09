@@ -8,7 +8,7 @@ const CreateProfile = ()=>{
     return(
         <div className={container}>
             <ProgressBar/>
-            <PersonalDetail />
+            {/* <PersonalDetail /> */}
         </div>
     )
 }
