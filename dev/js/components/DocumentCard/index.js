@@ -6,7 +6,7 @@ import { container } from './style.js';
 const DocumentCard = ({ documentData, downloadDocumentClicked, deleteDocumentClicked })=>{
     const [showMenuBar, setMenuBar] = useState(false);
 
-    const { doc_type, created_at, id, doc_id } = documentData;
+    const { doc_type, created_at, id, doc_id, orignal_file_name } = documentData;
 
     const { formattedDate } = getFormattedDate(created_at);
 
@@ -19,6 +19,7 @@ const DocumentCard = ({ documentData, downloadDocumentClicked, deleteDocumentCli
                 <div className="details">
                     <span className="name">{doc_type}</span>
                     <span className="docDate">{formattedDate} {getFormattedTime(created_at)}</span>
+                    <span className="name">{orignal_file_name}</span>
                 </div>
                 
                 <img className="dotMenu" src={ASSETS_BASE_URL+"/images/common/dotMenu.svg"} alt="menu" onClick={toggleMenuBar}/>

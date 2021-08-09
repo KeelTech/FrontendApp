@@ -157,11 +157,20 @@ const TaskView = ()=>{
         try{
             let filterList = [];
             documentList.map((doc)=>{
-                const { doc_type } = doc;
+                const { doc_type, orignal_file_name } = doc;
                 let name = doc_type.toLowerCase();
+                let fileOriginalName = orignal_file_name.toLowerCase();
                 let searchString = val.toLowerCase();
-                if(name.includes(searchString)){
-                    let index = name.indexOf(searchString);
+                if(name.includes(searchString) || fileOriginalName.includes(searchString)){
+                    let typeIndex = name.indexOf(searchString);
+                    let originalFileNameIndex = fileOriginalName.indexOf(searchString);
+                    let index;
+                    if(typeIndex>-1){
+                        index = typeIndex;
+                    }
+                    if(originalFileNameIndex>-1 && ((typeIndex>-1 && originalFileNameIndex<typeIndex) || typeIndex<0)){
+                        index = originalFileNameIndex;
+                    }
                     filterList.push({
                         ...doc,
                         rank: index
@@ -173,7 +182,7 @@ const TaskView = ()=>{
             })
             setFilterList(filterList);
         }catch(e) {
-
+            console.log(e);
         }
     }
 
@@ -199,28 +208,32 @@ const TaskView = ()=>{
 
     const downloadDocumentClicked = ({id, docId})=>{
         setLoading(true);
+        const selectedDoc = documentList.filter(x=>x.doc_id==docId);
+        let responseType = 'application/pdf';
+        let fileExt = '.pdf';
+        let fileName = selectedDoc[0].orignal_file_name;
+        if(fileName.includes('.png')){
+            responseType = 'image/png';
+            fileExt='.png';
+        }else if(fileName.includes('.jpg')){
+            responseType = 'image/jpg';
+            fileExt='.jpg';
+        }
         downloadDocument({ docId }, dispatch, (resp, err)=>{
+            console.log(resp);
             setLoading(false);
-            // console.log('resp is', resp);
-            // var blob=new Blob([resp]);
+            const base64 = btoa(resp);
+            // var blob = new Blob([base64], { type: responseType });
+            // // console.log('resp is', resp);
+            // // var blob=new Blob([resp]);
             // var link=document.createElement('a');
             // link.href=window.URL.createObjectURL(blob);
-            // link.download="new.png";
+            // link.download= fileName;
             // link.click();
-            // var img = document.createElement('img');
-            // img.classList.add('demo');
-            // img.id="demo";
-            // img.src = 'data:image/jpeg;base64,' + btoa(resp);
-            // document.body.appendChild(img);
-            // handleResponse(resp, 'Downloaded Successfully', false);
-            // resp.blob().then(blob => {
-            //     let url = window.URL.createObjectURL(blob);
-            //     let a = document.createElement("a");
-            //     console.log(url);
-            //     a.href = url;
-            //     a.download = 'filename';
-            //     a.click();
-            // });
+            var link=document.createElement('a');
+            link.href = 'data:image/png;base64,'+base64;
+            link.download= fileName;
+            link.click();
         })
     }
 
@@ -254,6 +267,9 @@ const TaskView = ()=>{
                     {
                         showDeleteConfirmation?<DeleteConfirmationPopup togglePopup={toggleDeletePopup} deletePopupHandler={deletePopupHandler}/>:null
                     }
+                    {
+                        loading?<div className={loaderView}><LoadingWidget/></div>:null
+                    }
                     <div className={filters}>
                         <div className="uploadBy">
                             <span className="btn">Uploaded By</span>
@@ -274,7 +290,7 @@ const TaskView = ()=>{
                         </div>
                     </div>
                     {
-                        documentListLoading || loading?<div className={loaderView}><LoadingWidget/></div>:
+                        documentListLoading?<div className={loaderView}><LoadingWidget/></div>:
                         <div className="documentList">
                             {
                                 documentListFiltered.length?
