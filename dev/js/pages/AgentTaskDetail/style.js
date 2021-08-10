@@ -38,6 +38,7 @@ export const container = css`
         border: 1px solid #A098AE;
         padding: 7px 11px;
         border-radius: 6px;
+        cursor: pointer;
     }
     .status{
         display: inline-block;
@@ -243,6 +244,9 @@ export const attachmentSection = css`
     .attachmentList{
         display: flex;
         flex-wrap: wrap;
+    }
+    .addAttachment{
+        cursor: pointer;
     }
     @media(max-width: ${tabScreenWidth}){
         margin-top: 20px;
