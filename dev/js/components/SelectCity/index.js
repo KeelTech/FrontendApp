@@ -39,7 +39,7 @@ const SelectCity = ({ saveSelectedOption })=>{
         {
             list.length?
             <CustomSearchSelect options={list} value="" handleChange={handleChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>
-            :null
+            :<p className="errorMsg">Please Select Country & State First</p>
         }
         </Fragment>   
     )
@@ -100,7 +100,8 @@ const SelectState = ({ saveSelectedOption })=>{
     return(
         <Fragment>
             {
-                list.length?<CustomSearchSelect options={list} value="" handleChange={handleChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>:null
+                list.length?<CustomSearchSelect options={list} value="" handleChange={handleChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>:
+                <p className="errorMsg">Please Select Country First</p>
             }
         </Fragment>
         
