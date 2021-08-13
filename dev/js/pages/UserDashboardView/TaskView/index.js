@@ -18,7 +18,9 @@ const TaskView = ()=>{
     const history = useHistory();
     const dispatch = useDispatch();
     const taskInfo = useSelector(state=>state.TASK_INFO);
-    const { taskList=[], taskListLoading } = taskInfo||{};
+    const { taskList=[], taskListLoading, userInfoLoading, userInfo } = taskInfo||{};
+    const { case:caseDetails={} } = userInfo;
+    const caseId = caseDetails && caseDetails.case_id;
     const [activeWidget, setActiveWidget] = useState(0);
     const [activeTask, setActiveTask] = useState('');
 
@@ -47,12 +49,14 @@ const TaskView = ()=>{
     },[])
 
     useEffect(()=>{
-        getTaskList({status: activeWidget}, dispatch, (resp, error)=>{
-            if(resp && resp.length && !isMobileView()){
-                setActiveTask(resp[0].task_id);
-            }
-        });
-    },[dispatch, activeWidget])
+        if(caseId){
+            getTaskList({status: activeWidget, case: caseId}, dispatch, (resp, error)=>{
+                if(resp && resp.length && !isMobileView()){
+                    setActiveTask(resp[0].task_id);
+                }
+            });
+        }
+    },[dispatch, activeWidget, caseId])
 
     return(
         <div className={body}>
@@ -78,7 +82,7 @@ const TaskView = ()=>{
                         </div>
                         <div className="taskList">
                             {
-                                taskListLoading?<div className={loaderView}><LoadingWidget/></div>
+                                userInfoLoading || taskListLoading?<div className={loaderView}><LoadingWidget/></div>
                                 :<Fragment>
                                     {
                                         taskList.length?
