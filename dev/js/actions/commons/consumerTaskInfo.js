@@ -149,3 +149,11 @@ export const createProfile = (dataParams, dispatch, cb=null)=>{
         if(cb)cb(null, true);
     })
 }
+
+export const updateProfile = (dataParams, dispatch, cb=null)=>{
+    API_POST(`${API_BASE_URL}/v1/user/update-full-profile`, dataParams).then((response)=>{
+        if(cb)cb(true, null);
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}

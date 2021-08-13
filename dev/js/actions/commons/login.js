@@ -16,7 +16,7 @@ export const userLogin = (data, dispatch, cb) => {
       loading: true,
     },
   });
-  API_POST(API_BASE_URL + '/v1/user/login', {
+  API_POST(API_BASE_URL + '/v1/user/customer-login', {
     email: data.email,
     password: data.password,
   })

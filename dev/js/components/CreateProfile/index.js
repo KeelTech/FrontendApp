@@ -131,6 +131,31 @@ const CreateProfile = ()=>{
 
     const handleCreateForm = ()=>{
         setLoading(true);
+        if(isProfileExist){
+            updateProfile(fullProfileInfo, dispatch, (resp, err)=>{
+                setLoading(false);
+                if(resp){
+                    setToasterInfo({
+                        isVisible: true,
+                        isError: false,
+                        isSuccess: true,
+                        msg: 'Profile Updated Successfully'
+                    });
+                }else{
+                    setToasterInfo({
+                        isVisible: true,
+                        isError: true,
+                        isSuccess: false,
+                        msg: 'Failed Please try again later'
+                    });
+                }
+                setTimeout(() => {
+                    hideToaster();
+                }, 1000);
+            });
+            return;
+        }
+
         createFullUserProfile(fullProfileInfo, dispatch, (resp, err)=>{
             setLoading(false);
             if(resp){
