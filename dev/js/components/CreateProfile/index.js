@@ -1,18 +1,26 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFullUserProfile, createUserProfile } from '@actions';
+import { getFullUserProfile, createFullUserProfile, updateUserProfile } from '@actions';
 import LoadingWidget from '@components/LoadingWidget';
 import { loaderView } from '@constants';
-import ProgressBar from './ProgressBar.js';
+import CustomToaster from '@components/CustomToaster';
 import ProfileForm from './ProfileForm.js';
 import { container, progressBar } from './style.js';
 
 const CreateProfile = ()=>{
     const dispatch = useDispatch();
     const taskInfo = useSelector(state=>state.TASK_INFO);
-    const { fullProfileInfo, fullProfileLoading } = taskInfo;
-
+    const { fullProfileInfo, fullProfileLoading, userInfo={} } = taskInfo;
+    const isProfileExist = userInfo && userInfo.profile_exists;
     const [activeState, setActive] = useState(1);
+    const [loading, setLoading] = useState(false);
+
+    const [toasterInfo, setToasterInfo] = useState({
+        isVisible: false,
+        isError: false,
+        isSuccess: false,
+        msg: ''
+    })
 
     const activeWidgetData = useMemo(()=>{
         let activeWidgetInfo = {
@@ -31,22 +39,23 @@ const CreateProfile = ()=>{
             }else if(activeState===2){
                 activeWidgetInfo = {
                     widget: 'education_assessment',
-                    dataParams: {...education_assessment},
-                    displayText: 'Education'
+                    dataParams: [...education_assessment],
+                    displayText: 'Education',
+                    isMultiple: true
                 }
             }else if(activeState===3){
                 activeWidgetInfo = {
                     widget: 'qualification',
-                    dataParams: {...qualification},
-                    displayText: 'Educational Creational Assessment'
-
+                    dataParams: [...qualification],
+                    displayText: 'Educational Creational Assessment',
+                    isMultiple: true
                 }
             }else if(activeState===4){
                 activeWidgetInfo = {
                     widget: 'work_experience',
-                    dataParams: {...work_experience},
-                    displayText: 'Work Experience'
-
+                    dataParams: [...work_experience],
+                    displayText: 'Work Experience',
+                    isMultiple: true
                 }
             }else if(activeState===5){
                 activeWidgetInfo = {
@@ -65,25 +74,99 @@ const CreateProfile = ()=>{
 
     const handleFormNavigation = (isNext=false)=>{
         if(isNext){
-            setActive(val=>val+1);
+            const { widget, dataParams, isMultiple=false } = activeWidgetData;
+
+            let isError = false;
+            let newDataParams = {};
+
+            if(isMultiple){
+                newDataParams=[];
+                let subFieldItems = {};
+                dataParams.map((subField, subIndex)=>{
+                    newDataParams[subIndex] = {};
+                    Object.entries(subField).map((val, key)=>{
+                        const [fieldType, dataValues] = val;
+                        const { value, labels } = dataValues;
+                        if(!labels) return;
+                        let showError = false;
+                        if(!value){
+                            isError = true;
+                            showError = true;
+                        }
+                        subFieldItems[fieldType] = {...dataValues, showError};
+                    })
+                    newDataParams.push(subFieldItems);
+                })
+            }else{
+                Object.entries(dataParams).map((val, key)=>{
+                    const [fieldType, dataValues] = val;
+                    const { value, labels } = dataValues;
+                    if(!labels) return;
+                    let showError = false;
+                    if(!value){
+                        isError = true;
+                        showError = true;
+                    }
+                    newDataParams[fieldType]= {...dataValues, showError }
+                })
+            }
+            let updatedParams = {
+                data: newDataParams,
+                type: widget,
+                isUpdate: isMultiple
+            }
+            if(isError){
+                updateUserProfile(updatedParams, dispatch);
+                return;
+            };
+            if(activeState==5){
+                handleCreateForm();
+            }else{
+                setActive(val=>val+1);
+            }
         }else{
             setActive(val=>val-1);
         }
     }
 
     const handleCreateForm = ()=>{
-        createUserProfile(fullProfileInfo, dispatch);
+        setLoading(true);
+        createFullUserProfile(fullProfileInfo, dispatch, (resp, err)=>{
+            setLoading(false);
+            if(resp){
+                setToasterInfo({
+                    isVisible: true,
+                    isError: false,
+                    isSuccess: true,
+                    msg: 'Profile Created Successfully'
+                });
+            }else{
+                setToasterInfo({
+                    isVisible: true,
+                    isError: true,
+                    isSuccess: false,
+                    msg: 'Failed Please try again later'
+                });
+            }
+            setTimeout(() => {
+                hideToaster();
+            }, 1000);
+        });
     }
 
-    console.log(activeWidgetData);
+    const hideToaster = ()=>{
+        setToasterInfo({
+            isVisible: false
+        })
+    }
 
-    const { widget, dataParams, displayText } = activeWidgetData;
+    const { widget, dataParams, displayText, isMultiple=false } = activeWidgetData;
     return(
         <div className={container}>
             {
-                fullProfileLoading?<div className={loaderView}><LoadingWidget/></div>:null
+                loading || fullProfileLoading?<div className={loaderView}><LoadingWidget/></div>:null
             }
-            {/* <ProgressBar/> */}
+            <CustomToaster {...toasterInfo} hideToaster={hideToaster}/>
             <div className={progressBar}>
             <div className="desktopProgressBar">
                 <div className="leftPorgressBar">
@@ -99,7 +182,14 @@ const CreateProfile = ()=>{
                     <h3>{displayText}</h3>
                     <div className="formsScroll">
                         {
-                            Object.entries(dataParams).map((val, key)=>{
+                            isMultiple?
+                            dataParams.map((subField, subIndex)=>{
+                                return Object.entries(subField).map((val, key)=>{
+                                    const [fieldType, dataValues] = val;
+                                    return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} subIndex={subIndex} isMultiple/>
+                                })
+                            })
+                            :Object.entries(dataParams).map((val, key)=>{
                                 const [fieldType, dataValues] = val;
                                 return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget}/>
                             })
@@ -110,7 +200,7 @@ const CreateProfile = ()=>{
                             activeState>1?<button onClick={()=>handleFormNavigation(false)}>Previous</button>:null
                         }
                         {
-                            activeState==5?<button onClick={handleCreateForm}>Submit</button>
+                            activeState==5?<button onClick={()=>handleFormNavigation(true)}>{isProfileExist?'Update':'Create'}</button>
                             :<button onClick={()=>handleFormNavigation(true)}>Next</button>
                         }
                     </div>

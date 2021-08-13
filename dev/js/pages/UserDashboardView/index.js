@@ -30,7 +30,7 @@ const UserDashboardView = (props)=>{
                 url.includes('vault') && <DocumentValutView/>
             }
             {
-                url.includes('profile') && <CustomerView/>
+                url.includes('profile') && <CustomerView {...props}/>
             }
             {
                 url.includes('billing') && <DashboardView/>

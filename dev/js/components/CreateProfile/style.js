@@ -28,7 +28,7 @@ export const progressBar = css`
 }
 
 .formWrapper {
-    margin-bottom: 30px;
+    margin-bottom: 26px;
 }
 
 .formWrapper label {
@@ -37,15 +37,27 @@ export const progressBar = css`
     margin-bottom: 5px;
     display: inline-block;
 }
-
-.inpCont input {
+.errorMsg, .hideMsg{
+    display: block;
+    margin: 0;
+    padding: 0;
+    margin-top: 2px;
+    font-size: 12px;
+    color: red;
+}
+.hideMsg{
+    visibility: hidden;
+}
+.inpCont input, textarea {
     width: 100%;
     border: 1px solid #CED4DA;
     min-height: 44px;
     padding: 5px 10px;
     border-radius: 4px;
 }
-
+.showError input, .showError textarea{
+    border: 1px solid red;
+}
 .inpCont {
     position: relative;
 }
