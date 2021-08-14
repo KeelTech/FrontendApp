@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
-import { container, menuBar } from './style.js';
+import DocumentModal from '@components/DocumentModal';
+import { container } from './style.js';
 
-const AttachmentCard = ({ data })=>{
+const AttachmentCard = ({ data, downloadDocumentClicked, deleteDocumentClicked })=>{
     const [showMenuBar, setMenuBar] = useState(false);
-    const { doc_type, id } = data;
+    const { doc_type, id, doc } = data;
+
+    const toggleMenuBar = ()=>{
+        setMenuBar(val=>!val)
+    }
+
     return(
-        <div className={container}>
+        <div className={container} key={id}>
             <img className="docIcon" src={ASSETS_BASE_URL+"/images/common/document.svg"} alt="document"/>
             <span className="docx">{doc_type}</span>
-            <img className="dotMenu" src={ASSETS_BASE_URL+"/images/common/dotMenu.svg"} alt="menu" onClick={()=>setMenuBar(val=>!val)}/>
+            <img className="dotMenu" src={ASSETS_BASE_URL+"/images/common/dotMenu.svg"} alt="menu" onClick={toggleMenuBar}/>
             {
-                showMenuBar && <div className={menuBar}>
-                    <span>Download</span>
-                    <span>Delete</span>
-                </div>
+                showMenuBar?<DocumentModal id={id} docId={doc} toggle={toggleMenuBar} downloadDocumentClicked={downloadDocumentClicked} deleteDocumentClicked={deleteDocumentClicked}/>:null
             }
         </div>
     )

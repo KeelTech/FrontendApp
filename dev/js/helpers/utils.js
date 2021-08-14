@@ -28,8 +28,8 @@ export const getFormattedTime = (val)=>{
         let hours = date.getHours();
         let minutes = date.getMinutes();
         let timeSuffix = 'AM';
-        if(hours>12){
-            hours = hours-12;
+        if(hours>=12){
+            hours = hours==12?12:hours-12;
             timeSuffix = 'PM';
         }
         if(hours<10){

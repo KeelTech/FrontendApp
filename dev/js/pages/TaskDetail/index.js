@@ -1,17 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import AttachmentCard from '@components/AttachmentCard';
 import { SET_MENUBAR_STATE } from '@constants/types';
-import { getTaskDetail } from '@actions';
+import { getTaskDetail, downloadDocument, deleteDocument } from '@actions';
+import PostCommentView from '@components/PostCommentView';
+import CustomToaster from '@components/CustomToaster';
+import FileUpload from '@components/FileUpload';
+import { loaderView } from '@constants';
+import LoadingWidget from '@components/LoadingWidget';
+import DeleteConfirmationPopup from '@components/DeleteConfirmationPopup';
 import { getNameInitialHelper, getFormattedTime, getFormattedDate, capitalizeFirstLetter } from '@helpers/utils';
 import { container, taskStatus, discussionSection, memberCard, attachmentSection, checklistSection, messageSection } from './style.js';
 
 const TaskDetail = ({ activeTask })=>{
     const history = useHistory();
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
     const taskInfo = useSelector(state=>state.TASK_INFO);
     const { taskDetail={} } = taskInfo||{};
+    const [openUploadDocumentModal, setOpenUploadModal] = useState(false);
+    const [toasterInfo, setToasterInfo] = useState({
+        isVisible: false,
+        isError: false,
+        isSuccess: false,
+        msg: ''
+    })
+    const [showDeleteConfirmation, setDeleteConfirmation] = useState(false);
+    const [selectedDeleteDocument, setDeleteDocument] = useState('');
+
     const handleBackBtnClick = ()=>{
         dispatch(
             {
@@ -33,12 +50,106 @@ const TaskDetail = ({ activeTask })=>{
 
     },[activeTask, dispatch]);
 
+    const updateTaskStatus = (success, error, errorMsg='Failed, Try again later', msg='Comment Added Successfully')=>{
+        if(success){
+            setToasterInfo({
+                isVisible: true,
+                isSuccess: true,
+                isError: false,
+                msg: msg
+            })
+            setTimeout(() => {
+                getTaskDetail({taskId: activeTask}, dispatch);
+            }, 1000);
+        }else if(error){
+            setToasterInfo({
+                isVisible: true,
+                isSuccess: false,
+                isError: true,
+                msg: errorMsg
+            })
+        }
+        setTimeout(() => {
+            hideToaster();
+        }, 1000);
+    }
+
+    const hideToaster = ()=>{
+        setToasterInfo({
+            isVisible: false
+        })
+    }
+
+    const uploadFile = (val, resp)=>{
+        toggleUploadModal();
+        updateTaskStatus(resp, !resp, 'Failed, Please try again later', 'Document Uploaded Successfully');
+    }
+
+    const toggleUploadModal = ()=>{
+        setOpenUploadModal(val=>!val);
+    }
+
+    const deleteDocumentClicked = ({id})=>{
+        setDeleteDocument(id);
+        toggleDeletePopup()
+    }
+
+    const deletePopupHandler = ()=>{
+        toggleDeletePopup();
+        setLoading(true);
+        deleteDocument({id: selectedDeleteDocument}, dispatch, (resp, err)=>{
+            setLoading(false);
+            updateTaskStatus(resp, !resp, 'Failed, Please try again later', 'Deleted Successfully');
+        })
+    }
+
+    const downloadDocumentClicked = ({id, docId})=>{
+        setLoading(true);
+        downloadDocument({ docId }, dispatch, (resp, err)=>{
+            setLoading(false);
+            // console.log('resp is', resp);
+            // var blob=new Blob([resp]);
+            // var link=document.createElement('a');
+            // link.href=window.URL.createObjectURL(blob);
+            // link.download="new.png";
+            // link.click();
+            // var img = document.createElement('img');
+            // img.classList.add('demo');
+            // img.id="demo";
+            // img.src = 'data:image/jpeg;base64,' + btoa(resp);
+            // document.body.appendChild(img);
+            // handleResponse(resp, 'Downloaded Successfully', false);
+            // resp.blob().then(blob => {
+            //     let url = window.URL.createObjectURL(blob);
+            //     let a = document.createElement("a");
+            //     console.log(url);
+            //     a.href = url;
+            //     a.download = 'filename';
+            //     a.click();
+            // });
+        })
+    }
+
+    const toggleDeletePopup = ()=>{
+        setDeleteConfirmation(val=>!val);
+    }
+
     const { title, priority_name, status_name, description, tasks_comment=[], tasks_docs=[], check_list=[] } = taskDetail && taskDetail[activeTask] || {};
 
     return(
         <div className={container}>
+            {
+                openUploadDocumentModal ?<FileUpload maxWidth="600px" isUploadToServer fileUploadModalClosed={toggleUploadModal} uploadFile={uploadFile} task_id={activeTask}/>:null
+            }
+            {
+                showDeleteConfirmation?<DeleteConfirmationPopup togglePopup={toggleDeletePopup} deletePopupHandler={deletePopupHandler}/>:null
+            }
+            {
+                loading && <div className={loaderView}><LoadingWidget/></div>
+            }
+            <CustomToaster {...toasterInfo} hideToaster={hideToaster}/>
             <div className="statusCont">
-                <span className="statusText">Mark as completed</span>
+                {/* <span className="statusText">Mark as completed</span> */}
                 <span className="status">{status_name}</span>
             </div>
             <div className="taskName">
@@ -91,15 +202,15 @@ const TaskDetail = ({ activeTask })=>{
                         <img className="icon" src={ASSETS_BASE_URL+"/images/common/attachment.svg"} alt="discuss"/>
                         <span>Attachments</span>
                     </div>
-                    <div className="taskName">
+                    <div className="taskName addAttachment" onClick={toggleUploadModal}>
                         <img className="icon" src={ASSETS_BASE_URL+"/images/common/addIcon.svg"} alt="attachment"/>
                         <span>Add an attachment</span>
                     </div>
                 </div>
                 <div className="attachmentList">
                     {
-                        tasks_docs.map((val)=>{
-                            return <AttachmentCard data={val} key={val.doc_id}/>
+                        tasks_docs.map((val, key)=>{
+                            return <AttachmentCard data={val} key={key} deleteDocumentClicked={deleteDocumentClicked} downloadDocumentClicked={downloadDocumentClicked}/>
                         })
                     }
                 </div>
@@ -134,10 +245,11 @@ const TaskDetail = ({ activeTask })=>{
                     <span>Activity</span>
                 </div>
                 <div className="messageSection">
-                    <div className="msgView">
+                    <PostCommentView taskId={activeTask} updateTaskStatus={updateTaskStatus}/>
+                    {/* <div className="msgView">
                         <span className="profile">SW</span>
                         <input type="text" placeholder="Write a Comment"/>
-                    </div>
+                    </div> */}
                     {
                         tasks_comment.map((val, key)=>{
                             const { user_details, user_name, msg, created_at, } = val;

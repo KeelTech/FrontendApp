@@ -44,7 +44,7 @@ const COMMON_REDUCER_PERSIST = {
 const TASK_INFO_PERSIST = {
     key: 'TASK_INFO',
     storage: storage,
-    whitelist: ['']
+    whitelist: ['userInfo']
 }
 
 const AGENT_STORE_PERSIST = {

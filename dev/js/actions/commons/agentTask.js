@@ -69,3 +69,26 @@ export const getCaseList = (dataParams={}, dispatch, cb=null)=>{
         })
     })
 }
+
+export const updateCurrentTaskStatus = (dataParams, dispatch, cb=null)=>{
+    const { task_id } = dataParams;
+    API_PUT(`${API_BASE_URL}/v1/tasks/taskStatus/${task_id}`, {
+        ...dataParams
+    }).then((response)=>{
+        if(cb)cb(response, null);
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}
+
+export const getAgentDetails = (dataParams={}, dispatch, cb=null)=>{
+    API_GET(`${API_BASE_URL}v1/user/item-count`).then((response)=>{
+        if(response && response.data){
+            if(cb)cb(response.data, false);
+        }else{
+            if(cb)cb(null, true);    
+        }
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}

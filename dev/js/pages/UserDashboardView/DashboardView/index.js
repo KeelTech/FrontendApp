@@ -18,8 +18,9 @@ const DashboardView = ()=>{
     const history = useHistory();
     const dispatch = useDispatch();
     const taskInfo = useSelector(state=>state.TASK_INFO);
-    const { taskList=[], taskListLoading } = taskInfo||{};
-
+    const { taskList=[], taskListLoading, userInfoLoading, userInfo={} } = taskInfo||{};
+    const { case:caseDetails={} } = userInfo;
+    const caseId = caseDetails && caseDetails.case_id;
     const [activeTask, setActiveTask] = useState('');
 
     useEffect(()=>{
@@ -34,12 +35,14 @@ const DashboardView = ()=>{
     },[])
 
     useEffect(()=>{
-        getTaskList({status: 0}, dispatch, (resp, error)=>{
-            if(resp && resp.length){
-                setActiveTask(resp[0].task_id);
-            }
-        });
-    },[dispatch])
+        if(caseId){
+            getTaskList({status: 0, case:caseId}, dispatch, (resp, error)=>{
+                if(resp && resp.length){
+                    setActiveTask(resp[0].task_id);
+                }
+            });
+        }
+    },[caseId])
 
     const redirectToTaskList = ()=>{
         history.push('/tasks');
@@ -60,7 +63,7 @@ const DashboardView = ()=>{
                     <div className={pendingTasks}>
                         <div className="taskHeading">PENDING TASKS</div>
                         {
-                            taskListLoading?<div className={loaderView}><LoadingWidget/></div>
+                            userInfoLoading || taskListLoading?<div className={loaderView}><LoadingWidget/></div>
                             :<Fragment>
                                 <div className="taskList">
                                     {

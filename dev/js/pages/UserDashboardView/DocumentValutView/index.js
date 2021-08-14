@@ -11,7 +11,7 @@ import LoadingWidget from '@components/LoadingWidget';
 import CustomButton from '@components/CustomButton';
 import CustomSelect from '@components/CustomSelect';
 import CustomSearch from '@components/CustomSearch';
-import { getDocumentsList, uploadDocument, getDocumentTypes, deleteDocument, downloadDocument } from '@actions';
+import { getDocumentsList, deleteDocument, downloadDocument } from '@actions';
 import DocumentCard from '@components/DocumentCard';
 import FileUpload from '@components/FileUpload';
 import CustomToaster from '@components/CustomToaster';
@@ -43,7 +43,6 @@ const TaskView = ()=>{
     const [uploadedBy, setUploadedBy] = useState(PriorityList[0]);
     const [searchVal, setSearchVal] = useState('');
     const [openUploadDocumentModal, setOpenUploadModal] = useState(false);
-    const [documentTypes, setDocumentTypes] = useState([]);
     const [showDeleteConfirmation, setDeleteConfirmation] = useState(false);
     const [toasterInfo, setToasterInfo] = useState({
         isVisible: false,
@@ -55,14 +54,6 @@ const TaskView = ()=>{
     const [selectedDeleteDocument, setDeleteDocument] = useState('');
     const [filterList, setFilterList] = useState([]);
 
-    const taskClickHandler = (taskId)=>{
-        if(isMobileView()){
-            history.push(`/task/detail/${taskId}`);
-        }else{
-            setActiveTask(taskId);
-        }
-    }
-
     useEffect(()=>{
         dispatch(
             {
@@ -73,19 +64,6 @@ const TaskView = ()=>{
             }
         )
         fetchDocuments();
-        getDocumentTypes({}, dispatch, (resp, err)=>{
-            if(resp && resp.data && resp.data.length){
-                const filterData = resp.data.map((val)=>{
-                    return {
-                        value: val.id,
-                        displayName: val.doc_type_name
-                    }
-                })
-                setDocumentTypes(filterData);
-            }else{
-
-            }
-        })
     },[])
 
     const fetchDocuments = ()=>{
@@ -135,17 +113,9 @@ const TaskView = ()=>{
         }, 1000);
     }
 
-    const uploadFile = (val)=>{
+    const uploadFile = (val, resp)=>{
         toggleUploadModal();
-        setLoading(true);
-        const { selectedFile,  selectedFileType } = val;
-        const formData = new FormData();
-        formData.append('doc_file', selectedFile);
-        formData.append('doc_type', selectedFileType && selectedFileType.value);
-        uploadDocument(formData, dispatch, (resp, error)=>{
-            handleResponse(resp);
-            setLoading(false);
-        })
+        handleResponse(resp, 'Document Uploaded Successfully');
     }
 
     const toggleUploadModal = ()=>{
@@ -204,14 +174,14 @@ const TaskView = ()=>{
 
     const downloadDocumentClicked = ({id, docId})=>{
         setLoading(true);
-        downloadDocument({ docId }, dispatch, (resp, err)=>{
+        downloadDocument({ docId:'doc_50b576b22c7e4600b523ed012b521109' }, dispatch, (resp, err)=>{
             setLoading(false);
-            // console.log('resp is', resp);
-            // var blob=new Blob([resp]);
-            // var link=document.createElement('a');
-            // link.href=window.URL.createObjectURL(blob);
-            // link.download="new.png";
-            // link.click();
+            console.log('resp is', resp);
+            var blob=new Blob([resp]);
+            var link=document.createElement('a');
+            link.href=window.URL.createObjectURL(blob);
+            link.download="new.pdf";
+            link.click();
             // var img = document.createElement('img');
             // img.classList.add('demo');
             // img.id="demo";
@@ -254,7 +224,7 @@ const TaskView = ()=>{
                 <div className={container}>
                 <CustomToaster {...toasterInfo} hideToaster={hideToaster}/>
                     {
-                        openUploadDocumentModal && documentTypes.length?<FileUpload documentTypes={documentTypes} fileUploadModalClosed={toggleUploadModal} uploadFile={uploadFile}/>:null
+                        openUploadDocumentModal ?<FileUpload isUploadToServer fileUploadModalClosed={toggleUploadModal} uploadFile={uploadFile}/>:null
                     }
                     {
                         showDeleteConfirmation?<DeleteConfirmationPopup togglePopup={toggleDeletePopup} deletePopupHandler={deletePopupHandler}/>:null

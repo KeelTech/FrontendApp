@@ -27,6 +27,7 @@ let routes = [
   { path: '/vault', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/billing', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/agent', component: AgentDashBoardView, isPrivate: true  },
+  { path: '/profile', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '*', component: NotFoundPage, isPrivate: false  },
 ];
 

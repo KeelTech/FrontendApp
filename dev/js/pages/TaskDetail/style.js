@@ -36,6 +36,9 @@ export const container = css`
         background: #CF3030;
         border-radius: 5px;
     }
+    .addAttachment{
+        cursor: pointer;
+    }
     .taskName{
         img{
             width: 12px;
