@@ -19,8 +19,12 @@ const DashboardView = ()=>{
     const dispatch = useDispatch();
     const taskInfo = useSelector(state=>state.TASK_INFO);
     const { taskList=[], taskListLoading, userInfoLoading, userInfo={} } = taskInfo||{};
-    const { case:caseDetails={} } = userInfo;
+    let { case:caseDetails={}, cases={} } = userInfo;
+    if(cases){
+        caseDetails = cases
+    }
     const caseId = caseDetails && caseDetails.case_id;
+    const userId = caseDetails && caseDetails.user;
     const [activeTask, setActiveTask] = useState('');
 
     useEffect(()=>{
@@ -87,7 +91,7 @@ const DashboardView = ()=>{
                         
                     </div>
                     <div className="chat">
-                        <ChatWidget/>
+                        {caseId ? <ChatWidget caseId={caseId} currentUserId={userId}/> : ""}
                     </div>
                 </div>
             </div>
