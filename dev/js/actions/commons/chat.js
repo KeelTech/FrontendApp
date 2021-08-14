@@ -13,10 +13,12 @@ export const getChatMessages = (caseId="", headers, dispatch, cb=null)=>{
             type: CHAT_LOADING,
             payload: false
         })
-        // dispatch({
-        //     type: MERGE_CHAT_MESSAGES,
-        //     payload: response && response.data
-        // })
+        if(response && response.data && response.data.results){
+            dispatch({
+                type: MERGE_CHAT_MESSAGES,
+                payload: response.data.results
+            })
+        }
         if(cb)cb(response, null);
     }).catch((e)=>{
         dispatch({

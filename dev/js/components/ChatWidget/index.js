@@ -5,30 +5,22 @@ import ChatCard from './ChatCard.js';
 import { container, chatWidget, msgWidget, mobileChatView } from './style.js';
 import { sendChatMessage, getChatMessages } from '@actions';
 
-const chat = [
-    {
-        text: 'Hello John!',
-        isReceiver: true,
-        time: ''
-    },
-    {
-        text: 'Can you arrange schedule for next meeting?',
-        isReceiver: true,
-        time: '12:45 PM, 12 Jun 2021'
-    }
-]
 
-const ChatWidget = ({ floatingChat=false, toggleChat, caseId="" })=>{
+const ChatWidget = ({ floatingChat=false, toggleChat, caseId="", currentUserId="" })=>{
 
     const mainClass = cx({
         [container]: true,
         [mobileChatView]: floatingChat,
     })
 
+    const chatData = useSelector(state=>state.CHAT);
     const dispatch = useDispatch();
     useEffect(()=>{
         if(floatingChat){
             document.body.style.overflow="hidden";
+        }
+        if(caseId){
+            getChatMessages(caseId, {limit:20, offset:0}, dispatch)
         }
         return ()=>{
             document.body.style.overflow="";
@@ -40,7 +32,9 @@ const ChatWidget = ({ floatingChat=false, toggleChat, caseId="" })=>{
     const sendButtonHandler = (e,v) => {
         if(inputMessage && inputMessage.length < 256) {
             sendChatMessage({"message": inputMessage, "case_id": caseId}, (res,err) => {
-                getChatMessages(caseId, {limit:20, offset:0}, dispatch)
+                if(caseId){
+                    getChatMessages(caseId, {limit:20, offset:0}, dispatch)
+                }
                 setinputMessage("")
             })
         }
@@ -60,7 +54,7 @@ const ChatWidget = ({ floatingChat=false, toggleChat, caseId="" })=>{
                 <img className="close" src={ASSETS_BASE_URL+"/images/common/crossIcon.svg"} alt="close" onClick={toggleChat}/>
             </div>
             <div className={chatWidget({floatingChat})}>
-                <ChatCard floatingChat={floatingChat} messages={chat}/>
+                <ChatCard floatingChat={floatingChat} messages={chatData.chatMessages} currentUserId={currentUserId}/>
             </div>
             <div className={msgWidget({floatingChat})}>
                 <div className="chatbox">

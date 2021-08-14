@@ -24,6 +24,7 @@ const DashboardView = ()=>{
         caseDetails = cases
     }
     const caseId = caseDetails && caseDetails.case_id;
+    const userId = caseDetails && caseDetails.user;
     const [activeTask, setActiveTask] = useState('');
 
     useEffect(()=>{
@@ -90,7 +91,7 @@ const DashboardView = ()=>{
                         
                     </div>
                     <div className="chat">
-                        {caseId ? <ChatWidget caseId={caseId}/> : ""}
+                        {caseId ? <ChatWidget caseId={caseId} currentUserId={userId}/> : ""}
                     </div>
                 </div>
             </div>
