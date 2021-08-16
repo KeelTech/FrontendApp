@@ -3,11 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCityList, getCountryList, getStateList, savePlaceInfo } from '@actions';
 import CustomSearchSelect from '@components/CustomSearchSelect';
 
-let city = [
-    {val:'aa'},
-    {val:'bb'},
-    {val:'cc'}
-]
 const SelectCity = ({ saveSelectedOption })=>{
     const dispatch = useDispatch();
     const taskInfo = useSelector(state=>state.TASK_INFO);
@@ -16,18 +11,17 @@ const SelectCity = ({ saveSelectedOption })=>{
     const [list, setList] = useState([]);
 
     useEffect(()=>{
-        if(country||state){
-            getCityList({id: country||state}, dispatch, (resp, err)=>{
+        if(state){
+            getCityList({id: state}, dispatch, (resp, err)=>{
                 if(resp && resp.message){
                     const filterResp = resp.message.map((val)=>{
                         return {...val, name: val.city_name};
                     })
-                    console.log(filterResp);
                     setList(filterResp);
                 }
             })
         }
-    },[city, country]);
+    },[state]);
 
     const handleChange = (val)=>{
         savePlaceInfo({city: val && val.id}, dispatch);
@@ -51,7 +45,6 @@ const SelectCountry = ({ saveSelectedOption })=>{
 
     useEffect(()=>{
         getCountryList({}, dispatch, (resp, err)=>{
-            console.log(resp);
             if(resp && resp.message){
                 setList(resp.message);
             }
@@ -77,20 +70,24 @@ const SelectCountry = ({ saveSelectedOption })=>{
 
 const SelectState = ({ saveSelectedOption })=>{
     const dispatch = useDispatch();
+    const taskInfo = useSelector(state=>state.TASK_INFO);
     const { placeInfo={} } = taskInfo;
     const { country } = placeInfo;
     const [list, setList] = useState([])
 
     useEffect(()=>{
-        getStateList({id: country}, dispatch, (resp, err)=>{
-            if(resp){
-                setList([
-                    
-                ])
-            }
-        })
-
-    },[state]);
+        if(country){
+            getStateList({id: country}, dispatch, (resp, err)=>{
+                console.log(resp);
+                if(resp && resp.message){
+                    const filterResp = resp.message.map((val)=>{
+                        return {...val, name: val.state};
+                    })
+                    setList(filterResp);
+                }
+            })
+        }
+    },[country]);
 
     const handleChange = (val)=>{
         savePlaceInfo({state: val && val.id}, dispatch);
