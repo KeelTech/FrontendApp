@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 import Header from "@components/Header";
 import NotificationWidget from "@components/NotificationWidget";
 import ProfileWidget from "@components/ProfileWidget";
+import { loaderView } from '@constants';
+import LoadingWidget from '@components/LoadingWidget';
 import { getCaseList } from '@actions';
 import { SET_AGENT_MENUBAR_STATE } from '@constants/types';
 import { head, view } from "./style.js";
@@ -13,9 +15,8 @@ import MobileViewList from './MobileViewList'
 const CustomerView = () => {
   const dispatch = useDispatch();
   const agentStore = useSelector((store) => store.AGENT_STORE);
-  const { caseList } = agentStore || {};
+  const { caseList, caseListLoading } = agentStore || {};
   const history = useHistory();
-  
   useEffect(() => {
     getCaseList({}, dispatch);
   }, []);
@@ -32,7 +33,7 @@ const CustomerView = () => {
   }, [])
 
   const handleCustomerClick = (caseId) => {
-    history.push(`/agent/tasks/${caseId}`)
+    history.push(`/agent/customer/${caseId}`);
   }
 
   return (
@@ -45,12 +46,17 @@ const CustomerView = () => {
           </div>
         </Header>
         <div className={view}>
-          <div className="desktopView">
-            <DesktopViewList handleCustomerClick={handleCustomerClick} caseList={caseList} />
-          </div>
-          <div className="mobileView">
-            <MobileViewList handleCustomerClick={handleCustomerClick} caseList={caseList} />
-          </div>
+          {
+              caseListLoading?<div className={loaderView}><LoadingWidget/></div>
+              :<Fragment>
+                <div className="desktopView">
+                  <DesktopViewList handleCustomerClick={handleCustomerClick} caseList={caseList} />
+                </div>
+                <div className="mobileView">
+                  <MobileViewList handleCustomerClick={handleCustomerClick} caseList={caseList} />
+                </div>
+              </Fragment>
+          }
         </div>
       </div>
     </Fragment>

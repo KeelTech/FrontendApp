@@ -1,7 +1,7 @@
 import React, { Fragment, useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { updateTask, deleteComment, downloadDocument, deleteDocument, updateCurrentTaskStatus } from '@actions';
+import { updateTask, deleteComment, downloadDocument, deleteDocument, updateCurrentTaskStatus, deleteTaskInfo } from '@actions';
 import AttachmentCard from '@components/AttachmentCard';
 import CustomButton from '@components/CustomButton';
 import CustomSelect from '@components/CustomSelect';
@@ -10,6 +10,7 @@ import PostCommentView from '@components/PostCommentView';
 import CustomToaster from '@components/CustomToaster';
 import FileUpload from '@components/FileUpload';
 import DeleteConfirmationPopup from '@components/DeleteConfirmationPopup';
+import { isMobileView } from '@constants';
 import { getNameInitialHelper, getFormattedTime, getFormattedDate, capitalizeFirstLetter } from '@helpers/utils';
 import { container, taskStatus, discussionSection, memberCard, attachmentSection, checklistSection, messageSection } from './style.js';
 
@@ -28,7 +29,7 @@ const PriorityList = [
     }
 ]
 
-const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
+const TaskInfo = ({taskDetail, refetchTaskDetail, refetchTaskList})=>{
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -164,6 +165,9 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
         updateCurrentTaskStatus(postDataParams, dispatch, (resp, err)=>{
             setLoading(false);
             updateTaskStatus(resp, err, 'Failed, Try again later', 'Task Updated successfully');
+            if(!isMobileView()){
+                refetchTaskList();
+            }
         })
     }
 
@@ -236,6 +240,19 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
 
     const toggleDeletePopup = ()=>{
         setDeleteConfirmation(val=>!val);
+    }
+
+    const deleteTask = ()=>{
+        setLoading(true);
+        deleteTaskInfo({taskId: dataParams.task_id}, dispatch, (resp, err)=>{
+            setLoading(false);
+            updateTaskStatus(resp, !resp, 'Failed, Please try again later', 'Deleted Successfully');
+            if(isMobileView()){
+                handleBackBtnClick();
+            }else if(refetchTaskList){
+                refetchTaskList();
+            }
+        })
     }
 
     let { fullYear, day, month } = getFormattedDate(due_date);
@@ -393,15 +410,18 @@ const TaskInfo = ({taskDetail, refetchTaskDetail})=>{
                                         <span className="name">{capitalizeFirstLetter(user_details.user_name)}</span>
                                         <span className="time">{`${getFormattedTime(created_at)}, ${getFormattedDate(created_at).formattedDate}`}</span> 
                                     </div>
-                                    <div className="msg">{msg}</div>
-                                    <div className="deleteComment">
-                                        <CustomButton text="Delete" clickHandler={()=>deleteCommentClicked(id)} margin="0px 0px 8px 0px" padding="10px 30px" borderRadius="5px" backgroundColor="#CF3030"/>
+                                    <div className="msgSection">
+                                        <div className="msg">{msg}</div>
+                                        <img src={`${ASSETS_BASE_URL}/images/common/delete.svg`} className="deleteIcon" onClick={()=>deleteCommentClicked(id)}/>
                                     </div>
                                 </div>
                             </div>
                         })
                     }
                     
+                </div>
+                <div className="deleteTask">
+                    <CustomButton text="Delete" clickHandler={deleteTask} margin="0px 0px 8px 0px" padding="10px 50px" borderRadius="5px" backgroundColor="#CF3030"/>
                 </div>
             </div>
         </div>

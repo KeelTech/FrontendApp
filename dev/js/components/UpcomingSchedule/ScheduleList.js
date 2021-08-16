@@ -5,8 +5,8 @@ const ScheduleList = ({schedules}) => {
   return (
     <div className={schedule}>
       <ul>
-        {schedules.map((schedule) => (
-          <li>
+        {schedules.map((schedule, key) => (
+          <li key={key}>
             <div>
               <span className="message">{schedule.message}</span>
             </div>
