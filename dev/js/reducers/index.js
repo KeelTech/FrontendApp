@@ -32,7 +32,7 @@ const USER_PERSIST = {
 const USER_LOGIN = {
   key: 'USER_LOGIN',
   storage: storage,
-  whitelist: ['IsloggedIn'],
+  whitelist: ['IsloggedIn', 'isAgent'],
 };
 
 const COMMON_REDUCER_PERSIST = {

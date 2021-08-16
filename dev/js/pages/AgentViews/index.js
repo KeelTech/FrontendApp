@@ -16,6 +16,7 @@ const UserDashboardView = ({ match })=>{
             <LeftMenuBar isAgent/>
             <div className={body}>
                 <Switch>
+                    <Route exact path={`${match.path}/`} component={DashboardView}/>
                     <Route exact path={`${match.path}/dashboard`} component={DashboardView}/>
                     <Route exact path={`${match.path}/tasks/:caseId`} component={TaskView}/>
                     <Route exact path={`${match.path}/task/create/:caseId`} component={CreateTaskMobileView}/>
