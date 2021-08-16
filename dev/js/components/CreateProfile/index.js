@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFullUserProfile, createFullUserProfile, updateUserProfile } from '@actions';
+import { getFullUserProfile, createFullUserProfile, updateUserProfile, updateProfile } from '@actions';
 import LoadingWidget from '@components/LoadingWidget';
 import { loaderView } from '@constants';
 import CustomToaster from '@components/CustomToaster';

@@ -72,7 +72,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                 <div className="openWidgetView">
                     <div className="widgetView">
                         <div className="homeWidget">
-                            <img className="homeIcon" src={ASSETS_BASE_URL+"/images/common/keelIcon.svg"} alt="home" onClick={()=>history.push('/dashboard')}/>
+                            <img className="homeIcon" src={ASSETS_BASE_URL+"/images/common/keelIcon.svg"} alt="home" onClick={()=>history.push('/')}/>
                             <img className="crossIcon" src={ASSETS_BASE_URL+"/images/common/crossIcon.svg"} alt="home" onClick={toggleMenuBar}/>
                         </div>
                         <div className={menuOptions}>

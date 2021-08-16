@@ -9,11 +9,13 @@ import {
   googleLogin,
   linkedinLogin,
   facebookLogin,
+  agentLogin
 } from '../../actions/index.js';
 import { Link } from 'react-router-dom';
 import { style, Loader } from './style.js';
 
 const LoginView = (props) => {
+  const isAgent = props.match.path.includes('agent');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginFail, setLoginFail] = useState(false);
@@ -33,19 +35,29 @@ const LoginView = (props) => {
     props.history.push('/');
   };
 
+  const loginAfterLoginSuccess = ()=>{
+    setTimeout(() => {
+      props.history.push('/');
+    }, 1000);
+  }
+
   const loginSubmitHnadler = (event) => {
     event.preventDefault();
     if (email === '' || password === '') {
       return;
     }
     setLoader(true);
-    userLogin({ email, password }, dispatch, (err, data) => {
+    let loginFunc = userLogin;
+    if(isAgent){
+      loginFunc = agentLogin;
+    }
+    loginFunc({ email, password }, dispatch, (err, data) => {
       if (data) {
         setLoader(false);
         setLoginFail(false);
         setEmail('');
         setPassword('');
-        props.history.push('/dashboard');
+        loginAfterLoginSuccess();
       }
       if (err) {
         setLoader(false);
@@ -60,7 +72,7 @@ const LoginView = (props) => {
     googleLogin({ accessToken }, dispatch, (err, data) => {
       if (data) {
         setLoader(false);
-        props.history.push('/dashboard');
+        loginAfterLoginSuccess();
       }
       if (err) {
         setLoader(false);
@@ -75,7 +87,7 @@ const LoginView = (props) => {
     facebookLogin({ accessToken }, dispatch, (err, data) => {
       if (data) {
         setLoader(false);
-        props.history.push('/dashboard');
+        loginAfterLoginSuccess();
       }
       if (err) {
         setLoader(false);
@@ -112,14 +124,14 @@ const LoginView = (props) => {
             onClick={() => loginClick()}
           />
           <p className="header-text">Log in to Continue</p>
-          <form className="form-wrapper" onSubmit={loginSubmitHnadler}>
+          <form className="form-wrapper" onSubmit={loginSubmitHnadler} autoComplete="false">
             <input
               className="login-email-input"
               placeholder="E-mail"
               type="email"
               value={email}
               onChange={emailLoginHnadler}
-              autoComplete="off"
+              autoComplete="new-password"
             />
             <input
               className="login-password-input"
@@ -127,7 +139,7 @@ const LoginView = (props) => {
               type="password"
               value={password}
               onChange={passwordLoginHandler}
-              autoComplete="off"
+              autoComplete="new-password"
             />
             {loginFail && (
               <p className="login-fail-msg">
@@ -139,37 +151,42 @@ const LoginView = (props) => {
               <button className="password-reset">Forgot your password?</button>
             </Link>
           </form>
-          <p className="login-divider">
-            <span>Or Login with </span>
-          </p>
-          <div className="social-button-wrapper">
-            <GoogleLogin
-              clientId="194271428747-v7t3bjqu3cea8jq734pd9o950kolco0o.apps.googleusercontent.com"
-              onSuccess={responseGoogle}
-              onFailure={responseGoogle}
-              render={(renderProps) => (
-                <button onClick={renderProps.onClick} className="google-button">
-                  <img
-                    className="google-button-image"
-                    src={ASSETS_BASE_URL + '/images/Signup/google-logo.jpeg'}
-                    alt="google-image"
-                  />
-                </button>
-              )}
-            />
-            <FacebookLogin
-              appId="966069997563073"
-              fields="name,email,picture"
-              textButton=""
-              callback={responseFacebook}
-              cssClass="facebook-button"
-              icon="fa-facebook"
-            />
+          {
+            isAgent?null
+            :<Fragment>
+              <p className="login-divider">
+                <span>Or Login with </span>
+              </p>
+              <div className="social-button-wrapper">
+                <GoogleLogin
+                  clientId="194271428747-v7t3bjqu3cea8jq734pd9o950kolco0o.apps.googleusercontent.com"
+                  onSuccess={responseGoogle}
+                  onFailure={responseGoogle}
+                  render={(renderProps) => (
+                    <button onClick={renderProps.onClick} className="google-button">
+                      <img
+                        className="google-button-image"
+                        src={ASSETS_BASE_URL + '/images/Signup/google-logo.jpeg'}
+                        alt="google-image"
+                      />
+                    </button>
+                  )}
+                />
+                <FacebookLogin
+                  appId="966069997563073"
+                  fields="name,email,picture"
+                  textButton=""
+                  callback={responseFacebook}
+                  cssClass="facebook-button"
+                  icon="fa-facebook"
+                />
 
-            {/* <button onClick={responseLinkedin} className="linkedin-button">
-            in
-          </button> */}
-          </div>
+                {/* <button onClick={responseLinkedin} className="linkedin-button">
+                in
+              </button> */}
+              </div>
+            </Fragment>
+          }
           <p className="signup-divider">
             <span>Or</span>
           </p>

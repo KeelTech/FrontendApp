@@ -1,4 +1,5 @@
-import React, { Fragment } from "react";
+import React from "react";
+import { useSelector } from 'react-redux';
 import NotificationWidget from "@components/NotificationWidget";
 import ProfileWidget from "@components/ProfileWidget";
 import Header from "@components/Header";
@@ -8,13 +9,16 @@ import { useHistory } from 'react-router-dom';
 
 const NotFoundPage = () => {
   const history = useHistory();
+  const LOGIN_STATE = useSelector(state=>state.LOGIN);
+  const { isAgent, IsloggedIn } = LOGIN_STATE;
 
   return (
-    <Fragment>
     <div className={container}>
-    <LeftMenuBar />
+      {
+        IsloggedIn?<LeftMenuBar isAgent={isAgent}/>:null
+      }
       <div className={main}>
-        <Header>
+        <Header isAgent={isAgent}>
           <div className={head}>
             <NotificationWidget />
             <ProfileWidget />
@@ -26,8 +30,7 @@ const NotFoundPage = () => {
           <button onClick={()=>history.push('/')}>Redirect to dashboard</button>
         </div>
       </div>
-      </div>
-    </Fragment>
+    </div>
   );
 };
 
