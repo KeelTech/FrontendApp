@@ -1,4 +1,4 @@
-import { TASK_LIST_LOADING, SET_TASK_LIST, TASK_DETAIL_INFO, GET_USER_PROFILE, LOADING_USER_PROFILE, GET_FULL_USER_PROFILE, LOADING_FULL_USER_PROFILE, UPDATE_USER_PROFILE, SAVE_PLACE_INFO } from '@constants/types';
+import { TASK_LIST_LOADING, SET_TASK_LIST, TASK_DETAIL_INFO, GET_USER_PROFILE,  LOADING_USER_PROFILE, GET_FULL_USER_PROFILE, LOADING_FULL_USER_PROFILE, UPDATE_USER_PROFILE, SAVE_PLACE_INFO } from '@constants/types';
 import { API_POST, API_GET } from '../../api/api.js';
 
 export const getTaskList = (dataParams, dispatch, cb=null)=>{
@@ -155,5 +155,31 @@ export const updateProfile = (dataParams, dispatch, cb=null)=>{
         if(cb)cb(true, null);
     }).catch((e)=>{
         if(cb)cb(null, true);
+    })
+}
+
+export const getCaseDetail = (dataParams, dispatch, cb=null)=>{
+    const {customerId} = dataParams;
+    dispatch({
+        type: CASE_DETAIL_LOADING,
+        payload: true
+    })
+    API_GET(`${API_BASE_URL}/v1/cases/list-cases-details/${customerId}`).then((response)=>{
+        dispatch({
+            type: CASE_DETAIL_LOADING,
+            payload: false
+        })
+        if(response && response.status==1){
+            dispatch({
+                type: CASE_DETAILS,
+                payload: response.message[0]
+            })
+        }
+
+    }).catch((e)=>{
+        dispatch({
+            type: CASE_DETAIL_LOADING,
+            payload: false
+        })
     })
 }

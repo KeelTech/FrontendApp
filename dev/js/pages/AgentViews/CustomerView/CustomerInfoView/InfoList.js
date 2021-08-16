@@ -1,44 +1,68 @@
 import React from "react";
 import { list } from "./style";
 
-const InfoList = () => {
+const InfoList = ({ info }) => {
+  const {
+    case_details = {},
+    user_details = {},
+    user_qualifications = [],
+  } = info;
+  const {
+    fullname,
+    mother_fullname,
+    father_fullname,
+    age,
+    address,
+    date_of_birth,
+  } = user_details;
+
   return (
     <ul className={list}>
       <li className="infofield">
         <span className="key">Date Of Birth:</span>
-        <span className="value">05/01/1996</span>
+        <span className="value">{date_of_birth}</span>
       </li>
       <li className="infofield">
         <span className="key">Age:</span>
-        <span className="value">23</span>
+        <span className="value">{age}</span>
       </li>
       <li className="infofield">
         <span className="key">Address:</span>
-        <span className="value">
-          Flat No. T4, HSR Layout, Sector 1, Bangalore-660001
-        </span>
+        <span className="value">{address}</span>
       </li>
-      <li className="infofield">
-        <span className="key">Qualification:</span>
-        <span className="value">B.Tech(Information Technology)</span>
-      </li>
-      <li className="infofield">
-        <span className="key">College Name:</span>
-        <span className="value">SRM University</span>
-      </li>
-      <li className="infofield">
-        <span className="key">College Address:</span>
-        <span className="value status">
-          SRM University, Ramapuram, Chennai, 600111
-        </span>
-      </li>
+      {user_qualifications.map((val) => {
+        const { institute, grade, year_of_passing, start_date, city, country } =
+          val;
+        return (
+          <React.Fragment>
+            <li className="infofield">
+              <span className="key">Qualification:</span>
+              <span className="value">B.Tech(Information Technology)</span>
+            </li>
+            <li className="infofield">
+              <span className="key">Year of Passing:</span>
+              <span className="value">{year_of_passing}</span>
+            </li>
+            <li className="infofield">
+              <span className="key">College Name:</span>
+              <span className="value">{institute}</span>
+            </li>
+            <li className="infofield">
+              <span className="key">College Address:</span>
+              <span className="value status">
+                {city},{country}
+              </span>
+            </li>
+          </React.Fragment>
+        );
+      })}
       <li className="infofield">
         <span className="key">Father's Name:</span>
-        <span className="value status">John Williams</span>
+        <span className="value status">{father_fullname}</span>
       </li>
       <li className="infofield">
         <span className="key">Mother's Name:</span>
-        <span className="value status">Scarlett Williams</span>
+        <span className="value status">{mother_fullname}</span>
       </li>
     </ul>
   );
