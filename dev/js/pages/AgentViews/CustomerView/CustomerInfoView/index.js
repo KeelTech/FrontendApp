@@ -1,11 +1,25 @@
-import React from 'react';
+import React,{useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import NotificationWidget from '@components/NotificationWidget';
 import ProfileWidget from '@components/ProfileWidget';
 import Header from '@components/Header';
+import LoadingWidget from '@components/LoadingWidget'
 import { body } from './style';
 import InfoList from './InfoList';
+import { getCaseDetail } from '@actions';
 
 function CustomerInfoView() {
+  const dispatch = useDispatch();
+  const taskInfo = useSelector((store)=>store.TASK_INFO);
+  const {caseDetails, caseDetailLoading} = taskInfo||{};
+  
+  useEffect(()=>{
+    const dataParams = { customerId: "bc6df72f-91aa-4382-b2e4-370ca785afdc"};
+    getCaseDetail(dataParams, dispatch);
+  },[]);
+   console.log(caseDetails);
+  const {case_details = {}, user_details={}, user_qualifications = [] } = caseDetails;
+  const {fullname} = user_details;
   return (
     <div className={body}>
       <div className="mainView">
@@ -16,13 +30,15 @@ function CustomerInfoView() {
           </div>
         </Header>
       </div>
+      {caseDetailLoading?<div><LoadingWidget/></div>
+      :<React.Fragment>
       <div className="basicInfo">
         <div className="infoWrapper">
           <img
             className="userImage"
           />
           <div className="userInfoHeaderWrapper">
-            <h3 className="userName">Samantha William (#127625)</h3>
+            <h3 className="userName">{fullname}</h3>
             <div className="flexWrapper">
               <img
                 className="tagImg"
@@ -66,8 +82,10 @@ function CustomerInfoView() {
         </div>
       </div>
       <div className="completeInfoWrapper">
-      <InfoList />
+      <InfoList info = {caseDetails}/>
       </div>
+      </React.Fragment>
+      }
     </div>
   );
 }

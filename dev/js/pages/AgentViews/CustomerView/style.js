@@ -15,8 +15,10 @@ export const lists = css`
 `;
 
 export const customer = css`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
   .key{
-    display: inline-block;
     margin: 0;
     color: #363b64;
     font-weight: 700;
@@ -25,15 +27,13 @@ export const customer = css`
     width: 90px;
   }
   .value{
-    display: inline-block;
     margin: 0;
     color: #363b64;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 11px;
     line-height: 18px;
   }
   .status{
-    display: inline-block;
     margin: 0;
     border-radius: 3px;
     padding: 2px 8px;

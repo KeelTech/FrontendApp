@@ -1,9 +1,11 @@
-import { TASK_LIST_LOADING, SET_TASK_LIST, TASK_DETAIL_INFO } from '@constants/types';
+import { TASK_LIST_LOADING, SET_TASK_LIST, TASK_DETAIL_INFO, CASE_DETAIL_LOADING, CASE_DETAILS} from '@constants/types';
 
 const defaultState = {
     taskListLoading: false,
     taskList: [],
-    taskDetail: {}
+    taskDetail: {},
+    caseDetailLoading: false,
+    caseDetails: {}
 }
 
 export default function (state = defaultState, action) {
@@ -31,6 +33,18 @@ export default function (state = defaultState, action) {
                 newState.taskDetail[action.taskId] = {...action.payload, tasks_comment: [...action.payload.tasks_comment]};
             }
             return newState
+        }
+
+        case CASE_DETAIL_LOADING: {
+            let newState = { ...state}
+            newState.caseDetailLoading = action.payload;
+            return newState;
+        }
+
+        case CASE_DETAILS: {
+            let newState = {...state}
+            newState.caseDetails = action.payload||{};
+            return newState;
         }
 
     }
