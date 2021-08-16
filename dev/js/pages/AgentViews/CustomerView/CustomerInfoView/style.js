@@ -14,13 +14,9 @@ export const body = css`
   .basicInfo {
     background: #fcfcfc;
     border-radius: 10px;
-    width: 60%;
-    height: 16%;
-    margin-left: 3%;
+    padding: 20px 0px;
     @media (max-width: ${tabScreenWidth}) {
       margin-top: 2%;
-      width: 90%;
-      height: 17%;
     }
   }
   .infoWrapper {
@@ -105,13 +101,9 @@ export const body = css`
   .meetingInfoWrapper {
     background: #fcfcfc;
     border-radius: 10px;
-    width: 60%;
-    height: 7%;
-    margin-top: 2%;
-    margin-left: 3%;
+    margin: 16px 0px;
+    padding: 16px;
     @media (max-width: ${tabScreenWidth}) {
-      width: 90%;
-      height: 15%;
     }
   }
   .meetingInfoFlexWrapper {
@@ -129,7 +121,6 @@ export const body = css`
     width: 50%;
     @media (max-width: ${tabScreenWidth}) {
       width: 100%;
-      margin-left: 10px;
     }
   }
   .meetingHeader {
@@ -137,7 +128,6 @@ export const body = css`
     font-weight: 600;
     font-size: 18px;
     margin-bottom: 0px;
-    margin-left: 15px;
     line-height: 15px;
   }
   .meetingDateWrapper {
@@ -145,7 +135,6 @@ export const body = css`
     flex-direction: row;
   }
   .calendarImg {
-    margin-left: 15px;
     height: 14px;
     margin-top: 5px;
   }
@@ -200,15 +189,11 @@ export const body = css`
   .completeInfoWrapper {
     background: #fcfcfc;
     border-radius: 10px;
-    height: 55%;
-    width: 60%;
     margin-top: 2%;
     overflow: scroll;
     display: flex;
     flex-direction: row;
-    margin-left: 3%;
     @media (max-width: ${tabScreenWidth}) {
-      width: 90%;
     }
   }
   .keyWrapper {
@@ -228,3 +213,25 @@ export const body = css`
     font-size: 20px;
   }
 `;
+
+
+export const container = css`
+  display: flex;
+  .leftWidget{
+    width: 60%;
+    padding-right: 20px;
+  }
+  .chat{
+    width: 38%;
+    max-height: 700px;
+  }
+  @media(max-width: ${tabScreenWidth}){
+    .chat{
+        display: none;
+    }
+    .leftWidget{
+      width: 100%;
+      padding: 0px 20px;
+    }
+}
+`

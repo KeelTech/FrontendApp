@@ -23,7 +23,7 @@ const UserDashboardView = ({ match }) => {
                     <Route exact path={`${match.path}/task/create/:caseId`} component={CreateTaskMobileView}/>
                     <Route exact path={`${match.path}/task/detail/:taskId`} component={AgentTaskDetail}/>
                     <Route exact path={`${match.path}/customer`} component={CustomerView}/>
-                    <Route exact path={`${match.path}/customer/detail`} component={CustomerInfoView}/>
+                    <Route exact path={`${match.path}/customer/:caseId`} component={CustomerInfoView}/>
 
                 </Switch>
             </div>
