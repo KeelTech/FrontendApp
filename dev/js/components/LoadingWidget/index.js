@@ -38,11 +38,25 @@ export const container = css`
 const CustomSelect = ({})=>{
 
     return(
-        <div className={container}>
-            <div className="loader">
-                <img className="icon" src={ASSETS_BASE_URL+"/images/common/loading.png"} alt="...loading"/>
+        // <div className={container}>
+        //     <div className="loader">
+        //         <img className="icon" src={ASSETS_BASE_URL+"/images/common/loading.png"} alt="...loading"/>
+        //     </div>
+        //     {/* <div className="overlay"></div> */}
+        // </div>
+        <div className="surveyPageLoader">
+            <div className="ins-prf-img-grd">
+                <div className="loader-for-page-div">
+                    <div className='loader-for-page'>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
             </div>
-            {/* <div className="overlay"></div> */}
         </div>
     )
 }

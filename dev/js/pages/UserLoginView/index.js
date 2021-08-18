@@ -103,11 +103,11 @@ const LoginView = (props) => {
           <LoadingWidget />
         </div>
       )}
-      <div className={style({})}>
-        <div className="row no-gutters">
+      <div className={'loginMainContainer' + ' ' + style({})}>
+        <div className="row no-gutters fullHeight">
           <div className="col-md-6 col-12">
-            <div className="loginMainContainer">
-              <div className="loginContainer">
+            <div className="loginContainer">
+              <div className="loginContent">
                 <div className="loginLogo">
                   <img
                     className="keel-logo img-fluid"
@@ -161,10 +161,26 @@ const LoginView = (props) => {
 
                   </div>
                 </form>
+                <div className="signUp">
+                  <p className="signup-divider">
+                    <span>Not registered yet? <Link className="signup-button-wrapper" to="/signup">
+                      Create an Account
+                    </Link></span>
+                  </p>
+                </div>
                 <p className="login-divider">
                   <span>Or Login with </span>
                 </p>
                 <div className="social-button-wrapper">
+                  
+                  <FacebookLogin
+                    appId="966069997563073"
+                    fields="name,email,picture"
+                    textButton=""
+                    callback={responseFacebook}
+                    cssClass="facebook-button"
+                    icon="fa-facebook"
+                  />
                   <GoogleLogin
                     clientId="194271428747-v7t3bjqu3cea8jq734pd9o950kolco0o.apps.googleusercontent.com"
                     onSuccess={responseGoogle}
@@ -179,14 +195,6 @@ const LoginView = (props) => {
                       </button>
                     )}
                   />
-                  <FacebookLogin
-                    appId="966069997563073"
-                    fields="name,email,picture"
-                    textButton=""
-                    callback={responseFacebook}
-                    cssClass="facebook-button"
-                    icon="fa-facebook"
-                  />
                   <button className="linkedin-button">
                     <img
                       className="google-button-image img-fluid"
@@ -197,26 +205,21 @@ const LoginView = (props) => {
                   {/* <button onClick={responseLinkedin} className="linkedin-button">in</button> */}
 
                 </div>
-                <div className="signUp">
-                  <p className="signup-divider">
-                    <span>Not registered yet? <Link className="signup-button-wrapper" to="/signup">
-                  Create an Account
-                  </Link></span>
-                  </p>
-                  
-                </div>
+                
               </div>
             </div>
           </div>
-          <div className="col-md-6 col-12">
+          <div className="col-md-6 col-12 mobileHide">
             <div className="loginRightImg">
-
-            </div>
-            {/* <img
-              className="passport-image img-fluid"
-              src={ASSETS_BASE_URL + '/images/Login/login.png'}
+            <img
+              className=" img-fluid"
+              src={ASSETS_BASE_URL + '/images/Login/login_high_res.png'}
               alt="pasport-image"
-            /> */}
+            />
+            <h4>Want to immigrate to<br/> Canada?</h4>
+            <p>All in one immigration Platform</p>
+            </div>
+            
           </div>
         </div>
       </div>
