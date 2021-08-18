@@ -29,7 +29,7 @@ const NotificationWidget = () => {
 
   const [isClicked, setIsClicked] = useState(false);
   const modalRef = useRef();
-
+return null;
   return (
     <div className={container} ref={modalRef} onClick={() => {
       setIsClicked(!isClicked);

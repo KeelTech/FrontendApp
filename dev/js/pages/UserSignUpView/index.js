@@ -123,7 +123,7 @@ function SignUp(props) {
               <div className="loginContent">
                 <div className="loginLogo">
                   <img
-                    className="logo"
+                    className="keel-logo img-fluid"
                     src={ASSETS_BASE_URL + '/images/common/keelIcon.svg'}
                     alt="keel-logo"
                     onClick={() => logoClick()}

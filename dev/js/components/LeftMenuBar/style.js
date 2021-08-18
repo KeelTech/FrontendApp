@@ -19,7 +19,11 @@ export const leftBarCont = css`
 export const container = css`
     position: relative;
     min-width: 210px;
+<<<<<<< HEAD
     z-index: 9;
+=======
+    z-index: 20;
+>>>>>>> master
     top: 0;
     height: 100vh;
     display: flex;

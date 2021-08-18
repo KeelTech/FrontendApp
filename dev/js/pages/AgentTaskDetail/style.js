@@ -371,9 +371,10 @@ export const messageSection = css`
     .commentSection{
         width: 100%;
     }
-    .deleteComment{
-        display: flex;
-        justify-content: flex-end;
+    .msgSection{
+        display : flex;
+        justify-content: space-between;
+        align-items: flex-start;
     }
     .profile{
         margin-right: 6px;
@@ -410,6 +411,11 @@ export const messageSection = css`
         font-size: 10px;
         line-height: 15px;
         color: #363B64
+    }
+    .deleteTask{
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-end;
     }
     @media(max-width: ${tabScreenWidth}){
         margin-top: 20px;

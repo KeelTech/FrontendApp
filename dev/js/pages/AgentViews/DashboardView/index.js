@@ -70,7 +70,6 @@ const AgentDashboardView = () => {
     })
   }
 
-  console.log('dashboardData is', dashboardData);
   const { cases_count={} } = dashboardData||{};
   const { booked_count, in_progress_count, completed_count, earnings_count, task_count } = cases_count;
   return (
@@ -88,21 +87,21 @@ const AgentDashboardView = () => {
           }
           <CustomToaster {...toasterInfo} hideToaster={hideToaster}/>
           <div className="performance">
-            <div className="intro">
+            {/* <div className="intro">
               <span className="profileName">Hi Shubh!</span>
               <span className="meetingTxt">
                 You have 9 meetings to attend in this week & you have 15 tasks
                 to review.{" "}
               </span>
               <span className="showTasks">Show Tasks</span>
-            </div>
+            </div> */}
             <div className={widgets}>
               <div
                 className="widget widget1"
                 style={{ backgroundImage: `url(${PendingImg})` }}
               >
                 <div className="cover">
-                  <span className="no">30</span>
+                  <span className="no">{booked_count}</span>
                   <span className="value">New</span>
                   <span className="value">Applications</span>
                 </div>
@@ -132,7 +131,7 @@ const AgentDashboardView = () => {
                 style={{ backgroundImage: `url(${RevenueImg})` }}
               >
                 <div className="cover revenue">
-                  <span className="no">$20,000</span>
+                  <span className="no">{earnings_count}</span>
                   <span className="value">Total</span>
                   <span className="value">Applications</span>
                 </div>

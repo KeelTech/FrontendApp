@@ -5,7 +5,7 @@ import LoadingWidget from '@components/LoadingWidget';
 import { loaderView } from '@constants';
 import TaskInfo from './TaskInfo.js';
 
-const TaskDetail = ({ activeTask })=>{
+const TaskDetail = ({ activeTask, refetchTaskList=()=>{} })=>{
     const dispatch = useDispatch();
     const taskDetail = useSelector(state=>state.TASK_INFO.taskDetail, shallowEqual);
     const [loading, setLoading] = useState(false);
@@ -26,7 +26,7 @@ const TaskDetail = ({ activeTask })=>{
     return(
         <Fragment>
             {
-                taskDetail && taskDetail[activeTask]?<TaskInfo taskDetail={taskDetail[activeTask]} refetchTaskDetail={refetchTaskDetail}/>:null
+                taskDetail && taskDetail[activeTask]?<TaskInfo taskDetail={taskDetail[activeTask]} refetchTaskDetail={refetchTaskDetail} refetchTaskList={refetchTaskList}/>:null
             }
         </Fragment>
     )

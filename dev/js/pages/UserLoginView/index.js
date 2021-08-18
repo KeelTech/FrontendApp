@@ -9,11 +9,13 @@ import {
   googleLogin,
   linkedinLogin,
   facebookLogin,
+  agentLogin
 } from '../../actions/index.js';
 import { Link } from 'react-router-dom';
 import { style, Loader } from './style.js';
 
 const LoginView = (props) => {
+  const isAgent = props.match.path.includes('agent');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginFail, setLoginFail] = useState(false);
@@ -33,19 +35,29 @@ const LoginView = (props) => {
     props.history.push('/');
   };
 
+  const loginAfterLoginSuccess = ()=>{
+    setTimeout(() => {
+      props.history.push('/');
+    }, 1000);
+  }
+
   const loginSubmitHnadler = (event) => {
     event.preventDefault();
     if (email === '' || password === '') {
       return;
     }
     setLoader(true);
-    userLogin({ email, password }, dispatch, (err, data) => {
+    let loginFunc = userLogin;
+    if(isAgent){
+      loginFunc = agentLogin;
+    }
+    loginFunc({ email, password }, dispatch, (err, data) => {
       if (data) {
         setLoader(false);
         setLoginFail(false);
         setEmail('');
         setPassword('');
-        props.history.push('/dashboard');
+        loginAfterLoginSuccess();
       }
       if (err) {
         setLoader(false);
@@ -60,7 +72,7 @@ const LoginView = (props) => {
     googleLogin({ accessToken }, dispatch, (err, data) => {
       if (data) {
         setLoader(false);
-        props.history.push('/dashboard');
+        loginAfterLoginSuccess();
       }
       if (err) {
         setLoader(false);
@@ -75,7 +87,7 @@ const LoginView = (props) => {
     facebookLogin({ accessToken }, dispatch, (err, data) => {
       if (data) {
         setLoader(false);
-        props.history.push('/dashboard');
+        loginAfterLoginSuccess();
       }
       if (err) {
         setLoader(false);

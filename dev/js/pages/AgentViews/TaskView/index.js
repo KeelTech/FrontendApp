@@ -126,7 +126,7 @@ const TaskView = (props)=>{
                     </div>
                     <div className="taskInfo">
                         {
-                            !loading && !showAddTaskView && activeTask?<AgentTaskDetail activeTask={activeTask}/>:null
+                            !loading && !showAddTaskView && activeTask?<AgentTaskDetail activeTask={activeTask} refetchTaskList={refetchTaskList}/>:null
                         }
                         {
                             showAddTaskView && <CreateTask toggleAddTaskView={toggleAddTaskView} caseId={caseId}/>

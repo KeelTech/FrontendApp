@@ -92,3 +92,14 @@ export const getAgentDetails = (dataParams={}, dispatch, cb=null)=>{
         if(cb)cb(null, true);
     })
 }
+
+export const deleteTaskInfo = (dataParams, dispatch, cb=null)=>{
+    const taskId = dataParams.taskId;
+    API_DELETE(`${API_BASE_URL}/v1/tasks/delete/${taskId}`, {
+        ...dataParams
+    }).then((response)=>{
+        if(cb)cb(response, null);
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}

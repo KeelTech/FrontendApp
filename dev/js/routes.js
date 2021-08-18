@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import CONFIG from './config';
 import CustomRoute from './CustomRoute.js';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
@@ -14,7 +15,7 @@ import AgentDashBoardView from './pages/AgentViews';
 import HomePageView from './HomePageView.js';
 import NotFoundPage from './pages/NotFoundPage';
 
-let routes = [
+let CUSTOMER_ROUTES = [
   { path: '/', exact: true, component: HomePageView },
   { path: '/dashboard', exact: true, component: UserDashboardView, isPrivate: true },
   { path: '/login', exact: true, component: UserLoginView, isSignin: true },
@@ -26,20 +27,70 @@ let routes = [
   { path: '/tasks', exact: true, component: UserDashboardView, isPrivate: true },
   { path: '/vault', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/billing', exact: true, component: UserDashboardView, isPrivate: true  },
-  { path: '/agent', component: AgentDashBoardView, isPrivate: true  },
   { path: '/profile', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '*', component: NotFoundPage, isPrivate: false  },
 ];
 
+let AGENT_ROUTES = [
+  { path: '/', exact: true, component: AgentDashBoardView },
+  { path: '/agent', component: AgentDashBoardView, isPrivate: true  },
+  { path: '*', component: NotFoundPage, isPrivate: false  },
+]
+
+let LOGIN_ROUTES = [
+  { path: '/', exact: true, component: HomePageView },
+  { path: '/agent/login', exact: true, component: UserLoginView, isSignin: true },
+  { path: '/login', exact: true, component: UserLoginView, isSignin: true },
+  { path: '/signup', exact: true, component: UserSignUpView, isSignin: true },
+  { path: '/reset-password', exact: true, component: PasswordReset, isSignin: true },
+  { path: '/confirm-email', exact: true, component: EmailVerification, isSignin: true },
+  { path: '/linkedin', exact: true, component: LinkedInPopUp, isSignin: true },
+  { path: '*', component: NotFoundPage, isPrivate: false  },
+]
+
 // routes.push({ path: '*', component: NotFound, NO_MATCH: true })
 
 class RouterConfig extends Component {
-  static ROUTES = routes;
+  constructor(props){
+    super(props);
+    this.state ={
+      currentRoute: CUSTOMER_ROUTES
+    }
+  }
+  //static ROUTES = routes;
+
+  componentDidMount(){
+    if(!this.props.IsloggedIn){
+      this.setState({
+        currentRoute: LOGIN_ROUTES
+      })  
+      return;
+    }
+    this.setState({
+      currentRoute: this.props.isAgent?AGENT_ROUTES:CUSTOMER_ROUTES
+    })
+  }
+
+  componentDidUpdate(prevProps){
+    if(!this.props.IsloggedIn && prevProps.IsloggedIn!==this.props.IsloggedIn){
+      this.setState({
+        currentRoute: LOGIN_ROUTES
+      })
+      return;
+    }
+    if((prevProps.isAgent!==this.props.isAgent) || (this.props.IsloggedIn && prevProps.IsloggedIn!==this.props.IsloggedIn)){
+      this.setState({
+        currentRoute: this.props.isAgent?AGENT_ROUTES:CUSTOMER_ROUTES
+      })
+    }
+  }
 
   render() {
+    const { currentRoute } = this.state;
+    
     return (
       <Switch location={location}>
-        {routes.map((route, i) => (
+        {currentRoute.map((route, i) => (
           <CustomRoute {...route} key={i} />
         ))}
       </Switch>
@@ -47,4 +98,11 @@ class RouterConfig extends Component {
   }
 }
 
-export default RouterConfig;
+const mapStateToProps = (state) => ({ 
+  isAgent: state.LOGIN.isAgent,
+  IsloggedIn: state.LOGIN.IsloggedIn
+})
+
+
+
+export default connect(mapStateToProps)(RouterConfig);

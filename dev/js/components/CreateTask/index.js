@@ -187,13 +187,13 @@ const CreateTask = ({ toggleAddTaskView, caseId })=>{
                     </span>
                 </div>
 
-                <div className={attachmentCont}>
+                {/* <div className={attachmentCont}>
                     <div className="taskName">
                         <img className="icon" src={ASSETS_BASE_URL+"/images/common/attachment.svg"} alt="discuss"/>
                         <span>Attachments</span>
                     </div>
                     <CustomButton text="Add a document" clickHandler={addMember} margin="0px" padding="9px" borderRadius="5px"/>
-                </div>
+                </div> */}
 
                 <div className={checkListCont}>
                     <div className="checklist">
