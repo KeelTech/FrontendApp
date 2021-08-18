@@ -61,63 +61,93 @@ function EmailConfirmation(props) {
           <LoadingWidget />
         </div>
       )}
-      <div className={style({})}>
-        <div className="container">
-          <img
-            className="keel-logo"
-            src={ASSETS_BASE_URL + '/images/common/keelIcon.svg'}
-            alt="keel-logo"
-            onClick={() => logoClick()}
-          />
-          <h3 className="header-text">Reset Your Password</h3>
-          <p className="sub-heading">
-            Please enter your registered e-mail address
-          </p>
-          {showInputFields && (
-            <form className="form-wrapper" onSubmit={loginSubmitHnadler}>
-              <input
-                className="login-email-input"
-                placeholder="E-mail"
-                type="email"
-                value={email}
-                onChange={emailLoginHnadler}
-                autoComplete="off"
-              />
-              <button className="submit-button">Submit</button>
-            </form>
-          )}
-          {successMessage && (
-            <div>
-              <p className="email-success-msg">
-                A verification OTP has been sent to your email address. Use that
-                to reset your password.
-              </p>
-              <p className="timerMsg">
-                Redirecting to a new page in
-                <span className="timer">{timer}</span>
-                seconds
-              </p>
-              <p className="emailSuccessBtnMsg">
-                Or you can click the button below
-              </p>
-              <Link to="/reset-password" className="BtnLink">
-                <button className="LinkBtn">Password Reset</button>
-              </Link>
+      <div className={'loginMainContainer' + ' ' + style({})}>
+        <div className="row no-gutters fullHeight">
+          <div className="col-md-6 col-12">
+            <div className="loginContainer">
+              <div className="loginContent">
+                <div className="loginLogo">
+                  <img
+                    className="keel-logo img-fluid"
+                    src={ASSETS_BASE_URL + '/images/common/keelIcon.svg'}
+                    alt="keel-logo"
+                    onClick={() => loginClick()}
+                  />
+                </div>
+                <h3 className="header-text">Reset Your Password</h3>
+                <p className="sub-heading">
+                  Please enter your registered e-mail address
+                </p>
+                {showInputFields && (
+                  <form className="form-wrapper" onSubmit={loginSubmitHnadler}>
+
+                    <div className="formCont">
+                      <label>Email</label>
+                      <input
+                        className="login-email-input"
+                        placeholder="E-mail"
+                        type="email"
+                        value={email}
+                        onChange={emailLoginHnadler}
+                        autoComplete="off"
+                      />
+                    </div>
+                    <div className="loginBtnCont">
+                      <button className="log-in-button">Submit</button>
+                    </div>
+                  </form>
+                )}
+                {successMessage && (
+                  <div>
+                    <p className="email-success-msg">
+                      A verification OTP has been sent to your email address. Use that
+                      to reset your password.
+                    </p>
+                    <p className="timerMsg">
+                      Redirecting to a new page in
+                      <span className="timer">{timer}</span>
+                      seconds
+                    </p>
+                    <p className="emailSuccessBtnMsg">
+                      Or you can click the button below
+                    </p>
+                    <Link to="/reset-password" className="BtnLink">
+                      <button className="LinkBtn">Password Reset</button>
+                    </Link>
+                  </div>
+                )}
+                {errorMessage && (
+                  <p className="email-fail-msg">
+                    This is not a registered email address
+                  </p>
+                )}
+              </div>
             </div>
-          )}
-          {errorMessage && (
-            <p className="email-fail-msg">
-              This is not a registered email address
-            </p>
-          )}
+          </div>
+          <div className="col-md-6 col-12 mobileHide">
+            <div className="loginRightImg">
+              <img
+                className=" img-fluid"
+                src={ASSETS_BASE_URL + '/images/Login/login_high_res.png'}
+                alt="pasport-image"
+              />
+              <h4>Want to immigrate to<br /> Canada?</h4>
+              <p>All in one immigration Platform</p>
+            </div>
+
+          </div>
         </div>
-        <img
-          className="passport-image"
-          src={ASSETS_BASE_URL + '/images/Login/password-reset-image.jpeg'}
-          alt="passport-image"
-        />
+
+
       </div>
-    </Fragment>
+      {/* </div>
+      <img
+        className="passport-image"
+        src={ASSETS_BASE_URL + '/images/Login/password-reset-image.jpeg'}
+        alt="passport-image"
+      />
+      </div> */}
+    </Fragment >
   );
 }
 

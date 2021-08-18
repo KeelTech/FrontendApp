@@ -4354,7 +4354,14 @@ button.linkedin-button {
     display:none;
   }
 }
-
+p.password-validation, p.login-fail-msg,p.email-fail-msg {
+  color: red;
+  font-weight: 500;
+  font-size: 14px;
+}
+button:focus{
+  outline: none !important;
+}
 /* ============ Custom style Common ============== */
 /* // ================ Page Loader   ================ */
 
