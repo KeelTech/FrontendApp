@@ -104,19 +104,129 @@ function SignUp(props) {
           <LoadingWidget />
         </div>
       )}
-      <div className={style({})}>
-        <img
-          className="passport-image"
-          src={ASSETS_BASE_URL + '/images/Signup/passport-image.jpeg'}
-          alt="passport-image"
-        />
-        <div className="container">
-          <img
-            className="logo"
-            src={ASSETS_BASE_URL + '/images/common/keelIcon.svg'}
-            alt="keel-logo"
-            onClick={() => logoClick()}
-          />
+      <div className={'loginMainContainer' + ' ' + style({})}>
+        <div className="row no-gutters fullHeight">
+          <div className="col-md-6 col-12 mobileHide">
+            <div className="loginRightImg">
+              <img
+                className=" img-fluid"
+                src={ASSETS_BASE_URL + '/images/Login/login_high_res.png'}
+                alt="pasport-image"
+              />
+              <h4>Want to immigrate to<br /> Canada?</h4>
+              <p>All in one immigration Platform</p>
+            </div>
+
+          </div>
+          <div className="col-md-6 col-12">
+            <div className="loginContainer">
+              <div className="loginContent">
+                <div className="loginLogo">
+                  <img
+                    className="keel-logo img-fluid"
+                    src={ASSETS_BASE_URL + '/images/common/keelIcon.svg'}
+                    alt="keel-logo"
+                    onClick={() => logoClick()}
+                  />
+                </div>
+                <h3 className="header-text">Sign Up to Continue</h3>
+                <form className="form-wrapper" onSubmit={signUpSubmitHandler}>
+                  <div className="formCont">
+                    <label>Email</label>
+                    <input
+                      placeholder="E-mail / username"
+                      type="email"
+                      value={email}
+                      onChange={emailSignUpHandler}
+                      autoComplete="off"
+                    />
+                  </div>
+                  <div className="formCont">
+                    <label>Password</label>
+                    <input
+                      className="password-field"
+                      placeholder="Password"
+                      type="password"
+                      value={password}
+                      onChange={passwordSignUpHandler}
+                      autoComplete="off"
+                    />
+                  </div>
+                  <div className="formCont">
+                    <label>Confirm Password</label>
+                    <input
+                      className="confirm-password-field"
+                      placeholder="Confirm Password"
+                      type="password"
+                      value={confirmPassword}
+                      onChange={confirmPasswordHandler}
+                      autoComplete="off"
+                    />
+                  </div>
+                  <div className="loginBtnCont">
+                    <button className="log-in-button">Sign Up</button>
+                  </div>
+                </form>
+                
+                {passwordValidation && (
+                  <p className="password-validation">Passwords do not match</p>
+                )}
+                {errorMessage && (
+                  <p className="password-validation">E-mail already exists</p>
+                )}
+                <div className="signUp">
+                  <p className="signup-divider">
+                    <span>If you're already a member! <Link className="signup-button-wrapper" to="/">
+                    Log In
+                  </Link></span>
+                  </p>
+                </div>
+                <p className="login-divider">
+                  <span>Or Login with </span>
+                </p>
+                <div className="social-button-wrapper">
+
+                  <FacebookLogin
+                    appId="1088597931155576"
+                    fields="name,email,picture"
+                    textButton=""
+                    callback={responseFacebook}
+                    cssClass="facebook-button"
+                    icon="fa-facebook"
+                  />
+                  <GoogleLogin
+                    clientId="194271428747-v7t3bjqu3cea8jq734pd9o950kolco0o.apps.googleusercontent.com"
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                    render={(renderProps) => (
+                      <button onClick={renderProps.onClick} className="google-button">
+                        <img
+                          className="google-button-image"
+                          src={ASSETS_BASE_URL + '/images/common/google.svg'}
+                          alt="google"
+                        />
+                      </button>
+                    )}
+                  />
+                  <button className="linkedin-button">
+                    <img
+                      className="google-button-image img-fluid"
+                      src={ASSETS_BASE_URL + '/images/common/linked.svg'}
+                      alt="google-image"
+                    />
+                  </button>
+                  {/* <button onClick={responseLinkedin} className="linkedin-button">in</button> */}
+
+                </div>
+                
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* <div className="container">
+
           <p className="header-text">Sign Up to Continue</p>
           <form className="form-wrapper" onSubmit={signUpSubmitHandler}>
             <input
@@ -176,14 +286,14 @@ function SignUp(props) {
               cssClass="facebook-button"
               icon="fa-facebook"
             />
-            {/* <LinkedInLogin
+            <LinkedInLogin
             clientId="81lx5we2omq9xh"
             onFailure={responseLinkedin}
             onSuccess={responseLinkedin}
             redirectUri="http://localhost:3000/linkedin"
           >
             <button className="linkedin-button">in</button>
-          </LinkedInLogin> */}
+          </LinkedInLogin>
           </div>
           <p className="signup-divider">
             <span>If you're already a member!</span>
@@ -191,9 +301,9 @@ function SignUp(props) {
           <Link className="signup-button-wrapper" to="/">
             <button className="sign-up-button">Log In</button>
           </Link>
-        </div>
+        </div> */}
       </div>
-    </Fragment>
+    </Fragment >
   );
 }
 

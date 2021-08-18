@@ -10,6 +10,7 @@ const queryString = require('query-string');
 require('../css/style.css')
 require('../css/snackbar.css')
 require('../css/dashboard.css')
+require('../css/bootstrap.min.css')
 
 const logPageView = () => {
 };

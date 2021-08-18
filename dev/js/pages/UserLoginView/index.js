@@ -115,90 +115,125 @@ const LoginView = (props) => {
           <LoadingWidget />
         </div>
       )}
-      <div className={style({})}>
-        <div className="container">
-          <img
-            className="keel-logo"
-            src={ASSETS_BASE_URL + '/images/common/keelIcon.svg'}
-            alt="keel-logo"
-            onClick={() => loginClick()}
-          />
-          <p className="header-text">Log in to Continue</p>
-          <form className="form-wrapper" onSubmit={loginSubmitHnadler} autoComplete="false">
-            <input
-              className="login-email-input"
-              placeholder="E-mail"
-              type="email"
-              value={email}
-              onChange={emailLoginHnadler}
-              autoComplete="new-password"
-            />
-            <input
-              className="login-password-input"
-              placeholder="Password"
-              type="password"
-              value={password}
-              onChange={passwordLoginHandler}
-              autoComplete="new-password"
-            />
-            {loginFail && (
-              <p className="login-fail-msg">
-                Invalid credentials, Please try Again!
-              </p>
-            )}
-            <button className="log-in-button">Log in</button>
-            <Link to="/confirm-email" className="password-reset-wrapper">
-              <button className="password-reset">Forgot your password?</button>
-            </Link>
-          </form>
-          {
-            isAgent?null
-            :<Fragment>
-              <p className="login-divider">
-                <span>Or Login with </span>
-              </p>
-              <div className="social-button-wrapper">
-                <GoogleLogin
-                  clientId="194271428747-v7t3bjqu3cea8jq734pd9o950kolco0o.apps.googleusercontent.com"
-                  onSuccess={responseGoogle}
-                  onFailure={responseGoogle}
-                  render={(renderProps) => (
-                    <button onClick={renderProps.onClick} className="google-button">
-                      <img
-                        className="google-button-image"
-                        src={ASSETS_BASE_URL + '/images/Signup/google-logo.jpeg'}
-                        alt="google-image"
-                      />
-                    </button>
+      <div className={'loginMainContainer' + ' ' + style({})}>
+        <div className="row no-gutters fullHeight">
+          <div className="col-md-6 col-12">
+            <div className="loginContainer">
+              <div className="loginContent">
+                <div className="loginLogo">
+                  <img
+                    className="keel-logo img-fluid"
+                    src={ASSETS_BASE_URL + '/images/common/keelIcon.svg'}
+                    alt="keel-logo"
+                    onClick={() => loginClick()}
+                  />
+                </div>
+                <h3 className="header-text">Log In</h3>
+                <p className="logSubHead">Start your journey & get free consulting</p>
+                <form className="form-wrapper" onSubmit={loginSubmitHnadler}>
+                  <div className="formCont">
+                    <label>Email</label>
+                    <input
+                      className="login-email-input"
+                      placeholder="E-mail"
+                      type="email"
+                      value={email}
+                      onChange={emailLoginHnadler}
+                      autoComplete="off"
+                    />
+                  </div>
+                  <div className="formCont">
+                    <label>Password</label>
+                    <input
+                      className="login-password-input"
+                      placeholder="Password"
+                      type="password"
+                      value={password}
+                      onChange={passwordLoginHandler}
+                      autoComplete="off"
+                    />
+                  </div>
+                  {loginFail && (
+                    <p className="login-fail-msg">
+                      Invalid credentials, Please try Again!
+                    </p>
                   )}
-                />
-                <FacebookLogin
-                  appId="966069997563073"
-                  fields="name,email,picture"
-                  textButton=""
-                  callback={responseFacebook}
-                  cssClass="facebook-button"
-                  icon="fa-facebook"
-                />
+                  <div className="formCheckForgt">
+                    <div className="checkBoxContMain">
+                      <label class="checkBoxCont"><p>Remember Me</p>
+                        <input type="checkbox" />
+                        <span className="checkmark"></span></label>
+                    </div>
+                    <Link to="/confirm-email" className="password-reset-wrapper">
+                      <button className="password-reset">Forgot your password?</button>
+                    </Link>
+                  </div>
+                  <div className="loginBtnCont">
+                    <button className="log-in-button">Log in</button>
 
-                {/* <button onClick={responseLinkedin} className="linkedin-button">
-                in
-              </button> */}
+                  </div>
+                </form>
+                <div className="signUp">
+                  <p className="signup-divider">
+                    <span>Not registered yet? <Link className="signup-button-wrapper" to="/signup">
+                      Create an Account
+                    </Link></span>
+                  </p>
+                </div>
+                <p className="login-divider">
+                  <span>Or Login with </span>
+                </p>
+                <div className="social-button-wrapper">
+                  
+                  <FacebookLogin
+                    appId="966069997563073"
+                    fields="name,email,picture"
+                    textButton=""
+                    callback={responseFacebook}
+                    cssClass="facebook-button"
+                    icon="fa-facebook"
+                  />
+                  <GoogleLogin
+                    clientId="194271428747-v7t3bjqu3cea8jq734pd9o950kolco0o.apps.googleusercontent.com"
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                    render={(renderProps) => (
+                      <button onClick={renderProps.onClick} className="google-button">
+                        <img
+                          className="google-button-image img-fluid"
+                          src={ASSETS_BASE_URL + '/images/common/google.svg'}
+                          alt="google-image"
+                        />
+                      </button>
+                    )}
+                  />
+                  <button className="linkedin-button">
+                    <img
+                      className="google-button-image img-fluid"
+                      src={ASSETS_BASE_URL + '/images/common/linked.svg'}
+                      alt="google-image"
+                    />
+                  </button>
+                  {/* <button onClick={responseLinkedin} className="linkedin-button">in</button> */}
+
+                </div>
+                
               </div>
-            </Fragment>
-          }
-          <p className="signup-divider">
-            <span>Or</span>
-          </p>
-          <Link className="signup-button-wrapper" to="/signup">
-            <button className="sign-up-button">Sign Up</button>
-          </Link>
+            </div>
+          </div>
+          <div className="col-md-6 col-12 mobileHide">
+            <div className="loginRightImg">
+            <img
+              className=" img-fluid"
+              src={ASSETS_BASE_URL + '/images/Login/login_high_res.png'}
+              alt="pasport-image"
+            />
+            <h4>Want to immigrate to<br/> Canada?</h4>
+            <p>All in one immigration Platform</p>
+            </div>
+            
+          </div>
         </div>
-        <img
-          className="passport-image"
-          src={ASSETS_BASE_URL + '/images/Login/visa-image.jpeg'}
-          alt="pasport-image"
-        />
       </div>
     </Fragment>
   );
