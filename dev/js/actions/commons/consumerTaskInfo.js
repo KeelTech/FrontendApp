@@ -61,7 +61,7 @@ export const getCaseDetail = (dataParams, dispatch, cb=null)=>{
         if(response && response.status==1){
             dispatch({
                 type: CASE_DETAILS,
-                payload: response.message[0]
+                payload: response.message
             })
         }
 

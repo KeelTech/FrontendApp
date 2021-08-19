@@ -32,7 +32,7 @@ export const body = css`
     flex-direction: row;
     margin-top: 12px;
   }
-  .userImage {
+  ${'' /* .userImage {
     border-radius: 10px;
     height: 55px;
     width: 55px;
@@ -41,15 +41,12 @@ export const body = css`
       width: 46px;
       height: 46px;
     }
-  }
+  } */}
   .userInfoHeaderWrapper {
     display: flex;
     flex-direction: column;
     margin-left: 12px;
     font-family: ${primaryFont};
-    @media (max-width: ${tabScreenWidth}) {
-      margin-left: 6px;
-    }
   }
   .userName {
     font-weight: 600;
