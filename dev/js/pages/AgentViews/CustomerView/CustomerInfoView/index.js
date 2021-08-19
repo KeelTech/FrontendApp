@@ -41,7 +41,6 @@ function CustomerInfoView(props) {
 
   const { first_name, last_name} = user_details;
   const { display_id, plan} = case_details;
-
   return (
     <div className={body}>
       <div className="mainView">

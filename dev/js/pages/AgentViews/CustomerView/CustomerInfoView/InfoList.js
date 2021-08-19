@@ -31,13 +31,17 @@ const InfoList = ({ info }) => {
         <span className="value">{address}</span>
       </li>
       {user_qualifications.map((val) => {
-        const { institute, grade, year_of_passing, start_date, city, country } =
+        const { institute, degree, grade, year_of_passing, start_date, city, state, country } =
           val;
         return (
           <React.Fragment>
             <li className="infofield">
               <span className="key">Qualification:</span>
-              <span className="value">B.Tech(Information Technology)</span>
+              <span className="value">{degree}</span>
+            </li>
+            <li className="infofield">
+              <span className="key">Grade:</span>
+              <span className="value">{grade}</span>
             </li>
             <li className="infofield">
               <span className="key">Year of Passing:</span>
@@ -50,7 +54,7 @@ const InfoList = ({ info }) => {
             <li className="infofield">
               <span className="key">College Address:</span>
               <span className="value status">
-                {city},{country}
+                {city},{state},{country}
               </span>
             </li>
           </React.Fragment>
