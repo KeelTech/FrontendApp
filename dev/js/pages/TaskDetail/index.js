@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import AttachmentCard from '@components/AttachmentCard';
 import { SET_MENUBAR_STATE } from '@constants/types';
-import { getTaskDetail, downloadDocument, deleteDocument } from '@actions';
+import { getTaskDetail, downloadDocument, deleteDocument, deleteComment } from '@actions';
 import PostCommentView from '@components/PostCommentView';
 import CustomToaster from '@components/CustomToaster';
 import FileUpload from '@components/FileUpload';
@@ -134,6 +134,15 @@ const TaskDetail = ({ activeTask })=>{
         setDeleteConfirmation(val=>!val);
     }
 
+    const deleteCommentClicked = (id)=>{
+        const postParams = {
+            commentId: id
+        }
+        deleteComment(postParams, dispatch, (resp, err)=>{
+            updateTaskStatus(resp, !resp, 'Failed, Please try again later', 'Deleted Successfully');
+        })
+    }
+
     const { title, priority_name, status_name, description, tasks_comment=[], tasks_docs=[], check_list=[] } = taskDetail && taskDetail[activeTask] || {};
 
     return(
@@ -252,7 +261,7 @@ const TaskDetail = ({ activeTask })=>{
                     </div> */}
                     {
                         tasks_comment.map((val, key)=>{
-                            const { user_details, user_name, msg, created_at, } = val;
+                            const { user_details, user_name, msg, created_at, id } = val;
                             return <div className="msgView" key={key}>
                                 <span className="profile">{getNameInitialHelper(user_details.user_name)}</span>
                                 <div className="commentSection">
@@ -260,7 +269,10 @@ const TaskDetail = ({ activeTask })=>{
                                         <span className="name">{capitalizeFirstLetter(user_details.user_name)}</span>
                                         <span className="time">{`${getFormattedTime(created_at)}, ${getFormattedDate(created_at).formattedDate}`}</span> 
                                     </div>
-                                    <div className="msg">{msg}</div>
+                                    <div className="msgSection">
+                                        <div className="msg">{msg}</div>
+                                        <img src={`${ASSETS_BASE_URL}/images/common/delete.svg`} className="deleteIcon" onClick={()=>deleteCommentClicked(id)}/>
+                                    </div>
                                 </div>
                             </div>
                         })
