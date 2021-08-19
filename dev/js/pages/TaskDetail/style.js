@@ -306,6 +306,17 @@ export const messageSection = css`
             border-radius: 7px;
         }
     }
+    .commentSection{
+        width: 100%;
+    }
+    .deleteIcon{
+        cursor: pointer;
+    }
+    .msgSection{
+        display : flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
     .profile{
         margin-right: 6px;
         min-height: 26px;

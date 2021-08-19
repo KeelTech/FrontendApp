@@ -174,28 +174,21 @@ const TaskView = ()=>{
 
     const downloadDocumentClicked = ({id, docId})=>{
         setLoading(true);
-        downloadDocument({ docId:'doc_50b576b22c7e4600b523ed012b521109' }, dispatch, (resp, err)=>{
+        downloadDocument({ docId }, dispatch, (resp, err)=>{
             setLoading(false);
             console.log('resp is', resp);
             var blob=new Blob([resp]);
             var link=document.createElement('a');
             link.href=window.URL.createObjectURL(blob);
-            link.download="new.pdf";
+            link.download="new.png";
             link.click();
-            // var img = document.createElement('img');
-            // img.classList.add('demo');
-            // img.id="demo";
-            // img.src = 'data:image/jpeg;base64,' + btoa(resp);
-            // document.body.appendChild(img);
-            // handleResponse(resp, 'Downloaded Successfully', false);
-            // resp.blob().then(blob => {
-            //     let url = window.URL.createObjectURL(blob);
-            //     let a = document.createElement("a");
-            //     console.log(url);
-            //     a.href = url;
-            //     a.download = 'filename';
-            //     a.click();
-            // });
+
+            // const link = document.getElementById('link');
+            // const file = event.target.files[0];
+            // let objectURL = URL.createObjectURL(file);
+
+            // link.download = file.name; // this name is used when the user downloads the file
+            // link.href = objectURL;
         })
     }
 

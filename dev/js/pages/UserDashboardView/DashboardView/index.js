@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_MENUBAR_STATE } from '@constants/types';
+import { SET_MENUBAR_STATE, SET_ACTIVE_TASK } from '@constants/types';
 import { getTaskList } from '@actions';
 import TaskCard from '@components/TaskCard';
 import ChatWidget from '@components/ChatWidget';
@@ -10,7 +10,7 @@ import NotificationWidget from '@components/NotificationWidget';
 import ProfileWidget from '@components/ProfileWidget';
 import BlankScreen from '@components/BlankScreen';
 import LoadingWidget from '@components/LoadingWidget';
-import { loaderView } from '@constants';
+import { loaderView, isMobileView } from '@constants';
 import { container, pendingTasks, scheduleCallCta, upcomingSchedules } from './style.js';
 import { body } from '../style.js';
 
@@ -52,6 +52,20 @@ const DashboardView = ()=>{
         history.push('/tasks');
     }
 
+    const handleTaskClick = (taskId)=>{
+        if(isMobileView()){
+            history.push(`/task/detail/${taskId}`);
+        }else{
+            history.push(`/tasks`);
+            dispatch(
+                {
+                    type: SET_ACTIVE_TASK,
+                    payload: taskId
+                }
+            )
+        }
+    }
+
     return(
         <div className={body}>
             <div className="mainView">
@@ -74,7 +88,7 @@ const DashboardView = ()=>{
                                         taskList.length?
                                         taskList.slice(0, 3).map((val)=>{
                                             const { task_id } = val;
-                                            return(<TaskCard key={task_id} clickHandler={()=>{}} data={val}/>)
+                                            return(<TaskCard key={task_id} isView clickHandler={()=>handleTaskClick(task_id)} data={val}/>)
                                         })
                                         :<BlankScreen message="You have no pending tasks"/>
                                     }
