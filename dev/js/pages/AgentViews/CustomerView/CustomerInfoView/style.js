@@ -85,22 +85,21 @@ export const body = css`
     height: 12px;
   }
   .taskDetails {
-    margin-top: 0px;
+    margin-top: -2px;
     font-size: 12px;
     color: #3a3f67;
     margin-left: 4px;
     @media (max-width: ${tabScreenWidth}) {
       font-size: 10px;
+      margin-top: 0px;
     }
   }
   .buttonWrapper {
     display: flex;
     flex-direction: row;
     margin-left: 12px;
-    margin-top: 10px;
-    @media (max-width: ${tabScreenWidth}) {
-      margin-top: 6px;
-    }
+    margin-top: 0px;
+    
   }
   .taskButton {
     border: none;
@@ -122,6 +121,7 @@ export const body = css`
     @media (max-width: ${tabScreenWidth}) {
       height: 28px;
       width: 54px;
+      padding: 10px 10px;
       border-radius: 5px;
       font-size: 12px;
       margin-right: 6px;
