@@ -69,7 +69,7 @@ export const container = props => css`
     }
 `
 
-const CustomSearchSelect = ({placeholder="Search Documents", value='', border="0px" ,handleChange=()=>{}, borderRadius="8px", backgroundColor="#FFF", fontColor="#363B64", fontSize="16px", fontWeight="normal", padding="10px 24px", margin="4px 0px", borderBottom="0.8px solid #EAEAEF", minHeight="30px", options=[]})=>{
+const CustomSearchSelect = ({placeholder="Search", value='', border="0px" ,handleChange=()=>{}, borderRadius="8px", backgroundColor="#FFF", fontColor="#363B64", fontSize="16px", fontWeight="normal", padding="10px 24px", margin="4px 0px", borderBottom="0.8px solid #EAEAEF", minHeight="30px", options=[]})=>{
 
     const[searchField, selectedVal] = useState(value);
     const[allOptions, setOptions] = useState(options);
@@ -118,7 +118,7 @@ const CustomSearchSelect = ({placeholder="Search Documents", value='', border="0
 
             <div className="searchBox">
                 <img className="searchIcon" src={ASSETS_BASE_URL+"/images/common/search.svg"} alt="open"/>
-                <input type="text" placeholder={placeholder} value={searchField} onChange={(e)=>onChange(e.target.value)} onFocus={toggleOptionList}/>
+                <input type="text" autoComplete="new-password" placeholder={placeholder} value={searchField} onChange={(e)=>onChange(e.target.value)} onFocus={toggleOptionList}/>
             </div>
             {
                 showOptions &&
