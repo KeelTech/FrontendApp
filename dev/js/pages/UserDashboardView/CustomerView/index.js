@@ -13,8 +13,11 @@ import { container } from './style.js';
 
 const CustomerView = (props)=>{
     const dispatch = useDispatch();
-    const parsed = queryString.parse(props.location.search);
-    const shortProfile = parsed && parsed.type=='profile';
+    const taskInfo = useSelector(state=>state.TASK_INFO);
+    const { fullProfileInfo, fullProfileLoading, userInfo={} } = taskInfo;
+    const isProfileExist = userInfo && userInfo.profile_exists;
+    // const parsed = queryString.parse(props.location.search);
+    // const shortProfile = parsed && parsed.type=='profile';
     useEffect(()=>{
         dispatch(
             {
@@ -37,7 +40,7 @@ const CustomerView = (props)=>{
                 </Header>
                 <div className="customerView">
                     {
-                        shortProfile?
+                        !isProfileExist?
                         <CreateShortProfile/>
                         :<CreateProfile/>
                     }

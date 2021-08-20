@@ -3,17 +3,17 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import AttachmentCard from '@components/AttachmentCard';
 import { SET_MENUBAR_STATE } from '@constants/types';
-import { getTaskDetail, downloadDocument, deleteDocument, deleteComment } from '@actions';
+import { getTaskDetail, downloadDocument, deleteDocument, deleteComment, updateCurrentTaskStatus } from '@actions';
 import PostCommentView from '@components/PostCommentView';
 import CustomToaster from '@components/CustomToaster';
 import FileUpload from '@components/FileUpload';
-import { loaderView } from '@constants';
+import { loaderView, isMobileView } from '@constants';
 import LoadingWidget from '@components/LoadingWidget';
 import DeleteConfirmationPopup from '@components/DeleteConfirmationPopup';
 import { getNameInitialHelper, getFormattedTime, getFormattedDate, capitalizeFirstLetter } from '@helpers/utils';
 import { container, taskStatus, discussionSection, memberCard, attachmentSection, checklistSection, messageSection } from './style.js';
 
-const TaskDetail = ({ activeTask })=>{
+const TaskDetail = ({ activeTask, refetchTaskList=()=>{} })=>{
     const history = useHistory();
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
@@ -143,7 +143,21 @@ const TaskDetail = ({ activeTask })=>{
         })
     }
 
-    const { title, priority_name, status_name, description, tasks_comment=[], tasks_docs=[], check_list=[] } = taskDetail && taskDetail[activeTask] || {};
+    const handleTaskStatusUpdate = ()=>{
+        const postDataParams = {
+            task_id: activeTask,
+            status: 1
+        }
+        updateCurrentTaskStatus(postDataParams, dispatch, (resp, err)=>{
+            setLoading(false);
+            updateTaskStatus(resp, err, 'Failed, Try again later', 'Task Updated successfully');
+            if(!isMobileView()){
+                refetchTaskList();
+            }
+        })
+    }
+
+    const { title, priority_name, status_name='', description, tasks_comment=[], tasks_docs=[], check_list=[] } = taskDetail && taskDetail[activeTask] || {};
 
     return(
         <div className={container}>
@@ -158,8 +172,10 @@ const TaskDetail = ({ activeTask })=>{
             }
             <CustomToaster {...toasterInfo} hideToaster={hideToaster}/>
             <div className="statusCont">
-                {/* <span className="statusText">Mark as completed</span> */}
-                <span className="status">{status_name}</span>
+                {
+                    status_name && status_name.toLowerCase().includes('pending')?<span className="statusText" onClick={handleTaskStatusUpdate}>Mark as In Review</span>:null
+                }
+                {/* <span className="status">{status_name}</span> */}
             </div>
             <div className="taskName">
                 <img className="icon" src={ASSETS_BASE_URL+"/images/common/task.svg"} alt="task"/>
@@ -170,7 +186,6 @@ const TaskDetail = ({ activeTask })=>{
                 <span className="sign">{title}</span>
                 <span className="backBtn" onClick={handleBackBtnClick}>Back</span>
             </div>
-            <div className="taskStatus">Mark as completed</div>
             <div className={taskStatus}>
                 <div className="view">
                     <div className="taskName">

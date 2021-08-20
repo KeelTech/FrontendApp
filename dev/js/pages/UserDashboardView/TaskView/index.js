@@ -64,6 +64,10 @@ const TaskView = ()=>{
 
 
     useEffect(()=>{
+        refetchTaskList();
+    },[dispatch, activeWidget, caseId])
+
+    const refetchTaskList = ()=>{
         if(caseId){
             getTaskList({status: activeWidget, case: caseId}, dispatch, (resp, error)=>{
                 if(resp && resp.length && !isMobileView() && !activeTask){
@@ -76,7 +80,7 @@ const TaskView = ()=>{
                 }
             });
         }
-    },[dispatch, activeWidget, caseId])
+    }
 
     return(
         <div className={body}>
@@ -118,7 +122,7 @@ const TaskView = ()=>{
                     </div>
                     <div className="taskInfo">
                         {
-                            activeTask?<TaskDetail activeTask={activeTask}/>:null
+                            activeTask?<TaskDetail activeTask={activeTask} refetchTaskList={refetchTaskList}/>:null
                         }                        
                     </div>
                 </div>

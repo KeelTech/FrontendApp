@@ -143,7 +143,7 @@ export const savePlaceInfo = (dataParams, dispatch, cb=null)=>{
 }
 
 export const createProfile = (dataParams, dispatch, cb=null)=>{
-    API_POST(`${API_BASE_URL}/v1/user/create-profile`, dataParams).then((response)=>{
+    API_POST(`${API_BASE_URL}/v1/user/create-initial-profile`, dataParams).then((response)=>{
         if(cb)cb(true, null);
     }).catch((e)=>{
         if(cb)cb(null, true);
