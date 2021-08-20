@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import FloatingChatWidget from '@components/FloatingChatWidget';
 import LeftMenuBar from '@components/LeftMenuBar';
 import { getUserProfile } from '@actions';
+import { loaderView } from '@constants';
+import LoadingWidget from '@components/LoadingWidget';
 import { container } from './style.js';
 import DashboardView from './DashboardView';
 import TaskView from './TaskView';
@@ -13,7 +15,7 @@ const UserDashboardView = (props)=>{
     const url  = props.match.path;
     const dispatch = useDispatch();
     const taskInfo = useSelector(state=>state.TASK_INFO);
-    const { userInfo={}, fullProfileLoading } = taskInfo;
+    const { userInfo={}, userInfoLoading } = taskInfo;
     const isProfileExist = userInfo && userInfo.profile_exists;
 
     useEffect(()=>{
@@ -22,7 +24,7 @@ const UserDashboardView = (props)=>{
 
     const renderRoutes = ()=>{
         
-        if(fullProfileLoading){
+        if(userInfoLoading){
             return null;
         }else if(!isProfileExist){
             return <CustomerView {...props}/>;
@@ -48,14 +50,13 @@ const UserDashboardView = (props)=>{
                 }
             </Fragment>
         }
-
     }
 
     return(
         <div className={container}>
             <LeftMenuBar/>
             {
-                fullProfileLoading?<div className={loaderView}><LoadingWidget/></div>:renderRoutes()
+                userInfoLoading?<div className={loaderView}><LoadingWidget/></div>:renderRoutes()
             }
             <FloatingChatWidget/>
         </div>
