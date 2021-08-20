@@ -8,6 +8,7 @@ import TaskView from './TaskView';
 import AgentTaskDetail from '@pages/AgentTaskDetail/TaskDetailMobileEntry.js';
 import CreateTaskMobileView from '@pages/CreateTaskMobileView';
 import CustomerView from './CustomerView';
+import CustomerInfoView from './CustomerView/CustomerInfoView';
 
 const UserDashboardView = ({ match }) => {
  
