@@ -6,13 +6,15 @@ export const container = css`
   width: 100%;
   height: 100%;
   position: relative;
-  border: 1px solid #363b64;
+  // border: 1px solid #4267b2;
   box-sizing: border-box;
   border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 300px;
+  background: white;
+    border-radius: 4px;
   span {
     font-family: ${primaryFont};
     position: absolute;

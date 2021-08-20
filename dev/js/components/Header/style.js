@@ -17,9 +17,9 @@ export const desktopView = css`
     }
     .heading{
         font-weight: bold;
-        font-size: 24px;
+        font-size: 16px;
         line-height: 36px;
-        color: #363B64;
+        color: #343A40;
         justify-content: space-between;
     }
 `

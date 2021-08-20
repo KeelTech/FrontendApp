@@ -4288,14 +4288,18 @@ p.login-divider:before {content: '';position: absolute;height: .5px;background: 
 .social-button-wrapper {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .social-button-wrapper button {
   width: 100px;
   height: 44px;
+  margin: 0px 10px;
+  cursor: pointer;
 }
-
+button{
+  cursor: pointer;
+}
 p.signup-divider {margin-top: 15px;font-size: 14px;font-weight: 500;}
 
 p.signup-divider a {
@@ -4334,6 +4338,7 @@ button.linkedin-button {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 0px 30px;
 }
 
 .loginRightImg h4 {
@@ -4349,11 +4354,7 @@ button.linkedin-button {
   font-weight: 400;
   text-align: center;
 }
-@media (max-width:767px) {
-  .mobileHide{
-    display:none;
-  }
-}
+
 p.password-validation, p.login-fail-msg,p.email-fail-msg {
   color: red;
   font-weight: 500;
@@ -4362,7 +4363,52 @@ p.password-validation, p.login-fail-msg,p.email-fail-msg {
 button:focus{
   outline: none !important;
 }
+
 /* ============ Custom style Common ============== */
+/* ============ Dashboard Custom style Common ============== */
+.subHeaderTop {
+  position: absolute;
+  background: white;
+  width: 100%;
+  z-index: 8;
+  display: flex;
+  justify-content: flex-end;
+  box-shadow: 2px 2px 8px #d8dce4;
+  top: 0;
+  min-height: 55px;
+  padding: 10px;
+}
+.p-relative{
+  position: relative !important;
+}
+/* ============ Dashboard Custom style Common ============== */
+/* ============ Media Queries ============== */
+@media (max-width:767px) {
+  .mobileHide{
+    display:none;
+  }
+  .loginContent{
+    padding: 10px 20px;
+  }
+  .loginLogo{
+    position: relative;
+    top: -30px;
+  }
+}
+@media (max-height:520px) {
+  .loginContainer{
+    align-items: unset;
+  }
+}
+@media (min-width:1900px){
+  .chat{
+    max-width:500px;
+}
+.pandingLeftTask{
+  max-width: 300px;
+}
+}
+/* ============ Media Queries ============== */
 /* // ================ Page Loader   ================ */
 
 

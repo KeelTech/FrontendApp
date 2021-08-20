@@ -9,7 +9,10 @@ export const container = css`
     height: calc(100% - 160px);
     .chat{
         width: 60%;
+        // max-width:500px;
+        box-shadow: 2px 2px 8px #D8DCE4;
         height: 100%;
+        border-radius: 4px;
     }
     @media(max-width: ${tabScreenWidth}){
         padding: 20px;
@@ -30,15 +33,21 @@ export const pendingTasks = css`
         margin-top: 14px;
         overflow-y: auto;
         max-height: calc(100% - 120px);
+        // box-shadow: 2px 2px 8px #eae8ee;
+    border-radius: 4px;
     }
     .taskHeading{
         width: 100%;
         font-size: 16px;
         line-height: 24px;
-        color: #363B64;
+        color: #6C757D;
         text-align: center;
         margin-bottom: 8px;
-        border-bottom: 1px solid #CCCCCC;
+        background: #E7EFF8;
+        font-weight: 600;
+        padding: 10px 5px;
+        border-radius: 4px;
+        border: 1px solid white;
     }
     .moreTasks{
         display: flex;
@@ -89,8 +98,8 @@ export const scheduleCallCta = css`
     cursor: pointer;
     align-items: center;
     padding: 11px 38px;
-    background: #363B64;
-    border-radius: 14px;
+    background: #4267B2;
+    border-radius: 4px;
     color: #FCFCFC;
     span{
         margin-right: 10px;
@@ -121,9 +130,10 @@ export const scheduleCallCta = css`
 export const upcomingSchedules = css`
     min-width: 240px;
     min-height: 100vh;
-    margin-top: 30px;
+    margin-top: 0px;
     padding: 0px 22px;
     display: none;
+    background:white;
     @media(min-width: 1200px){
         display: block;
         .headerView{
@@ -134,6 +144,9 @@ export const upcomingSchedules = css`
             margin-bottom: 8px;
             font-size: 12px;
             line-height: 18px;
+            .taskSch{
+                
+            }
         }
         .upcoming{
             display: flex;
@@ -141,14 +154,18 @@ export const upcomingSchedules = css`
             margin-bottom: 14px;
             span{
                 display: inline-block;
-                background: #FCFCFC;
-                border-radius: 14px;
-                font-size: 12px;
-                line-height: 18px;
-                color: #363B64;
-                padding: 10px 27px;
                 cursor: pointer;
-                font-weight: bold;
+                width: 100%;
+                font-size: 16px;
+                line-height: 24px;
+                color: #6C757D;
+                text-align: center;
+                margin-bottom: 8px;
+                background: #E7EFF8;
+                font-weight: 600;
+                padding: 10px 5px;
+                border-radius: 4px;
+                border: 1px solid white;
             }
         }
         .info{
@@ -158,15 +175,20 @@ export const upcomingSchedules = css`
             color: #363B64;
             display: flex;
             flex-direction: column;
+            box-shadow: 0px 2px 8px #d8dce4;
+            border-radius: 4px;
+            padding: 8px;
         }
+        .taskSch {display: flex;}
         .taskName{
             display: flex;
-            align-items: center;
+            align-items: self-end;
             margin-bottom: 5px;
             img{
                 height: 12px;
                 width: 12px;
-                margin-right: 17px;
+                margin-right: 8px;
+                margin-top: 3px;
             }
             span{
                 font-size: 10px;

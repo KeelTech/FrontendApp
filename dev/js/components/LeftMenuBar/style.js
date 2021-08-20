@@ -2,8 +2,9 @@ import { css } from '@emotion/css'
 import { tabScreenWidth } from '@constants';
 
 export const leftBarCont = css`
-    background: rgba(252, 252, 252, 0.5);
+    background: white;
     z-index: 10;
+    box-shadow: 2px 2px 8px #d8dce4;
     .overlay{
         position: fixed;
         z-index: 1;
@@ -19,20 +20,17 @@ export const leftBarCont = css`
 export const container = css`
     position: relative;
     min-width: 210px;
-<<<<<<< HEAD
     z-index: 9;
-=======
-    z-index: 20;
->>>>>>> master
     top: 0;
     height: 100vh;
     display: flex;
     background: rgba(252,252,252,0.5);
     .openWidgetView{
         position: relative;
-        padding: 30px 32px;
-        padding-right: 0px;
-        min-height: 100vh;
+    /* padding: 30px 32px; */
+    padding-right: 0px;
+    min-height: 100vh;
+    width: 100%;
     }
     .widgetView{
         display: flex;
@@ -43,7 +41,8 @@ export const container = css`
     .homeWidget{
         display: flex;
         width: 100%;
-        margin-bottom: 52px;
+        padding: 20px 10px 0 25px;
+        margin-bottom: 30px;
     }
     .homeIcon{
         width: 104px;
@@ -62,23 +61,27 @@ export const menuOptions = css`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    width: 100%;
     .widget{
         display: flex;
         cursor: pointer;
         align-items: center;
         padding: 10px 17px;
         margin-bottom: 8px;
+        padding: 12px 8px 12px 25px;
+        position: relative;
         .icon{
             width: 20px;
             height: 20px;
             max-width: 20px;
             min-width: 20px;
+            filter: brightness(.5) !important;
         }
         .heading{
             font-weight: 500;
-            font-size: 12px;
+            font-size: 14px;
             line-height: 18px;
-            color: #A098AE;
+            color: #343A40;
             margin-left: 17px;
         }
     }
@@ -86,11 +89,12 @@ export const menuOptions = css`
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 35px;
-        margin-left: 17px;
-        background: #363B64;
+        // margin-top: 35px;
+        // margin-left: 17px;
+        margin: 10px 20px;
+        background: #4267B2;
         box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
-        border-radius: 13px;
+        border-radius: 4px;
         padding: 26px 36px;
         font-weight: 700;
         img{
@@ -106,13 +110,22 @@ export const menuOptions = css`
     }
     .activeWidget{
         background: #FCFCFC;
-        box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
-        border-radius: 13px;
+        // box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
+        // border-radius: 13px;
         .icon{
-            filter: brightness(0.5) !important;
+            filter: brightness(1) !important;
         }
         .heading{
-            color: #363B64;
+            color: #4267B2;
+        }
+        &:before{
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 100%;
+            background: #4267B2;
+            left: 0;
+            border-radius: 20px;
         }
     }
 `
@@ -133,6 +146,7 @@ export const mobileView = css`
     .homeWidget{
         justify-content: space-between;
         align-items: center;
+        padding: 20px 10px 0 25px;
         margin-bottom: 28px;
     }
     .homeIcon{
@@ -152,6 +166,7 @@ export const mobileView = css`
         height: 26px;
         max-width: 26px;
         min-width: 26px;
+        filter: brightness(.5) !important;
     }
     .heading{
         font-weight: 500;

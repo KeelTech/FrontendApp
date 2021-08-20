@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 
-export const primaryFont = "sans-serif";
+export const primaryFont = "inherit";
 export const mobileScreenWidth = "600px";
 export const tabScreenWidth = "1100px";
 

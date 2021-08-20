@@ -112,6 +112,7 @@ export const progressBar = css`
 
 body {
   background-color: #2979FF;
+  font-family: 'Roboto', sans-serif;
   
 }
 
