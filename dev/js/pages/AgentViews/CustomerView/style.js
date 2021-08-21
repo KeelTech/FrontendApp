@@ -37,11 +37,14 @@ export const customer = css`
     margin: 0;
     border-radius: 3px;
     padding: 2px 8px;
-    background: #f44336;
+    color: #CF3030;
+    border: 1px solid #CF3030;
+    background: #F5D6D6;
     font-weight: 500;
     font-size: 10px;
-    line-height: 15px;
-    color: #fcfcfc;
+    line-height: 14px;
+    text-transform: uppercase;
+    // color: #fcfcfc;
   }
 `
 

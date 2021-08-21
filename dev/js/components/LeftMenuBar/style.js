@@ -95,7 +95,7 @@ export const menuOptions = css`
         background: #4267B2;
         box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
         border-radius: 4px;
-        padding: 26px 36px;
+        padding: 10px 16px;
         font-weight: 700;
         img{
             margin-bottom: 8px;
@@ -183,7 +183,7 @@ export const mobileView = css`
         background: #363B64;
         box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
         border-radius: 20px;
-        padding: 20px 28px;
+        padding: 10px 16px;
         font-weight: 700;
         img{
             margin-bottom: 8px;

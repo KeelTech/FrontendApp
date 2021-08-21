@@ -44,7 +44,8 @@ export const outerShell = props=> css`
     background: white;
     position:absolute;
     top:15%;
-    width:90vw;
+    width: 100%;
+    left: 0;
     max-width: ${props.maxWidth};
     box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
     text-align:center;
@@ -79,11 +80,11 @@ export const fileButton = css`
     padding: 9px 9px;
     position: absolute;
     width: 200px ;
-    height: 50px;
-    background-color: #363B64;
-    color:white;
-    border:none;
-    border-radius: 20px;
+    height: 40px;
+    background-color: #4267B2;
+    color: white;
+    border: none;
+    border-radius: 5px;
     cursor:pointer;
     margin-right:auto;
 `

@@ -59,7 +59,7 @@ width: 100%;
 font-family: ${primaryFont};
 font-style: normal;
 font-weight: normal;
-font-size: 18px;
+font-size: 14px;
 line-height: 27px;
 cursor:pointer;
 color: #A098AE;

@@ -7,12 +7,24 @@ export const card = props=>css`
     box-shadow: 2px 2px 8px #eae8ee;
     border-radius: 4px;
     margin-bottom: 14px;
+    position:relative;
     ${props.isView && `
         cursor: pointer;
         // border: 1px solid #FCFCFC;
     `}
     ${props.active && `
-        border: 1px solid #4267B2;
+    &:before{
+        content: '';
+        position: absolute;
+        width: 5px;
+        height: 100%;
+        left: 0;
+        top: 0;
+        z-index: 999;
+        background: #4267B2;
+        border-radius: 20px;
+    }
+        // border: 1px solid #4267B2;
     `}
     &:last-child{
         margin-bottom: 0px;
@@ -42,14 +54,17 @@ export const card = props=>css`
             color: #A098AE;
         }
         .status{
-            background: #f44336;
-    border-radius: 4px;
+            color: #CF3030;
+    border: 1px solid #CF3030;
+    background: #F5D6D6;
+    border-radius: 2px;
     padding: 1px 6px;
     font-weight: 500;
     font-size: 10px;
-    line-height: 15px;
+    line-height: 14px;
+    text-transform: uppercase;
     text-align: center;
-    color: #FCFCFC;
+    // color: #FCFCFC;
         }
     }
     @media(max-width: ${mobileScreenWidth}){
@@ -67,9 +82,10 @@ export const card = props=>css`
             }
             .status{
                 font-size: 10px;
-                line-height: 15px;
+                line-height: 14px;
+    text-transform: uppercase;
                 padding: 2px 5px;
-                border-radius: 3px;
+                border-radius: 2px;
             }
         }
     }

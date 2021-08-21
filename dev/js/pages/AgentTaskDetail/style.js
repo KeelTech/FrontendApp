@@ -48,10 +48,13 @@ width: 100%;
         color: #FCFCFC;
         font-weight: 600;
         font-size: 12px;
-        line-height: 18px;
+        line-height: 14px;
+    text-transform: uppercase;
         padding: 2px 8px;
-        background: #f44336;
-        border-radius: 5px;
+        color: #CF3030;
+    border: 1px solid #CF3030;
+    background: #F5D6D6;
+        border-radius: 2px;
     }
     .taskName{
         img{
@@ -118,7 +121,8 @@ width: 100%;
         }
         .status{
             font-size: 10px;
-            line-height: 15px;
+            line-height: 14px;
+    text-transform: uppercase;
             padding: 2px 4px;
         }
         .mobileView{
@@ -283,6 +287,7 @@ export const checklistSection = props=> css`
         margin-bottom: 8px;
         display: flex;
         align-items: center;
+        padding: 0 5px;
     }
     .progressNo{
         font-size: 8px;
@@ -366,7 +371,7 @@ export const messageSection = css`
             font-size: 10px;
             line-height: 15px;
             border: 0.5px solid #A098AE;
-            border-radius: 7px;
+            border-radius:47px;
         }
     }
     .commentSection{
