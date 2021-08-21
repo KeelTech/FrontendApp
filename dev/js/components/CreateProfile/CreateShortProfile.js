@@ -83,7 +83,8 @@ const CreateProfile = ()=>{
                     isSuccess: true,
                     msg: 'Profile Created Successfully'
                 });
-                getUserProfile({}, dispatch);
+                window.location.href = window.location.host;
+                //getUserProfile({}, dispatch);
             }else{
                 setToasterInfo({
                     isVisible: true,
@@ -131,7 +132,6 @@ const CreateProfile = ()=>{
                         <button onClick={handleCreateForm}>Create</button>
                     </div>
                 </div>
-                <div>list adress</div>
             </div>
         </div>
         </div>

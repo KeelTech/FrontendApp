@@ -53,7 +53,7 @@ function SignUp(props) {
           setEmail('');
           setPassword('');
           setConfirmPassword('');
-          props.history.push('/dashboard');
+          window.location.href = "https://app.getkeel.com/";
         }
         if (err) {
           setErrorMessage(true);

@@ -5,15 +5,18 @@ import LoadingWidget from '@components/LoadingWidget';
 import { loaderView } from '@constants';
 import CustomToaster from '@components/CustomToaster';
 import ProfileForm from './ProfileForm.js';
+import ProfileView from './ProfileView.js';
 import { container, progressBar } from './style.js';
 
 const CreateProfile = () => {
+    const isEditView = window && window.location && window.location.search.includes('isEdit');
     const dispatch = useDispatch();
     const taskInfo = useSelector(state => state.TASK_INFO);
     const { fullProfileInfo, fullProfileLoading, userInfo = {} } = taskInfo;
     const isProfileExist = userInfo && userInfo.profile_exists;
     const [activeState, setActive] = useState(1);
     const [loading, setLoading] = useState(false);
+    const [showEditView, setEditView] = useState(isEditView);
 
     const [toasterInfo, setToasterInfo] = useState({
         isVisible: false,
@@ -21,6 +24,12 @@ const CreateProfile = () => {
         isSuccess: false,
         msg: ''
     })
+
+    const editProfileRedirect = ()=>{
+        setEditView(val=>!val);
+        setActive(1);
+        getFullUserProfile({}, dispatch);
+    }
 
     const activeWidgetData = useMemo(() => {
         let activeWidgetInfo = {
@@ -83,7 +92,7 @@ const CreateProfile = () => {
                 newDataParams = [];
                 let subFieldItems = {};
                 dataParams.map((subField, subIndex) => {
-                    newDataParams[subIndex] = {};
+                    //newDataParams[subIndex] = {};
                     Object.entries(subField).map((val, key) => {
                         const [fieldType, dataValues] = val;
                         const { value, labels } = dataValues;
@@ -141,6 +150,7 @@ const CreateProfile = () => {
                         isSuccess: true,
                         msg: 'Profile Updated Successfully'
                     });
+                    
                 } else {
                     setToasterInfo({
                         isVisible: true,
@@ -151,6 +161,9 @@ const CreateProfile = () => {
                 }
                 setTimeout(() => {
                     hideToaster();
+                    if(resp){
+                        editProfileRedirect();
+                    }
                 }, 1000);
             });
             return;
@@ -175,6 +188,9 @@ const CreateProfile = () => {
             }
             setTimeout(() => {
                 hideToaster();
+                if(resp){
+                    editProfileRedirect();
+                }
             }, 1000);
         });
     }
@@ -192,130 +208,50 @@ const CreateProfile = () => {
                 loading || fullProfileLoading ? <div className={loaderView}><LoadingWidget /></div> : null
             }
             <CustomToaster {...toasterInfo} hideToaster={hideToaster} />
-            <div className={progressBar}>
-                <div className="desktopProgressBar">
-                    <div className="leftPorgressBar">
-                        <ul class="progressbar">
-                            <li className={activeState === 1 ? 'active' : ''}></li>
-                            <li className={activeState === 2 ? 'active' : ''}></li>
-                            <li className={activeState === 3 ? 'active' : ''}></li>
-                            <li className={activeState === 4 ? 'active' : ''}></li>
-                            <li className={activeState === 5 ? 'active' : ''}></li>
-                        </ul>
-                    </div>
-                    <div className="userFormsMainContainer">
-                        <h3>{displayText}</h3>
-                        <div className="formsScroll">
-                            {
-                                isMultiple ?
-                                    dataParams.map((subField, subIndex) => {
-                                        return Object.entries(subField).map((val, key) => {
-                                            const [fieldType, dataValues] = val;
-                                            return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} subIndex={subIndex} isMultiple />
-                                        })
-                                    })
-                                    : Object.entries(dataParams).map((val, key) => {
-                                        const [fieldType, dataValues] = val;
-                                        return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} />
-                                    })
-                            }
-                        </div>
-                        <div className="btnCont">
-                            {
-                                activeState > 1 ? <button onClick={() => handleFormNavigation(false)}>Previous</button> : null
-                            }
-                            {
-                                activeState == 5 ? <button onClick={() => handleFormNavigation(true)}>{isProfileExist ? 'Update' : 'Create'}</button>
-                                    : <button onClick={() => handleFormNavigation(true)}>Next</button>
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="useDetailsContainer d-none">
-                <div className="userProfile">
-                    <div className="userNameDtls">
-                        <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/user.svg"} />
-                        <h3>Mayank Yadav</h3>
-                    </div>
-                    <button className="editPrfl">Edit Profile</button>
-                </div>
-                <div className="editProgress">
-                    <label>30% complete</label>
-                    <div className="progressBar">
-                        <div className="progBarFill" style={{ width: '30%' }}></div>
-                    </div>
-                </div>
-                <div className="prflDtlsAccordionContainer">
-                    <div className="prfAccrd">
-                        <div className="accrdHead">
-                            <h5>Personal  Details</h5>
-                            <button>Hide Details <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/drop.svg"} /></button>
-                        </div>
-                        <div className="accrdContent">
-                            <ul>
-                                <li>
-                                    <h5>Email:</h5>
-                                    <p>samantha.williams@gmail.com</p>
-                                </li>
-                                <li>
-                                    <h5>Number:</h5>
-                                    <p>lorem Sed ut perspiciatis, unde omnis iste natus</p>
-                                </li>
-                                <li>
-                                    <h5>Date of Birth:</h5>
-                                    <p>lorem Sed ut perspiciatis, unde omnis iste natus</p>
-                                </li>
-                                <li>
-                                    <h5>Place of Birth:</h5>
-                                    <p>lorem Sed ut perspiciatis, unde omnis iste natus</p>
-                                </li>
-                                <li>
-                                    <h5>City:</h5>
-                                    <p>lorem Sed ut , unde omnis iste natus</p>
-                                </li>
-                                <li>
-                                    <h5>Country:</h5>
-                                    <p>lorem  ut perspiciatis, unde omnis iste natus</p>
-                                </li>
-                                <li>
-                                    <h5>Nationality:</h5>
-                                    <p>lorem Sed ut perspiciatis, unde omnis iste natus</p>
-                                </li>
-                                <li>
-                                    <h5>National Identity Number:</h5>
-                                    <p>lorem Sed ut , unde omnis iste natus</p>
-                                </li>
-                                <li>
-                                    <h5>Date of Issue:</h5>
-                                    <p>lorem Sed ut perspiciatis,  omnis iste natus</p>
-                                </li>
-                                <li>
-                                    <h5>Date of Expiry:</h5>
-                                    <p>lorem Sed ut perspiciatis, unde omnis iste natus</p>
-                                </li>
-                                <li>
-                                    <h5>Passport Number:</h5>
-                                    <p> Sed ut perspiciatis, unde omnis iste natus</p>
-                                </li>
-                                <li>
-                                    <h5>Passport Number:</h5>
-                                    <p>lorem Sed ut , unde omnis iste natus</p>
-                                </li>
-                                <li>
-                                    <h5>Passport Number:</h5>
-                                    <p>lorem Sed ut perspiciatis, unde omnis iste natus</p>
-                                </li>
-                                <li>
-                                    <h5>Current Address:</h5>
-                                    <p>lorem Sed ut perspiciatis, unde omnis iste natus</p>
-                                </li>
-
+            {
+                showEditView?
+                <div className={progressBar}>
+                    <div className="desktopProgressBar">
+                        <div className="leftPorgressBar">
+                            <ul className="progressbar">
+                                <li className={activeState === 1 ? 'active' : ''}></li>
+                                <li className={activeState === 2 ? 'active' : ''}></li>
+                                <li className={activeState === 3 ? 'active' : ''}></li>
+                                <li className={activeState === 4 ? 'active' : ''}></li>
+                                <li className={activeState === 5 ? 'active' : ''}></li>
                             </ul>
                         </div>
+                        <div className="userFormsMainContainer">
+                            <h3>{displayText}</h3>
+                            <div className="formsScroll">
+                                {
+                                    isMultiple ?
+                                        dataParams.map((subField, subIndex) => {
+                                            return Object.entries(subField).map((val, key) => {
+                                                const [fieldType, dataValues] = val;
+                                                return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} subIndex={subIndex} isMultiple />
+                                            })
+                                        })
+                                        : Object.entries(dataParams).map((val, key) => {
+                                            const [fieldType, dataValues] = val;
+                                            return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} />
+                                        })
+                                }
+                            </div>
+                            <div className="btnCont">
+                                {
+                                    activeState > 1 ? <button onClick={() => handleFormNavigation(false)}>Previous</button> : null
+                                }
+                                {
+                                    activeState == 5 ? <button onClick={() => handleFormNavigation(true)}>{isProfileExist ? 'Update' : 'Create'}</button>
+                                        : <button onClick={() => handleFormNavigation(true)}>Next</button>
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+                :<ProfileView fullProfileInfo={fullProfileInfo} editProfileRedirect={editProfileRedirect} userInfo={userInfo}/>
+            }
         </div>
     )
 }

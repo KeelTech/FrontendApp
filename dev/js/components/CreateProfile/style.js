@@ -3,6 +3,9 @@ import { tabScreenWidth } from '@constants';
 
 export const container = css`
     width: 100%;
+    .rotateAcordion{
+        transform: rotate(180deg);
+    }
 `
 export const progressBar = css`
 .desktopProgressBar {
