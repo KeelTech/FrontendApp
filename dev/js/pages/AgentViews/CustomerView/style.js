@@ -37,7 +37,7 @@ export const customer = css`
     margin: 0;
     border-radius: 3px;
     padding: 2px 8px;
-    background: #cf3030;
+    background: #f44336;
     font-weight: 500;
     font-size: 10px;
     line-height: 15px;
@@ -72,7 +72,7 @@ export const redBtnClass = css`
   align-items: center;
   text-align: center;
   color: #FCFCFC;
-  background: #CF3030;
+  background: #f44336;
   border-radius: 5px;
   outline: none;
     border: none;

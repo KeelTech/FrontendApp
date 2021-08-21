@@ -42,14 +42,14 @@ export const card = props=>css`
             color: #A098AE;
         }
         .status{
-            background: #CF3030;
-            border-radius: 4px;
-            padding: 2px 6px;
-            font-weight: 500;
-            font-size: 10px;
-            line-height: 15px;
-            text-align: center;
-            color: #FCFCFC;
+            background: #f44336;
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 15px;
+    text-align: center;
+    color: #FCFCFC;
         }
     }
     @media(max-width: ${mobileScreenWidth}){

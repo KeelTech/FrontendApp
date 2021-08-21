@@ -2,13 +2,14 @@ import { css } from '@emotion/css';
 import { inputField, tabScreenWidth } from '@constants';
 
 export const container = css`
-    position: relative;
-    background: #FCFCFC;
-    border-radius: 20px;
-    padding: 22px 26px;
-    height: 100%;
-    overflow-y: auto;
-    width: 100%;
+position: relative;
+background: white;
+box-shadow: 2px 2px 8px #eae8ee;
+border-radius: 4px;
+padding: 12px;
+height: 100%;
+overflow-y: auto;
+width: 100%;
     .loadingScrn{
         position: absolute;
         display: flex;
@@ -28,17 +29,17 @@ export const container = css`
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding-bottom: 23px;
+        padding-bottom: 12px;
     }
     .statusText{
         font-weight: 600;
-        font-size: 12px;
-        line-height: 18px;
-        color: #A098AE;
-        border: 1px solid #A098AE;
-        padding: 7px 11px;
-        border-radius: 6px;
-        cursor: pointer;
+    font-size: 12px;
+    line-height: 18px;
+    color: #4267b2;
+    border: 1px solid #4267b2;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
     }
     .status{
         display: inline-block;
@@ -49,7 +50,7 @@ export const container = css`
         font-size: 12px;
         line-height: 18px;
         padding: 2px 8px;
-        background: #CF3030;
+        background: #f44336;
         border-radius: 5px;
     }
     .taskName{
@@ -60,7 +61,7 @@ export const container = css`
         }
         display: flex;
         align-items: center;
-        color: #A098AE;
+        color: #212529;
         font-weight: 600;
         font-size: 10px;
         line-height: 15px;

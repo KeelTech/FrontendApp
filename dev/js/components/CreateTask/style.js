@@ -28,7 +28,7 @@ export const container = css`
         }
         display: flex;
         align-items: center;
-        color: #A098AE;
+        color: #212529;
         font-weight: 600;
         font-size: 10px;
         line-height: 15px;

@@ -60,6 +60,7 @@ export const tasksView = css`
         border: 1px solid #4267B2;
         cursor: pointer;
         font-weight:500;
+        background:white;
     }
     .ctaActive{
         color: #4267B2;

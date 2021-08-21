@@ -4364,6 +4364,9 @@ button:focus{
   outline: none !important;
 }
 
+.taskUi{
+  box-shadow: 2px 2px 8px #d8dce4;
+}
 /* ============ Custom style Common ============== */
 /* ============ Dashboard Custom style Common ============== */
 .subHeaderTop {

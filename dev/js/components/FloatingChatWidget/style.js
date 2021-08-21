@@ -8,7 +8,7 @@ export const floatingChat = css`
     bottom: 16px;
     right: 20px;
     padding: 8px;
-    background: #CF3030;
+    background: #f44336;
     border-radius: 50%;
     display: none;
     img{

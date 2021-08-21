@@ -232,7 +232,7 @@ const CreateProfile = () => {
                     </div>
                 </div>
             </div>
-            <div className="useDetailsContainer">
+            <div className="useDetailsContainer d-none">
                 <div className="userProfile">
                     <div className="userNameDtls">
                         <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/user.svg"} />
