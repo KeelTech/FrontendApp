@@ -211,30 +211,28 @@ const TaskInfo = ({taskDetail, refetchTaskDetail, refetchTaskList})=>{
         })
     }
 
+    const downloadImg = (data, contentType)=>{
+        let type='png';
+        if(contentType){
+            type = contentType.split('/')[1];
+        }
+        const resp = `data:${contentType};base64, ${data}`;
+        var link=document.createElement('a');
+        console.log('link is', link);
+        link.href=resp;
+        link.download=`new.${type}`;
+        link.click();
+    }
+
     const downloadDocumentClicked = ({id, docId})=>{
         setLoading(true);
         downloadDocument({ docId }, dispatch, (resp, err)=>{
             setLoading(false);
-            // console.log('resp is', resp);
-            // var blob=new Blob([resp]);
-            // var link=document.createElement('a');
-            // link.href=window.URL.createObjectURL(blob);
-            // link.download="new.png";
-            // link.click();
-            // var img = document.createElement('img');
-            // img.classList.add('demo');
-            // img.id="demo";
-            // img.src = 'data:image/jpeg;base64,' + btoa(resp);
-            // document.body.appendChild(img);
-            // handleResponse(resp, 'Downloaded Successfully', false);
-            // resp.blob().then(blob => {
-            //     let url = window.URL.createObjectURL(blob);
-            //     let a = document.createElement("a");
-            //     console.log(url);
-            //     a.href = url;
-            //     a.download = 'filename';
-            //     a.click();
-            // });
+            if(resp && resp.file_data){
+                let contentType = resp.content_type;
+                
+                downloadImg(resp.file_data, contentType);
+            }
         })
     }
 
