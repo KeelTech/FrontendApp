@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_MENUBAR_STATE } from '@constants/types';
+import { SET_MENUBAR_STATE, SET_ACTIVE_TASK } from '@constants/types';
 import { getTaskList } from '@actions';
 import TaskCard from '@components/TaskCard';
 import ChatWidget from '@components/ChatWidget';
@@ -10,7 +10,7 @@ import NotificationWidget from '@components/NotificationWidget';
 import ProfileWidget from '@components/ProfileWidget';
 import BlankScreen from '@components/BlankScreen';
 import LoadingWidget from '@components/LoadingWidget';
-import { loaderView } from '@constants';
+import { loaderView, isMobileView } from '@constants';
 import { container, pendingTasks, scheduleCallCta, upcomingSchedules } from './style.js';
 import { body } from '../style.js';
 
@@ -52,20 +52,34 @@ const DashboardView = () => {
         history.push('/tasks');
     }
 
-    return (
+    const handleTaskClick = (taskId)=>{
+        if(isMobileView()){
+            history.push(`/task/detail/${taskId}`);
+        }else{
+            history.push(`/tasks`);
+            dispatch(
+                {
+                    type: SET_ACTIVE_TASK,
+                    payload: taskId
+                }
+            )
+        }
+    }
+
+    return(
         <div className={body + '    ' + 'p-relative pt-5'}>
             <div className="mainView">
                 <div className="subHeaderTop">
-                    <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} />
-                    <NotificationWidget />
+                    {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
+                    {/* <NotificationWidget /> */}
                     <ProfileWidget />
                 </div>
                 <Header headerText="Welcome Shubh!">
                     <div className="headerView">
-                        <div className={scheduleCallCta}>
+                        {/* <div className={scheduleCallCta}>
                             <span>Schedule Call</span>
                             <img src={ASSETS_BASE_URL + "/images/common/callIcon.svg"} alt="home" />
-                        </div>
+                        </div> */}
                     </div>
                 </Header>
                 <div className={container}>
@@ -76,21 +90,22 @@ const DashboardView = () => {
                                 : <Fragment>
                                     <div className="taskList">
                                         {
-                                            taskList.length ?
-                                                taskList.slice(0, 3).map((val) => {
-                                                    const { task_id } = val;
-                                                    return (<TaskCard key={task_id} clickHandler={() => { }} data={val} />)
-                                                })
-                                                : <BlankScreen message="You have no pending tasks" />
+                                           taskList.length?
+                                           taskList.slice(0, 3).map((val)=>{
+                                               const { task_id } = val;
+                                               return(<TaskCard key={task_id} isView clickHandler={()=>handleTaskClick(task_id)} data={val}/>)
+                                           })
+                                           :<BlankScreen message="You have no pending tasks"/>
                                         }
-                                    </div>
-                                    {
-                                        taskList.length > 3 ?
-                                            <div className="allTasks">
-                                                <div className="moreTasks" onClick={redirectToTaskList}>Show All</div>
-                                            </div>
-                                            : null
+                                        {
+                                        //  taskList.length > 3 ?
+                                         
+                                        //  : null  
                                     }
+                                    </div>
+                                    <div className="allTasks">
+                                             <div className="moreTasks" onClick={redirectToTaskList}>Show All</div>
+                                         </div>
                                 </Fragment>
                         }
 

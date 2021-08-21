@@ -1,4 +1,4 @@
-import { TASK_LIST_LOADING, SET_TASK_LIST, TASK_DETAIL_INFO, GET_USER_PROFILE, LOADING_USER_PROFILE, GET_FULL_USER_PROFILE, LOADING_FULL_USER_PROFILE, UPDATE_USER_PROFILE, SAVE_PLACE_INFO } from '@constants/types';
+import { TASK_LIST_LOADING, SET_TASK_LIST, TASK_DETAIL_INFO, GET_USER_PROFILE, LOADING_USER_PROFILE, GET_FULL_USER_PROFILE, LOADING_FULL_USER_PROFILE, UPDATE_USER_PROFILE, SAVE_PLACE_INFO, SET_ACTIVE_TASK, CASE_DETAIL_LOADING, CASE_DETAILS } from '@constants/types';
 
 const defaultState = {
     taskListLoading: false,
@@ -12,7 +12,10 @@ const defaultState = {
         city: '',
         state: '',
         country: ''
-    }
+    },
+    activeTask: '',
+    caseDetailLoading: false,
+    caseDetails: {}
 }
 
 export default function (state = defaultState, action) {
@@ -89,6 +92,24 @@ export default function (state = defaultState, action) {
             newState.placeInfo = {...newState.placeInfo, ...action.payload};
             return newState;
         }
+
+        case SET_ACTIVE_TASK: {
+            let newState = {...state};
+            newState.activeTask = action.payload;
+            return newState;
+        }
+        case CASE_DETAIL_LOADING: {
+            let newState = { ...state}
+            newState.caseDetailLoading = action.payload;
+            return newState;
+        }
+
+        case CASE_DETAILS: {
+            let newState = {...state}
+            newState.caseDetails = action.payload||{};
+            return newState;
+        }
+
     }
     return state
 }

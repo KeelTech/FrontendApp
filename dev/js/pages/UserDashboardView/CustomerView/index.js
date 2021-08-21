@@ -13,8 +13,11 @@ import { container } from './style.js';
 
 const CustomerView = (props)=>{
     const dispatch = useDispatch();
-    const parsed = queryString.parse(props.location.search);
-    const shortProfile = parsed && parsed.type=='profile';
+    const taskInfo = useSelector(state=>state.TASK_INFO);
+    const { fullProfileInfo, fullProfileLoading, userInfo={} } = taskInfo;
+    const isProfileExist = userInfo && userInfo.profile_exists;
+    // const parsed = queryString.parse(props.location.search);
+    // const shortProfile = parsed && parsed.type=='profile';
     useEffect(()=>{
         dispatch(
             {
@@ -27,17 +30,22 @@ const CustomerView = (props)=>{
     },[])
 
     return(
-        <div className={`${body} ${container}`}>
+        <div className={`${body} ${container}` + '    ' + 'p-relative pt-5'}>
             <div className="mainView">
+            <div className="subHeaderTop">
+                    {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
+                    {/* <NotificationWidget /> */}
+                    <ProfileWidget />
+                </div>
                 <Header headerText="Profile">
                     <div className="headerView">
-                        <NotificationWidget/>
-                        <ProfileWidget/>
+                        {/* <NotificationWidget/> */}
+                        {/* <ProfileWidget/> */}
                     </div>
                 </Header>
                 <div className="customerView">
                     {
-                        shortProfile?
+                        !isProfileExist?
                         <CreateShortProfile/>
                         :<CreateProfile/>
                     }

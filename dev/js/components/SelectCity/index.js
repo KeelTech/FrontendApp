@@ -32,7 +32,7 @@ const SelectCity = ({ saveSelectedOption })=>{
         <Fragment>
         {
             list.length?
-            <CustomSearchSelect options={list} value="" handleChange={handleChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>
+            <CustomSearchSelect options={list} placeholder="Search City" value="" handleChange={handleChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>
             :<p className="errorMsg">Please Select Country & State First</p>
         }
         </Fragment>   
@@ -61,7 +61,7 @@ const SelectCountry = ({ saveSelectedOption })=>{
         <Fragment>
         {
             list.length?
-            <CustomSearchSelect options={list} value="" handleChange={handleChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>
+            <CustomSearchSelect options={list} placeholder="Search Country" value="" handleChange={handleChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>
             :null
         }
         </Fragment>
@@ -97,7 +97,7 @@ const SelectState = ({ saveSelectedOption })=>{
     return(
         <Fragment>
             {
-                list.length?<CustomSearchSelect options={list} value="" handleChange={handleChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>:
+                list.length?<CustomSearchSelect options={list} placeholder="Search State" value="" handleChange={handleChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>:
                 <p className="errorMsg">Please Select Country First</p>
             }
         </Fragment>

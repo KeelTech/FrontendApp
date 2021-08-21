@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { SET_MENUBAR_STATE } from '@constants/types';
+import { SET_MENUBAR_STATE, SET_ACTIVE_TASK } from '@constants/types';
 import TaskCard from '@components/TaskCard';
 import Header from '@components/Header';
 import NotificationWidget from '@components/NotificationWidget';
@@ -18,22 +18,35 @@ const TaskView = ()=>{
     const history = useHistory();
     const dispatch = useDispatch();
     const taskInfo = useSelector(state=>state.TASK_INFO);
-    const { taskList=[], taskListLoading, userInfoLoading, userInfo } = taskInfo||{};
-    const { case:caseDetails={} } = userInfo;
+    const { taskList=[], taskListLoading, userInfoLoading, userInfo, activeTask } = taskInfo||{};
+    let { case:caseDetails={}, cases={}  } = userInfo;
+    if(cases){
+        caseDetails = cases
+    }
     const caseId = caseDetails && caseDetails.case_id;
     const [activeWidget, setActiveWidget] = useState(0);
-    const [activeTask, setActiveTask] = useState('');
 
     const handleCtaClick = (val)=>{
         setActiveWidget(val);
-        setActiveTask('');
+        dispatch(
+            {
+                type: SET_ACTIVE_TASK,
+                payload: ''
+            }
+        )
     }
+    
 
     const taskClickHandler = (taskId)=>{
         if(isMobileView()){
             history.push(`/task/detail/${taskId}`);
         }else{
-            setActiveTask(taskId);
+            dispatch(
+                {
+                    type: SET_ACTIVE_TASK,
+                    payload: taskId
+                }
+            )
         }
     }
 
@@ -48,23 +61,39 @@ const TaskView = ()=>{
         )
     },[])
 
+
+
     useEffect(()=>{
+        refetchTaskList();
+    },[dispatch, activeWidget, caseId])
+
+    const refetchTaskList = ()=>{
         if(caseId){
             getTaskList({status: activeWidget, case: caseId}, dispatch, (resp, error)=>{
-                if(resp && resp.length && !isMobileView()){
-                    setActiveTask(resp[0].task_id);
+                if(resp && resp.length && !isMobileView() && !activeTask){
+                    dispatch(
+                        {
+                            type: SET_ACTIVE_TASK,
+                            payload: resp[0].task_id
+                        }
+                    )
                 }
             });
         }
-    },[dispatch, activeWidget, caseId])
+    }
 
     return(
-        <div className={body}>
+        <div className={body + '    ' + 'p-relative pt-5'}>
             <div className="mainView">
+            <div className="subHeaderTop">
+                    {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
+                    {/* <NotificationWidget /> */}
+                    <ProfileWidget />
+                </div>
                 <Header headerText="Task">
                     <div className="headerView">
                         <NotificationWidget/>
-                        <ProfileWidget/>
+                        {/* <ProfileWidget/> */}
                     </div>
                 </Header>
                 <div className={container}>
@@ -98,7 +127,7 @@ const TaskView = ()=>{
                     </div>
                     <div className="taskInfo">
                         {
-                            activeTask?<TaskDetail activeTask={activeTask}/>:null
+                            activeTask?<TaskDetail activeTask={activeTask} refetchTaskList={refetchTaskList}/>:null
                         }                        
                     </div>
                 </div>

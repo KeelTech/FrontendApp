@@ -174,28 +174,21 @@ const TaskView = ()=>{
 
     const downloadDocumentClicked = ({id, docId})=>{
         setLoading(true);
-        downloadDocument({ docId:'doc_50b576b22c7e4600b523ed012b521109' }, dispatch, (resp, err)=>{
+        downloadDocument({ docId }, dispatch, (resp, err)=>{
             setLoading(false);
             console.log('resp is', resp);
             var blob=new Blob([resp]);
             var link=document.createElement('a');
             link.href=window.URL.createObjectURL(blob);
-            link.download="new.pdf";
+            link.download="new.png";
             link.click();
-            // var img = document.createElement('img');
-            // img.classList.add('demo');
-            // img.id="demo";
-            // img.src = 'data:image/jpeg;base64,' + btoa(resp);
-            // document.body.appendChild(img);
-            // handleResponse(resp, 'Downloaded Successfully', false);
-            // resp.blob().then(blob => {
-            //     let url = window.URL.createObjectURL(blob);
-            //     let a = document.createElement("a");
-            //     console.log(url);
-            //     a.href = url;
-            //     a.download = 'filename';
-            //     a.click();
-            // });
+
+            // const link = document.getElementById('link');
+            // const file = event.target.files[0];
+            // let objectURL = URL.createObjectURL(file);
+
+            // link.download = file.name; // this name is used when the user downloads the file
+            // link.href = objectURL;
         })
     }
 
@@ -210,15 +203,20 @@ const TaskView = ()=>{
     }
      
     return(
-        <div className={body}>
+        <div className={body + '    ' + 'p-relative pt-5'}>
             <div className="mainView">
+            <div className="subHeaderTop">
+                    {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
+                    {/* <NotificationWidget /> */}
+                    <ProfileWidget />
+                </div>
                 <Header headerText="All your documents are safe with us!">
                     <div className="headerView">
                         <div className={uploadMobileCta}>
                             <CustomButton text="Upload Document" icon={`${ASSETS_BASE_URL}/images/common/uploadedDocs.svg`} clickHandler={toggleUploadModal} margin="0px 8px 0px 0px" padding="6px 20px" borderRadius="10px" backgroundColor="#363B64" fontSize="12px"/>
                         </div>
-                        <NotificationWidget/>
-                        <ProfileWidget/>
+                        {/* <NotificationWidget/>
+                        <ProfileWidget/> */}
                     </div>
                 </Header>
                 <div className={container}>
@@ -240,7 +238,7 @@ const TaskView = ()=>{
                                 <CustomSearch handleChange={handleSearch} value={searchVal} padding="6px 16px"/>
                             </div>
                             <div className="uploadCTA">
-                                <CustomButton text="Upload Document" icon={`${ASSETS_BASE_URL}/images/common/uploadedDocs.svg`} clickHandler={toggleUploadModal} margin="0px 8px 0px 0px" padding="10px 28px" borderRadius="16px" backgroundColor="#363B64" fontSize="12px"/>
+                                <CustomButton text="Upload Document" icon={`${ASSETS_BASE_URL}/images/common/uploadedDocs.svg`} clickHandler={toggleUploadModal} margin="0px 8px 0px 0px" padding="10px 28px" borderRadius="4px" backgroundColor="#4267B2" fontSize="12px"/>
                             </div>
                         </div>
                         <div className="mobileDropDown">

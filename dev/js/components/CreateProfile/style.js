@@ -18,6 +18,9 @@ export const progressBar = css`
     max-width: 500px;
     flex-shrink: 0;
     width: 100%;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 4px 4px 8px #d8dce4;
 }
     
 .userFormsMainContainer h3 {
@@ -46,7 +49,8 @@ export const progressBar = css`
     color: red;
 }
 .hideMsg{
-    visibility: hidden;
+    // visibility: hidden;
+    display:none;
 }
 .inpCont input, textarea {
     width: 100%;
@@ -187,7 +191,7 @@ body {
     background: #466CAD;
 }
 .formsScroll {
-    height: calc(100vh - 300px);
+    height: calc(100vh - 380px);
     overflow: auto;
     padding: 12px;
     &::-webkit-scrollbar {

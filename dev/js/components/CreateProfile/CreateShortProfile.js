@@ -1,17 +1,24 @@
 import React, { Fragment, useEffect, useState, useMemo } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createProfile } from '@actions';
+import { createProfile, getUserProfile } from '@actions';
 import LoadingWidget from '@components/LoadingWidget';
 import { loaderView } from '@constants';
 import CustomToaster from '@components/CustomToaster';
-import { SelectCity, SelectState, SelectCountry } from '@components/SelectCity';
+import { SelectCountry } from '@components/SelectCity';
 import { container, progressBar } from './style.js';
 
 const CreateProfile = ()=>{
     const dispatch = useDispatch();
+    const history = useHistory();
     const taskInfo = useSelector(state=>state.TASK_INFO);
     const { fullProfileInfo } = taskInfo;
     const [dataParams, setDataParams] = useState({
+        phone_number: {
+            value: '',
+            labels: "Phone Number",
+            type: "char"
+        },
         first_name: {
             value: '',
             labels: "First Name",
@@ -22,29 +29,19 @@ const CreateProfile = ()=>{
             labels: "Last Name",
             type: "char"
         },
-        mother_fullname: {
-            value: '',
-            labels: "Mother's Fullname",
-            type: "char"
-        },
-        father_fullname: {
-            value: '',
-            labels: "Father's Fullname",
-            type: "char"
-        },
         age: {
             value: '',
             labels: "Age",
             type: "char"
         },
-        address: {
+        current_country: {
             value: '',
-            labels: "Address",
-            type: "address"
+            labels: "Current Country",
+            type: "char"
         },
-        date_of_birth: {
+        desired_country: {
             value: '',
-            labels: "Date of Birth",
+            labels: "Desired Country",
             type: "char"
         }
     });
@@ -86,6 +83,7 @@ const CreateProfile = ()=>{
                     isSuccess: true,
                     msg: 'Profile Created Successfully'
                 });
+                getUserProfile({}, dispatch);
             }else{
                 setToasterInfo({
                     isVisible: true,
@@ -105,6 +103,7 @@ const CreateProfile = ()=>{
             return {...oldState, ...val}
         })
     }
+    
 
     const hideToaster = ()=>{
         setToasterInfo({
@@ -132,6 +131,7 @@ const CreateProfile = ()=>{
                         <button onClick={handleCreateForm}>Create</button>
                     </div>
                 </div>
+                <div>list adress</div>
             </div>
         </div>
         </div>
@@ -149,7 +149,7 @@ const ProfileForm = ({ dataParams, fieldType, handleChange})=>{
     }
 
     if(!labels) return null;
-    const showCustomFields = fieldType=='city' || fieldType=='country' || fieldType=='state';
+    const showCustomFields = fieldType.includes('country');
     return(
         <div className="formWrapper">
             <label>{labels}<sup>*</sup></label>
@@ -171,17 +171,18 @@ const ProfileForm = ({ dataParams, fieldType, handleChange})=>{
                 </div>
                 :null
             }
+            {
+                fieldType.includes('country')?
+                <SelectCountry saveSelectedOption={handleFieldChange}/>
+                :null
+            }
             <p className={showError?"errorMsg":"hideMsg"}>Please Fill {labels}</p>
             {/* {
                 fieldType=='city'?
                 <SelectCity saveSelectedOption={handleFieldChange}/>
                 :null
             }
-            {
-                fieldType=='country'?
-                <SelectCountry saveSelectedOption={handleFieldChange}/>
-                :null
-            }
+            
             {
                 fieldType=='state'?
                 <SelectState saveSelectedOption={handleFieldChange}/>

@@ -23,6 +23,7 @@ export const container = css`
         border: 1px solid #A098AE;
         padding: 7px 11px;
         border-radius: 6px;
+        cursor: pointer;
     }
     .status{
         display: inline-block;
@@ -97,7 +98,8 @@ export const container = css`
         background: unset;
         padding: 0px 4px;
         .statusCont{
-            display: none;
+            display: block;
+            margin: 4px;
         }
         .status{
             font-size: 10px;
@@ -305,6 +307,17 @@ export const messageSection = css`
             border: 0.5px solid #A098AE;
             border-radius: 7px;
         }
+    }
+    .commentSection{
+        width: 100%;
+    }
+    .deleteIcon{
+        cursor: pointer;
+    }
+    .msgSection{
+        display : flex;
+        justify-content: space-between;
+        align-items: flex-start;
     }
     .profile{
         margin-right: 6px;

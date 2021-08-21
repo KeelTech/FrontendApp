@@ -4,7 +4,7 @@ const ProfileDropdown = () => {
   return (
     <div className={profile}>
       <div className={info}>
-        <img></img>
+        <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/user.svg"} />
         <h2>Shubh Wadekar</h2>
         <h3>shubh@getkeel.com</h3>
       </div>

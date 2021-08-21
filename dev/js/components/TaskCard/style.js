@@ -9,10 +9,10 @@ export const card = props=>css`
     margin-bottom: 14px;
     ${props.isView && `
         cursor: pointer;
-        border: 3px solid #FCFCFC;
+        // border: 1px solid #FCFCFC;
     `}
     ${props.active && `
-        border: 3px solid #363B64;
+        border: 1px solid #4267B2;
     `}
     &:last-child{
         margin-bottom: 0px;

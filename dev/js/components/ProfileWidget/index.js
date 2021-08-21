@@ -15,7 +15,7 @@ const ProfileWidget = () => {
       }}
       ref={modalRef}
     >
-      <img></img>
+      <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/user.svg"} />
       {
       isClicked && 
       <DetectClickOutside targetRef={modalRef} clickOutside={()=>setIsClicked(false)}>
