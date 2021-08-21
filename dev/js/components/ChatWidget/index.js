@@ -62,7 +62,7 @@ const ChatWidget = ({ floatingChat=false, toggleChat, caseId="", currentUserId="
                     <div className="sendWidget">
                         {/* <img className="attachment" src={ASSETS_BASE_URL+"/images/common/attachment.svg"} alt="attachment"/> */}
                         <div className="sendBtn" onClick={sendButtonHandler}>
-                            <span>Send</span>
+                            <span></span>
                             <img className="icon" src={ASSETS_BASE_URL+"/images/common/sendIcon.svg"} alt="send"/>
                         </div>
                     </div>

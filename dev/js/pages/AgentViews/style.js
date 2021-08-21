@@ -8,7 +8,7 @@ export const container = css`
     min-width: 100vw;
     min-height: 100vh;
     overflow-wrap: anywhere;
-    font-family: ${primaryFont};
+    // font-family: ${primaryFont};
     &:after{
         content: '';
         height: 400px;
@@ -29,7 +29,7 @@ export const body = css`
     width: 100%;
     .mainView{
         width: 100%;
-        background: rgba(252,252,252,0.5);
+        background: #F7F8F9;
     }
     .headerView{
         display: flex;

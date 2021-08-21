@@ -5,10 +5,14 @@ export const container = css`
   background: #dbdbdb;
   position: relative;
   margin-left: 11px;
-  height: 40px;
-  width: 37px;
+  height: 35px;
+  width: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #4267b2;
+  border-radius: 4px;
   background: #fcfcfc;
-  border-radius: 10px;
   cursor: pointer;
 `;
 

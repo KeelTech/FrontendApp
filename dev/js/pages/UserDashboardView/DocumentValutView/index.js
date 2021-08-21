@@ -203,15 +203,20 @@ const TaskView = ()=>{
     }
      
     return(
-        <div className={body}>
+        <div className={body + '    ' + 'p-relative pt-5'}>
             <div className="mainView">
+            <div className="subHeaderTop">
+                    {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
+                    {/* <NotificationWidget /> */}
+                    <ProfileWidget />
+                </div>
                 <Header headerText="All your documents are safe with us!">
                     <div className="headerView">
                         <div className={uploadMobileCta}>
                             <CustomButton text="Upload Document" icon={`${ASSETS_BASE_URL}/images/common/uploadedDocs.svg`} clickHandler={toggleUploadModal} margin="0px 8px 0px 0px" padding="6px 20px" borderRadius="10px" backgroundColor="#363B64" fontSize="12px"/>
                         </div>
-                        <NotificationWidget/>
-                        <ProfileWidget/>
+                        {/* <NotificationWidget/>
+                        <ProfileWidget/> */}
                     </div>
                 </Header>
                 <div className={container}>
@@ -233,7 +238,7 @@ const TaskView = ()=>{
                                 <CustomSearch handleChange={handleSearch} value={searchVal} padding="6px 16px"/>
                             </div>
                             <div className="uploadCTA">
-                                <CustomButton text="Upload Document" icon={`${ASSETS_BASE_URL}/images/common/uploadedDocs.svg`} clickHandler={toggleUploadModal} margin="0px 8px 0px 0px" padding="10px 28px" borderRadius="16px" backgroundColor="#363B64" fontSize="12px"/>
+                                <CustomButton text="Upload Document" icon={`${ASSETS_BASE_URL}/images/common/uploadedDocs.svg`} clickHandler={toggleUploadModal} margin="0px 8px 0px 0px" padding="10px 28px" borderRadius="4px" backgroundColor="#4267B2" fontSize="12px"/>
                             </div>
                         </div>
                         <div className="mobileDropDown">

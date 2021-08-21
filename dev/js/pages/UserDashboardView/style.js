@@ -5,7 +5,7 @@ export const container = css`
     overflow-x: hidden;
     display: flex;
     background: #DFEAF4;
-    min-width: 100vw;
+    // min-width: 100vw;
     min-height: 100vh;
     font-family: ${primaryFont};
     &:after{
@@ -29,7 +29,7 @@ export const body = css`
     width: 100%;
     .mainView{
         width: 100%;
-        background: rgba(252,252,252,0.5);
+        background: #F7F8F9;
     }
     .headerView{
         display: flex;

@@ -88,13 +88,18 @@ const TaskView = (props)=>{
     }
 
     return(
-        <div className={`${body} ${mainCont}`}>
+        <div className={`${body} ${mainCont}`+ '    ' + 'p-relative pt-5'}>
             <div className="mainView">
+            <div className="subHeaderTop">
+                    {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
+                    {/* <NotificationWidget /> */}
+                    <ProfileWidget />
+                </div>
                 <Header headerText="Task" isAgent>
                     <div className="headerView">
                         <CustomButton text="Add New Task" clickHandler={addMoreTasks} margin="0px 16px 0px 0px"/>
                         <NotificationWidget/>
-                        <ProfileWidget/>
+                        {/* <ProfileWidget/> */}
                     </div>
                 </Header>
                 <div className={container}>

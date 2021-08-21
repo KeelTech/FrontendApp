@@ -14,20 +14,20 @@ import { loaderView, isMobileView } from '@constants';
 import { container, pendingTasks, scheduleCallCta, upcomingSchedules } from './style.js';
 import { body } from '../style.js';
 
-const DashboardView = ()=>{
+const DashboardView = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const taskInfo = useSelector(state=>state.TASK_INFO);
-    const { taskList=[], taskListLoading, userInfoLoading, userInfo={} } = taskInfo||{};
-    let { case:caseDetails={}, cases={} } = userInfo;
-    if(cases){
+    const taskInfo = useSelector(state => state.TASK_INFO);
+    const { taskList = [], taskListLoading, userInfoLoading, userInfo = {} } = taskInfo || {};
+    let { case: caseDetails = {}, cases = {} } = userInfo;
+    if (cases) {
         caseDetails = cases
     }
     const caseId = caseDetails && caseDetails.case_id;
     const userId = caseDetails && caseDetails.user;
     const [activeTask, setActiveTask] = useState('');
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(
             {
                 type: SET_MENUBAR_STATE,
@@ -36,19 +36,19 @@ const DashboardView = ()=>{
                 }
             }
         )
-    },[])
+    }, [])
 
-    useEffect(()=>{
-        if(caseId){
-            getTaskList({status: 0, case:caseId}, dispatch, (resp, error)=>{
-                if(resp && resp.length){
+    useEffect(() => {
+        if (caseId) {
+            getTaskList({ status: 0, case: caseId }, dispatch, (resp, error) => {
+                if (resp && resp.length) {
                     setActiveTask(resp[0].task_id);
                 }
             });
         }
-    },[caseId])
+    }, [caseId])
 
-    const redirectToTaskList = ()=>{
+    const redirectToTaskList = () => {
         history.push('/tasks');
     }
 
@@ -67,63 +67,71 @@ const DashboardView = ()=>{
     }
 
     return(
-        <div className={body}>
+        <div className={body + '    ' + 'p-relative pt-5'}>
             <div className="mainView">
+                <div className="subHeaderTop">
+                    {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
+                    {/* <NotificationWidget /> */}
+                    <ProfileWidget />
+                </div>
                 <Header headerText="Welcome Shubh!">
                     <div className="headerView">
-                        <div className={scheduleCallCta}>
+                        {/* <div className={scheduleCallCta}>
                             <span>Schedule Call</span>
-                            <img src={ASSETS_BASE_URL+"/images/common/callIcon.svg"} alt="home"/>
-                        </div>
+                            <img src={ASSETS_BASE_URL + "/images/common/callIcon.svg"} alt="home" />
+                        </div> */}
                     </div>
                 </Header>
                 <div className={container}>
-                    <div className={pendingTasks}>
-                        <div className="taskHeading">PENDING TASKS</div>
+                    <div className={pendingTasks + ' ' + 'pandingLeftTask'}>
+                        <div className="taskHeading">Pending Tasks</div>
                         {
-                            userInfoLoading || taskListLoading?<div className={loaderView}><LoadingWidget/></div>
-                            :<Fragment>
-                                <div className="taskList">
-                                    {
-                                        taskList.length?
-                                        taskList.slice(0, 3).map((val)=>{
-                                            const { task_id } = val;
-                                            return(<TaskCard key={task_id} isView clickHandler={()=>handleTaskClick(task_id)} data={val}/>)
-                                        })
-                                        :<BlankScreen message="You have no pending tasks"/>
+                            userInfoLoading || taskListLoading ? <div className={loaderView}><LoadingWidget /></div>
+                                : <Fragment>
+                                    <div className="taskList">
+                                        {
+                                           taskList.length?
+                                           taskList.slice(0, 3).map((val)=>{
+                                               const { task_id } = val;
+                                               return(<TaskCard key={task_id} isView clickHandler={()=>handleTaskClick(task_id)} data={val}/>)
+                                           })
+                                           :<BlankScreen message="You have no pending tasks"/>
+                                        }
+                                        {
+                                        //  taskList.length > 3 ?
+                                         
+                                        //  : null  
                                     }
-                                </div>
-                                {
-                                    taskList.length>3?
-                                    <div className="allTasks">
-                                        <div className="moreTasks" onClick={redirectToTaskList}>Show All</div>
                                     </div>
-                                    :null
-                                }
-                            </Fragment>
+                                    <div className="allTasks">
+                                             <div className="moreTasks" onClick={redirectToTaskList}>Show All</div>
+                                         </div>
+                                </Fragment>
                         }
-                        
+
                     </div>
                     <div className="chat">
-                        {caseId ? <ChatWidget caseId={caseId} currentUserId={userId}/> : ""}
+                        {caseId ? <ChatWidget caseId={caseId} currentUserId={userId} /> : ""}
                     </div>
                 </div>
             </div>
             <div className={upcomingSchedules}>
                 <div className="headerView">
-                        <NotificationWidget/>
-                        <ProfileWidget/>
+                    <NotificationWidget />
+                    {/* <ProfileWidget /> */}
                 </div>
                 <div className="upcoming"><span>Upcoming Schedule</span></div>
                 <div className="info">
                     <span className="upcomingTitle">This is the title of meeting </span>
-                    <div className="taskName">
-                        <img className="icon" src={ASSETS_BASE_URL+"/images/common/calendar.svg"} alt="time"/>
-                        <span>March 20, 2021</span>
-                    </div>
-                    <div className="taskName">
-                        <img className="icon" src={ASSETS_BASE_URL+"/images/common/clock.svg"} alt="clock"/>
-                        <span>09.00 - 10.00 AM</span>
+                    <div className="taskSch">
+                        <div className="taskName">
+                            <img className="icon" src={ASSETS_BASE_URL + "/images/common/calendar.svg"} alt="time" />
+                            <span>March 20, 2021</span>
+                        </div>
+                        <div className="taskName">
+                            <img className="icon" src={ASSETS_BASE_URL + "/images/common/clock.svg"} alt="clock" />
+                            <span>09.00 - 10.00 AM</span>
+                        </div>
                     </div>
                 </div>
             </div>

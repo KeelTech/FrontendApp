@@ -2,16 +2,17 @@ import { css } from '@emotion/css';
 import { mobileScreenWidth } from '@constants';
 
 export const card = props=>css`
-    background: #FCFCFC;
-    border-radius: 20px;
+    background: white;
     padding: 12px 26px;
+    box-shadow: 2px 2px 8px #eae8ee;
+    border-radius: 4px;
     margin-bottom: 14px;
     ${props.isView && `
         cursor: pointer;
-        border: 3px solid #FCFCFC;
+        // border: 1px solid #FCFCFC;
     `}
     ${props.active && `
-        border: 3px solid #363B64;
+        border: 1px solid #4267B2;
     `}
     &:last-child{
         margin-bottom: 0px;

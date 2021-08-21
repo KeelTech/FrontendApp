@@ -83,12 +83,17 @@ const TaskView = ()=>{
     }
 
     return(
-        <div className={body}>
+        <div className={body + '    ' + 'p-relative pt-5'}>
             <div className="mainView">
+            <div className="subHeaderTop">
+                    {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
+                    {/* <NotificationWidget /> */}
+                    <ProfileWidget />
+                </div>
                 <Header headerText="Task">
                     <div className="headerView">
                         <NotificationWidget/>
-                        <ProfileWidget/>
+                        {/* <ProfileWidget/> */}
                     </div>
                 </Header>
                 <div className={container}>

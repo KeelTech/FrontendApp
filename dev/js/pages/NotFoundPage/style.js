@@ -4,7 +4,7 @@ import { primaryFont, mobileScreenWidth } from "@constants";
 export const container = css`
     display: flex;
     overflow-x: hidden;
-    min-width: 100vw;
+    // min-width: 100vw;
     min-height: 100vh;
     font-family: ${primaryFont};
 `;

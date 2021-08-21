@@ -6,7 +6,7 @@ export const container = css`
     width: 100%;
     height: 100%;
     padding: 0px 26px;
-    height: calc(100% - 160px);
+    height: calc(100% - 120px);
     .taskInfo{
         width: 60%;
         overflow-y: auto;
@@ -33,23 +33,25 @@ export const tasksView = css`
     .cta{
         margin: 0px 16px 16px 0px;
         padding: 10px 26px;
-        border: 3px solid #363B64;
+        border: 3px solid #4267B2;
         color: #FCFCFC;
-        border-radius: 10px;
-        color: #363B64;
+        border-radius: 4px;
+        color: #4267B2;
         font-size: 12px;
         line-height: 18px;
-        border: 3px solid #363B64;
+        border: 1px solid #4267B2;
         cursor: pointer;
+        font-weight:500;
     }
     .ctaActive{
-        color: #363B64;
-        background: #363B64;
+        color: #4267B2;
+        background: #4267B2;
         color: #FCFCFC;
     }
     .taskList{
         overflow-y: auto;
-        max-height: calc(100% - 120px);
+        padding:5px;
+        height: calc(100vh - 290px);
     }
     @media(max-width: ${tabScreenWidth}){
         margin: 0px;

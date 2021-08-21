@@ -5,7 +5,7 @@ export const container = css`
     height: 100%;
     background: #FCFCFC;
     box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
-    border-radius: 14px;
+    border-radius: 4px;
     padding-top: 24px;
     .header{
         display: flex;
@@ -66,26 +66,32 @@ export const msgWidget = props =>css`
     display: flex;
     padding: 19px 22px;
     .chatbox{
-        border: 2px solid #DBDBDB;
+        // border: 2px solid #DBDBDB;
         box-sizing: border-box;
-        border-radius: 14px;
+        // border-radius: 14px;
         display: flex;
         width: 100%;
-        padding: 9px 10px;
+        // padding: 9px 10px;
         align-items: center;
         justify-content: space-between;
     }
     input{
-        border: 0px;
-        font-size: 12px;
-        line-height: 18px;
-        color: #A098AE;
-        min-width: 100px;
+        font-size: 14px;
+    line-height: 18px;
+    color: #A098AE;
+    min-width: 100px;
+    background: #FCFCFC;
+    border: 1px solid #DBDBDB;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    padding: 12px;
         ${inputField};
     }
     .sendWidget{
         display: flex;
         align-items: center;
+        margin-left:10px;
     }
     .attachment{
         height: 17px;
@@ -96,16 +102,17 @@ export const msgWidget = props =>css`
     .sendBtn{
         display: flex;
         padding: 10px 16px;
-        background: #363B64;
-        border-radius: 14px;
+        background: #4267B2;
+        border-radius: 4px;
         font-size: 12px;
         line-height: 18px;
         color: #FCFCFC;
         align-items: center;
         cursor: pointer;
+        height: 100%;
         font-weight: 600;
         img{
-            margin-left: 6px;
+            // margin-left: 6px;
             height: 16px;
             width: 16px;
         }
@@ -151,6 +158,7 @@ export const chatBox = props=>css`
     .sender{
         display: flex;
         justify-content: flex-end;
+        margin-bottom:10px;
     }
     .receiver .msg{
         width: 80%;
@@ -161,11 +169,11 @@ export const chatBox = props=>css`
     .receiver .chatMsg{
         font-size: 12px;
         line-height: 18px;
-        color: #363B64;
+        color: #495057;
         margin-bottom: 10px;
         padding: 10px 17px;
         background: #EBEBEB;
-        border-radius: 14px;
+        border-radius: 4px;
         display: inline-block;
         
     }
@@ -180,13 +188,14 @@ export const chatBox = props=>css`
     }
     .sender .chatMsg{
         font-size: 12px;
-        line-height: 18px;
-        margin-bottom: 10px;
-        padding: 10px 17px;
-        border-radius: 14px;
-        background: #363B64;
-        color: #FCFCFC;
-        display: inline-block;   
+    line-height: 18px;
+    margin-bottom: 10px;
+    padding: 10px 17px;
+    border-radius: 4px;
+    background: #DEE2E6;
+    color: #495057;
+    display: inline-block;
+    font-weight: 500;  
     }
     .sender .msgTime{
         margin-right: 10px;
