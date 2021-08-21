@@ -4382,6 +4382,158 @@ button:focus{
   position: relative !important;
 }
 /* ============ Dashboard Custom style Common ============== */
+/* ============ User Profile ============== */
+.useDetailsContainer {
+  padding: 12px;
+  width: 100%;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 4px 4px 8px #d8dce4;
+}
+
+.userProfile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #F8F9FA;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.userNameDtls {
+  display: flex;
+  align-items: center;
+}
+
+.userNameDtls img {
+  width: 70px;
+  height: 70px;
+}
+
+.userNameDtls h3 {
+  margin: 0;
+  margin-left: 10px;
+  color: #3A3F67;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+button.editPrfl {
+  color: white;
+  background: #466CAD;
+  border: none;
+  padding: 5px 10px;
+  min-height: 44px;
+  border-radius: 4px;
+  min-width: 120px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.editProgress {
+  display: flex;
+  align-items: center;
+}
+
+.editProgress label {
+  margin-right: 10px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #466CAD;
+  flex-shrink: 0;
+}
+
+.progressBar {width: 100%;height: 12px;box-shadow: inset 0px 0px 2px #00102b;border-radius: 20px;overflow: hidden;display: flex;align-items: center;background: #f8f9fa;position: relative;}
+
+.progBarFill {
+  height: 100%;
+  background: #466CAD;
+}
+.prfAccrd {}
+
+.prflDtlsAccordionContainer {
+    margin-top: 30px;
+}
+
+.prfAccrd {
+    background: #F8F9FA;
+    border-radius: 4px;
+    padding: 12px;
+    box-shadow: inset 0px 0px 2px #c5c5c5;
+}
+
+.accrdHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0px;
+    font-size: 18px;
+}
+
+.accrdContent {
+    margin-top: 10px;
+}
+
+.accrdContent {
+    background: white;
+    border-radius: 4px;
+    padding: 20px;
+    box-shadow: inset 0px 0px 2px #c5c5c5;
+}
+
+.accrdContent ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.accrdContent ul li {
+    list-style: none;
+    display: flex;
+    padding: 5px 0;
+}
+
+li {}
+
+.accrdContent ul li h5 {
+    min-width: 240px;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    color: #212529;
+}
+
+.accrdContent ul li p {
+    margin: 0;
+    color: #494949;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.accrdHead h5 {
+    margin: 0;
+}
+
+.accrdHead button {
+    border: none;
+    background: transparent;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.accrdHead button img {
+    width: 10px;
+    margin-left: 4px;
+}
+
+.accrdHead h5 {
+    font-size: 18px;
+    margin: 0;
+}
+/* ============ User Profile ============== */
 /* ============ Media Queries ============== */
 @media (max-width:767px) {
   .mobileHide{
