@@ -54,7 +54,7 @@ export const chatWidget = props=>css`
     border-top: 1px solid #EBEBEB;
     padding: 19px 28px;
     overflow: auto;
-    height: calc(100% - 160px);
+    height: calc(100vh - 332px);
     ${props.floatingChat && `
         padding: 13px 21px;
         height: calc(100% - 136px);

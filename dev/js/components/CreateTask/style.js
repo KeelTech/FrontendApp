@@ -28,7 +28,7 @@ export const container = css`
         }
         display: flex;
         align-items: center;
-        color: #A098AE;
+        color: #212529;
         font-weight: 600;
         font-size: 10px;
         line-height: 15px;
@@ -114,7 +114,7 @@ export const messageSection = css`
             font-size: 10px;
             line-height: 15px;
             border: 0.5px solid #A098AE;
-            border-radius: 7px;
+            border-radius: 4px;
         }
     }
     .profile{

@@ -46,25 +46,29 @@ export const tasksView = css`
     .tasksCta{
         display: flex;
         align-items: center;
-        flex-wrap: wrap;
+        // flex-wrap: wrap;
+        border: 1px solid #4267b2;
+        border-radius: 4px;
+        margin-bottom: 10px;
     }
     .cta{
-        margin: 0px 16px 16px 0px;
-        padding: 10px 26px;
-        border: 3px solid #4267B2;
-        color: #FCFCFC;
-        border-radius: 10px;
-        color: #4267B2;
-        font-size: 12px;
-        line-height: 18px;
-        border: 1px solid #4267B2;
         cursor: pointer;
-        font-weight:500;
+    width: 100%;
+    font-size: 14px;
+    line-height: 24px;
+    color: #5a5d5f;
+    text-align: center;
+    margin-bottom: 8px;
+    background: #E7EFF8;
+    font-weight: 600;
+    padding: 5px 5px;
+    border-radius: 4px;
+    margin: 0;
+    border: none;
     }
     .ctaActive{
         color: #4267B2;
-        background: #4267B2;
-        color: #FCFCFC;
+    background: white;
     }
     .taskList{
         overflow-y: auto;
@@ -82,9 +86,9 @@ export const tasksView = css`
         padding-bottom: 84px;
         padding-right: 0px;
         .cta{
-            padding: 5px 21px;
-            border-radius: 4px;
-            margin: 0px 8px 8px 0px;
+            // padding: 5px 21px;
+            // border-radius: 4px;
+            // margin: 0px 8px 8px 0px;
         }
         .taskList{
             max-height: 100%;

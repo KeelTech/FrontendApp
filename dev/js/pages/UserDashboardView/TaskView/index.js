@@ -125,7 +125,7 @@ const TaskView = ()=>{
                             }
                         </div>
                     </div>
-                    <div className="taskInfo">
+                    <div className="taskInfo taskUi">
                         {
                             activeTask?<TaskDetail activeTask={activeTask} refetchTaskList={refetchTaskList}/>:null
                         }                        

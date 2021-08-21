@@ -158,7 +158,7 @@ const TaskDetail = ({ activeTask, refetchTaskList=()=>{} })=>{
     const { title, priority_name, status_name='', description, tasks_comment=[], tasks_docs=[], check_list=[] } = taskDetail && taskDetail[activeTask] || {};
 
     return(
-        <div className={container}>
+        <div className={container + ' ' + 'innerTask' }>
             {
                 openUploadDocumentModal ?<FileUpload maxWidth="600px" isUploadToServer fileUploadModalClosed={toggleUploadModal} uploadFile={uploadFile} task_id={activeTask}/>:null
             }

@@ -33,7 +33,7 @@ const PostComments = ({ taskId, updateTaskStatus })=>{
                 <span className="profile">SW</span>
                 <input type="text" placeholder="Write a Comment" value={comment} onChange={(e)=>setComment(e.target.value)}/>
             </div>
-            <CustomButton text="Add" clickHandler={addComment} margin="0px 0px 16px 30px" padding="10px 20px" borderRadius="5px" backgroundColor="#747BB4"/>
+            <CustomButton text="Add" clickHandler={addComment} margin="0px 0px 16px 30px" padding="10px 20px" borderRadius="5px" backgroundColor="#4267b2"/>
         </div>
     )
 }

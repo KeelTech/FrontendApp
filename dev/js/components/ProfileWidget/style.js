@@ -83,14 +83,18 @@ export const links = css`
   margin: 10px 0 0 0;
   div {
     margin-bottom: 12px;
+    cursor:pointer;
+    // &:hover{
+    //   background:gray;
+    // }
   }
   img {
     float: left;
     margin-right: 10px;
   }
   span {
-    color: #a098ae;
+    color: #343A40;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
   }
 `;
