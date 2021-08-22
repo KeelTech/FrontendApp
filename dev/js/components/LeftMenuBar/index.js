@@ -49,7 +49,9 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
     const handleLogout = ()=>{
         setLoader(true);
         STORAGE.deleteAuth().then((resp)=>{
-
+            dispatch({
+                type: 'LOGOUT_USER',
+              })
             setTimeout(()=>{
                 setLoader(false);
                 history.push('/');
@@ -101,10 +103,10 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                                         <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/tasks.svg"} alt="tasks"/>
                                         <span className="heading">Tasks</span>
                                     </div>
-                                    <div className={`widget ${activeWidget==='profile'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('profile')}>
+                                    {/* <div className={`widget ${activeWidget==='profile'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('profile')}>
                                         <img className="icon" src={ASSETS_BASE_URL+"/images/common/customer.svg"} alt="profile"/>
                                         <span className="heading">Customer</span>
-                                    </div>
+                                    </div> */}
                                     <div className={`widget ${activeWidget==='vault'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('vault')}>
                                         <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/valutIcon.svg"} alt="documents"/>
                                         <span className="heading">Document Vault</span>
@@ -121,7 +123,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                             </div>
                             <div className="degreeWidget">
                                 <img src={ASSETS_BASE_URL+"/images/leftmenubar/degreeIcon.svg"} alt="degree"/>
-                                <span>Study Permit</span>
+                                <span>Immigration</span>
                                 <span>Consultation</span>
                             </div>
                         </div>

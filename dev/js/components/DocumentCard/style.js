@@ -4,9 +4,10 @@ import { primaryFont } from '@constants'
 
 export const container = css`
     position: relative;
-    background: #FCFCFC;
+    background: white;
     padding: 24px 20px;
-    border-radius: 14px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 8px #d8dce4;
     margin: 0px 20px 20px 0px;
     .topRow{
         display: flex;
@@ -26,7 +27,7 @@ export const container = css`
         }
     }
     .dotMenu{
-        height: 4px;
+        height: 24px;
         margin-top: 4px;
         width: 24px;
         cursor: pointer;

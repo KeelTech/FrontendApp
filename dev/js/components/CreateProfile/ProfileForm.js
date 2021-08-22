@@ -38,17 +38,17 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
             }
             {
                 fieldType=='city'?
-                <SelectCity saveSelectedOption={handleChange}/>
+                <SelectCity saveSelectedOption={handleChange} value={value}/>
                 :null
             }
             {
                 fieldType=='country'?
-                <SelectCountry saveSelectedOption={handleChange}/>
+                <SelectCountry saveSelectedOption={handleChange} value={value}/>
                 :null
             }
             {
                 fieldType=='state'?
-                <SelectState saveSelectedOption={handleChange}/>
+                <SelectState saveSelectedOption={handleChange}  value={value}/>
                 :null
             }     
             <p className={showError?"errorMsg":"hideMsg"}>Please Fill {labels}</p>   

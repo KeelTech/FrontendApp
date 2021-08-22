@@ -64,6 +64,7 @@ export const info = css`
     font-weight: 600;
     font-size: 18px;
     text-align: center;
+    margin-bottom:10px;
   }
   h3 {
     margin: 0;

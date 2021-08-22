@@ -13,7 +13,7 @@ export const container = css`
     width: 100%;
     height: 100%;
     padding: 0px 26px;
-    height: calc(100% - 120px);
+    height: calc(100vh - 180px);
     .taskInfo{
         width: 60%;
         overflow-y: auto;
