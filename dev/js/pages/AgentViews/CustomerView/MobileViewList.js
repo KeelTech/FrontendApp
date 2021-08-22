@@ -1,12 +1,12 @@
 import React, { Fragment } from "react";
-import { getFormattedTime, getFormattedDate } from '@helpers/utils';
+import { getFormattedTime, getFormattedDate, renderStatusText } from '@helpers/utils';
 import { lists, customer } from "./style.js";
 
 const MobileViewList = ({ handleCustomerClick, caseList }) => {
   return (
     <Fragment>
       {caseList.map((list) => {
-        const { case_id, user, plan, start_date, updated_at, is_active } = list;
+        const { case_id, user, plan, created_at, updated_at, status } = list;
         return (
           <ul key={case_id} className={lists} onClick={() => handleCustomerClick(case_id)}>
             <li className={customer}>
@@ -27,11 +27,11 @@ const MobileViewList = ({ handleCustomerClick, caseList }) => {
             </li>
             <li className={customer}>
               <h2 className='key'>Start Date:</h2>
-              <h2 className='value'>{`${getFormattedDate(start_date).formattedDate} ${getFormattedTime(start_date)}`}</h2>
+              <h2 className='value'>{`${getFormattedDate(created_at).formattedDate} ${getFormattedTime(created_at)}`}</h2>
             </li>
             <li className={customer}>
               <h2 className='key'>Task Status:</h2>
-              <h2 className='value status'>{is_active ? 'Pending' : 'Completed'}</h2>
+              <h2 className='value status'>{renderStatusText(status)}</h2>
             </li>
           </ul>
         )

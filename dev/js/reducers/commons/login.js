@@ -2,7 +2,9 @@ import {
   SEND_USER_LOGIN_CREDENTIALS,
   USER_LOGIN_FAIL,
   USER_LOGIN_SUCCESS,
-  AGENT_LOGIN_SUCCESS
+  AGENT_LOGIN_SUCCESS,
+  USER_SIGNUP_LOGIN_SUCCESS,
+  LOGOUT_USER
 } from '../../constants/types';
 
 const defaultState = {
@@ -35,7 +37,12 @@ export default function (state = defaultState, action) {
       newState.IsloggedIn = true;
       return newState;
     }
-    case 'LOGOUT_USER': {
+    case USER_SIGNUP_LOGIN_SUCCESS :{
+      let newState = { ...state };
+      newState.IsloggedIn = true;
+      return newState;
+    }
+    case LOGOUT_USER: {
       let newState = { ...state };
       newState.isAgent = false;
       newState.IsloggedIn = false;

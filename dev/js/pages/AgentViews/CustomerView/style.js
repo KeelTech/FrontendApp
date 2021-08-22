@@ -11,6 +11,7 @@ export const lists = css`
   padding: 12px 16px;
   background-color: #fcfcfc;
   border-radius: 10px;
+  cursor: pointer;
   list-style: none;
 `;
 
@@ -34,17 +35,7 @@ export const customer = css`
     line-height: 18px;
   }
   .status{
-    margin: 0;
-    border-radius: 3px;
-    padding: 2px 8px;
-    color: #CF3030;
-    border: 1px solid #CF3030;
-    background: #F5D6D6;
-    font-weight: 500;
-    font-size: 10px;
-    line-height: 14px;
-    text-transform: uppercase;
-    // color: #fcfcfc;
+    margin-top: 4px;
   }
 `
 
