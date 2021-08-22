@@ -16,6 +16,7 @@ const CustomerView = (props)=>{
     const taskInfo = useSelector(state=>state.TASK_INFO);
     const { fullProfileInfo, fullProfileLoading, userInfo={} } = taskInfo;
     const isProfileExist = userInfo && userInfo.profile_exists;
+    
     // const parsed = queryString.parse(props.location.search);
     // const shortProfile = parsed && parsed.type=='profile';
     useEffect(()=>{
@@ -37,7 +38,7 @@ const CustomerView = (props)=>{
                     {/* <NotificationWidget /> */}
                     <ProfileWidget />
                 </div>
-                <Header headerText="Profile">
+                <Header headerText={isProfileExist ? "Profile" : " Let's get you started. Tell us about the amazing you!" }>
                     <div className="headerView">
                         {/* <NotificationWidget/> */}
                         {/* <ProfileWidget/> */}

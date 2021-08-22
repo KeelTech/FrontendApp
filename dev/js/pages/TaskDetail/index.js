@@ -171,7 +171,7 @@ const TaskDetail = ({ activeTask, refetchTaskList=()=>{} })=>{
             <CustomToaster {...toasterInfo} hideToaster={hideToaster}/>
             <div className="statusCont">
                 {
-                    status_name && status_name.toLowerCase().includes('pending')?<span className="statusText" onClick={handleTaskStatusUpdate}>Mark as In Review</span>:null
+                    status_name && status_name.toLowerCase().includes('pending')?<span className="statusText" onClick={handleTaskStatusUpdate}>Submit for review</span>:null
                 }
                 {/* <span className="status">{status_name}</span> */}
             </div>

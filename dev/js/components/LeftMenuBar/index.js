@@ -123,7 +123,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                             </div>
                             <div className="degreeWidget">
                                 <img src={ASSETS_BASE_URL+"/images/leftmenubar/degreeIcon.svg"} alt="degree"/>
-                                <span>Study Permit</span>
+                                <span>Immigration</span>
                                 <span>Consultation</span>
                             </div>
                         </div>
