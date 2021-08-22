@@ -158,65 +158,73 @@ const LoginView = (props) => {
                       Invalid credentials, Please try Again!
                     </p>
                   )}
-                  <div className="formCheckForgt">
-                    <div className="checkBoxContMain">
-                      <label class="checkBoxCont"><p>Remember Me</p>
-                        <input type="checkbox" />
-                        <span className="checkmark"></span></label>
+                  {
+                    isAgent?null
+                    :<div className="formCheckForgt">
+                      <div className="checkBoxContMain">
+                        <label class="checkBoxCont"><p>Remember Me</p>
+                          <input type="checkbox" />
+                          <span className="checkmark"></span></label>
+                      </div>
+                      <Link to="/confirm-email" className="password-reset-wrapper">
+                        <button className="password-reset">Forgot your password?</button>
+                      </Link>
                     </div>
-                    <Link to="/confirm-email" className="password-reset-wrapper">
-                      <button className="password-reset">Forgot your password?</button>
-                    </Link>
-                  </div>
+                  }
                   <div className="loginBtnCont">
                     <button className="log-in-button">Log in</button>
-
                   </div>
                 </form>
-                <div className="signUp">
-                  <p className="signup-divider">
-                    <span>Not registered yet? <Link className="signup-button-wrapper" to="/signup">
-                      Create an Account
-                    </Link></span>
-                  </p>
-                </div>
-                <p className="login-divider">
-                  <span>Or Login with </span>
-                </p>
-                <div className="social-button-wrapper">
-                  
-                  <FacebookLogin
-                    appId="966069997563073"
-                    fields="name,email,picture"
-                    textButton=""
-                    callback={responseFacebook}
-                    cssClass="facebook-button"
-                    icon="fa-facebook"
-                  />
-                  <GoogleLogin
-                    clientId="194271428747-v7t3bjqu3cea8jq734pd9o950kolco0o.apps.googleusercontent.com"
-                    onSuccess={responseGoogle}
-                    onFailure={responseGoogle}
-                    render={(renderProps) => (
-                      <button onClick={renderProps.onClick} className="google-button">
+                {
+                  isAgent?null
+                  :<Fragment>
+                    <div className="signUp">
+                      <p className="signup-divider">
+                        <span>Not registered yet? <Link className="signup-button-wrapper" to="/signup">
+                          Create an Account
+                        </Link></span>
+                      </p>
+                    </div>
+                    <p className="login-divider">
+                      <span>Or Login with </span>
+                    </p>
+                    <div className="social-button-wrapper">
+                      
+                      <FacebookLogin
+                        appId="966069997563073"
+                        fields="name,email,picture"
+                        textButton=""
+                        callback={responseFacebook}
+                        cssClass="facebook-button"
+                        icon="fa-facebook"
+                      />
+                      <GoogleLogin
+                        clientId="194271428747-v7t3bjqu3cea8jq734pd9o950kolco0o.apps.googleusercontent.com"
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                        render={(renderProps) => (
+                          <button onClick={renderProps.onClick} className="google-button">
+                            <img
+                              className="google-button-image img-fluid"
+                              src={ASSETS_BASE_URL + '/images/common/google.svg'}
+                              alt="google-image"
+                            />
+                          </button>
+                        )}
+                      />
+                      <button className="linkedin-button">
                         <img
                           className="google-button-image img-fluid"
-                          src={ASSETS_BASE_URL + '/images/common/google.svg'}
+                          src={ASSETS_BASE_URL + '/images/common/linked.svg'}
                           alt="google-image"
                         />
                       </button>
-                    )}
-                  />
-                  <button className="linkedin-button">
-                    <img
-                      className="google-button-image img-fluid"
-                      src={ASSETS_BASE_URL + '/images/common/linked.svg'}
-                      alt="google-image"
-                    />
-                  </button>
-                  {/* <button onClick={responseLinkedin} className="linkedin-button">in</button> */}
+                      {/* <button onClick={responseLinkedin} className="linkedin-button">in</button> */}
 
-                </div>
+                    </div>
+                  </Fragment>
+                }
+                
                 
               </div>
             </div>
