@@ -114,6 +114,7 @@ export const progressBar = css`
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
+    margin-right:5px;
 }
 @import url(https://fonts.googleapis.com/css?family=Roboto:700);
 
