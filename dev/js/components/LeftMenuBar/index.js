@@ -13,6 +13,11 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
     const dispatch = useDispatch();
     const state = useSelector(state=>state.COMMON);
     const { activeWidget, agentActiveWidget } = state;
+
+    const taskInfo = useSelector(state=>state.TASK_INFO);
+    const { userInfo={} } = taskInfo;
+    const isProfileExist = userInfo && userInfo.profile_exists;
+
     const [showLoader, setLoader] = useState(false);
 
     useEffect(()=>{
@@ -23,15 +28,17 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
     },[])
 
     const handleMenuOptionsClick = (value)=>{
-        dispatch(
-            {
-                type: SET_MENUBAR_STATE,
-                payload: {
-                    activeWidget: value
+        if(isProfileExist){
+            dispatch(
+                {
+                    type: SET_MENUBAR_STATE,
+                    payload: {
+                        activeWidget: value
+                    }
                 }
-            }
-        )
-        history.push(`/${value}`);
+            )
+            history.push(`/${value}`);
+        }
     }
 
     const handleAgentMenuOptionsClick = (value)=>{
@@ -55,13 +62,18 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
             setTimeout(()=>{
                 setLoader(false);
                 history.push('/');
-            },5000)
+            },2000)
         })
     }
 
     const mainClass = cx({
         [container]: true,
         [mobileView]: isMobileView
+    })
+
+    const widgetClass = cx({
+        widget: true,
+        disableWidget: !isProfileExist
     })
 
     return(
@@ -95,11 +107,11 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                                     </div> */}
                                 </Fragment>
                                 :<Fragment>
-                                    <div className={`widget ${activeWidget==='dashboard'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('dashboard')}>
+                                    <div className={`${widgetClass} ${activeWidget==='dashboard'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('dashboard')}>
                                         <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/dashboardIcons.svg"} alt="home"/>
                                         <span className="heading">Dashboard</span>
                                     </div>
-                                    <div className={`widget ${activeWidget==='tasks'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('tasks')}>
+                                    <div className={`${widgetClass} ${activeWidget==='tasks'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('tasks')}>
                                         <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/tasks.svg"} alt="tasks"/>
                                         <span className="heading">Tasks</span>
                                     </div>
@@ -107,11 +119,11 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                                         <img className="icon" src={ASSETS_BASE_URL+"/images/common/customer.svg"} alt="profile"/>
                                         <span className="heading">Customer</span>
                                     </div> */}
-                                    <div className={`widget ${activeWidget==='vault'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('vault')}>
+                                    <div className={`${widgetClass} ${activeWidget==='vault'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('vault')}>
                                         <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/valutIcon.svg"} alt="documents"/>
                                         <span className="heading">Document Vault</span>
                                     </div>
-                                    <div className={`widget ${activeWidget==='billing'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('billing')}>
+                                    <div className={`${widgetClass} ${activeWidget==='billing'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('billing')}>
                                         <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/billingIcon.svg"} alt="billing"/>
                                         <span className="heading">Billing</span>
                                     </div>

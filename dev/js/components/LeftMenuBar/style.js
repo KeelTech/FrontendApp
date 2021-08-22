@@ -85,6 +85,10 @@ export const menuOptions = css`
             margin-left: 17px;
         }
     }
+    .disableWidget{
+        cursor: unset;
+        opacity: 0.4;
+    }
     .degreeWidget{
         display: flex;
         flex-direction: column;

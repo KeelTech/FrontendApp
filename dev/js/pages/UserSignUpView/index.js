@@ -48,12 +48,16 @@ function SignUp(props) {
       setLoader(true);
       userSignUp({ email, password }, dispatch, (err, data) => {
         if (data) {
-          setLoader(false);
           setErrorMessage(false);
           setEmail('');
           setPassword('');
           setConfirmPassword('');
-          window.location.href = "https://app.getkeel.com/";
+          
+          setTimeout(()=>{
+            setLoader(false);
+            window.location.href = 'https://app.getkeel.com/';
+          },1000);
+         
         }
         if (err) {
           setErrorMessage(true);
@@ -138,7 +142,7 @@ function SignUp(props) {
                       type="email"
                       value={email}
                       onChange={emailSignUpHandler}
-                      autoComplete="off"
+                      autoComplete="new-password"
                     />
                   </div>
                   <div className="formCont">
@@ -149,7 +153,7 @@ function SignUp(props) {
                       type="password"
                       value={password}
                       onChange={passwordSignUpHandler}
-                      autoComplete="off"
+                      autoComplete="new-password"
                     />
                   </div>
                   <div className="formCont">
@@ -160,7 +164,7 @@ function SignUp(props) {
                       type="password"
                       value={confirmPassword}
                       onChange={confirmPasswordHandler}
-                      autoComplete="off"
+                      autoComplete="new-password"
                     />
                   </div>
                   <div className="loginBtnCont">

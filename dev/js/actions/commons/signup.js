@@ -2,6 +2,7 @@ import {
   SEND_USER_SIGNUP_CREDENTIALS,
   USER_SIGNUP_FAIL,
   USER_SIGNUP_SUCCESS,
+  USER_SIGNUP_LOGIN_SUCCESS
 } from '../../constants/types';
 import { API_POST } from '../../api/api.js';
 import STORAGE from '@helpers/storage/storage.js';
@@ -33,6 +34,9 @@ export const userSignUp = (data, dispatch, cb) => {
             signUp_message: message,
           },
         });
+        dispatch({
+          type: USER_SIGNUP_LOGIN_SUCCESS
+        })
         if (cb) cb(null, response);
       } else {
         let message = 'Failing to sign up the user';

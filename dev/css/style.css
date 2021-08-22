@@ -1984,7 +1984,9 @@ p.profilepicNote{
   opacity: 0.6;
 }
 
-
+.cursor-pointer{
+  cursor: pointer;
+}
 
 
 .health-docs-dashboard {

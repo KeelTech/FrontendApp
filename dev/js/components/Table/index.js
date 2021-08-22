@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { getFormattedTime, getFormattedDate, renderStatusText } from '@helpers/utils';
 import TableCustomRows from '@components/TableCustomRows';
 import { headerClass, headerRowClass, tableClass, rowClass, hrClass, rowItemClass, rowItemClassEmpty } from './style.js';
 
@@ -9,42 +10,32 @@ class Table extends Component {
         };
     }
     decideRendering = (row, key) => {
-        // let list = this.props.children;
-        // if (list.length > 2) {
-        //     let output = list.find((item) => {
-        //         return item.type == "template" && item.props.id == key
-        //     })
-        //     if (output) {
-        //         return <td className={rowItemClass} key={key}>{React.cloneElement(output.props.children, {})}</td>
-        //     }
-        //     else {
-        //         return <td className={rowItemClass} key={key}>{row[key]}</td>
-        //     }
+        // if(key.CustomView){
+        //     return <td className={rowItemClass} key={key.key}><TableCustomRows id={key.CustomView} optionId={row.case_id}/></td>
         // }
-        // else {
-        //     if (list.type == "template" && list.props.id == key) {
-        //         return <td className={rowItemClass} key={key}>{React.cloneElement(list.props.children, {})}</td>
-        //     }
-        //     else {
-        //         return <td className={rowItemClass} key={key}>{row[key]}</td>
-        //     }
-        // }
-        if(key.CustomView){
-            return <td className={rowItemClass} key={key.key}><TableCustomRows id={key.CustomView} clickHandler={this.props.handleCustomerClick} optionId={row.case_id}/></td>
+        let dataLabel = row[key.key];
+        if(key.isDate){
+            dataLabel = `${getFormattedDate(dataLabel).formattedDate} ${getFormattedTime(dataLabel)}`
+        }else if(key.CustomView){
+            dataLabel = renderStatusText(dataLabel);
         }
-        return <td className={rowItemClass} key={key.key}>{row[key.key]}</td>
+        return <td className={rowItemClass} key={key.key}>{dataLabel}</td>
     }
-    renderData = (data, cols) =>
-        data.map(row =>
-            <tr className={rowClass} key={row.key}>
+
+    renderData = (data, cols) =>{
+        return data.map(row =>
+            <tr className={`${rowClass} cursor-pointer`} key={row.key} onClick={()=>this.props.handleCustomerClick(row.case_id)}>
                 {cols.map(col =>
                     this.decideRendering(row, col)
                 )}
             </tr>
         );
+    }
+
     renderEmptyState = cols =>
         <tr className={rowClass} align="center" ><td colSpan={cols.length} className={rowItemClassEmpty}>There is no data in this table</td></tr>
-        ;
+    ;
+
     render() {
         return (
             <table className={tableClass}>

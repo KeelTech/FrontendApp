@@ -139,7 +139,7 @@ const LoginView = (props) => {
                       type="email"
                       value={email}
                       onChange={emailLoginHnadler}
-                      autoComplete="off"
+                      autoComplete="new-password"
                     />
                   </div>
                   <div className="formCont">
@@ -150,7 +150,7 @@ const LoginView = (props) => {
                       type="password"
                       value={password}
                       onChange={passwordLoginHandler}
-                      autoComplete="off"
+                      autoComplete="new-password"
                     />
                   </div>
                   {loginFail && (
