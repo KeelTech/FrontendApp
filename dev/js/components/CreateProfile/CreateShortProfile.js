@@ -83,7 +83,7 @@ const CreateProfile = ()=>{
                     isSuccess: true,
                     msg: 'Profile Created Successfully'
                 });
-                window.location.href = window.location.host;
+                window.location.href = window.location.origin;
                 //getUserProfile({}, dispatch);
             }else{
                 setToasterInfo({
