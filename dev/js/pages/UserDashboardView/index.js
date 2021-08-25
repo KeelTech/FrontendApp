@@ -10,13 +10,16 @@ import DashboardView from './DashboardView';
 import TaskView from './TaskView';
 import DocumentValutView from './DocumentValutView';
 import CustomerView from './CustomerView';
+import UserOnboardingView from './UserOnboardingView';
+import BillingView from './BillingView';
 
 const UserDashboardView = (props)=>{
     const url  = props.match.path;
     const dispatch = useDispatch();
     const taskInfo = useSelector(state=>state.TASK_INFO);
     const { userInfo={}, userInfoLoading } = taskInfo;
-    const isProfileExist = userInfo && userInfo.profile_exists;
+    const { cases, profile_exists } = userInfo;
+    const isPlanPurchased = cases && cases.plan;
 
     useEffect(()=>{
         getUserProfile({}, dispatch);
@@ -26,13 +29,16 @@ const UserDashboardView = (props)=>{
         
         if(userInfoLoading){
             return null;
-        }else if(!isProfileExist){
+        }else if(!profile_exists){
             return <CustomerView {...props}/>;
+        }else if(url.includes('dashboard') || url==='/'){
+            if(isPlanPurchased){
+                return <DashboardView/>
+            }else{
+                return <UserOnboardingView />
+            }
         }else {
             return <Fragment>
-                {
-                    (url.includes('dashboard') || url==='/') && <DashboardView/>
-                }
                 {
                     url.includes('tasks') && <TaskView/>
                 }
@@ -43,10 +49,7 @@ const UserDashboardView = (props)=>{
                     url.includes('profile') && <CustomerView {...props}/>
                 }
                 {
-                    url.includes('billing') && <DashboardView/>
-                }
-                {
-                    url.includes('logout') && <DashboardView/>
+                    url.includes('billing') && <BillingView/>
                 }
             </Fragment>
         }
