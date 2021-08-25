@@ -212,13 +212,13 @@ const LoginView = (props) => {
                           </button>
                         )}
                       />
-                      <button className="linkedin-button">
+                      {/* <button className="linkedin-button">
                         <img
                           className="google-button-image img-fluid"
                           src={ASSETS_BASE_URL + '/images/common/linked.svg'}
                           alt="google-image"
                         />
-                      </button>
+                      </button> */}
                       {/* <button onClick={responseLinkedin} className="linkedin-button">in</button> */}
 
                     </div>

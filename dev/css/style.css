@@ -4560,6 +4560,428 @@ li {}
     margin: 0;
 }
 /* ============ User Profile ============== */
+/* ============ on board  ============== */
+.planSelectionScreen {
+  padding: 0px 25px;
+}
+
+.dashMainHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashMainHeading h2 {
+  font-size: 16px;
+  color: #343A40;
+  font-weight: 500;
+}
+
+.schCallSection {
+  background: #FFFFFF;
+  box-shadow: 4px 4px 8px #D8DCE4;
+  border-radius: 4px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0 40px 0;
+}
+
+.schCallSection p {
+  margin: 0;
+  color: #343A40;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.schCallSection button {
+  background: #4267B2;
+  box-shadow: 0px 11.2949px 28.2373px rgba(191, 21, 108, 0.05);
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  color: white;
+  font-size: 14px;
+  min-height: 35px;
+  padding: 0 20px;
+}
+
+.planCards {
+  background: #FFFFFF;
+  box-shadow: 4px 4px 8px #d8dce4;
+  border-radius: 4px;
+  padding: 40px 12px 30px 12px;
+  height: 100%;
+  text-align: center;
+}
+
+.planCards img {
+  width: 180px;
+}
+
+.plnCardCont {
+  margin-top: 40px;
+}
+
+.plnCardCont h5 {
+  color: #363B64;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.plnCardCont p {
+  font-size: 14px;
+  color: #7E8197;
+  font-weight: 400;
+  margin: 0;
+}
+
+.planPurchase {
+  margin: 30px 0px;
+  text-align: center;
+}
+.planPurchase p {
+  color: #363B64;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.schCallSection button {
+  background: #4267B2;
+  box-shadow: 0px 11.2949px 28.2373px rgb(191 21 108 / 5%);
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  color: white;
+  font-size: 14px;
+  min-height: 35px;
+  padding: 0 20px;
+}
+
+.planPurchase button {
+  background: #4267B2;
+  box-shadow: 0px 11.2949px 28.2373px rgb(191 21 108 / 5%);
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  color: white;
+  font-size: 14px;
+  min-height: 35px;
+  padding: 0 20px;
+}
+.commonPopUpOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  background: #000000c9;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.commonPopUpConten {
+  min-width: 320px;
+  background: #FFFFFF;
+  border: 1px solid #C7CACC;
+  box-shadow: 4px 4px 8px #1e1e1e;
+  border-radius: 4px;
+  padding: 25px 30px;
+  text-align: center;
+  max-width: 380px;
+}
+
+.popBtn button {
+  margin: 0 8px;
+  min-width: 80px;
+  font-size: 14px;
+  padding: 5px 5px;
+  border-radius: 4px;
+}
+
+button.outlineBtn {
+  background: transparent;
+  outline: none;
+  border: 1px solid #4267B2;
+  color: #4267B2;
+}
+
+button.fillBtn {
+  background: #CF3030;
+  border: 1px solid #CF3030;
+  color: white;
+}
+
+.commonPopUpConten {
+  font-size: 14px;
+  font-weight: 500;
+  position: relative;
+}
+.closePop{
+  position: absolute;
+  right: 5px;
+  cursor: pointer;
+  top: 5px;
+}
+
+.commonPopUpConten p {
+  margin-bottom: 25px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.breadCrumb a {
+  font-size: 12px;
+  font-weight: 500;
+  color: #4267B2 !important;
+  cursor: pointer;
+}
+.breadCrumb span {
+  font-size: 12px;
+  font-weight: 700;
+  color: #4267B2 !important;
+  cursor: pointer;
+  margin: 0 5px;
+}
+.selectPlan {
+  margin-bottom: 30px;
+  background: #FFFFFF;
+  box-shadow: 4px 4px 8px #D8DCE4;
+  border-radius: 4px;
+  padding: 12px;
+  margin-top: 15px;
+}
+
+.selectPlan h5 {color: #343A40;font-size: 16px;font-weight: 500;}
+
+.selectPlan button {
+  background: #F8F9FA;
+  border: 1px solid #6C757D;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  min-height: 30px;
+  margin-bottom: 10px;
+  padding: 4px 20px;
+}
+
+.selectPlan p {
+  margin: 0;
+  font-size: 12px;
+  color: #6C757D;
+  font-weight: 400;
+}
+
+.planPurchaseCard {
+  background: #FFFFFF;
+  box-shadow: 4px 4px 8px #D8DCE4;
+  border-radius: 4px;
+  padding: 20px;
+  position: relative;
+}
+.popularPlan{
+  position: absolute;
+    top: -11px;
+    margin: auto;
+    background: #8bc34a;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    padding: 2px 10px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    left: 0;
+    right: 0;
+    margin: auto;
+    max-width: 120px;
+    text-align: center;
+}
+
+.planPrices {
+  text-align: center;
+
+}
+
+.planPrices h2 {
+  color: #3A3F67;
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.planPrices img {
+  margin: 20px 0 20px 0;
+}
+
+.planPrices p {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.planPrices p span {
+  font-size: 16px;
+  margin-right: 6px;
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+.planPurchaseCont ul {
+  padding: 0;
+  list-style: none;
+}
+
+.planPurchaseCont ul li {list-style: none;display: flex;font-size: 15px;color: #77838F;padding: 3px 0;}
+
+.planPurchaseCont ul li img {
+  margin-right: 9px;
+}
+
+.planPurchaseCont button {
+  background: #4267B2;
+  color: white;
+  border: none;
+  width: 100%;
+  min-height: 35px;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+.selectPlan {
+  display: flex;
+}
+
+.plnImgTop {
+  background: #F8F9FA;
+  border-radius: 4px;
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.plnImgTop img {
+  width: 60px;
+}
+.planDetailsBill {
+  background: #FFFFFF;
+  box-shadow: 4px 4px 8px #D8DCE4;
+  border-radius: 4px;
+  padding: 12px;
+}
+
+.planDetailsBill h4 {
+  color: #343A40;
+  font-size: 18px;
+}
+
+.planDetailsBill p {
+  font-size: 12px;
+  color: #6C757D;
+}
+
+.planDetailsBill ul {
+  list-style: none;
+  padding: 0;
+}
+
+.planDetailsBill li {
+  padding: 4px 0;
+  display: flex;
+  font-size: 12px;
+}
+
+.planDetailsBill li img {
+  margin-right: 6px;
+}
+
+.billingMainSection {
+  margin-top: 15px;
+}
+
+.billingMainSection {}
+
+.billingMainSection hr {
+  border: 1px dashed #bebebe;
+}
+
+.subPlndDetals {
+  margin-top: 30px;
+}
+
+.clsCardDtls {
+  background: #FFFFFF;
+  box-shadow: 4px 4px 8px #d8dce4;
+  border-radius: 4px;
+  padding: 12px;
+  text-align: center;
+}
+
+.clsCardDtls p {
+  font-weight: 400;
+    font-size: 12px;
+    color: #6C757D;
+    margin: 0;
+    margin-top: 15px;
+}
+
+.orderCartCard {
+  background: #FFFFFF;
+  box-shadow: 4px 4px 8px #d8dce4;
+  border-radius: 4px;
+  padding: 12px;
+}
+
+.orderCartCard h4 {
+  color: #343A40;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.orderCartCard table {
+  width: 100%;
+}
+
+p.tblHed {
+  font-size: 14px;
+  color: #343A40;
+  font-weight: 500;
+  margin: 0;
+}
+
+p.tblData {
+  color: #6C757D;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+  text-align: right;
+}
+
+.orderCartCard table td {
+  padding: 8px 0;
+}
+
+.orderCartCard button {
+  padding: 8px 10px;
+  border: none;
+  background: #4267B2;
+  color: white;
+  width: 100%;
+  min-height: 30px;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+.policyData {
+  margin-top: 30px;
+}
+
+.policyData p {
+  font-size: 12px;
+  color: #6C757D;
+}
+/* ============ on board  ============== */
 /* ============ Media Queries ============== */
 @media (max-width:767px) {
   .mobileHide{

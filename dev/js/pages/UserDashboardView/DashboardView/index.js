@@ -19,10 +19,11 @@ const DashboardView = () => {
     const dispatch = useDispatch();
     const taskInfo = useSelector(state => state.TASK_INFO);
     const { taskList = [], taskListLoading, userInfoLoading, userInfo = {} } = taskInfo || {};
-    let { case: caseDetails = {}, cases = {} } = userInfo;
+    let { case: caseDetails = {}, cases = {}, profile={} } = userInfo;
     if (cases) {
         caseDetails = cases
     }
+    const { first_name='' } = profile;
     const caseId = caseDetails && caseDetails.case_id;
     const userId = caseDetails && caseDetails.user;
     const [activeTask, setActiveTask] = useState('');
@@ -52,10 +53,10 @@ const DashboardView = () => {
         history.push('/tasks');
     }
 
-    const handleTaskClick = (taskId)=>{
-        if(isMobileView()){
+    const handleTaskClick = (taskId) => {
+        if (isMobileView()) {
             history.push(`/task/detail/${taskId}`);
-        }else{
+        } else {
             history.push(`/tasks`);
             dispatch(
                 {
@@ -66,7 +67,7 @@ const DashboardView = () => {
         }
     }
 
-    return(
+    return (
         <div className={body + '    ' + 'p-relative pt-5'}>
             <div className="mainView">
                 <div className="subHeaderTop">
@@ -74,7 +75,7 @@ const DashboardView = () => {
                     {/* <NotificationWidget /> */}
                     <ProfileWidget />
                 </div>
-                <Header headerText="Welcome Shubh!">
+                <Header headerText={`Welcome ${first_name}`}>
                     <div className="headerView">
                         {/* <div className={scheduleCallCta}>
                             <span>Schedule Call</span>
@@ -90,22 +91,22 @@ const DashboardView = () => {
                                 : <Fragment>
                                     <div className="taskList">
                                         {
-                                           taskList.length?
-                                           taskList.slice(0, 3).map((val)=>{
-                                               const { task_id } = val;
-                                               return(<TaskCard key={task_id} isView clickHandler={()=>handleTaskClick(task_id)} data={val}/>)
-                                           })
-                                           :<BlankScreen message="You have no pending tasks"/>
+                                            taskList.length ?
+                                                taskList.slice(0, 3).map((val) => {
+                                                    const { task_id } = val;
+                                                    return (<TaskCard key={task_id} isView clickHandler={() => handleTaskClick(task_id)} data={val} />)
+                                                })
+                                                : <BlankScreen message="You have no pending tasks" />
                                         }
                                         {
-                                        //  taskList.length > 3 ?
-                                         
-                                        //  : null  
-                                    }
+                                            //  taskList.length > 3 ?
+
+                                            //  : null  
+                                        }
                                     </div>
                                     <div className="allTasks">
-                                             <div className="moreTasks" onClick={redirectToTaskList}>Show All</div>
-                                         </div>
+                                        <div className="moreTasks" onClick={redirectToTaskList}>Show All</div>
+                                    </div>
                                 </Fragment>
                         }
 
