@@ -138,7 +138,7 @@ function SignUp(props) {
                   <div className="formCont">
                     <label>Email</label>
                     <input
-                      placeholder="E-mail / username"
+                      // placeholder="E-mail / username"
                       type="email"
                       value={email}
                       onChange={emailSignUpHandler}
@@ -149,7 +149,7 @@ function SignUp(props) {
                     <label>Password</label>
                     <input
                       className="password-field"
-                      placeholder="Password"
+                      // placeholder="Password"
                       type="password"
                       value={password}
                       onChange={passwordSignUpHandler}
@@ -160,7 +160,7 @@ function SignUp(props) {
                     <label>Confirm Password</label>
                     <input
                       className="confirm-password-field"
-                      placeholder="Confirm Password"
+                      // placeholder="Confirm Password"
                       type="password"
                       value={confirmPassword}
                       onChange={confirmPasswordHandler}
@@ -212,13 +212,13 @@ function SignUp(props) {
                       </button>
                     )}
                   />
-                  <button className="linkedin-button">
+                  {/* <button className="linkedin-button">
                     <img
                       className="google-button-image img-fluid"
                       src={ASSETS_BASE_URL + '/images/common/linked.svg'}
                       alt="google-image"
                     />
-                  </button>
+                  </button> */}
                   {/* <button onClick={responseLinkedin} className="linkedin-button">in</button> */}
 
                 </div>

@@ -85,7 +85,7 @@ function EmailConfirmation(props) {
                       <label>Email</label>
                       <input
                         className="login-email-input"
-                        placeholder="E-mail"
+                        // placeholder="E-mail"
                         type="email"
                         value={email}
                         onChange={emailLoginHnadler}

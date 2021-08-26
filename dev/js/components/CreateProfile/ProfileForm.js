@@ -27,12 +27,13 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
 
     return(
         <div className="formWrapper">
-            <label>{labels}<sup>*</sup></label>
+            
             
             {
                 !showCustomFields?
                 <div className={`inpCont ${showError?'showError':''}`}>
-                    <input type={showDate?"date":"text"} autoComplete="new-password" placeholder={labels} onChange={(e)=>handleChange(e.target.value)} value={value}/>
+                    <input type={showDate?"date":"text"} autoComplete="new-password" onChange={(e)=>handleChange(e.target.value)} value={value}/>
+                    <label>{labels}<sup>*</sup></label>
                 </div>
                 :null
             }
@@ -67,6 +68,7 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
                 </div>
                 :null
             }
+            
         </div>
     )
 }

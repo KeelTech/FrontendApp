@@ -4390,10 +4390,100 @@ button:focus{
 ::-webkit-scrollbar-thumb:hover {
   background: black; 
 }
+.customForFirst{
+  padding: 20px;
+    flex-shrink: 0;
+    width: 100%;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 4px 4px 8px 0px #D8DCE4;
+    height: calc(100vh - 150px);
+    overflow: auto;
+}
+h1.crtMainHed {
+  color: #343A40;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+p.crtSubHed {
+  font-size: 18px;
+  font-weight: 400;
+  color: #6C757D;
+  margin-bottom: 20px;
+}
+.loginImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.formWrapper {
+  position: relative;
+}
+
+.formWrapper label {
+  position: absolute;
+  z-index: 1;
+  font-size: 16px !important;
+  font-weight: 400;
+  color: #9e9ca0 !important;
+  pointer-events: none;
+  top: 10px;
+  left: 15px;
+  transition: 0.2s;
+  transition-timing-function: ease;
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.formWrapper label sup {
+  display: none;
+}
+
+/* .formWrapper input:focus{
+  outline: #4267B2 !important;
+  border-color: #4267B2 !important;
+} */
+/* .formWrapper input:focus + label {
+  transform: scale(0.75) translateY(-120%) translateX(-20px);
+    background: white;
+    padding: 0 5px;
+    color: #4267B2 !important;
+    font-weight: 600;
+} */
+
+
+input:valid + label, input:focus + label{
+  transform: scale(0.75) translateY(-120%) translateX(-20px);
+  background: white;
+  padding: 0 5px;
+  color: #4267B2 !important;
+  font-weight: 600;
+}
+
+
+
+
+
+
+
+
+
+@media (min-width:1920px) {
+  .root{
+max-width: 1180px;
+margin:auto;
+  }
+  body{
+    background-color: #F7F8F9;
+  }
+}
+
+
 /* ============ Custom style Common ============== */
 /* ============ Dashboard Custom style Common ============== */
 .subHeaderTop {
-  position: absolute;
+  position: fixed;
   background: white;
   width: 100%;
   z-index: 8;
@@ -4403,6 +4493,9 @@ button:focus{
   top: 0;
   min-height: 55px;
   padding: 10px;
+  left: 0;
+  right: 0;
+  z-index: 99;
 }
 .p-relative{
   position: relative !important;
