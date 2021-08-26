@@ -15,7 +15,7 @@ const UserDashboardView = ({ match }) => {
    return(
         <div className={container}>
             <LeftMenuBar isAgent/>
-            <div className={body}>
+            <div className={body + ' ' + "mainContainer" }>
                 <Switch>
                     <Route exact path={`${match.path}/`} component={DashboardView}/>
                     <Route exact path={`${match.path}/dashboard`} component={DashboardView}/>

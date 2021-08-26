@@ -41,7 +41,7 @@ const ChatWidget = ({ floatingChat=false, toggleChat, caseId="", currentUserId="
     }
 
     return(
-        <div className={mainClass}>
+        <div className={mainClass + " " + "chatMainContainer"}>
             <div className="header">
                 <div className="profile"></div>
                 <div className="nameSection">

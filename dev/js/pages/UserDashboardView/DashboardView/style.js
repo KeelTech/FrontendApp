@@ -10,9 +10,9 @@ export const container = css`
     .chat{
         width: 60%;
         // max-width:500px;
-        box-shadow: 2px 2px 8px #D8DCE4;
+        // box-shadow: 2px 2px 8px #D8DCE4;
         height: 100%;
-        border-radius: 4px;
+        // border-radius: 4px;
     }
     @media(max-width: ${tabScreenWidth}){
         padding: 20px;
@@ -48,7 +48,7 @@ export const pendingTasks = css`
         font-weight: 600;
         padding: 10px 5px;
         border-radius: 4px;
-        border: 1px solid white;
+        border: 1px solid #0000004d;
     }
     .moreTasks{
         display: flex;
@@ -129,12 +129,17 @@ export const scheduleCallCta = css`
 `
 
 export const upcomingSchedules = css`
-    min-width: 240px;
+    // min-width: 240px;
     // min-height: 100vh;
-    margin-top: 0px;
-    padding: 0px 22px;
+    margin-top: 40px;
+    padding: 0px 12px;
     display: none;
-    background:white;
+    background: white;
+    height: fit-content;
+    min-height: 340px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px #d8dce4;
+    border: 1px solid #e0dfdc;
     @media(min-width: 1200px){
         display: block;
         .headerView{

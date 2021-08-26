@@ -16,48 +16,48 @@ import { getTaskList } from '@actions';
 import { mainCont, container, tasksView } from './style.js';
 import { body } from '../style.js';
 
-const TaskView = (props)=>{
+const TaskView = (props) => {
     let caseId = '';
-    if(props && props.match && props.match.params){
+    if (props && props.match && props.match.params) {
         caseId = props.match.params.caseId;
     }
 
     const history = useHistory();
     const dispatch = useDispatch();
-    const taskInfo = useSelector(state=>state.TASK_INFO);
-    const { taskList=[] } = taskInfo||{};
+    const taskInfo = useSelector(state => state.TASK_INFO);
+    const { taskList = [] } = taskInfo || {};
     const [activeWidget, setActiveWidget] = useState(0);
     const [activeTask, setActiveTask] = useState('');
     const [showAddTaskView, setAddTaskView] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const handleCtaClick = (val)=>{
+    const handleCtaClick = (val) => {
         setActiveWidget(val);
         setActiveTask('');
     }
 
-    const taskClickHandler = (taskId)=>{
-        if(isMobileView()){
+    const taskClickHandler = (taskId) => {
+        if (isMobileView()) {
             history.push(`/agent/task/detail/${taskId}`);
-        }else{
+        } else {
             setActiveTask(taskId);
             setAddTaskView(false);
         }
     }
 
-    const refetchTaskList = ()=>{
+    const refetchTaskList = () => {
         setLoading(true);
-        getTaskList({status: activeWidget, case: caseId}, dispatch, (resp, error)=>{
+        getTaskList({ status: activeWidget, case: caseId }, dispatch, (resp, error) => {
             setLoading(false);
-            if(resp && resp.length && !isMobileView()){
+            if (resp && resp.length && !isMobileView()) {
                 setActiveTask(resp[0].task_id);
-            }else{
+            } else {
                 setActiveTask('');
             }
         });
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(
             {
                 type: SET_AGENT_MENUBAR_STATE,
@@ -66,76 +66,79 @@ const TaskView = (props)=>{
                 }
             }
         )
-    },[])
+    }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
         refetchTaskList();
-    },[activeWidget])
+    }, [activeWidget])
 
-    const addMoreTasks = ()=>{
-        if(isMobileView()){
+    const addMoreTasks = () => {
+        if (isMobileView()) {
             history.push(`/agent/task/create/${caseId}`);
-        }else{
+        } else {
             setAddTaskView(true);
         }
     }
 
-    const toggleAddTaskView = (isCreateNew=false)=>{
-        if(!isMobileView() && isCreateNew){
+    const toggleAddTaskView = (isCreateNew = false) => {
+        if (!isMobileView() && isCreateNew) {
             refetchTaskList();
         }
-        setAddTaskView(val=>!val);
+        setAddTaskView(val => !val);
     }
 
-    return(
-        <div className={`${body} ${mainCont}`+ '    ' + 'p-relative pt-5'}>
+    return (
+        <div className={`${body} ${mainCont}` + '    ' + 'p-relative pt-5'}>
             <div className="mainView">
-            <div className="subHeaderTop">
-                    {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
-                    {/* <NotificationWidget /> */}
-                    <ProfileWidget />
+                <div className="subHeaderTop">
+                    <div className="headerContent">
+                        <img className="img-fluid keelTopLogo" src={ASSETS_BASE_URL + "/images/common/keelIcon.svg"} alt="home" onClick={()=>history.push('/')} />
+                        {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
+                        {/* <NotificationWidget /> */}
+                        <ProfileWidget />
+                    </div>
                 </div>
                 <Header headerText="Task" isAgent>
                     <div className="headerView">
-                        <CustomButton text="Add New Task" clickHandler={addMoreTasks} margin="0px 16px 0px 0px"/>
-                        <NotificationWidget/>
+                        <CustomButton text="Add New Task" clickHandler={addMoreTasks} margin="0px 16px 0px 0px" />
+                        <NotificationWidget />
                         {/* <ProfileWidget/> */}
                     </div>
                 </Header>
                 <div className={container}>
                     <div className={tasksView}>
                         <div className="tasksCta">
-                            <div className={`cta ${activeWidget===0?'ctaActive':''}`} onClick={()=>handleCtaClick(0)}>
+                            <div className={`cta ${activeWidget === 0 ? 'ctaActive' : ''}`} onClick={() => handleCtaClick(0)}>
                                 <span>Pending</span>
                             </div>
-                            <div className={`cta ${activeWidget===1?'ctaActive':''}`} onClick={()=>handleCtaClick(1)}>
+                            <div className={`cta ${activeWidget === 1 ? 'ctaActive' : ''}`} onClick={() => handleCtaClick(1)}>
                                 <span>In Review</span>
                             </div>
-                            <div className={`cta ${activeWidget===2?'ctaActive':''}`} onClick={()=>handleCtaClick(2)}>
+                            <div className={`cta ${activeWidget === 2 ? 'ctaActive' : ''}`} onClick={() => handleCtaClick(2)}>
                                 <span>Completed</span>
                             </div>
                         </div>
                         {
-                            loading?<div className={loaderView}><LoadingWidget/></div>
-                            :<div className="taskList">
-                                {
-                                    taskList.length?
-                                    taskList.map((val)=>{
-                                        const { task_id } = val;
-                                        return(<TaskCard key={task_id} isView active={!showAddTaskView && activeTask===task_id} clickHandler={()=>taskClickHandler(task_id)} data={val}/>)
-                                    })
-                                    :<div className="emptyData"><BlankScreen message="You have no pending tasks"/></div>
-                                }
-                            </div>
+                            loading ? <div className={loaderView}><LoadingWidget /></div>
+                                : <div className="taskList">
+                                    {
+                                        taskList.length ?
+                                            taskList.map((val) => {
+                                                const { task_id } = val;
+                                                return (<TaskCard key={task_id} isView active={!showAddTaskView && activeTask === task_id} clickHandler={() => taskClickHandler(task_id)} data={val} />)
+                                            })
+                                            : <div className="emptyData"><BlankScreen message="You have no pending tasks" /></div>
+                                    }
+                                </div>
                         }
                     </div>
                     <div className="taskInfo">
                         {
-                            !loading && !showAddTaskView && activeTask?<AgentTaskDetail activeTask={activeTask} refetchTaskList={refetchTaskList}/>:null
+                            !loading && !showAddTaskView && activeTask ? <AgentTaskDetail activeTask={activeTask} refetchTaskList={refetchTaskList} /> : null
                         }
                         {
-                            showAddTaskView && <CreateTask toggleAddTaskView={toggleAddTaskView} caseId={caseId}/>
-                        }                     
+                            showAddTaskView && <CreateTask toggleAddTaskView={toggleAddTaskView} caseId={caseId} />
+                        }
                     </div>
                 </div>
             </div>

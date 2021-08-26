@@ -57,7 +57,7 @@ const UserDashboardView = (props)=>{
     }
 
     return(
-        <div className={container}>
+        <div className={container + " " + 'mainContainer' }>
             <LeftMenuBar/>
             {
                 userInfoLoading?<div className={loaderView}><LoadingWidget/></div>:renderRoutes()

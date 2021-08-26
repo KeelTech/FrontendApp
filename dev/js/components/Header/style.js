@@ -16,7 +16,7 @@ export const desktopView = css`
         display: flex;
     }
     .heading{
-        font-weight: bold;
+        font-weight: 600;
         font-size: 16px;
         line-height: 36px;
         color: #343A40;
