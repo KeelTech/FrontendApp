@@ -37,6 +37,7 @@ export const container = css`
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        padding-top: 60px;
     }
     .homeWidget{
         display: flex;

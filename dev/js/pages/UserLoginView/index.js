@@ -135,7 +135,7 @@ const LoginView = (props) => {
                     <label>Email</label>
                     <input
                       className="login-email-input"
-                      placeholder="E-mail"
+                      // placeholder="E-mail"
                       type="email"
                       value={email}
                       onChange={emailLoginHnadler}
@@ -146,7 +146,7 @@ const LoginView = (props) => {
                     <label>Password</label>
                     <input
                       className="login-password-input"
-                      placeholder="Password"
+                      // placeholder="Password"
                       type="password"
                       value={password}
                       onChange={passwordLoginHandler}
