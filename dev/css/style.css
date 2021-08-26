@@ -4428,7 +4428,6 @@ p.crtSubHed {
   position: relative;
 }
 
-
 .formWrapper label {
   position: absolute;
   z-index: 1;
@@ -4486,6 +4485,14 @@ margin:auto;
   }
   .headerContent{
     max-width: 1180px;
+  }
+  .loginRightImg{
+    background-size: 100% 50% !important;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  .loginMainContainer{
+    background-color: #f3f2ef !important;
   }
 }
 
@@ -4551,6 +4558,9 @@ img.img-fluid.keelTopLogo {
   font-size: 12px;
   padding: 4px 10px;
   border: 1px solid #e0dfdc;
+}
+.loginMainContainer {
+  background: white;
 }
 
 /* ============ Custom style Common ============== */
