@@ -6,7 +6,7 @@ export const ddContainer = css`
     background: #FCFCFC;
     box-shadow: 0px 6.74px 16.85px rgba(191, 21, 108, 0.05);
     border-radius: 6.74px;
-    border: 1px solid #e0dfdc;
+    border: 1px solid #363b64;
     width: 230px;
     margin-left: auto;
     margin-right: auto;
@@ -27,7 +27,7 @@ export const ddContainerItem = css`
     font-family: ${primaryFont};
     font-style: normal;
     font-weight: normal;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 27px;
     cursor:pointer;
     color: #363B64;
