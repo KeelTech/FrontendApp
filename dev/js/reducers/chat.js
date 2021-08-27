@@ -30,6 +30,9 @@ export default function (state = defaultState, action) {
 
 
 function mergeChatMessages(oldMessages=[], newMessages=[]) {
+    if(!isMergeRequired(oldMessages, newMessages)){
+        return oldMessages
+    }
     let finalMessages = []
     let added = {}
     let i = 0
@@ -63,4 +66,11 @@ function addDedup(added, finalMessages, message){
     finalMessages.push(message)
     added[message.id] = true
     return
+}
+
+function isMergeRequired(oldMessages=[], newMessages=[]) {
+    if(newMessages.length && oldMessages.length) {
+        return !(newMessages[newMessages.length - 1].id == oldMessages[oldMessages.length - 1].id)
+    }
+    return true
 }
