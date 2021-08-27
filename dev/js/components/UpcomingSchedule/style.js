@@ -36,9 +36,10 @@ export const schedule = css`
   }
   li {
     margin-bottom: 10px;
-    background: #fcfcfc;
-    box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
-    border-radius: 20px;
+    background: white;
+    box-shadow: 2px 2px 8px #d8dce4;
+    border-radius: 4px;
+    border: 1px solid #e0dfdc;
     padding: 10px 32px;
   }
   .message {

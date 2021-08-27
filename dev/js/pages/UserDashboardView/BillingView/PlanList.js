@@ -25,7 +25,7 @@ const PlanList = ({ first_name, planClick, planData })=>{
                 {
                     planData.map((val, key)=>{
                         const { actualPrice, dealPrice, isPopular, planName, isActive } = val;
-                        return <div className="col-md-4 col-12" key={key}>
+                        return <div className="col-md-4 col-12 mb-4 " key={key}>
                             <div className="planPurchaseCard">
                                 {
                                     isPopular?<span className="popularPlan">recommended</span>:null

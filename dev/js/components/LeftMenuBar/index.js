@@ -77,19 +77,19 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
     })
 
     return(
-        <div className={leftBarCont}>
+        <div className={leftBarCont + " " + "sideBarMainContainer"}>
             {
                 isMobileView && <div className="overlay"></div>
             }
             {showLoader && <div className={loaderView}><LoadingWidget/></div> }
-            <div className={mainClass}>
+            <div className={mainClass + " " + "mobileSideMenu"}>
                 <div className="openWidgetView">
                     <div className="widgetView">
                         <div className="homeWidget">
                             <div className="bgForUser"></div>
                             <div className="userDetailsSidebar">
                                 <div className="userContent">
-                                    <img className="img-fluid" src={ASSETS_BASE_URL+"/images/common/default.jpeg"} alt="user" />
+                                    <img className="img-fluid" src={ASSETS_BASE_URL+"/images/common/Avatar_blue.svg"} alt="user" />
                                     <div className="userDetailsMain">
                                         <h5>Maddy</h5>
                                         <p><strong>98%</strong>Profile Completed</p>

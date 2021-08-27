@@ -14,7 +14,7 @@ border: 1px solid #e0dfdc;
         padding-bottom: 18px;
         .profile{
             background: #DBDBDB;
-            border-radius: 14px;
+            border-radius: 100px;
             height: 42px;
             width: 42px;
             margin-right: 16px;

@@ -4538,6 +4538,7 @@ img.img-fluid.keelTopLogo {
   border-radius: 100px;
   margin: auto;
   display: block;
+  box-shadow: 0px 1px 2px 0px #f6f6f6;
 }
 
 .userContent {
@@ -4572,6 +4573,16 @@ img.img-fluid.keelTopLogo {
 }
 
 /* ============ Custom style Common ============== */
+/* ============ Agent Dashboard Update ============== */
+.agentMainContainer {
+  width: 98%!important;
+  margin: auto;
+  min-width: 98% !important;
+}
+.agentDashboardMain{
+  padding-top: 48px;
+}
+/* ============ Agent Dashboard Update ============== */
 /* ============ Dashboard Custom style Common ============== */
 .subHeaderTop {
   position: fixed;
@@ -5208,6 +5219,45 @@ p.tblData {
   font-size: 12px;
   color: #6C757D;
 }
+.profileDropDown {
+  border-radius: 10px !important;
+  width: 200px !important;
+}
+
+.dropWhiteBox {
+  margin: 12px !important;
+}
+
+.dropWhiteBox img {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.dropWhiteBox h2 {
+  white-space: nowrap!important;
+  text-overflow: ellipsis!important;
+  overflow: hidden!important;
+  font-size: 16px !important;
+}
+
+.listDropItem {
+  padding: 8px 12px!important;
+}
+
+.listDropItem li div {
+  margin: 0px !important;
+  display: flex!important;
+  align-items: center!important;
+}
+
+
+.listDropItem li {
+  padding: 5px 0!important
+}
+
+.listDropItem li div img {
+  width: 20px!important;
+}
 /* ============ on board  ============== */
 /* ============ Media Queries ============== */
 @media (max-width:767px) {
@@ -5238,12 +5288,66 @@ p.tblData {
   max-width: 300px;
 }
 }
+
+@media (min-width: 1100px){
+.headerContent {
+  padding-left: 70px;
+  }
+
+}
+@media (max-width:1100px) {
+  .mobileHamburger{
+    position: fixed;
+    top: 12px;
+    z-index: 99;
+  }
+  .planSelectionScreen{
+    padding: 0px 12px;
+  }
+  .sideBarMainContainer {
+    position: fixed !important;
+    z-index: 99 !important;
+    top: 0 !important;
+}
+.subHeaderTop{
+  padding-left: 50px;
+}
+.innerPopUp{
+  width: 94% !important;
+}
+.mobileSideMenu{
+  height: 100vh;
+  width: 240px !important;
+}
+.mobileSideMenu img.crossIcon{
+  position: absolute;
+  top: 0;
+  right: 0;
+  filter: invert(1);
+}
+.openWidgetView {
+  position: relative;
+  border: 0px;
+  padding: 0 !important;
+  overflow: auto;
+  height: 100%;
+}
+.openWidgetView .widgetView .bgForUser{
+  border-radius: 0px;
+}
+}
 @media (min-height:1200px) {
   .chatMainContainer{
     height: auto !important;
   }
   .taskList{
     max-height: 640px;
+  }
+}
+
+@media (min-width: 1520px){
+  .chatMainContainer {
+      height: auto !important;
   }
 }
 /* ============ Media Queries ============== */

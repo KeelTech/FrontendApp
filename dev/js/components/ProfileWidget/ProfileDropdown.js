@@ -15,14 +15,14 @@ const ProfileDropdown = ({ handleLogout }) => {
   const { isAgent } = logginInfo||{};
 
   return (
-    <div className={profile}>
-      <div className={info}>
+    <div className={profile + " " + "profileDropDown"}>
+      <div className={info + " " + "dropWhiteBox" }>
         <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/user.svg"} />
-        <h2>{`${first_name} ${last_name}`}</h2>
+        <h2 className="usrDrpName">{`${first_name} ${last_name}`}</h2>
         {/* <h3>shubh@getkeel.com</h3> */}
       </div>
       <div>
-        <ul className={links}>
+        <ul className={links + " " + "listDropItem"}>
           {
             isAgent?null
             :<Fragment>
