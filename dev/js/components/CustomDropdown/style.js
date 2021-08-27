@@ -6,6 +6,7 @@ export const ddContainer = css`
     background: #FCFCFC;
     box-shadow: 0px 6.74px 16.85px rgba(191, 21, 108, 0.05);
     border-radius: 6.74px;
+    border: 1px solid #e0dfdc;
     width: 230px;
     margin-left: auto;
     margin-right: auto;

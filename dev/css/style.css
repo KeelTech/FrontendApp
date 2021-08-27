@@ -4494,6 +4494,13 @@ margin:auto;
   .loginMainContainer{
     background-color: #f3f2ef !important;
   }
+  .formsScroll{
+    max-height: 600px;
+    height: 100% !important;
+  }
+  .customForFirst{
+    height: 100% !important;
+  }
 }
 .selectedOption {
   padding: 8px 10px !important;
@@ -4795,6 +4802,47 @@ li {}
 
 .planCards img {
   width: 180px;
+  height: 200px;
+}
+button.disableBtn{
+  opacity: .3;
+  cursor: no-drop;
+}
+.blackSideImg {
+  background: white;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.blackSideImg p {
+  font-size: 17px;
+  margin-top: 18px;
+  font-weight: 400;
+  color: #6C757D;
+}
+.overLayPopUp {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: #000000bf;
+  z-index: 999;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.customEditProfile{
+  background: white;
+  border: 1px solid #C7CACC;
+  border-radius: 4px;
+  box-shadow: 4px 4px 8px #D8DCE4;
+  padding: 20px !important;
+  min-width: 400px;
 }
 
 .plnCardCont {

@@ -131,7 +131,12 @@ const TaskView = ()=>{
                     </div>
                     <div className="taskInfo taskUi">
                         {
-                            activeTask?<TaskDetail activeTask={activeTask} refetchTaskList={refetchTaskList}/>:null
+                            activeTask?<TaskDetail activeTask={activeTask} refetchTaskList={refetchTaskList}/>
+                            :
+                            <div className="blackSideImg">
+                                <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/notask.svg"}/>
+                                <p>No task to display at this time</p>
+                            </div>
                         }                        
                     </div>
                 </div>

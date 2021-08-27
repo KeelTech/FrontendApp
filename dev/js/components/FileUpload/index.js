@@ -144,7 +144,8 @@ const FileUpload = ({ fileUploadModalClosed, uploadFile, isUploadToServer=false,
     }
 
     return (
-        <div className={outerShell({maxWidth})}>
+        <div className="overLayPopUp">
+            <div className={outerShell({maxWidth}) + " " + "innerPopUp"}>
             {
                 loading?<div className={loaderView}><LoadingWidget/></div>:null
             }
@@ -162,6 +163,7 @@ const FileUpload = ({ fileUploadModalClosed, uploadFile, isUploadToServer=false,
                     </button>
                 </div>
             </div>
+        </div>
         </div>
     );
 }

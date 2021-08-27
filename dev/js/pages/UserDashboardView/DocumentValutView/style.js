@@ -10,6 +10,10 @@ export const container = css`
         display: flex;
         flex-wrap: wrap;
         overflow-x: hidden;
+        border-radius: 4px;
+        border: 1px solid #e0dfdc;
+        background:white;
+        box-shadow: 4px 4px 8px #D8DCE4;
     }
     @media(max-width: ${tabScreenWidth}){
         padding: 20px;
