@@ -10,7 +10,7 @@ export const mobileCont = css`
     padding-bottom: 200px;
     .taskInfo{
         width: 50%;
-        overflow-y: auto;
+        overflow-y: hidden;
     }
     @media(max-width: ${tabScreenWidth}){
         padding: 20px;

@@ -8,7 +8,7 @@ box-shadow: 2px 2px 8px #eae8ee;
 border-radius: 4px;
 padding: 12px;
 height: 100%;
-overflow-y: auto;
+// overflow-y: auto;
 width: 100%;
     .statusCont{
         display: flex;
@@ -388,7 +388,7 @@ export const taskMobileCont = css`
     padding-bottom: 200px;
     .taskInfo{
         width: 50%;
-        overflow-y: auto;
+        overflow-y: hidden;
     }
     @media(max-width: ${tabScreenWidth}){
         padding: 20px;
