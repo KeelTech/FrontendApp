@@ -12,13 +12,11 @@ export const leftBarCont = css`
     border: 1px solid #e0dfdc;
     .overlay{
         position: fixed;
-        z-index: 1;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background: #C4C4C4;
-        opacity: 0.3;
+        background: #000000c9;
     }
 `
 
@@ -192,7 +190,7 @@ export const mobileView = css`
         margin-left: 27px;
         background: #363B64;
         box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
-        border-radius: 20px;
+        border-radius: 4px;
         padding: 10px 16px;
         font-weight: 700;
         img{

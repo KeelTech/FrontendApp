@@ -9,7 +9,7 @@ export const container = css`
     height: calc(100vh - 180px);
     .taskInfo{
         width: 60%;
-        overflow-y: auto;
+        overflow-y: hidden;
     }
     @media(max-width: ${tabScreenWidth}){
         padding: 20px;
@@ -32,6 +32,7 @@ export const tasksView = css`
         border: 1px solid #4267b2;
         border-radius: 4px;
         margin-bottom: 10px;
+        overflow:hidden;
     }
     .cta{
         cursor: pointer;
@@ -51,6 +52,7 @@ export const tasksView = css`
     .ctaActive{
         color: #4267B2;
     background: white;
+    border-radius:0px;
     }
     .taskList{
         overflow-y: auto;

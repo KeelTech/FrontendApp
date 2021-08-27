@@ -20,7 +20,7 @@ export const card = props=>css`
         height: 100%;
         left: 0;
         top: 0;
-        z-index: 999;
+        z-index: 9;
         background: #4267B2;
         border-radius: 20px;
     }

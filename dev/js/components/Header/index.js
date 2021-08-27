@@ -24,7 +24,7 @@ const Header = (props)=>{
             {
                 IsloggedIn?
                 <div className={mobileView}>
-                    <img className="homeIcon" src={ASSETS_BASE_URL+"/images/leftmenubar/hamburgerMenu.svg"} alt="home" onClick={toggleMenuBar}/>
+                    <img className="homeIcon mobileHamburger" src={ASSETS_BASE_URL+"/images/leftmenubar/hamburgerMenu.svg"} alt="home" onClick={toggleMenuBar}/>
                     <div className="rightView">
                         {props.children}
                     </div>
@@ -32,7 +32,8 @@ const Header = (props)=>{
                 :null
             }
             
-            <div className={mobileHeading}>{headerText}</div>
+            <div className={mobileHeading}>
+                {headerText}</div>
             {
                 showMobileMenuBar && IsloggedIn && <LeftMenuBar isMobileView toggleMenuBar={toggleMenuBar} isAgent={isAgent}/>
             }

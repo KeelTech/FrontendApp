@@ -110,7 +110,7 @@ const AgentDashboardView = () => {
                 className="widget widget2"
                 style={{ backgroundImage: `url(${ReviewImg})` }}
               >
-                <div className="cover progress">
+                <div className="cover progressADD">
                   <span className="no">{in_progress_count||0}</span>
                   <span className="value">In Progress</span>
                   <span className="value">Applications</span>

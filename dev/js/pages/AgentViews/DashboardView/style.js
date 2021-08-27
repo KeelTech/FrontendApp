@@ -132,23 +132,25 @@ export const widgets = css`
   flex-wrap: wrap;
   .widget {
     width: 46%;
-    height: 110px;
+    height: 120px;
     margin: 0px 8px 16px 8px;
     padding: 18px;
-    border-radius: 20px;
-    box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
+    border-radius: 4px;
+    box-shadow: 2px 2px 8px #d8dce4;
     font-weight: bold;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
     span {
       display: block;
       text-align: right;
     }
     .no {
-      font-size: 36px;
+      font-size: 24px;
       margin-bottom: 4px;
       font-family: ${primaryFont};
     }
     .value {
-      font-size: 18px;
+      font-size: 16px;
       color: #363b64;
       font-family: ${primaryFont};
     }

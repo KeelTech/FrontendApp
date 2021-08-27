@@ -9,13 +9,22 @@ import AgentTaskDetail from '@pages/AgentTaskDetail/TaskDetailMobileEntry.js';
 import CreateTaskMobileView from '@pages/CreateTaskMobileView';
 import CustomerView from './CustomerView';
 import CustomerInfoView from './CustomerView/CustomerInfoView';
+import ProfileWidget from '@components/ProfileWidget';
 
 const UserDashboardView = ({ match }) => {
  
    return(
-        <div className={container}>
+        <div className={container + " " + "agentMainContainer"}>
+            <div className="subHeaderTop">
+                    <div className="headerContent">
+                        <img className="img-fluid keelTopLogo" src={ASSETS_BASE_URL + "/images/common/keelIcon.svg"} alt="home" onClick={()=>history.push('/')} />
+                        {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
+                        {/* <NotificationWidget /> */}
+                        <ProfileWidget />
+                    </div>
+                </div>
             <LeftMenuBar isAgent/>
-            <div className={body + ' ' + "mainContainer" }>
+            <div className={body + ' ' + "mainContainerADD agentDashboardMain" }>
                 <Switch>
                     <Route exact path={`${match.path}/`} component={DashboardView}/>
                     <Route exact path={`${match.path}/dashboard`} component={DashboardView}/>
