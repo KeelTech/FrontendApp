@@ -116,7 +116,7 @@ const DashboardView = () => {
 
                     </div>
                     <div className="chat">
-                        {caseId ? <ChatWidget caseId={caseId} currentUserId={userId} /> : ""}
+                        {caseId && userId ? <ChatWidget caseId={caseId} currentUserId={userId} /> : ""}
                     </div>
                 </div>
             </div>
