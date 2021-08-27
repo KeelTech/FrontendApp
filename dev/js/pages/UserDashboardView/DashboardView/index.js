@@ -71,9 +71,13 @@ const DashboardView = () => {
         <div className={body + '    ' + 'p-relative pt-5'}>
             <div className="mainView">
                 <div className="subHeaderTop">
+                <div className="headerContent">
+                <img className="img-fluid keelTopLogo" src={ASSETS_BASE_URL + "/images/common/keelIcon.svg"} alt="home" onClick={()=>history.push('/')} />
+
                     {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
                     {/* <NotificationWidget /> */}
                     <ProfileWidget />
+                    </div>
                 </div>
                 <Header headerText={`Welcome ${first_name}`}>
                     <div className="headerView">
