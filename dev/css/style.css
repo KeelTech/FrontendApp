@@ -6855,6 +6855,8 @@ p.tblData {
     overflow: auto;
     height: 100%;
   }
+
+  
   .openWidgetView .widgetView .bgForUser {
     border-radius: 0px;
   }
