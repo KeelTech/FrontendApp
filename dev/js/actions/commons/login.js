@@ -312,3 +312,23 @@ export const agentLogin = (data, dispatch, cb) => {
       if (cb) cb(message, null);
     });
 };
+
+export const sendOTP = (dataParams, dispatch, cb=null)=>{
+  API_POST(`${API_BASE_URL}/v1/user/otp/generate`,
+      dataParams
+  ).then((response)=>{
+      if(cb)cb(response, null);
+  }).catch((e)=>{
+      if(cb)cb(null, true);
+  })
+}
+
+export const verifyOTP = (dataParams, dispatch, cb=null)=>{
+  API_POST(`${API_BASE_URL}/v1/user/otp/verify`,
+      dataParams
+  ).then((response)=>{
+      if(cb)cb(response, null);
+  }).catch((e)=>{
+      if(cb)cb(null, true);
+  })
+}
