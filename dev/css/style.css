@@ -4494,7 +4494,6 @@ margin:auto;
   .loginMainContainer{
     background-color: #f3f2ef !important;
   }
-<<<<<<< HEAD
   .formsScroll{
     max-height: 600px;
     height: 100% !important;
@@ -4502,8 +4501,6 @@ margin:auto;
   .customForFirst{
     height: 100% !important;
   }
-=======
->>>>>>> master
 }
 .selectedOption {
   padding: 8px 10px !important;
@@ -4530,7 +4527,6 @@ img.img-fluid.keelTopLogo {
   height: 60px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-<<<<<<< HEAD
 }
 
 .userContent img {
@@ -4542,19 +4538,6 @@ img.img-fluid.keelTopLogo {
   display: block;
 }
 
-=======
-}
-
-.userContent img {
-  width: 70px;
-  height: 70px;
-  object-fit: cover;
-  border-radius: 100px;
-  margin: auto;
-  display: block;
-}
-
->>>>>>> master
 .userContent {
   margin-top: -37px;
   text-align: center;
