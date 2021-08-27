@@ -9,8 +9,8 @@ export const fileUpload = css`
     cursor:pointer
 `
 export const fileUploadWrapper = css`
-    width:95px;
-    height:95px;
+    width:115px;
+    height:115px;
     background-image:url("${ASSETS_BASE_URL}/images/common/file.svg");
     background-color:transparent;
     background-repeat: no-repeat;
@@ -42,23 +42,24 @@ export const alignCenter = css`
 
 export const outerShell = props=> css`
     background: white;
-    position:absolute;
+    // position:absolute;
     top:15%;
     width: 100%;
     left: 0;
     max-width: ${props.maxWidth};
-    box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
-    text-align:center;
-    border-radius: 8px;
+    background: #FFFFFF;
+box-shadow: 4px 4px 8px #2e2e2e;
+border-radius: 4px;
+text-align:center;
     z-index:99;
 `
 export const innerShell = css`
-    background: #EAEAEF;
+    background: #ffffff;
     text-align:center;
     padding:20px;
     border-radius: 8px;
     padding-top:40px;
-    margin:4%;
+    // margin:4%;
     max-height: 600px;
 `
 export const closeWrapper = css`

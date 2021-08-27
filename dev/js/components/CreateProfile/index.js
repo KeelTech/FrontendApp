@@ -221,7 +221,7 @@ const CreateProfile = () => {
                                 <li className={activeState === 5 ? 'active' : ''}></li>
                             </ul>
                         </div>
-                        <div className="userFormsMainContainer">
+                        <div className="userFormsMainContainer customEditProfile">
                             <h3>{displayText}</h3>
                             <div className="formsScroll">
                                 {

@@ -263,7 +263,7 @@ const TaskView = ()=>{
                                 documentListFiltered.map((document)=>{
                                     return <DocumentCard key={document.id} documentData={document} deleteDocumentClicked={deleteDocumentClicked} downloadDocumentClicked={downloadDocumentClicked}/>
                                 })
-                                :<BlankScreen message="You have no documents"/>
+                                :<BlankScreen message=""/>
                             }
                         </div>
                     }
