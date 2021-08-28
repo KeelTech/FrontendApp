@@ -6,6 +6,7 @@ import { SET_MENUBAR_STATE, SET_AGENT_MENUBAR_STATE } from '@constants/types';
 import STORAGE from '@helpers/storage';
 import { loaderView } from '@constants';
 import LoadingWidget from '@components/LoadingWidget';
+import { logoutUser } from '@actions';
 import { leftBarCont, container, menuOptions, mobileView} from './style.js';
 
 const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
@@ -55,15 +56,17 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
 
     const handleLogout = ()=>{
         setLoader(true);
-        STORAGE.deleteAuth().then((resp)=>{
-            dispatch({
-                type: 'LOGOUT_USER',
-              })
-            setTimeout(()=>{
-                setLoader(false);
-                history.push('/');
-            },2000)
-        })
+        logoutUser({}, ()=>{}, (res, error)=>{
+            STORAGE.deleteAuth().then((resp)=>{
+                dispatch({
+                    type: 'LOGOUT_USER',
+                })
+                setTimeout(()=>{
+                    setLoader(false);
+                    history.push('/');
+                },2000)
+            })
+        });
     }
 
     const mainClass = cx({

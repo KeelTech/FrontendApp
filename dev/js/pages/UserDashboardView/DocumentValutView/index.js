@@ -30,7 +30,7 @@ const PriorityList = [
     },
     {
         id: 0,
-        val: 'agent'
+        val: 'Consultant'
     }
 ]
 

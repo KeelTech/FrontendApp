@@ -39,12 +39,12 @@ const SelectCity = ({ saveSelectedOption })=>{
     )
 }
 
-const SelectCountry = ({ saveSelectedOption })=>{
+const SelectCountry = ({ saveSelectedOption, placeholder="Search Country", isDesired })=>{
     const dispatch = useDispatch();
     const [list, setList] = useState([])
 
     useEffect(()=>{
-        getCountryList({}, dispatch, (resp, err)=>{
+        getCountryList({isDesired}, dispatch, (resp, err)=>{
             if(resp && resp.message){
                 setList(resp.message);
             }
@@ -61,7 +61,7 @@ const SelectCountry = ({ saveSelectedOption })=>{
         <Fragment>
         {
             list.length?
-            <CustomSearchSelect options={list} placeholder="Search Country" value="" handleChange={handleChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>
+            <CustomSearchSelect options={list} placeholder={placeholder} value="" handleChange={handleChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>
             :null
         }
         </Fragment>

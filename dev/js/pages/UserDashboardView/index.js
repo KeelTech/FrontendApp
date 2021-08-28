@@ -12,6 +12,7 @@ import DocumentValutView from './DocumentValutView';
 import CustomerView from './CustomerView';
 import UserOnboardingView from './UserOnboardingView';
 import BillingView from './BillingView';
+import SelectedPlanView from './SelectedPlanView';
 
 const UserDashboardView = (props)=>{
     const url  = props.match.path;
@@ -51,6 +52,9 @@ const UserDashboardView = (props)=>{
                 {
                     url.includes('billing') && <BillingView/>
                 }
+                {
+                    url.includes('plan') && <SelectedPlanView {...props}/>
+                }
             </Fragment>
         }
 
@@ -62,7 +66,7 @@ const UserDashboardView = (props)=>{
             {
                 userInfoLoading?<div className={loaderView}><LoadingWidget/></div>:renderRoutes()
             }
-            <FloatingChatWidget/>
+            {isPlanPurchased && <FloatingChatWidget/>}
         </div>
     )
 }
