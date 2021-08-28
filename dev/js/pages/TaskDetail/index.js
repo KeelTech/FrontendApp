@@ -181,9 +181,9 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
                 <span className="status mobileView">{status_name}</span>
             </div>
             <div className="signDoc">
-                    <span className="sign">{title}</span>
-                    <span className="backBtn" onClick={handleBackBtnClick}>Back</span>
-                </div>
+                <span className="sign">{title}</span>
+                <span className="backBtn" onClick={handleBackBtnClick}>Back</span>
+            </div>
             <div className="taskScrollSection">
                 <div className={taskStatus}>
                     <div className="view">
