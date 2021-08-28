@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { Fragment, useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFullUserProfile, createFullUserProfile, updateUserProfile, updateProfile } from '@actions';
 import LoadingWidget from '@components/LoadingWidget';
@@ -56,7 +56,7 @@ const CreateProfile = () => {
                 activeWidgetInfo = {
                     widget: 'qualification',
                     dataParams: [...qualification],
-                    displayText: 'Educational Creational Assessment',
+                    displayText: 'Educational Credential Assessment',
                     isMultiple: true
                 }
             } else if (activeState === 4) {
@@ -202,12 +202,10 @@ const CreateProfile = () => {
     }
 
     const { widget, dataParams, displayText, isMultiple = false } = activeWidgetData;
-    return (
-        <div className={container}>
-            {
-                loading || fullProfileLoading ? <div className={loaderView}><LoadingWidget /></div> : null
-            }
-            <CustomToaster {...toasterInfo} hideToaster={hideToaster} />
+    
+    const renderView = ()=>{
+        return (
+            <Fragment>
             {
                 showEditView?
                 <div className={progressBar}>
@@ -252,6 +250,17 @@ const CreateProfile = () => {
                 </div>
                 :<ProfileView fullProfileInfo={fullProfileInfo} editProfileRedirect={editProfileRedirect} userInfo={userInfo}/>
             }
+            </Fragment>
+        )
+    }
+
+    return (
+        <div className={container}>
+            {
+                loading || fullProfileLoading ? <div className={loaderView}><LoadingWidget /></div> : renderView()
+            }
+            <CustomToaster {...toasterInfo} hideToaster={hideToaster} />
+            
         </div>
     )
 }

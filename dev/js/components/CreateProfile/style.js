@@ -51,6 +51,13 @@ export const progressBar = css`
     font-size: 12px;
     color: red;
 }
+.otpMessage{
+    display: block;
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    color: red;
+}
 .hideMsg{
     // visibility: hidden;
     display:none;
@@ -205,6 +212,18 @@ body {
         background: #888;
         border-radius: 20px;
     }
+}
+.sendOtPBtn{
+    margin: 0px !important;
+    margin-top: 4px !important;
+}
+.mg8{
+    margin-top: 8px;
+}
+.noVerified{
+    margin: 4px 0px;
+    color: green;
+    font-size: 12px;
 }
 `
 

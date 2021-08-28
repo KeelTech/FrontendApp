@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createProfile, getUserProfile } from '@actions';
+import { createProfile, getUserProfile, sendOTP, verifyOTP } from '@actions';
 import LoadingWidget from '@components/LoadingWidget';
 import { loaderView } from '@constants';
 import CustomToaster from '@components/CustomToaster';
@@ -17,7 +17,10 @@ const CreateProfile = () => {
         phone_number: {
             value: '',
             labels: "Phone Number",
-            type: "char"
+            type: "phone",
+            lastVerifiedNo: '',
+            otpSent: false,
+            otpVerify: false
         },
         first_name: {
             value: '',
@@ -60,14 +63,21 @@ const CreateProfile = () => {
         let newDataParams = {};
         Object.entries(dataParams).map((val, key) => {
             const [fieldType, dataValues] = val;
-            const { value } = dataValues;
+            const { value, type, lastVerifiedNo } = dataValues;
             postParams[fieldType] = value;
             let showError = false;
-            if (!value) {
+            let otpVerify = false;
+            if(!value){
                 isError = true;
                 showError = true;
+            }else if(type=='phone'){
+                if(lastVerifiedNo==value){
+                    otpVerify = true;
+                }else{
+                    isError = true;
+                }
             }
-            newDataParams[fieldType] = { ...dataValues, showError }
+            newDataParams[fieldType]= {...dataValues, showError, otpVerify, showOtpError: !otpVerify }
         })
         if (isError) {
             setDataParams(newDataParams);
@@ -105,13 +115,113 @@ const CreateProfile = () => {
         })
     }
 
-
     const hideToaster = () => {
         setToasterInfo({
             isVisible: false
         })
     }
-    return (
+
+    const sendOTPClicked = ()=>{
+        const mobileNo = dataParams && dataParams.phone_number && dataParams.phone_number.value;
+        const postParams = {
+            phone_number: mobileNo
+        }
+        if(!mobileNo){
+            setToasterInfo({
+                isVisible: true,
+                isError: true,
+                isSuccess: false,
+                msg: 'Please Fill Valid Mobile No'
+            });
+            setTimeout(() => {
+                hideToaster();
+            }, 1000);
+            return;
+        }
+        setLoading(true);
+        sendOTP(postParams, dispatch, (resp, err)=>{
+            setLoading(false);
+            if(resp){
+                setDataParams((oldState)=>{
+                    return {...oldState, ...{phone_number: {
+                        value: mobileNo,
+                        labels: "Phone Number",
+                        type: "phone",
+                        lastVerifiedNo: '',
+                        otpSent: true
+                    }}}
+                })
+                setToasterInfo({
+                    isVisible: true,
+                    isError: false,
+                    isSuccess: true,
+                    msg: 'OTP Sent Successfully'
+                });
+            }else{
+                setToasterInfo({
+                    isVisible: true,
+                    isError: true,
+                    isSuccess: false,
+                    msg: 'Failed To Sent OTP'
+                });
+            }
+            setTimeout(() => {
+                hideToaster();
+            }, 1000);
+        })
+    }
+
+    const verifyOTPClicked = (otp)=>{
+        const mobileNo = dataParams && dataParams.phone_number && dataParams.phone_number.value;
+        const postParams = {
+            otp
+        }
+        if(!otp){
+            setToasterInfo({
+                isVisible: true,
+                isError: true,
+                isSuccess: false,
+                msg: 'Please Fill Valid OTP'
+            });
+            setTimeout(() => {
+                hideToaster();
+            }, 1000);
+            return;
+        }
+        setLoading(true);
+        verifyOTP(postParams, dispatch, (resp, err)=>{
+            setLoading(false);
+            if(resp){
+                setDataParams((oldState)=>{
+                    return {...oldState, ...{phone_number: {
+                        value: mobileNo,
+                        labels: "Phone Number",
+                        type: "phone",
+                        lastVerifiedNo: mobileNo,
+                        otpSent: true,
+                    }}}
+                })
+                setToasterInfo({
+                    isVisible: true,
+                    isError: false,
+                    isSuccess: true,
+                    msg: 'OTP Verified Successfully'
+                });
+            }else{
+                setToasterInfo({
+                    isVisible: true,
+                    isError: true,
+                    isSuccess: false,
+                    msg: 'Failed To Verify OTP'
+                });
+            }
+            setTimeout(() => {
+                hideToaster();
+            }, 1000);
+        })
+    }
+
+    return(
         <div className={container + ' ' + "firstTimeUserProfile"}>
             {
                 loading ? <div className={loaderView}><LoadingWidget /></div> : null
@@ -128,7 +238,7 @@ const CreateProfile = () => {
                                     {
                                         Object.entries(dataParams).map((val, key) => {
                                             const [fieldType, dataValues] = val;
-                                            return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={key} handleChange={handleChange} />
+                                            return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={key} handleChange={handleChange} sendOTPClicked={sendOTPClicked} verifyOTPClicked={verifyOTPClicked}/>
                                         })
                                     }
                                 </div>
@@ -154,32 +264,65 @@ const CreateProfile = () => {
     )
 }
 
-const ProfileForm = ({ dataParams, fieldType, handleChange }) => {
-    const { labels, type, value, showError = false } = dataParams;
+const ProfileForm = ({ dataParams, fieldType, handleChange, sendOTPClicked, verifyOTPClicked })=>{
+    const { labels, type, value, showError=false, lastVerifiedNo, otpSent, otpVerify, showOtpError } = dataParams;
+    const [otp, setOTP] = useState('');
 
     const handleFieldChange = (val) => {
+        if(fieldType.includes('age')){
+            let age = parseInt(val, 10);
+            if(age>125) return null;
+        }else if(fieldType.includes('phone')){
+            if(val.length>10) return null;
+        }
         let updatedParams = {
             [fieldType]: { ...dataParams, value: val, showError: false }
         }
         handleChange(updatedParams);
     }
-
+    const isNumber = fieldType.includes('age');
     if (!labels) return null;
     const showCustomFields = fieldType.includes('country');
     return (
         <div className="formWrapper">
             
             {
-                type === 'char' && !showCustomFields ?
-                    <div className={`inpCont ${showError ? 'showError' : ''}`}>
-                        {
-                            fieldType.includes('date') ?
-                                <input type="date" autoComplete="new-password" onChange={(e) => handleFieldChange(e.target.value)} value={value} />
-                                : <input type="text" autoComplete="new-password" onChange={(e) => handleFieldChange(e.target.value)} value={value} />
-                        }
-                        <label>{labels}<sup>*</sup></label>
-                    </div>
-                    : null
+                type==='phone'?
+                <div className={`inpCont ${showError?'showError':''}`}>
+                    <input type="number" autoComplete="new-password" placeholder={labels} onChange={(e)=>handleFieldChange(e.target.value)} value={value}/>
+                    {
+                        showOtpError?<p className="otpMessage">Please verify Mobile No</p>:null
+                    }
+                    {
+                        lastVerifiedNo && lastVerifiedNo==value?
+                        <p className="noVerified">*Phone No Verified</p>
+                        :otpSent?
+                        <div className="mg8">
+                            <input type="number" autoComplete="new-password" placeholder="Enter OTP" onChange={(e)=>setOTP(e.target.value)} value={otp}/>
+                            <div className="btnCont sendOtPBtn">
+                                <button onClick={()=>verifyOTPClicked(otp)}>Verify OTP</button>
+                                <button onClick={sendOTPClicked}>Resend OTP</button>
+                            </div>
+                        </div>
+                        :<div className="btnCont sendOtPBtn">
+                            <button onClick={sendOTPClicked}>Send OTP</button>
+                        </div>
+                    }
+                    
+                </div>
+                :null
+            }
+            {
+                type==='char' && !showCustomFields?                    
+                <div className={`inpCont ${showError?'showError':''}`}>
+                    {
+                        fieldType.includes('date')?
+                        <input type="date" autoComplete="new-password" placeholder={labels} onChange={(e)=>handleFieldChange(e.target.value)} value={value}/>
+                        :<input type={isNumber?"number":"text"} autoComplete="new-password" placeholder={labels} onChange={(e)=>handleFieldChange(e.target.value)} value={value}/>
+                    }
+                    <label>{labels}<sup>*</sup></label>
+                </div>
+                :null
             }
             {
                 type == 'address' ?
@@ -190,7 +333,7 @@ const ProfileForm = ({ dataParams, fieldType, handleChange }) => {
             }
             {
                 fieldType.includes('country') ?
-                    <SelectCountry saveSelectedOption={handleFieldChange} />
+                    <SelectCountry saveSelectedOption={handleFieldChange} placeholder={`Search ${labels}`} isDesired={fieldType.includes('desired_country')}/>
                     : null
             }
             <p className={showError ? "errorMsg" : "hideMsg"}>Please Fill {labels}</p>
