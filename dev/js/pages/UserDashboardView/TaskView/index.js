@@ -86,9 +86,13 @@ const TaskView = ()=>{
         <div className={body + '    ' + 'p-relative pt-5'}>
             <div className="mainView">
             <div className="subHeaderTop">
+            <div className="headerContent">
+            <img className="img-fluid keelTopLogo" src={ASSETS_BASE_URL + "/images/common/keelIcon.svg"} alt="home" onClick={()=>history.push('/')} />
+
                     {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
                     {/* <NotificationWidget /> */}
                     <ProfileWidget />
+                    </div>
                 </div>
                 <Header headerText="Task">
                     <div className="headerView">
@@ -127,7 +131,12 @@ const TaskView = ()=>{
                     </div>
                     <div className="taskInfo taskUi">
                         {
-                            activeTask?<TaskDetail activeTask={activeTask} refetchTaskList={refetchTaskList}/>:null
+                            activeTask?<TaskDetail activeTask={activeTask} refetchTaskList={refetchTaskList}/>
+                            :
+                            <div className="blackSideImg">
+                                <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/notask.svg"}/>
+                                <p>No task to display at this time</p>
+                            </div>
                         }                        
                     </div>
                 </div>

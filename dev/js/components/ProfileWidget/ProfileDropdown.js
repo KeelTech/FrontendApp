@@ -44,7 +44,7 @@ const ProfileDropdown = ({ handleLogout }) => {
           <li>
             <div onClick={handleLogout}>
               <img src={ASSETS_BASE_URL + "/images/common/logoutIcon.svg"} />
-              <span onClick={handleLogout}>Logout</span>
+              <span>Logout</span>
             </div>
           </li>
         </ul>

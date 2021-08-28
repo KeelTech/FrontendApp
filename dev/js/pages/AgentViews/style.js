@@ -4,7 +4,7 @@ import { primaryFont } from '@constants';
 export const container = css`
     overflow-x: hidden;
     display: flex;
-    background: #DFEAF4;
+    // background: #DFEAF4;
     min-width: 100vw;
     min-height: 100vh;
     overflow-wrap: anywhere;
@@ -24,12 +24,13 @@ export const container = css`
     }
 `
 export const body = css`
-    background: rgba(252, 252, 252, 0.5);
+    // background: rgba(252, 252, 252, 0.5);
     display: flex;
     width: 100%;
     .mainView{
         width: 100%;
-        background: #F7F8F9;
+        background: #f3f2ef;
+        margin-top:8px;
     }
     .headerView{
         display: flex;

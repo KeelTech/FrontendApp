@@ -2,11 +2,12 @@ import { css } from '@emotion/css';
 import { inputField } from '@constants';
 
 export const container = css`
-    height: 100%;
-    background: #FCFCFC;
-    box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
-    border-radius: 4px;
-    padding-top: 24px;
+height: 100%;
+background: #FCFCFC;
+padding-top: 24px;
+border-radius: 10px;
+box-shadow: 2px 2px 8px #d8dce4;
+border: 1px solid #e0dfdc;
     .header{
         display: flex;
         padding: 0px 28px;
@@ -54,7 +55,8 @@ export const chatWidget = props=>css`
     border-top: 1px solid #EBEBEB;
     padding: 19px 28px;
     overflow: auto;
-    height: calc(100vh - 332px);
+    height: calc(100vh - 336px);
+    max-height:600px;
     ${props.floatingChat && `
         padding: 13px 21px;
         height: calc(100% - 136px);

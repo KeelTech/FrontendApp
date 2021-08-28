@@ -6,6 +6,7 @@ import { SET_MENUBAR_STATE, SET_AGENT_MENUBAR_STATE } from '@constants/types';
 import STORAGE from '@helpers/storage';
 import { loaderView } from '@constants';
 import LoadingWidget from '@components/LoadingWidget';
+import { logoutUser } from '@actions';
 import { leftBarCont, container, menuOptions, mobileView} from './style.js';
 
 const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
@@ -55,15 +56,17 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
 
     const handleLogout = ()=>{
         setLoader(true);
-        STORAGE.deleteAuth().then((resp)=>{
-            dispatch({
-                type: 'LOGOUT_USER',
-              })
-            setTimeout(()=>{
-                setLoader(false);
-                history.push('/');
-            },2000)
-        })
+        logoutUser({}, ()=>{}, (res, error)=>{
+            STORAGE.deleteAuth().then((resp)=>{
+                dispatch({
+                    type: 'LOGOUT_USER',
+                })
+                setTimeout(()=>{
+                    setLoader(false);
+                    history.push('/');
+                },2000)
+            })
+        });
     }
 
     const mainClass = cx({
@@ -86,7 +89,18 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                 <div className="openWidgetView">
                     <div className="widgetView">
                         <div className="homeWidget">
-                            <img className="homeIcon" src={ASSETS_BASE_URL+"/images/common/keelIcon.svg"} alt="home" onClick={()=>history.push('/')}/>
+                            <div className="bgForUser"></div>
+                            <div className="userDetailsSidebar">
+                                <div className="userContent">
+                                    <img className="img-fluid" src={ASSETS_BASE_URL+"/images/common/default.jpeg"} alt="user" />
+                                    <div className="userDetailsMain">
+                                        <h5>Maddy</h5>
+                                        <p><strong>98%</strong>Profile Completed</p>
+                                        <button>Update Profile</button>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* <img className="homeIcon" src={ASSETS_BASE_URL+"/images/common/keelIcon.svg"} alt="home" onClick={()=>history.push('/')}/> */}
                             <img className="crossIcon" src={ASSETS_BASE_URL+"/images/common/crossIcon.svg"} alt="home" onClick={toggleMenuBar}/>
                         </div>
                         <div className={menuOptions}>

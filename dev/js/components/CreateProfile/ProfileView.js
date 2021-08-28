@@ -4,7 +4,18 @@ import { useHistory } from 'react-router-dom';
 const ProfileView = ({ fullProfileInfo={}, editProfileRedirect, userInfo={} })=>{
     const { profile={}} = userInfo;
     const { first_name='', last_name='' } = profile;
-    const [activeWidgets, setActiveWidget] = useState([]);
+    const [activeWidgets, setActiveWidget] = useState(()=>{
+        const widgets =[];
+        Object.entries(fullProfileInfo).filter((val)=>{
+            
+            const [type] = val;
+            if(type.includes('profile')) return false;
+            else{
+                widgets.push(type);
+            }
+        })
+        return widgets;
+    });
 
     const handleClick = (val)=>{
         let newVal = [...activeWidgets];
@@ -15,6 +26,7 @@ const ProfileView = ({ fullProfileInfo={}, editProfileRedirect, userInfo={} })=>
         }
         setActiveWidget(newVal);
     }
+    
     const history = useHistory();
     return(
         <div className="useDetailsContainer ">

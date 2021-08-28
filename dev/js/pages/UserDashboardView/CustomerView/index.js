@@ -11,15 +11,15 @@ import { SET_MENUBAR_STATE } from '@constants/types';
 import { body } from '../style.js';
 import { container } from './style.js';
 
-const CustomerView = (props)=>{
+const CustomerView = (props) => {
     const dispatch = useDispatch();
-    const taskInfo = useSelector(state=>state.TASK_INFO);
-    const { fullProfileInfo, fullProfileLoading, userInfo={} } = taskInfo;
+    const taskInfo = useSelector(state => state.TASK_INFO);
+    const { fullProfileInfo, fullProfileLoading, userInfo = {} } = taskInfo;
     const isProfileExist = userInfo && userInfo.profile_exists;
-    
+
     // const parsed = queryString.parse(props.location.search);
     // const shortProfile = parsed && parsed.type=='profile';
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(
             {
                 type: SET_MENUBAR_STATE,
@@ -28,17 +28,21 @@ const CustomerView = (props)=>{
                 }
             }
         )
-    },[])
+    }, [])
 
-    return(
+    return (
         <div className={`${body} ${container}` + '    ' + 'p-relative pt-5'}>
             <div className="mainView">
-            <div className="subHeaderTop">
-                    {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
-                    {/* <NotificationWidget /> */}
-                    <ProfileWidget />
+                <div className="subHeaderTop">
+                    <div className="headerContent">
+                    <img className="img-fluid keelTopLogo" src={ASSETS_BASE_URL + "/images/common/keelIcon.svg"} alt="home" onClick={()=>history.push('/')} />
+
+                        {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
+                        {/* <NotificationWidget /> */}
+                        <ProfileWidget />
+                    </div>
                 </div>
-                <Header headerText={isProfileExist ? "Profile" : " Let's get you started. Tell us about the amazing you!" }>
+                <Header headerText={isProfileExist ? "Profile" : ""}>
                     <div className="headerView">
                         {/* <NotificationWidget/> */}
                         {/* <ProfileWidget/> */}
@@ -46,11 +50,11 @@ const CustomerView = (props)=>{
                 </Header>
                 <div className="customerView">
                     {
-                        !isProfileExist?
-                        <CreateShortProfile/>
-                        :<CreateProfile/>
+                        !isProfileExist ?
+                            <CreateShortProfile />
+                            : <CreateProfile />
                     }
-                    
+
                 </div>
             </div>
         </div>

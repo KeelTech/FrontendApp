@@ -17,13 +17,13 @@ export const progressBar = css`
 }
 
 .userFormsMainContainer {
-    padding: 12px;
+    // padding: 12px;
     max-width: 500px;
     flex-shrink: 0;
-    width: 100%;
-    background: white;
-    border-radius: 4px;
-    box-shadow: 4px 4px 8px #d8dce4;
+    // width: 100%;
+    // background: white;
+    // border-radius: 4px;
+    // box-shadow: 4px 4px 8px #d8dce4;
 }
     
 .userFormsMainContainer h3 {

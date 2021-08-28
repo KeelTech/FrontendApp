@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SelectedPlanView = ({ planClick, selectedUpgradePlan, first_name })=>{
+const SelectedPlanView = ({ planClick, redirectDashboard, first_name })=>{
 
     return (
         <div className="planSelectionScreen">
@@ -19,7 +19,10 @@ const SelectedPlanView = ({ planClick, selectedUpgradePlan, first_name })=>{
             <div className="dashMainHeading">
                 <h2>Welcome {first_name}</h2>
                 <div className="breadCrumb">
-                    <a onClick={()=>planClick({})}>Dashboard</a>
+                    <a onClick={(e)=>{
+                        e.preventDefault();
+                        redirectDashboard()
+                    }}>Dashboard</a>
                     <span>&#62;</span>
                     <a>Premium Plan </a>
                 </div>

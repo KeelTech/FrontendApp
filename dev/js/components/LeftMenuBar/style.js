@@ -5,6 +5,11 @@ export const leftBarCont = css`
     background: white;
     z-index: 10;
     box-shadow: 2px 2px 8px #d8dce4;
+    height: fit-content;
+    position: sticky;
+    top: 90px;
+    border-radius: 10px;
+    border: 1px solid #e0dfdc;
     .overlay{
         position: fixed;
         z-index: 1;
@@ -22,14 +27,14 @@ export const container = css`
     min-width: 210px;
     z-index: 9;
     top: 0;
-    height: 100vh;
+    // height: 100vh;
     display: flex;
-    background: rgba(252,252,252,0.5);
+    // background: rgba(252,252,252,0.5);
     .openWidgetView{
         position: relative;
     /* padding: 30px 32px; */
     padding-right: 0px;
-    min-height: 100vh;
+    // min-height: 100vh;
     width: 100%;
     }
     .widgetView{
@@ -37,11 +42,12 @@ export const container = css`
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        // padding-top: 60px;
     }
     .homeWidget{
-        display: flex;
+        // display: flex;
         width: 100%;
-        padding: 20px 10px 0 25px;
+        // padding: 20px 10px 0 25px;
         margin-bottom: 30px;
     }
     .homeIcon{
@@ -150,7 +156,7 @@ export const mobileView = css`
     .homeWidget{
         justify-content: space-between;
         align-items: center;
-        padding: 20px 10px 0 25px;
+        // padding: 20px 10px 0 25px;
         margin-bottom: 28px;
     }
     .homeIcon{

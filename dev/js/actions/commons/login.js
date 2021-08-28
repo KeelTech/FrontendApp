@@ -7,7 +7,7 @@ import {
   USER_LOGIN_RESET_SUCCESS,
   AGENT_LOGIN_SUCCESS
 } from '../../constants/types';
-import { API_POST } from '../../api/api.js';
+import { API_POST, API_GET } from '../../api/api.js';
 import STORAGE from '@helpers/storage/storage.js';
 
 export const userLogin = (data, dispatch, cb) => {
@@ -327,6 +327,14 @@ export const verifyOTP = (dataParams, dispatch, cb=null)=>{
   API_POST(`${API_BASE_URL}/v1/user/otp/verify`,
       dataParams
   ).then((response)=>{
+      if(cb)cb(response, null);
+  }).catch((e)=>{
+      if(cb)cb(null, true);
+  })
+}
+
+export const logoutUser = (dataParams, dispatch, cb=null)=>{
+  API_GET(`${API_BASE_URL}/v1/user/logout`).then((response)=>{
       if(cb)cb(response, null);
   }).catch((e)=>{
       if(cb)cb(null, true);

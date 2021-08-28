@@ -8,7 +8,7 @@ export const container = css`
   position: relative;
   // border: 1px solid #4267b2;
   box-sizing: border-box;
-  border-radius: 20px;
+  // border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,9 +17,10 @@ export const container = css`
     border-radius: 4px;
   span {
     font-family: ${primaryFont};
-    position: absolute;
-    margin: 0px 20px;
-    top: 68%;
+    display:none;
+    position: relative;
+    margin: 10px 20px;
+    // top: 68%;
     font-size: 18px;
     line-height: 27px;
     text-align: center;

@@ -28,6 +28,7 @@ let CUSTOMER_ROUTES = [
   { path: '/vault', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/billing', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/profile', exact: true, component: UserDashboardView, isPrivate: true  },
+  { path: '/plan/detail/:id', exact: true, component: UserDashboardView, isPrivate: true },
   { path: '*', component: NotFoundPage, isPrivate: false  },
 ];
 

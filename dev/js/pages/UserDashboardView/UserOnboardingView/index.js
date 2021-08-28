@@ -16,9 +16,13 @@ const UserOnboardingView = ()=>{
     <div className={body + '    ' + 'p-relative pt-5'}>
         <div className="mainView">
             <div className="subHeaderTop">
+            <div className="headerContent">
+            <img className="img-fluid keelTopLogo" src={ASSETS_BASE_URL + "/images/common/keelIcon.svg"} />
+
                 {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
                 {/* <NotificationWidget /> */}
                 <ProfileWidget />
+                </div>
             </div>
             <Header headerText="">
                 <div className="headerView">

@@ -8,10 +8,10 @@ import CustomToaster from '@components/CustomToaster';
 import { SelectCountry } from '@components/SelectCity';
 import { container, progressBar } from './style.js';
 
-const CreateProfile = ()=>{
+const CreateProfile = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const taskInfo = useSelector(state=>state.TASK_INFO);
+    const taskInfo = useSelector(state => state.TASK_INFO);
     const { fullProfileInfo } = taskInfo;
     const [dataParams, setDataParams] = useState({
         phone_number: {
@@ -57,11 +57,11 @@ const CreateProfile = ()=>{
     })
     const [loading, setLoading] = useState('');
 
-    const handleCreateForm = ()=>{
-        const postParams={};
+    const handleCreateForm = () => {
+        const postParams = {};
         let isError = false;
         let newDataParams = {};
-        Object.entries(dataParams).map((val, key)=>{
+        Object.entries(dataParams).map((val, key) => {
             const [fieldType, dataValues] = val;
             const { value, type, lastVerifiedNo } = dataValues;
             postParams[fieldType] = value;
@@ -77,16 +77,16 @@ const CreateProfile = ()=>{
                     isError = true;
                 }
             }
-            newDataParams[fieldType]= {...dataValues, showError, otpVerify }
+            newDataParams[fieldType]= {...dataValues, showError, otpVerify, showOtpError: !otpVerify }
         })
-        if(isError){
+        if (isError) {
             setDataParams(newDataParams);
             return;
         };
         setLoading(true);
-        createProfile(postParams, dispatch, (resp, err)=>{
+        createProfile(postParams, dispatch, (resp, err) => {
             setLoading(false);
-            if(resp){
+            if (resp) {
                 setToasterInfo({
                     isVisible: true,
                     isError: false,
@@ -95,7 +95,7 @@ const CreateProfile = ()=>{
                 });
                 window.location.href = window.location.origin;
                 //getUserProfile({}, dispatch);
-            }else{
+            } else {
                 setToasterInfo({
                     isVisible: true,
                     isError: true,
@@ -109,14 +109,13 @@ const CreateProfile = ()=>{
         });
     }
 
-    const handleChange = (val)=>{
-        setDataParams((oldState)=>{
-            return {...oldState, ...val}
+    const handleChange = (val) => {
+        setDataParams((oldState) => {
+            return { ...oldState, ...val }
         })
     }
-    
 
-    const hideToaster = ()=>{
+    const hideToaster = () => {
         setToasterInfo({
             isVisible: false
         })
@@ -223,54 +222,76 @@ const CreateProfile = ()=>{
     }
 
     return(
-        <div className={container}>
+        <div className={container + ' ' + "firstTimeUserProfile"}>
             {
-                loading?<div className={loaderView}><LoadingWidget/></div>:null
+                loading ? <div className={loaderView}><LoadingWidget /></div> : null
             }
-            <CustomToaster {...toasterInfo} hideToaster={hideToaster}/>
+            <CustomToaster {...toasterInfo} hideToaster={hideToaster} />
             <div className={progressBar}>
-            <div className="desktopProgressBar">
-                <div className="userFormsMainContainer">
-                    <div className="formsScroll">
-                        {
-                            Object.entries(dataParams).map((val, key)=>{
-                                const [fieldType, dataValues] = val;
-                                return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={key} handleChange={handleChange} sendOTPClicked={sendOTPClicked} verifyOTPClicked={verifyOTPClicked}/>
-                            })
-                        }
+                <div className="desktopProgressBar d-block customForFirst">
+                    <div className="row">
+                        <div className="col-md-6 col-12 mb-10">
+                            <h1 className="crtMainHed">Let's get you started. </h1>
+                            <p className="crtSubHed">Tell us about the amazing you!</p>
+                            <div className="userFormsMainContainer">
+                                <div className="formsScroll">
+                                    {
+                                        Object.entries(dataParams).map((val, key) => {
+                                            const [fieldType, dataValues] = val;
+                                            return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={key} handleChange={handleChange} sendOTPClicked={sendOTPClicked} verifyOTPClicked={verifyOTPClicked}/>
+                                        })
+                                    }
+                                </div>
+                                <div className="btnCont">
+                                    <button onClick={handleCreateForm}>Create</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-6 col-12 mb-10">
+                            <div className="loginImg">
+                                <img
+                                    className="img-fluid"
+                                    src={ASSETS_BASE_URL + '/images/common/onbard.svg'}
+                                    alt="login"
+                                />
+                            </div>
+                        </div>
                     </div>
-                    <div className="btnCont">
-                        <button onClick={handleCreateForm}>Create</button>
-                    </div>
+
                 </div>
             </div>
-        </div>
         </div>
     )
 }
 
 const ProfileForm = ({ dataParams, fieldType, handleChange, sendOTPClicked, verifyOTPClicked })=>{
-    const { labels, type, value, showError=false, lastVerifiedNo, otpSent, otpVerify } = dataParams;
+    const { labels, type, value, showError=false, lastVerifiedNo, otpSent, otpVerify, showOtpError } = dataParams;
     const [otp, setOTP] = useState('');
 
-    const handleFieldChange = (val)=>{
+    const handleFieldChange = (val) => {
+        if(fieldType.includes('age')){
+            let age = parseInt(val, 10);
+            if(age>125) return null;
+        }else if(fieldType.includes('phone')){
+            if(val.length>10) return null;
+        }
         let updatedParams = {
-            [fieldType]: {...dataParams, value: val, showError: false}
+            [fieldType]: { ...dataParams, value: val, showError: false }
         }
         handleChange(updatedParams);
     }
-
-    if(!labels) return null;
+    const isNumber = fieldType.includes('age');
+    if (!labels) return null;
     const showCustomFields = fieldType.includes('country');
-    return(
+    return (
         <div className="formWrapper">
-            <label>{labels}<sup>*</sup></label>
+            
             {
                 type==='phone'?
                 <div className={`inpCont ${showError?'showError':''}`}>
                     <input type="number" autoComplete="new-password" placeholder={labels} onChange={(e)=>handleFieldChange(e.target.value)} value={value}/>
                     {
-                        otpVerify?null:<p className="otpMessage">Please verify Mobile No</p>
+                        showOtpError?<p className="otpMessage">Please verify Mobile No</p>:null
                     }
                     {
                         lastVerifiedNo && lastVerifiedNo==value?
@@ -297,24 +318,25 @@ const ProfileForm = ({ dataParams, fieldType, handleChange, sendOTPClicked, veri
                     {
                         fieldType.includes('date')?
                         <input type="date" autoComplete="new-password" placeholder={labels} onChange={(e)=>handleFieldChange(e.target.value)} value={value}/>
-                        :<input type="text" autoComplete="new-password" placeholder={labels} onChange={(e)=>handleFieldChange(e.target.value)} value={value}/>
+                        :<input type={isNumber?"number":"text"} autoComplete="new-password" placeholder={labels} onChange={(e)=>handleFieldChange(e.target.value)} value={value}/>
                     }
+                    <label>{labels}<sup>*</sup></label>
                 </div>
                 :null
             }
             {
-                type=='address'?
-                <div className={`inpCont ${showError?'showError':''}`}>
-                    <textarea onChange={(e)=>handleFieldChange(e.target.value)} value={value} placeholder={labels} autoComplete="new-password"></textarea>
-                </div>
-                :null
+                type == 'address' ?
+                    <div className={`inpCont ${showError ? 'showError' : ''}`}>
+                        <textarea onChange={(e) => handleFieldChange(e.target.value)} value={value} autoComplete="new-password"></textarea>
+                    </div>
+                    : null
             }
             {
-                fieldType.includes('country')?
-                <SelectCountry saveSelectedOption={handleFieldChange}/>
-                :null
+                fieldType.includes('country') ?
+                    <SelectCountry saveSelectedOption={handleFieldChange} placeholder={`Search ${labels}`} isDesired={fieldType.includes('desired_country')}/>
+                    : null
             }
-            <p className={showError?"errorMsg":"hideMsg"}>Please Fill {labels}</p>
+            <p className={showError ? "errorMsg" : "hideMsg"}>Please Fill {labels}</p>
             {/* {
                 fieldType=='city'?
                 <SelectCity saveSelectedOption={handleFieldChange}/>
@@ -326,6 +348,7 @@ const ProfileForm = ({ dataParams, fieldType, handleChange, sendOTPClicked, veri
                 <SelectState saveSelectedOption={handleFieldChange}/>
                 :null
             } */}
+            
         </div>
     )
 }

@@ -3,17 +3,16 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '@components/Header';
 import ProfileWidget from '@components/ProfileWidget';
-import PlanList from './PlanList.js';
+import SelectedPlanView from './SelectedPlanView.js'
 import { body } from '../style.js';
 
-const BillingView = ()=>{
+const PlanDetail = ()=>{
     const dispatch = useDispatch();
     const history = useHistory();
     const taskInfo = useSelector(state=>state.TASK_INFO);
     const { userInfo={}, userInfoLoading } = taskInfo;
     const { profile={} } = userInfo;
     const { first_name='' } = profile;
-    const [selectedUpgradePlan, setUpgradePlan] = useState({});
     const planData = [
         {
             id: 1,
@@ -38,14 +37,18 @@ const BillingView = ()=>{
             planName: 'Calling Plan'
         }
     ]
+    const [selectedUpgradePlan, setUpgradePlan] = useState(planData[0]);
 
     const planClick = (planInfo)=>{
         if(planInfo && planInfo.isAcive){
 
         }else{
-            history.push(`/plan/detail/${planInfo.id}`);
-            //setUpgradePlan(planInfo);
+            setUpgradePlan(planInfo);
         }
+    }
+
+    const redirectDashboard = ()=>{
+        history.push('/');
     }
 
     return(
@@ -67,10 +70,10 @@ const BillingView = ()=>{
                     </div> */}
                 </div>
             </Header>
-            <PlanList first_name={first_name} planClick={planClick} planData={planData}/>
+            <SelectedPlanView selectedUpgradePlan={selectedUpgradePlan} redirectDashboard={redirectDashboard} first_name={first_name} planClick={planClick} history={history}/>
         </div>
     </div>
     )
 }
 
-export default BillingView;
+export default PlanDetail;
