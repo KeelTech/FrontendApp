@@ -294,7 +294,8 @@ export const checklistSection = props=> css`
         line-height: 12px;
         display: flex;
         align-items: center;
-        color: #363B64;
+        color: #000000;
+        font-weight:500;
         padding-right: 5px;
     }
     .checkItem{
@@ -305,7 +306,7 @@ export const checklistSection = props=> css`
         position: relative;
         width: calc(100% - 30px);
         border-radius: 6px;
-        background: #ECECF1;
+        background: #f3f2ef;
         height: 6px;
         &:after{
             content: '';
@@ -314,7 +315,7 @@ export const checklistSection = props=> css`
             border-radius: 6px;
             height: 6px;
             width: ${props.progress};
-            background: #363B64;
+            background: #4caf50;
         }
     }
     .item{

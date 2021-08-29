@@ -225,6 +225,7 @@ export const checklistSection = props=> css`
         display: flex;
         align-items: center;
         padding: 0 5px;
+        border: 1px solid darkgrey;
     }
     .progressNo{
         font-size: 8px;
@@ -238,7 +239,7 @@ export const checklistSection = props=> css`
         position: relative;
         width: 100%;
         border-radius: 6px;
-        background: #ECECF1;
+        background: #f3f2ef;
         height: 6px;
         &:after{
             content: '';
@@ -247,7 +248,7 @@ export const checklistSection = props=> css`
             border-radius: 6px;
             height: 6px;
             width: ${props.progress};
-            background: #363B64;
+            background: #4caf50;
         }
     }
     .item{
