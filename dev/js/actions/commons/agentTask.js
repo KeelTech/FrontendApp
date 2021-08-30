@@ -103,3 +103,11 @@ export const deleteTaskInfo = (dataParams, dispatch, cb=null)=>{
         if(cb)cb(null, true);
     })
 }
+
+export const getAgentProfile = (dataParams={})=>{
+    API_GET(`${API_BASE_URL}/v1/user/get-agent-profile`).then((response)=>{
+        if(cb)cb(response, null);
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}
