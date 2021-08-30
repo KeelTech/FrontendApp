@@ -6,16 +6,17 @@ const MobileViewList = ({ handleCustomerClick, caseList }) => {
   return (
     <Fragment>
       {caseList.map((list) => {
-        const { case_id, user, plan, created_at, updated_at, status } = list;
+        const { case_id, plan, created_at, updated_at, status, display_id, user_details={} } = list;
+        const { user_name ='' } = user_details;
         return (
           <ul key={case_id} className={lists} onClick={() => handleCustomerClick(case_id)}>
             <li className={customer}>
               <h2 className='key'>Case Id:</h2>
-              <h2 className='value'>{case_id}</h2>
+              <h2 className='value'>{display_id}</h2>
             </li>
             <li className={customer}>
               <h2 className='key'>Name:</h2>
-              <h2 className='value'>{user}</h2>
+              <h2 className='value'>{user_name}</h2>
             </li>
             <li className={customer}>
               <h2 className='key'>Case Type:</h2>

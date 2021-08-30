@@ -1,5 +1,7 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Switch, Route, useHistory } from 'react-router-dom';
+import { getAgentProfile } from '@actions';
 import FloatingChatWidget from '@components/FloatingChatWidget';
 import LeftMenuBar from '@components/LeftMenuBar';
 import { container, body } from './style.js';
@@ -12,7 +14,13 @@ import CustomerInfoView from './CustomerView/CustomerInfoView';
 import ProfileWidget from '@components/ProfileWidget';
 
 const UserDashboardView = ({ match }) => {
- 
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+        //getAgentProfile({}, dispatch);
+    },[])
+
    return(
         <div className={container + " " + "agentMainContainer"}>
             <div className="subHeaderTop">

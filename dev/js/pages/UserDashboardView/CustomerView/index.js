@@ -12,6 +12,7 @@ import { body } from '../style.js';
 import { container } from './style.js';
 
 const CustomerView = (props) => {
+    const history = useHistory();
     const dispatch = useDispatch();
     const taskInfo = useSelector(state => state.TASK_INFO);
     const { fullProfileInfo, fullProfileLoading, userInfo = {} } = taskInfo;

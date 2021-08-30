@@ -18,6 +18,8 @@ class Table extends Component {
             dataLabel = `${getFormattedDate(dataLabel).formattedDate} ${getFormattedTime(dataLabel)}`
         }else if(key.CustomView){
             dataLabel = renderStatusText(dataLabel);
+        }else if(key.isUser){
+            dataLabel= dataLabel.user_name;
         }
         return <td className={rowItemClass} key={key.key}>{dataLabel}</td>
     }
