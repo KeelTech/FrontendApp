@@ -42,12 +42,6 @@ export default function (state = defaultState, action) {
       newState.IsloggedIn = true;
       return newState;
     }
-    case LOGOUT_USER: {
-      let newState = { ...state };
-      newState.isAgent = false;
-      newState.IsloggedIn = false;
-      return newState;
-    }
   }
   return state;
 }
