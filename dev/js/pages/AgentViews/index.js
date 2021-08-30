@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import { getAgentProfile } from '@actions';
-import FloatingChatWidget from '@components/FloatingChatWidget';
 import LeftMenuBar from '@components/LeftMenuBar';
 import { container, body } from './style.js';
 import DashboardView from './DashboardView';
@@ -18,7 +17,7 @@ const UserDashboardView = ({ match }) => {
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        //getAgentProfile({}, dispatch);
+        getAgentProfile({}, dispatch);
     },[])
 
    return(
@@ -43,7 +42,6 @@ const UserDashboardView = ({ match }) => {
                     <Route exact path={`${match.path}/customer/:caseId`} component={CustomerInfoView}/>
                 </Switch>
             </div>
-            <FloatingChatWidget/>
         </div>
     )
 }

@@ -21,6 +21,10 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
     const { first_name='' } = profile;
     const isProfileExist = userInfo && userInfo.profile_exists;
 
+    const agentInfo = useSelector(state=>state.AGENT_STORE);
+    const { agentProfile={} } = agentInfo;
+    const { agent_profile={} } = agentProfile;
+    const { full_name='' } = agent_profile;
     const [showLoader, setLoader] = useState(false);
 
     useEffect(()=>{
@@ -96,7 +100,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                                 <div className="userContent">
                                     <img className="img-fluid" src={ASSETS_BASE_URL+"/images/common/Avatar_blue.svg"} alt="user" />
                                     <div className="userDetailsMain">
-                                        <h5>{first_name}</h5>
+                                        <h5>{first_name||full_name}</h5>
                                         <p><strong>98%</strong>Profile Completed</p>
                                         {
                                             isAgent?null:<button onClick={()=>history.push('/profile?isEdit=true')}>Update Profile</button>
