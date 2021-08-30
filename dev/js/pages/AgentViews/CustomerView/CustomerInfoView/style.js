@@ -286,6 +286,24 @@ export const body = css`
       margin-bottom: 16px;
     }
   }
+  .main-container{
+    display: flex;
+  }
+  .chat{
+    min-width: 40%;
+  }
+  .leftBar{
+    width: 60%;
+  }
+  @media (max-width: ${tabScreenWidth}) {
+    .chat{
+      display: none;
+    }
+    .leftBar{
+      width: 100%;
+    }
+  }
+  
 `;
 
 export const list = css`
