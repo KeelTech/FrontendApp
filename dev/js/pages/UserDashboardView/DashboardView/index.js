@@ -11,10 +11,11 @@ import ProfileWidget from '@components/ProfileWidget';
 import BlankScreen from '@components/BlankScreen';
 import LoadingWidget from '@components/LoadingWidget';
 import { loaderView, isMobileView } from '@constants';
+import { getFormattedDate, getFormattedTime } from '@helpers/utils.js';
 import { container, pendingTasks, scheduleCallCta, upcomingSchedules } from './style.js';
 import { body } from '../style.js';
 
-const DashboardView = () => {
+const DashboardView = ({ scheduleList }) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const taskInfo = useSelector(state => state.TASK_INFO);
@@ -66,7 +67,6 @@ const DashboardView = () => {
             )
         }
     }
-
     return (
         <div className={body + '    ' + 'p-relative pt-5'}>
             <div className="mainView">
@@ -126,19 +126,24 @@ const DashboardView = () => {
                     {/* <ProfileWidget /> */}
                 </div>
                 <div className="upcoming"><span>Upcoming Schedule</span></div>
-                <div className="info">
-                    <span className="upcomingTitle">This is the title of meeting </span>
-                    <div className="taskSch">
-                        <div className="taskName">
-                            <img className="icon" src={ASSETS_BASE_URL + "/images/common/calendar.svg"} alt="time" />
-                            <span>March 20, 2021</span>
+                {
+                    scheduleList.map((val, key)=>{
+                        const { start_time, name='', end_time } = val;
+                        return <div className="info">
+                            <span className="upcomingTitle">{name} </span>
+                            <div className="taskSch">
+                                <div className="taskName">
+                                    <img className="icon" src={ASSETS_BASE_URL + "/images/common/calendar.svg"} alt="time" />
+                                    <span>{getFormattedDate(start_time).formattedDate}</span>
+                                </div>
+                                <div className="taskName">
+                                    <img className="icon" src={ASSETS_BASE_URL + "/images/common/clock.svg"} alt="clock" />
+                                    <span>{`${getFormattedTime(start_time)} - ${getFormattedTime(end_time)}`}</span>
+                                </div>
+                            </div>
                         </div>
-                        <div className="taskName">
-                            <img className="icon" src={ASSETS_BASE_URL + "/images/common/clock.svg"} alt="clock" />
-                            <span>09.00 - 10.00 AM</span>
-                        </div>
-                    </div>
-                </div>
+                    })
+                }
             </div>
         </div>
     )

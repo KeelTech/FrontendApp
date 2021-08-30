@@ -1,4 +1,4 @@
-import { TASK_LIST_LOADING, SET_TASK_LIST, TASK_DETAIL_INFO, GET_USER_PROFILE,  LOADING_USER_PROFILE, GET_FULL_USER_PROFILE, LOADING_FULL_USER_PROFILE, UPDATE_USER_PROFILE, SAVE_PLACE_INFO, CASE_DETAIL_LOADING, CASE_DETAILS } from '@constants/types';
+import { TASK_LIST_LOADING, SET_TASK_LIST, TASK_DETAIL_INFO, GET_USER_PROFILE,  LOADING_USER_PROFILE, GET_FULL_USER_PROFILE, LOADING_FULL_USER_PROFILE, UPDATE_USER_PROFILE, SAVE_PLACE_INFO, CASE_DETAIL_LOADING, CASE_DETAILS, CALENDLY_URL_LOADING, FETCH_CALENDLY_URL } from '@constants/types';
 import { API_POST, API_GET } from '../../api/api.js';
 
 export const getTaskList = (dataParams, dispatch, cb=null)=>{
@@ -181,5 +181,54 @@ export const getCaseDetail = (dataParams, dispatch, cb=null)=>{
             type: CASE_DETAIL_LOADING,
             payload: false
         })
+    })
+}
+
+export const getCalendlyLink = (dataParams, dispatch, cb=null)=>{
+    dispatch({
+        type: CALENDLY_URL_LOADING,
+        payload: true
+    })
+    API_GET(`${API_BASE_URL}/v1/calendly/agent/schedule-url`).then((response)=>{
+        dispatch({
+            type: CALENDLY_URL_LOADING,
+            payload: false
+        })
+        if(response && response.status==1){
+            dispatch({
+                type: FETCH_CALENDLY_URL,
+                payload: response.message && response.message.schedule_url
+            })
+        }
+
+    }).catch((e)=>{
+        dispatch({
+            type: CALENDLY_URL_LOADING,
+            payload: false
+        })
+    })
+}
+
+export const scheduleCall = (dataParams, dispatch, cb=null)=>{
+    
+    API_POST(`${API_BASE_URL}/v1/calendly/agent/schedule-call`, {
+        ...dataParams
+    }).then((response)=>{
+        if(cb)cb(response);
+
+    }).catch((e)=>{
+        
+    })
+}
+
+export const getScheduleDetail = (dataParams, dispatch, cb=null)=>{
+    API_GET(`${API_BASE_URL}/v1/calendly/active-schedule/details`).then((response)=>{
+        
+        if(response && response.status==1){
+            if(cb)cb(response);
+        }
+
+    }).catch((e)=>{
+        
     })
 }
