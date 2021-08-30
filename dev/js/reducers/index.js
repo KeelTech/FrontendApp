@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-
+import { LOGOUT_USER } from '@constants/types';
 import AUTH from './commons/auth.js';
 import USER from './commons/user.js';
 import LOGIN from './commons/login.js';
@@ -76,6 +76,24 @@ const allReducers = combineReducers({
   CHAT: persistReducer(CHAT_PERSIST, CHAT)
 });
 
-const persistedReducer = persistReducer(persistConfig, allReducers);
+const rootReducer = (state, action) => {
+  if (action.type === LOGOUT_USER) {
+      // for all keys defined in your persistConfig(s)
+      storage.removeItem('persist:root')
+      storage.removeItem('persist:AUTH')
+      storage.removeItem('persist:USER')
+      storage.removeItem('persist:USER_LOGIN')
+      storage.removeItem('persist:COMMON')
+      storage.removeItem('persist:TASK_INFO')
+      storage.removeItem('persist:AGENT_STORE')
+      storage.removeItem('persist:DOCUMENT_VAULT')
+      storage.removeItem('persist:CHAT')
+
+      return allReducers(undefined, action);
+  }
+  return allReducers(state, action);
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export default persistedReducer;
