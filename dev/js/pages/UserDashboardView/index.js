@@ -19,7 +19,7 @@ const UserDashboardView = (props)=>{
     const dispatch = useDispatch();
     const taskInfo = useSelector(state=>state.TASK_INFO);
     const { userInfo={}, userInfoLoading, calendlyURL } = taskInfo;
-    const { cases, profile_exists } = userInfo;
+    const { cases={}, profile_exists } = userInfo;
     const isPlanPurchased = cases && cases.plan;
     const [scheduleList, setScheduleList] = useState([]);
 
