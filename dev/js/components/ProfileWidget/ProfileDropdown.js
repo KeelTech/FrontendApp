@@ -11,6 +11,11 @@ const ProfileDropdown = ({ handleLogout }) => {
   const { userInfo = {} } = taskInfo;
   const { profile:profileData={} } = userInfo;
   const { first_name='', last_name='' } = profileData;
+
+  const agentInfo = useSelector(state=>state.AGENT_STORE);
+  const { agentProfile={} } = agentInfo;
+  const { agent_profile={} } = agentProfile;
+  const { full_name='' } = agent_profile;
   
   const { isAgent } = logginInfo||{};
 
@@ -18,7 +23,7 @@ const ProfileDropdown = ({ handleLogout }) => {
     <div className={profile + " " + "profileDropDown"}>
       <div className={info + " " + "dropWhiteBox" }>
         <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/user.svg"} />
-        <h2 className="usrDrpName">{`${first_name} ${last_name}`}</h2>
+        <h2 className="usrDrpName">{`${first_name} ${last_name} ${full_name}`}</h2>
         {/* <h3>shubh@getkeel.com</h3> */}
       </div>
       <div>

@@ -1,4 +1,4 @@
-import { ADD_CASE_LIST, CASE_LIST_LOADING } from '@constants/types';
+import { ADD_CASE_LIST, CASE_LIST_LOADING, FETCH_AGENT_PROFILE, AGENT_PROFILE_LOADING } from '@constants/types';
 import { API_GET, API_POST, API_PUT, API_DELETE } from '../../api/api.js';
 
 export const createTask = (dataParams, dispatch, cb=null)=>{
@@ -104,10 +104,26 @@ export const deleteTaskInfo = (dataParams, dispatch, cb=null)=>{
     })
 }
 
-export const getAgentProfile = (dataParams={})=>{
+export const getAgentProfile = (dataParams={}, dispatch, cb=null)=>{
+    dispatch({
+        type: AGENT_PROFILE_LOADING,
+        payload: true
+    })
     API_GET(`${API_BASE_URL}/v1/user/get-agent-profile`).then((response)=>{
+        dispatch({
+            type: AGENT_PROFILE_LOADING,
+            payload: false
+        })
+        dispatch({
+            type: FETCH_AGENT_PROFILE,
+            payload: response && response.message||{}
+        })
         if(cb)cb(response, null);
     }).catch((e)=>{
+        dispatch({
+            type: AGENT_PROFILE_LOADING,
+            payload: false
+        })
         if(cb)cb(null, true);
     })
 }
