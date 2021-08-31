@@ -20,10 +20,11 @@ const DashboardView = ({ scheduleList }) => {
     const dispatch = useDispatch();
     const taskInfo = useSelector(state => state.TASK_INFO);
     const { taskList = [], taskListLoading, userInfoLoading, userInfo = {} } = taskInfo || {};
-    let { case: caseDetails = {}, cases = {}, profile={} } = userInfo;
+    let { case: caseDetails = {}, cases = {}, profile={}, agent={} } = userInfo;
     if (cases) {
         caseDetails = cases
     }
+    const { full_name:agentName='' } = agent;
     const { first_name='' } = profile;
     const caseId = caseDetails && caseDetails.case_id;
     const userId = caseDetails && caseDetails.user;
@@ -116,7 +117,7 @@ const DashboardView = ({ scheduleList }) => {
 
                     </div>
                     <div className="chat">
-                        {caseId && userId ? <ChatWidget caseId={caseId} currentUserId={userId} /> : ""}
+                        {caseId && userId ? <ChatWidget caseId={caseId} currentUserId={userId} chatHeaderName={agentName}/> : ""}
                     </div>
                 </div>
             </div>

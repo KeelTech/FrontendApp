@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createComment } from '@actions';
 import CustomButton from '@components/CustomButton';
+import { getNameInitialHelper } from '@helpers/utils';
 import { container } from './style.js';
 
-const PostComments = ({ taskId, updateTaskStatus })=>{
+const PostComments = ({ taskId, updateTaskStatus, title="" })=>{
     const dispatch = useDispatch();
     const [comment, setComment] = useState('');
 
@@ -30,7 +31,7 @@ const PostComments = ({ taskId, updateTaskStatus })=>{
     return(
         <div className={container}>
             <div className="msgView">
-                <span className="profile">SW</span>
+                <span className="profile">{getNameInitialHelper(title)}</span>
                 <input type="text" placeholder="Write a Comment" value={comment} onChange={(e)=>setComment(e.target.value)}/>
             </div>
             <CustomButton text="Add" clickHandler={addComment} margin="0px 0px 16px 30px" padding="10px 20px" borderRadius="5px" backgroundColor="#4267b2"/>

@@ -1,6 +1,6 @@
 import React, { Fragment, useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateTask, deleteComment, downloadDocument, deleteDocument, updateCurrentTaskStatus, deleteTaskInfo } from '@actions';
 import AttachmentCard from '@components/AttachmentCard';
 import CustomButton from '@components/CustomButton';
@@ -32,6 +32,11 @@ const PriorityList = [
 const TaskInfo = ({taskDetail, refetchTaskDetail, refetchTaskList})=>{
     const history = useHistory();
     const dispatch = useDispatch();
+
+    const agentInfo = useSelector(state=>state.AGENT_STORE);
+    const { agentProfile={} } = agentInfo;
+    const { agent_profile={} } = agentProfile;
+    const { full_name:agentName='' } = agent_profile;
 
     const [dataParams, setDataParams] = useState({
         ...taskDetail
@@ -289,9 +294,9 @@ const TaskInfo = ({taskDetail, refetchTaskDetail, refetchTaskList})=>{
                         <span>Members</span>
                     </div>
                     <div className="member">
-                        <span>S</span>
-                        <span className={memberCard({val: 1, bgcolor: '#C1E0B6'})}>M</span>
-                        <span className={memberCard({val: 2, bgcolor: '#B8D4D6'})}>C</span>
+                        <span>{agentName.split('')[0]}</span>
+                        {/* <span className={memberCard({val: 1, bgcolor: '#C1E0B6'})}>M</span>
+                        <span className={memberCard({val: 2, bgcolor: '#B8D4D6'})}>C</span> */}
                     </div>
                 </div>
                 <div className="view">
@@ -397,7 +402,7 @@ const TaskInfo = ({taskDetail, refetchTaskDetail, refetchTaskList})=>{
                     <span>Activity</span>
                 </div>
                 <div className="messageSection">
-                    <PostCommentView taskId={dataParams.task_id} updateTaskStatus={updateTaskStatus}/>
+                    <PostCommentView taskId={dataParams.task_id} updateTaskStatus={updateTaskStatus} title={agentName}/>
                     {
                         dataParams.tasks_comment.map((val, key)=>{
                             const { user_details, msg, created_at, id } = val;

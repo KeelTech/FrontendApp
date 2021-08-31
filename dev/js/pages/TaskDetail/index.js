@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import AttachmentCard from '@components/AttachmentCard';
@@ -18,7 +18,11 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const taskInfo = useSelector(state => state.TASK_INFO);
-    const { taskDetail = {} } = taskInfo || {};
+    const { taskDetail = {}, userInfo={} } = taskInfo || {};
+    const { profile={}, agent={} } = userInfo;
+    const { first_name:consumerName='', last_name: cosumerLastName='' } = profile;
+    const { full_name:agentName='' } = agent;
+
     const [openUploadDocumentModal, setOpenUploadModal] = useState(false);
     const [toasterInfo, setToasterInfo] = useState({
         isVisible: false,
@@ -157,6 +161,21 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
 
     const { title, priority_name, status_name = '', description, tasks_comment = [], tasks_docs = [], check_list = [] } = taskDetail && taskDetail[activeTask] || {};
 
+    const checklistPercentage = useMemo(()=>{
+        let checked=0;
+        let totalItems = 0;
+        Object.entries(check_list).map((val, key)=>{
+            if(val[1].action){
+                checked++;
+            }
+            totalItems++;
+        })
+        if(checked){
+            return parseInt((checked/totalItems)*100);
+        }
+        return 0;
+    },[check_list]);
+
     return (
         <div className={container + ' ' + 'innerTask'}>
             {
@@ -192,9 +211,9 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
                             <span>Members</span>
                         </div>
                         <div className="member">
-                            <span>S</span>
-                            <span className={memberCard({ val: 1, bgcolor: '#C1E0B6' })}>M</span>
-                            <span className={memberCard({ val: 2, bgcolor: '#B8D4D6' })}>C</span>
+                            <span>{agentName.split('')[0]}</span>
+                            {/* <span className={memberCard({ val: 1, bgcolor: '#C1E0B6' })}>M</span>
+                            <span className={memberCard({ val: 2, bgcolor: '#B8D4D6' })}>C</span> */}
                         </div>
                     </div>
                     <div className="view">
@@ -239,19 +258,19 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
                     </div>
                 </div>
 
-                <div className={checklistSection({ progress: '60%' })}>
+                <div className={checklistSection({ progress: `${checklistPercentage}%` })}>
                     <div className="taskName">
                         <img className="icon" src={ASSETS_BASE_URL + "/images/common/checklist.svg"} alt="discuss" />
                         <span>Checklist</span>
                     </div>
                     <div className="progress">
-                        <span className="progressNo">60%</span>
+                        <span className="progressNo">{checklistPercentage}%</span>
                         <span className="percent"></span>
                     </div>
                     <div className="checklistItems">
                         {
                             Object.entries(check_list).map((val, key) => {
-                                const checked = val[1];
+                                const checked = val[1] && val[1].action;
                                 const icon = checked ? `${ASSETS_BASE_URL}/images/common/checkedTicker.svg` : `${ASSETS_BASE_URL}/images/common/emptyTicker.svg`;
                                 return <div className={`item ${checked ? 'checkedItem' : ''}`} key={key}>
                                     <img src={icon} alt="discuss" />
@@ -268,11 +287,7 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
                         <span>Activity</span>
                     </div>
                     <div className="messageSection">
-                        <PostCommentView taskId={activeTask} updateTaskStatus={updateTaskStatus} />
-                        {/* <div className="msgView">
-                        <span className="profile">SW</span>
-                        <input type="text" placeholder="Write a Comment"/>
-                    </div> */}
+                        <PostCommentView taskId={activeTask} updateTaskStatus={updateTaskStatus} title={`${consumerName} ${cosumerLastName}`}/>
                         {
                             tasks_comment.map((val, key) => {
                                 const { user_details, user_name, msg, created_at, id } = val;
