@@ -7,7 +7,7 @@ import { sendChatMessage, getChatMessages } from '@actions';
 
 
 const ChatWidget = ({ floatingChat=false, toggleChat, caseId="", currentUserId="", chatHeaderName="" })=>{
-
+    //console.log(currentUserId)
     const dispatch = useDispatch();
     const mainClass = cx({
         [container]: true,

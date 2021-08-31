@@ -16,10 +16,10 @@ function CustomerInfoView(props) {
   const taskInfo = useSelector((store) => store.TASK_INFO);
   const { caseDetails, caseDetailLoading } = taskInfo || {};
 
-  // const agentInfo = useSelector(state=>state.AGENT_STORE);
-  // const { agentProfile={} } = agentInfo;
-  // const { agent_profile={} } = agentProfile;
-  // const { id='' } = agent_profile;
+  const agentInfo = useSelector(state=>state.AGENT_STORE);
+  const { agentProfile={} } = agentInfo;
+  const { agent_profile={} } = agentProfile;
+  const { id='' } = agent_profile;
 
   let caseId = '';
   if (props && props.match && props.match.params) {
@@ -45,7 +45,7 @@ function CustomerInfoView(props) {
     task_count = null,
   } = caseDetails;
 
-  const { first_name, last_name, id } = user_details;
+  const { first_name, last_name } = user_details;
   const { display_id, plan } = case_details;
   return (
     <div className={body}>
@@ -94,7 +94,7 @@ function CustomerInfoView(props) {
                 {/* <button className="docButton">Documents</button> */}
               </div>
             </div>
-            <div className="meetingInfoWrapperADD meetingNewAd">
+            {/* <div className="meetingInfoWrapperADD meetingNewAd">
               <div className="meetingInfoFlexWrapper">
                 <div className="meetingTextWrapper">
                   <p className="meetingHeader">This title is for the meeting</p>
@@ -112,17 +112,17 @@ function CustomerInfoView(props) {
                   <button className="scheduleBtn">Reschedule</button>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="completeInfoWrapperADD userCompleteInfo">
               <InfoList info={caseDetails} />
             </div>
           </div>
           <div className="chat">
-            {caseId && id ? <ChatWidget caseId={caseId} currentUserId={id} /> : ""}
+            {caseId && id ? <ChatWidget caseId={caseId} currentUserId={id} chatHeaderName={first_name}/> : ""}
           </div>
         </div>
       )}
-      {caseId && id ? <FloatingChatWidget caseId={caseId} currentUserId={id} /> : ""}
+      {caseId && id ? <FloatingChatWidget caseId={caseId} currentUserId={id} chatHeaderName={first_name}/> : ""}
     </div>
   );
 }

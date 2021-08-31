@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Header from "@components/Header";
 import NotificationWidget from "@components/NotificationWidget";
 import ProfileWidget from "@components/ProfileWidget";
@@ -17,6 +17,11 @@ const ReviewImg = `${ASSETS_BASE_URL}/images/common/review.svg`;
 
 const AgentDashboardView = () => {
   const dispatch = useDispatch();
+  const agentInfo = useSelector(state=>state.AGENT_STORE);
+  const { agentProfile={} } = agentInfo;
+  const { agent_profile={} } = agentProfile;
+  const { full_name='' } = agent_profile;
+
   const [loading, setLoading] = useState(true);
   const [toasterInfo, setToasterInfo] = useState({
     isVisible: false,
@@ -88,12 +93,12 @@ const AgentDashboardView = () => {
           <CustomToaster {...toasterInfo} hideToaster={hideToaster} />
           <div className="performance">
             <div className="intro">
-              <span className="profileName">Hi Shubh!</span>
+              <span className="profileName">Hi {full_name}!</span>
               <span className="meetingTxt">
                 You have 9 meetings to attend in this week & you have 15 tasks
                 to review.{" "}
               </span>
-              <span className="showTasks">Show Tasks</span>
+              {/* <span className="showTasks">Show Tasks</span> */}
             </div>
             <div className={widgets + " " + "consultWidgets"}>
               <div className="widgetCardMain">
