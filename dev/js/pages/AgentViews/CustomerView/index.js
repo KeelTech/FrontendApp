@@ -38,19 +38,32 @@ const CustomerView = () => {
 
   return (
     <Fragment>
-      <div className="mainView">
-        <Header headerText="All Customers" isAgent>
+      <div className="mainView mainSectionTopSpace">
+        {/* <Header headerText="All Customers" isAgent>
           <div className={head}>
             <NotificationWidget />
             <ProfileWidget />
           </div>
-        </Header>
-        <div className={view}>
+        </Header> */}
+        <div className={view + " " + "tableMainContainer"}>
           {
-              caseListLoading?<div className={loaderView}><LoadingWidget/></div>
+              caseListLoading?<div className={loaderView + " " + "tableInnerCont"}><LoadingWidget/></div>
               :<Fragment>
                 <div className="desktopView">
                   <DesktopViewList handleCustomerClick={handleCustomerClick} caseList={caseList} />
+                  <div className="paginationBtn">
+                    <button className="prevBtn">
+                    <img className="img-fluid" src={ASSETS_BASE_URL+"/images/common/vector.svg"} alt="pagination" />
+                    </button>
+                    <ul>
+                      <li><span className="active">1</span></li>
+                      <li><span>2</span></li>
+                      <li><span>3</span></li>
+                    </ul>
+                    <button className="nxtBtn">
+                    <img className="img-fluid" src={ASSETS_BASE_URL+"/images/common/vector.svg"} alt="pagination" />
+                    </button>
+                  </div>
                 </div>
                 <div className="mobileView">
                   <MobileViewList handleCustomerClick={handleCustomerClick} caseList={caseList} />

@@ -3,7 +3,7 @@ import { inputField } from '@constants';
 
 export const container = css`
 height: 100%;
-background: #FCFCFC;
+background: #ffffff;
 padding-top: 12px;
 border-radius: 10px;
 box-shadow: 2px 2px 8px #d8dce4;

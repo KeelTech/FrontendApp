@@ -3,28 +3,34 @@ import { mobileScreenWidth } from "@constants";
 import { primaryFont } from "@constants";
 
 export const upcoming = css`
-  font-weight: bold;
-  font-size: 18px;
-  font-family: ${primaryFont};
-  line-height: 27px;
-  color: #363b64;
-  background: #fcfcfc;
-  border-radius: 14px;
-  padding: 12px 0px;
-  width: 100%;
-  box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
-  text-align: center;
+font-weight: bold;
+font-size: 16px;
+font-family: inherit;
+line-height: 24px;
+color: #ffffff;
+background: rgb(34, 193, 195);
+background: linear-gradient( 
+38deg
+, rgba(34, 193, 195, 1) 0%, rgba(66, 103, 178, 1) 100%);
+border: 1px solid #c7c7c5;
+border-radius: 4px;
+padding: 8px 0px;
+width: 100%;
+text-align: center;
+box-shadow: 2px 2px 8px #d8dce4;
   .calendar {
     width: 100%;
     padding-top: 30px;
   }
   @media (max-width: ${mobileScreenWidth}) {
-    display: inline;
-    text-align: left;
-    font-size: 16px;
+    background: rgb(34, 193, 195);
+background: linear-gradient( 
+38deg
+, rgba(34, 193, 195, 1) 0%, rgba(66, 103, 178, 1) 100%);
+border: 1px solid #c7c7c5;
+    text-align:  center;
+    font-size: 14px;
     line-height: 24px;
-    background: inherit;
-    border-radius: 0;
   }
 `;
 
@@ -40,16 +46,18 @@ export const schedule = css`
     box-shadow: 2px 2px 8px #d8dce4;
     border-radius: 4px;
     border: 1px solid #e0dfdc;
-    padding: 10px 32px;
+    padding: 10px 12px;
   }
   .message {
-    font-size: 16px;
+    font-size: 14px;
+    font-weight:400;
     line-height: 20px;
     color: #363b64;
     font-family: ${primaryFont};
   }
   .time {
-    margin-top: 6px;
+    display: flex;
+    margin-top: 10px;
     img {
       width: 16px;
       height: 16px;
@@ -59,7 +67,7 @@ export const schedule = css`
 
     span {
       font-size: 12px;
-      color: #a098ae;
+      color: #4267B2;
       position: relative;
       top: -2px;
       font-family: ${primaryFont};

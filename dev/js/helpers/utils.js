@@ -66,10 +66,14 @@ export const capitalizeFirstLetter = (string) =>{
 }
 
 export const statusStyle = props =>css`
-    background: ${props.bgColor};
-    padding: 4px 8px;
-    color: #FFF;
-    font-size: 12px;
+    // background: ${props.bgColor};
+    background: ${props.bgColor};;
+    border: 1px solid ${props.bgBorder};
+    padding: 0px 5px;
+    color: ${props.bgBorder};
+    width: 100%;
+    display: inline-block;
+    text-align: center;
     border-radius: 3px;
     font-weight: 500;
     font-size: 10px;
@@ -78,15 +82,19 @@ export const statusStyle = props =>css`
 export const renderStatusText = (val) =>{
     let status = '';
     let bgColor = 'red';
+    let bgBorder = 'white';
     if(val==0){
         status = 'Pending on customer'
-        bgColor='#28A745';
+        bgColor='#F5D6D6';
+        bgBorder="#CF3030";
     }else if(val ==1){
         status = 'Pending on you'
-        bgColor='#DC3545';
+        bgColor='#F5D6D6';
+        bgBorder="#CF3030";
     }else if(val==2){
         status = 'Completed'
-        bgColor='#747BB4';
+        bgColor='#DEF2EC';
+        bgBorder="#4CBC9A";
     }
-    return <span className={statusStyle({ bgColor })}>{status}</span>
+    return <span className={statusStyle({ bgColor,bgBorder })}>{status}</span>
 }

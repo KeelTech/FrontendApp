@@ -26,46 +26,46 @@ export const container = css`
     display: flex;
     align-items: flex-start;
   }
-  .intro {
-    padding: 22px 20px;
-    background: #fcfcfc;
-    box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
-    border-radius: 20px;
-    width: 54%;
-    height:236px;
-    .profileName {
-      display: block;
-      font-weight: bold;
-      font-size: 30px;
-      line-height: 66px;
-      color: #363b64;
-      margin-bottom: 3px;
-      font-family: ${primaryFont};
-    }
-    .meetingTxt {
-      display: block;
-      color: #363b64;
-      font-size: 16px;
-      line-height: 18px;
-      margin-bottom: 20px;
-      font-family: ${primaryFont};
-    }
-    .showTasks {
-      display: block;
-      background: #363b64;
-      padding: 6px;
-      margin-left: -6px;
-      box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
-      font-size: 16px;
-      line-height: 27px;
-      border-radius: 10px;
-      color: #fcfcfc;
-      width: 100%;
-      text-align: center;
-      font-weight: bold;    
-      font-family: ${primaryFont};
-    }
-  }
+  // .intro {
+  //   padding: 22px 20px;
+  //   background: #fcfcfc;
+  //   box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
+  //   border-radius: 20px;
+  //   width: 54%;
+  //   height:236px;
+  //   .profileName {
+  //     display: block;
+  //     font-weight: bold;
+  //     font-size: 30px;
+  //     line-height: 66px;
+  //     color: #363b64;
+  //     margin-bottom: 3px;
+  //     font-family: ${primaryFont};
+  //   }
+  //   .meetingTxt {
+  //     display: block;
+  //     color: #363b64;
+  //     font-size: 16px;
+  //     line-height: 18px;
+  //     margin-bottom: 20px;
+  //     font-family: ${primaryFont};
+  //   }
+  //   .showTasks {
+  //     display: block;
+  //     background: #363b64;
+  //     padding: 6px;
+  //     margin-left: -6px;
+  //     box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
+  //     font-size: 16px;
+  //     line-height: 27px;
+  //     border-radius: 10px;
+  //     color: #fcfcfc;
+  //     width: 100%;
+  //     text-align: center;
+  //     font-weight: bold;    
+  //     font-family: ${primaryFont};
+  //   }
+  // }
   .graph {
     width: 60%;
   }
@@ -77,37 +77,37 @@ export const container = css`
     .performance {
       display: block;
     }
-    .intro {
-      background: rgba(252, 252, 252, 0.5);
-      box-shadow: none;
-      border-radius: 0px;
-      width: 100%;
-      padding: 0;
-      height:auto;
-      .profileName {
-        font-size: 20px;
-        line-height: 24px;
-        color: #363b64;
-        margin-bottom: 6px;
-      }
-      .meetingTxt {
-        display: block;
-        color: #363b64;
-        font-size: 14px;
-        line-height: 18px;
-        margin-bottom: 10px;
-      }
-      .showTasks {
-        padding: 10px 14px;
-        margin-left: 0px;
-        box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
-        border-radius: 10px;
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 21px;
-        width: 110px;
-      }
-    }
+    // .intro {
+    //   background: rgba(252, 252, 252, 0.5);
+    //   box-shadow: none;
+    //   border-radius: 0px;
+    //   width: 100%;
+    //   padding: 0;
+    //   height:auto;
+    //   .profileName {
+    //     font-size: 20px;
+    //     line-height: 24px;
+    //     color: #363b64;
+    //     margin-bottom: 6px;
+    //   }
+    //   .meetingTxt {
+    //     display: block;
+    //     color: #363b64;
+    //     font-size: 14px;
+    //     line-height: 18px;
+    //     margin-bottom: 10px;
+    //   }
+    //   .showTasks {
+    //     padding: 10px 14px;
+    //     margin-left: 0px;
+    //     box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
+    //     border-radius: 10px;
+    //     font-weight: 600;
+    //     font-size: 14px;
+    //     line-height: 21px;
+    //     width: 110px;
+    //   }
+    // }
   }
 `;
 

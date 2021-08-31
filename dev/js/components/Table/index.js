@@ -26,7 +26,7 @@ class Table extends Component {
 
     renderData = (data, cols) =>{
         return data.map(row =>
-            <tr className={`${rowClass} cursor-pointer`} key={row.key} onClick={()=>this.props.handleCustomerClick(row.case_id)}>
+            <tr className={`${rowClass + " " + "tableRow" } cursor-pointer`} key={row.key} onClick={()=>this.props.handleCustomerClick(row.case_id)}>
                 {cols.map(col =>
                     this.decideRendering(row, col)
                 )}
@@ -40,11 +40,11 @@ class Table extends Component {
 
     render() {
         return (
-            <table className={tableClass}>
-                <thead className={headerClass}>
-                    <tr className={headerRowClass}>
+            <table className={tableClass + " " + "tableMain"}>
+                <thead className={headerClass + " " + "tableHeadMain"}>
+                    <tr className={headerRowClass + " " + "tableRow"}>
                         {this.props.cols.map(col =>
-                            <th className={hrClass} key={col.key}>{col.label}</th>
+                            <th className={hrClass + " " + "tableHead"} key={col.key}>{col.label}</th>
                         )}
                     </tr>
                 </thead>

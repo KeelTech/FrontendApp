@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import FloatingChatWidget from '@components/FloatingChatWidget';
@@ -22,22 +22,22 @@ function CustomerInfoView(props) {
   // const { id='' } = agent_profile;
 
   let caseId = '';
-  if(props && props.match && props.match.params){
-      caseId = props.match.params.caseId;
+  if (props && props.match && props.match.params) {
+    caseId = props.match.params.caseId;
   }
   const history = useHistory();
-  
-  const redirectToTask = ()=>{
+
+  const redirectToTask = () => {
     history.push(`/agent/tasks/${caseId}`);
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     window.scrollTo(0, 0);
     const dataParams = { customerId: caseId };
     getCaseDetail(dataParams, dispatch);
-  },[])
+  }, [])
 
-  
+
   const {
     case_details = {},
     user_details = {},
@@ -46,27 +46,27 @@ function CustomerInfoView(props) {
   } = caseDetails;
 
   const { first_name, last_name, id } = user_details;
-  const { display_id, plan} = case_details;
+  const { display_id, plan } = case_details;
   return (
     <div className={body}>
-      <div className="mainView">
-        <Header headerText="Customer Details" isAgent>
+      <div className="mainView mainSectionTopSpace">
+        {/* <Header headerText="Customer Details" isAgent>
           <div className="head">
             <NotificationWidget />
             <ProfileWidget />
           </div>
-        </Header>
+        </Header> */}
       </div>
       {caseDetailLoading ? (
         <div>
           <LoadingWidget />
         </div>
       ) : (
-        <div className="main-container">
+        <div className="main-container customerMainContainer">
           <div className="leftBar">
-            <div className="basicInfo">
+            <div className="basicInfoADD customerDetails">
               <div className="infoWrapper">
-                {/* <img className="userImage" /> */}
+                <img className="img-fluid userProfileXn" src={ASSETS_BASE_URL + "/images/common/Avatar_blue.svg"} alt="user" />
                 <div className="userInfoHeaderWrapper">
                   <h3 className="userName">
                     {first_name} {last_name}
@@ -94,7 +94,7 @@ function CustomerInfoView(props) {
                 {/* <button className="docButton">Documents</button> */}
               </div>
             </div>
-            {/* <div className="meetingInfoWrapper">
+            <div className="meetingInfoWrapperADD meetingNewAd">
               <div className="meetingInfoFlexWrapper">
                 <div className="meetingTextWrapper">
                   <p className="meetingHeader">This title is for the meeting</p>
@@ -112,17 +112,17 @@ function CustomerInfoView(props) {
                   <button className="scheduleBtn">Reschedule</button>
                 </div>
               </div>
-            </div> */}
-            <div className="completeInfoWrapper">
-              <InfoList info={caseDetails}/>
+            </div>
+            <div className="completeInfoWrapperADD userCompleteInfo">
+              <InfoList info={caseDetails} />
             </div>
           </div>
           <div className="chat">
-              {caseId && id ? <ChatWidget caseId={caseId} currentUserId={id} /> : ""}
+            {caseId && id ? <ChatWidget caseId={caseId} currentUserId={id} /> : ""}
           </div>
         </div>
       )}
-      {caseId && id ? <FloatingChatWidget caseId={caseId} currentUserId={id}/>:""}
+      {caseId && id ? <FloatingChatWidget caseId={caseId} currentUserId={id} /> : ""}
     </div>
   );
 }
