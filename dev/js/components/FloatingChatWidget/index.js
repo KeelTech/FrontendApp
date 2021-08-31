@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ChatWidget from '@components/ChatWidget';
 import { floatingChat } from './style.js';
 
-const FloatingChatWidget = ({ caseId, currentUserId })=>{
+const FloatingChatWidget = ({ caseId, currentUserId, chatHeaderName="" })=>{
 
     const [showChat, setChatVisiblity] = useState(false);
 
@@ -15,7 +15,7 @@ const FloatingChatWidget = ({ caseId, currentUserId })=>{
                 <img src={ASSETS_BASE_URL+"/images/common/chat.svg"} alt="chat"/>
             </div>
             {
-                showChat && <ChatWidget toggleChat={toggleChat} floatingChat caseId={caseId} currentUserId={currentUserId}/>
+                showChat && <ChatWidget toggleChat={toggleChat} floatingChat caseId={caseId} currentUserId={currentUserId} chatHeaderName={chatHeaderName}/>
             }
         </div>
     )

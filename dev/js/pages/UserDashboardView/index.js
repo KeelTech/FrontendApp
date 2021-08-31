@@ -19,9 +19,10 @@ const UserDashboardView = (props)=>{
     const dispatch = useDispatch();
     const taskInfo = useSelector(state=>state.TASK_INFO);
     const { userInfo={}, userInfoLoading, calendlyURL } = taskInfo;
-    const { cases={}, profile_exists } = userInfo;
+    const { cases={}, profile_exists, agent={} } = userInfo;
     const { case_id, user } = cases;
     const isPlanPurchased = cases && cases.plan;
+    const { full_name:agentName='' } = agent;
     const [scheduleList, setScheduleList] = useState([]);
 
     useEffect(()=>{
@@ -107,7 +108,7 @@ const UserDashboardView = (props)=>{
             {
                 userInfoLoading?<div className={loaderView}><LoadingWidget/></div>:renderRoutes()
             }
-            {isPlanPurchased && user && case_id && <FloatingChatWidget caseId={case_id} currentUserId={user}/>}
+            {isPlanPurchased && user && case_id && <FloatingChatWidget caseId={case_id} currentUserId={user} chatHeaderName={agentName}/>}
         </div>
     )
 }

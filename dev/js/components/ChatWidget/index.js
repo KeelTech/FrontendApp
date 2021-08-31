@@ -6,7 +6,7 @@ import { container, chatWidget, msgWidget, mobileChatView } from './style.js';
 import { sendChatMessage, getChatMessages } from '@actions';
 
 
-const ChatWidget = ({ floatingChat=false, toggleChat, caseId="", currentUserId="" })=>{
+const ChatWidget = ({ floatingChat=false, toggleChat, caseId="", currentUserId="", chatHeaderName="" })=>{
 
     const dispatch = useDispatch();
     const mainClass = cx({
@@ -89,7 +89,7 @@ const ChatWidget = ({ floatingChat=false, toggleChat, caseId="", currentUserId="
                 <img className="img-fluid" src={ASSETS_BASE_URL+"/images/common/Avatar_blue.svg"} alt="user" />
                 </div>
                 <div className="nameSection">
-                    <div className="name">Samantha WIlliam</div>
+                    <div className="name">{chatHeaderName}</div>
                     {/* <div className="user">
                         <span className="activeUser"></span>
                         <span className="status">Online</span>
