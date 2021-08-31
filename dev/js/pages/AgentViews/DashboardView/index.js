@@ -74,12 +74,12 @@ const AgentDashboardView = () => {
   const { booked_count, in_progress_count, completed_count, earnings_count, task_count } = cases_count;
   return (
     <div className="mainView mainSectionTopSpace">
-      {/* <Header headerText="Dashboard" isAgent>
-        <div className={header}>
+      <Header headerText="Dashboard" isAgent>
+        {/* <div className={header}>
           <NotificationWidget />
           <ProfileWidget />
-        </div>
-      </Header> */}
+        </div> */}
+      </Header>
       <div className={wrapper + " " + "consultDash"}>
         <div className={container + " " + "consultDasLoad"}>
           {

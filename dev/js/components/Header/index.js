@@ -17,10 +17,10 @@ const Header = (props)=>{
 
     return(
         <div className={container}>
-            <div className={desktopView}>
+            {/* <div className={desktopView}>
                 <span className="heading">{headerText}</span>
                 {props.children}
-            </div>
+            </div> */}
             {
                 IsloggedIn?
                 <div className={mobileView}>
@@ -32,8 +32,9 @@ const Header = (props)=>{
                 :null
             }
             
-            <div className={mobileHeading}>
-                {headerText}</div>
+            {/* <div className={mobileHeading}>
+                {headerText}
+                </div> */}
             {
                 showMobileMenuBar && IsloggedIn && <LeftMenuBar isMobileView toggleMenuBar={toggleMenuBar} isAgent={isAgent}/>
             }
