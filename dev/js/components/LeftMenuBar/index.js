@@ -101,7 +101,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                                     <img className="img-fluid" src={ASSETS_BASE_URL+"/images/common/Avatar_blue.svg"} alt="user" />
                                     <div className="userDetailsMain">
                                         <h5>{first_name||full_name}</h5>
-                                        <p><strong>98%</strong>Profile Completed</p>
+                                        {/* <p><strong>98%</strong>Profile Completed</p> */}
                                         {
                                             isAgent?null:<button onClick={()=>history.push('/profile?isEdit=true')}>Update Profile</button>
                                         }

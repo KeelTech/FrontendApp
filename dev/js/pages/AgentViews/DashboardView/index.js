@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Header from "@components/Header";
 import NotificationWidget from "@components/NotificationWidget";
 import ProfileWidget from "@components/ProfileWidget";
@@ -8,15 +8,20 @@ import { getAgentDetails } from '@actions';
 import { loaderView } from '@constants';
 import LoadingWidget from '@components/LoadingWidget';
 import CustomToaster from '@components/CustomToaster';
-import { header, wrapper, container,mobileView, rightBar, widgets } from "./style.js";
+import { header, wrapper, container, mobileView, rightBar, widgets } from "./style.js";
 import UpcomingSchedule from "@components/UpcomingSchedule";
-const CompletedImg = `${ASSETS_BASE_URL}/images/AgentDashboard/completed.svg`;
-const PendingImg = `${ASSETS_BASE_URL}/images/AgentDashboard/pending.svg`;
-const RevenueImg = `${ASSETS_BASE_URL}/images/AgentDashboard/revenue.svg`;
-const ReviewImg = `${ASSETS_BASE_URL}/images/AgentDashboard/review.svg`;
+const CompletedImg = `${ASSETS_BASE_URL}/images/common/completed.svg`;
+const PendingImg = `${ASSETS_BASE_URL}/images/common/pending.svg`;
+const RevenueImg = `${ASSETS_BASE_URL}/images/common/revenue.svg`;
+const ReviewImg = `${ASSETS_BASE_URL}/images/common/review.svg`;
 
 const AgentDashboardView = () => {
   const dispatch = useDispatch();
+  const agentInfo = useSelector(state=>state.AGENT_STORE);
+  const { agentProfile={} } = agentInfo;
+  const { agent_profile={} } = agentProfile;
+  const { full_name='' } = agent_profile;
+
   const [loading, setLoading] = useState(true);
   const [toasterInfo, setToasterInfo] = useState({
     isVisible: false,
@@ -33,109 +38,153 @@ const AgentDashboardView = () => {
         activeWidget: "dashboard",
       },
     });
-    getAgentDetails({}, dispatch, (resp, err)=>{
+    getAgentDetails({}, dispatch, (resp, err) => {
       setLoading(false);
-      if(resp){
+      if (resp) {
         setDashboardData(resp);
-      }else{
+      } else {
         updateTaskStatus(false, true, 'Failed to fetch Data');
       }
     })
   }, []);
 
-  const updateTaskStatus = (success, error, errorMsg='Failed, Try again later', msg='Comment Added Successfully')=>{
-    if(success){
-        setToasterInfo({
-            isVisible: true,
-            isSuccess: true,
-            isError: false,
-            msg: msg
-        })
-    }else if(error){
-        setToasterInfo({
-            isVisible: true,
-            isSuccess: false,
-            isError: true,
-            msg: errorMsg
-        })
+  const updateTaskStatus = (success, error, errorMsg = 'Failed, Try again later', msg = 'Comment Added Successfully') => {
+    if (success) {
+      setToasterInfo({
+        isVisible: true,
+        isSuccess: true,
+        isError: false,
+        msg: msg
+      })
+    } else if (error) {
+      setToasterInfo({
+        isVisible: true,
+        isSuccess: false,
+        isError: true,
+        msg: errorMsg
+      })
     }
     setTimeout(() => {
-        hideToaster();
+      hideToaster();
     }, 1000);
   }
 
-  const hideToaster = ()=>{
+  const hideToaster = () => {
     setToasterInfo({
-        isVisible: false
+      isVisible: false
     })
   }
 
-  const { cases_count={} } = dashboardData||{};
+  const { cases_count = {} } = dashboardData || {};
   const { booked_count, in_progress_count, completed_count, earnings_count, task_count } = cases_count;
   return (
-    <div className="mainView">
+    <div className="mainView mainSectionTopSpace">
       <Header headerText="Dashboard" isAgent>
-        <div className={header}>
+        {/* <div className={header}>
           <NotificationWidget />
           <ProfileWidget />
-        </div>
+        </div> */}
       </Header>
-      <div className={wrapper}>
-        <div className={container}>
+      <div className={wrapper + " " + "consultDash"}>
+        <div className={container + " " + "consultDasLoad"}>
           {
-              loading && <div className={loaderView}><LoadingWidget/></div>
+            loading && <div className={loaderView}><LoadingWidget /></div>
           }
-          <CustomToaster {...toasterInfo} hideToaster={hideToaster}/>
+          <CustomToaster {...toasterInfo} hideToaster={hideToaster} />
           <div className="performance">
-            {/* <div className="intro">
-              <span className="profileName">Hi Shubh!</span>
+            <div className="intro">
+              <span className="profileName">Hi {full_name}!</span>
               <span className="meetingTxt">
                 You have 9 meetings to attend in this week & you have 15 tasks
                 to review.{" "}
               </span>
-              <span className="showTasks">Show Tasks</span>
-            </div> */}
-            <div className={widgets}>
-              <div
+              {/* <span className="showTasks">Show Tasks</span> */}
+            </div>
+            <div className={widgets + " " + "consultWidgets"}>
+              <div className="widgetCardMain">
+                <div className="widgetImg">
+                  <img className="img-fluid" src={PendingImg}/>
+                </div>
+                <div className="widgetContent default">
+                  <div className="cover">
+                  <span className="no">{booked_count}</span>
+                  <span className="value">New Applications</span>
+                </div>
+                </div>
+              </div>
+              <div className="widgetCardMain inProg">
+                <div className="widgetImg">
+                  <img className="img-fluid" src={ReviewImg}/>
+                </div>
+                <div className="widgetContent">
+                  <div className="cover">
+                  <span className="no">{in_progress_count || 0}</span>
+                  <span className="value">In Progress Applications</span>
+                </div>
+                </div>
+              </div>
+              <div className="widgetCardMain checkIn">
+                <div className="widgetImg">
+                  <img className="img-fluid" src={CompletedImg}/>
+                </div>
+                <div className="widgetContent">
+                  <div className="cover">
+                  <span className="no">{completed_count || 0}</span>
+                  <span className="value">Completed Applications</span>
+                </div>
+                </div>
+              </div>
+              <div className="widgetCardMain totalRevenue">
+                <div className="widgetImg">
+                  <img className="img-fluid" src={RevenueImg}/>
+                </div>
+                <div className="widgetContent">
+                  <div className="cover">
+                  <span className="no">{earnings_count}</span>
+                  <span className="value">Total Applications</span>
+                </div>
+                </div>
+              </div>
+
+              {/* <div
                 className="widget widget1"
-                style={{ backgroundImage: `url(${PendingImg})` }}
-              >
+                style={{ backgroundImage: `url(${PendingImg})` }}>
                 <div className="cover">
                   <span className="no">{booked_count}</span>
                   <span className="value">New</span>
                   <span className="value">Applications</span>
                 </div>
               </div>
+
               <div
                 className="widget widget2"
-                style={{ backgroundImage: `url(${ReviewImg})` }}
-              >
+                style={{ backgroundImage: `url(${ReviewImg})` }}>
                 <div className="cover progressADD">
-                  <span className="no">{in_progress_count||0}</span>
+                  <span className="no">{in_progress_count || 0}</span>
                   <span className="value">In Progress</span>
                   <span className="value">Applications</span>
                 </div>
               </div>
+
               <div
                 className="widget widget3"
-                style={{ backgroundImage: `url(${CompletedImg})` }}
-              >
+                style={{ backgroundImage: `url(${CompletedImg})` }}>
                 <div className="cover completed">
-                  <span className="no">{completed_count||0}</span>
+                  <span className="no">{completed_count || 0}</span>
                   <span className="value">Completed</span>
                   <span className="value">Applications</span>
                 </div>
               </div>
+
               <div
                 className="widget widget4"
-                style={{ backgroundImage: `url(${RevenueImg})` }}
-              >
+                style={{ backgroundImage: `url(${RevenueImg})` }}>
                 <div className="cover revenue">
                   <span className="no">{earnings_count}</span>
                   <span className="value">Total</span>
                   <span className="value">Applications</span>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className={mobileView}>

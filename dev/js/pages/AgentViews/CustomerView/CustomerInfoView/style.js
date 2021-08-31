@@ -215,8 +215,8 @@ export const body = css`
     flex-direction: row;
     margin-top: 10px;
     @media (max-width: ${tabScreenWidth}) {
-      margin-left: 14px;
-      margin-top: 0px;
+      margin-left: 0px;
+      margin-top: 10px;
     }
   }
   .joinBtn {
@@ -293,7 +293,8 @@ export const body = css`
     min-width: 40%;
   }
   .leftBar{
-    width: 60%;
+    width: calc(60% - 15px);
+    margin-right: 15px;
   }
   @media (max-width: ${tabScreenWidth}) {
     .chat{
@@ -301,6 +302,7 @@ export const body = css`
     }
     .leftBar{
       width: 100%;
+      margin:auto;
     }
   }
   
@@ -317,7 +319,7 @@ export const list = css`
     flex-direction: row;
     width: 100%;
     @media (max-width: ${tabScreenWidth}) {
-      flex-direction: column;
+      // flex-direction: column;
     }
     .key {
       width: 120px;

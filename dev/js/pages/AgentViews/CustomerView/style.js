@@ -8,11 +8,12 @@ export const head = css`
 export const lists = css`
   font-family: ${primaryFont};
   margin: 6px 20px;
-  padding: 12px 16px;
-  background-color: #fcfcfc;
-  border-radius: 10px;
   cursor: pointer;
   list-style: none;
+  background: #FFFFFF;
+box-shadow: 4px 4px 8px #D8DCE4;
+border-radius: 4px;
+padding: 12px 12px;
 `;
 
 export const customer = css`
