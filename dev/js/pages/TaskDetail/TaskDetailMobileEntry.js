@@ -17,7 +17,7 @@ const TaskDetailMobileView = (props)=>{
         <div className={container}>
             <LeftMenuBar/>
             <div className={`${body} ${mobileScrollView}`}>
-                <div className="mainView">
+                <div className="mainView mainSectionTopSpace">
                     <Header headerText="">
                         <div className="headerView">
                             <NotificationWidget/>

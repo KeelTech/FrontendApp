@@ -2,7 +2,7 @@ import { css } from '@emotion/css';
 import { tabScreenWidth } from '@constants';
 
 export const container = css`
-    background: #FFFFFF;
+    // background: #FFFFFF;
     .customerView{
         display: flex;
         width: 100%;

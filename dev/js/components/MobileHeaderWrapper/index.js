@@ -11,7 +11,7 @@ const MobileHeaderWrapper = (props)=>{
     return(
         <Fragment>
             <div className={`${body} ${mobileScrollView}`}>
-                <div className="mainView">
+                <div className="mainView mainSectionTopSpace">
                     <Header headerText="" isAgent={isAgent}>
                         <div className="headerView">
                             <NotificationWidget/>
