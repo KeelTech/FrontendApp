@@ -19,7 +19,7 @@ function CustomerInfoView(props) {
   const agentInfo = useSelector(state=>state.AGENT_STORE);
   const { agentProfile={} } = agentInfo;
   const { agent_profile={} } = agentProfile;
-  const { id='' } = agent_profile;
+  const { id='', user="" } = agent_profile;
 
   let caseId = '';
   if (props && props.match && props.match.params) {
@@ -118,11 +118,11 @@ function CustomerInfoView(props) {
             </div>
           </div>
           <div className="chat">
-            {caseId && id ? <ChatWidget caseId={caseId} currentUserId={id} chatHeaderName={first_name}/> : ""}
+            {caseId && user ? <ChatWidget caseId={caseId} currentUserId={user} chatHeaderName={first_name}/> : ""}
           </div>
         </div>
       )}
-      {caseId && id ? <FloatingChatWidget caseId={caseId} currentUserId={id} chatHeaderName={first_name}/> : ""}
+      {caseId && user ? <FloatingChatWidget caseId={caseId} currentUserId={user} chatHeaderName={first_name}/> : ""}
     </div>
   );
 }

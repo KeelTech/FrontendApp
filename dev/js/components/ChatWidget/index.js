@@ -4,6 +4,7 @@ import { cx } from '@emotion/css';
 import ChatCard from './ChatCard.js';
 import { container, chatWidget, msgWidget, mobileChatView } from './style.js';
 import { sendChatMessage, getChatMessages } from '@actions';
+import { MERGE_CHAT_MESSAGES } from '@constants/types';
 
 
 const ChatWidget = ({ floatingChat=false, toggleChat, caseId="", currentUserId="", chatHeaderName="" })=>{
@@ -29,6 +30,10 @@ const ChatWidget = ({ floatingChat=false, toggleChat, caseId="", currentUserId="
             setTimeout(scrollToBottom, 1000)
         }
         return () => {
+            dispatch({
+                type: MERGE_CHAT_MESSAGES,
+                payload: { caseId:null, messages: [] }
+            })
             if(checkChat){
                 clearInterval(checkChat)
             }
