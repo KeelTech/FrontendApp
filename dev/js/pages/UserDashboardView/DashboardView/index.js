@@ -15,7 +15,7 @@ import { getFormattedDate, getFormattedTime } from '@helpers/utils.js';
 import { container, pendingTasks, scheduleCallCta, upcomingSchedules } from './style.js';
 import { body } from '../style.js';
 
-const DashboardView = ({ scheduleList }) => {
+const DashboardView = ({ scheduleList, calendlyURL }) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const taskInfo = useSelector(state => state.TASK_INFO);
@@ -68,6 +68,11 @@ const DashboardView = ({ scheduleList }) => {
             )
         }
     }
+
+    const scheduleCall = ()=>{
+        Calendly.initPopupWidget({url: calendlyURL});
+    }
+
     return (
         <div className={body + '    ' + 'p-relative pt-5'}>
             <div className="mainView mainSectionTopSpace">
@@ -126,7 +131,10 @@ const DashboardView = ({ scheduleList }) => {
                     <NotificationWidget />
                     {/* <ProfileWidget /> */}
                 </div>
-                <div className="upcoming"><span>Upcoming Schedule</span></div>
+                {
+                    scheduleList.length?<div className="upcoming"><span>Upcoming Schedule</span></div>
+                    :<div className="upcoming" onClick={scheduleCall}><span>Schedule Call</span></div>
+                }
                 {
                     scheduleList.map((val, key)=>{
                         const { start_time, name='', end_time } = val;

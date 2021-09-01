@@ -56,7 +56,7 @@ const UserDashboardView = (props)=>{
 
     useEffect(()=>{
         if(calendlyURL){
-            Calendly.initBadgeWidget({ url: calendlyURL, text: 'Schedule Meeting', color: '#006bff', textColor: '#ffffff', branding: true });
+           // Calendly.initBadgeWidget({ url: calendlyURL, text: 'Schedule Meeting', color: '#006bff', textColor: '#ffffff', branding: true });
         }
     },[calendlyURL])
 
@@ -76,7 +76,7 @@ const UserDashboardView = (props)=>{
             return <CustomerView {...props}/>;
         }else if(url.includes('dashboard') || url==='/'){
             if(isPlanPurchased){
-                return <DashboardView scheduleList={scheduleList}/>
+                return <DashboardView scheduleList={scheduleList} calendlyURL={calendlyURL}/>
             }else{
                 return <UserOnboardingView />
             }
