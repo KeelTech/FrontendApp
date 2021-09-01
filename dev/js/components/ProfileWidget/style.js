@@ -48,7 +48,7 @@ export const info = css`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-bottom: 2px solid #e0e7ff;
+  border-bottom: 2px solid #f3f2ef;
 
   img {
     margin: auto;
@@ -64,7 +64,7 @@ export const info = css`
     font-weight: 600;
     font-size: 18px;
     text-align: center;
-    margin-bottom:10px;
+    margin-bottom:0px;
   }
   h3 {
     margin: 0;

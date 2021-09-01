@@ -74,7 +74,7 @@ export const tasksView = css`
     }
     .taskList{
         overflow-y: auto;
-        height: calc(100vh - 290px);
+        max-height: calc(100vh - 290px);
         padding:5px;
     }
     .emptyData{
