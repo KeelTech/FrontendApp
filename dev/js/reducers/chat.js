@@ -2,7 +2,8 @@ import { CHAT_LOADING, MERGE_CHAT_MESSAGES } from '@constants/types';
 
 const defaultState = {
     chatLoading: false,
-    chatMessages: []
+    chatMessages: [],
+    caseId: null
 }
 
 export default function (state = defaultState, action) {
@@ -16,11 +17,17 @@ export default function (state = defaultState, action) {
         }
 
         case MERGE_CHAT_MESSAGES: {
-          let newState = { ...state}
-          let newMessages = action.payload||[];
-          newMessages.sort(function(a, b){return a.id - b.id})
-          newState.chatMessages = mergeChatMessages(newState.chatMessages, newMessages)
-          return newState
+            let newState = { ...state}
+            let {messages, caseId} = action.payload;
+            let newMessages = messages || [];
+            newMessages.sort(function(a, b){return a.id - b.id})
+            if(caseId == state.caseId) {
+                newState.chatMessages = mergeChatMessages(newState.chatMessages, newMessages)
+            } else {
+                newState.chatMessages = newMessages
+            }
+            newMessages.caseId = caseId
+            return newState
         }
     }
     return state

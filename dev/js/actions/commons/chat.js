@@ -16,7 +16,7 @@ export const getChatMessages = (caseId="", headers, dispatch, cb=null)=>{
         if(response && response.data && response.data.results){
             dispatch({
                 type: MERGE_CHAT_MESSAGES,
-                payload: response.data.results
+                payload: { caseId:caseId, messages: response.data.results }
             })
         }
         if(cb)cb(response, null);
