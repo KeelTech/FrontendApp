@@ -5970,6 +5970,10 @@ input:focus + label {
   color: #4267b2 !important;
   font-weight: 600;
 }
+.taskInfo {
+  max-height: 600px;
+  height: 100% !important;
+}
 
 @media (min-width: 1920px) {
   .root {
@@ -6227,7 +6231,7 @@ span.showTasks:hover {
 
 .tableRow.cursor-pointer td {
   color: #363B64;
-  font-weight: 400;
+  font-weight: 500;
 }
 .tableMain .tableRow th:first-child {
   border-radius: 4px 0px 0px 4px;
@@ -7062,7 +7066,8 @@ p.tblData {
 }
 
 .dropWhiteBox {
-  margin: 12px !important;
+  padding: 12px !important;
+    margin: 0px !important;
 }
 
 .dropWhiteBox img {
@@ -7078,7 +7083,7 @@ p.tblData {
 }
 
 .listDropItem {
-  padding: 8px 12px !important;
+  padding: 8px 0px !important;
 }
 
 .listDropItem li div {
@@ -7088,13 +7093,38 @@ p.tblData {
 }
 
 .listDropItem li {
-  padding: 5px 0 !important;
+  padding: 5px 12px !important;
+  transition: all .2s ease;
+
+}
+.listDropItem li:hover{
+  background: #d8dce4;
 }
 
 .listDropItem li div img {
-  width: 20px !important;
+  width: 16px !important;
 }
 /* ============ on board  ============== */
+/* ============ Task Container  ============== */
+.topTaskHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+span.statusText {
+  background: #4267b2;
+  color: white !important;
+  line-height: 14px !important;
+  padding: 2px 12px !important;
+  border-radius: 2px !important;
+  margin-left: 10px !important;
+}
+.tskMainHed{
+  font-size: 12px;
+  font-weight: 600;
+}
+/* ============ Task Container  ============== */
 /* ============ Media Queries ============== */
 @media (max-width: 767px) {
   .mobileHide {
@@ -7157,13 +7187,13 @@ p.tblData {
   }
   .mobileSideMenu {
     height: 100vh;
-    width: 240px !important;
+    width: 280px !important;
   }
   .mobileSideMenu img.crossIcon {
-    position: absolute;
-    top: 0;
-    right: 0;
-    filter: invert(1);
+    position: fixed;
+    top: 10px;
+    left: 290px;
+    width: 30px;
   }
   .openWidgetView {
     position: relative;

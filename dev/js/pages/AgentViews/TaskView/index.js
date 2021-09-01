@@ -132,7 +132,7 @@ const TaskView = (props) => {
                                 </div>
                         }
                     </div>
-                    <div className="taskInfo">
+                    <div className="taskInfo taskUi">
                         {
                             !loading && !showAddTaskView && activeTask ? <AgentTaskDetail activeTask={activeTask} refetchTaskList={refetchTaskList} /> : null
                         }

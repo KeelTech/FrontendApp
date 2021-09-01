@@ -18,10 +18,10 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const taskInfo = useSelector(state => state.TASK_INFO);
-    const { taskDetail = {}, userInfo={} } = taskInfo || {};
-    const { profile={}, agent={} } = userInfo;
-    const { first_name:consumerName='', last_name: cosumerLastName='' } = profile;
-    const { full_name:agentName='' } = agent;
+    const { taskDetail = {}, userInfo = {} } = taskInfo || {};
+    const { profile = {}, agent = {} } = userInfo;
+    const { first_name: consumerName = '', last_name: cosumerLastName = '' } = profile;
+    const { full_name: agentName = '' } = agent;
 
     const [openUploadDocumentModal, setOpenUploadModal] = useState(false);
     const [toasterInfo, setToasterInfo] = useState({
@@ -161,20 +161,20 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
 
     const { title, priority_name, status_name = '', description, tasks_comment = [], tasks_docs = [], check_list = [] } = taskDetail && taskDetail[activeTask] || {};
 
-    const checklistPercentage = useMemo(()=>{
-        let checked=0;
+    const checklistPercentage = useMemo(() => {
+        let checked = 0;
         let totalItems = 0;
-        Object.entries(check_list).map((val, key)=>{
-            if(val[1].action){
+        Object.entries(check_list).map((val, key) => {
+            if (val[1].action) {
                 checked++;
             }
             totalItems++;
         })
-        if(checked){
-            return parseInt((checked/totalItems)*100);
+        if (checked) {
+            return parseInt((checked / totalItems) * 100);
         }
         return 0;
-    },[check_list]);
+    }, [check_list]);
 
     return (
         <div className={container + ' ' + 'innerTask'}>
@@ -188,23 +188,25 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
                 loading && <div className={loaderView}><LoadingWidget /></div>
             }
             <CustomToaster {...toasterInfo} hideToaster={hideToaster} />
-            <div className="statusCont">
-                {
-                    status_name && status_name.toLowerCase().includes('pending') ? <span className="statusText" onClick={handleTaskStatusUpdate}>Submit for review</span> : null
-                }
-                {/* <span className="status">{status_name}</span> */}
-            </div>
+            <div className="topTaskHead">
             <div className="taskName">
-                <img className="icon" src={ASSETS_BASE_URL + "/images/common/task.svg"} alt="task" />
-                <span>Task Name</span>
-                <span className="status mobileView">{status_name}</span>
+                    <img className="icon" src={ASSETS_BASE_URL + "/images/common/task.svg"} alt="task" />
+                    <span className="tskMainHed">Task Name</span>
+                    <span className="status mobileView">{status_name}</span>
+                </div>
+                <div className="statusCont">
+                    {
+                        status_name && status_name.toLowerCase().includes('pending') ? <span className="statusText" onClick={handleTaskStatusUpdate}>Submit for review</span> : null
+                    }
+                    {/* <span className="status">{status_name}</span> */}
+                </div>
             </div>
             <div className="signDoc">
                 <span className="sign">{title}</span>
                 <span className="backBtn" onClick={handleBackBtnClick}>Back</span>
             </div>
             <div className="taskScrollSection">
-                <div className={taskStatus}>
+                <div className={taskStatus + " " + "taskStatus"}>
                     <div className="view">
                         <div className="taskName">
                             <img className="icon" src={ASSETS_BASE_URL + "/images/common/member.svg"} alt="home" />
@@ -231,14 +233,14 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
                         <span className="dueDate">29 Feb 2020</span>
                     </div>
                 </div>
-                <div className={discussionSection}>
+                <div className={discussionSection + " " + "discussionSection"}>
                     <div className="taskName">
                         <img className="icon" src={ASSETS_BASE_URL + "/images/common/description.svg"} alt="discuss" />
                         <span>Description</span>
                     </div>
                     <span className="discussionTxt">{description}</span>
                 </div>
-                <div className={attachmentSection}>
+                <div className={attachmentSection + " " + "attachmentSection"}>
                     <div className="attachmentHeader">
                         <div className="taskName">
                             <img className="icon" src={ASSETS_BASE_URL + "/images/common/attachment.svg"} alt="discuss" />
@@ -281,13 +283,13 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
                     </div>
                 </div>
 
-                <div className={messageSection}>
+                <div className={messageSection + " " + "messageSection"}>
                     <div className="taskName">
                         <img className="icon" src={ASSETS_BASE_URL + "/images/common/message.svg"} alt="discuss" />
                         <span>Activity</span>
                     </div>
                     <div className="messageSection">
-                        <PostCommentView taskId={activeTask} updateTaskStatus={updateTaskStatus} title={`${consumerName} ${cosumerLastName}`}/>
+                        <PostCommentView taskId={activeTask} updateTaskStatus={updateTaskStatus} title={`${consumerName} ${cosumerLastName}`} />
                         {
                             tasks_comment.map((val, key) => {
                                 const { user_details, user_name, msg, created_at, id } = val;

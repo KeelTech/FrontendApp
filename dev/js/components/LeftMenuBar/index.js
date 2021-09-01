@@ -109,7 +109,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                                 </div>
                             </div>
                             {/* <img className="homeIcon" src={ASSETS_BASE_URL+"/images/common/keelIcon.svg"} alt="home" onClick={()=>history.push('/')}/> */}
-                            <img className="crossIcon" src={ASSETS_BASE_URL+"/images/common/crossIcon.svg"} alt="home" onClick={toggleMenuBar}/>
+                            <img className="crossIcon" src={ASSETS_BASE_URL+"/images/common/x_white.svg"} alt="home" onClick={toggleMenuBar}/>
                         </div>
                         <div className={menuOptions}>
                             {

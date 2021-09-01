@@ -32,7 +32,7 @@ export const pendingTasks = css`
     .taskList{
         margin-top: 14px;
         overflow-y: auto;
-        height: calc(100vh - 290px);
+        max-height: calc(100vh - 290px);
         // box-shadow: 2px 2px 8px #eae8ee;
     border-radius: 4px;
     padding:5px;
@@ -88,9 +88,10 @@ export const pendingTasks = css`
             background: #4267B2;
             border-radius: 4px;
             text-align: center;
-            padding: 5px 76px;
+            padding: 8px 76px;
             color: #FCFCFC;
             justify-content: center;
+            width:100%
         }
     }
 `

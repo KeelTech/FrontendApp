@@ -57,7 +57,7 @@ export const tasksView = css`
     .taskList{
         overflow-y: auto;
         padding:5px;
-        height: calc(100vh - 290px);
+        max-height: calc(100vh - 290px);
     }
     @media(max-width: ${tabScreenWidth}){
         margin: 0px;
