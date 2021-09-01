@@ -100,7 +100,7 @@ const TaskView = (props) => {
                 </div>
                 <Header headerText="Task" isAgent>
                     <div className="headerView">
-                        <CustomButton text="Add New Task" clickHandler={addMoreTasks} margin="0px 16px 0px 0px" />
+                        
                         <NotificationWidget />
                         {/* <ProfileWidget/> */}
                     </div>
@@ -133,6 +133,7 @@ const TaskView = (props) => {
                         }
                     </div>
                     <div className="taskInfo">
+                    <CustomButton text="Add New Task" clickHandler={addMoreTasks} margin="0px 16px 0px 0px" />
                         {
                             !loading && !showAddTaskView && activeTask ? <AgentTaskDetail activeTask={activeTask} refetchTaskList={refetchTaskList} /> : null
                         }

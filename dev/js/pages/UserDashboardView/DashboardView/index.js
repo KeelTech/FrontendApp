@@ -131,10 +131,8 @@ const DashboardView = ({ scheduleList, calendlyURL }) => {
                     <NotificationWidget />
                     {/* <ProfileWidget /> */}
                 </div>
-                {
-                    scheduleList.length?<div className="upcoming"><span>Upcoming Schedule</span></div>
-                    :<div className="upcoming" onClick={scheduleCall}><span>Schedule Call</span></div>
-                }
+                <div className="upcoming" onClick={scheduleCall}><span>Schedule Call</span></div>
+                <div className="upcoming"><span>Upcoming Schedule</span></div>
                 {
                     scheduleList.map((val, key)=>{
                         const { start_time, name='', end_time } = val;
