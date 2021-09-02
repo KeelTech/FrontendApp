@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { css } from '@emotion/css';
 import DetectClickOutside from '@helpers/DetectClickOutside.js'
 import { tabScreenWidth, inputField } from '@constants';
@@ -70,12 +70,16 @@ export const container = props => css`
 `
 
 const CustomSearchSelect = ({placeholder="Search", value='', border="0px" ,handleChange=()=>{}, borderRadius="8px", backgroundColor="#FFF", fontColor="#363B64", fontSize="16px", fontWeight="normal", padding="10px 24px", margin="4px 0px", borderBottom="0.8px solid #EAEAEF", minHeight="30px", options=[]})=>{
-
+console.log(`value for ${placeholder} ${value}`);
     const[searchField, selectedVal] = useState(value);
     const[allOptions, setOptions] = useState(options);
     const [showOptions, setOptionsVisibility] = useState(false);
 
     const optionListRef = useRef();
+
+    useEffect(()=>{
+        setOptions(options);
+    },[options]);
 
     const toggleOptionList = ()=>{
         setOptionsVisibility(val=>!val)

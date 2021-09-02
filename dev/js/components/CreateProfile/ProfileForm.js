@@ -22,7 +22,7 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
 
     if(!labels) return null;
     
-    const showCustomFields = fieldType=='city' || fieldType=='country' || fieldType=='state';
+    const showCustomFields = fieldType.includes('city') || fieldType.includes('country') || fieldType.includes('state');
     const showDate = fieldType.includes('date');
 
     return(
@@ -38,23 +38,23 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
                 :null
             }
             {
-                fieldType=='city'?
+                fieldType.includes('city')?
                 <SelectCity saveSelectedOption={handleChange} value={value}/>
                 :null
             }
             {
-                fieldType=='country'?
+                fieldType.includes('country')?
                 <SelectCountry saveSelectedOption={handleChange} value={value}/>
                 :null
             }
             {
-                fieldType=='state'?
+                fieldType.includes('state')?
                 <SelectState saveSelectedOption={handleChange}  value={value}/>
                 :null
             }     
             <p className={showError?"errorMsg":"hideMsg"}>Please Fill {labels}</p>   
             {
-                type ==='dropdown'?
+                type ==='dropdown' && false?
                 <div className="formWrapper">
                     <label>Select the Country to Travel<sup>*</sup></label>
                     <div className="selectBox">

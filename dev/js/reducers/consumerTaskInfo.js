@@ -1,4 +1,4 @@
-import { TASK_LIST_LOADING, SET_TASK_LIST, TASK_DETAIL_INFO, GET_USER_PROFILE, LOADING_USER_PROFILE, GET_FULL_USER_PROFILE, LOADING_FULL_USER_PROFILE, UPDATE_USER_PROFILE, SAVE_PLACE_INFO, SET_ACTIVE_TASK, CASE_DETAIL_LOADING, CASE_DETAILS, CALENDLY_URL_LOADING, FETCH_CALENDLY_URL } from '@constants/types';
+import { TASK_LIST_LOADING, SET_TASK_LIST, TASK_DETAIL_INFO, GET_USER_PROFILE, LOADING_USER_PROFILE, GET_FULL_USER_PROFILE, LOADING_FULL_USER_PROFILE, UPDATE_USER_PROFILE, SAVE_PLACE_INFO, SET_ACTIVE_TASK, CASE_DETAIL_LOADING, CASE_DETAILS, CALENDLY_URL_LOADING, FETCH_CALENDLY_URL, GET_SCHEDULE_DETAIL } from '@constants/types';
 
 const defaultState = {
     taskListLoading: false,
@@ -17,7 +17,8 @@ const defaultState = {
     caseDetailLoading: false,
     caseDetails: {},
     calendlyUrlLoading: false,
-    calendlyURL: ''   
+    calendlyURL: '',
+    scheduleList: []
 }
 
 export default function (state = defaultState, action) {
@@ -121,6 +122,12 @@ export default function (state = defaultState, action) {
         case FETCH_CALENDLY_URL:{
             let newState = {...state}
             newState.calendlyURL = action.payload||{};
+            return newState;
+        }
+
+        case GET_SCHEDULE_DETAIL: {
+            let newState = {...state}
+            newState.scheduleList = action.payload||[];
             return newState;
         }
 

@@ -13,59 +13,56 @@ import CustomerView from './CustomerView';
 import UserOnboardingView from './UserOnboardingView';
 import BillingView from './BillingView';
 import SelectedPlanView from './SelectedPlanView';
+import ProfileView from './ProfileView';
 
 const UserDashboardView = (props)=>{
     const url  = props.match.path;
     const dispatch = useDispatch();
     const taskInfo = useSelector(state=>state.TASK_INFO);
-    const { userInfo={}, userInfoLoading, calendlyURL } = taskInfo;
+    const { userInfo={}, userInfoLoading, calendlyURL, scheduleList } = taskInfo;
     const { cases={}, profile_exists, agent={} } = userInfo;
     const { case_id, user } = cases;
     const isPlanPurchased = cases && cases.plan;
     const { full_name:agentName='' } = agent;
-    const [scheduleList, setScheduleList] = useState([]);
 
     useEffect(()=>{
-        getUserProfile({}, dispatch);
-        getCalendlyLink({}, dispatch);
-        fetchScheduleList();
-        
+        if(!profile_exists){
+            getUserProfile({}, dispatch);
+        }
+        if(!calendlyURL){
+            getCalendlyLink({}, dispatch);
+        }
+        if(!scheduleList.length){
+            fetchScheduleList();
+        }
         function isCalendlyEvent(e) {
             return e.data.event &&
                     e.data.event.indexOf('calendly') === 0;
         };
 
-        window.addEventListener(
-        'message',
-            function(e) {
-                if (isCalendlyEvent(e)) {
-                    if(e.data.event=='calendly.event_scheduled'){
-                        const url = e.data.payload && e.data.payload.invitee && e.data.payload.invitee.uri
-                        let postDataParams = {
-                            calendly_invitee_url: url
-                        }
-                        scheduleCall(postDataParams, dispatch, (resp, req)=>{
-                            getCalendlyLink({}, dispatch);
-                            fetchScheduleList();  
-                        })
+        function listenCalendlyEvents(e) {
+            if (isCalendlyEvent(e)) {
+                if(e.data.event=='calendly.event_scheduled'){
+                    const url = e.data.payload && e.data.payload.invitee && e.data.payload.invitee.uri
+                    let postDataParams = {
+                        calendly_invitee_url: url
                     }
+                    scheduleCall(postDataParams, dispatch, (resp, req)=>{
+                        getCalendlyLink({}, dispatch);
+                        fetchScheduleList();  
+                    })
                 }
             }
-        );
+        }
+
+        window.addEventListener('message',listenCalendlyEvents);
+        return ()=>{
+            window.removeEventListener('message', listenCalendlyEvents);
+        }
     },[])
 
-    useEffect(()=>{
-        if(calendlyURL){
-           // Calendly.initBadgeWidget({ url: calendlyURL, text: 'Schedule Meeting', color: '#006bff', textColor: '#ffffff', branding: true });
-        }
-    },[calendlyURL])
-
     const fetchScheduleList = ()=>{
-        getScheduleDetail({}, ()=>{}, (resp, error)=>{
-            if(resp.message && Array.isArray(resp.message)){
-                setScheduleList(resp.message);
-            }
-        });
+        getScheduleDetail({}, dispatch);
     }
 
     const renderRoutes = ()=>{
@@ -89,7 +86,13 @@ const UserDashboardView = (props)=>{
                     url.includes('vault') && <DocumentValutView/>
                 }
                 {
-                    url.includes('profile') && <CustomerView {...props}/>
+                    url.includes('profile') && <ProfileView {...props}/>
+                }
+                {
+                    url.includes('edit') && <CustomerView {...props}/>
+                }
+                {
+                    url.includes('create') && <CustomerView {...props}/>
                 }
                 {
                     url.includes('billing') && <BillingView/>
