@@ -30,7 +30,7 @@ export const container = props => css`
 const CustomButton = ({text="", iconHeight="20px", mpadding="10px", clickHandler=()=>{}, borderRadius="10px", backgroundColor="#363B64", fontColor="#FCFCFC", fontSize="12px", fontWeight="bold", padding="10px 30px", margin="", mFontSize="", icon })=>{
 
     return(
-        <div className={container({borderRadius, iconHeight, mpadding, backgroundColor, fontColor, fontSize, fontWeight, padding, margin, mFontSize})} onClick={clickHandler}>
+        <div className={container({borderRadius, iconHeight, mpadding, backgroundColor, fontColor, fontSize, fontWeight, padding, margin, mFontSize}) + " " + "addBtnCmnt"} onClick={clickHandler}>
             <span>{text}</span>
             {
                 icon?<img src={icon} className="ctaIcon"/>:null
