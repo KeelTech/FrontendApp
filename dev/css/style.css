@@ -27,7 +27,10 @@ button.primary-button.disabled {
   background-color: #ffe6d3;
   pointer-events: none;
 }
-
+.alignEnd{
+  display: flex;
+  justify-content: flex-end;
+}
 .dashed-button {
   border: 1px dashed #25385865;
   border-radius: 8px;

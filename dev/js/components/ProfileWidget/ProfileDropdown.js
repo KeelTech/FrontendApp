@@ -37,12 +37,12 @@ const ProfileDropdown = ({ handleLogout }) => {
                   <span onClick={()=>history.push('/profile')}>Profile</span>
                 </div>
               </li>
-              <li>
+              {/* <li>
                 <div>
                   <img src={ASSETS_BASE_URL + "/images/common/editIcon.svg"} />
-                  <span onClick={()=>history.push('/profile?isEdit=true')}>Edit Profile</span>
+                  <span onClick={()=>history.push('/profile')}>Edit Profile</span>
                 </div>
-              </li>
+              </li> */}
             </Fragment>
           }
           
