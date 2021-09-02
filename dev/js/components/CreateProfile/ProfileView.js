@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-const ProfileView = ({ fullProfileInfo={}, editProfileRedirect, userInfo={} })=>{
+const ProfileView = ({ fullProfileInfo={}, userInfo={} })=>{
     const { profile={}} = userInfo;
     const { first_name='', last_name='' } = profile;
     const [activeWidgets, setActiveWidget] = useState(()=>{
@@ -35,7 +35,6 @@ const ProfileView = ({ fullProfileInfo={}, editProfileRedirect, userInfo={} })=>
                     <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/user.svg"} />
                     <h3>{`${first_name} ${last_name}`}</h3>
                 </div>
-                <button className="editPrfl" onClick={editProfileRedirect}>Edit Profile</button>
             </div>
             {/* <div className="editProgress">
                 <label>30% complete</label>
@@ -47,20 +46,33 @@ const ProfileView = ({ fullProfileInfo={}, editProfileRedirect, userInfo={} })=>
                 Object.entries(fullProfileInfo).map((val)=>{
                     const [type, values] = val;
                     let widgetName = '';
+                    let selectedType =0;
                     if(type.includes('profile')){
                         widgetName = 'Personal Details';
+                        selectedType = 1;
                     }else if(type.includes('education_assessment')){
                         widgetName = 'Education';
+                        selectedType = 2;
                     }else if(type.includes('qualification')){
                         widgetName = 'Educational Creational Assessment';
+                        selectedType = 3;
                     }else if(type.includes('work_experience')){
                         widgetName = 'Work Experience';
+                        selectedType = 4;
                     }else if(type.includes('relative_in_canada')){
                         widgetName = 'Relative in Canada (if any)';
+                        selectedType = 5;
                     }
                     const isHide = activeWidgets.includes(type);
                     return <div className="prflDtlsAccordionContainer" key={type}>
                             <div className="prfAccrd">
+                                {
+                                    selectedType?
+                                    <div className="alignEnd">
+                                        <button className="editPrfl" onClick={()=>history.push(`/edit/${selectedType}`)}>Edit Profile</button>
+                                    </div>
+                                    :null
+                                }
                                 <div className="accrdHead">
                                     <h5>{widgetName}</h5>
                                     <button onClick={()=>handleClick(type)}>{isHide?'Show Details':'Hide Details'} <img className={`img-fluid ${isHide?'':'rotateAcordion'}`} src={ASSETS_BASE_URL + "/images/common/drop.svg"}/></button>

@@ -103,7 +103,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                                         <h5>{first_name||full_name}</h5>
                                         {/* <p><strong>98%</strong>Profile Completed</p> */}
                                         {
-                                            isAgent?null:<button onClick={()=>history.push('/profile?isEdit=true')}>Update Profile</button>
+                                            isAgent?null:<button onClick={()=>history.push('/profile')}>Update Profile</button>
                                         }
                                     </div>
                                 </div>

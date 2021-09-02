@@ -1,12 +1,9 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-const queryString = require('query-string');
 import Header from '@components/Header';
-import NotificationWidget from '@components/NotificationWidget';
 import ProfileWidget from '@components/ProfileWidget';
-import CreateProfile from '@components/CreateProfile';
-import CreateShortProfile from '@components/CreateProfile/CreateShortProfile.js';
+import CreateProfile from '@components/CreateProfile/';
 import { SET_MENUBAR_STATE } from '@constants/types';
 import { body } from '../style.js';
 import { container } from './style.js';
@@ -18,8 +15,6 @@ const CustomerView = (props) => {
     const { fullProfileInfo, fullProfileLoading, userInfo = {} } = taskInfo;
     const isProfileExist = userInfo && userInfo.profile_exists;
 
-    // const parsed = queryString.parse(props.location.search);
-    // const shortProfile = parsed && parsed.type=='profile';
     useEffect(() => {
         dispatch(
             {
@@ -50,12 +45,7 @@ const CustomerView = (props) => {
                     </div>
                 </Header>
                 <div className="customerView">
-                    {
-                        !isProfileExist ?
-                            <CreateShortProfile />
-                            : <CreateProfile {...props}/>
-                    }
-
+                    <CreateProfile isProfileView {...props}/>
                 </div>
             </div>
         </div>

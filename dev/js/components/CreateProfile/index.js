@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { getFullUserProfile, createFullUserProfile, updateUserProfile, updateProfile } from '@actions';
 import LoadingWidget from '@components/LoadingWidget';
 import { loaderView } from '@constants';
@@ -8,16 +9,19 @@ import ProfileForm from './ProfileForm.js';
 import ProfileView from './ProfileView.js';
 import { container, progressBar } from './style.js';
 
-const CreateProfile = () => {
-    const isEditView = window && window.location && window.location.search.includes('isEdit');
+const CreateProfile = (props) => {
+    const { isProfileView=false } = props;
+    let editID = '';
+    if (props && props.match && props.match.params) {
+        editID = props.match.params.id;
+    }
     const dispatch = useDispatch();
+    const history = useHistory();
     const taskInfo = useSelector(state => state.TASK_INFO);
     const { fullProfileInfo, fullProfileLoading, userInfo = {} } = taskInfo;
     const isProfileExist = userInfo && userInfo.profile_exists;
-    const [activeState, setActive] = useState(1);
+    const [activeState, setActive] = useState(editID?parseInt(editID):1);
     const [loading, setLoading] = useState(false);
-    const [showEditView, setEditView] = useState(isEditView);
-
     const [toasterInfo, setToasterInfo] = useState({
         isVisible: false,
         isError: false,
@@ -26,9 +30,9 @@ const CreateProfile = () => {
     })
 
     const editProfileRedirect = ()=>{
-        setEditView(val=>!val);
-        setActive(1);
-        getFullUserProfile({}, dispatch);
+        history.push('/profile');
+        //setActive(1);
+        //getFullUserProfile({}, dispatch);
     }
 
     const activeWidgetData = useMemo(() => {
@@ -78,7 +82,9 @@ const CreateProfile = () => {
     }, [activeState, fullProfileInfo, fullProfileLoading])
 
     useEffect(() => {
-        getFullUserProfile({}, dispatch);
+        if(!editID || !(fullProfileInfo && fullProfileInfo.profile)){
+            getFullUserProfile({}, dispatch);
+        }
     }, [])
 
     const handleFormNavigation = (isNext = false) => {
@@ -207,18 +213,21 @@ const CreateProfile = () => {
         return (
             <Fragment>
             {
-                showEditView?
+                !isProfileView?
                 <div className={progressBar}>
                     <div className="desktopProgressBar">
-                        <div className="leftPorgressBar">
-                            <ul className="progressbar">
-                                <li className={activeState === 1 ? 'active' : ''}></li>
-                                <li className={activeState === 2 ? 'active' : ''}></li>
-                                <li className={activeState === 3 ? 'active' : ''}></li>
-                                <li className={activeState === 4 ? 'active' : ''}></li>
-                                <li className={activeState === 5 ? 'active' : ''}></li>
-                            </ul>
-                        </div>
+                        {
+                            editID?null:
+                            <div className="leftPorgressBar">
+                                <ul className="progressbar">
+                                    <li className={activeState === 1 ? 'active' : ''}></li>
+                                    <li className={activeState === 2 ? 'active' : ''}></li>
+                                    <li className={activeState === 3 ? 'active' : ''}></li>
+                                    <li className={activeState === 4 ? 'active' : ''}></li>
+                                    <li className={activeState === 5 ? 'active' : ''}></li>
+                                </ul>
+                            </div>
+                        }
                         <div className="userFormsMainContainer customEditProfile">
                             <h3>{displayText}</h3>
                             <div className="formsScroll">
@@ -237,18 +246,24 @@ const CreateProfile = () => {
                                 }
                             </div>
                             <div className="btnCont">
-                                {
-                                    activeState > 1 ? <button onClick={() => handleFormNavigation(false)}>Previous</button> : null
-                                }
-                                {
-                                    activeState == 5 ? <button onClick={() => handleFormNavigation(true)}>{isProfileExist ? 'Update' : 'Create'}</button>
-                                        : <button onClick={() => handleFormNavigation(true)}>Next</button>
-                                }
+                            {
+                                editID?<button onClick={handleCreateForm}>Update</button>
+                                :<Fragment>
+                                    {
+                                        activeState > 1 ? <button onClick={() => handleFormNavigation(false)}>Previous</button> : null
+                                    }
+                                    {
+                                        activeState == 5 ? <button onClick={() => handleFormNavigation(true)}>{isProfileExist ? 'Update' : 'Create'}</button>
+                                            : <button onClick={() => handleFormNavigation(true)}>Next</button>
+                                    }
+                                </Fragment>
+
+                            }    
                             </div>
                         </div>
                     </div>
                 </div>
-                :<ProfileView fullProfileInfo={fullProfileInfo} editProfileRedirect={editProfileRedirect} userInfo={userInfo}/>
+                :<ProfileView fullProfileInfo={fullProfileInfo} userInfo={userInfo}/>
             }
             </Fragment>
         )
@@ -257,7 +272,10 @@ const CreateProfile = () => {
     return (
         <div className={container}>
             {
-                loading || fullProfileLoading ? <div className={loaderView}><LoadingWidget /></div> : renderView()
+                loading ?<div className={loaderView}><LoadingWidget /></div> : null
+            }
+            {
+                fullProfileLoading ? <div className={loaderView}><LoadingWidget /></div> : renderView()
             }
             <CustomToaster {...toasterInfo} hideToaster={hideToaster} />
             
