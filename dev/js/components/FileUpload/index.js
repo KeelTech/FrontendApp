@@ -150,7 +150,7 @@ const FileUpload = ({ fileUploadModalClosed, uploadFile, isUploadToServer=false,
                 loading?<div className={loaderView}><LoadingWidget/></div>:null
             }
             <CustomToaster {...toasterInfo} hideToaster={hideToaster}/>
-            <span onClick={close} className={closeWrapper}>x</span>
+            <span onClick={close} className={closeWrapper + " " + "mr-1"}><img className="crossIcon" src={ASSETS_BASE_URL+"/images/common/x_black.svg"} alt="close"/></span>
             <div className={innerShell}>
                 <div className={fileUploadWrapper}>
                     <input id="file" className={fileUpload} type="file" onChange={onFileChange} />

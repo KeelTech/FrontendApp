@@ -11,7 +11,7 @@ const AttachmentCard = ({ data, downloadDocumentClicked, deleteDocumentClicked }
     }
 
     return(
-        <div className={container} key={id}>
+        <div className={container + " " + "taskAttachments"} key={id}>
             <img className="docIcon" src={ASSETS_BASE_URL+"/images/common/document.svg"} alt="document"/>
             <span className="docx">{doc_type}</span>
             <img className="dotMenu" src={ASSETS_BASE_URL+"/images/common/dotMenu.svg"} alt="menu" onClick={toggleMenuBar}/>

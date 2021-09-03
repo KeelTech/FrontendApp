@@ -5,12 +5,12 @@ import CustomButton from '@components/CustomButton';
 import { getNameInitialHelper } from '@helpers/utils';
 import { container } from './style.js';
 
-const PostComments = ({ taskId, updateTaskStatus, title="" })=>{
+const PostComments = ({ taskId, updateTaskStatus, title = "" }) => {
     const dispatch = useDispatch();
     const [comment, setComment] = useState('');
 
-    const addComment = ()=>{
-        if(!comment){
+    const addComment = () => {
+        if (!comment) {
             updateTaskStatus(null, true, 'Please add some comments');
             return;
         }
@@ -18,23 +18,26 @@ const PostComments = ({ taskId, updateTaskStatus, title="" })=>{
             msg: comment,
             task: taskId
         }
-        createComment(dataParams, dispatch, (resp, err)=>{
+        createComment(dataParams, dispatch, (resp, err) => {
             setComment('');
-            if(resp){
+            if (resp) {
                 updateTaskStatus(true, null);
-            }else{
+            } else {
                 updateTaskStatus(null, true);
             }
         })
     }
 
-    return(
-        <div className={container}>
+    return (
+        <div className={container + " " + "postCommentSection"}>
             <div className="msgView">
                 <span className="profile">{getNameInitialHelper(title)}</span>
-                <input type="text" placeholder="Write a Comment" value={comment} onChange={(e)=>setComment(e.target.value)}/>
+                <input type="text" placeholder="Write a Comment" value={comment} onChange={(e) => setComment(e.target.value)} />
             </div>
-            <CustomButton text="Add" clickHandler={addComment} margin="0px 0px 16px 30px" padding="10px 20px" borderRadius="5px" backgroundColor="#4267b2"/>
+            <div className="postCommentCancel">
+                <CustomButton text="Add" clickHandler={addComment}  />
+                <button>Cancel</button>
+            </div>
         </div>
     )
 }

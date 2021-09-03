@@ -206,7 +206,7 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
                 <span className="backBtn" onClick={handleBackBtnClick}>Back</span>
             </div>
             <div className="taskScrollSection">
-                <div className={taskStatus + " " + "taskStatus"}>
+                <div className={taskStatus + " " + "taskStatusNew"}>
                     <div className="view">
                         <div className="taskName">
                             <img className="icon" src={ASSETS_BASE_URL + "/images/common/member.svg"} alt="home" />
@@ -233,7 +233,7 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
                         <span className="dueDate">29 Feb 2020</span>
                     </div>
                 </div>
-                <div className={discussionSection + " " + "discussionSection"}>
+                <div className={discussionSection + " " + "discussionSectionNew"}>
                     <div className="taskName">
                         <img className="icon" src={ASSETS_BASE_URL + "/images/common/description.svg"} alt="discuss" />
                         <span>Description</span>
@@ -283,7 +283,7 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
                     </div>
                 </div>
 
-                <div className={messageSection + " " + "messageSection"}>
+                <div className={messageSection + " " + "messageSectionNew"}>
                     <div className="taskName">
                         <img className="icon" src={ASSETS_BASE_URL + "/images/common/message.svg"} alt="discuss" />
                         <span>Activity</span>

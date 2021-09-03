@@ -5,9 +5,9 @@ import { container, menuBar } from './style.js';
 const DocumentCardModal = ({ id, docId, toggle, deleteDocumentClicked, downloadDocumentClicked })=>{
     const modalRef = useRef();
     return(
-        <div className={container} ref={modalRef}>
+        <div className={container + " " + "attachDrop"} ref={modalRef}>
             <DetectClickOutside targetRef={modalRef} clickOutside={toggle}>
-                <div className={menuBar}>
+                <div className={menuBar + " " + "attachDropMenu"}>
                     <span onClick={()=>{
                         toggle();
                         downloadDocumentClicked({id, docId})

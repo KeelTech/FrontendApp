@@ -115,7 +115,7 @@ const CustomPopup = ({ deletePopupHandler=()=>{}, togglePopup })=>{
     },[])
 
     return(
-        <div className={container}>
+        <div className={container + " " + "overLayPopUp fixedThis"}>
             {/* <div className={overlay}></div> */}
             <div className="popupCont">
                 <div className="documentInfo" ref={bodyRef}>

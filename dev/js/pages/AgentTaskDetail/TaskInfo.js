@@ -291,7 +291,7 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
             </div>
             {/* <div className="taskStatus">Mark as completed</div> */}
             <div className="taskScrollSection">
-                <div className={taskStatus + " " + "taskStatus"}>
+                <div className={taskStatus + " " + "taskStatusNew"}>
                     <div className="view">
                         <div className="taskName">
                             <img className="icon" src={ASSETS_BASE_URL + "/images/common/member.svg"} alt="home" />
@@ -318,10 +318,10 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
                             <img className="icon" src={ASSETS_BASE_URL + "/images/common/blueCalendar.svg"} alt="home" />
                             <span className="hideMobile">Select</span><span>Due Date</span>
                         </div>
-                        <input type="date" id="dueDate" name="dueDate" defaultValue={defaultDueDate} onChange={(e) => setDataValues({ due_date: new Date(e.target.value) })} />
+                        <input className="taskInputBlock" type="date" id="dueDate" name="dueDate" defaultValue={defaultDueDate} onChange={(e) => setDataValues({ due_date: new Date(e.target.value) })} />
                     </div>
                 </div>
-                <div className={discussionSection + " " + "discussionSection"}>
+                <div className={discussionSection + " " + "discussionSectionNew"}>
                     <div className="taskName">
                         <img className="icon" src={ASSETS_BASE_URL + "/images/common/description.svg"} alt="discuss" />
                         <span>Description</span>
@@ -336,9 +336,9 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
                             <img className="icon" src={ASSETS_BASE_URL + "/images/common/attachment.svg"} alt="discuss" />
                             <span>Attachments</span>
                         </div>
-                        <div className="taskName">
+                        <div className="taskName addAttachment">
                             <img className="icon" src={ASSETS_BASE_URL + "/images/common/addIcon.svg"} alt="attachment" />
-                            <span onClick={toggleUploadModal} className="addAttachment">Add an attachment</span>
+                            <span onClick={toggleUploadModal}>Add an attachment</span>
                         </div>
                     </div>
                     <div className="attachmentList">
@@ -395,12 +395,9 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
                     </div>
                 </div>
 
-                <div className="submitCta">
-                    <CustomButton text="Update" clickHandler={updateTaskDetils} margin="0px 8px 0px 0px" padding="10px 30px" borderRadius="5px" backgroundColor="#747BB4" />
-                    <CustomButton text="Cancel" clickHandler={handleBackBtnClick} margin="0px" padding="10px 30px" borderRadius="5px" backgroundColor="#FE9874" />
-                </div>
 
-                <div className={messageSection + " " + "messageSection"}>
+
+                <div className={messageSection + " " + "messageSectionNew"}>
                     <div className="taskName">
                         <img className="icon" src={ASSETS_BASE_URL + "/images/common/message.svg"} alt="discuss" />
                         <span>Activity</span>
@@ -427,9 +424,13 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
                         }
 
                     </div>
-                    <div className="deleteTask">
-                        <CustomButton text="Delete" clickHandler={deleteTask} margin="0px 0px 8px 0px" padding="10px 50px" borderRadius="5px" backgroundColor="#CF3030" />
-                    </div>
+                </div>
+            </div>
+            <div className="deleteTask customEditFor">
+                <CustomButton text="Delete" clickHandler={deleteTask} margin="0px 0px 8px 0px" padding="10px 50px" borderRadius="5px" backgroundColor="#CF3030" />
+                <div className="submitCta">
+                    <CustomButton text="Update" clickHandler={updateTaskDetils} margin="0px 8px 0px 0px" padding="10px 30px" borderRadius="5px" backgroundColor="#747BB4" />
+                    <CustomButton text="Cancel" clickHandler={handleBackBtnClick} margin="0px" padding="10px 30px" borderRadius="5px" backgroundColor="#FE9874" />
                 </div>
             </div>
         </div >

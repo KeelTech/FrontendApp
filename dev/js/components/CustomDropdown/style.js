@@ -20,19 +20,25 @@ export const ddContainer = css`
     };
 `
 export const ddContainerItem = css`
-    background: #FCFCFC;
-    border: none;
-    width: 100%;
-    border-top:0.8px solid #EAEAEF;
+background: #FCFCFC;
+border: none;
+width: 100%;
+border-left: 1px solid #404040;
+border-top: 1px solid #404040;
+border-right: 1px solid #404040;
+text-transform: uppercase;
+font-family: inherit;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+font-weight: 500;
+line-height: 27px;
+cursor: pointer;
+color: #363B64;
+text-align: left;
+margin-right: 0px;
     font-family: ${primaryFont};
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 27px;
-    cursor:pointer;
-    color: #363B64;
-    text-align:left;
-    margin-right:0px;
+    
     :hover{
        
         background: white;
