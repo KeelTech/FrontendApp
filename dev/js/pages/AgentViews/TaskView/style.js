@@ -13,7 +13,7 @@ export const container = css`
     width: 100%;
     height: 100%;
     padding: 0px 26px;
-    height: calc(100vh - 180px);
+    height: calc(100vh - 120px);
     .taskInfo{
         width: 60%;
         overflow-y: hidden;
@@ -22,7 +22,7 @@ export const container = css`
         ${inputField};
         background: #F6F5FA;
         border: 1px solid #A098AE;
-        border-radius: 10px;
+        border-radius: 4px;
         width: 100%;
         padding: 8px 4px;
         font-size: 12px;
@@ -74,7 +74,7 @@ export const tasksView = css`
     }
     .taskList{
         overflow-y: auto;
-        max-height: calc(100vh - 290px);
+        max-height: calc(100vh - 215px);
         padding:5px;
     }
     .emptyData{

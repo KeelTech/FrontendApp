@@ -58,7 +58,7 @@ export const container = css`
   //     box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
   //     font-size: 16px;
   //     line-height: 27px;
-  //     border-radius: 10px;
+  //     border-radius: 4px;
   //     color: #fcfcfc;
   //     width: 100%;
   //     text-align: center;
@@ -101,7 +101,7 @@ export const container = css`
     //     padding: 10px 14px;
     //     margin-left: 0px;
     //     box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
-    //     border-radius: 10px;
+    //     border-radius: 4px;
     //     font-weight: 600;
     //     font-size: 14px;
     //     line-height: 21px;

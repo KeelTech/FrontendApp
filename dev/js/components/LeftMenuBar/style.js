@@ -8,7 +8,7 @@ export const leftBarCont = css`
     height: fit-content;
     position: sticky;
     top: 90px;
-    border-radius: 10px;
+    border-radius: 4px;
     border: 1px solid #e0dfdc;
     .overlay{
         position: fixed;

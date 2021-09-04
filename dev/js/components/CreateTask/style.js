@@ -3,7 +3,7 @@ import { inputField, tabScreenWidth, textAreaPlaceholder } from '@constants';
 
 export const container = css`
     background: #FCFCFC;
-    border-radius: 10px;
+    border-radius: 4px;
     padding: 22px;
     max-width: 100%;
     h2{
@@ -38,7 +38,7 @@ export const container = css`
         ${inputField};
         background: #F6F5FA;
         border: 1px solid #A098AE;
-        border-radius: 10px;
+        border-radius: 4px;
         width: 100%;
         padding: 8px;
         font-size: 12px;

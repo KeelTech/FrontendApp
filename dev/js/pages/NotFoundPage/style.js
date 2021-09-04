@@ -36,7 +36,7 @@ export const content = css`
     padding: 10px 14px;
     background: #212529;
     box-shadow: 0px 11px 28px rgba(191, 21, 108, 0.05);
-    border-radius: 10px;
+    border-radius: 4px;
     margin: 0;
     margin-top: 25px;
     font-weight: 600;

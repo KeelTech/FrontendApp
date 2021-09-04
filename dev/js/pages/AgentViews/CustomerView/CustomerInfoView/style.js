@@ -3,7 +3,7 @@ import { primaryFont } from "@constants";
 import { tabScreenWidth } from "@constants";
 
 export const body = css`
-  background: rgba(252, 252, 252, 0.5);
+  // background: rgba(252, 252, 252, 0.5);
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -16,7 +16,7 @@ export const body = css`
   }
   .basicInfo {
     background: #fcfcfc;
-    border-radius: 10px;
+    border-radius: 4px;
     box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
     width: 60%;
     margin-left: 3%;
@@ -33,7 +33,7 @@ export const body = css`
     margin-top: 12px;
   }
   ${'' /* .userImage {
-    border-radius: 10px;
+    border-radius: 4px;
     height: 55px;
     width: 55px;
     margin-left: 12px;
@@ -111,7 +111,7 @@ export const body = css`
     padding: 10px 14px;
     background: #363b64;
     box-shadow: 0px 11px 28px rgba(191, 21, 108, 0.05);
-    border-radius: 10px;
+    border-radius: 4px;
     width: 124px;
     height: 34px;
     color: #fcfcfc;
@@ -135,7 +135,7 @@ export const body = css`
     align-items: center;
     background: #363b64;
     box-shadow: 0px 11px 28px rgba(191, 21, 108, 0.05);
-    border-radius: 10px;
+    border-radius: 4px;
     width: 124px;
     height: 34px;
     padding: 10px 14px;
@@ -152,7 +152,7 @@ export const body = css`
   }
   .meetingInfoWrapper {
     background: #fcfcfc;
-    border-radius: 10px;
+    border-radius: 4px;
     box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
     width: 60%;
     margin-top: 10px;
@@ -227,7 +227,7 @@ export const body = css`
     border: none;
     background: #363b64;
     box-shadow: 0px 11px 28px rgba(191, 21, 108, 0.05);
-    border-radius: 10px;
+    border-radius: 4px;
     padding: 10px 14px;
     color: #fcfcfc;
     height: 34px;
@@ -252,7 +252,7 @@ export const body = css`
     border: none;
     background: #363b64;
     box-shadow: 0px 11px 28px rgba(191, 21, 108, 0.05);
-    border-radius: 10px;
+    border-radius: 4px;
     padding: 10px 14px;
     color: #fcfcfc;
     height: 34px;
@@ -269,7 +269,7 @@ export const body = css`
   }
   .completeInfoWrapper {
     background: #fcfcfc;
-    border-radius: 10px;
+    border-radius: 4px;
     box-shadow: 0px 14px 34px rgba(191, 21, 108, 0.05);
     height: 42%;
     width: 60%;

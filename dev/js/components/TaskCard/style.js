@@ -4,6 +4,7 @@ import { mobileScreenWidth } from '@constants';
 export const card = props=>css`
     background: white;
     padding: 12px 26px;
+    border: 1px solid #00000020;
     box-shadow: 2px 2px 8px #eae8ee;
     border-radius: 4px;
     margin-bottom: 14px;

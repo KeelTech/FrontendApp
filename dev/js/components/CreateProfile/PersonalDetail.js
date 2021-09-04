@@ -10,7 +10,7 @@ const PersonalDetail = ()=>{
     }
 
     return(
-        <div className={formView}>
+        <div className={formView + " " + "UPDATEDFORM"}>
             <div className="formView">
                 <div className="formHeading">Personal Details</div>
                 <div className="formFields">

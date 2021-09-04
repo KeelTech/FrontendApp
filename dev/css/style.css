@@ -263,7 +263,8 @@ html {
 
 body {
   margin: 0;
-  font-family: "Roboto", sans-serif;
+  /* font-family: "Roboto", sans-serif !important; */
+  font-family: "Poppins", sans-serif !important;
   height: 100%;
 }
 
@@ -2184,7 +2185,7 @@ body
   width: 100%;
   margin-right: 64px;
   border: 1px solid rgba(94, 108, 132, 0.2);
-  border-radius: 10px;
+  border-radius: 4px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4911,7 +4912,7 @@ body
   width: 100%;
   margin-right: 64px;
   border: 1px solid rgba(94, 108, 132, 0.2);
-  border-radius: 10px;
+  border-radius: 4px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -5880,7 +5881,23 @@ button:focus {
 }
 
 .taskUi {
-  box-shadow: 2px 2px 8px #d8dce4;
+  /* box-shadow: 2px 2px 8px #d8dce4; */
+}
+.addStaticBtn {
+  text-align: end;
+  /* display: none; */
+  margin-bottom: 10px;
+  margin-right: 28px;
+}
+
+.addStaticBtn button {
+  background: #4267B2;
+  /* margin-right: 10px; */
+  color: white;
+  border-radius: 4px !important;
+  border: 1px solid #4267B2;
+  padding: 4px 10px;
+  font-size: 14px;
 }
 /* width */
 ::-webkit-scrollbar {
@@ -5891,13 +5908,13 @@ button:focus {
 /* Track */
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px #b3b3b3;
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #4d4c4c;
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 /* Handle on hover */
@@ -6017,6 +6034,7 @@ input:focus + label {
   font-size: 14px !important;
   text-transform: uppercase;
   font-weight: 500 !important;
+  min-width: 120px !important;
 }
 
 .headerContent {
@@ -6034,8 +6052,8 @@ img.img-fluid.keelTopLogo {
   background: rgb(34, 193, 195);
   background: linear-gradient(38deg, rgba(34, 193, 195, 1) 0%, rgba(66, 103, 178, 1) 100%);
   height: 60px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 
 .userContent img {
@@ -6084,9 +6102,53 @@ img.img-fluid.keelTopLogo {
   padding-right:22px;
   margin-right: -12px;
 }
+.taskScrollSection.forCustomTaskHeight {
+  height: calc(100% - 55px);
+}
+.menuOPT .menuItemSr{
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+.noMeeting {
+  background: #ffffff;
+  padding-top: 12px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 8px #eeeeee;
+  border: 1px solid #e0dfdc;
+  margin-bottom: 15px;
+  padding: 12px;
+  text-align: center;
+}
 
+.noMeeting h5 {
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+
+.noMeeting img {
+  width: 90px;
+}
+
+.noMeeting .upcoming {margin-top: 20px;margin-bottom: 0;}
 /* ============ Custom style Common ============== */
 /* ============ Agent Dashboard Update ============== */
+.taskHandlersCnt {
+  height: calc(100vh - 120px);
+}
+.addNewTask button {
+  width: 100%;
+    margin-bottom: 10px;
+    color: #4267B2;
+    background: transparent;
+    border-radius: 4px !important;
+    border: 1px solid #4267B2;
+    padding: 8px 5px;
+    font-size: 14px;
+    font-weight: 500;
+}
 .agentMainContainer {
   width: 98% !important;
   margin: auto;
@@ -6094,6 +6156,13 @@ img.img-fluid.keelTopLogo {
 }
 .agentDashboardMain {
   /* padding-top: 48px; */
+  height: calc(100vh - 30px);
+}
+.agentPadding{
+  padding-top: 48px !important;
+}
+.optionList span{
+  text-transform: uppercase;
 }
 .mainSectionTopSpace{
   margin-top: 45px !important;
@@ -6221,10 +6290,10 @@ span.showTasks:hover {
 }
 
 .tableMain .tableHeadMain .tableRow .tableHead {
-  background: #E7EFF8;
-  color: #343A40;
-  font-size: 12px;
-  border: 1px solid white;
+  background: #213969;
+    color: white;
+    font-size: 12px;
+    border: 1px solid white;
 }
 
 .tableRow.cursor-pointer {
@@ -6302,6 +6371,7 @@ button.nxtBtn {
 }
 .main-container.customerMainContainer {
   padding: 0px 25px;
+  height: 100%;
 }
 
 img.img-fluid.userProfileXn {
@@ -7120,6 +7190,17 @@ p.tblData {
 .listDropItem li div img {
   width: 16px !important;
 }
+.upcoming button {
+  background: #4267b2;
+  color: white;
+  border-radius: 4px !important;
+  width: 100%;
+  border: 1px solid #4267b2;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 1px 1px 4px #bababa;
+}
 /* ============ on board  ============== */
 /* ============ Task Container  ============== */
 .topTaskHead {
@@ -7164,10 +7245,10 @@ span.discussionTxt {
 }
 
 .taskStatusNew {
-    background: #f3f2ef;
-    padding: 12px 12px;
-    border-radius: 4px;
-    border: 1px solid #cacac9;
+  background: #f5faff;
+  padding: 12px 12px;
+  border-radius: 4px;
+  border: 1px solid #9eadcd;
 }
 .taskStatusNew .selectedOption,.taskStatusNew .taskInputBlock{
   margin: 0px !important;
@@ -7334,6 +7415,7 @@ span.percent:after {
   align-items: center;
   justify-content: space-between;
   padding-top: 15px;
+  border-top: 1px solid #f3f2ef;
 }
 
 .deleteTask.customEditFor .addBtnCmnt {
@@ -7374,6 +7456,32 @@ span.percent:after {
 }
 .checklistItems .item img {
   cursor: pointer;
+}
+.newTaskMainContainer{
+  max-width: 100%;
+    position: relative;
+    background: white !important;
+    box-shadow: 2px 2px 8px #eae8ee;
+    border-radius: 4px !important;
+    padding: 12px !important;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.newTaskMainContainer .formView .field input,.newTaskMainContainer .formView .view input,.newTaskMainContainer .formView .field textarea{
+  background: white !important;
+    border-radius: 4px !important;
+    border: 1px solid #CED4DA !important;
+}
+.newTaskMainContainer .formView {
+  max-height: calc(100vh - 255px) !important;
+  overflow: auto !important;
+  margin-right: -12px;
+    padding-right: 12px;
+}
+
+.newTaskMainContainer .customEditFor div.forNewTskBtn:first-child{
+  background: #CF3030!important;
 }
 /* ============ Task Container  ============== */
 /* ============ Media Queries ============== */
@@ -7473,7 +7581,7 @@ span.percent:after {
 }
 @media (min-height: 1200px) {
   .chatMainContainer {
-    height: auto !important;
+    /* height: auto !important; */
   }
   .taskList {
     max-height: 640px;
@@ -7482,7 +7590,7 @@ span.percent:after {
 
 @media (min-width: 1520px) {
   .chatMainContainer {
-    height: auto !important;
+    /* height: auto !important; */
   }
 }
 /* ============ Media Queries ============== */

@@ -6,7 +6,7 @@ export const container = css`
     width: 100%;
     height: 100%;
     padding: 0px 26px;
-    height: calc(100% - 120px);
+    height: calc(100% - 30px);
     .chat{
         width: 60%;
         // max-width:500px;
@@ -32,7 +32,7 @@ export const pendingTasks = css`
     .taskList{
         margin-top: 14px;
         overflow-y: auto;
-        max-height: calc(100vh - 290px);
+        max-height: calc(100vh - 240px);
         // box-shadow: 2px 2px 8px #eae8ee;
     border-radius: 4px;
     padding:5px;
@@ -116,7 +116,7 @@ export const scheduleCallCta = css`
     @media(max-width: ${tabScreenWidth}){
         padding: 6px 15px;
         margin-right: 13px;
-        border-radius: 10px;
+        border-radius: 4px;
         height: 40px;
         span{
             font-size: 14px;
@@ -138,7 +138,7 @@ export const upcomingSchedules = css`
     background: white;
     height: fit-content;
     min-height: 340px;
-    border-radius: 10px;
+    border-radius: 4px;
     box-shadow: 2px 2px 8px #d8dce4;
     border: 1px solid #e0dfdc;
     @media(min-width: 1200px){
@@ -163,13 +163,13 @@ export const upcomingSchedules = css`
                 display: inline-block;
                 cursor: pointer;
                 width: 100%;
-                font-size: 16px;
+                font-size: 14px;
                 line-height: 24px;
                 color: #6C757D;
                 text-align: center;
                 margin-bottom: 8px;
                 background: #E7EFF8;
-                font-weight: 600;
+                font-weight: 500;
                 padding: 10px 5px;
                 border-radius: 4px;
                 border: 1px solid white;

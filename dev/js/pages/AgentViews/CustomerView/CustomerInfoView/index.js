@@ -62,7 +62,7 @@ function CustomerInfoView(props) {
           <LoadingWidget />
         </div>
       ) : (
-        <div className="main-container customerMainContainer">
+        <div className="main-container customerMainContainer agentPadding">
           <div className="leftBar">
             <div className="basicInfoADD customerDetails">
               <div className="infoWrapper">

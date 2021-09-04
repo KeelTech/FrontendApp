@@ -204,7 +204,7 @@ export const taskStatus = css`
         ${inputField};
         background: #F6F5FA;
         border: 1px solid #A098AE;
-        border-radius: 10px;
+        border-radius: 4px;
         width: 100%;
         padding: 8px !important;
         font-size: 12px;

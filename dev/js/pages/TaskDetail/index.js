@@ -205,7 +205,7 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
                 <span className="sign">{title}</span>
                 <span className="backBtn" onClick={handleBackBtnClick}>Back</span>
             </div>
-            <div className="taskScrollSection">
+            <div className="taskScrollSection forCustomTaskHeight">
                 <div className={taskStatus + " " + "taskStatusNew"}>
                     <div className="view">
                         <div className="taskName">

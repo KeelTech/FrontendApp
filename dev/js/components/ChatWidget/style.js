@@ -5,7 +5,7 @@ export const container = css`
 height: 100%;
 background: #ffffff;
 padding-top: 12px;
-border-radius: 10px;
+border-radius: 4px;
 box-shadow: 2px 2px 8px #d8dce4;
 border: 1px solid #e0dfdc;
     .header{
@@ -55,8 +55,8 @@ export const chatWidget = props=>css`
     border-top: 1px solid #EBEBEB;
     padding: 19px 28px;
     overflow: auto;
-    height: calc(100vh - 320px);
-    max-height:600px;
+    height: calc(100vh - 272px);
+    // max-height:600px;
     ${props.floatingChat && `
         padding: 13px 21px;
         height: calc(100% - 136px);
@@ -123,7 +123,7 @@ export const msgWidget = props =>css`
     ${props.floatingChat && `
         padding: 14px 20px;
         .chatbox{
-            border-radius: 10px;
+            border-radius: 4px;
             padding: 5px;
         }
         input{
@@ -139,7 +139,7 @@ export const msgWidget = props =>css`
         }
         .sendBtn{
             padding: 18px 20px;
-            // border-radius: 10px;
+            // border-radius: 4px;
             font-size: 14px;
             line-height: 18px;
             img{
@@ -215,7 +215,7 @@ export const chatBox = props=>css`
             line-height: 18px;
             margin-bottom: 4px;
             padding: 12px 8px;
-            border-radius: 10px;
+            border-radius: 4px;
         }`
     }
 `

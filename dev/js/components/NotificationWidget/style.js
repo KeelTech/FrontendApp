@@ -11,7 +11,7 @@ export const container = css`
   position: relative;
   background: #fcfcfc;
   box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
-  border-radius: 10px;
+  border-radius: 4px;
   img {
     width: 13px;
     height: 18px;
@@ -39,7 +39,7 @@ export const notification = css`
   width: 400px;
   height: auto;
   box-shadow: -10px 10px 64px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+  border-radius: 4px;
 
   @media (max-width: ${mobileScreenWidth}) {
     width: 300px;

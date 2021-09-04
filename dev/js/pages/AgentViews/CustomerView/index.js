@@ -45,7 +45,7 @@ const CustomerView = () => {
             <ProfileWidget />
           </div>
         </Header> */}
-        <div className={view + " " + "tableMainContainer"}>
+        <div className={view + " " + "tableMainContainer agentPadding"}>
           {
               caseListLoading?<div className={loaderView + " " + "tableInnerCont"}><LoadingWidget/></div>
               :<Fragment>

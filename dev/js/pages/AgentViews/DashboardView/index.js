@@ -85,7 +85,7 @@ const AgentDashboardView = () => {
           <ProfileWidget />
         </div> */}
       </Header>
-      <div className={wrapper + " " + "consultDash"}>
+      <div className={wrapper + " " + "consultDash agentPadding"}>
         <div className={container + " " + "consultDasLoad"}>
           {
             loading && <div className={loaderView}><LoadingWidget /></div>
