@@ -7457,6 +7457,30 @@ span.percent:after {
 .checklistItems .item img {
   cursor: pointer;
 }
+.newTaskMainContainer{
+  max-width: 100%;
+    position: relative;
+    background: white !important;
+    box-shadow: 2px 2px 8px #eae8ee;
+    border-radius: 4px !important;
+    padding: 12px !important;
+    overflow-y: auto;
+    width: 100%;
+}
+.newTaskMainContainer .formView .field input,.newTaskMainContainer .formView .view input,.newTaskMainContainer .formView .field textarea{
+  background: white !important;
+    border-radius: 4px !important;
+    border: 1px solid #CED4DA !important;
+}
+.newTaskMainContainer .formView {
+  max-height: calc(100vh - 255px) !important;
+  overflow: auto !important;
+  margin-right: -12px;
+    padding-right: 12px;
+}
+.newTaskMainContainer .customEditFor div.forNewTskBtn:first-child{
+  background: #CF3030!important;
+}
 /* ============ Task Container  ============== */
 /* ============ Media Queries ============== */
 @media (max-width: 767px) {

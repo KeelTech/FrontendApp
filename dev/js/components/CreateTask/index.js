@@ -134,7 +134,7 @@ const CreateTask = ({ toggleAddTaskView, caseId })=>{
     }
 
     return(
-        <div className={container}>
+        <div className={container + " " + "newTaskMainContainer"}>
             {
                 loading && <div className={loaderView}><LoadingWidget/></div>
             }
@@ -247,12 +247,13 @@ const CreateTask = ({ toggleAddTaskView, caseId })=>{
                     </div>
                 </div> */}
 
-                <div className={cta}>
-                    <CustomButton text="Cancel" clickHandler={()=>toggleAddTaskView(false)} margin="0px 8px 0px 0px" padding="10px 16px" borderRadius="4px" backgroundColor="#DC3545" fontColor="16px" fontWeight="600" fontColor="#FFFFFF"/>
-                    <CustomButton text="Save Task" clickHandler={createTaskClicked} margin="0px" padding="10px 16px" borderRadius="4px" backgroundColor="#28A745" fontColor="16px" fontWeight="600" fontColor="#FFFFFF"/>
-                </div>
+               
 
-            </div>        
+            </div>   
+            <div className={cta + " " + "deleteTask customEditFor"}>
+                    <CustomButton text="Cancel" clickHandler={()=>toggleAddTaskView(false)} />
+                    <CustomButton text="Save Task" clickHandler={createTaskClicked} />
+                </div>     
         </div>
     )
 }
