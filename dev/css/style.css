@@ -7467,6 +7467,7 @@ span.percent:after {
     overflow-y: auto;
     width: 100%;
 }
+
 .newTaskMainContainer .formView .field input,.newTaskMainContainer .formView .view input,.newTaskMainContainer .formView .field textarea{
   background: white !important;
     border-radius: 4px !important;
