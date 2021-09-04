@@ -229,7 +229,7 @@ body {
 
 export const formView = css`
     background: #F8F9FA;
-    border-radius: 10px;
+    border-radius: 4px;
     height: 100%;
     overflow-y: auto;
     .formView{
@@ -251,7 +251,7 @@ export const formView = css`
     }
     .formFields{
         background: #FFFFFF;
-        border-radius: 10px;
+        border-radius: 4px;
         padding: 34px 24px;
         margin-top: 12px;
     }

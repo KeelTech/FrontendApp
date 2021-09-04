@@ -88,7 +88,7 @@ const TaskView = (props) => {
     }
 
     return (
-        <div className={`${body} ${mainCont}` + '    ' + 'p-relative pt-5'}>
+        <div className={`${body} ${mainCont}` + '    ' + 'taskViewMainContainer p-relative pt-5'}>
             <div className="mainView mainSectionTopSpace">
                 <div className="subHeaderTop">
                     <div className="headerContent">
@@ -98,6 +98,9 @@ const TaskView = (props) => {
                         <ProfileWidget />
                     </div>
                 </div>
+                {/* <div className="addStaticBtn">
+                            <button clickHandler={addMoreTasks}>Add New Task</button>
+                        </div> */}
                 <Header headerText="Task" isAgent>
                     <div className="headerView">
                         <CustomButton text="Add New Task" clickHandler={addMoreTasks} margin="0px 16px 0px 0px" />
@@ -105,7 +108,7 @@ const TaskView = (props) => {
                         {/* <ProfileWidget/> */}
                     </div>
                 </Header>
-                <div className={container}>
+                <div className={container + '    ' +"taskHandlersCnt"}>
                     <div className={tasksView}>
                         <div className="tasksCta">
                             <div className={`cta ${activeWidget === 0 ? 'ctaActive' : ''}`} onClick={() => handleCtaClick(0)}>
@@ -118,9 +121,14 @@ const TaskView = (props) => {
                                 <span>Completed</span>
                             </div>
                         </div>
+                        {/* =========== Custom Add Task Button =========== */}
+                        <div className="addNewTask">
+                            <button>Add New Task</button>
+                        </div>
+                        {/* =========== Custom Add Task Button =========== */}
                         {
-                            loading ? <div className={loaderView}><LoadingWidget /></div>
-                                : <div className="taskList">
+                            loading ? <div className={loaderView + '    ' + "CstmLoaderView"}><LoadingWidget /></div>
+                                : <div className="taskList agentTaskList">
                                     {
                                         taskList.length ?
                                             taskList.map((val) => {

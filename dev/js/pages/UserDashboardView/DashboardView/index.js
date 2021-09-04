@@ -20,12 +20,12 @@ const DashboardView = ({ scheduleList, calendlyURL }) => {
     const dispatch = useDispatch();
     const taskInfo = useSelector(state => state.TASK_INFO);
     const { taskList = [], taskListLoading, userInfoLoading, userInfo = {} } = taskInfo || {};
-    let { case: caseDetails = {}, cases = {}, profile={}, agent={} } = userInfo;
+    let { case: caseDetails = {}, cases = {}, profile = {}, agent = {} } = userInfo;
     if (cases) {
         caseDetails = cases
     }
-    const { full_name:agentName='' } = agent;
-    const { first_name='' } = profile;
+    const { full_name: agentName = '' } = agent;
+    const { first_name = '' } = profile;
     const caseId = caseDetails && caseDetails.case_id;
     const userId = caseDetails && caseDetails.user;
     const [activeTask, setActiveTask] = useState('');
@@ -69,20 +69,20 @@ const DashboardView = ({ scheduleList, calendlyURL }) => {
         }
     }
 
-    const scheduleCall = ()=>{
-        Calendly.initPopupWidget({url: calendlyURL});
+    const scheduleCall = () => {
+        Calendly.initPopupWidget({ url: calendlyURL });
     }
 
     return (
         <div className={body + '    ' + 'p-relative pt-5'}>
             <div className="mainView mainSectionTopSpace">
                 <div className="subHeaderTop">
-                <div className="headerContent">
-                <img className="img-fluid keelTopLogo" src={ASSETS_BASE_URL + "/images/common/keelIcon.svg"} alt="home" onClick={()=>history.push('/')} />
+                    <div className="headerContent">
+                        <img className="img-fluid keelTopLogo" src={ASSETS_BASE_URL + "/images/common/keelIcon.svg"} alt="home" onClick={() => history.push('/')} />
 
-                    {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
-                    {/* <NotificationWidget /> */}
-                    <ProfileWidget />
+                        {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
+                        {/* <NotificationWidget /> */}
+                        <ProfileWidget />
                     </div>
                 </div>
                 <Header headerText={`Welcome ${first_name}`}>
@@ -122,7 +122,7 @@ const DashboardView = ({ scheduleList, calendlyURL }) => {
 
                     </div>
                     <div className="chat">
-                        {caseId && userId ? <ChatWidget caseId={caseId} currentUserId={userId} chatHeaderName={agentName}/> : ""}
+                        {caseId && userId ? <ChatWidget caseId={caseId} currentUserId={userId} chatHeaderName={agentName} /> : ""}
                     </div>
                 </div>
             </div>
@@ -131,11 +131,10 @@ const DashboardView = ({ scheduleList, calendlyURL }) => {
                     <NotificationWidget />
                     {/* <ProfileWidget /> */}
                 </div>
-                <div className="upcoming" onClick={scheduleCall}><span>Schedule Call</span></div>
-                <div className="upcoming"><span>Upcoming Schedule</span></div>
+                <div className="upcoming"><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Upcoming Schedule</span></div>
                 {
-                    scheduleList.map((val, key)=>{
-                        const { start_time, name='', end_time } = val;
+                    scheduleList.map((val, key) => {
+                        const { start_time, name = '', end_time } = val;
                         return <div className="info">
                             <span className="upcomingTitle">{name} </span>
                             <div className="taskSch">
@@ -151,6 +150,11 @@ const DashboardView = ({ scheduleList, calendlyURL }) => {
                         </div>
                     })
                 }
+                <div className="noMeeting">
+                    <h5>No meetings scheduled</h5>
+                    <img className="icon" src={ASSETS_BASE_URL + "/images/common/sch.svg"} alt="time" />
+                    <div className="upcoming" onClick={scheduleCall}><button><i class="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div>
+                </div>
             </div>
         </div>
     )

@@ -27,7 +27,7 @@ export const profile = css`
   width: 300px;
   height: auto;
   box-shadow: -10px 10px 64px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+  border-radius: 4px;
 
   @media (max-width: ${mobileScreenWidth}) {
     width: 250px;

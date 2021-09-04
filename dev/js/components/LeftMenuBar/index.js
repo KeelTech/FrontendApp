@@ -111,7 +111,8 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                             {/* <img className="homeIcon" src={ASSETS_BASE_URL+"/images/common/keelIcon.svg"} alt="home" onClick={()=>history.push('/')}/> */}
                             <img className="crossIcon" src={ASSETS_BASE_URL+"/images/common/x_white.svg"} alt="home" onClick={toggleMenuBar}/>
                         </div>
-                        <div className={menuOptions}>
+                        <div className={menuOptions + ' '+ "menuOPT" }>
+                            <div className="menuItemSr">
                             {
                                 isAgent?
                                 <Fragment>
@@ -154,6 +155,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                             <div className={`widget ${activeWidget==='logout'?'activeWidget':''}`} onClick={handleLogout}>
                                 <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/logoutIcon.svg"} alt="logout"/>
                                 <span className="heading">Logout</span>
+                            </div>
                             </div>
                             <div className="degreeWidget">
                                 <img src={ASSETS_BASE_URL+"/images/leftmenubar/degreeIcon.svg"} alt="degree"/>

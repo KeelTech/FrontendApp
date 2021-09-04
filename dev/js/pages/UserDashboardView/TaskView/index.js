@@ -100,8 +100,8 @@ const TaskView = ()=>{
                         {/* <ProfileWidget/> */}
                     </div>
                 </Header>
-                <div className={container}>
-                    <div className={tasksView}>
+                <div className={container + " "+"UserDashBoardMain"}>
+                    <div className={tasksView + " "+ "taskViewMainCust"}>
                         <div className="tasksCta">
                             <div className={`cta ${activeWidget===0?'ctaActive':''}`} onClick={()=>handleCtaClick(0)}>
                                 <span>Pending</span>
@@ -113,7 +113,7 @@ const TaskView = ()=>{
                                 <span>Completed</span>
                             </div>
                         </div>
-                        <div className="taskList">
+                        <div className="taskList customerTaskList">
                             {
                                 userInfoLoading || taskListLoading?<div className={loaderView}><LoadingWidget/></div>
                                 :<Fragment>
