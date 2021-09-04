@@ -103,7 +103,7 @@ const TaskView = (props) => {
                         </div> */}
                 <Header headerText="Task" isAgent>
                     <div className="headerView">
-                        <CustomButton text="Add New Task" clickHandler={addMoreTasks} margin="0px 16px 0px 0px" />
+                        {/* <CustomButton text="Add New Task" clickHandler={addMoreTasks} margin="0px 16px 0px 0px" /> */}
                         <NotificationWidget />
                         {/* <ProfileWidget/> */}
                     </div>
@@ -122,7 +122,7 @@ const TaskView = (props) => {
                             </div>
                         </div>
                         {/* =========== Custom Add Task Button =========== */}
-                        <div className="addNewTask">
+                        <div className="addNewTask" onClick={addMoreTasks}>
                             <button>Add New Task</button>
                         </div>
                         {/* =========== Custom Add Task Button =========== */}
