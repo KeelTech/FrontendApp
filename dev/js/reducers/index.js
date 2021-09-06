@@ -13,8 +13,7 @@ import CHAT from './chat.js';
 
 const persistConfig = {
   key: 'root',
-  storage,
-  whitelist: [],
+  storage
 };
 
 const AUTH_PERSIST = {
@@ -76,24 +75,27 @@ const allReducers = combineReducers({
   CHAT: persistReducer(CHAT_PERSIST, CHAT)
 });
 
-const rootReducer = (state, action) => {
-  if (action.type === LOGOUT_USER) {
-      // for all keys defined in your persistConfig(s)
-      storage.removeItem('persist:root')
-      storage.removeItem('persist:AUTH')
-      storage.removeItem('persist:USER')
-      storage.removeItem('persist:USER_LOGIN')
-      storage.removeItem('persist:COMMON')
-      storage.removeItem('persist:TASK_INFO')
-      storage.removeItem('persist:AGENT_STORE')
-      storage.removeItem('persist:DOCUMENT_VAULT')
-      storage.removeItem('persist:CHAT')
+// const rootReducer = (state, action) => {
+//   //if(!state) return undefined;
+//   if (action.type === LOGOUT_USER) {
+//       // for all keys defined in your persistConfig(s)
+//       storage.removeItem('persist:root')
+//       storage.removeItem('persist:AUTH')
+//       storage.removeItem('persist:USER')
+//       storage.removeItem('persist:USER_LOGIN')
+//       storage.removeItem('persist:COMMON')
+//       storage.removeItem('persist:TASK_INFO')
+//       storage.removeItem('persist:AGENT_STORE')
+//       storage.removeItem('persist:DOCUMENT_VAULT')
+//       storage.removeItem('persist:CHAT')
+//       console.log('before logout', state);
 
-      return allReducers(undefined, action);
-  }
-  return allReducers(state, action);
-};
+//       return allReducers(undefined, action);
+//   }
+//   console.log('after logout', state);
+//   return allReducers(state, action);
+// };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, allReducers);
 
 export default persistedReducer;
