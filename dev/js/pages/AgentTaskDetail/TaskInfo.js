@@ -162,10 +162,10 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
         }, 1000);
     }
 
-    const handleTaskStatusUpdate = () => {
+    const handleTaskStatusUpdate = (val) => {
         const postDataParams = {
             task_id: dataParams.task_id,
-            status: 2
+            status: val
         }
         updateCurrentTaskStatus(postDataParams, dispatch, (resp, err) => {
             setLoading(false);
@@ -258,6 +258,16 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
         })
     }
 
+    const renderStatusOptions = (val)=>{
+        if(val=='Progress'){
+            return <Fragment>
+                <span className="statusText" onClick={()=>handleTaskStatusUpdate(2)}>Mark as completed</span>
+                <span className="statusText" onClick={()=>handleTaskStatusUpdate(0)}>Mark as In Progress</span>
+            </Fragment>
+        }
+        return null;
+    }
+
     let { fullYear, day, month } = getFormattedDate(due_date);
     let defaultDueDate = `${fullYear}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`;
 
@@ -281,7 +291,7 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
                 </div>
                 <div className="statusCont">
                     <span className="status">{status_name}</span>
-                    <span className="statusText" onClick={handleTaskStatusUpdate}>Mark as completed</span>
+                    {renderStatusOptions(status_name)}
                 </div>
 
             </div>
