@@ -34,6 +34,12 @@ export default function (state = defaultState, action) {
             newState.agentProfile = action.payload||[];
             return newState
         }
+
+        case 'RESET_AGENT_PROFILE' : {
+            let newState = { ...state}
+            newState.agentProfile = {};
+            return newState
+        }
     }
     return state
 }

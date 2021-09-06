@@ -65,7 +65,13 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
         logoutUser({}, ()=>{}, (res, error)=>{
             STORAGE.deleteAuth().then((resp)=>{
                 dispatch({
-                    type: 'LOGOUT_USER',
+                    type: 'RESET_USER_INFO',
+                })
+                dispatch({
+                    type: 'RESET_AGENT_PROFILE',
+                })
+                dispatch({
+                    type: 'RESET_LOGIN_DATA',
                 })
                 setTimeout(()=>{
                     setLoader(false);

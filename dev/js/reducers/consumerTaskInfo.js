@@ -130,7 +130,11 @@ export default function (state = defaultState, action) {
             newState.scheduleList = action.payload||[];
             return newState;
         }
-
+        case 'RESET_USER_INFO': {
+            let newState = { ...state}
+            newState.userInfo = {};
+            return newState;
+        }
     }
     return state
 }
