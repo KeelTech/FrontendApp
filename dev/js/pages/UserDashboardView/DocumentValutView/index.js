@@ -34,7 +34,12 @@ const PriorityList = [
     }
 ]
 
-const TaskView = ()=>{
+const TaskView = (props)=>{
+    console.log(props);
+    let caseId = '';
+    if (props && props.match && props.match.params) {
+        caseId = props.match.params.caseId;
+    }
     const history = useHistory();
     const dispatch = useDispatch();
     const documentsInfo = useSelector(state=>state.DOCUMENT_VAULT);
@@ -67,7 +72,7 @@ const TaskView = ()=>{
     },[])
 
     const fetchDocuments = ()=>{
-        getDocumentsList({}, dispatch);
+        getDocumentsList({caseId}, dispatch);
     }
 
     const handleUploadedByChange = (val)=>{
@@ -179,10 +184,9 @@ const TaskView = ()=>{
         }
         const resp = `data:${contentType};base64, ${data}`;
         var link=document.createElement('a');
-        console.log('link is', link);
         link.href=resp;
         link.download=`new.${type}`;
-        link.click();        
+        link.click();
     }
 
     const downloadDocumentClicked = ({id, docId})=>{

@@ -190,6 +190,7 @@ const client_base = {
             '@helpers': path.resolve(__dirname, 'dev/js/helpers'),
             '@utils': path.resolve(__dirname, 'dev/js/utils'),
             '@actions': path.resolve(__dirname, 'dev/js/actions'),
+            '@pages': path.resolve(__dirname, 'dev/js/pages'),
           }
     }
 

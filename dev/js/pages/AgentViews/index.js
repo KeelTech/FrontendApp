@@ -11,6 +11,7 @@ import CreateTaskMobileView from '@pages/CreateTaskMobileView';
 import CustomerView from './CustomerView';
 import CustomerInfoView from './CustomerView/CustomerInfoView';
 import ProfileWidget from '@components/ProfileWidget';
+import DocumentView from '@pages/UserDashboardView/DocumentValutView';
 
 const UserDashboardView = ({ match }) => {
     const history = useHistory();
@@ -40,6 +41,7 @@ const UserDashboardView = ({ match }) => {
                     <Route exact path={`${match.path}/task/detail/:taskId`} component={AgentTaskDetail}/>
                     <Route exact path={`${match.path}/customer`} component={CustomerView}/>
                     <Route exact path={`${match.path}/customer/:caseId`} component={CustomerInfoView}/>
+                    <Route exact path={`${match.path}/documents/:caseId`} component={DocumentView}/>
                 </Switch>
             </div>
         </div>

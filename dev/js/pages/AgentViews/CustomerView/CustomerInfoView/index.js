@@ -31,6 +31,10 @@ function CustomerInfoView(props) {
     history.push(`/agent/tasks/${caseId}`);
   }
 
+  const redirectToDocument = ()=>{
+    history.push(`/agent/documents/${caseId}`);
+  }
+
   useEffect(() => {
     window.scrollTo(0, 0);
     const dataParams = { customerId: caseId };
@@ -91,7 +95,7 @@ function CustomerInfoView(props) {
               </div>
               <div className="buttonWrapper">
                 <button className="taskButton" onClick={redirectToTask}>Tasks</button>
-                {/* <button className="docButton">Documents</button> */}
+                <button className="docButton" onClick={redirectToDocument}>Documents</button>
               </div>
             </div>
             {/* <div className="meetingInfoWrapperADD meetingNewAd">
