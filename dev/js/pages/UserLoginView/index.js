@@ -96,6 +96,15 @@ const LoginView = (props) => {
     });
   };
 
+  const handleKeyPress = (e)=>{
+    const target = e;
+    if(target.key=='Enter'){
+      target.preventDefault();
+      document.getElementById('password').blur();
+      loginSubmitHnadler(target);
+    }
+  }
+
   // Function for linkedin Login
   // const responseLinkedin = (response) => {
   //   axios
@@ -130,7 +139,7 @@ const LoginView = (props) => {
                 </div>
                 <h3 className="header-text">Log In</h3>
                 <p className="logSubHead">Start your journey & get free consulting</p>
-                <form className="form-wrapper" onSubmit={loginSubmitHnadler}>
+                <form className="form-wrapper">
                   <div className="formCont">
                     <label>Email</label>
                     <input
@@ -149,8 +158,10 @@ const LoginView = (props) => {
                       // placeholder="Password"
                       type="password"
                       value={password}
+                      id="password"
                       onChange={passwordLoginHandler}
                       autoComplete="new-password"
+                      onKeyPress={handleKeyPress}
                     />
                   </div>
                   {loginFail && (
@@ -162,7 +173,7 @@ const LoginView = (props) => {
                     isAgent?null
                     :<div className="formCheckForgt">
                       <div className="checkBoxContMain">
-                        <label class="checkBoxCont"><p>Remember Me</p>
+                        <label className="checkBoxCont"><p>Remember Me</p>
                           <input type="checkbox" />
                           <span className="checkmark"></span></label>
                       </div>
@@ -171,7 +182,7 @@ const LoginView = (props) => {
                       </Link>
                     </div>
                   }
-                  <div className="loginBtnCont">
+                  <div className="loginBtnCont" onClick={loginSubmitHnadler}>
                     <button className="log-in-button">Log in</button>
                   </div>
                 </form>

@@ -70,7 +70,14 @@ const TaskView = ()=>{
     const refetchTaskList = ()=>{
         if(caseId){
             getTaskList({status: activeWidget, case: caseId}, dispatch, (resp, error)=>{
-                if(resp && resp.length && !isMobileView() && !activeTask){
+                if(resp && resp.length==0){
+                    dispatch(
+                        {
+                            type: SET_ACTIVE_TASK,
+                            payload: ''
+                        }
+                    )
+                }else if(!isMobileView() && !activeTask){
                     dispatch(
                         {
                             type: SET_ACTIVE_TASK,

@@ -108,18 +108,17 @@ const DashboardView = ({ scheduleList, calendlyURL }) => {
                                                 })
                                                 : <BlankScreen message="You have no pending tasks" />
                                         }
-                                        {
-                                            //  taskList.length > 3 ?
-
-                                            //  : null  
-                                        }
                                     </div>
-                                    <div className="allTasks">
-                                        <div className="moreTasks" onClick={redirectToTaskList}>Show All</div>
-                                    </div>
+                                    {
+                                        taskList.length>3?
+                                            <div className="allTasks">
+                                            <div className="moreTasks" onClick={redirectToTaskList}>Show All</div>
+                                        </div>
+                                        :null
+                                    }
+                                    
                                 </Fragment>
                         }
-
                     </div>
                     <div className="chat">
                         {caseId && userId ? <ChatWidget caseId={caseId} currentUserId={userId} chatHeaderName={agentName} /> : ""}

@@ -78,11 +78,11 @@ const TaskView = ()=>{
             selectedDocList = [...filterList];
         }
         const newFilterList = selectedDocList.filter((doc)=>{
-            const { user_id } = doc;
+            const { user_type } = doc;
             if(id==0){
-                return !user_id
+                return user_type=='RCIC'
             }else if(id==2){
-                return !!user_id;
+                return user_type=='CUSTOMER';
             }
             return true;
         });

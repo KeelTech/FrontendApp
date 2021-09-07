@@ -41,19 +41,22 @@ const SelectCity = ({ saveSelectedOption, value="" })=>{
     },[state]);
 
     const handleChange = (val)=>{
+        if(!state){
+            return null;
+        }
         savePlaceInfo({city: val && val.id}, dispatch);
         saveSelectedOption(val && val.id);
     }
     const { name:val} = selectedVal;
     if(loading) return null;
 
-    if(!state) return <p className="errorMsg">Please Select Country & State First</p>
+    //if(!state) return <p className="errorMsg">Please Select Country & State First</p>
     return(
         <Fragment>
         {
             list.length?
             <CustomSearchSelect options={list} placeholder="Search City" value={val} handleChange={handleChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>
-            :<p className="errorMsg">No City Exist</p>
+            :null
         }
         </Fragment>   
     )
@@ -143,13 +146,13 @@ const SelectState = ({ saveSelectedOption, value="" })=>{
     const { name:val=''} = selectedVal;
 
     if(loading) return null
-    if(!country) return <p className="errorMsg">Please Select Country First</p>
+    //if(!country) return <p className="errorMsg">Please Select Country First</p>
 
     return(
         <Fragment>
             {
                 list.length?<CustomSearchSelect options={list} placeholder="Search State" value={val} handleChange={handleChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>:
-                <p className="errorMsg">No State Found</p>
+                null
             }
         </Fragment>
         
