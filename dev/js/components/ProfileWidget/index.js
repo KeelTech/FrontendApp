@@ -20,9 +20,15 @@ const ProfileWidget = () => {
     setLoader(true);
     logoutUser({},()=>{}, (res, error)=>{
       STORAGE.deleteAuth().then((resp)=>{
-          dispatch({
-            type: 'LOGOUT_USER',
-          })
+        dispatch({
+            type: 'RESET_USER_INFO',
+        })
+        dispatch({
+            type: 'RESET_AGENT_PROFILE',
+        })
+        dispatch({
+            type: 'RESET_LOGIN_DATA',
+        })
           setTimeout(()=>{
               setLoader(false);
               history.push('/');

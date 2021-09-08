@@ -57,21 +57,26 @@ class RouterConfig extends Component {
   constructor(props){
     super(props);
     this.state ={
-      currentRoute: CUSTOMER_ROUTES
+      currentRoute: this.getRoutes(props)
     }
   }
   //static ROUTES = routes;
 
   componentDidMount(){
-    if(!this.props.IsloggedIn){
-      this.setState({
-        currentRoute: LOGIN_ROUTES
-      })  
-      return;
-    }
+    const route = this.getRoutes(this.props);
     this.setState({
-      currentRoute: this.props.isAgent?AGENT_ROUTES:CUSTOMER_ROUTES
+      currentRoute: route
     })
+  }
+
+  getRoutes(props){
+    if(!props.IsloggedIn){
+      return LOGIN_ROUTES
+    }else if(props.isAgent){
+      return AGENT_ROUTES
+    }else {
+      return CUSTOMER_ROUTES
+    }
   }
 
   componentDidUpdate(prevProps){

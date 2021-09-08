@@ -17,7 +17,8 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
 
     const taskInfo = useSelector(state=>state.TASK_INFO);
     const { userInfo={} } = taskInfo;
-    const { profile={} } = userInfo;
+    const { profile={}, cases={} } = userInfo;
+    const { plan =''} = cases;
     const { first_name='' } = profile;
     const isProfileExist = userInfo && userInfo.profile_exists;
 
@@ -65,7 +66,13 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
         logoutUser({}, ()=>{}, (res, error)=>{
             STORAGE.deleteAuth().then((resp)=>{
                 dispatch({
-                    type: 'LOGOUT_USER',
+                    type: 'RESET_USER_INFO',
+                })
+                dispatch({
+                    type: 'RESET_AGENT_PROFILE',
+                })
+                dispatch({
+                    type: 'RESET_LOGIN_DATA',
                 })
                 setTimeout(()=>{
                     setLoader(false);
@@ -157,11 +164,19 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                                 <span className="heading">Logout</span>
                             </div>
                             </div>
-                            <div className="degreeWidget">
-                                <img src={ASSETS_BASE_URL+"/images/leftmenubar/degreeIcon.svg"} alt="degree"/>
-                                <span>Immigration</span>
-                                <span>Consultation</span>
-                            </div>
+                            {
+                                isAgent?null
+                                :<div className="degreeWidget">
+                                    <img src={ASSETS_BASE_URL+"/images/leftmenubar/degreeIcon.svg"} alt="degree"/>
+                                    {
+                                        plan?<span>{plan}</span>
+                                        :<Fragment>
+                                            <span>Immigration</span>
+                                            <span>Consultation</span>
+                                        </Fragment>
+                                    }
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>

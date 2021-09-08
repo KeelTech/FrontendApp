@@ -42,6 +42,12 @@ export default function (state = defaultState, action) {
       newState.IsloggedIn = true;
       return newState;
     }
+    case 'RESET_LOGIN_DATA': {
+      let newState = { ...state };
+      newState.IsloggedIn = false;
+      newState.isAgent = false;
+      return newState;
+    }
   }
   return state;
 }

@@ -1,34 +1,34 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-const ProfileView = ({ fullProfileInfo={}, userInfo={} })=>{
-    const { profile={}} = userInfo;
-    const { first_name='', last_name='' } = profile;
-    const [activeWidgets, setActiveWidget] = useState(()=>{
-        const widgets =[];
-        Object.entries(fullProfileInfo).filter((val)=>{
-            
+const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
+    const { profile = {} } = userInfo;
+    const { first_name = '', last_name = '' } = profile;
+    const [activeWidgets, setActiveWidget] = useState(() => {
+        const widgets = [];
+        Object.entries(fullProfileInfo).filter((val) => {
+
             const [type] = val;
-            if(type.includes('profile')) return false;
-            else{
+            if (type.includes('profile')) return false;
+            else {
                 widgets.push(type);
             }
         })
         return widgets;
     });
 
-    const handleClick = (val)=>{
+    const handleClick = (val) => {
         let newVal = [...activeWidgets];
-        if(activeWidgets.includes(val)){
-            newVal = newVal.filter(x=>x!==val);
-        }else{
+        if (activeWidgets.includes(val)) {
+            newVal = newVal.filter(x => x !== val);
+        } else {
             newVal.push(val);
         }
         setActiveWidget(newVal);
     }
-    
+
     const history = useHistory();
-    return(
+    return (
         <div className="useDetailsContainer ">
             <div className="userProfile">
                 <div className="userNameDtls">
@@ -43,72 +43,73 @@ const ProfileView = ({ fullProfileInfo={}, userInfo={} })=>{
                 </div>
             </div> */}
             {
-                Object.entries(fullProfileInfo).map((val)=>{
+                Object.entries(fullProfileInfo).map((val) => {
                     const [type, values] = val;
                     let widgetName = '';
-                    let selectedType =0;
-                    if(type.includes('profile')){
+                    let selectedType = 0;
+                    if (type.includes('profile')) {
                         widgetName = 'Personal Details';
                         selectedType = 1;
-                    }else if(type.includes('education_assessment')){
+                    } else if (type.includes('education_assessment')) {
                         widgetName = 'Education';
                         selectedType = 2;
-                    }else if(type.includes('qualification')){
+                    } else if (type.includes('qualification')) {
                         widgetName = 'Educational Creational Assessment';
                         selectedType = 3;
-                    }else if(type.includes('work_experience')){
+                    } else if (type.includes('work_experience')) {
                         widgetName = 'Work Experience';
                         selectedType = 4;
-                    }else if(type.includes('relative_in_canada')){
+                    } else if (type.includes('relative_in_canada')) {
                         widgetName = 'Relative in Canada (if any)';
                         selectedType = 5;
                     }
                     const isHide = activeWidgets.includes(type);
                     return <div className="prflDtlsAccordionContainer" key={type}>
-                            <div className="prfAccrd">
-                                {
-                                    selectedType?
-                                    <div className="alignEnd">
-                                        <button className="editPrfl" onClick={()=>history.push(`/edit/${selectedType}`)}>Edit Profile</button>
-                                    </div>
-                                    :null
-                                }
-                                <div className="accrdHead">
-                                    <h5>{widgetName}</h5>
-                                    <button onClick={()=>handleClick(type)}>{isHide?'Show Details':'Hide Details'} <img className={`img-fluid ${isHide?'':'rotateAcordion'}`} src={ASSETS_BASE_URL + "/images/common/drop.svg"}/></button>
+                        <div className="prfAccrd">
+
+                            <div className="accrdHead">
+                                <h5>{widgetName}</h5>
+                                <div className="alignEnd">
+                                    {
+                                        selectedType ?
+                                            <button className="editPrfl" onClick={() => history.push(`/edit/${selectedType}`)}>Edit Profile</button>
+                                            : null
+                                    }
+                                    <button onClick={() => handleClick(type)}>{isHide ? 'Show Details' : 'Hide Details'} <img className={`img-fluid ${isHide ? '' : 'rotateAcordion'}`} src={ASSETS_BASE_URL + "/images/common/drop.svg"} /></button>
                                 </div>
-                                {
-                                    isHide?null:
+                            </div>
+                            {
+                                isHide ? null :
                                     <div className="accrdContent">
                                         <ul>
                                             {
-                                                Array.isArray(values)?
-                                                values.map((widgetObject, dataVal)=>{
-                                                    return Object.values(widgetObject).map((widgetVal)=>{
-                                                        const { labels, value=''} = widgetVal;
-                                                        if(!labels) return null;
+                                                Array.isArray(values) ?
+                                                    values.map((widgetObject, dataVal) => {
+                                                        return Object.values(widgetObject).map((widgetVal) => {
+                                                            const { labels, value = '' } = widgetVal;
+                                                            if (!labels) return null;
+                                                            return (
+                                                                <li key={dataVal + labels}>
+                                                                    <h5>{labels}:</h5>
+                                                                    <p>{value}</p>
+                                                                </li>
+                                                            )
+                                                        })
+                                                    })
+                                                    : Object.values(values).map((widgetVal, dataKeys) => {
+                                                        const { labels, value = '' } = widgetVal;
+                                                        if (!labels) return null;
                                                         return (
-                                                            <li key={dataVal+labels}>
+                                                            <li key={dataKeys}>
                                                                 <h5>{labels}:</h5>
                                                                 <p>{value}</p>
                                                             </li>
                                                         )
                                                     })
-                                                })
-                                                :Object.values(values).map((widgetVal, dataKeys)=>{
-                                                    const { labels, value=''} = widgetVal;
-                                                    if(!labels) return null;
-                                                    return (
-                                                        <li key={dataKeys}>
-                                                            <h5>{labels}:</h5>
-                                                            <p>{value}</p>
-                                                        </li>
-                                                    )
-                                                })
-                                            }  
+                                            }
                                         </ul>
                                     </div>
-                                }
+                            }
                         </div>
                     </div>
                 })

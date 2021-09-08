@@ -5722,7 +5722,7 @@ p.logSubHead {
   border: 1px solid #ced4da;
   width: 100%;
   border-radius: 4px;
-  min-height: 44px;
+  /* min-height: 44px; */
   padding: 4px 8px;
   outline: none;
 }
@@ -5755,7 +5755,7 @@ button.password-reset {
 button.log-in-button {
   cursor: pointer;
   width: 100%;
-  min-height: 44px;
+  min-height: 34px;
   border-radius: 4px;
   outline: none;
   border: none;
@@ -5928,7 +5928,7 @@ button:focus {
   background: white;
   border-radius: 4px;
   box-shadow: 4px 4px 8px 0px #d8dce4;
-  height: calc(100vh - 150px);
+  /* height: calc(100vh - 150px); */
   overflow: auto;
 }
 h1.crtMainHed {
@@ -5954,7 +5954,7 @@ p.crtSubHed {
 }
 
 .formWrapper label {
-  position: absolute;
+  /* position: absolute;
   z-index: 1;
   font-size: 16px !important;
   font-weight: 400;
@@ -5964,7 +5964,7 @@ p.crtSubHed {
   left: 15px;
   transition: 0.2s;
   transition-timing-function: ease;
-  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1); */
 }
 
 .formWrapper label sup {
@@ -6508,6 +6508,9 @@ img.img-fluid.userProfileXn {
 .p-relative {
   position: relative !important;
 }
+.userFormsMainContainer.MaxWithFull .btnCont {
+  margin-top: 0px !important;
+}
 /* ============ Dashboard Custom style Common ============== */
 /* ============ User Profile ============== */
 .useDetailsContainer {
@@ -6547,17 +6550,18 @@ img.img-fluid.userProfileXn {
   font-weight: 500;
 }
 
-button.editPrfl {
+div.alignEnd button.editPrfl {
   color: white;
   background: #466cad;
   border: none;
   padding: 5px 10px;
-  min-height: 44px;
+  min-height: 30px;
   border-radius: 4px;
   min-width: 120px;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
+  margin-right: 10px;
 }
 
 .editProgress {
@@ -6675,6 +6679,9 @@ li {
 }
 /* ============ User Profile ============== */
 /* ============ on board  ============== */
+
+
+
 .planSelectionScreen {
   padding: 0px 25px;
 }
@@ -6683,6 +6690,7 @@ li {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  display: none;
 }
 
 .dashMainHeading h2 {
@@ -6768,7 +6776,7 @@ button.disableBtn {
 }
 .customEditProfile {
   background: white;
-  border: 1px solid #c7cacc;
+  border: 1px solid #e6e6e6;
   border-radius: 4px;
   box-shadow: 4px 4px 8px #d8dce4;
   padding: 20px !important;
@@ -7201,6 +7209,106 @@ p.tblData {
   font-weight: 500;
   box-shadow: 1px 1px 4px #bababa;
 }
+.pandingLeftTask {
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 8px #d8dce4;
+  border: 1px solid #e0dfdc;
+  max-width: 300px !important;
+  min-width: 300px!important;
+}
+.userFormsMainContainer.customEditProfile {
+  max-width: 660px !important;
+    width: 100%;
+}
+
+.formsScroll {
+  height: auto !important;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0px !important;
+  overflow: inherit !important;
+  margin-left: -15px;
+  margin-right: -15px;
+  max-width: 720px;
+}
+
+.formsScroll div.formWrapper {width: 50%;padding-left: 15px;padding-right: 15px; margin-bottom: 10px !important;}
+
+
+div.editProfSteps .btnCont {
+  margin: 10px;
+}
+.formsScroll div.formWrapper .customDropSearch {
+  margin: 0;
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+.formsScroll div.formWrapper .customDropSearch img.searchIcon {
+  width: 22px;
+}
+
+.formsScroll div.formWrapper .customDropSearch input {
+  font-size: 14px;
+}
+
+div.editProfSteps .btnCont button {
+  padding: 5px 0 !important;
+  min-height: auto;
+  text-transform: uppercase;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.MaxWithFull{
+  max-width: 100% !important;
+}
+.btnCont.sendOtPBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0 !important;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btnCont.sendOtPBtn button {
+  background: transparent!important;
+  color: #466CAD!important;
+  margin-right: 8px !important;
+  padding: 0 !important;
+  min-width: auto!important;
+  min-height: auto!important;
+  font-size: 12px !important;
+  font-weight: 500!important;
+  cursor: pointer!important;
+}
+.formWrapper div.optionList{
+  height: 150px;
+  overflow: auto;
+}
+.formsScroll.newUserForm div.formWrapper{
+margin-bottom: 30px !important;
+}
+.userFormsMainContainer.MaxWithFull {
+  margin-top: 30px;
+}
+.formsScroll.newUserForm div.formWrapper .noVerified{
+  position: absolute;
+  bottom: -22px;
+}
 /* ============ on board  ============== */
 /* ============ Task Container  ============== */
 .topTaskHead {
@@ -7497,12 +7605,24 @@ span.percent:after {
   }
   .loginLogo {
     position: relative;
-    top: -30px;
+    top: 0;
+    margin-bottom: 20px;
   }
   .widgetCardMain{
     width: 100%;
     margin-left: 0px;
     margin-right: 0px;
+  }
+}
+@media (max-height: 670px) {
+  .loginContainer {
+    align-items: unset;
+    height: 100vh;
+  }
+  .loginLogo {
+    position: relative;
+    top: 0;
+    margin-bottom: 20px;
   }
 }
 @media (max-height: 520px) {
@@ -7593,6 +7713,7 @@ span.percent:after {
     /* height: auto !important; */
   }
 }
+
 /* ============ Media Queries ============== */
 /* // ================ Page Loader   ================ */
 

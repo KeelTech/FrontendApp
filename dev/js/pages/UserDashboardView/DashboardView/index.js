@@ -131,11 +131,17 @@ const DashboardView = ({ scheduleList, calendlyURL }) => {
                     <NotificationWidget />
                     {/* <ProfileWidget /> */}
                 </div>
+                {
+                    scheduleList.length?
+                    <div className="upcoming" onClick={scheduleCall}><button><i class="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div>
+                    :null
+                }
                 <div className="upcoming"><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Upcoming Schedule</span></div>
                 {
+                    scheduleList.length?
                     scheduleList.map((val, key) => {
                         const { start_time, name = '', end_time } = val;
-                        return <div className="info">
+                        return <div className="info" key={key}>
                             <span className="upcomingTitle">{name} </span>
                             <div className="taskSch">
                                 <div className="taskName">
@@ -149,12 +155,12 @@ const DashboardView = ({ scheduleList, calendlyURL }) => {
                             </div>
                         </div>
                     })
+                    :<div className="noMeeting">
+                        <h5>No meetings scheduled</h5>
+                        <img className="icon" src={ASSETS_BASE_URL + "/images/common/sch.svg"} alt="time" />
+                        <div className="upcoming" onClick={scheduleCall}><button><i class="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div>
+                    </div>
                 }
-                <div className="noMeeting">
-                    <h5>No meetings scheduled</h5>
-                    <img className="icon" src={ASSETS_BASE_URL + "/images/common/sch.svg"} alt="time" />
-                    <div className="upcoming" onClick={scheduleCall}><button><i class="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div>
-                </div>
             </div>
         </div>
     )

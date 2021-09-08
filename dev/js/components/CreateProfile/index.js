@@ -10,7 +10,7 @@ import ProfileView from './ProfileView.js';
 import { container, progressBar } from './style.js';
 
 const CreateProfile = (props) => {
-    const { isProfileView=false } = props;
+    const { isProfileView = false } = props;
     let editID = '';
     if (props && props.match && props.match.params) {
         editID = props.match.params.id;
@@ -20,7 +20,7 @@ const CreateProfile = (props) => {
     const taskInfo = useSelector(state => state.TASK_INFO);
     const { fullProfileInfo, fullProfileLoading, userInfo = {} } = taskInfo;
     const isProfileExist = userInfo && userInfo.profile_exists;
-    const [activeState, setActive] = useState(editID?parseInt(editID):1);
+    const [activeState, setActive] = useState(editID ? parseInt(editID) : 1);
     const [loading, setLoading] = useState(false);
     const [toasterInfo, setToasterInfo] = useState({
         isVisible: false,
@@ -29,7 +29,7 @@ const CreateProfile = (props) => {
         msg: ''
     })
 
-    const editProfileRedirect = ()=>{
+    const editProfileRedirect = () => {
         history.push('/profile');
         //setActive(1);
         //getFullUserProfile({}, dispatch);
@@ -82,7 +82,7 @@ const CreateProfile = (props) => {
     }, [activeState, fullProfileInfo, fullProfileLoading])
 
     useEffect(() => {
-        if(!editID || !(fullProfileInfo && fullProfileInfo.profile)){
+        if (!editID || !(fullProfileInfo && fullProfileInfo.profile)) {
             getFullUserProfile({}, dispatch);
         }
     }, [])
@@ -156,7 +156,7 @@ const CreateProfile = (props) => {
                         isSuccess: true,
                         msg: 'Profile Updated Successfully'
                     });
-                    
+
                 } else {
                     setToasterInfo({
                         isVisible: true,
@@ -167,7 +167,7 @@ const CreateProfile = (props) => {
                 }
                 setTimeout(() => {
                     hideToaster();
-                    if(resp){
+                    if (resp) {
                         editProfileRedirect();
                     }
                 }, 1000);
@@ -194,7 +194,7 @@ const CreateProfile = (props) => {
             }
             setTimeout(() => {
                 hideToaster();
-                if(resp){
+                if (resp) {
                     editProfileRedirect();
                 }
             }, 1000);
@@ -208,63 +208,68 @@ const CreateProfile = (props) => {
     }
 
     const { widget, dataParams, displayText, isMultiple = false } = activeWidgetData;
-    
-    const renderView = ()=>{
+
+    const renderView = () => {
         return (
             <Fragment>
-            {
-                !isProfileView?
-                <div className={progressBar}>
-                    <div className="desktopProgressBar">
-                        {
-                            editID?null:
-                            <div className="leftPorgressBar">
-                                <ul className="progressbar">
-                                    <li className={activeState === 1 ? 'active' : ''}></li>
-                                    <li className={activeState === 2 ? 'active' : ''}></li>
-                                    <li className={activeState === 3 ? 'active' : ''}></li>
-                                    <li className={activeState === 4 ? 'active' : ''}></li>
-                                    <li className={activeState === 5 ? 'active' : ''}></li>
-                                </ul>
-                            </div>
-                        }
-                        <div className="userFormsMainContainer customEditProfile">
-                            <h3>{displayText}</h3>
-                            <div className="formsScroll">
+                {
+                    !isProfileView ?
+                        <div className={progressBar + " " + "progMainCont"}>
+                            <div className="desktopProgressBar">
                                 {
-                                    isMultiple ?
-                                        dataParams.map((subField, subIndex) => {
-                                            return Object.entries(subField).map((val, key) => {
-                                                const [fieldType, dataValues] = val;
-                                                return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} subIndex={subIndex} isMultiple />
-                                            })
-                                        })
-                                        : Object.entries(dataParams).map((val, key) => {
-                                            const [fieldType, dataValues] = val;
-                                            return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} />
-                                        })
+                                    editID ? null :
+                                        <div className="leftPorgressBar">
+                                            <ul className="progressbar">
+                                                <li className={activeState === 1 ? 'active' : ''}></li>
+                                                <li className={activeState === 2 ? 'active' : ''}></li>
+                                                <li className={activeState === 3 ? 'active' : ''}></li>
+                                                <li className={activeState === 4 ? 'active' : ''}></li>
+                                                <li className={activeState === 5 ? 'active' : ''}></li>
+                                            </ul>
+                                        </div>
                                 }
-                            </div>
-                            <div className="btnCont">
-                            {
-                                editID?<button onClick={handleCreateForm}>Update</button>
-                                :<Fragment>
-                                    {
-                                        activeState > 1 ? <button onClick={() => handleFormNavigation(false)}>Previous</button> : null
-                                    }
-                                    {
-                                        activeState == 5 ? <button onClick={() => handleFormNavigation(true)}>{isProfileExist ? 'Update' : 'Create'}</button>
-                                            : <button onClick={() => handleFormNavigation(true)}>Next</button>
-                                    }
-                                </Fragment>
+                                <div className="userFormsMainContainer customEditProfile">
+                                    <div className="editProfSteps">
+                                        <h3>{displayText}</h3>
+                                        <div className="formsScroll">
+                                            {
+                                                isMultiple ?
+                                                    dataParams.map((subField, subIndex) => {
+                                                        return Object.entries(subField).map((val, key) => {
+                                                            const [fieldType, dataValues] = val;
+                                                            return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} subIndex={subIndex} isMultiple />
+                                                        })
+                                                    })
+                                                    : Object.entries(dataParams).map((val, key) => {
+                                                        const [fieldType, dataValues] = val;
+                                                        return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} />
+                                                    })
+                                            }
+                                        </div>
+                                        <div className="btnCont">
+                                            {
+                                                editID ? <button onClick={handleCreateForm}>Update</button>
+                                                    : <Fragment>
+                                                        {
+                                                            activeState > 1 ? <button onClick={() => handleFormNavigation(false)}>Previous</button> : null
+                                                        }
+                                                        {
+                                                            activeState == 5 ? <button onClick={() => handleFormNavigation(true)}>{isProfileExist ? 'Update' : 'Create'}</button>
+                                                                : <button onClick={() => handleFormNavigation(true)}>Next</button>
+                                                        }
+                                                    </Fragment>
 
-                            }    
+                                            }
+                                        </div>
+                                    </div>
+                                    {/* <div className="stepAddImg">
+                                        <img className="img-fluid" />
+                                    </div> */}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                :<ProfileView fullProfileInfo={fullProfileInfo} userInfo={userInfo}/>
-            }
+                        : <ProfileView fullProfileInfo={fullProfileInfo} userInfo={userInfo} />
+                }
             </Fragment>
         )
     }
@@ -272,13 +277,13 @@ const CreateProfile = (props) => {
     return (
         <div className={container}>
             {
-                loading ?<div className={loaderView}><LoadingWidget /></div> : null
+                loading ? <div className={loaderView}><LoadingWidget /></div> : null
             }
             {
                 fullProfileLoading ? <div className={loaderView}><LoadingWidget /></div> : renderView()
             }
             <CustomToaster {...toasterInfo} hideToaster={hideToaster} />
-            
+
         </div>
     )
 }
