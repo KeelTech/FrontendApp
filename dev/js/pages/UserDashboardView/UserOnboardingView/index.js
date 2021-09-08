@@ -40,7 +40,7 @@ const UserOnboardingView = ()=>{
                     </div>
                 </div>
                 <div className="schCallSection">
-                    <p>Schedule a free call and check how Keel can help you in your immigration journey.</p>
+                    <p>Schedule a free call to know how Keel can help you in your immigration journey.</p>
                     <button>Schedule Call</button>
                 </div>
                 <div className="planCardSection">
@@ -59,7 +59,7 @@ const UserOnboardingView = ()=>{
                                 <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/step2.svg"} />
                                 <div className="plnCardCont">
                                     <h5>Live Chat  </h5>
-                                    <p>Uninterrupted chat with consultant</p>
+                                    <p>Uninterrupted chat with Licensed consultant</p>
                                 </div>
                             </div>
                         </div>
@@ -68,13 +68,13 @@ const UserOnboardingView = ()=>{
                                 <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/step3.svg"} />
                                 <div className="plnCardCont">
                                     <h5>End to end support  </h5>
-                                    <p>Get a dedicated customer success manager</p>
+                                    <p>We handhold you throughout the process</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="planPurchase">
-                        <p>Upgrade now for one on one video calls, unlimited chats and premium support.</p>
+                        <p>Upgrade for one on one call, unlimited chats, and premium support.</p>
                         <button onClick={()=>history.push('/billing')}>Upgrade Now</button>
                     </div>
                 </div>

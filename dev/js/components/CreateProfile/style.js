@@ -30,7 +30,7 @@ export const progressBar = css`
     margin: 0;
     font-size: 24px;
     font-weight: 600;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .formWrapper {
@@ -38,10 +38,11 @@ export const progressBar = css`
 }
 
 .formWrapper label {
-    font-size: 14px;
+    font-size: 12px;
     color:  #0A071B;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
     display: inline-block;
+    font-weight:500;
 }
 .errorMsg, .hideMsg{
     display: block;
@@ -65,9 +66,10 @@ export const progressBar = css`
 .inpCont input, textarea {
     width: 100%;
     border: 1px solid #CED4DA;
-    min-height: 44px;
+    min-height: 36px;
     padding: 5px 10px;
     border-radius: 4px;
+    font-size:14px;
 }
 .showError input, .showError textarea{
     border: 1px solid red;
@@ -103,7 +105,7 @@ export const progressBar = css`
 .formWrapper .selectBox select {
     width: 100%;
     border: 1px solid #CED4DA;
-    min-height: 44px;
+    // min-height: 44px;
     padding: 5px 10px;
     border-radius: 4px;
 }
@@ -115,7 +117,7 @@ export const progressBar = css`
     background: #466CAD;
     border: none;
     padding: 5px 10px;
-    min-height: 44px;
+    // min-height: 44px;
     border-radius: 4px;
     min-width: 120px;
     font-size: 14px;
@@ -218,7 +220,7 @@ body {
     margin-top: 4px !important;
 }
 .mg8{
-    margin-top: 8px;
+    margin-top: 30px;
 }
 .noVerified{
     margin: 4px 0px;

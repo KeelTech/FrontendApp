@@ -9,7 +9,7 @@ export const container = css`
     height: calc(100% - 30px);
     .chat{
         width: 60%;
-        // max-width:500px;
+        max-width:500px;
         // box-shadow: 2px 2px 8px #D8DCE4;
         height: 100%;
         // border-radius: 4px;
@@ -25,7 +25,7 @@ export const container = css`
 
 export const pendingTasks = css`
     max-width: 429px;
-    padding-right: 22px;
+    margin-right: 22px;
     max-width: 40%;
     min-width: 40%;
     height: 100%;

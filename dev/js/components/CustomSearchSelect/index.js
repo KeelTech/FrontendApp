@@ -118,7 +118,7 @@ console.log(`value for ${placeholder} ${value}`);
     }
 
     return(
-        <div className={container({border, minHeight, borderRadius, backgroundColor, fontColor, fontSize, fontWeight, padding, margin, borderBottom})} ref={optionListRef}>
+        <div className={container({border, minHeight, borderRadius, backgroundColor, fontColor, fontSize, fontWeight, padding, margin, borderBottom}) + " " + "customDropSearch"} ref={optionListRef}>
 
             <div className="searchBox">
                 <img className="searchIcon" src={ASSETS_BASE_URL+"/images/common/search.svg"} alt="open"/>

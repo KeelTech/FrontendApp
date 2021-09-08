@@ -170,6 +170,7 @@ export const chatBox = props=>css`
         align-items: flex-start;
     }
     .receiver .chatMsg{
+        word-break: break-word;
         font-size: 12px;
         line-height: 18px;
         color: #495057;
@@ -190,6 +191,7 @@ export const chatBox = props=>css`
         align-items: flex-end;
     }
     .sender .chatMsg{
+        word-break: break-word;
         font-size: 12px;
     line-height: 18px;
     margin-bottom: 10px;
@@ -211,6 +213,8 @@ export const chatBox = props=>css`
             margin-left: 4px;
         }
         .receiver .chatMsg, .sender .chatMsg{
+            word-break: break-word;
+            word-break: break-word;
             font-size: 12px;
             line-height: 18px;
             margin-bottom: 4px;

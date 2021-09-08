@@ -230,11 +230,11 @@ const CreateProfile = () => {
             <div className={progressBar}>
                 <div className="desktopProgressBar d-block customForFirst">
                     <div className="row">
-                        <div className="col-md-6 col-12 mb-10">
+                        <div className="col-md-7 col-12 mb-10">
                             <h1 className="crtMainHed">Let's get you started. </h1>
                             <p className="crtSubHed">Tell us about the amazing you!</p>
-                            <div className="userFormsMainContainer">
-                                <div className="formsScroll">
+                            <div className="userFormsMainContainer MaxWithFull">
+                                <div className="formsScroll newUserForm">
                                     {
                                         Object.entries(dataParams).map((val, key) => {
                                             const [fieldType, dataValues] = val;
@@ -247,7 +247,7 @@ const CreateProfile = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-6 col-12 mb-10">
+                        <div className="col-md-5 col-12 mb-10">
                             <div className="loginImg">
                                 <img
                                     className="img-fluid"
@@ -295,9 +295,9 @@ const ProfileForm = ({ dataParams, fieldType, handleChange, sendOTPClicked, veri
                     }
                     {
                         lastVerifiedNo && lastVerifiedNo==value?
-                        <p className="noVerified">*Phone No Verified</p>
+                        <p className="noVerified">Verified Successfully</p>
                         :otpSent?
-                        <div className="mg8">
+                        <div className="mg8 p-relative">
                             <input type="number" autoComplete="new-password" placeholder="Enter OTP" onChange={(e)=>setOTP(e.target.value)} value={otp}/>
                             <div className="btnCont sendOtPBtn">
                                 <button onClick={()=>verifyOTPClicked(otp)}>Verify OTP</button>
@@ -320,7 +320,7 @@ const ProfileForm = ({ dataParams, fieldType, handleChange, sendOTPClicked, veri
                         <input type="date" autoComplete="new-password" placeholder={labels} onChange={(e)=>handleFieldChange(e.target.value)} value={value}/>
                         :<input type={isNumber?"number":"text"} autoComplete="new-password" placeholder={labels} onChange={(e)=>handleFieldChange(e.target.value)} value={value}/>
                     }
-                    <label>{labels}<sup>*</sup></label>
+                    {/* <label>{labels}<sup>*</sup></label> */}
                 </div>
                 :null
             }
