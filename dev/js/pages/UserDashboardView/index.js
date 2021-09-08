@@ -26,9 +26,7 @@ const UserDashboardView = (props)=>{
     const { full_name:agentName='' } = agent;
 
     useEffect(()=>{
-        if(!profile_exists){
-            getUserProfile({}, dispatch);
-        }
+        getUserProfile({}, dispatch);
         if(!calendlyURL){
             getCalendlyLink({}, dispatch);
         }
