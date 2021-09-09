@@ -8,6 +8,18 @@ body {
   width: 98%;
   margin: auto;
 }
+.is-contain{
+  display: none !important;
+}
+.LivechatLauncher {
+  display: none !important; 
+}
+:global(.LivechatLauncher) {
+  display: none;
+}
+:global(.is-contain) {
+  display: none !important;
+}
 button.primary-button {
   width: 100%;
   height: 48px;

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import DetectClickOutside from '@helpers/DetectClickOutside.js'
@@ -15,6 +15,7 @@ const ProfileWidget = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [showLoader, setLoader] = useState(false);
+  const [landbotInstance, setBotInstance] = useState('');
 
   const handleLogout = ()=>{
     setLoader(true);
@@ -37,6 +38,20 @@ const ProfileWidget = () => {
     });
   }
 
+
+  useEffect(()=>{
+    var myLandbotpop = new Landbot.Popup({
+      configUrl: 'https://chats.landbot.io/v3/H-973102-9X9CDMX47L0KP823/index.json'
+    });
+    setBotInstance(myLandbotpop);
+  },[])
+
+  const handleHelpClick = ()=>{
+    if(landbotInstance){
+      landbotInstance.open();
+    }
+  }
+
   return (
     <div
       className={container}
@@ -51,7 +66,7 @@ const ProfileWidget = () => {
       {
       isClicked && 
       <DetectClickOutside targetRef={modalRef} clickOutside={()=>setIsClicked(false)}>
-        <ProfileDropdown handleLogout={handleLogout}/>
+        <ProfileDropdown handleLogout={handleLogout} handleHelpClick={handleHelpClick}/>
       </DetectClickOutside>
       }
     </div>

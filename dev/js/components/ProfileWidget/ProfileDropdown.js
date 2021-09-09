@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { profile, info, links } from "./style";
 
-const ProfileDropdown = ({ handleLogout }) => {
+const ProfileDropdown = ({ handleLogout, handleHelpClick }) => {
 
   const history = useHistory();
   const taskInfo = useSelector(state => state.TASK_INFO);
@@ -45,7 +45,12 @@ const ProfileDropdown = ({ handleLogout }) => {
               </li> */}
             </Fragment>
           }
-          
+          <li>
+            <div onClick={handleHelpClick}>
+              <img src={ASSETS_BASE_URL + "/images/common/profileIcon.svg"} />
+              <span>help</span>
+            </div>
+          </li>
           <li>
             <div onClick={handleLogout}>
               <img src={ASSETS_BASE_URL + "/images/common/logoutIcon.svg"} />
