@@ -45,7 +45,7 @@ const UserOnboardingView = ()=>{
                 </div>
                 <div className="planCardSection">
                     <div className="row">
-                        <div className="col-md-4 col-12">
+                        <div className="col-md-4 col-12 mb-4">
                             <div className="planCards">
                                 <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/step1.svg"} />
                                 <div className="plnCardCont">
@@ -54,7 +54,7 @@ const UserOnboardingView = ()=>{
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-4 col-12">
+                        <div className="col-md-4 col-12 mb-4">
                             <div className="planCards">
                                 <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/step2.svg"} />
                                 <div className="plnCardCont">
@@ -63,7 +63,7 @@ const UserOnboardingView = ()=>{
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-4 col-12">
+                        <div className="col-md-4 col-12 mb-4">
                             <div className="planCards">
                                 <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/step3.svg"} />
                                 <div className="plnCardCont">

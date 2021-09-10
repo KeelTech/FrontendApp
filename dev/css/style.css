@@ -7646,6 +7646,26 @@ div.DDContNew {
     margin-left: 0px;
     margin-right: 0px;
   }
+  .loginImg{
+    padding-top: 30px;
+  }
+  .schCallSection p{
+    padding-right: 10px;
+    font-size: 12px;
+  }
+  .schCallSection button{
+    flex-shrink: 0;
+    font-size: 12px;
+    padding: 0 11px;
+    margin-top: 10px;
+  }
+  .schCallSection{
+    flex-direction: column;
+    text-align: center;
+  }
+  .formsScroll.newUserForm div.formWrapper{
+    width: 100%;
+  }
 }
 @media (max-height: 670px) {
   .loginContainer {
