@@ -259,7 +259,7 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
     }
 
     const renderStatusOptions = (val)=>{
-        if(val=='Progress'){
+        if(val && val.includes('Progress')){
             return <Fragment>
                 <span className="statusText" onClick={()=>handleTaskStatusUpdate(2)}>Mark as completed</span>
                 <span className="statusText" onClick={()=>handleTaskStatusUpdate(0)}>Mark as In Progress</span>
