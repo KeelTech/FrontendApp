@@ -102,7 +102,7 @@ const ChatWidget = ({ floatingChat=false, toggleChat, caseId="", currentUserId="
                 </div>
                 <img className="close" src={ASSETS_BASE_URL+"/images/common/crossIcon.svg"} alt="close" onClick={toggleChat}/>
             </div>
-            <div className={chatWidget({floatingChat})} id="chatScrollableWindow">
+            <div className={chatWidget({floatingChat}) + " " + "forMobileChat"} id="chatScrollableWindow">
                 <ChatCard floatingChat={floatingChat} messages={chatData.chatMessages} currentUserId={currentUserId}/>
             </div>
             <div className={msgWidget({floatingChat})}>

@@ -59,7 +59,7 @@ export const chatWidget = props=>css`
     // max-height:600px;
     ${props.floatingChat && `
         padding: 13px 21px;
-        height: calc(100% - 136px);
+        height: calc(100% - 110px);
         z-index: 10;
         max-height:100%;
     `};
@@ -121,13 +121,13 @@ export const msgWidget = props =>css`
         }
     }
     ${props.floatingChat && `
-        padding: 14px 20px;
+        padding: 5px 12px;
         .chatbox{
             border-radius: 4px;
             padding: 5px;
         }
         input{
-            border: 0px;
+            // border: 0px;
             font-size: 12px;
             line-height: 18px;
             min-width: 100px;
@@ -138,13 +138,13 @@ export const msgWidget = props =>css`
             margin-right: 8px;
         }
         .sendBtn{
-            padding: 18px 20px;
+            padding: 11px 20px;
             // border-radius: 4px;
             font-size: 14px;
             line-height: 18px;
             img{
-                height: 10px;
-                width: 10px;
+                height: 14px;
+                width: 14px;
             }
         }
     `};
@@ -232,8 +232,9 @@ export const mobileChatView = css`
     bottom: 0;
     overflow: hidden;
     border-radius: 0px;
-    padding-top: 16px;
+    // padding-top: 16px;
     z-index: 99;
+    border:0px;
     .header{
         padding: 0px 21px;
         padding-bottom: 12px;
@@ -258,7 +259,7 @@ export const mobileChatView = css`
             flex-direction: column;
             .name{
                 font-weight: 600;
-                font-size: 20px;
+                font-size: 16px;
                 line-height: 30px;
             }
             .user{

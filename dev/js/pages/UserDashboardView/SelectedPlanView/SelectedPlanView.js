@@ -42,19 +42,19 @@ const SelectedPlanView = ({ planClick, redirectDashboard, first_name })=>{
                         </div>
                         <div className="subPlndDetals">
                             <div className="row">
-                                <div className="col-md-4 col-12">
+                                <div className="col-md-4 col-12 mb-4">
                                     <div className="clsCardDtls">
                                         <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/first.svg"} />
                                         <p>Secure & Encryopted</p>
                                     </div>
                                 </div>
-                                <div className="col-md-4 col-12">
+                                <div className="col-md-4 col-12 mb-4">
                                     <div className="clsCardDtls">
                                         <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/second.svg"} />
                                         <p>Secure & Encryopted</p>
                                     </div>
                                 </div>
-                                <div className="col-md-4 col-12">
+                                <div className="col-md-4 col-12 mb-4">
                                     <div className="clsCardDtls">
                                         <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/third.svg"} />
                                         <p>Secure & Encryopted</p>
