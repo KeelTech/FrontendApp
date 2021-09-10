@@ -87,14 +87,14 @@ const FileUpload = ({ fileUploadModalClosed, uploadFile, isUploadToServer=false,
     const displayFileData = () => {
         if (selectedFile) {
             return (
-                <span className={selectedFileText}>
+                <span className={selectedFileText + " " + "SelecTFileText"}>
                     <b>{selectedFile.name}</b> is selected
                 </span>
             );
         }
         else {
             return (
-                <button onClick={btnClickedUpload} className={fileButton}>
+                <button onClick={btnClickedUpload} className={fileButton + " " + "FiLeButtoN"}>
                     Select File
                 </button>
             );
@@ -150,15 +150,15 @@ const FileUpload = ({ fileUploadModalClosed, uploadFile, isUploadToServer=false,
                 loading?<div className={loaderView}><LoadingWidget/></div>:null
             }
             <CustomToaster {...toasterInfo} hideToaster={hideToaster}/>
-            <span onClick={close} className={closeWrapper + " " + "mr-1"}><img className="crossIcon" src={ASSETS_BASE_URL+"/images/common/x_black.svg"} alt="close"/></span>
-            <div className={innerShell}>
-                <div className={fileUploadWrapper}>
-                    <input id="file" className={fileUpload} type="file" onChange={onFileChange} />
+            <span onClick={close} className={closeWrapper + " " + "mr-1 popUpInClose"}><img className="crossIcon" src={ASSETS_BASE_URL+"/images/common/x_black.svg"} alt="close"/></span>
+            <div className={innerShell  + " " + "InnerShellN"}>
+                <div className={fileUploadWrapper  + " " + "FileUpldWrap"}>
+                    <input id="file" className={fileUpload  + " " + "FileUpLoad"} type="file" onChange={onFileChange} />
                 </div>
-                <div className={fileData}>{displayFileData()}</div>
+                <div className={fileData  + " " + "FileDataN"}>{displayFileData()}</div>
                 <CustomDropDown list={documentTypes} optionSelected={handleOptionChange}></CustomDropDown>
-                <div className={submitButtonWrapper}>
-                    <button onClick={handleUploadFile} className={submitButton}>
+                <div className={submitButtonWrapper  + " " + "PopDubBtnCont"}>
+                    <button onClick={handleUploadFile} className={submitButton + " " + "PopDubButtonS"}>
                         Upload
                     </button>
                 </div>

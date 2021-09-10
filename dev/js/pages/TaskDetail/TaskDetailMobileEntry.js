@@ -24,7 +24,7 @@ const TaskDetailMobileView = (props)=>{
                             <ProfileWidget/>
                         </div>
                     </Header>
-                    <div className={taskMobileCont}>
+                    <div className={taskMobileCont + " " + "tastMobileContNew"}>
                         <TaskDetail activeTask={taskId}/>
                     </div>
                 </div>

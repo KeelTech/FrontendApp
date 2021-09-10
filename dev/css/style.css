@@ -6026,6 +6026,15 @@ input:focus + label {
   .customForFirst {
     height: 100% !important;
   }
+  .chatMainContainer{
+    height: auto !important;
+  }
+  .forMobileChat{
+    max-height: 40vh;
+  }
+  .taskList{
+    max-height: 41vh;
+  }
 }
 .selectedOption {
   padding: 8px 10px !important;
@@ -6551,17 +6560,16 @@ img.img-fluid.userProfileXn {
 }
 
 div.alignEnd button.editPrfl {
-  color: white;
-  background: #466cad;
-  border: none;
-  padding: 5px 10px;
-  min-height: 30px;
-  border-radius: 4px;
-  min-width: 120px;
-  font-size: 14px;
-  font-weight: 500;
+  border-radius: 2px;
+  color: #466cad;
+  border: 1px solid #466cad;
+  min-height: 22px;
+  min-width: 0px;
   cursor: pointer;
   margin-right: 10px;
+  font-size: 12px;
+  padding: 0px 7px;
+  font-weight: 500;
 }
 
 .editProgress {
@@ -7210,13 +7218,13 @@ p.tblData {
   box-shadow: 1px 1px 4px #bababa;
 }
 .pandingLeftTask {
-  background: #ffffff;
+  /* background: #ffffff;
   padding: 12px;
   border-radius: 4px;
   box-shadow: 2px 2px 8px #d8dce4;
   border: 1px solid #e0dfdc;
   max-width: 300px !important;
-  min-width: 300px!important;
+  min-width: 300px!important; */
 }
 .userFormsMainContainer.customEditProfile {
   max-width: 660px !important;
@@ -7591,6 +7599,31 @@ span.percent:after {
 .newTaskMainContainer .customEditFor div.forNewTskBtn:first-child{
   background: #CF3030!important;
 }
+span.SelecTFileText {
+  height: auto;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.FileDataN {
+  height: auto !important;
+}
+.FileDataN button.FiLeButtoN {
+  position: relative;
+  margin: auto;
+  padding: 5px 0;
+  height: auto;
+}
+div.DDContNew {
+  height: auto !important;
+}
+.backBtn{
+  border: 1px solid #4267B2 !important;
+    color: #4267B2 !important;
+    padding: 7px 10px !important;
+    line-height: 8px !important;
+    border-radius: 2px !important;
+}
 /* ============ Task Container  ============== */
 /* ============ Media Queries ============== */
 @media (max-width: 767px) {
@@ -7622,7 +7655,7 @@ span.percent:after {
   .loginLogo {
     position: relative;
     top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
 }
 @media (max-height: 520px) {
@@ -7638,7 +7671,27 @@ span.percent:after {
     max-width: 300px;
   }
 }
-
+@media (max-width: 520px) {
+  .accrdContent ul li{
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 992px) {
+  .accrdHead .alignEnd{
+    flex-direction: column;
+    flex-shrink: 0;
+  }
+  .accrdHead .alignEnd .editPrfl{
+    margin: 0 0 8px 0;
+  }
+  .accrdHead{
+    padding: 0px;
+  }
+  .accrdHead h5{
+    font-size: 14px;
+  }
+}
 @media (min-width: 1100px) {
   .headerContent {
     padding-left: 70px;
@@ -7646,8 +7699,46 @@ span.percent:after {
 }
 @media (max-width: 1100px) {
   .mobileHamburger {
-    position: fixed;
+    /* position: fixed;
     top: 12px;
+    z-index: 99; */
+    margin-right: 10px;
+  }
+  /* .pandingLeftTask{
+    margin: 0px;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    padding-right: 0px;
+  } */
+  
+  
+  .mblMssgViewCmnt {
+    max-height: 200px;
+    overflow: auto;
+}
+  .popUpInClose {
+    position: relative;
+    left: -4px;
+    top: 8px;
+    width: unset !important;
+}
+  .tastMobileContNew {
+    padding: 12px !important;
+    height: auto !important;
+    margin-top: 40px !important;
+}
+  .HamMobile{
+    position: fixed;
+    background: white;
+    width: 100%;
+    display: flex !important;
+    justify-content: space-between !important;
+    box-shadow: 2px 2px 8px #d8dce4;
+    top: 0;
+    padding: 10px !important;
+    left: 0;
+    right: 0;
     z-index: 99;
   }
   .planSelectionScreen {

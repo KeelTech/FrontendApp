@@ -189,7 +189,7 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
             }
             <CustomToaster {...toasterInfo} hideToaster={hideToaster} />
             <div className="topTaskHead">
-            <div className="taskName">
+                <div className="taskName">
                     <img className="icon" src={ASSETS_BASE_URL + "/images/common/task.svg"} alt="task" />
                     <span className="tskMainHed">Task Name</span>
                     <span className="status mobileView">{status_name}</span>
@@ -203,7 +203,7 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
             </div>
             <div className="signDoc">
                 <span className="sign">{title}</span>
-                <span className="backBtn" onClick={handleBackBtnClick}>Back</span>
+                <span className="backBtn" onClick={handleBackBtnClick}><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</span>
             </div>
             <div className="taskScrollSection forCustomTaskHeight">
                 <div className={taskStatus + " " + "taskStatusNew"}>
@@ -290,24 +290,26 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
                     </div>
                     <div className="messageSection">
                         <PostCommentView taskId={activeTask} updateTaskStatus={updateTaskStatus} title={`${consumerName} ${cosumerLastName}`} />
-                        {
-                            tasks_comment.map((val, key) => {
-                                const { user_details, user_name, msg, created_at, id } = val;
-                                return <div className="msgView" key={key}>
-                                    <span className="profile">{getNameInitialHelper(user_details.user_name)}</span>
-                                    <div className="commentSection">
-                                        <div className="info">
-                                            <span className="name">{capitalizeFirstLetter(user_details.user_name)}</span>
-                                            <span className="time">{`${getFormattedTime(created_at)}, ${getFormattedDate(created_at).formattedDate}`}</span>
-                                        </div>
-                                        <div className="msgSection">
-                                            <div className="msg">{msg}</div>
-                                            <img src={`${ASSETS_BASE_URL}/images/common/delete.svg`} className="deleteIcon" onClick={() => deleteCommentClicked(id)} />
+                        <div className="mblMssgViewCmnt">
+                            {
+                                tasks_comment.map((val, key) => {
+                                    const { user_details, user_name, msg, created_at, id } = val;
+                                    return <div className="msgView" key={key}>
+                                        <span className="profile">{getNameInitialHelper(user_details.user_name)}</span>
+                                        <div className="commentSection">
+                                            <div className="info">
+                                                <span className="name">{capitalizeFirstLetter(user_details.user_name)}</span>
+                                                <span className="time">{`${getFormattedTime(created_at)}, ${getFormattedDate(created_at).formattedDate}`}</span>
+                                            </div>
+                                            <div className="msgSection">
+                                                <div className="msg">{msg}</div>
+                                                <img src={`${ASSETS_BASE_URL}/images/common/delete.svg`} className="deleteIcon" onClick={() => deleteCommentClicked(id)} />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            })
-                        }
+                                })
+                            }
+                        </div>
 
                     </div>
                 </div>

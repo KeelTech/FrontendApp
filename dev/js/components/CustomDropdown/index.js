@@ -26,19 +26,19 @@ class CustomDropDown extends Component {
             selectedItem = <span>Search or Select type</span>
         }
         return (
-            <div className={ddContainer}>
-                <div className={innerWrapper}>
+            <div className={ddContainer + " " + "DDContNew"}>
+                <div className={innerWrapper + " " + "InnerWrpNew"}>
                     <div onClick={this.toggleSelect}>
-                        <button className={ddContainerItemHeader}>{selectedItem}</button>
+                        <button className={ddContainerItemHeader + " " + "DdContItemHead"}>{selectedItem}</button>
                     </div>
                     {
                         this.state.isDropdownExpanded &&
 
-                        <div className={optionMenu}>
+                        <div className={optionMenu + " " + "OptnMenuN"}>
                             {
                                 this.props.list.map((item, index) => {
                                     return (
-                                        <button onClick={() => this.onOptionSelect(item)} key={index} className={ddContainerItem}>{item.displayName.substring(0, 25)}</button>
+                                        <button onClick={() => this.onOptionSelect(item)} key={index} className={ddContainerItem + " " + "ddContBtn"}>{item.displayName.substring(0, 25)}</button>
                                     );
                                 })
                             }

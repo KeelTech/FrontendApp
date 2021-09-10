@@ -7,10 +7,10 @@ export const container = props => css`
     margin: ${props.margin};
     padding: ${props.padding};
     background: ${props.backgroundColor};
-    border-radius: ${props.borderRadius};
+    border-radius: 4px;
     color: ${props.fontColor};
-    font-weight: ${props.fontWeight};
-    font-size: ${props.fontSize};
+    font-weight: 500;
+    font-size: 14px;
     display: flex;
     align-items: center;
     justify-content: center;

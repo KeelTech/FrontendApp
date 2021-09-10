@@ -99,8 +99,8 @@ width: 100%;
         display: none;
     }
     @media(max-width: ${tabScreenWidth}){
-        background: unset;
-        padding: 0px 4px;
+        // background: unset;
+        // padding: 0px 4px;
         .statusCont{
             display: block;
             margin: 4px;

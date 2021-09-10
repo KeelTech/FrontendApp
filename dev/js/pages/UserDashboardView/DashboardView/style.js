@@ -68,9 +68,10 @@ export const pendingTasks = css`
         margin: 0px;
         width: 100%;
         max-width: 100%;
-        height: calc(100% - 80px);
-        overflow-y:auto;
-        padding-bottom: 84px;
+        // height: calc(100% - 80px);
+        height:100%;
+        // overflow-y:auto;
+        // padding-bottom: 84px;
         padding-right: 0px;
         .taskHeading{
             text-align: start;
