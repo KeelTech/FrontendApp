@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { string } from 'prop-types';
 import LeftMenuBar from '@components/LeftMenuBar';
+import { useHistory } from 'react-router-dom';
 import { container, desktopView, mobileView, mobileHeading } from './style.js';
 
 const Header = (props) => {
+    const history = useHistory();
     const LOGIN_STATE = useSelector(state => state.LOGIN);
     const { IsloggedIn } = LOGIN_STATE;
 
