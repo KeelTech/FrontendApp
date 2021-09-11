@@ -7624,9 +7624,26 @@ div.DDContNew {
     line-height: 8px !important;
     border-radius: 2px !important;
 }
+.docOverlay{
+  background: url(/assets/images/common/files.jpg) !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: 70px !important;
+  border: 1px solid #f3f2ef;
+  min-height: 50px !important;
+}
 /* ============ Task Container  ============== */
 /* ============ Media Queries ============== */
+@media (min-width: 670px) {
+ 
+}
 @media (max-width: 767px) {
+  .customEditProfile{
+    min-width: 100%;
+  }
+  .formsScroll div.formWrapper{
+    width: 100%;
+  }
   .mobileHide {
     display: none;
   }

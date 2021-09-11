@@ -17,7 +17,7 @@ const UserOnboardingView = ()=>{
         <div className="mainView mainSectionTopSpace">
             <div className="subHeaderTop">
             <div className="headerContent">
-            <img className="img-fluid keelTopLogo" src={ASSETS_BASE_URL + "/images/common/keelIcon.svg"} />
+            <img className="img-fluid keelTopLogo" src={ASSETS_BASE_URL + "/images/common/keelIcon.svg"} onClick={()=>history.push('/')} />
 
                 {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
                 {/* <NotificationWidget /> */}
