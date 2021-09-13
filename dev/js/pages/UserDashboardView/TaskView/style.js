@@ -37,7 +37,7 @@ export const tasksView = css`
     .cta{
         cursor: pointer;
     width: 100%;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 24px;
     color: #5a5d5f;
     text-align: center;
