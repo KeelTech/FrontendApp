@@ -56,8 +56,8 @@ export const container = css`
     }
     ${textAreaPlaceholder({color: '#A098AE'})};
     @media(max-width: ${tabScreenWidth}){
-        background: unset;
-        padding: 0px;
+        // background: unset;
+        // padding: 0px;
         h2{
             font-size: 20px;
             line-height: 30px;
