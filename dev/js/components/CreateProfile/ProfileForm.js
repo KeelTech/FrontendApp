@@ -5,7 +5,7 @@ import { SelectCity, SelectState, SelectCountry } from '@components/SelectCity';
 
 const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=false })=>{
     const dispatch = useDispatch();
-    const { labels, type, value, showError=false } = dataParams;
+    const { labels, type, value, showError=false, errorMsg='' } = dataParams;
     const handleChange = (val)=>{
         let updatedParams = {
             data: {
@@ -52,7 +52,7 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
                 <SelectState saveSelectedOption={handleChange}  value={value}/>
                 :null
             }     
-            <p className={showError?"errorMsg":"hideMsg"}>Please Fill {labels}</p>   
+            <p className={showError?"errorMsg":"hideMsg"}>{errorMsg?errorMsg:`Please Fill ${labels}`}</p>
             {
                 type ==='dropdown' && false?
                 <div className="formWrapper">

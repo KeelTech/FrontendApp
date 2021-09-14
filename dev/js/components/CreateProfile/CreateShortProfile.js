@@ -30,7 +30,8 @@ const CreateProfile = () => {
         last_name: {
             value: '',
             labels: "Last Name",
-            type: "char"
+            type: "char",
+            isRequired: false
         },
         age: {
             value: '',
@@ -63,18 +64,20 @@ const CreateProfile = () => {
         let newDataParams = {};
         Object.entries(dataParams).map((val, key) => {
             const [fieldType, dataValues] = val;
-            const { value, type, lastVerifiedNo } = dataValues;
+            const { value, type, lastVerifiedNo, isRequired=true } = dataValues;
             postParams[fieldType] = value;
             let showError = false;
             let otpVerify = false;
-            if(!value){
-                isError = true;
-                showError = true;
-            }else if(type=='phone'){
-                if(lastVerifiedNo==value){
-                    otpVerify = true;
-                }else{
+            if(isRequired){
+                if(!value){
                     isError = true;
+                    showError = true;
+                }else if(type=='phone'){
+                    if(lastVerifiedNo==value){
+                        otpVerify = true;
+                    }else{
+                        isError = true;
+                    }
                 }
             }
             newDataParams[fieldType]= {...dataValues, showError, otpVerify, showOtpError: !otpVerify }
