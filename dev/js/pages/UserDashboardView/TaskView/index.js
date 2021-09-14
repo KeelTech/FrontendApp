@@ -111,13 +111,13 @@ const TaskView = ()=>{
                     <div className={tasksView + " "+ "taskViewMainCust"}>
                         <div className="tasksCta">
                             <div className={`cta ${activeWidget===0?'ctaActive':''}`} onClick={()=>handleCtaClick(0)}>
-                                <span>Pending <i>3</i></span>
+                                <span>Pending </span>
                             </div>
                             <div className={`cta ${activeWidget===1?'ctaActive':''}`} onClick={()=>handleCtaClick(1)}>
-                                <span>In Review <i>2</i></span>
+                                <span>In Review </span>
                             </div>
                             <div className={`cta ${activeWidget===2?'ctaActive':''}`} onClick={()=>handleCtaClick(2)}>
-                                <span>Completed <i>5</i></span>
+                                <span>Completed </span>
                             </div>
                         </div>
                         <div className="taskList customerTaskList">
