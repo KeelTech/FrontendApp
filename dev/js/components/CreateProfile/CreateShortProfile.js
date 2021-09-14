@@ -288,7 +288,6 @@ const ProfileForm = ({ dataParams, fieldType, handleChange, sendOTPClicked, veri
     const showCustomFields = fieldType.includes('country');
     return (
         <div className="formWrapper">
-            
             {
                 type==='phone'?
                 <div className={`inpCont ${showError?'showError':''}`}>
