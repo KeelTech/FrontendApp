@@ -86,12 +86,12 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
                                                 Array.isArray(values) ?
                                                     values.map((widgetObject, dataVal) => {
                                                         return Object.values(widgetObject).map((widgetVal) => {
-                                                            const { labels, value = '' } = widgetVal;
+                                                            const { labels, value = '', name='' } = widgetVal;
                                                             if (!labels) return null;
                                                             return (
                                                                 <li key={dataVal + labels}>
                                                                     <h5>{labels}:</h5>
-                                                                    <p>{value}</p>
+                                                                    <p>{name||value}</p>
                                                                 </li>
                                                             )
                                                         })
