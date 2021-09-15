@@ -4,7 +4,7 @@ import Header from "@components/Header";
 import NotificationWidget from "@components/NotificationWidget";
 import ProfileWidget from "@components/ProfileWidget";
 import { SET_AGENT_MENUBAR_STATE } from "@constants/types";
-import { getAgentDetails } from '@actions';
+import { getAgentDetails, getAgentSchedule } from '@actions';
 import { loaderView } from '@constants';
 import LoadingWidget from '@components/LoadingWidget';
 import CustomToaster from '@components/CustomToaster';
@@ -18,7 +18,7 @@ const ReviewImg = `${ASSETS_BASE_URL}/images/common/review.svg`;
 const AgentDashboardView = () => {
   const dispatch = useDispatch();
   const agentInfo = useSelector(state=>state.AGENT_STORE);
-  const { agentProfile={} } = agentInfo;
+  const { agentProfile={}, agentScheduleDetails=[] } = agentInfo;
   const { agent_profile={} } = agentProfile;
   const { full_name='' } = agent_profile;
 
@@ -46,6 +46,7 @@ const AgentDashboardView = () => {
         updateTaskStatus(false, true, 'Failed to fetch Data');
       }
     })
+    getAgentSchedule({}, dispatch);
   }, []);
 
   const updateTaskStatus = (success, error, errorMsg = 'Failed, Try again later', msg = 'Comment Added Successfully') => {
@@ -94,10 +95,14 @@ const AgentDashboardView = () => {
           <div className="performance">
             <div className="intro">
               <span className="profileName">Hi {full_name}!</span>
-              <span className="meetingTxt">
-                You have 9 meetings to attend in this week & you have 15 tasks
-                to review.{" "}
-              </span>
+              {
+                agentScheduleDetails.length?
+                <span className="meetingTxt">
+                  You have {agentScheduleDetails.length} meetings to attend in this week & you have 15 tasks
+                  to review.{" "}
+                </span>
+                :null
+              }
               {/* <span className="showTasks">Show Tasks</span> */}
             </div>
             <div className={widgets + " " + "consultWidgets"}>
@@ -188,13 +193,13 @@ const AgentDashboardView = () => {
             </div>
           </div>
           <div className={mobileView}>
-            <UpcomingSchedule />
+            <UpcomingSchedule agentScheduleDetails={agentScheduleDetails}/>
           </div>
           <div className="graph"></div>
         </div>
 
         <div className={rightBar}>
-          <UpcomingSchedule />
+          <UpcomingSchedule agentScheduleDetails={agentScheduleDetails}/>
         </div>
       </div>
     </div>

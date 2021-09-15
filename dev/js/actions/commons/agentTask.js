@@ -1,4 +1,4 @@
-import { ADD_CASE_LIST, CASE_LIST_LOADING, FETCH_AGENT_PROFILE, AGENT_PROFILE_LOADING } from '@constants/types';
+import { ADD_CASE_LIST, CASE_LIST_LOADING, FETCH_AGENT_PROFILE, AGENT_PROFILE_LOADING, AGENT_SCHEDULE_DETAILS, AGENT_SCHEDULE_LOADING } from '@constants/types';
 import { API_GET, API_POST, API_PUT, API_DELETE } from '../../api/api.js';
 
 export const createTask = (dataParams, dispatch, cb=null)=>{
@@ -122,6 +122,30 @@ export const getAgentProfile = (dataParams={}, dispatch, cb=null)=>{
     }).catch((e)=>{
         dispatch({
             type: AGENT_PROFILE_LOADING,
+            payload: false
+        })
+        if(cb)cb(null, true);
+    })
+}
+
+export const getAgentSchedule = (dataParams={}, dispatch, cb=null)=>{
+    dispatch({
+        type: AGENT_SCHEDULE_LOADING,
+        payload: true
+    })
+    API_GET(`${API_BASE_URL}/v1/calendly/active-schedule/details`).then((response)=>{
+        dispatch({
+            type: AGENT_SCHEDULE_LOADING,
+            payload: false
+        })
+        dispatch({
+            type: AGENT_SCHEDULE_DETAILS,
+            payload: response && response.message||[]
+        })
+        if(cb)cb(response, null);
+    }).catch((e)=>{
+        dispatch({
+            type: AGENT_SCHEDULE_LOADING,
             payload: false
         })
         if(cb)cb(null, true);

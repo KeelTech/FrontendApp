@@ -1,10 +1,12 @@
-import { ADD_CASE_LIST, CASE_LIST_LOADING, FETCH_AGENT_PROFILE, AGENT_PROFILE_LOADING } from '@constants/types';
+import { ADD_CASE_LIST, CASE_LIST_LOADING, FETCH_AGENT_PROFILE, AGENT_PROFILE_LOADING, AGENT_SCHEDULE_DETAILS, AGENT_SCHEDULE_LOADING } from '@constants/types';
 
 const defaultState = {
     caseListLoading: false,
     caseList: [],
     agentProfileLoading: false,
-    agentProfile: {}
+    agentProfile: {},
+    agentScheduleLoading: false,
+    agentScheduleDetails: []
 }
 
 export default function (state = defaultState, action) {
@@ -38,6 +40,18 @@ export default function (state = defaultState, action) {
         case 'RESET_AGENT_PROFILE' : {
             let newState = { ...state}
             newState.agentProfile = {};
+            return newState
+        }
+
+        case AGENT_SCHEDULE_LOADING: {
+            let newState = { ...state}
+            newState.agentScheduleLoading = action.payload;
+            return newState
+        }
+
+        case AGENT_SCHEDULE_DETAILS: {
+            let newState = { ...state}
+            newState.agentScheduleDetails = action.payload;
             return newState
         }
     }
