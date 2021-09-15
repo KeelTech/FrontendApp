@@ -120,6 +120,7 @@ const TaskView = ()=>{
                                 <span>Completed </span>
                             </div>
                         </div>
+                        
                         <div className="taskList customerTaskList">
                             {
                                 userInfoLoading || taskListLoading?<div className={loaderView}><LoadingWidget/></div>
