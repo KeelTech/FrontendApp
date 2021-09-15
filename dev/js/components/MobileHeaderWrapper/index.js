@@ -10,7 +10,7 @@ const MobileHeaderWrapper = (props)=>{
     const { isAgent=false } = props;
     return(
         <Fragment>
-            <div className={`${body} ${mobileScrollView}`}>
+            <div className={`${body} ${mobileScrollView}` + '    ' + 'p-relative pt-5'}>
                 <div className="mainView mainSectionTopSpace">
                     <Header headerText="" isAgent={isAgent}>
                         <div className="headerView">

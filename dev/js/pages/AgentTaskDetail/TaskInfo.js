@@ -272,7 +272,7 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
     let defaultDueDate = `${fullYear}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`;
 
     return (
-        <div className={container}>
+        <div className={container + " " + "innerTask agneTaskMobile"}>
             {
                 loading && <div className="loadingScrn"><LoadingWidget /></div>
             }
