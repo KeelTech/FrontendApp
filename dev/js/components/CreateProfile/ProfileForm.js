@@ -5,7 +5,7 @@ import { SelectCity, SelectState, SelectCountry } from '@components/SelectCity';
 
 const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=false })=>{
     const dispatch = useDispatch();
-    const { labels, type, value, showError=false, errorMsg='' } = dataParams;
+    const { labels, type, value, showError=false, errorMsg='', name='' } = dataParams;
     const handleChange = (val)=>{
         let updatedParams = {
             data: {
@@ -39,17 +39,17 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
             }
             {
                 fieldType.includes('city')?
-                <SelectCity saveSelectedOption={handleChange} value={value}/>
+                <SelectCity saveSelectedOption={handleChange} value={name||value}/>
                 :null
             }
             {
                 fieldType.includes('country')?
-                <SelectCountry saveSelectedOption={handleChange} value={value}/>
+                <SelectCountry saveSelectedOption={handleChange} value={name||value}/>
                 :null
             }
             {
                 fieldType.includes('state')?
-                <SelectState saveSelectedOption={handleChange}  value={value}/>
+                <SelectState saveSelectedOption={handleChange}  value={name||value}/>
                 :null
             }     
             <p className={showError?"errorMsg":"hideMsg"}>{errorMsg?errorMsg:`Please Fill ${labels}`}</p>

@@ -1,4 +1,4 @@
-import { TASK_LIST_LOADING, SET_TASK_LIST, TASK_DETAIL_INFO, GET_USER_PROFILE, LOADING_USER_PROFILE, GET_FULL_USER_PROFILE, LOADING_FULL_USER_PROFILE, UPDATE_USER_PROFILE, SAVE_PLACE_INFO, SET_ACTIVE_TASK, CASE_DETAIL_LOADING, CASE_DETAILS, CALENDLY_URL_LOADING, FETCH_CALENDLY_URL, GET_SCHEDULE_DETAIL } from '@constants/types';
+import { TASK_LIST_LOADING, SET_TASK_LIST, TASK_DETAIL_INFO, GET_USER_PROFILE, LOADING_USER_PROFILE, GET_FULL_USER_PROFILE, LOADING_FULL_USER_PROFILE, UPDATE_USER_PROFILE, SAVE_PLACE_INFO, SET_ACTIVE_TASK, CASE_DETAIL_LOADING, CASE_DETAILS, CALENDLY_URL_LOADING, FETCH_CALENDLY_URL, GET_SCHEDULE_DETAIL, FETCH_COUNTRY_LIST } from '@constants/types';
 
 const defaultState = {
     taskListLoading: false,
@@ -19,7 +19,8 @@ const defaultState = {
     caseDetails: {},
     calendlyUrlLoading: false,
     calendlyURL: '',
-    scheduleList: []
+    scheduleList: [],
+    countryList: []
 }
 
 export default function (state = defaultState, action) {
@@ -135,6 +136,11 @@ export default function (state = defaultState, action) {
         case 'RESET_USER_INFO': {
             let newState = { ...state}
             newState.userInfo = {};
+            return newState;
+        }
+        case FETCH_COUNTRY_LIST: {
+            let newState = {...state};
+            newState.countryList = action.payload;
             return newState;
         }
     }

@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { getFullUserProfile, createFullUserProfile, updateUserProfile, updateProfile } from '@actions';
+import { getFullUserProfile, createFullUserProfile, updateUserProfile, updateProfile, getCountryList } from '@actions';
 import LoadingWidget from '@components/LoadingWidget';
 import { loaderView } from '@constants';
 import CustomToaster from '@components/CustomToaster';
@@ -18,7 +18,7 @@ const CreateProfile = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const taskInfo = useSelector(state => state.TASK_INFO);
-    const { fullProfileInfo, fullProfileLoading, userInfo = {}, originalFullProfileInfo } = taskInfo;
+    const { fullProfileInfo, fullProfileLoading, userInfo = {}, countryList=[], originalFullProfileInfo={} } = taskInfo;
     const isProfileExist = userInfo && userInfo.profile_exists;
     const [activeState, setActive] = useState(editID ? parseInt(editID) : 1);
     const [loading, setLoading] = useState(false);
@@ -85,6 +85,10 @@ const CreateProfile = (props) => {
         if (!editID || !(fullProfileInfo && fullProfileInfo.profile)) {
             getFullUserProfile({}, dispatch);
         }
+        if(!countryList.length){
+            console.log('from main index');
+            getCountryList({}, dispatch);
+        }
     }, [])
 
     const handleFormNavigation = (isNext = false) => {
@@ -97,19 +101,40 @@ const CreateProfile = (props) => {
             if (isMultiple) {
                 newDataParams = [];
                 let subFieldItems = {};
+                let startDate=null, endDate=null;
                 dataParams.map((subField, subIndex) => {
                     subFieldItems = {};
                     //newDataParams[subIndex] = {};
+                    startDate=null;
+                    endDate=null;
+                    subFieldItems= {};
                     Object.entries(subField).map((val, key) => {
                         const [fieldType, dataValues] = val;
                         const { value, labels } = dataValues;
-                        if (!labels) return;
                         let showError = false;
+                        let errorMsg = '';
+                        if (!labels) return;
+                        const newLabel = labels.toLowerCase();
+                        console.log(newLabel);
+                        console.log(startDate);
+                        console.log(endDate);
+                        if(newLabel.includes('start') && newLabel.includes('date')){
+                            startDate = value;
+                        }else if(newLabel.includes('end') && newLabel.includes('date') && startDate){
+                            let startD = new Date(startDate);
+                            let endD = new Date(value);
+                            if(+startD >= +endD){
+                                isError = true;
+                                showError = true;
+                                errorMsg = 'End Date should less then Start Date';
+                            }
+                        }
+
                         if (!value) {
                             isError = true;
                             showError = true;
                         }
-                        subFieldItems[fieldType] = { ...dataValues, showError };
+                        subFieldItems[fieldType] = { ...dataValues, showError, errorMsg };
                     })
                     newDataParams.push(subFieldItems);
                 })
@@ -135,7 +160,7 @@ const CreateProfile = (props) => {
                 updateUserProfile(updatedParams, dispatch);
                 return;
             };
-            if (activeState == 5) {
+            if (activeState == 5 || isProfileExist) {
                 handleCreateForm();
             } else {
                 setActive(val => val + 1);
@@ -146,6 +171,9 @@ const CreateProfile = (props) => {
     }
 
     const handleCreateForm = () => {
+
+        console.log(fullProfileInfo);
+        return null;
         setLoading(true);
         if (isProfileExist) {
             updateProfile(fullProfileInfo, dispatch, (resp, err) => {
@@ -302,13 +330,13 @@ const CreateProfile = (props) => {
                                         </div>
                                         <div className="btnCont">
                                             {
-                                                editID ? <button onClick={handleCreateForm}>Update</button>
+                                                editID ? <button onClick={()=>handleFormNavigation(true)}>Update</button>
                                                     : <Fragment>
                                                         {
                                                             activeState > 1 ? <button onClick={() => handleFormNavigation(false)}>Previous</button> : null
                                                         }
                                                         {
-                                                            activeState == 5 ? <button onClick={() => handleFormNavigation(true)}>{isProfileExist ? 'Update' : 'Create'}</button>
+                                                            activeState == 5 ? <button onClick={() => handleFormNavigation(true)}>Create</button>
                                                                 : <button onClick={() => handleFormNavigation(true)}>Next</button>
                                                         }
                                                     </Fragment>
