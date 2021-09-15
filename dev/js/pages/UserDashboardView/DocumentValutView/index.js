@@ -132,14 +132,16 @@ const TaskView = ()=>{
         try{
             let filterList = [];
             selectedDocList.map((doc)=>{
-                const { doc_type } = doc;
+                const { doc_type='', orignal_file_name='' } = doc;
                 let name = doc_type.toLowerCase();
+                let originalFileName = orignal_file_name.toLowerCase();
                 let searchString = val.toLowerCase();
-                if(name.includes(searchString)){
+                if(name.includes(searchString) || originalFileName.includes(searchString)){
                     let index = name.indexOf(searchString);
+                    let originalFileIndex = originalFileName.indexOf(searchString);
                     filterList.push({
                         ...doc,
-                        rank: index
+                        rank: index>originalFileIndex && index>-1?originalFileIndex:index
                     })
                 }
             })

@@ -51,10 +51,10 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
                         widgetName = 'Personal Details';
                         selectedType = 1;
                     } else if (type.includes('education_assessment')) {
-                        widgetName = 'Education';
+                        widgetName = 'Educational Credential Assessment';
                         selectedType = 2;
                     } else if (type.includes('qualification')) {
-                        widgetName = 'Educational Creational Assessment';
+                        widgetName = 'Educational';
                         selectedType = 3;
                     } else if (type.includes('work_experience')) {
                         widgetName = 'Work Experience';
@@ -97,12 +97,12 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
                                                         })
                                                     })
                                                     : Object.values(values).map((widgetVal, dataKeys) => {
-                                                        const { labels, value = '' } = widgetVal;
+                                                        const { labels, value = '', name='' } = widgetVal;
                                                         if (!labels) return null;
                                                         return (
                                                             <li key={dataKeys}>
                                                                 <h5>{labels}:</h5>
-                                                                <p>{value}</p>
+                                                                <p>{name||value}</p>
                                                             </li>
                                                         )
                                                     })

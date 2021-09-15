@@ -53,14 +53,14 @@ const CreateProfile = (props) => {
                 activeWidgetInfo = {
                     widget: 'education_assessment',
                     dataParams: [...education_assessment],
-                    displayText: 'Education',
+                    displayText: 'Educational Credential Assessment',
                     isMultiple: true
                 }
             } else if (activeState === 3) {
                 activeWidgetInfo = {
                     widget: 'qualification',
                     dataParams: [...qualification],
-                    displayText: 'Educational Credential Assessment',
+                    displayText: 'Education',
                     isMultiple: true
                 }
             } else if (activeState === 4) {
@@ -98,6 +98,7 @@ const CreateProfile = (props) => {
                 newDataParams = [];
                 let subFieldItems = {};
                 dataParams.map((subField, subIndex) => {
+                    subFieldItems={};
                     //newDataParams[subIndex] = {};
                     Object.entries(subField).map((val, key) => {
                         const [fieldType, dataValues] = val;

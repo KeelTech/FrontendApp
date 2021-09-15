@@ -110,13 +110,12 @@ const DashboardView = ({ scheduleList, calendlyURL }) => {
                                         }
                                     </div>
                                     {
-                                        taskList.length>3?
+                                        taskList.length>0?
                                             <div className="allTasks">
                                             <div className="moreTasks" onClick={redirectToTaskList}>Show All</div>
                                         </div>
                                         :null
                                     }
-                                    
                                 </Fragment>
                         }
                     </div>

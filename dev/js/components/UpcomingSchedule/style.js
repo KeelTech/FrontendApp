@@ -35,64 +35,36 @@ border: 1px solid #c7c7c5;
 `;
 
 export const schedule = css`
-  ul {
-    margin: 20px 0px;
-    padding: 0;
-    list-style: none;
-  }
-  li {
-    margin-bottom: 10px;
-    background: white;
-    box-shadow: 2px 2px 8px #d8dce4;
-    border-radius: 4px;
-    border: 1px solid #e0dfdc;
-    padding: 10px 12px;
-  }
-  .message {
-    font-size: 14px;
-    font-weight:400;
-    line-height: 20px;
-    color: #363b64;
-    font-family: ${primaryFont};
-  }
-  .time {
+  .info{
+    margin-top: 20px;
+    font-size: 18px;
+    line-height: 27px;
+    color: #363B64;
     display: flex;
-    margin-top: 10px;
-    img {
-      width: 16px;
-      height: 16px;
-      float: left;
-      margin-right: 4px;
-    }
-
-    span {
-      font-size: 12px;
-      color: #4267B2;
-      position: relative;
-      top: -2px;
-      font-family: ${primaryFont};
-    }
+    flex-direction: column;
+    box-shadow: 0px 2px 8px #d8dce4;
+    border-radius: 4px;
+    padding: 8px;
+    background: #FFF;
   }
-  @media(max-width: ${mobileScreenWidth}){
-    li {
-      padding: 10px 16px;
+  .taskSch {
+    display: flex;
+    justify-content: space-around;
+  }
+  .taskName{
+    display: flex;
+    align-items: self-end;
+    margin-bottom: 5px;
+    img{
+        height: 12px;
+        width: 12px;
+        margin-right: 8px;
+        margin-top: 3px;
     }
-
-      .message {
-        font-size: 12px;
-        line-height: 18px;
-      }
-      .time {
-        margin-top: 2px;
-        img {
-          width: 14px;
-          height: 14px;
-          margin-right: 4px;
-        }
-        span {
-          font-size: 10px;
-          line-height: 15px;
-          top: -4px;
-        }
+    span{
+        font-size: 10px;
+        line-height: 15px;
+        color: #A098AE;
+    }
   }
 `;
