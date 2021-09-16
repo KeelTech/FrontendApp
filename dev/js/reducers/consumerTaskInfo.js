@@ -7,6 +7,7 @@ const defaultState = {
     userInfo: {},
     userInfoLoading: false,
     fullProfileInfo: {},
+    originalFullProfileInfo: {},
     fullProfileLoading: false,
     placeInfo: {
         city: '',
@@ -61,6 +62,7 @@ export default function (state = defaultState, action) {
         case GET_FULL_USER_PROFILE: {
             let newState = { ...state}
             newState.fullProfileInfo = action.payload;
+            newState.originalFullProfileInfo = action.payload;
             return newState;
         }
 

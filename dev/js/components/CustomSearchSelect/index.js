@@ -122,10 +122,10 @@ console.log(`value for ${placeholder} ${value}`);
 
             <div className="searchBox">
                 <img className="searchIcon" src={ASSETS_BASE_URL+"/images/common/search.svg"} alt="open"/>
-                <input type="text" autoComplete="new-password" placeholder={placeholder} value={searchField} onChange={(e)=>onChange(e.target.value)} onFocus={toggleOptionList}/>
+                <input type="text" disabled={allOptions.length==0} autoComplete="new-password" placeholder={placeholder} value={searchField} onChange={(e)=>onChange(e.target.value)} onFocus={toggleOptionList}/>
             </div>
             {
-                showOptions &&
+                showOptions && allOptions.length &&
                 <div className="optionList">
                     <DetectClickOutside targetRef={optionListRef} clickOutside={toggleOptionList}>
                     {

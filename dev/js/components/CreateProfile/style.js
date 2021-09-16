@@ -215,6 +215,9 @@ body {
         border-radius: 20px;
     }
 }
+.multipleWidgetWrapper{
+    width: 100%;
+}
 .sendOtPBtn{
     margin: 0px !important;
     margin-top: 4px !important;
