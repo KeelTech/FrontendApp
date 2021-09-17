@@ -228,7 +228,9 @@ const CreateProfile = (props) => {
                     const [fieldType, dataValues] = val;
                     newAddedEntity[fieldType] = { ...dataValues, value: '', name: '' };
                 })
-                console.log(newAddedEntity);
+                if(newAddedEntity.id){
+                    delete newAddedEntity.id;
+                }
                 newDataParams.push(newAddedEntity);
             }
             const updatedParams = {
@@ -262,12 +264,15 @@ const CreateProfile = (props) => {
                                 <div className="userFormsMainContainer customEditProfile">
                                     <div className="editProfSteps">
                                         <h3 className="addMoreBtnHead">{displayText}
-                                        <button className="formAddMore" onClick={() => handleWidgetUpdate(0, false)}>Add More Details +</button>
+                                        {
+                                            isMultiple?<button className="formAddMore" onClick={() => handleWidgetUpdate(0, false)}>Add More Details +</button>
+                                            :null
+                                        }                                        
                                         </h3>
                                         <div className="formsScroll forCustomAddOnForm">
                                             {
                                                 isMultiple ?
-                                                    <Fragment >
+                                                    <Fragment>
                                                         {
                                                             dataParams.map((subField, subIndex) => {
                                                                 return <Fragment>
@@ -277,9 +282,11 @@ const CreateProfile = (props) => {
                                                                             return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} subIndex={subIndex} isMultiple />
                                                                         })
                                                                     }
-                                                                    <div className="formWrapper delBtnHeight">
-                                                                        <button className="formdelBtn" onClick={() => handleWidgetUpdate(subIndex, true)}><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
-                                                                    </div>
+                                                                    {
+                                                                        dataParams.length==1?null:<div className="formWrapper delBtnHeight">
+                                                                            <button className="formdelBtn" onClick={() => handleWidgetUpdate(subIndex, true)}><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+                                                                        </div>
+                                                                    }
                                                                     <hr></hr>
                                                                 </Fragment>
                                                             })
