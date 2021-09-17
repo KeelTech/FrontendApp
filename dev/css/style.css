@@ -6163,7 +6163,7 @@ img.img-fluid.keelTopLogo {
 .editProfSteps hr {
   display: block;
     width: 100%;
-    border-bottom: 2px solid #e7e6e3;
+    border-bottom: 8px solid #e7e6e3;
     height: 0px;
     border-top: transparent;
     margin: 25px 0;
@@ -6236,6 +6236,10 @@ span.userChatIco {
 
 .msg {
   position: relative;
+}
+.receiver span.userChatIco{
+  background-color: blueviolet;
+  left: -10px;
 }
 /* ============ Custom style Common ============== */
 /* ============ Agent Dashboard Update ============== */
@@ -7726,6 +7730,23 @@ div.DDContNew {
   background-size: 70px !important;
   border: 1px solid #f3f2ef;
   min-height: 50px !important;
+}
+.resetBtnFrg{
+  cursor: pointer;
+  width: 100%;
+  min-height: 34px;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  margin-top: 15px;
+  background: #ef4f4f;
+  color: white;
+  font-size: 14px;
+}
+.splitTImer{
+  margin:0px 5px;
+  font-weight: 600;
+  color: #ef4f4f;
 }
 /* ============ Task Container  ============== */
 /* ============ Media Queries ============== */

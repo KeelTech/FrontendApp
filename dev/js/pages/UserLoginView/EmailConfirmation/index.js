@@ -105,14 +105,14 @@ function EmailConfirmation(props) {
                     </p>
                     <p className="timerMsg">
                       Redirecting to a new page in
-                      <span className="timer">{timer}</span>
+                      <span className="timer splitTImer">{timer}</span>
                       seconds
                     </p>
                     <p className="emailSuccessBtnMsg">
                       Or you can click the button below
                     </p>
                     <Link to="/reset-password" className="BtnLink">
-                      <button className="LinkBtn">Password Reset</button>
+                      <button className="LinkBtn resetBtnFrg">Password Reset</button>
                     </Link>
                   </div>
                 )}

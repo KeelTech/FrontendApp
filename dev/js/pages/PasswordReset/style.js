@@ -3,8 +3,17 @@ import { tabScreenWidth } from '@constants';
 
 export const style = css`
   min-height: 100vh;
+  height:100%;
   display: flex;
   overflow: hidden;
+  .row.fullHeight{
+    width:100%;
+  }
+  .loginRightImg{
+    background-image:url('../assets/images/Login/login.png');
+    background-size:cover;
+    height: 100%;
+  }
   .container {
     width: 50vw;
     @media (max-width: ${tabScreenWidth}) {

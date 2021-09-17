@@ -139,6 +139,7 @@ export const upcomingSchedules = css`
     display: none;
     background: white;
     height: fit-content;
+    padding-bottom:20px;
     min-height: 340px;
     border-radius: 4px;
     box-shadow: 2px 2px 8px #d8dce4;
