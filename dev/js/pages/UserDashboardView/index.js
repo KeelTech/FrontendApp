@@ -20,7 +20,8 @@ const UserDashboardView = (props)=>{
     const dispatch = useDispatch();
     const taskInfo = useSelector(state=>state.TASK_INFO);
     const { userInfo={}, userInfoLoading, calendlyURL, scheduleList } = taskInfo;
-    const { cases={}, profile_exists, agent={} } = userInfo;
+    const { cases={}, profile_exists, agent={}, profile={} } = userInfo;
+    const { id } = profile;
     const { case_id, user } = cases;
     const isPlanPurchased = cases && cases.plan;
     const { full_name:agentName='' } = agent;
@@ -63,9 +64,7 @@ const UserDashboardView = (props)=>{
 
     const renderRoutes = ()=>{
         
-        if(userInfoLoading){
-            return null;
-        }else if(!profile_exists){
+        if(!profile_exists){
             return <CustomerView {...props}/>;
         }else if(url.includes('dashboard') || url==='/'){
             if(isPlanPurchased){
@@ -105,7 +104,7 @@ const UserDashboardView = (props)=>{
         <div className={container + " " + 'mainContainer' }>
             <LeftMenuBar/>
             {
-                userInfoLoading?<div className={loaderView}><LoadingWidget/></div>:renderRoutes()
+                userInfoLoading && !id?<div className={loaderView}><LoadingWidget/></div>:renderRoutes()
             }
             {isPlanPurchased && user && case_id && <FloatingChatWidget caseId={case_id} currentUserId={user} chatHeaderName={agentName}/>}
         </div>

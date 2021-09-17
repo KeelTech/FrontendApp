@@ -70,7 +70,6 @@ export const container = props => css`
 `
 
 const CustomSearchSelect = ({placeholder="Search", value='', border="0px" ,handleChange=()=>{}, borderRadius="8px", backgroundColor="#FFF", fontColor="#363B64", fontSize="16px", fontWeight="normal", padding="10px 24px", margin="4px 0px", borderBottom="0.8px solid #EAEAEF", minHeight="30px", options=[]})=>{
-console.log(`value for ${placeholder} ${value}`);
     const[searchField, selectedVal] = useState(value);
     const[allOptions, setOptions] = useState(options);
     const [showOptions, setOptionsVisibility] = useState(false);
@@ -80,6 +79,10 @@ console.log(`value for ${placeholder} ${value}`);
     useEffect(()=>{
         setOptions(options);
     },[options]);
+
+    useEffect(()=>{
+        selectedVal(value);
+    },[value])
 
     const toggleOptionList = ()=>{
         setOptionsVisibility(val=>!val)
@@ -116,7 +119,6 @@ console.log(`value for ${placeholder} ${value}`);
             console.log(e);
         }
     }
-
     return(
         <div className={container({border, minHeight, borderRadius, backgroundColor, fontColor, fontSize, fontWeight, padding, margin, borderBottom}) + " " + "customDropSearch"} ref={optionListRef}>
 
