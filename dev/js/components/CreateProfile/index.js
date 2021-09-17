@@ -98,7 +98,7 @@ const CreateProfile = (props) => {
                 newDataParams = [];
                 let subFieldItems = {};
                 dataParams.map((subField, subIndex) => {
-                    subFieldItems={};
+                    subFieldItems = {};
                     //newDataParams[subIndex] = {};
                     Object.entries(subField).map((val, key) => {
                         const [fieldType, dataValues] = val;
@@ -210,23 +210,23 @@ const CreateProfile = (props) => {
 
     const { widget, dataParams, displayText, isMultiple = false } = activeWidgetData;
 
-    const handleWidgetUpdate = (index, isDelete=false)=>{
-        if(Array.isArray(dataParams)){
+    const handleWidgetUpdate = (index, isDelete = false) => {
+        if (Array.isArray(dataParams)) {
             let newDataParams = [];
-            if(isDelete){
-                newDataParams = dataParams.filter((x, key)=>{
-                    if(key==index){
+            if (isDelete) {
+                newDataParams = dataParams.filter((x, key) => {
+                    if (key == index) {
                         return false;
                     }
                     return true;
                 })
-                
-            }else if(originalFullProfileInfo && originalFullProfileInfo[widget] && originalFullProfileInfo[widget].length){
+
+            } else if (originalFullProfileInfo && originalFullProfileInfo[widget] && originalFullProfileInfo[widget].length) {
                 let newAddedEntity = {};
                 newDataParams = [...dataParams];
                 Object.entries(originalFullProfileInfo[widget][0]).map((val, key) => {
                     const [fieldType, dataValues] = val;
-                    newAddedEntity[fieldType] = {...dataValues, value:'', name:''};
+                    newAddedEntity[fieldType] = { ...dataValues, value: '', name: '' };
                 })
                 console.log(newAddedEntity);
                 newDataParams.push(newAddedEntity);
@@ -261,27 +261,32 @@ const CreateProfile = (props) => {
                                 }
                                 <div className="userFormsMainContainer customEditProfile">
                                     <div className="editProfSteps">
-                                        <h3>{displayText}</h3>
-                                        <div className="formsScroll">
+                                        <h3 className="addMoreBtnHead">{displayText}
+                                        <button className="formAddMore" onClick={() => handleWidgetUpdate(0, false)}>Add More Details +</button>
+                                        </h3>
+                                        <div className="formsScroll forCustomAddOnForm">
                                             {
                                                 isMultiple ?
-                                                    <div className="multipleWidgetWrapper">
-                                                    {
-                                                        dataParams.map((subField, subIndex) => {
-                                                            return <div>
-                                                                <p onClick={()=>handleWidgetUpdate(subIndex, true)}>Delete</p>
-                                                                {
-                                                                    Object.entries(subField).map((val, key) => {
-                                                                        const [fieldType, dataValues] = val;
-                                                                        return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} subIndex={subIndex} isMultiple />
-                                                                    })
-                                                                }
-                                                            </div>
-                                                        })
-                                                    }
-                                                    <p onClick={()=>handleWidgetUpdate(0, false)}>Add More</p>
-                                                    </div>
-                                                    
+                                                    <Fragment >
+                                                        {
+                                                            dataParams.map((subField, subIndex) => {
+                                                                return <Fragment>
+                                                                    {
+                                                                        Object.entries(subField).map((val, key) => {
+                                                                            const [fieldType, dataValues] = val;
+                                                                            return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} subIndex={subIndex} isMultiple />
+                                                                        })
+                                                                    }
+                                                                    <div className="formWrapper delBtnHeight">
+                                                                        <button className="formdelBtn" onClick={() => handleWidgetUpdate(subIndex, true)}><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+                                                                    </div>
+                                                                    <hr></hr>
+                                                                </Fragment>
+                                                            })
+                                                        }
+                                                        
+                                                    </Fragment>
+
                                                     : Object.entries(dataParams).map((val, key) => {
                                                         const [fieldType, dataValues] = val;
                                                         return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} />

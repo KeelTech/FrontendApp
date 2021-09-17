@@ -16,7 +16,7 @@ const ChatCard = ({ floatingChat = false, messages = [], currentUserId="" })=>{
                             <div className="msg">
                                 <span className="chatMsg">{message}</span>
                                 {
-                                    sender_name?<span className="profile">{getNameInitialHelper(sender_name)}</span>:null
+                                    sender_name?<span className="userChatIco">{getNameInitialHelper(sender_name)}</span>:null
                                 }
                                 {
                                     created_at?<span className="msgTime">{created_at}</span>:null

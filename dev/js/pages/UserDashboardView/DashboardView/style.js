@@ -57,7 +57,7 @@ export const pendingTasks = css`
         background: #4267B2;
         border-radius: 4px;
         text-align: center;
-        padding: 16px 0px;
+        padding: 12px 0px;
         color: #FCFCFC;
         justify-content: center;
         cursor: pointer;
