@@ -271,6 +271,16 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
     let { fullYear, day, month } = getFormattedDate(due_date);
     let defaultDueDate = `${fullYear}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`;
 
+    const sortedComments = dataParams.tasks_comment.sort((a, b) => {
+        try{
+            let startD = new Date(a.created_at);
+            let endD = new Date(b.created_at);
+            return +endD - +startD;
+        }catch(e){
+            return false;
+        }
+    });
+
     return (
         <div className={container + " " + "innerTask agneTaskMobile"}>
             {
@@ -415,13 +425,13 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
                     <div className="messageSection">
                         <PostCommentView taskId={dataParams.task_id} updateTaskStatus={updateTaskStatus} title={agentName} />
                         {
-                            dataParams.tasks_comment.map((val, key) => {
+                            sortedComments.map((val, key) => {
                                 const { user_details, msg, created_at, id } = val;
                                 return <div className="msgView" key={key}>
-                                    <span className="profile">{getNameInitialHelper(user_details.user_name)}</span>
+                                    <span className="profile">{getNameInitialHelper(user_details.user_name||agentName)}</span>
                                     <div className="commentSection">
                                         <div className="info">
-                                            <span className="name">{capitalizeFirstLetter(user_details.user_name)}</span>
+                                            <span className="name">{capitalizeFirstLetter(user_details.user_name||agentName)}</span>
                                             <span className="time">{`${getFormattedTime(created_at)}, ${getFormattedDate(created_at).formattedDate}`}</span>
                                         </div>
                                         <div className="msgSection">

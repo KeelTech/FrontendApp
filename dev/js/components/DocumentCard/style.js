@@ -5,26 +5,41 @@ import { primaryFont } from '@constants'
 export const container = css`
     position: relative;
     background: white;
-    padding: 24px 20px;
+    padding: 15px 18px;
     border-radius: 4px;
-    box-shadow: 2px 2px 8px #d8dce4;
+    box-shadow: 4px 4px 8px #D8DCE4;
     margin: 0px 20px 20px 0px;
     .topRow{
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        padding-bottom: 10px;
+        border-bottom: 1px dashed #343A40;
     }
-    .details{
+    .docHeading{
+        font-weight: bold;
+        font-size: 10px;
+        line-height: 12px;
+        color: #343A40;
+        padding-right: 3px;
+    }
+    .bottomRow{
         display: flex;
         flex-direction: column;
-        .name{
-            font-weight: 600;
-            font-size: 12px;
-            color: #363B64;
-        }
-        .docDate{
-            color: #A098AE;
-            font-size: 10px;
-        }
+        padding-top: 10px;
+    }
+    .name{
+        font-weight: 600;
+        font-size: 12px;
+        color: #363B64;
+    }
+    .docDate{
+        color: #6C757D;
+        font-size: 10px;
+        margin-bottom: 6px;
+    }
+    .docTime{
+        font-size: 8px;
     }
     .dotMenu{
         height: 24px;

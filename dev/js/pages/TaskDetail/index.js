@@ -47,9 +47,7 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
 
     useEffect(() => {
         if (activeTask) {
-            if (!(taskDetail && taskDetail[activeTask])) {
-                getTaskDetail({ taskId: activeTask }, dispatch);
-            }
+            getTaskDetail({ taskId: activeTask }, dispatch);
         }
 
     }, [activeTask, dispatch]);
@@ -176,6 +174,16 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
         return 0;
     }, [check_list]);
 
+    const sortedComments = tasks_comment.sort((a, b) => {
+        try{
+            let startD = new Date(a.created_at);
+            let endD = new Date(b.created_at);
+            return +endD - +startD;
+        }catch(e){
+            return false;
+        }
+    });
+
     return (
         <div className={container + ' ' + 'innerTask'}>
             {
@@ -292,13 +300,13 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
                         <PostCommentView taskId={activeTask} updateTaskStatus={updateTaskStatus} title={`${consumerName} ${cosumerLastName}`} />
                         <div className="mblMssgViewCmnt">
                             {
-                                tasks_comment.map((val, key) => {
+                                sortedComments.map((val, key) => {
                                     const { user_details, user_name, msg, created_at, id } = val;
                                     return <div className="msgView" key={key}>
-                                        <span className="profile">{getNameInitialHelper(user_details.user_name)}</span>
+                                        <span className="profile">{getNameInitialHelper(user_details.user_name||agentName)}</span>
                                         <div className="commentSection">
                                             <div className="info">
-                                                <span className="name">{capitalizeFirstLetter(user_details.user_name)}</span>
+                                                <span className="name">{capitalizeFirstLetter(user_details.user_name||agentName)}</span>
                                                 <span className="time">{`${getFormattedTime(created_at)}, ${getFormattedDate(created_at).formattedDate}`}</span>
                                             </div>
                                             <div className="msgSection">
