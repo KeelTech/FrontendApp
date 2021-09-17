@@ -43,7 +43,8 @@ const COMMON_REDUCER_PERSIST = {
 const TASK_INFO_PERSIST = {
     key: 'TASK_INFO',
     storage: storage,
-    whitelist: ['userInfo']
+    whitelist: ['userInfo'],
+    blacklist: ['calendlyURL']
 }
 
 const AGENT_STORE_PERSIST = {

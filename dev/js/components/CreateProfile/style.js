@@ -28,9 +28,9 @@ export const progressBar = css`
     
 .userFormsMainContainer h3 {
     margin: 0;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .formWrapper {
@@ -214,6 +214,9 @@ body {
         background: #888;
         border-radius: 20px;
     }
+}
+.multipleWidgetWrapper{
+    width: 100%;
 }
 .sendOtPBtn{
     margin: 0px !important;

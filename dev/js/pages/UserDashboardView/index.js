@@ -27,9 +27,7 @@ const UserDashboardView = (props)=>{
 
     useEffect(()=>{
         getUserProfile({}, dispatch);
-        if(!calendlyURL){
-            getCalendlyLink({}, dispatch);
-        }
+        getCalendlyLink({}, dispatch);
         if(!scheduleList.length){
             fetchScheduleList();
         }
