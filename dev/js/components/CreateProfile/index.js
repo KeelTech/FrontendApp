@@ -31,8 +31,6 @@ const CreateProfile = (props) => {
 
     const editProfileRedirect = () => {
         history.push('/profile');
-        //setActive(1);
-        //getFullUserProfile({}, dispatch);
     }
 
     const activeWidgetData = useMemo(() => {
@@ -86,7 +84,6 @@ const CreateProfile = (props) => {
             getFullUserProfile({}, dispatch);
         }
         if(!countryList.length){
-            console.log('from main index');
             getCountryList({}, dispatch);
         }
     }, [])
@@ -113,11 +110,11 @@ const CreateProfile = (props) => {
                         const { value, labels } = dataValues;
                         let showError = false;
                         let errorMsg = '';
-                        if (!labels) return;
-                        const newLabel = labels.toLowerCase();
-                        console.log(newLabel);
-                        console.log(startDate);
-                        console.log(endDate);
+                        const showCustomFields = fieldType.includes('city') || fieldType.includes('country') || fieldType.includes('state');
+                        const isAddressType = fieldType.includes('full_address');
+
+                        if ((!labels||showCustomFields) && !isAddressType) return;
+                        const newLabel = labels && labels.toLowerCase() || '';
                         if(newLabel.includes('start') && newLabel.includes('date')){
                             startDate = value;
                         }else if(newLabel.includes('end') && newLabel.includes('date') && startDate){
@@ -130,7 +127,7 @@ const CreateProfile = (props) => {
                             }
                         }
 
-                        if (!value) {
+                        if (!value && !isAddressType) {
                             isError = true;
                             showError = true;
                         }
@@ -142,9 +139,12 @@ const CreateProfile = (props) => {
                 Object.entries(dataParams).map((val, key) => {
                     const [fieldType, dataValues] = val;
                     const { value, labels } = dataValues;
-                    if (!labels) return;
+                    const showCustomFields = fieldType.includes('city') || fieldType.includes('country') || fieldType.includes('state');
+                    const isAddressType = fieldType.includes('full_address');
+                    if ((!labels || showCustomFields) && !isAddressType) return;
+
                     let showError = false;
-                    if (!value) {
+                    if (!value && !isAddressType) {
                         isError = true;
                         showError = true;
                     }
@@ -171,9 +171,6 @@ const CreateProfile = (props) => {
     }
 
     const handleCreateForm = () => {
-
-        console.log(fullProfileInfo);
-        return null;
         setLoading(true);
         if (isProfileExist) {
             updateProfile(fullProfileInfo, dispatch, (resp, err) => {
@@ -303,7 +300,7 @@ const CreateProfile = (props) => {
                                                     <Fragment>
                                                         {
                                                             dataParams.map((subField, subIndex) => {
-                                                                return <Fragment>
+                                                                return <Fragment key={subIndex}>
                                                                     {
                                                                         Object.entries(subField).map((val, key) => {
                                                                             const [fieldType, dataValues] = val;

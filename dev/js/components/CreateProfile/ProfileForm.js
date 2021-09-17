@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateUserProfile } from '@actions';
-import { SelectCity, SelectState, SelectCountry } from '@components/SelectCity';
+import { SelectCountry } from '@components/SelectCity';
 
 const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=false })=>{
     const dispatch = useDispatch();
@@ -20,10 +20,28 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
         updateUserProfile(updatedParams, dispatch);
     }
 
-    if(!labels) return null;
-    
+    const handleAddressUpdate = (val)=>{
+        let updatedParams = {
+            data: {
+                [fieldType]: {...dataParams, ...val, showError: false}
+            },
+            type: widget
+        }
+        if(isMultiple){
+            updatedParams.subIndex = subIndex;
+            updatedParams.isMultiple = true;
+        }
+        updateUserProfile(updatedParams, dispatch);
+    }
+
     const showCustomFields = fieldType.includes('city') || fieldType.includes('country') || fieldType.includes('state');
     const showDate = fieldType.includes('date');
+
+    if(fieldType.includes('full_address')){
+        return <SelectCountry saveSelectedOption={handleAddressUpdate} dataParams={dataParams}/>
+    }
+
+    if(!labels || showCustomFields) return null;
 
     return(
         <div className="formWrapper">
@@ -36,22 +54,7 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
                     <input type={showDate?"date":"text"} autoComplete="new-password" onChange={(e)=>handleChange(e.target.value)} value={value}/>
                 </div>
                 :null
-            }
-            {
-                fieldType.includes('city')?
-                <SelectCity saveSelectedOption={handleChange} value={name||value}/>
-                :null
-            }
-            {
-                fieldType.includes('country')?
-                <SelectCountry saveSelectedOption={handleChange} value={name||value}/>
-                :null
-            }
-            {
-                fieldType.includes('state')?
-                <SelectState saveSelectedOption={handleChange}  value={name||value}/>
-                :null
-            }     
+            }  
             <p className={showError?"errorMsg":"hideMsg"}>{errorMsg?errorMsg:`Please Fill ${labels}`}</p>
             {
                 type ==='dropdown' && false?

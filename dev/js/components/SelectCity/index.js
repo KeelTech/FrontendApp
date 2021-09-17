@@ -3,178 +3,105 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCityList, getStateList, savePlaceInfo } from '@actions';
 import CustomSearchSelect from '@components/CustomSearchSelect';
 
-const SelectCity = ({ saveSelectedOption, value="" })=>{
-    const dispatch = useDispatch();
-    const taskInfo = useSelector(state=>state.TASK_INFO);
-    const { placeInfo={} } = taskInfo;
-    const { state, country } = placeInfo;
-    const [list, setList] = useState([]);
-    const [selectedVal, setValue] = useState({});
-    const [loading, setLoading] = useState(false);
-    useEffect(()=>{
-        if(state){
-            setLoading(true);
-            getCityList({id: state}, dispatch, (resp, err)=>{
-                setLoading(false);
-                if(resp && resp.message){
-                    if(resp.message.length==0){
-                        setValue({});
-                        handleChange({id: ''});
-                    }
-                    const filterResp = resp.message.map((val)=>{
-                        return {...val, name: val.city_name};
-                    })
-                    if(value){
-                        const selectedVal = filterResp.filter(x=>x.id==value);
-                        if(selectedVal.length){
-                            setValue(selectedVal[0]);
-                            handleChange(selectedVal[0]);
-                        }else{
-                            setValue({});
-                            handleChange({id: ''});
-                        }
-                    }
-                    setList(filterResp);
-                }
-            })
-        }
-    },[state]);
+const SelectCountry = ({ saveSelectedOption, dataParams={} })=>{
+    const { city='', cityId='', cityLabel='', country='', countryId='', countryLabel='', state='', stateId='', stateLabel='', showError=false } = dataParams;
 
-    const handleChange = (val)=>{
-        if(!state){
-            return null;
-        }
-        savePlaceInfo({city: val && val.id}, dispatch);
-        saveSelectedOption(val && val.id);
-    }
-    const { name:val} = selectedVal;
-    if(loading) return null;
-
-    //if(!state) return <p className="errorMsg">Please Select Country & State First</p>
-    return(
-        <Fragment>
-        <CustomSearchSelect options={list} placeholder="Search City" value={val} handleChange={handleChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>
-        </Fragment>   
-    )
-}
-
-const SelectCountry = ({ saveSelectedOption, placeholder="Search Country", isDesired=false, value='' })=>{
-    const [selectedCountry, setCountry] = useState('');
-    const [selectedState, setState] = useState('');
+    const [cityList, setCityList] = useState([]);
+    const [stateList, setStateList] = useState([]);
     const dispatch = useDispatch();
 
     const taskInfo = useSelector(state => state.TASK_INFO);
     const { countryList=[] } = taskInfo;
 
     useEffect(()=>{
-        if(selectedCountry){
-            getStateList({id: selectedCountry}, dispatch, (resp, err)=>{
-                // setLoading(false);
-                // if(resp && resp.message){
-                //     if(resp.message.length==0){
-                //         setValue({});
-                //         handleChange({id: ''});
-                //     }
-                //     const filterResp = resp.message.map((val)=>{
-                //         return {...val, name: val.state};
-                //     })
-                //     if(value){
-                //         const selectedVal = filterResp.filter(x=>x.id==value);
-                //         if(selectedVal.length){
-                //             setValue(selectedVal[0]);
-                //             handleChange(selectedVal[0]);
-                //         }else{
-                //             setValue({});
-                //             handleChange({id: ''});
-                //         }
-                //     }else{
-                //         setValue({});
-                //     }
-                //     setList(filterResp);
-                // }
+        if(countryId){
+            getStateList({id: countryId}, dispatch, (resp, err)=>{
+                if(resp && resp.message){
+                    const filterResp = resp.message.map((val)=>{
+                        return {...val, name: val.state};
+                    })
+                    setStateList(filterResp);
+                }
             })
         }
-    },[selectedCountry]);
+    },[countryId]);
+
+    useEffect(()=>{
+        if(stateId){
+            getCityList({id: stateId}, dispatch, (resp, err)=>{
+                if(resp && resp.message){
+                    const filterResp = resp.message.map((val)=>{
+                        return {...val, name: val.city_name};
+                    })
+                    setCityList(filterResp);
+                }
+            })
+        }
+    },[stateId]);
 
     const handleCountryChange = (val)=>{
-        setCountry(val && val.id);
-        //savePlaceInfo({country: val && val.id}, dispatch);
-        //saveSelectedOption(val && val.id)
+        const { id, name } = val;
+        setCityList([]);
+        saveSelectedOption({city:'', cityId:'', country:name, countryId:id, state:'', stateId:''})
     }
 
     const handleStateChange = (val)=>{
-        //savePlaceInfo({country: val && val.id}, dispatch);
-        //saveSelectedOption(val && val.id)
+        const { id, name } = val;
+        saveSelectedOption({city:'', cityId:'', state:name, stateId:id})
     }
 
     const handleCityChange = (val)=>{
-        //savePlaceInfo({country: val && val.id}, dispatch);
-        //saveSelectedOption(val && val.id)
+        const { id, name } = val;
+        saveSelectedOption({city:name, cityId:id})
     }
-
     return(
         <Fragment>
-            <CustomSearchSelect options={countryList} placeholder={placeholder} value={val} handleChange={handleChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>
+            {
+                countryLabel?
+                <div className="formWrapper">
+                    <label>{countryLabel}<sup>*</sup></label>
+                    <CustomSearchSelect options={countryList} placeholder="Search Country" value={country} handleChange={handleCountryChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>
+                    <p className={showError && !country?"errorMsg":"hideMsg"}>Please Select Country</p>
+                </div>
+                :null
+            }
+            {
+                stateLabel?
+                <div className="formWrapper">
+                    <label>{stateLabel}<sup>*</sup></label>
+                    <CustomSearchSelect options={stateList} placeholder="Search State" value={state} handleChange={handleStateChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>
+                    <p className={showError && !state?"errorMsg":"hideMsg"}>Please Select State</p>
+                </div>
+                :null
+            }
+            {
+                cityLabel?
+                <div className="formWrapper">
+                    <label>{cityLabel}<sup>*</sup></label>
+                    <CustomSearchSelect options={cityList} placeholder="Search City" value={city} handleChange={handleCityChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>
+                    <p className={showError && !city?"errorMsg":"hideMsg"}>Please Select City</p>
+                </div>
+                :null
+            }
+            
         </Fragment>
     )
 }
 
-const SelectState = ({ saveSelectedOption, value="" })=>{
-    const dispatch = useDispatch();
-    const taskInfo = useSelector(state=>state.TASK_INFO);
-    const { placeInfo={} } = taskInfo;
-    const { country } = placeInfo;
-    const [list, setList] = useState([])
-    const [selectedVal, setValue] = useState({});
-    const [loading, setLoading] = useState(false);
-
-    useEffect(()=>{
-        if(country){
-            setLoading(true);
-            getStateList({id: country}, dispatch, (resp, err)=>{
-                setLoading(false);
-                if(resp && resp.message){
-                    if(resp.message.length==0){
-                        setValue({});
-                        handleChange({id: ''});
-                    }
-                    const filterResp = resp.message.map((val)=>{
-                        return {...val, name: val.state};
-                    })
-                    if(value){
-                        const selectedVal = filterResp.filter(x=>x.id==value);
-                        if(selectedVal.length){
-                            setValue(selectedVal[0]);
-                            handleChange(selectedVal[0]);
-                        }else{
-                            setValue({});
-                            handleChange({id: ''});
-                        }
-                    }else{
-                        setValue({});
-                    }
-                    setList(filterResp);
-                }
-            })
-        }
-    },[country]);
+const SelectMainCountry = ({ saveSelectedOption, value="", placeholder="Select Country" })=>{
+    const taskInfo = useSelector(state => state.TASK_INFO);
+    const { countryList=[] } = taskInfo;
 
     const handleChange = (val)=>{
-        savePlaceInfo({state: val && val.id}, dispatch);
         saveSelectedOption(val && val.id);
     }
 
-    const { name:val=''} = selectedVal;
-
-    if(loading) return null
-    //if(!country) return <p className="errorMsg">Please Select Country First</p>
-
     return(
         <Fragment>
-            <CustomSearchSelect options={list} placeholder="Search State" value={val} handleChange={handleChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>
+            <CustomSearchSelect options={countryList} placeholder={placeholder} value={value} handleChange={handleChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>
         </Fragment>
         
     )
 }
 
-export  { SelectCity, SelectState, SelectCountry }
+export  { SelectMainCountry, SelectCountry }
