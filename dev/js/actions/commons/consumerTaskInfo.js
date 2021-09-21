@@ -204,12 +204,21 @@ export const getCalendlyLink = (dataParams, dispatch, cb=null)=>{
                 type: FETCH_CALENDLY_URL,
                 payload: response.message && response.message.schedule_url
             })
+        }else{
+            dispatch({
+                type: FETCH_CALENDLY_URL,
+                payload: ""
+            })
         }
 
     }).catch((e)=>{
         dispatch({
             type: CALENDLY_URL_LOADING,
             payload: false
+        })
+        dispatch({
+            type: FETCH_CALENDLY_URL,
+            payload: ""
         })
     })
 }

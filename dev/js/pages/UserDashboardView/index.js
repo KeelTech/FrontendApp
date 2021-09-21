@@ -82,7 +82,7 @@ const UserDashboardView = (props)=>{
             if(isPlanPurchased){
                 return <DashboardView scheduleList={scheduleList} calendlyURL={calendlyURL}/>
             }else{
-                return <UserOnboardingView />
+                return <UserOnboardingView calendlyURL={calendlyURL}/>
             }
         }else {
             return <Fragment>
