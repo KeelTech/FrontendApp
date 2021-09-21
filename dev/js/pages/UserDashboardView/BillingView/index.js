@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '@components/Header';
 import ProfileWidget from '@components/ProfileWidget';
+import { getPaymentIndent } from '@actions';
 import PlanList from './PlanList.js';
 import { body } from '../style.js';
-
+var stripeInstance;
 const BillingView = ()=>{
     const dispatch = useDispatch();
     const history = useHistory();
@@ -48,9 +49,19 @@ const BillingView = ()=>{
         }
     }
 
+    useEffect(()=>{
+        getPaymentIndent({}, {}, (resp, err)=>{
+            console.log(resp);
+            console.log(err);
+        })
+        
+
+    },[])
+
     return(
     <div className={body + '    ' + 'p-relative pt-5'}>
         <div className="mainView mainSectionTopSpace">
+            <div id="card-element"></div>
             <div className="subHeaderTop">
             <div className="headerContent">
             <img className="img-fluid keelTopLogo" src={ASSETS_BASE_URL + "/images/common/keelIcon.svg"} alt="home" onClick={()=>history.push('/')} />
@@ -67,6 +78,9 @@ const BillingView = ()=>{
                     </div> */}
                 </div>
             </Header>
+            <form id="payment-form">
+
+            </form>
             <PlanList first_name={first_name} planClick={planClick} planData={planData}/>
         </div>
     </div>

@@ -1,6 +1,48 @@
-import React from 'react';
-
+import React, {useEffect} from 'react';
+var card, stripe;
 const PlanList = ({ first_name, planClick, planData })=>{
+    useEffect(()=>{
+        stripe = Stripe('pk_test_51JBS4QI2bVytQPLa2nDz061StVfnZCJtuT0ao8JB2OwXOhFHE6RlQbptrtO4bF62vcAjhiw3d7koNBnx8Uakkb4z00VDVKXzaX');
+        var elements = stripe.elements();
+        var style = {
+            base: {
+              color: "#32325d",
+              fontFamily: 'Arial, sans-serif',
+              fontSmoothing: "antialiased",
+              fontSize: "16px",
+              "::placeholder": {
+                color: "#32325d"
+              }
+            },
+            invalid: {
+              fontFamily: 'Arial, sans-serif',
+              color: "#fa755a",
+              iconColor: "#fa755a"
+            }
+          };
+          console.log('ADDED ADDED ADDED');
+        card = elements.create("card", { style: style });
+        card.mount("#card-element");
+    },[])
+
+    var payWithCard = function() {
+        //loading(true);
+        stripe
+          .confirmCardPayment('pk_test_51JBS4QI2bVytQPLa2nDz061StVfnZCJtuT0ao8JB2OwXOhFHE6RlQbptrtO4bF62vcAjhiw3d7koNBnx8Uakkb4z00VDVKXzaX', {
+            payment_method: {
+              card
+            }
+          })
+          .then(function(result) {
+            if (result.error) {
+              // Show error to your customer
+              alert(result.error.message);
+            } else {
+              // The payment succeeded!
+              alert(result.paymentIntent.id);
+            }
+          });
+      };
 
     return(
         <div className="planSelectionScreen">
@@ -31,7 +73,7 @@ const PlanList = ({ first_name, planClick, planData })=>{
                                     isPopular?<span className="popularPlan">recommended</span>:null
                                 }
                                 <div className="planPrices">
-                                    <h2>{planName}</h2>
+                                    <h2 onClick={payWithCard}>{planName}</h2>
                                     {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/plan.svg"} /> */}
                                     <p><span>{dealPrice}</span>{actualPrice}</p>
                                 </div>

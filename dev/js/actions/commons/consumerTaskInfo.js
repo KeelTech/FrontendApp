@@ -241,3 +241,15 @@ export const getScheduleDetail = (dataParams, dispatch, cb=null)=>{
         
     })
 }
+
+export const getPaymentIndent = (dataParams, dispatch, cb=null)=>{
+    
+    API_POST(`${API_BASE_URL}/v1/payment/stripe/create/order`, {
+        ...dataParams
+    }).then((response)=>{
+        if(cb)cb(response);
+
+    }).catch((e)=>{
+        
+    })
+} 
