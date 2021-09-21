@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import FloatingChatWidget from '@components/FloatingChatWidget';
 import Header from '@components/Header';
 import NotificationWidget from '@components/NotificationWidget';
 import ProfileWidget from '@components/ProfileWidget';
@@ -23,7 +22,6 @@ const MobileHeaderWrapper = (props)=>{
                     </div>
                 </div>
             </div>
-            <FloatingChatWidget/>
         </Fragment>
     )
 }

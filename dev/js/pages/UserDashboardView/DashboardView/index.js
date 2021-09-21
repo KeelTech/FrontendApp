@@ -69,8 +69,9 @@ const DashboardView = ({ scheduleList, calendlyURL }) => {
         }
     }
 
-    const scheduleCall = () => {
-        Calendly.initPopupWidget({ url: calendlyURL });
+    const scheduleCall = (url) => {
+        console.log({url});
+        Calendly.initPopupWidget({ url });
     }
 
     return (
@@ -120,7 +121,7 @@ const DashboardView = ({ scheduleList, calendlyURL }) => {
                         }
                     </div>
                     <div className="chat">
-                        {caseId && userId ? <ChatWidget caseId={caseId} currentUserId={userId} chatHeaderName={agentName} /> : ""}
+                        {caseId && userId? <ChatWidget caseId={caseId} currentUserId={userId} chatHeaderName={agentName} /> : ""}
                     </div>
                 </div>
             </div>
@@ -131,14 +132,14 @@ const DashboardView = ({ scheduleList, calendlyURL }) => {
                 </div>
                 {
                     scheduleList.length?
-                    <div className="upcoming" onClick={scheduleCall}><button><i class="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div>
+                    <div className="upcoming" onClick={()=>scheduleCall(calendlyURL)}><button><i class="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div>
                     :null
                 }
                 <div className="upcoming"><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Upcoming Schedule</span></div>
                 {
                     scheduleList.length?
                     scheduleList.map((val, key) => {
-                        const { start_time, name = '', end_time } = val;
+                        const { start_time, name = '', end_time, cancel_url='', reschedule_url='' } = val;
                         return <div className="info" key={key}>
                             <span className="upcomingTitle">{name} </span>
                             <div className="taskSch">
@@ -152,15 +153,19 @@ const DashboardView = ({ scheduleList, calendlyURL }) => {
                                 </div>
                             </div>
                             <div className="tstResh">
-                                <button className="cncTsk">Cancel</button>
-                                <button>Reschedule</button>
+                                {
+                                    cancel_url?<button className="cncTsk" onClick={()=>scheduleCall(cancel_url)}>Cancel</button>:null
+                                }
+                                {
+                                    reschedule_url?<button onClick={()=>scheduleCall(reschedule_url)}>Reschedule</button>:null
+                                }
                             </div>
                         </div>
                     })
                     :<div className="noMeeting">
                         <h5>No meetings scheduled</h5>
                         <img className="icon" src={ASSETS_BASE_URL + "/images/common/sch.svg"} alt="time" />
-                        <div className="upcoming" onClick={scheduleCall}><button><i class="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div>
+                        <div className="upcoming" onClick={()=>scheduleCall(calendlyURL)}><button><i class="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div>
                     </div>
                 }
             </div>

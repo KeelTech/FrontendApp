@@ -36,6 +36,7 @@ border: 1px solid #c7c7c5;
 
 export const schedule = css`
   .info{
+    cursor: pointer;
     margin-top: 20px;
     font-size: 18px;
     line-height: 27px;

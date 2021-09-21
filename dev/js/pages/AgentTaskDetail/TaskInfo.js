@@ -11,6 +11,7 @@ import CustomToaster from '@components/CustomToaster';
 import FileUpload from '@components/FileUpload';
 import DeleteConfirmationPopup from '@components/DeleteConfirmationPopup';
 import { isMobileView } from '@constants';
+import FloatingChatWidget from '@components/FloatingChatWidget';
 import { getNameInitialHelper, getFormattedTime, getFormattedDate, capitalizeFirstLetter } from '@helpers/utils';
 import { container, taskStatus, discussionSection, memberCard, attachmentSection, checklistSection, messageSection } from './style.js';
 
@@ -36,7 +37,12 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
     const agentInfo = useSelector(state => state.AGENT_STORE);
     const { agentProfile = {} } = agentInfo;
     const { agent_profile = {} } = agentProfile;
-    const { full_name: agentName = '' } = agent_profile;
+    const { full_name: agentName = '', agent } = agent_profile;
+
+    const taskInfo = useSelector((store) => store.TASK_INFO);
+    const { caseDetails } = taskInfo || {};
+    const { user_details = {} } = caseDetails;
+    const { first_name } = user_details;
 
     const [dataParams, setDataParams] = useState({
         ...taskDetail
@@ -292,6 +298,7 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
             {
                 showDeleteConfirmation ? <DeleteConfirmationPopup togglePopup={toggleDeletePopup} deletePopupHandler={deletePopupHandler} /> : null
             }
+            <FloatingChatWidget caseId={case_id} currentUserId={agent} chatHeaderName={first_name}/>
             <CustomToaster {...toasterInfo} hideToaster={hideToaster} />
             <div className="topTaskHead">
                 <div className="taskName">

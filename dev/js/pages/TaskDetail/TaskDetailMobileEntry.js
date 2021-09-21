@@ -1,5 +1,4 @@
 import React from 'react';
-import FloatingChatWidget from '@components/FloatingChatWidget';
 import LeftMenuBar from '@components/LeftMenuBar';
 import Header from '@components/Header';
 import NotificationWidget from '@components/NotificationWidget';
@@ -29,7 +28,6 @@ const TaskDetailMobileView = (props)=>{
                     </div>
                 </div>
             </div>
-            <FloatingChatWidget/>
         </div>
     )
 }

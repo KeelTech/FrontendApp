@@ -90,7 +90,7 @@ function CustomerInfoView(props) {
                 </div>
               </div>
               <div className="buttonWrapper justify-content-between ">
-                <div className="customSelects">
+                {/* <div className="customSelects">
                   <label>Case Type:</label>
                   <select name="CustomN" id="Drp">
                     <option value="dro1">Value Dummy</option>
@@ -99,7 +99,7 @@ function CustomerInfoView(props) {
                     <option value="dro4">Value Dummy</option>
                     <option value="dro5">Value Dummy</option>
                   </select>
-                </div>
+                </div> */}
                 <div className="agntTaskBtns">
                   <button className="taskButton" onClick={redirectToTask}>Tasks</button>
                   {/* <button className="docButton">Documents</button> */}

@@ -10,6 +10,7 @@ import FileUpload from '@components/FileUpload';
 import { loaderView, isMobileView } from '@constants';
 import LoadingWidget from '@components/LoadingWidget';
 import DeleteConfirmationPopup from '@components/DeleteConfirmationPopup';
+import FloatingChatWidget from '@components/FloatingChatWidget';
 import { getNameInitialHelper, getFormattedTime, getFormattedDate, capitalizeFirstLetter } from '@helpers/utils';
 import { container, taskStatus, discussionSection, memberCard, attachmentSection, checklistSection, messageSection } from './style.js';
 
@@ -19,10 +20,11 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
     const [loading, setLoading] = useState(false);
     const taskInfo = useSelector(state => state.TASK_INFO);
     const { taskDetail = {}, userInfo = {} } = taskInfo || {};
-    const { profile = {}, agent = {} } = userInfo;
+    const { profile = {}, agent = {}, cases={} } = userInfo;
     const { first_name: consumerName = '', last_name: cosumerLastName = '' } = profile;
     const { full_name: agentName = '' } = agent;
-
+    const { case_id, user } = cases;
+    
     const [openUploadDocumentModal, setOpenUploadModal] = useState(false);
     const [toasterInfo, setToasterInfo] = useState({
         isVisible: false,
@@ -195,6 +197,7 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
             {
                 loading && <div className={loaderView}><LoadingWidget /></div>
             }
+             <FloatingChatWidget caseId={case_id} currentUserId={user} chatHeaderName={agentName}/>
             <CustomToaster {...toasterInfo} hideToaster={hideToaster} />
             <div className="topTaskHead">
                 <div className="taskName">

@@ -1,13 +1,22 @@
 import React from "react";
+import { useHistory } from 'react-router-dom';
 import { getFormattedDate, getFormattedTime } from '@helpers/utils.js';
 import {schedule} from  './style.js'
 
 const ScheduleList = ({schedules}) => {
+  const history = useHistory();
+
+  const handleCardClick = (id)=>{
+    if(id){
+      history.push(`agent/customer/${id}`);
+    }
+  }
+
   return (
     <div className={schedule}>
         {schedules.map((val, key) => {
-          const { start_time, name = '', end_time } = val;
-          return <div className="info" key={key}>
+          const { start_time, name = '', end_time, case_id } = val;
+          return <div className="info" key={key} onClick={()=>handleCardClick(case_id)}>
               <span className="upcomingTitle">{name} </span>
               <div className="taskSch">
                   <div className="taskName">
