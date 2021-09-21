@@ -6625,6 +6625,27 @@ img.img-fluid.userProfileXn {
   width: 160px !important;
   font-weight: 500 !important;
 }
+.taskName.customTimeTask {
+  align-items: flex-start;
+}
+.tstResh button {
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: 'Poppins';
+  color: #4267b2;
+}
+
+.tstResh {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tstResh button.cncTsk {
+  color: red;
+}
 /* ============ Agent Dashboard Update ============== */
 /* ============ TakCardUi ============== */
 .taskName span {

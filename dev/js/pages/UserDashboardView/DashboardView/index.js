@@ -142,14 +142,18 @@ const DashboardView = ({ scheduleList, calendlyURL }) => {
                         return <div className="info" key={key}>
                             <span className="upcomingTitle">{name} </span>
                             <div className="taskSch">
-                                <div className="taskName">
+                                <div className="taskName customTimeTask">
                                     <img className="icon" src={ASSETS_BASE_URL + "/images/common/calendar.svg"} alt="time" />
                                     <span>{getFormattedDate(start_time).formattedDate}</span>
                                 </div>
-                                <div className="taskName">
+                                <div className="taskName customTimeTask">
                                     <img className="icon" src={ASSETS_BASE_URL + "/images/common/clock.svg"} alt="clock" />
                                     <span>{`${getFormattedTime(start_time)} - ${getFormattedTime(end_time)}`}</span>
                                 </div>
+                            </div>
+                            <div className="tstResh">
+                                <button className="cncTsk">Cancel</button>
+                                <button>Reschedule</button>
                             </div>
                         </div>
                     })
