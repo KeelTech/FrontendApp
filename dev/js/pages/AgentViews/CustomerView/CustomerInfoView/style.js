@@ -98,7 +98,7 @@ export const body = css`
   .buttonWrapper {
     display: flex;
     flex-direction: row;
-    margin-left: 12px;
+    // margin-left: 12px;
     margin-top: 0;
   }
   .taskButton {

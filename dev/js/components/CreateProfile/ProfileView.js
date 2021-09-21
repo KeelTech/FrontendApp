@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 
 const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
@@ -85,16 +85,23 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
                                             {
                                                 Array.isArray(values) ?
                                                     values.map((widgetObject, dataVal) => {
-                                                        return Object.values(widgetObject).map((widgetVal) => {
-                                                            const { labels, value = '', name='' } = widgetVal;
-                                                            if (!labels) return null;
-                                                            return (
-                                                                <li key={dataVal + labels}>
-                                                                    <h5>{labels}:</h5>
-                                                                    <p>{name||value}</p>
-                                                                </li>
-                                                            )
-                                                        })
+                                                        return <Fragment key={dataVal}>
+                                                            {
+                                                                Object.values(widgetObject).map((widgetVal) => {
+                                                                    const { labels, value = '', name='' } = widgetVal;
+                                                                    if (!labels) return null;
+                                                                    return (
+                                                                        <li key={dataVal + labels}>
+                                                                            <h5>{labels}:</h5>
+                                                                            <p>{name||value}</p>
+                                                                        </li>
+                                                                    )
+                                                                })
+                                                            }
+                                                            {
+                                                                dataVal==values.length-1?null:<hr></hr>
+                                                            }
+                                                        </Fragment>
                                                     })
                                                     : Object.values(values).map((widgetVal, dataKeys) => {
                                                         const { labels, value = '', name='' } = widgetVal;

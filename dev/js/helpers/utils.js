@@ -77,6 +77,7 @@ export const statusStyle = props =>css`
     border-radius: 3px;
     font-weight: 500;
     font-size: 10px;
+    width:100px;
 `
 
 export const renderStatusText = (val) =>{

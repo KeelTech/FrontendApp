@@ -5,7 +5,7 @@ import { createProfile, getUserProfile, sendOTP, verifyOTP } from '@actions';
 import LoadingWidget from '@components/LoadingWidget';
 import { loaderView } from '@constants';
 import CustomToaster from '@components/CustomToaster';
-import { SelectCountry } from '@components/SelectCity';
+import { SelectMainCountry } from '@components/SelectCity';
 import { container, progressBar } from './style.js';
 
 const CreateProfile = () => {
@@ -335,7 +335,7 @@ const ProfileForm = ({ dataParams, fieldType, handleChange, sendOTPClicked, veri
             }
             {
                 fieldType.includes('country') ?
-                    <SelectCountry saveSelectedOption={handleFieldChange} placeholder={`Search ${labels}`} isDesired={fieldType.includes('desired_country')}/>
+                    <SelectMainCountry saveSelectedOption={handleFieldChange} placeholder={`Search ${labels}`} isDesired={fieldType.includes('desired_country')}/>
                     : null
             }
             <p className={showError ? "errorMsg" : "hideMsg"}>Please Fill {labels}</p>

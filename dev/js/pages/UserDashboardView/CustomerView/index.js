@@ -8,6 +8,7 @@ import ProfileWidget from '@components/ProfileWidget';
 import CreateProfile from '@components/CreateProfile';
 import CreateShortProfile from '@components/CreateProfile/CreateShortProfile.js';
 import { SET_MENUBAR_STATE } from '@constants/types';
+import { getCountryList } from '@actions';
 import { body } from '../style.js';
 import { container } from './style.js';
 
@@ -15,12 +16,15 @@ const CustomerView = (props) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const taskInfo = useSelector(state => state.TASK_INFO);
-    const { fullProfileInfo, fullProfileLoading, userInfo = {} } = taskInfo;
+    const { fullProfileInfo, fullProfileLoading, userInfo = {}, countryList=[] } = taskInfo;
     const isProfileExist = userInfo && userInfo.profile_exists;
 
     // const parsed = queryString.parse(props.location.search);
     // const shortProfile = parsed && parsed.type=='profile';
     useEffect(() => {
+        if(!countryList.length){
+            getCountryList({}, dispatch);
+        }
         dispatch(
             {
                 type: SET_MENUBAR_STATE,
