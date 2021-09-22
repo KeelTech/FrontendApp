@@ -310,7 +310,7 @@ const CreateProfile = (props) => {
                                                                         }
                                                                         {
                                                                             dataParams.length == 1 ? null : <div className="delBtnHeight">
-                                                                                <h5>Additional Information</h5>
+                                                                                <h5>{subIndex==0?'':'Additional Information'}</h5>
                                                                                 <button className="formdelBtn" onClick={() => handleWidgetUpdate(subIndex, true)}><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
                                                                             </div>
                                                                         }

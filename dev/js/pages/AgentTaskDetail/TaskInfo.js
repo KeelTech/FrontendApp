@@ -40,7 +40,7 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
     const { full_name: agentName = '', agent } = agent_profile;
 
     const taskInfo = useSelector((store) => store.TASK_INFO);
-    const { caseDetails } = taskInfo || {};
+    const { caseDetails={} } = taskInfo || {};
     const { user_details = {} } = caseDetails;
     const { first_name } = user_details;
 
