@@ -15,6 +15,7 @@ import BillingView from './BillingView';
 import SelectedPlanView from './SelectedPlanView';
 import ProfileView from './ProfileView';
 
+let isCalendlyClosed= 0;
 const UserDashboardView = (props)=>{
     const url  = props.match.path;
     const dispatch = useDispatch();
@@ -25,17 +26,28 @@ const UserDashboardView = (props)=>{
     const { case_id, user } = cases;
     const isPlanPurchased = cases && cases.plan;
     const { full_name:agentName='' } = agent;
-
     useEffect(()=>{
         getUserProfile({}, dispatch);
         getCalendlyLink({}, dispatch);
-        if(!scheduleList.length){
-            fetchScheduleList();
-        }
+        fetchScheduleList();
         function isCalendlyEvent(e) {
             return e.data.event &&
                     e.data.event.indexOf('calendly') === 0;
         };
+
+        var observer = new MutationObserver(function(mutations) {
+            const elem = document.getElementsByClassName('calendly-overlay');
+            if (elem && elem[0] && document.contains(elem[0])) {
+                 isCalendlyClosed=1;
+             }else if(isCalendlyClosed==1){
+                console.log('CALENDLY CLOSED');
+                fetchScheduleList();
+                isCalendlyClosed=0;
+             }
+         });
+         
+         observer.observe(document, {attributes: false, childList: true, characterData: false, subtree:true});
+         
 
         function listenCalendlyEvents(e) {
             if (isCalendlyEvent(e)) {
@@ -70,7 +82,7 @@ const UserDashboardView = (props)=>{
             if(isPlanPurchased){
                 return <DashboardView scheduleList={scheduleList} calendlyURL={calendlyURL}/>
             }else{
-                return <UserOnboardingView />
+                return <UserOnboardingView calendlyURL={calendlyURL}/>
             }
         }else {
             return <Fragment>

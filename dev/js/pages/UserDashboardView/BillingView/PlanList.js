@@ -21,6 +21,10 @@ const PlanList = ({ first_name, planClick, planData })=>{
             </div>
         </div>
         <div className="planCardSection">
+            <div className="tabButtonPlan">
+                <button className="actPlan">Pending Payments <span className="notiPus">2</span>    </button>
+                <button>Plans</button>
+            </div>
             <div className="row">
                 {
                     planData.map((val, key)=>{
@@ -33,9 +37,10 @@ const PlanList = ({ first_name, planClick, planData })=>{
                                 <div className="planPrices">
                                     <h2>{planName}</h2>
                                     {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/plan.svg"} /> */}
-                                    <p><span>{dealPrice}</span>{actualPrice}</p>
+                                    <p>{actualPrice}<span>{dealPrice}</span></p>
                                 </div>
                                 <div className="planPurchaseCont">
+                                    <button onClick={()=>planClick(val)}>Upgrade Plan</button>
                                     <ul>
                                         <li><img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/tick_green_circle.svg"} />Some Pointer related the plan</li>
                                         <li><img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/tick_green_circle.svg"} />Some Pointer related the plan</li>
@@ -45,7 +50,6 @@ const PlanList = ({ first_name, planClick, planData })=>{
                                         <li><img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/cross_with_circle.svg"} />Some Pointer related the plan</li>
                                         <li><img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/cross_with_circle.svg"} />Some Pointer related the plan</li>
                                     </ul>
-                                    <button onClick={()=>planClick(val)}>Upgrade Plan</button>
                                 </div>
                             </div>
                         </div>

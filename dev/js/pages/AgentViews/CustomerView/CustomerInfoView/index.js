@@ -16,10 +16,10 @@ function CustomerInfoView(props) {
   const taskInfo = useSelector((store) => store.TASK_INFO);
   const { caseDetails, caseDetailLoading } = taskInfo || {};
 
-  const agentInfo = useSelector(state=>state.AGENT_STORE);
-  const { agentProfile={} } = agentInfo;
-  const { agent_profile={} } = agentProfile;
-  const { id='', agent="" } = agent_profile;
+  const agentInfo = useSelector(state => state.AGENT_STORE);
+  const { agentProfile = {} } = agentInfo;
+  const { agent_profile = {} } = agentProfile;
+  const { id = '', agent = "" } = agent_profile;
 
   let caseId = '';
   if (props && props.match && props.match.params) {
@@ -89,9 +89,21 @@ function CustomerInfoView(props) {
                   </div>
                 </div>
               </div>
-              <div className="buttonWrapper">
-                <button className="taskButton" onClick={redirectToTask}>Tasks</button>
-                {/* <button className="docButton">Documents</button> */}
+              <div className="buttonWrapper justify-content-between ">
+                {/* <div className="customSelects">
+                  <label>Case Type:</label>
+                  <select name="CustomN" id="Drp">
+                    <option value="dro1">Value Dummy</option>
+                    <option value="dro2">Value Dummy</option>
+                    <option value="dro3">Value Dummy</option>
+                    <option value="dro4">Value Dummy</option>
+                    <option value="dro5">Value Dummy</option>
+                  </select>
+                </div> */}
+                <div className="agntTaskBtns">
+                  <button className="taskButton" onClick={redirectToTask}>Tasks</button>
+                  {/* <button className="docButton">Documents</button> */}
+                </div>
               </div>
             </div>
             {/* <div className="meetingInfoWrapperADD meetingNewAd">
@@ -118,11 +130,11 @@ function CustomerInfoView(props) {
             </div>
           </div>
           <div className="chat">
-            {caseId && agent ? <ChatWidget caseId={caseId} currentUserId={agent} chatHeaderName={first_name}/> : ""}
+            {caseId && agent ? <ChatWidget caseId={caseId} currentUserId={agent} chatHeaderName={first_name} /> : ""}
           </div>
         </div>
       )}
-      {caseId && agent ? <FloatingChatWidget caseId={caseId} currentUserId={agent} chatHeaderName={first_name}/> : ""}
+      {caseId && agent ? <FloatingChatWidget caseId={caseId} currentUserId={agent} chatHeaderName={first_name} /> : ""}
     </div>
   );
 }

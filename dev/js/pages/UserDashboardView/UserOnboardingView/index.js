@@ -5,12 +5,18 @@ import Header from '@components/Header';
 import ProfileWidget from '@components/ProfileWidget';
 import { body } from '../style.js';
 
-const UserOnboardingView = ()=>{
+const UserOnboardingView = ({ calendlyURL })=>{
     const history = useHistory();
     const taskInfo = useSelector(state=>state.TASK_INFO);
     const { userInfo={}, userInfoLoading } = taskInfo;
     const { profile={} } = userInfo;
     const { first_name='' } = profile;
+
+    const scheduleCall = () => {
+        if(calendlyURL){
+            Calendly.initPopupWidget({ url: calendlyURL });
+        }
+    }
 
     return(
     <div className={body + '    ' + 'p-relative pt-5'}>
@@ -41,7 +47,7 @@ const UserOnboardingView = ()=>{
                 </div>
                 <div className="schCallSection">
                     <p>Schedule a free call to know how Keel can help you in your immigration journey.</p>
-                    <button>Schedule Call</button>
+                    <button onClick={scheduleCall}>Schedule Call</button>
                 </div>
                 <div className="planCardSection">
                     <div className="row">
