@@ -1,6 +1,8 @@
 import React from 'react';
 
-const SelectedPlanView = ({ planClick, redirectDashboard, first_name })=>{
+const SelectedPlanView = ({ selectedUpgradePlan, redirectDashboard, first_name })=>{
+
+    const { currency='', description='', discount='', id='', price='', sgst='', title='', cgst=''} = selectedUpgradePlan||{};
 
     return (
         <div className="planSelectionScreen">
@@ -24,15 +26,15 @@ const SelectedPlanView = ({ planClick, redirectDashboard, first_name })=>{
                         redirectDashboard()
                     }}>Dashboard</a>
                     <span>&#62;</span>
-                    <a>Premium Plan </a>
+                    <a>{title}</a>
                 </div>
             </div>
             <div className="billingMainSection">
                 <div className="row">
                     <div className="col-md-8 col-12">
                         <div className="planDetailsBill">
-                            <h4>Premiun Plan</h4>
-                            <p>This plan will give you access to all our premiun services, such as live chat, unlimilted calls, and other great   </p>
+                            <h4>{title}</h4>
+                            <p>{description}</p>
                             <hr />
                             <ul>
                                 <li><img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/tick_green_circle.svg"} />Some Pointer related the plan</li>
@@ -69,18 +71,18 @@ const SelectedPlanView = ({ planClick, redirectDashboard, first_name })=>{
                             <table>
                                 <tr>
                                     <td><p className="tblHed">Amount:</p></td>
-                                    <td><p className="tblData">₹ 1,99,999</p></td>
+                                    <td><p className="tblData">{`${currency} ${price}`}</p></td>
                                 </tr>
                                 <tr>
                                     <td><p className="tblHed">SGST (9%):</p></td>
-                                    <td><p className="tblData">+ ₹ 17999</p></td>
+                                    <td><p className="tblData">+ ${currency} {cgst}</p></td>
                                 </tr>
                             </table>
                             <hr />
                             <table>
                                 <tr>
                                     <td><p className="tblHed">CGST (9%):</p></td>
-                                    <td><p className="tblData">+ ₹ 17999</p></td>
+                                    <td><p className="tblData">+ {currency} {cgst}</p></td>
                                 </tr>
                                 <tr>
                                     <td><p className="tblHed">Valid Till::</p></td>
@@ -91,7 +93,7 @@ const SelectedPlanView = ({ planClick, redirectDashboard, first_name })=>{
                             <table>
                                 <tr>
                                     <td><p className="tblHed">Total:</p></td>
-                                    <td><p className="tblData">₹ 2,35,997</p></td>
+                                    <td><p className="tblData">{currency} {price}</p></td>
                                 </tr>
                             </table>
                             <button>Proceed to Payment</button>

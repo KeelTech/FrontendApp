@@ -9,7 +9,7 @@ import { taskMobileCont } from './style.js';
 
 const TaskDetailMobileView = (props)=>{
     let taskId = '';
-    if(props && props.match && props.match && props.match.params.id){
+    if(props && props.match && props.match.params.id){
         taskId = props.match.params.id;
     }
     return(

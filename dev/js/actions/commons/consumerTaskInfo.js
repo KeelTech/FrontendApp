@@ -250,3 +250,32 @@ export const getScheduleDetail = (dataParams, dispatch, cb=null)=>{
         
     })
 }
+
+export const getPlanList = (dataParams, dispatch, cb=null)=>{
+    API_GET(`${API_BASE_URL}/v1/plans/list-plans`).then((response)=>{
+        
+        if(response && response.status==1){
+            if(cb)cb(response.data||[]);
+        }else{
+            if(cb)cb(null, true);
+        }
+        
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}
+
+export const getPlanDetail = (dataParams, dispatch, cb=null)=>{
+    const { id } = dataParams;
+    API_GET(`${API_BASE_URL}/v1/plans/plan-details/${id}`).then((response)=>{
+        
+        if(response && response.status==1){
+            if(cb)cb(response.data||{}, null);
+        }else{
+            if(cb)cb(null, true);
+        }
+        
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}

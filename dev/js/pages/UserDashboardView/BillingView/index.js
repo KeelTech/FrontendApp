@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '@components/Header';
 import ProfileWidget from '@components/ProfileWidget';
+import { getPlanList } from '@actions';
 import PlanList from './PlanList.js';
 import { body } from '../style.js';
 
@@ -13,31 +14,8 @@ const BillingView = ()=>{
     const { userInfo={}, userInfoLoading } = taskInfo;
     const { profile={} } = userInfo;
     const { first_name='' } = profile;
-    const [selectedUpgradePlan, setUpgradePlan] = useState({});
-    const planData = [
-        {
-            id: 1,
-            actualPrice:  '$199',
-            dealPrice: '$0',
-            isAcive: true,
-            planName: 'Free Plan'
-        },
-        {
-            id: 2,
-            actualPrice:  '$599',
-            dealPrice: '$299',
-            isPopular: true,
-            isAcive: false,
-            planName: 'Premium Plan'
-        },
-        {
-            id: 3,
-            actualPrice:  '$299',
-            dealPrice: '$199',
-            isAcive: false,
-            planName: 'Calling Plan'
-        }
-    ]
+
+    const [planListData, setPlanList] = useState([]);
 
     const planClick = (planInfo)=>{
         if(planInfo && planInfo.isAcive){
@@ -47,6 +25,14 @@ const BillingView = ()=>{
             //setUpgradePlan(planInfo);
         }
     }
+
+    useEffect(()=>{
+        getPlanList({}, dispatch, (resp, err)=>{
+            if(resp){
+                setPlanList(resp);
+            }
+        })
+    },[])
 
     return(
     <div className={body + '    ' + 'p-relative pt-5'}>
@@ -67,7 +53,7 @@ const BillingView = ()=>{
                     </div> */}
                 </div>
             </Header>
-            <PlanList first_name={first_name} planClick={planClick} planData={planData}/>
+            <PlanList first_name={first_name} planClick={planClick} planData={planListData}/>
         </div>
     </div>
     )

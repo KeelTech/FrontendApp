@@ -28,16 +28,16 @@ const PlanList = ({ first_name, planClick, planData })=>{
             <div className="row">
                 {
                     planData.map((val, key)=>{
-                        const { actualPrice, dealPrice, isPopular, planName, isActive } = val;
+                        const { currency, discount, price, isPopular=false, title, isActive } = val;
                         return <div className="col-md-4 col-12 mb-4 " key={key}>
                             <div className="planPurchaseCard">
                                 {
                                     isPopular?<span className="popularPlan">recommended</span>:null
                                 }
                                 <div className="planPrices">
-                                    <h2>{planName}</h2>
+                                    <h2>{title}</h2>
                                     {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/plan.svg"} /> */}
-                                    <p>{actualPrice}<span>{dealPrice}</span></p>
+                                    <p>{`${currency} ${price}`}<span>{`${currency} ${discount+price}`}</span></p>
                                 </div>
                                 <div className="planPurchaseCont">
                                     <button onClick={()=>planClick(val)}>Upgrade Plan</button>
