@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '@components/Header';
 import ProfileWidget from '@components/ProfileWidget';
+import LoadingWidget from '@components/LoadingWidget';
+import { getPlanList, getPendingPaymentIndent } from '@actions';
 import PlanList from './PlanList.js';
 import { body } from '../style.js';
 
@@ -11,33 +13,14 @@ const BillingView = ()=>{
     const history = useHistory();
     const taskInfo = useSelector(state=>state.TASK_INFO);
     const { userInfo={}, userInfoLoading } = taskInfo;
-    const { profile={} } = userInfo;
+    const { profile={}, cases={} } = userInfo;
     const { first_name='' } = profile;
-    const [selectedUpgradePlan, setUpgradePlan] = useState({});
-    const planData = [
-        {
-            id: 1,
-            actualPrice:  '$199',
-            dealPrice: '$0',
-            isAcive: true,
-            planName: 'Free Plan'
-        },
-        {
-            id: 2,
-            actualPrice:  '$599',
-            dealPrice: '$299',
-            isPopular: true,
-            isAcive: false,
-            planName: 'Premium Plan'
-        },
-        {
-            id: 3,
-            actualPrice:  '$299',
-            dealPrice: '$199',
-            isAcive: false,
-            planName: 'Calling Plan'
-        }
-    ]
+
+    const [loading, setLoading] = useState(false);
+
+    const [planListData, setPlanList] = useState([]);
+    const [pendingPayment, setPendingPayment] = useState([]);
+    const [pendingPaymentLoaded, setPaymentLoading] = useState(true);
 
     const planClick = (planInfo)=>{
         if(planInfo && planInfo.isAcive){
@@ -47,6 +30,22 @@ const BillingView = ()=>{
             //setUpgradePlan(planInfo);
         }
     }
+
+    useEffect(()=>{
+        setLoading(true);
+        getPlanList({}, dispatch, (resp, err)=>{
+            setLoading(false);
+            if(resp){
+                setPlanList(resp);
+            }
+        })
+        getPendingPaymentIndent({}, dispatch, (resp, err)=>{
+            if(resp && resp.message && resp.message.length){
+                setPendingPayment(resp.message);
+            }
+            setPaymentLoading(false);
+        })
+    },[])
 
     return(
     <div className={body + '    ' + 'p-relative pt-5'}>
@@ -67,7 +66,9 @@ const BillingView = ()=>{
                     </div> */}
                 </div>
             </Header>
-            <PlanList first_name={first_name} planClick={planClick} planData={planData}/>
+            {
+                pendingPaymentLoaded || loading?<LoadingWidget/>:<PlanList first_name={first_name} planClick={planClick} planData={planListData} pendingPayment={pendingPayment} caseInfo={cases}/>
+            }
         </div>
     </div>
     )

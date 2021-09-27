@@ -21,7 +21,10 @@ button.primary-button {
   font: normal normal bold 16px/18px Roboto;
   cursor: pointer;
 }
-
+button.payment-disabled{
+  background-color: gray !important;
+  cursor: not-allowed !important;
+}
 button.primary-button.disabled {
   color: #a8a0a2;
   background-color: #ffe6d3;
