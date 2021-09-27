@@ -181,7 +181,7 @@ const SelectedPlanView = ({ selectedUpgradePlan, redirectDashboard, first_name, 
                             </table>
                             <div id="card-element"></div>
                             <form id="payment-form"></form>
-                            <button disabled={payment_client_secret?false:true} onClick={payWithCard}>Proceed to Payment</button>
+                            <button className={payment_client_secret?"":"payment-disabled"} onClick={payWithCard}>Proceed to Payment</button>
                         </div>
                         <div className="policyData">
                             <p>There’s no refund for this service. We request you to check our <strong>Refund Policy</strong> for further details.
