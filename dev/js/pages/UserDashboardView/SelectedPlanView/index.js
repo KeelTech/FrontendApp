@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Header from '@components/Header';
 import ProfileWidget from '@components/ProfileWidget';
 import { getPlanDetail } from '@actions';
+import LoadingWidget from '@components/LoadingWidget';
 import SelectedPlanView from './SelectedPlanView.js'
 import { body } from '../style.js';
 
@@ -20,16 +21,7 @@ const PlanDetail = (props)=>{
     const { profile={} } = userInfo;
     const { first_name='' } = profile;
 
-
     const [selectedUpgradePlan, setUpgradePlan] = useState({});
-
-    const planClick = (planInfo)=>{
-        if(planInfo && planInfo.isAcive){
-
-        }else{
-            setUpgradePlan(planInfo);
-        }
-    }
 
     const redirectDashboard = ()=>{
         history.push('/');
@@ -57,8 +49,8 @@ const PlanDetail = (props)=>{
                 </div>
             </Header>
             {
-                selectedUpgradePlan && selectedUpgradePlan.id?<SelectedPlanView selectedUpgradePlan={selectedUpgradePlan} redirectDashboard={redirectDashboard} first_name={first_name}/>
-                :null
+                selectedUpgradePlan && selectedUpgradePlan.id?<SelectedPlanView selectedUpgradePlan={selectedUpgradePlan} redirectDashboard={redirectDashboard} first_name={first_name} planId={planId}/>
+                :<LoadingWidget/>
             }
         </div>
     </div>

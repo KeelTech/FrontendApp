@@ -1,8 +1,91 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { getPaymentIndent } from '@actions';
 
-const SelectedPlanView = ({ selectedUpgradePlan, redirectDashboard, first_name })=>{
+var card, stripe;
+const SelectedPlanView = ({ selectedUpgradePlan, redirectDashboard, first_name, planId })=>{
 
     const { currency='', description='', discount='', id='', price='', sgst='', title='', cgst=''} = selectedUpgradePlan||{};
+
+    const taskInfo = useSelector(state=>state.TASK_INFO);
+    const { userInfo={} } = taskInfo;
+    const { cases={} } = userInfo;
+    const { case_id } = cases;
+
+    const[paymentData, setData] = useState({});
+    const { payment_client_secret='' } = paymentData||{};
+
+    useEffect(()=>{
+        const postParams = {
+            "case_id": null,
+            "order_items": {
+                "quotation_milestone":[],
+                "plan": [`${planId}`],
+                "service": []
+            }
+        }
+        getPaymentIndent(postParams, {}, (resp, err)=>{
+            if(resp && resp.status ==1){
+                setData(resp.data);
+            }
+        })
+        
+    },[])
+
+    useEffect(()=>{
+        if(payment_client_secret){
+            try{
+                stripe = Stripe(payment_client_secret);
+                var elements = stripe.elements();
+                var style = {
+                    base: {
+                        color: "#32325d",
+                        fontFamily: 'Arial, sans-serif',
+                        fontSmoothing: "antialiased",
+                        fontSize: "16px",
+                        "::placeholder": {
+                            color: "#32325d"
+                        }
+                    },
+                    invalid: {
+                        fontFamily: 'Arial, sans-serif',
+                        color: "#fa755a",
+                        iconColor: "#fa755a"
+                    }
+                };
+                card = elements.create("card", { style: style });
+                card.mount("#card-element");
+            }catch(e){
+    
+            }
+        }
+    },[payment_client_secret])
+
+    var payWithCard = function() {
+        //loading(true);
+        try{
+            stripe
+          .confirmCardPayment(payment_client_secret, {
+            payment_method: {
+              card
+            }
+          })
+          .then(function(result) {
+            if (result.error) {
+              // Show error to your customer
+              alert(result.error.message);
+            } else {
+              // The payment succeeded!
+              alert(result.paymentIntent.id);
+            }
+          }).catch((e)=>{
+              console.log('error is',e);
+          })
+        }catch(e){
+            console.log(e);
+        }
+        
+      };
 
     return (
         <div className="planSelectionScreen">
@@ -96,7 +179,9 @@ const SelectedPlanView = ({ selectedUpgradePlan, redirectDashboard, first_name }
                                     <td><p className="tblData">{currency} {price}</p></td>
                                 </tr>
                             </table>
-                            <button>Proceed to Payment</button>
+                            <div id="card-element"></div>
+                            <form id="payment-form"></form>
+                            <button disabled={payment_client_secret?false:true} onClick={payWithCard}>Proceed to Payment</button>
                         </div>
                         <div className="policyData">
                             <p>There’s no refund for this service. We request you to check our <strong>Refund Policy</strong> for further details.

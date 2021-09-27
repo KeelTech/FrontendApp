@@ -279,3 +279,26 @@ export const getPlanDetail = (dataParams, dispatch, cb=null)=>{
         if(cb)cb(null, true);
     })
 }
+
+export const getPaymentIndent = (dataParams, dispatch, cb=null)=>{
+
+    API_POST(`${API_BASE_URL}/v1/payment/order/create`, {
+        ...dataParams
+    }).then((response)=>{
+        if(cb)cb(response);
+    }).catch((e)=>{
+        if(cb) cb(null, true);
+    })
+}
+
+export const getPendingPaymentIndent = (dataParams, dispatch, cb=null)=>{
+
+    API_GET(`${API_BASE_URL}/v1/payment/transactions/pending`, {
+        ...dataParams
+    }).then((response)=>{
+        console.log(response);
+        if(cb)cb(response);
+    }).catch((e)=>{
+        if(cb) cb(null, true);
+    })
+}

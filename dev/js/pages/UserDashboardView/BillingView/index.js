@@ -3,7 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '@components/Header';
 import ProfileWidget from '@components/ProfileWidget';
-import { getPlanList } from '@actions';
+import LoadingWidget from '@components/LoadingWidget';
+import { getPlanList, getPendingPaymentIndent } from '@actions';
 import PlanList from './PlanList.js';
 import { body } from '../style.js';
 
@@ -12,10 +13,14 @@ const BillingView = ()=>{
     const history = useHistory();
     const taskInfo = useSelector(state=>state.TASK_INFO);
     const { userInfo={}, userInfoLoading } = taskInfo;
-    const { profile={} } = userInfo;
+    const { profile={}, cases={} } = userInfo;
     const { first_name='' } = profile;
 
+    const [loading, setLoading] = useState(false);
+
     const [planListData, setPlanList] = useState([]);
+    const [pendingPayment, setPendingPayment] = useState([]);
+    const [pendingPaymentLoaded, setPaymentLoading] = useState(true);
 
     const planClick = (planInfo)=>{
         if(planInfo && planInfo.isAcive){
@@ -27,10 +32,18 @@ const BillingView = ()=>{
     }
 
     useEffect(()=>{
+        setLoading(true);
         getPlanList({}, dispatch, (resp, err)=>{
+            setLoading(false);
             if(resp){
                 setPlanList(resp);
             }
+        })
+        getPendingPaymentIndent({}, dispatch, (resp, err)=>{
+            if(resp && resp.message && resp.message.length){
+                setPendingPayment(resp.message);
+            }
+            setPaymentLoading(false);
         })
     },[])
 
@@ -53,7 +66,9 @@ const BillingView = ()=>{
                     </div> */}
                 </div>
             </Header>
-            <PlanList first_name={first_name} planClick={planClick} planData={planListData}/>
+            {
+                pendingPaymentLoaded || loading?<LoadingWidget/>:<PlanList first_name={first_name} planClick={planClick} planData={planListData} pendingPayment={pendingPayment} caseInfo={cases}/>
+            }
         </div>
     </div>
     )
