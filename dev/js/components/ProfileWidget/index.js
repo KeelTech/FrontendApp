@@ -16,44 +16,49 @@ const ProfileWidget = () => {
   const history = useHistory();
   const [showLoader, setLoader] = useState(false);
 
-  const handleLogout = ()=>{
+  const handleLogout = () => {
     setLoader(true);
-    logoutUser({},()=>{}, (res, error)=>{
-      STORAGE.deleteAuth().then((resp)=>{
+    logoutUser({}, () => { }, (res, error) => {
+      STORAGE.deleteAuth().then((resp) => {
         dispatch({
-            type: 'RESET_USER_INFO',
+          type: 'RESET_USER_INFO',
         })
         dispatch({
-            type: 'RESET_AGENT_PROFILE',
+          type: 'RESET_AGENT_PROFILE',
         })
         dispatch({
-            type: 'RESET_LOGIN_DATA',
+          type: 'RESET_LOGIN_DATA',
         })
-          setTimeout(()=>{
-              setLoader(false);
-              history.push('/');
-          },2000)
+        setTimeout(() => {
+          setLoader(false);
+          history.push('/');
+        }, 2000)
       })
     });
   }
 
   return (
-    <div
-      className={container}
-      onClick={() => {
-        setIsClicked(!isClicked);
-      }}
-      ref={modalRef}
-    >
-      {showLoader && <div className={loaderView}><LoadingWidget/></div> }
+    <div className="commonProfWidget">
+      <div className="getHelp">
+        <button>Get Help</button>
+      </div>
+      <div
+        className={container}
+        onClick={() => {
+          setIsClicked(!isClicked);
+        }}
+        ref={modalRef}
+      >
+        {showLoader && <div className={loaderView}><LoadingWidget /></div>}
 
-      <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/user.svg"} />
-      {
-      isClicked && 
-      <DetectClickOutside targetRef={modalRef} clickOutside={()=>setIsClicked(false)}>
-        <ProfileDropdown handleLogout={handleLogout}/>
-      </DetectClickOutside>
-      }
+        <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/user.svg"} />
+        {
+          isClicked &&
+          <DetectClickOutside targetRef={modalRef} clickOutside={() => setIsClicked(false)}>
+            <ProfileDropdown handleLogout={handleLogout} />
+          </DetectClickOutside>
+        }
+      </div>
     </div>
   );
 };

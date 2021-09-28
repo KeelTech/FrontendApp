@@ -5600,6 +5600,48 @@ body .health-id-dashboard .health-id-dashboard-side-popup .edit-profile-conatine
 }
 /*# sourceMappingURL=style.css.map */
 /* ============ Custom style Common ============== */
+.payData {
+  border-bottom: 1px dashed #e7e7e7;
+  margin-bottom: 30px;
+}
+
+.payData h2 {
+  color: #4267B2;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.payData h4 {
+  color: #343A40;
+  font-weight: 700;
+  margin: 19px 0;
+  font-size: 30px;
+}
+
+.payButtons button {
+  width: 100%;
+  margin-bottom: 12px;
+  background: #FFFFFF;
+  box-shadow: 4px 4px 8px #D8DCE4;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  padding: 10px 10px;
+}
+
+.payButtons {
+}
+
+.payButtons button img {
+  margin-right: 10px;
+}
+
+.payButtons button:last-child {
+  margin: 0;
+}
 /* The container */
 .checkBoxCont {
   position: relative;
@@ -6061,13 +6103,25 @@ img.img-fluid.keelTopLogo {
   cursor: pointer;
 }
 .bgForUser {
-  background: rgb(34, 193, 195);
-  background: linear-gradient(38deg, rgba(34, 193, 195, 1) 0%, rgba(66, 103, 178, 1) 100%);
+  /* background: rgb(34, 193, 195);
+  background: linear-gradient(38deg, rgba(34, 193, 195, 1) 0%, rgba(66, 103, 178, 1) 100%); */
   height: 60px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 }
-
+.commonProfWidget{
+  display: flex;
+  align-items: center;
+}
+.getHelp button {
+  border: 2px solid #4267b2;
+  background: white;
+  color: #4267b2;
+  margin-right: 10px;
+  border-radius: 30px;
+  padding: 2px 20px;
+  font-weight: 500;
+}
 .userContent img {
   width: 70px;
   height: 70px;
@@ -7065,7 +7119,7 @@ button.fillBtn {
 }
 
 .commonPopUpConten p {
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   font-size: 14px;
   font-weight: 500;
 }
@@ -7116,6 +7170,7 @@ button.fillBtn {
 }
 
 .planPurchaseCard {
+  height: 100%;
   background: #ffffff;
   box-shadow: 4px 4px 8px #d8dce4;
   border-radius: 4px;
@@ -7216,6 +7271,31 @@ button.fillBtn {
 
 .tabButtonPlan button.actPlan {
   background: linear-gradient(180.38deg, #FFFFFF 0.33%, #F8F9FF 99.67%);
+}
+.popCntrImg {
+  margin: 10px 0 20px;
+}
+
+.popCntrImg img {
+    width: 70px;
+    height: 70px;
+}
+
+p.popSubPera {
+    color: gray;
+    font-size: 12px;
+}
+
+button.ProceedBtnPop {
+    background: #4267b2;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+}
+
+
+.popBtn {
+    margin-top: 25px;
 }
 .plnImgTop {
   background: #f8f9fa;
