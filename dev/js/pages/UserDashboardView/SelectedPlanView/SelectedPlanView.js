@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getPaymentIndent } from '@actions';
+import PaymentModal from '@components/PaymentModal'
 
 var card, stripe;
 const SelectedPlanView = ({ selectedUpgradePlan, redirectDashboard, first_name, planId })=>{
@@ -35,7 +36,7 @@ const SelectedPlanView = ({ selectedUpgradePlan, redirectDashboard, first_name, 
     useEffect(()=>{
         if(payment_client_secret){
             try{
-                stripe = Stripe(payment_client_secret);
+                stripe = Stripe(STRIPE_API_KEY);
                 var elements = stripe.elements();
                 var style = {
                     base: {

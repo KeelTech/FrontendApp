@@ -36,6 +36,7 @@ const client_dev = {
             "DHM_STAGING": false,
             "ASSETS_BASE_URL": JSON.stringify("/assets"),
             "API_BASE_URL": JSON.stringify(process.env.API_BASE_URL) || "https://getkeel.com/api",
+            "STRIPE_API_KEY": JSON.stringify(process.env.STRIPE_API_KEY)
         }),
         new HtmlWebpackPlugin({
             // filename: 'index.html',
@@ -112,6 +113,7 @@ const client_staging = {
             "DHM_STAGING": true,
             "ASSETS_BASE_URL": JSON.stringify("/assets"),
             "API_BASE_URL": JSON.stringify(process.env.API_BASE_URL) || "https://getkeel.com/api",
+            "STRIPE_API_KEY": JSON.stringify(process.env.STRIPE_API_KEY)
         }),
         new HtmlWebpackPlugin({
             // filename: 'index.html',
@@ -210,6 +212,7 @@ const serverConfig = {
             "DHM_STAGING": process.env.NODE_ENV == 'staging',
             "ASSETS_BASE_URL": JSON.stringify("/assets"),
             "API_BASE_URL": JSON.stringify(process.env.API_BASE_URL) || "",
+            "STRIPE_API_KEY": JSON.stringify(process.env.STRIPE_API_KEY)
         })
     ],
     output: {
