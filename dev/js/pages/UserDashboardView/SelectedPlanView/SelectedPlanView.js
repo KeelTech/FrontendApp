@@ -102,6 +102,21 @@ const SelectedPlanView = ({ selectedUpgradePlan, redirectDashboard, first_name, 
                 </div>
             </div>
             ***/}
+            {/* ================= Pay PopUp  */}
+            <div className="commonPopUpOverlay d-none">
+                <div className="commonPopUpConten PayPopup">
+                    <img className="closePop" src={ASSETS_BASE_URL + "/images/common/x.svg"} alt="time" />
+                    <div className="payData">
+                        <h2>Pay for Service Name</h2>
+                        <h4>$299</h4>
+                    </div>
+                    <div className="payButtons">
+                        <button className=""><img className="" src={ASSETS_BASE_URL + "/images/common/credit-card.svg"} alt="card" />Pay via Card</button>
+                        <button className=""><img className="" src={ASSETS_BASE_URL + "/images/common/upi.svg"} alt="upi" />Pay via UPI</button>
+                    </div>
+                </div>
+            </div>
+            {/* ================= Pay PopUp  */}
             <div className="dashMainHeading">
                 <h2>Welcome {first_name}</h2>
                 <div className="breadCrumb">

@@ -210,7 +210,7 @@ const LoginView = (props) => {
                         icon="fa-facebook"
                       />
                       <GoogleLogin
-                        clientId="194271428747-v7t3bjqu3cea8jq734pd9o950kolco0o.apps.googleusercontent.com"
+                        clientId="808865086270-ubvpodrjmha0d4m3beirst561kdefv5n.apps.googleusercontent.com"
                         onSuccess={responseGoogle}
                         onFailure={responseGoogle}
                         render={(renderProps) => (
