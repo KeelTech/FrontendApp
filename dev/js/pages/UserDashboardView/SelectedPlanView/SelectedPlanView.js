@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getPaymentIndent } from '@actions';
+import PaymentModal from '@components/PaymentModal'
 
 var card, stripe;
 const SelectedPlanView = ({ selectedUpgradePlan, redirectDashboard, first_name, planId })=>{
@@ -14,6 +15,12 @@ const SelectedPlanView = ({ selectedUpgradePlan, redirectDashboard, first_name, 
 
     const[paymentData, setData] = useState({});
     const { payment_client_secret='' } = paymentData||{};
+
+    const [showPaymentPopup, setPaymentPopup] = useState(false);
+      const [paymentInfo, setPaymentInfo] = useState({
+          selectedClientSecret: '',
+          priceToPay: ''
+      })
 
     useEffect(()=>{
         const postParams = {
@@ -31,91 +38,32 @@ const SelectedPlanView = ({ selectedUpgradePlan, redirectDashboard, first_name, 
         })
         
     },[])
-
-    useEffect(()=>{
-        if(payment_client_secret){
-            try{
-                stripe = Stripe(payment_client_secret);
-                var elements = stripe.elements();
-                var style = {
-                    base: {
-                        color: "#32325d",
-                        fontFamily: 'Arial, sans-serif',
-                        fontSmoothing: "antialiased",
-                        fontSize: "16px",
-                        "::placeholder": {
-                            color: "#32325d"
-                        }
-                    },
-                    invalid: {
-                        fontFamily: 'Arial, sans-serif',
-                        color: "#fa755a",
-                        iconColor: "#fa755a"
-                    }
-                };
-                card = elements.create("card", { style: style });
-                card.mount("#card-element");
-            }catch(e){
+  
+    const payPendingPrice = () => {
+          setPaymentPopup(val=>!val);
+          setPaymentInfo({
+              selectedClientSecret: payment_client_secret,
+              priceToPay: `${currency} ${price}`
+          })
+    }
+  
+    const togglePaymentModal = ()=>{
+          setPaymentPopup(false);
+          setPaymentInfo({
+              selectedClientSecret: '',
+              priceToPay: ``
+          })
+    }
     
-            }
-        }
-    },[payment_client_secret])
+      const onPaymentSuccess = ()=>{
 
-    var payWithCard = function() {
-        //loading(true);
-        try{
-            stripe
-          .confirmCardPayment(payment_client_secret, {
-            payment_method: {
-              card
-            }
-          })
-          .then(function(result) {
-            if (result.error) {
-              // Show error to your customer
-              alert(result.error.message);
-            } else {
-              // The payment succeeded!
-              alert(result.paymentIntent.id);
-            }
-          }).catch((e)=>{
-              console.log('error is',e);
-          })
-        }catch(e){
-            console.log(e);
-        }
-        
-      };
+      }
 
     return (
         <div className="planSelectionScreen">
-            {/* Popup success
-            <div className="commonPopUpOverlay d-none">
-                <div className="commonPopUpConten">
-                    <img className="closePop" src={ASSETS_BASE_URL + "/images/common/x.svg"} alt="time" />
-                    <p>Don't give up on your dream so fast Do you really want to cancel this meeting?</p>
-                    <div className="popBtn">
-                        <button className="outlineBtn">No</button>
-                        <button className="fillBtn">Yes</button>
-                    </div>
-                </div>
-            </div>
-            ***/}
-            {/* ================= Pay PopUp  */}
-            <div className="commonPopUpOverlay d-none">
-                <div className="commonPopUpConten PayPopup">
-                    <img className="closePop" src={ASSETS_BASE_URL + "/images/common/x.svg"} alt="time" />
-                    <div className="payData">
-                        <h2>Pay for Service Name</h2>
-                        <h4>$299</h4>
-                    </div>
-                    <div className="payButtons">
-                        <button className=""><img className="" src={ASSETS_BASE_URL + "/images/common/credit-card.svg"} alt="card" />Pay via Card</button>
-                        <button className=""><img className="" src={ASSETS_BASE_URL + "/images/common/upi.svg"} alt="upi" />Pay via UPI</button>
-                    </div>
-                </div>
-            </div>
-            {/* ================= Pay PopUp  */}
+            {
+                showPaymentPopup?<PaymentModal showPaymentPopup={showPaymentPopup} togglePaymentModal={togglePaymentModal} paymentInfo={paymentInfo} onSuccess={onPaymentSuccess}/>:null
+            }
             <div className="dashMainHeading">
                 <h2>Welcome {first_name}</h2>
                 <div className="breadCrumb">
@@ -196,7 +144,7 @@ const SelectedPlanView = ({ selectedUpgradePlan, redirectDashboard, first_name, 
                             </table>
                             <div id="card-element"></div>
                             <form id="payment-form"></form>
-                            <button className={payment_client_secret?"":"payment-disabled"} onClick={payWithCard}>Proceed to Payment</button>
+                            <button className={payment_client_secret?"":"payment-disabled"} onClick={payPendingPrice}>Proceed to Payment</button>
                         </div>
                         <div className="policyData">
                             <p>There’s no refund for this service. We request you to check our <strong>Refund Policy</strong> for further details.
