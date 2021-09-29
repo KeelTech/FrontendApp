@@ -32,7 +32,7 @@ const DocumentCard = ({ documentData, downloadDocumentClicked, deleteDocumentCli
         }
     }
     return(
-        <div className={container}>
+        <div className={container + " " + "docCardUpdate"}>
             <div className="topRow">
                 <span className="name">{doc_type}</span>
                 <img className="dotMenu" src={ASSETS_BASE_URL+"/images/common/dotMenu.svg"} alt="menu" onClick={toggleMenuBar}/>

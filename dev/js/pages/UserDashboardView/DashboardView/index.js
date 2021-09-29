@@ -75,7 +75,7 @@ const DashboardView = ({ scheduleList, calendlyURL }) => {
     }
 
     return (
-        <div className={body + '    ' + 'p-relative pt-5'}>
+        <div className={body + '    ' + 'p-relative pt-5 dashTaskSchSection '}>
             <div className="mainView mainSectionTopSpace">
                 <div className="subHeaderTop">
                     <div className="headerContent">
@@ -125,22 +125,23 @@ const DashboardView = ({ scheduleList, calendlyURL }) => {
                     </div>
                 </div>
             </div>
-            <div className={upcomingSchedules}>
+            <div className={upcomingSchedules+ " " +"sideScheduleCard"}  >
                 <div className="headerView">
                     <NotificationWidget />
                     {/* <ProfileWidget /> */}
                 </div>
                 {
                     scheduleList.length?
-                    <div className="upcoming" onClick={()=>scheduleCall(calendlyURL)}><button><i class="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div>
+                    <div className="upcoming mt-3" onClick={()=>scheduleCall(calendlyURL)}><button><i class="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div>
                     :null
                 }
-                <div className="upcoming"><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Upcoming Schedule</span></div>
+                <div className="upcoming mt-0"><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Upcoming Schedule</span></div>
                 {
                     scheduleList.length?
                     scheduleList.map((val, key) => {
                         const { start_time, name = '', end_time, cancel_url='', reschedule_url='' } = val;
                         return <div className="info" key={key}>
+                            <h2 className="infoHeadingName">Prince Charles</h2>
                             <span className="upcomingTitle">{name} </span>
                             <div className="taskSch">
                                 <div className="taskName customTimeTask">
