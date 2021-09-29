@@ -18,7 +18,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
     const taskInfo = useSelector(state=>state.TASK_INFO);
     const { userInfo={} } = taskInfo;
     const { profile={}, cases={} } = userInfo;
-    const { plan =''} = cases;
+    const { plan ={}} = cases;
     const { first_name='' } = profile;
     const isProfileExist = userInfo && userInfo.profile_exists;
 
@@ -169,7 +169,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                                 :<div className="degreeWidget">
                                     <img src={ASSETS_BASE_URL+"/images/leftmenubar/degreeIcon.svg"} alt="degree"/>
                                     {
-                                        plan?<span>{plan}</span>
+                                        plan && plan.id?<span>{plan.name||''}</span>
                                         :<Fragment>
                                             <span>Immigration</span>
                                             <span>Consultation</span>

@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import PaymentFailureModal from './PaymentFailureModal.js';
+import PaymentSuccessModal from './PaymentSuccessModal.js';
 
 var card, stripe;
 
-const PaymentModal = ({payment_client_secret=''})=>{
-console.log({STRIPE_API_KEY});
+const PaymentModal = ({ togglePaymentModal=()=>{}, paymentInfo={}, onSuccess=()=>{}  })=>{
+    const { selectedClientSecret='', priceToPay='' } = paymentInfo;
+    const [showPopup, setPopup] = useState(true);
+    const [showSuccessPopup, setSuccessPopup] = useState(false);
+    const [showFailurePopup, setFailurePopup] = useState(false);
+
     useEffect(()=>{
         try{
             stripe = Stripe(STRIPE_API_KEY);
@@ -35,7 +41,7 @@ console.log({STRIPE_API_KEY});
         //loading(true);
         try{
             stripe
-          .confirmCardPayment(payment_client_secret, {
+          .confirmCardPayment(selectedClientSecret, {
             payment_method: {
               card
             }
@@ -43,10 +49,13 @@ console.log({STRIPE_API_KEY});
           .then(function(result) {
             if (result.error) {
               // Show error to your customer
-              alert(result.error.message);
+              setFailurePopup(true);
+              //alert(result.error.message);
             } else {
               // The payment succeeded!
-              alert(result.paymentIntent.id);
+              setSuccessPopup(true);
+              onSuccess();
+              //alert(result.paymentIntent.id);
             }
           }).catch((e)=>{
               console.log('error is',e);
@@ -57,10 +66,41 @@ console.log({STRIPE_API_KEY});
         
     };
 
+    const mainPaymentModal = ()=>{
+        setPopup(false);
+        setSuccessPopup(false);
+        setFailurePopup(false);
+        togglePaymentModal();
+    }
+
+    if(showSuccessPopup){
+        return <PaymentSuccessModal mainPaymentModal={mainPaymentModal}/>
+    }
+
+    if(showFailurePopup){
+        return <PaymentFailureModal mainPaymentModal={mainPaymentModal}/>
+    }
     return(
         <div>
-            <div id="card-element"></div>
             <form id="payment-form"></form>
+            <div className={`commonPopUpOverlay ${showPopup?'':'d-none'}`}>
+                
+                <div className="commonPopUpConten PayPopup">
+                    <img className="closePop" src={ASSETS_BASE_URL + "/images/common/x.svg"} alt="time" onClick={mainPaymentModal}/>
+                    <div className="payData">
+                        <h2>Pay</h2>
+                        <h4>{priceToPay}</h4>
+                    </div>
+                    <div className="payButtons">
+                        <button className=""><img className="" src={ASSETS_BASE_URL + "/images/common/credit-card.svg"} alt="card" />Pay via Card</button>
+                        <div id="card-element"></div>
+                        <div className="popBtn">
+                            <button className="ProceedBtnPop" onClick={payWithCard}>Pay</button>
+                        </div>
+                        {/* <button className=""><img className="" src={ASSETS_BASE_URL + "/images/common/upi.svg"} alt="upi" />Pay via UPI</button> */}
+                    </div>
+                </div>
+            </div>
         </div>
     )
 

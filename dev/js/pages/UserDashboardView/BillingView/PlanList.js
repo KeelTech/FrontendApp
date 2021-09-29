@@ -1,34 +1,42 @@
 import React, { useState } from 'react';
+import PaymentModal from '@components/PaymentModal'
+
 let checkedIcon = `${ASSETS_BASE_URL}/images/common/tick_green_circle.svg`;
 let unCheckedIcon = `${ASSETS_BASE_URL}/images/common/cross_with_circle.svg`;
 
-const PlanList = ({ first_name, planClick, planData, pendingPayment = [], caseInfo = {} }) => {
+const PlanList = ({ first_name, planClick, planData, pendingPayment = [], caseInfo = {}, refetchPaymentList }) => {
 
     const [activeTab, setTab] = useState(pendingPayment.length ? 0 : 1);
+    const [showPaymentPopup, setPaymentPopup] = useState(false);
+    const [paymentInfo, setPaymentInfo] = useState({
+        selectedClientSecret: '',
+        priceToPay: ''
+    })
 
-    const payPendingPrice = () => {
-
+    const payPendingPrice = (paymentData) => {
+        const { front_end_transaction_identifier='', order_total_amount='', currency='' }= paymentData;
+        setPaymentPopup(val=>!val);
+        setPaymentInfo({
+            selectedClientSecret: front_end_transaction_identifier,
+            priceToPay: `${currency} ${order_total_amount}`
+        })
     }
 
-    const { plan = '' } = caseInfo;
+    const togglePaymentModal = ()=>{
+        setPaymentPopup(false);
+        setPaymentInfo({
+            selectedClientSecret: '',
+            priceToPay: ''
+        })
+    }
+
+    const { plan = {} } = caseInfo;
 
     return (
         <div className="planSelectionScreen">
-            {/* Popup success */}
-            <div className="commonPopUpOverlay d-none">
-                <div className="commonPopUpConten">
-                    <img className="closePop" src={ASSETS_BASE_URL + "/images/common/x.svg"} alt="time" />
-                    <div className="popCntrImg">
-                    <img src={ASSETS_BASE_URL + "/images/common/right.svg"} alt="time" />
-                    </div>
-                    <p>We’ve sucessfully received your payment</p>
-                    <p className="popSubPera">Redirect to homepage to access the service right now</p>
-                    <div className="popBtn">
-                        <button className="ProceedBtnPop">Proceed To Dashboard</button>
-                    </div>
-                </div>
-            </div>
-            {/* *====================* */}
+            {
+                showPaymentPopup?<PaymentModal showPaymentPopup={showPaymentPopup} togglePaymentModal={togglePaymentModal} paymentInfo={paymentInfo} onSuccess={refetchPaymentList}/>:null
+            }
             <div className="dashMainHeading">
                 <h2>Welcome {first_name}</h2>
                 <div className="breadCrumb">
@@ -40,7 +48,7 @@ const PlanList = ({ first_name, planClick, planData, pendingPayment = [], caseIn
                     <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/plan.svg"} />
                 </div>
                 <div className="plnTopHeading">
-                    <h5>You are currently on {plan ? plan : 'FREE PLAN'}</h5>
+                    <h5>You are currently on {plan && plan.name ? plan.name : 'FREE PLAN'}</h5>
                     <button>Express Entry</button>
                     {/* <p>This can be some text related to this plan and some more details if needed.</p> */}
                 </div>
@@ -56,7 +64,7 @@ const PlanList = ({ first_name, planClick, planData, pendingPayment = [], caseIn
                     {
                         activeTab == 0 ?
                             pendingPayment.map((val, key) => {
-                                const { order_details = {} } = val;
+                                const { order_details = {}, order_total_amount='' } = val;
                                 const { currency = '', order_items = [] } = order_details;
                                 let totalSum = 0;
                                 return <div className="col-md-4 col-12 mb-4 " key={key}>
@@ -73,7 +81,7 @@ const PlanList = ({ first_name, planClick, planData, pendingPayment = [], caseIn
                                             })
                                         }
                                         <div className="planPurchaseCont">
-                                            <button onClick={() => payPendingPrice(val)}>Pay {currency} {totalSum}</button>
+                                            <button onClick={() => payPendingPrice(val)}>Pay {currency} {order_total_amount}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +99,10 @@ const PlanList = ({ first_name, planClick, planData, pendingPayment = [], caseIn
                                             <p>{`${currency} ${price}`}<span>{`${currency} ${discount + price}`}</span></p>
                                         </div>
                                         <div className="planPurchaseCont">
-                                            <button onClick={() => planClick(val)}>Upgrade Plan</button>
+                                            {
+                                                plan.id==val.id?<button>Current Active Plan</button>:<button onClick={() => planClick(val)}>Upgrade Plan</button>
+                                            }
+                                            
                                             <ul>
                                                 {
                                                     check_list.map((val, key) => {

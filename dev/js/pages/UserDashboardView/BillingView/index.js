@@ -31,6 +31,15 @@ const BillingView = ()=>{
         }
     }
 
+    const refetchPaymentList = ()=>{
+        getPendingPaymentIndent({}, dispatch, (resp, err)=>{
+            if(resp && resp.message && resp.message.length){
+                setPendingPayment(resp.message);
+            }
+            setPaymentLoading(false);
+        })
+    }
+
     useEffect(()=>{
         setLoading(true);
         getPlanList({}, dispatch, (resp, err)=>{
@@ -39,12 +48,7 @@ const BillingView = ()=>{
                 setPlanList(resp);
             }
         })
-        getPendingPaymentIndent({}, dispatch, (resp, err)=>{
-            if(resp && resp.message && resp.message.length){
-                setPendingPayment(resp.message);
-            }
-            setPaymentLoading(false);
-        })
+        refetchPaymentList();
     },[])
 
     return(
@@ -67,7 +71,7 @@ const BillingView = ()=>{
                 </div>
             </Header>
             {
-                pendingPaymentLoaded || loading?<LoadingWidget/>:<PlanList first_name={first_name} planClick={planClick} planData={planListData} pendingPayment={pendingPayment} caseInfo={cases}/>
+                pendingPaymentLoaded || loading?<LoadingWidget/>:<PlanList first_name={first_name} planClick={planClick} planData={planListData} pendingPayment={pendingPayment} caseInfo={cases} refetchPaymentList={refetchPaymentList}/>
             }
         </div>
     </div>
