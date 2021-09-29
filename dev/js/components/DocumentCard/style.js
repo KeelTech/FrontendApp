@@ -9,6 +9,8 @@ export const container = css`
     border-radius: 4px;
     box-shadow: 4px 4px 8px #D8DCE4;
     margin: 0px 20px 20px 0px;
+    word-break: break-word;
+    width: 260px;
     .topRow{
         display: flex;
         justify-content: space-between;

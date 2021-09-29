@@ -141,6 +141,7 @@ export const upcomingSchedules = css`
     height: fit-content;
     padding-bottom:20px;
     min-height: 340px;
+    max-height:calc(100vh - 120px);
     border-radius: 4px;
     box-shadow: 2px 2px 8px #d8dce4;
     border: 1px solid #e0dfdc;
