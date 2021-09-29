@@ -15,9 +15,10 @@ const ScheduleList = ({schedules}) => {
   return (
     <div className={schedule}>
         {schedules.map((val, key) => {
-          const { start_time, name = '', end_time, case_id } = val;
+          const { start_time, name = '', end_time, case_id, customer_name='' } = val;
           return <div className="info" key={key} onClick={()=>handleCardClick(case_id)}>
-              <span className="upcomingTitle">{name} </span>
+              {/* <span className="upcomingTitle">{customer_name} </span> */}
+              <h2 className="infoHeadingName">{customer_name}</h2>
               <div className="taskSch">
                   <div className="taskName">
                       <img className="icon" src={ASSETS_BASE_URL + "/images/common/calendar.svg"} alt="time" />
