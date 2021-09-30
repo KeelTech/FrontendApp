@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import FloatingChatWidget from '@components/FloatingChatWidget';
@@ -7,7 +7,7 @@ import ProfileWidget from '@components/ProfileWidget';
 import ChatWidget from '@components/ChatWidget';
 import Header from '@components/Header';
 import LoadingWidget from "@components/LoadingWidget";
-import { getCaseDetail } from "@actions";
+import { getCaseDetail, getProgramList, updateProgram } from "@actions";
 import InfoList from './InfoList';
 import { body, container } from './style';
 
@@ -27,6 +27,9 @@ function CustomerInfoView(props) {
   }
   const history = useHistory();
 
+  const [programStateList, getProgramState] = useState([]);
+  const [selectedProgam, setProgram] = useState('');
+
   const redirectToTask = () => {
     history.push(`/agent/tasks/${caseId}`);
   }
@@ -35,8 +38,24 @@ function CustomerInfoView(props) {
     window.scrollTo(0, 0);
     const dataParams = { customerId: caseId };
     getCaseDetail(dataParams, dispatch);
+    getProgramList({}, dispatch, (resp, err)=>{
+      getProgramState(resp);
+    })
   }, [])
 
+  const updateProgramStatus = (e)=>{
+    const type = e.target.value;
+    setProgram(type);
+    const postDataParams = {
+      "program" : type,
+      caseId
+    }
+    updateProgram(postDataParams, dispatch, (resp, err)=>{
+      if(err){
+        alert('Failed to update');
+      }
+    })
+  }
 
   const {
     case_details = {},
@@ -46,7 +65,14 @@ function CustomerInfoView(props) {
   } = caseDetails;
 
   const { first_name, last_name } = user_details;
-  const { display_id, plan } = case_details;
+  const { display_id, plan, program } = case_details;
+
+  useEffect(()=>{
+    if(program){
+      setProgram(program)
+    }
+  },[program]);
+
   return (
     <div className={body}>
       <div className="mainView mainSectionTopSpace">
@@ -77,7 +103,7 @@ function CustomerInfoView(props) {
                       src={ASSETS_BASE_URL + "/images/common/tagIcon.svg"}
                       alt="list"
                     />
-                    <p className="visaPackage">{plan}</p>
+                    <p className="visaPackage">{plan && plan.name||''}</p>
                   </div>
                   <div className="flexWrapper">
                     <img
@@ -90,16 +116,20 @@ function CustomerInfoView(props) {
                 </div>
               </div>
               <div className="buttonWrapper justify-content-between ">
-                {/* <div className="customSelects">
+                <div className="customSelects">
                   <label>Case Type:</label>
-                  <select name="CustomN" id="Drp">
-                    <option value="dro1">Value Dummy</option>
-                    <option value="dro2">Value Dummy</option>
-                    <option value="dro3">Value Dummy</option>
-                    <option value="dro4">Value Dummy</option>
-                    <option value="dro5">Value Dummy</option>
-                  </select>
-                </div> */}
+                  {
+                    programStateList.length?
+                    <select name="CustomN" id="Drp" onChange={updateProgramStatus} value={selectedProgam}>
+                    {
+                      programStateList.map((state, key)=>{
+                      return <option value={state.choice}>{state.choice}</option>
+                      })
+                    }
+                    </select>
+                    :null
+                  }
+                </div>
                 <div className="agntTaskBtns">
                   <button className="taskButton" onClick={redirectToTask}>Tasks</button>
                   {/* <button className="docButton">Documents</button> */}

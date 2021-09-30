@@ -20,7 +20,7 @@ const MobileViewList = ({ handleCustomerClick, caseList }) => {
             </li>
             <li className={customer}>
               <h2 className='key'>Case Type:</h2>
-              <h2 className='value'>{plan}</h2>
+              <h2 className='value'>{plan && plan.name||''}</h2>
             </li>
             <li className={customer}>
               <h2 className='key'>Last Update:</h2>
