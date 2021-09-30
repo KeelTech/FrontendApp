@@ -95,7 +95,7 @@ const PaymentModal = ({ togglePaymentModal=()=>{}, paymentInfo={}, onSuccess=()=
                         <button className=""><img className="" src={ASSETS_BASE_URL + "/images/common/credit-card.svg"} alt="card" />Pay via Card</button>
                         <div id="card-element"></div>
                         <div className="popBtn">
-                            <button className="ProceedBtnPop" onClick={payWithCard}>Pay</button>
+                            <button className="ProceedBtnPop text-center justify-content-center" onClick={payWithCard}>Pay</button>
                         </div>
                         {/* <button className=""><img className="" src={ASSETS_BASE_URL + "/images/common/upi.svg"} alt="upi" />Pay via UPI</button> */}
                     </div>
