@@ -5,7 +5,7 @@ const DesktopViewList = ({ handleCustomerClick, caseList }) => {
   const columnList = [
     { key: 'display_id', label: 'Case ID' },
     { key: 'user_details', label: 'Name', isUser: true },
-    { key: 'plan', label: 'Case Type' },
+    { key: 'plan', label: 'Case Type', isPlanName: true },
     { key: 'created_at', label: 'Start Date', isDate: true },
     { key: 'updated_at', label: 'Last Update', isDate: true },
     { key: 'status', label: 'Task Status', CustomView: 'TaskStatusRow' }

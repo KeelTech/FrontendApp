@@ -151,3 +151,28 @@ export const getAgentSchedule = (dataParams={}, dispatch, cb=null)=>{
         if(cb)cb(null, true);
     })
 }
+
+export const getProgramList = (dataParams={}, dispatch, cb=null)=>{
+    API_GET(`${API_BASE_URL}v1/cases/list-case-programs`).then((response)=>{
+        if(response && response.data){
+            if(cb)cb(response.data, false);
+        }else{
+            if(cb)cb(null, true);    
+        }
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}
+
+export const updateProgram = (dataParams={}, dispatch, cb=null)=>{
+    const { caseId } = dataParams;
+    API_POST(`${API_BASE_URL}v1/cases/update-program/${caseId}`, dataParams).then((response)=>{
+        if(response && response.data){
+            if(cb)cb(response.data, false);
+        }else{
+            if(cb)cb(null, true);
+        }
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}
