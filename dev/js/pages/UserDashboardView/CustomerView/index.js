@@ -38,15 +38,12 @@ const CustomerView = (props) => {
     return (
         <div className={`${body} ${container}` + '    ' + 'p-relative pt-5'}>
             <div className="mainView mainSectionTopSpace">
-                <div className="subHeaderTop">
+                {/* <div className="subHeaderTop">
                     <div className="headerContent">
                     <img className="img-fluid keelTopLogo" src={ASSETS_BASE_URL + "/images/common/keelIcon.svg"} alt="home" onClick={()=>history.push('/')} />
-
-                        {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
-                        {/* <NotificationWidget /> */}
                         <ProfileWidget />
                     </div>
-                </div>
+                </div> */}
                 <Header headerText={isProfileExist ? "Profile" : ""}>
                     <div className="headerView">
                         {/* <NotificationWidget/> */}
