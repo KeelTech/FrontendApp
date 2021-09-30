@@ -25,7 +25,7 @@ export const desktopView = css`
 `
 
 export const mobileView = css`
-    display: none;
+    // display: none;
     padding: 18px 21px;
     .homeIcon{
         cursor: pointer;

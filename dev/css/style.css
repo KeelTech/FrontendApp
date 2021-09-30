@@ -21,6 +21,9 @@ button.primary-button {
   font: normal normal bold 16px/18px Roboto;
   cursor: pointer;
 }
+.text-center{
+  text-align: center !important;
+}
 button.payment-disabled{
   background-color: gray !important;
   cursor: not-allowed !important;
@@ -49,7 +52,29 @@ button.primary-button.disabled {
   margin-top: 24px;
   cursor: pointer;
 }
-
+.HamMobile{
+  position: fixed;
+  background: white;
+  width: 100%;
+  /* display: flex !important;
+  justify-content: space-between !important; */
+  box-shadow: 2px 2px 8px #d8dce4;
+  top: 0;
+  padding: 10px !important;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+.innerFixedHeader{
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center;
+  width:100%;
+    margin: auto;
+}
+img.homeIcon.mobileHamburger{
+  display: none;
+}
 .dashed-button:focus {
   outline: none;
 }
@@ -6046,6 +6071,10 @@ input:focus + label {
     max-width: 1180px;
     margin: auto;
   }
+  .innerFixedHeader{
+    max-width: 1180px;
+    margin: auto;
+  }
   body {
     background-color: #f7f8f9;
   }
@@ -8073,6 +8102,7 @@ div.sideScheduleCard {
   .headerContent {
     padding-left: 70px;
   }
+  
 }
 @media (max-width: 1100px) {
   .sideScheduleCard {
@@ -8191,6 +8221,9 @@ div.sideScheduleCard {
   }
   .mainSectionTopSpace{
     margin-top: 15px !important;
+  }
+  img.homeIcon.mobileHamburger{
+    display: inline-block;
   }
 }
 @media (min-height: 1200px) {

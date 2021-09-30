@@ -22,14 +22,12 @@ const UserDashboardView = ({ match }) => {
 
    return(
         <div className={container + " " + "agentMainContainer"}>
-            <div className="subHeaderTop">
+            {/* <div className="subHeaderTop">
                     <div className="headerContent">
                         <img className="img-fluid keelTopLogo" src={ASSETS_BASE_URL + "/images/common/keelIcon.svg"} alt="home" onClick={()=>history.push('/')} />
-                        {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
-                        {/* <NotificationWidget /> */}
                         <ProfileWidget />
                     </div>
-                </div>
+                </div> */}
             <LeftMenuBar isAgent/>
             <div className={body + ' ' + "mainContainerADD agentDashboardMain" }>
                 <Switch>

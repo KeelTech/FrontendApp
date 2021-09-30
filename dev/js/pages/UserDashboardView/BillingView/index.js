@@ -8,13 +8,13 @@ import { getPlanList, getPendingPaymentIndent } from '@actions';
 import PlanList from './PlanList.js';
 import { body } from '../style.js';
 
-const BillingView = ()=>{
+const BillingView = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const taskInfo = useSelector(state=>state.TASK_INFO);
-    const { userInfo={}, userInfoLoading } = taskInfo;
-    const { profile={}, cases={} } = userInfo;
-    const { first_name='' } = profile;
+    const taskInfo = useSelector(state => state.TASK_INFO);
+    const { userInfo = {}, userInfoLoading } = taskInfo;
+    const { profile = {}, cases = {} } = userInfo;
+    const { first_name = '' } = profile;
 
     const [loading, setLoading] = useState(false);
 
@@ -22,59 +22,57 @@ const BillingView = ()=>{
     const [pendingPayment, setPendingPayment] = useState([]);
     const [pendingPaymentLoaded, setPaymentLoading] = useState(true);
 
-    const planClick = (planInfo)=>{
-        if(planInfo && planInfo.isAcive){
+    const planClick = (planInfo) => {
+        if (planInfo && planInfo.isAcive) {
 
-        }else{
+        } else {
             history.push(`/plan/detail/${planInfo.id}`);
             //setUpgradePlan(planInfo);
         }
     }
 
-    const refetchPaymentList = ()=>{
-        getPendingPaymentIndent({}, dispatch, (resp, err)=>{
-            if(resp && resp.message && resp.message.length){
+    const refetchPaymentList = () => {
+        getPendingPaymentIndent({}, dispatch, (resp, err) => {
+            if (resp && resp.message && resp.message.length) {
                 setPendingPayment(resp.message);
             }
             setPaymentLoading(false);
         })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         setLoading(true);
-        getPlanList({}, dispatch, (resp, err)=>{
+        getPlanList({}, dispatch, (resp, err) => {
             setLoading(false);
-            if(resp){
+            if (resp) {
                 setPlanList(resp);
             }
         })
         refetchPaymentList();
-    },[])
+    }, [])
 
-    return(
-    <div className={body + '    ' + 'p-relative pt-5'}>
-        <div className="mainView mainSectionTopSpace">
-            <div className="subHeaderTop">
-            <div className="headerContent">
-            <img className="img-fluid keelTopLogo" src={ASSETS_BASE_URL + "/images/common/keelIcon.svg"} alt="home" onClick={()=>history.push('/')} />
-                {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
-                {/* <NotificationWidget /> */}
-                <ProfileWidget />
-                </div>
-            </div>
-            <Header headerText="">
-                <div className="headerView">
-                    {/* <div className={scheduleCallCta}>
+    return (
+        <div className={body + '    ' + 'p-relative pt-5'}>
+            <div className="mainView mainSectionTopSpace">
+                {/* <div className="subHeaderTop">
+                    <div className="headerContent">
+                        <img className="img-fluid keelTopLogo" src={ASSETS_BASE_URL + "/images/common/keelIcon.svg"} alt="home" onClick={() => history.push('/')} />
+                        <ProfileWidget />
+                    </div>
+                </div> */}
+                <Header headerText="">
+                    <div className="headerView">
+                        {/* <div className={scheduleCallCta}>
                         <span>Schedule Call</span>
                         <img src={ASSETS_BASE_URL + "/images/common/callIcon.svg"} alt="home" />
                     </div> */}
-                </div>
-            </Header>
-            {
-                pendingPaymentLoaded || loading?<LoadingWidget/>:<PlanList first_name={first_name} planClick={planClick} planData={planListData} pendingPayment={pendingPayment} caseInfo={cases} refetchPaymentList={refetchPaymentList}/>
-            }
+                    </div>
+                </Header>
+                {
+                    pendingPaymentLoaded || loading ? <LoadingWidget /> : <PlanList first_name={first_name} planClick={planClick} planData={planListData} pendingPayment={pendingPayment} caseInfo={cases} refetchPaymentList={refetchPaymentList} />
+                }
+            </div>
         </div>
-    </div>
     )
 }
 

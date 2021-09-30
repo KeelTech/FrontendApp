@@ -90,14 +90,12 @@ const TaskView = (props) => {
     return (
         <div className={`${body} ${mainCont}` + '    ' + 'taskViewMainContainer p-relative pt-5'}>
             <div className="mainView mainSectionTopSpace">
-                <div className="subHeaderTop">
+                {/* <div className="subHeaderTop">
                     <div className="headerContent">
                         <img className="img-fluid keelTopLogo" src={ASSETS_BASE_URL + "/images/common/keelIcon.svg"} alt="home" onClick={()=>history.push('/')} />
-                        {/* <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/bell.svg"} /> */}
-                        {/* <NotificationWidget /> */}
                         <ProfileWidget />
                     </div>
-                </div>
+                </div> */}
                 {/* <div className="addStaticBtn">
                             <button clickHandler={addMoreTasks}>Add New Task</button>
                         </div> */}
