@@ -1,11 +1,9 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { SET_MENUBAR_STATE } from '@constants/types';
 import Header from '@components/Header';
-import NotificationWidget from '@components/NotificationWidget';
-import ProfileWidget from '@components/ProfileWidget';
-import { isMobileView, loaderView } from '@constants';
+import { loaderView } from '@constants';
 import BlankScreen from '@components/BlankScreen';
 import LoadingWidget from '@components/LoadingWidget';
 import CustomButton from '@components/CustomButton';
@@ -34,11 +32,17 @@ const PriorityList = [
     }
 ]
 
-const TaskView = () => {
+const TaskView = (props) => {
+
     const history = useHistory();
     const dispatch = useDispatch();
     const documentsInfo = useSelector(state => state.DOCUMENT_VAULT);
     const { documentListLoading, documentList } = documentsInfo;
+
+    const taskInfo = useSelector(state => state.TASK_INFO);
+    const { userInfo = {} } = taskInfo || {};
+    const { cases = {} } = userInfo;
+    const { case_id } = cases;
 
     const [uploadedBy, setUploadedBy] = useState(PriorityList[0]);
     const [searchVal, setSearchVal] = useState('');
@@ -54,6 +58,13 @@ const TaskView = () => {
     const [selectedDeleteDocument, setDeleteDocument] = useState('');
     const [filterList, setFilterList] = useState([]);
 
+    let caseId = '';
+    if (props && props.match && props.match.params) {
+        caseId = props.match.params.caseId;
+    }else{
+        caseId = case_id;
+    }
+
     useEffect(() => {
         dispatch(
             {
@@ -67,7 +78,7 @@ const TaskView = () => {
     }, [])
 
     const fetchDocuments = () => {
-        getDocumentsList({}, dispatch);
+        getDocumentsList({caseId}, dispatch);
     }
 
     const handleUploadedByChange = (val) => {
@@ -230,7 +241,7 @@ const TaskView = () => {
                 <div className={container}>
                     <CustomToaster {...toasterInfo} hideToaster={hideToaster} />
                     {
-                        openUploadDocumentModal ? <FileUpload isUploadToServer fileUploadModalClosed={toggleUploadModal} uploadFile={uploadFile} /> : null
+                        openUploadDocumentModal ? <FileUpload isUploadToServer fileUploadModalClosed={toggleUploadModal} uploadFile={uploadFile} caseId={caseId}/> : null
                     }
                     {
                         showDeleteConfirmation ? <DeleteConfirmationPopup togglePopup={toggleDeletePopup} deletePopupHandler={deletePopupHandler} /> : null

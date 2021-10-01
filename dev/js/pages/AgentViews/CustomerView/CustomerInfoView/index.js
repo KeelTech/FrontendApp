@@ -73,6 +73,10 @@ function CustomerInfoView(props) {
     }
   },[program]);
 
+  const redirectToDocument = ()=>{
+    history.push(`/agent/documents/${caseId}`);
+  }
+
   return (
     <div className={body}>
       <div className="mainView mainSectionTopSpace">
@@ -130,10 +134,10 @@ function CustomerInfoView(props) {
                     :null
                   }
                 </div>
-                <div className="agntTaskBtns">
+              </div>
+              <div className="agntTaskBtns buttonWrapper">
                   <button className="taskButton" onClick={redirectToTask}>Tasks</button>
-                  {/* <button className="docButton">Documents</button> */}
-                </div>
+                  <button className="taskButton" onClick={redirectToDocument}>Documents</button>
               </div>
             </div>
             {/* <div className="meetingInfoWrapperADD meetingNewAd">

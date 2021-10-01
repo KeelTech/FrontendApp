@@ -103,6 +103,7 @@ export const body = css`
   }
   .taskButton {
     border: none;
+    margin-top: 6px;
     margin-right: 8px;
     display: flex;
     flex-direction: row;
@@ -112,7 +113,6 @@ export const body = css`
     background: #363b64;
     box-shadow: 0px 11px 28px rgba(191, 21, 108, 0.05);
     border-radius: 4px;
-    width: 124px;
     height: 34px;
     color: #fcfcfc;
     cursor: pointer;
@@ -120,7 +120,6 @@ export const body = css`
     text-align: center;
     @media (max-width: ${tabScreenWidth}) {
       height: 28px;
-      width: 54px;
       border-radius: 5px;
       padding: 10px 10px;
       font-size: 12px;

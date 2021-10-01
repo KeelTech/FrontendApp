@@ -7,7 +7,7 @@ import CustomToaster from '@components/CustomToaster';
 import LoadingWidget from '@components/LoadingWidget';
 import { loaderView } from '@constants';
 
-const FileUpload = ({ fileUploadModalClosed, uploadFile, isUploadToServer=false, task_id, maxWidth="890px" }) => {
+const FileUpload = ({ fileUploadModalClosed, uploadFile, isUploadToServer=false, task_id, maxWidth="890px", caseId="" }) => {
     const dispatch = useDispatch();
     const [selectedFile, setSelectedFile] = useState('');
     const [selectedFileType, setSelectedFileType] = useState({});
@@ -134,6 +134,9 @@ const FileUpload = ({ fileUploadModalClosed, uploadFile, isUploadToServer=false,
         const formData = new FormData();
         formData.append('doc_file', selectedFile);
         formData.append('doc_type', selectedFileType && selectedFileType.value);
+        if(caseId){
+            formData.append('case', caseId);
+        }
         if(task_id){
             formData.append('task_id', task_id);            
         }
