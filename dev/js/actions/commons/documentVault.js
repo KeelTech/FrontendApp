@@ -6,9 +6,8 @@ export const getDocumentsList = (dataParams, dispatch, cb=null)=>{
         type: DOCUMENT_LIST_LOADING,
         payload: true
     })
-    API_GET(`${API_BASE_URL}/v1/user/get-user-doc`, {
-        ...dataParams
-    }).then((response)=>{
+    const caseId = dataParams && dataParams.caseId||'';
+    API_GET(`${API_BASE_URL}/v1/user/get-user-doc?case=${caseId}`).then((response)=>{
         dispatch({
             type: DOCUMENT_LIST_LOADING,
             payload: false
@@ -22,6 +21,10 @@ export const getDocumentsList = (dataParams, dispatch, cb=null)=>{
         dispatch({
             type: DOCUMENT_LIST_LOADING,
             payload: false
+        })
+        dispatch({
+            type: ADD_DOCUMENT_LIST,
+            payload: []
         })
         if(cb)cb(null, true);
     })
