@@ -131,10 +131,6 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                                         <img className="icon" src={ASSETS_BASE_URL+"/images/common/customer.svg"} alt="tasks"/>
                                         <span className="heading">Customers</span>
                                     </div>
-                                    {/* <div className={`widget ${activeWidget==='billing'?'activeWidget':''}`} onClick={()=>handleAgentMenuOptionsClick('billing')}>
-                                        <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/billingIcon.svg"} alt="billing"/>
-                                        <span className="heading">Billing</span>
-                                    </div> */}
                                 </Fragment>
                                 :<Fragment>
                                     <div className={`${widgetClass} ${activeWidget==='dashboard'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('dashboard')}>
@@ -153,10 +149,10 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                                         <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/valutIcon.svg"} alt="documents"/>
                                         <span className="heading">Document Vault</span>
                                     </div>
-                                    <div className={`${widgetClass} ${activeWidget==='billing'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('billing')}>
+                                    {/* <div className={`${widgetClass} ${activeWidget==='billing'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('billing')}>
                                         <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/billingIcon.svg"} alt="billing"/>
                                         <span className="heading">Billing</span>
-                                    </div>
+                                    </div> */}
                                 </Fragment>
                             }
                             <div className={`widget ${activeWidget==='logout'?'activeWidget':''}`} onClick={handleLogout}>

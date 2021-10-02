@@ -78,7 +78,7 @@ const UserOnboardingView = ({ calendlyURL }) => {
                         </div>
                         <div className="planPurchase">
                             <p>Upgrade for one on one call, unlimited chats, and premium support.</p>
-                            <button onClick={() => history.push('/billing')}>Upgrade Now</button>
+                            {/* <button onClick={() => history.push('/billing')}>Upgrade Now</button> */}
                         </div>
                     </div>
                 </div>
