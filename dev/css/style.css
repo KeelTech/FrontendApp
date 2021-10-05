@@ -8362,4 +8362,17 @@ div.sideScheduleCard {
   justify-content: center;
 }
 
+:global(img.Media.is-contain){
+  display: none !important;
+}
+.LivechatLauncher {
+  display: none !important; 
+}
+:global(.LivechatLauncher) {
+  display: none !important;
+}
+:global(.is-contain) {
+  display: none !important;
+}
+
 /* // ================ Page Loader   ================ */

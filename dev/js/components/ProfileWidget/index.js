@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import DetectClickOutside from '@helpers/DetectClickOutside.js'
@@ -15,6 +15,7 @@ const ProfileWidget = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [showLoader, setLoader] = useState(false);
+  const [landbotInstance, setBotInstance] = useState('');
 
   const handleLogout = () => {
     setLoader(true);
@@ -37,9 +38,38 @@ const ProfileWidget = () => {
     });
   }
 
+  useEffect(()=>{
+    var myLandbotpop = new Landbot.Popup({
+      configUrl: 'https://chats.landbot.io/v3/H-973102-9X9CDMX47L0KP823/index.json'
+    });
+    setBotInstance(myLandbotpop);
+    // const chatbotWidget = document.getElementsByClassName('is-contain');
+    // if(chatbotWidget && chatbotWidget.length) {
+    //   chatbotWidget.style.display ="none";
+    // }else{
+    //   var observer = new MutationObserver(function(mutations) {
+    //     const elem = document.getElementsByClassName('is-contain');
+    //     console.log(elem);
+    //     if (elem && elem[0]) {
+    //       elem[0].style.display ="none";
+    //       observer.unobserve(elem);
+    //     }
+    //  });
+     
+    //  observer.observe(document, {attributes: false, childList: true, characterData: false, subtree:true});
+    // }   
+
+  },[])
+
+  const handleHelpClick = ()=>{
+    if(landbotInstance){
+      landbotInstance.open();
+    }
+  }
+
   return (
     <div className="commonProfWidget">
-      <div className="getHelp">
+      <div className="getHelp" onClick={handleHelpClick}>
         <button>Get Help</button>
       </div>
       <div
