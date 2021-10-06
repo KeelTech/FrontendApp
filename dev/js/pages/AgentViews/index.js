@@ -12,38 +12,41 @@ import CustomerView from './CustomerView';
 import CustomerInfoView from './CustomerView/CustomerInfoView';
 import ProfileWidget from '@components/ProfileWidget';
 import DocumentView from '@pages/UserDashboardView/DocumentValutView';
+import Header from "@components/Header";
 
 const UserDashboardView = ({ match }) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    useEffect(()=>{
+    useEffect(() => {
         getAgentProfile({}, dispatch);
-    },[])
+    }, [])
 
-   return(
+    return (
         <div className={container + " " + "agentMainContainer"}>
+
             {/* <div className="subHeaderTop">
                     <div className="headerContent">
                         <img className="img-fluid keelTopLogo" src={ASSETS_BASE_URL + "/images/common/keelIcon.svg"} alt="home" onClick={()=>history.push('/')} />
                         <ProfileWidget />
                     </div>
                 </div> */}
-            <LeftMenuBar isAgent/>
-            <div className={body + ' ' + "mainContainerADD agentDashboardMain" }>
+            <LeftMenuBar isAgent />
+            <div className={body + ' ' + "mainContainerADD agentDashboardMain"}>
+                
                 <Switch>
-                    <Route exact path={`${match.path}/`} component={DashboardView}/>
-                    <Route exact path={`${match.path}/dashboard`} component={DashboardView}/>
-                    <Route exact path={`${match.path}/tasks/:caseId`} component={TaskView}/>
-                    <Route exact path={`${match.path}/task/create/:caseId`} component={CreateTaskMobileView}/>
-                    <Route exact path={`${match.path}/task/detail/:taskId`} component={AgentTaskDetail}/>
-                    <Route exact path={`${match.path}/customer`} component={CustomerView}/>
-                    <Route exact path={`${match.path}/customer/:caseId`} component={CustomerInfoView}/>
-                    <Route exact path={`${match.path}/documents/:caseId`} component={DocumentView}/>
+                    <Route exact path={`${match.path}/`} component={DashboardView} />
+                    <Route exact path={`${match.path}/dashboard`} component={DashboardView} />
+                    <Route exact path={`${match.path}/tasks/:caseId`} component={TaskView} />
+                    <Route exact path={`${match.path}/task/create/:caseId`} component={CreateTaskMobileView} />
+                    <Route exact path={`${match.path}/task/detail/:taskId`} component={AgentTaskDetail} />
+                    <Route exact path={`${match.path}/customer`} component={CustomerView} />
+                    <Route exact path={`${match.path}/customer/:caseId`} component={CustomerInfoView} />
+                    <Route exact path={`${match.path}/documents/:caseId`} component={DocumentView} />
                 </Switch>
             </div>
         </div>
     )
 }
 
-export default UserDashboardView; 
+export default UserDashboardView;

@@ -39,12 +39,8 @@ const CustomerView = () => {
   return (
     <Fragment>
       <div className="mainView mainSectionTopSpace">
-        {/* <Header headerText="All Customers" isAgent>
-          <div className={head}>
-            <NotificationWidget />
-            <ProfileWidget />
-          </div>
-        </Header> */}
+      <Header headerText="Dashboard" isAgent>
+      </Header>
         <div className={view + " " + "tableMainContainer agentPadding"}>
           {
               caseListLoading?<div className={loaderView + " " + "tableInnerCont"}><LoadingWidget/></div>
