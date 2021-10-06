@@ -17,10 +17,10 @@ const ReviewImg = `${ASSETS_BASE_URL}/images/common/review.svg`;
 
 const AgentDashboardView = () => {
   const dispatch = useDispatch();
-  const agentInfo = useSelector(state=>state.AGENT_STORE);
-  const { agentProfile={}, agentScheduleDetails=[] } = agentInfo;
-  const { agent_profile={} } = agentProfile;
-  const { full_name='' } = agent_profile;
+  const agentInfo = useSelector(state => state.AGENT_STORE);
+  const { agentProfile = {}, agentScheduleDetails = [] } = agentInfo;
+  const { agent_profile = {} } = agentProfile;
+  const { full_name = '' } = agent_profile;
 
   const [loading, setLoading] = useState(true);
   const [toasterInfo, setToasterInfo] = useState({
@@ -81,10 +81,6 @@ const AgentDashboardView = () => {
   return (
     <div className="mainView mainSectionTopSpace">
       <Header headerText="Dashboard" isAgent>
-        {/* <div className={header}>
-          <NotificationWidget />
-          <ProfileWidget />
-        </div> */}
       </Header>
       <div className={wrapper + " " + "consultDash agentPadding"}>
         <div className={container + " " + "consultDasLoad"}>
@@ -96,58 +92,58 @@ const AgentDashboardView = () => {
             <div className="intro">
               <span className="profileName">Hi {full_name}!</span>
               {
-                agentScheduleDetails.length?
-                <span className="meetingTxt">
-                  You have {agentScheduleDetails.length} meetings to attend in this week & you have 15 tasks
-                  to review.{" "}
-                </span>
-                :null
+                agentScheduleDetails.length ?
+                  <span className="meetingTxt">
+                    You have {agentScheduleDetails.length} meetings to attend in this week & you have 15 tasks
+                    to review.{" "}
+                  </span>
+                  : null
               }
               {/* <span className="showTasks">Show Tasks</span> */}
             </div>
             <div className={widgets + " " + "consultWidgets"}>
               <div className="widgetCardMain">
                 <div className="widgetImg">
-                  <img className="img-fluid" src={PendingImg}/>
+                  <img className="img-fluid" src={PendingImg} />
                 </div>
                 <div className="widgetContent default">
                   <div className="cover">
-                  <span className="no">{booked_count}</span>
-                  <span className="value">New Applications</span>
-                </div>
+                    <span className="no">{booked_count}</span>
+                    <span className="value">New Applications</span>
+                  </div>
                 </div>
               </div>
               <div className="widgetCardMain inProg">
                 <div className="widgetImg">
-                  <img className="img-fluid" src={ReviewImg}/>
+                  <img className="img-fluid" src={ReviewImg} />
                 </div>
                 <div className="widgetContent">
                   <div className="cover">
-                  <span className="no">{in_progress_count || 0}</span>
-                  <span className="value">In Progress Applications</span>
-                </div>
+                    <span className="no">{in_progress_count || 0}</span>
+                    <span className="value">In Progress Applications</span>
+                  </div>
                 </div>
               </div>
               <div className="widgetCardMain checkIn">
                 <div className="widgetImg">
-                  <img className="img-fluid" src={CompletedImg}/>
+                  <img className="img-fluid" src={CompletedImg} />
                 </div>
                 <div className="widgetContent">
                   <div className="cover">
-                  <span className="no">{completed_count || 0}</span>
-                  <span className="value">Completed Applications</span>
-                </div>
+                    <span className="no">{completed_count || 0}</span>
+                    <span className="value">Completed Applications</span>
+                  </div>
                 </div>
               </div>
               <div className="widgetCardMain totalRevenue">
                 <div className="widgetImg">
-                  <img className="img-fluid" src={RevenueImg}/>
+                  <img className="img-fluid" src={RevenueImg} />
                 </div>
                 <div className="widgetContent">
                   <div className="cover">
-                  <span className="no">{earnings_count}</span>
-                  <span className="value">Total Applications</span>
-                </div>
+                    <span className="no">{earnings_count}</span>
+                    <span className="value">Total Applications</span>
+                  </div>
                 </div>
               </div>
 
@@ -193,13 +189,13 @@ const AgentDashboardView = () => {
             </div>
           </div>
           <div className={mobileView}>
-            <UpcomingSchedule agentScheduleDetails={agentScheduleDetails}/>
+            <UpcomingSchedule agentScheduleDetails={agentScheduleDetails} />
           </div>
           <div className="graph"></div>
         </div>
 
         <div className={rightBar}>
-          <UpcomingSchedule agentScheduleDetails={agentScheduleDetails}/>
+          <UpcomingSchedule agentScheduleDetails={agentScheduleDetails} />
         </div>
       </div>
     </div>

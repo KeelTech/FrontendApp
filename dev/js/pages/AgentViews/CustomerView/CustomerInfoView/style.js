@@ -100,6 +100,7 @@ export const body = css`
     flex-direction: row;
     // margin-left: 12px;
     margin-top: 0;
+    flex-wrap:wrap;
   }
   .taskButton {
     border: none;
