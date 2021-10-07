@@ -58,10 +58,14 @@ export const filters = css`
             display: none;
         }
         .uploadCTA{
-            display: none;
+            // display: none;
+            width: 100%;
+            flex-shrink: 0;
+            margin-top: 10px;
         }
         .documentCta{
             width: 100%;
+            flex-wrap:wrap;
         }
         .searchBar{
             padding: 0px;

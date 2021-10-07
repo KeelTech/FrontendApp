@@ -38,20 +38,20 @@ function CustomerInfoView(props) {
     window.scrollTo(0, 0);
     const dataParams = { customerId: caseId };
     getCaseDetail(dataParams, dispatch);
-    getProgramList({}, dispatch, (resp, err)=>{
+    getProgramList({}, dispatch, (resp, err) => {
       getProgramState(resp);
     })
   }, [])
 
-  const updateProgramStatus = (e)=>{
+  const updateProgramStatus = (e) => {
     const type = e.target.value;
     setProgram(type);
     const postDataParams = {
-      "program" : type,
+      "program": type,
       caseId
     }
-    updateProgram(postDataParams, dispatch, (resp, err)=>{
-      if(err){
+    updateProgram(postDataParams, dispatch, (resp, err) => {
+      if (err) {
         alert('Failed to update');
       }
     })
@@ -67,25 +67,21 @@ function CustomerInfoView(props) {
   const { first_name, last_name } = user_details;
   const { display_id, plan, program } = case_details;
 
-  useEffect(()=>{
-    if(program){
+  useEffect(() => {
+    if (program) {
       setProgram(program)
     }
-  },[program]);
+  }, [program]);
 
-  const redirectToDocument = ()=>{
+  const redirectToDocument = () => {
     history.push(`/agent/documents/${caseId}`);
   }
 
   return (
     <div className={body}>
       <div className="mainView mainSectionTopSpace">
-        {/* <Header headerText="Customer Details" isAgent>
-          <div className="head">
-            <NotificationWidget />
-            <ProfileWidget />
-          </div>
-        </Header> */}
+        <Header headerText="Customer Details" isAgent>
+        </Header>
       </div>
       {caseDetailLoading ? (
         <div>
@@ -107,7 +103,7 @@ function CustomerInfoView(props) {
                       src={ASSETS_BASE_URL + "/images/common/tagIcon.svg"}
                       alt="list"
                     />
-                    <p className="visaPackage">{plan && plan.name||''}</p>
+                    <p className="visaPackage">{plan && plan.name || ''}</p>
                   </div>
                   <div className="flexWrapper">
                     <img
@@ -123,22 +119,23 @@ function CustomerInfoView(props) {
                 <div className="customSelects">
                   <label>Case Type:</label>
                   {
-                    programStateList.length?
-                    <select name="CustomN" id="Drp" onChange={updateProgramStatus} value={selectedProgam}>
-                    {
-                      programStateList.map((state, key)=>{
-                      return <option value={state.choice}>{state.choice}</option>
-                      })
-                    }
-                    </select>
-                    :null
+                    programStateList.length ?
+                      <select name="CustomN" id="Drp" onChange={updateProgramStatus} value={selectedProgam}>
+                        {
+                          programStateList.map((state, key) => {
+                            return <option value={state.choice}>{state.choice}</option>
+                          })
+                        }
+                      </select>
+                      : null
                   }
                 </div>
-              </div>
-              <div className="agntTaskBtns buttonWrapper">
+                <div className="agntTaskBtns buttonWrapper">
                   <button className="taskButton" onClick={redirectToTask}>Tasks</button>
                   <button className="taskButton" onClick={redirectToDocument}>Documents</button>
+                </div>
               </div>
+
             </div>
             {/* <div className="meetingInfoWrapperADD meetingNewAd">
               <div className="meetingInfoFlexWrapper">
