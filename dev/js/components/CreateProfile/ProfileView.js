@@ -32,7 +32,7 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
         <div className="useDetailsContainer ">
             <div className="userProfile">
                 <div className="userNameDtls">
-                    <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/user.svg"} />
+                    <img className="img-fluid" style={{borderRadius: "100%"}} src={ASSETS_BASE_URL + "/images/common/newavatar.svg"} />
                     <h3>{`${first_name} ${last_name}`}</h3>
                 </div>
             </div>

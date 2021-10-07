@@ -32,20 +32,20 @@ export const body = css`
     flex-direction: row;
     margin-top: 12px;
   }
-  ${'' /* .userImage {
+   .userImage {
     border-radius: 4px;
-    height: 55px;
+    height: 60px;
     width: 55px;
-    margin-left: 12px;
+    ${'' /* margin-left: 12px; */}
     @media (max-width: ${tabScreenWidth}) {
       width: 46px;
       height: 46px;
     }
-  } */}
+  } 
   .userInfoHeaderWrapper {
     display: flex;
     flex-direction: column;
-    margin-left: 12px;
+    ${'' /* margin-left: 12px; */}
     font-family: ${primaryFont};
   }
   .userName {

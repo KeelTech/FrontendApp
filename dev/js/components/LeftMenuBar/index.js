@@ -105,7 +105,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                             <div className="bgForUser"></div>
                             <div className="userDetailsSidebar">
                                 <div className="userContent">
-                                    <img className="img-fluid" src={ASSETS_BASE_URL+"/images/common/Avatar_blue.svg"} alt="user" />
+                                    <img className="img-fluid" src={ASSETS_BASE_URL+"/images/common/newavatar.svg"} alt="user" />
                                     <div className="userDetailsMain">
                                         <h5>{first_name||full_name}</h5>
                                         {/* <p><strong>98%</strong>Profile Completed</p> */}

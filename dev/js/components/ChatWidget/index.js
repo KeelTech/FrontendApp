@@ -90,8 +90,8 @@ const ChatWidget = ({ floatingChat = false, toggleChat, caseId = "", currentUser
     return (
         <div className={mainClass + " " + "chatMainContainer"}>
             <div className="header d-flex align-items-center">
-                <div className="profile">
-                    <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/Avatar_blue.svg"} alt="user" />
+                <div>
+                    <img className="img-fluid profile" src={ASSETS_BASE_URL + "/images/common/newavatar.svg"} alt="user" />
                 </div>
                 <div className="nameSection">
                     <div className="name">{chatHeaderName}</div>

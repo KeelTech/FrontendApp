@@ -17,7 +17,7 @@ border: 1px solid #e0dfdc;
             border-radius: 100px;
             height: 42px;
             width: 42px;
-            margin-right: 16px;
+            margin-right: 12px;
         }
         .close{
             display: none;

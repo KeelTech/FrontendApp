@@ -92,7 +92,7 @@ function CustomerInfoView(props) {
           <div className="leftBar">
             <div className="basicInfoADD customerDetails">
               <div className="infoWrapper">
-                <img className="img-fluid userProfileXn" src={ASSETS_BASE_URL + "/images/common/Avatar_blue.svg"} alt="user" />
+                <img className="img-fluid userProfileXn userImage" src={ASSETS_BASE_URL + "/images/common/newavatar.svg"} alt="user" />
                 <div className="userInfoHeaderWrapper">
                   <h3 className="userName">
                     {first_name} {last_name}
