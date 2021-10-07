@@ -43,6 +43,7 @@
     "rc-slider": "^8.6.1",
     "react": "^16.8.0",
     "react-addons-css-transition-group": "^15.6.2",
+    "react-calendar": "^3.4.0",
     "react-copy-to-clipboard": "^5.0.1",
     "react-cropper": "^1.0.1",
     "react-day-picker": "^7.2.4",
