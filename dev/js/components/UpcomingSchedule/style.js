@@ -69,3 +69,21 @@ export const schedule = css`
     }
   }
 `;
+
+export const calendarSelected = css`
+  width: 100%;
+  position: relative;  
+  margin: 0px;
+  &:after{
+      content:'';
+      position: absolute;
+      background: blue;
+      width: 10px;
+      height: 10px;
+      display: flex;
+      border-radius: 100%;
+      justify-content: center;
+      top: 2px;
+      right: 10px;
+    }
+`

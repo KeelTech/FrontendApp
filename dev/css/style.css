@@ -60,7 +60,7 @@ button.primary-button.disabled {
   justify-content: space-between !important; */
   box-shadow: 2px 2px 8px #d8dce4;
   top: 0;
-  padding: 10px !important;
+  padding: 10px 20px !important;
   left: 0;
   right: 0;
   z-index: 99;
@@ -8169,7 +8169,7 @@ div.sideScheduleCard {
     justify-content: space-between !important;
     box-shadow: 2px 2px 8px #d8dce4;
     top: 0;
-    padding: 10px !important;
+    padding: 10px 20px !important;
     left: 0;
     right: 0;
     z-index: 99;
