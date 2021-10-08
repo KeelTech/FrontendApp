@@ -6,6 +6,7 @@ import { style, Loader } from './style';
 import { Link } from 'react-router-dom';
 
 function EmailConfirmation(props) {
+  const isAgent = props.match.path.includes('agent');
   const [email, setEmail] = useState('');
   const [successMessage, setSuccessMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
@@ -37,7 +38,11 @@ function EmailConfirmation(props) {
         setSuccessMessage(true);
         setLoader(false);
         setTimeout(() => {
-          props.history.push('/reset-password');
+          if(isAgent){
+            props.history.push('/agent/reset-password');  
+          }else{
+            props.history.push('/reset-password');
+          }
         }, 10000);
         var timeleft = 10;
         var RedirectTimer = setInterval(function () {
@@ -71,7 +76,6 @@ function EmailConfirmation(props) {
                     className="keel-logo img-fluid"
                     src={ASSETS_BASE_URL + '/images/common/keelIcon.svg'}
                     alt="keel-logo"
-                    onClick={() => loginClick()}
                   />
                 </div>
                 <h3 className="header-text">Reset Your Password</h3>
@@ -111,7 +115,7 @@ function EmailConfirmation(props) {
                     <p className="emailSuccessBtnMsg">
                       Or you can click the button below
                     </p>
-                    <Link to="/reset-password" className="BtnLink">
+                    <Link to={isAgent?"/agent/reset-password":"/reset-password"} className="BtnLink">
                       <button className="LinkBtn resetBtnFrg">Password Reset</button>
                     </Link>
                   </div>

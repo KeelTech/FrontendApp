@@ -48,6 +48,8 @@ let LOGIN_ROUTES = [
   { path: '/reset-password', exact: true, component: PasswordReset, isSignin: true },
   { path: '/confirm-email', exact: true, component: EmailVerification, isSignin: true },
   { path: '/linkedin', exact: true, component: LinkedInPopUp, isSignin: true },
+  { path: '/agent/reset-password', exact: true, component: PasswordReset, isSignin: true },
+  { path: '/agent/confirm-email', exact: true, component: EmailVerification, isSignin: true },
   { path: '*', component: NotFoundPage, isPrivate: false  },
 ]
 

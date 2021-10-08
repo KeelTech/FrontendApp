@@ -169,19 +169,16 @@ const LoginView = (props) => {
                       Invalid credentials, Please try Again!
                     </p>
                   )}
-                  {
-                    isAgent?null
-                    :<div className="formCheckForgt">
-                      <div className="checkBoxContMain">
-                        <label className="checkBoxCont"><p>Remember Me</p>
-                          <input type="checkbox" />
-                          <span className="checkmark"></span></label>
-                      </div>
-                      <Link to="/confirm-email" className="password-reset-wrapper">
-                        <button className="password-reset">Forgot your password?</button>
-                      </Link>
+                  <div className="formCheckForgt">
+                    <div className="checkBoxContMain">
+                      <label className="checkBoxCont"><p>Remember Me</p>
+                        <input type="checkbox" />
+                        <span className="checkmark"></span></label>
                     </div>
-                  }
+                    <Link to={isAgent?"/agent/confirm-email":"/confirm-email"} className="password-reset-wrapper">
+                      <button className="password-reset">Forgot your password?</button>
+                    </Link>
+                  </div>
                   <div className="loginBtnCont" onClick={loginSubmitHnadler}>
                     <button className="log-in-button">Log in</button>
                   </div>
