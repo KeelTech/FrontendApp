@@ -230,13 +230,13 @@ export const resetPasswordLink = (data, dispatch, cb) => {
             loading: false,
           },
         });
-        const message = 'Successfully sent the user email';
-        dispatch({
-          type: USER_LOGIN_RESET_SUCCESS,
-          payload: {
-            login_message: message,
-          },
-        });
+        // const message = 'Successfully sent the user email';
+        // dispatch({
+        //   type: USER_LOGIN_RESET_SUCCESS,
+        //   payload: {
+        //     login_message: message,
+        //   },
+        // });
         if (cb) cb(null, response);
       } else {
         let message = 'Failing to send user email address';

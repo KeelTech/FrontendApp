@@ -7,6 +7,8 @@ import { style, Loader } from './style';
 import { Link } from 'react-router-dom';
 
 function PasswordReset(props) {
+  const isAgent = props.match.path.includes('agent');
+
   const [otp, setOtp] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -53,7 +55,11 @@ function PasswordReset(props) {
           setConfirmPassword('');
           setLoader(false);
           setTimeout(() => {
-            props.history.push('/');
+            if(isAgent){
+              props.history.push('/agent/login');
+            }else{
+              props.history.push('/');
+            }
           }, 10000);
           var timeleft = 10;
           var RedirectTimer = setInterval(function () {
@@ -139,7 +145,7 @@ function PasswordReset(props) {
                     <p className="emailSuccessBtnMsg">
                       Or you can click the button below
                     </p>
-                    <Link to="/" className="BtnLink">
+                    <Link to={isAgent?"/agent/login":"/"} className="BtnLink">
                       <button className="LinkBtn">Login</button>
                     </Link>
                   </Fragment>
