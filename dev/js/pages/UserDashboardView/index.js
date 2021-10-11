@@ -20,7 +20,7 @@ const UserDashboardView = (props)=>{
     const url  = props.match.path;
     const dispatch = useDispatch();
     const taskInfo = useSelector(state=>state.TASK_INFO);
-    const { userInfo={}, userInfoLoading, calendlyURL, scheduleList, planComponents=[] } = taskInfo;
+    const { userInfo={}, userInfoLoading, calendlyURL, scheduleList, planComponents=[], planLoaded=false } = taskInfo;
     const { cases={}, profile_exists, agent={}, profile={} } = userInfo;
     const { id } = profile;
     const { case_id, user } = cases;
@@ -30,7 +30,7 @@ const UserDashboardView = (props)=>{
         getUserProfile({}, dispatch);
         getCalendlyLink({}, dispatch);
         fetchScheduleList();
-        if(!planComponents.length){
+        if(!planLoaded){
             getPlansComponents({}, dispatch);
         }
         function isCalendlyEvent(e) {

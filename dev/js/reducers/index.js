@@ -13,7 +13,8 @@ import CHAT from './chat.js';
 
 const persistConfig = {
   key: 'root',
-  storage
+  storage,
+  whitelist: []
 };
 
 const AUTH_PERSIST = {
@@ -44,7 +45,7 @@ const TASK_INFO_PERSIST = {
     key: 'TASK_INFO',
     storage: storage,
     whitelist: ['userInfo', 'countryList'],
-    blacklist: ['calendlyURL']
+    blacklist: ['calendlyURL', 'planLoaded']
 }
 
 const AGENT_STORE_PERSIST = {
