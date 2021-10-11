@@ -73,17 +73,25 @@ const CustomAnimatedDropdown = ({ options, handleSelect, selectedProgam })=>{
         <div className={container} ref={optionListRef}>
             <input className={showOptions?'selectedOptionVal':''} type="text" value={selectedProgam} onClick={toggleList}/>
             {
-                showOptions && options.length &&
+                showOptions && options && Object.values(options).length &&
                 <div className="optionList">
                     <DetectClickOutside targetRef={optionListRef} clickOutside={toggleList}>
                     {
-                      options.map((state, key) => {
-                        const { choice } = state;
-                        return <span className={choice==selectedProgam?'selectedItem':''} value={choice} key={key} onClick={()=>{
-                            handleSelect(choice);
-                            toggleList();
-                        }}>{choice}</span>
-                      })
+                        Object.values(options).map((programCategory, categoryKey)=>{
+                            const { name, subCategory } = programCategory;
+                            return <div className="" key={categoryKey}>
+                                <p>{name}</p>
+                                {
+                                    subCategory.map((state, key) => {
+                                        const { choice } = state;
+                                        return <span className={choice==selectedProgam?'selectedItem':''} value={choice} key={key} onClick={()=>{
+                                            handleSelect(choice);
+                                            toggleList();
+                                        }}>{choice}</span>
+                                    })
+                                }
+                            </div>
+                        })
                     }
                     </DetectClickOutside>
                 </div>

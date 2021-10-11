@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import FloatingChatWidget from '@components/FloatingChatWidget';
@@ -75,6 +75,21 @@ function CustomerInfoView(props) {
     history.push(`/agent/documents/${caseId}`);
   }
 
+  const filterProgramList = useMemo(()=>{
+    const filterData = {};
+    programStateList.map((val)=>{
+      const { category } = val;
+      if(filterData[category] && filterData[category].subCategory){
+        filterData[category].subCategory.push(val);
+      }else{
+        filterData[category] = {};
+        filterData[category].name = category;
+        filterData[category].subCategory =[val];
+      }
+    })
+    return filterData;
+  },[programStateList])
+
   return (
     <div className={body}>
       <div className="mainView mainSectionTopSpace">
@@ -129,7 +144,7 @@ function CustomerInfoView(props) {
                   }
                 </div> */}
                 <div className="customSelects">
-                  <CustomAnimatedDropdown options={programStateList} handleSelect={updateProgramStatus} selectedProgam={selectedProgam}/>
+                  <CustomAnimatedDropdown options={filterProgramList} handleSelect={updateProgramStatus} selectedProgam={selectedProgam}/>
                 </div>
                 <div className="agntTaskBtns buttonWrapper">
                   <button className="taskButton" onClick={redirectToTask}>Tasks</button>
