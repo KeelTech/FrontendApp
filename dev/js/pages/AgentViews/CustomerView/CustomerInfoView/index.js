@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import FloatingChatWidget from '@components/FloatingChatWidget';
-import NotificationWidget from '@components/NotificationWidget';
-import ProfileWidget from '@components/ProfileWidget';
 import ChatWidget from '@components/ChatWidget';
 import Header from '@components/Header';
 import LoadingWidget from "@components/LoadingWidget";
 import { getCaseDetail, getProgramList, updateProgram } from "@actions";
+import CustomAnimatedDropdown from '@components/CustomAnimatedDropdown';
 import InfoList from './InfoList';
-import { body, container } from './style';
+import { body } from './style';
 
 function CustomerInfoView(props) {
   const dispatch = useDispatch();
@@ -43,8 +42,7 @@ function CustomerInfoView(props) {
     })
   }, [])
 
-  const updateProgramStatus = (e) => {
-    const type = e.target.value;
+  const updateProgramStatus = (type) => {
     setProgram(type);
     const postDataParams = {
       "program": type,
@@ -116,19 +114,22 @@ function CustomerInfoView(props) {
                 </div>
               </div>
               <div className="buttonWrapper justify-content-between ">
-                <div className="customSelects">
+                {/* <div className="customSelects">
                   <label>Case Type:</label>
                   {
                     programStateList.length ?
                       <select name="CustomN" id="Drp" onChange={updateProgramStatus} value={selectedProgam}>
                         {
                           programStateList.map((state, key) => {
-                            return <option value={state.choice}>{state.choice}</option>
+                            return <option value={state.choice} key={key}>{state.choice}</option>
                           })
                         }
                       </select>
                       : null
                   }
+                </div> */}
+                <div className="customSelects">
+                  <CustomAnimatedDropdown options={programStateList} handleSelect={updateProgramStatus} selectedProgam={selectedProgam}/>
                 </div>
                 <div className="agntTaskBtns buttonWrapper">
                   <button className="taskButton" onClick={redirectToTask}>Tasks</button>

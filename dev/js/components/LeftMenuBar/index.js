@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { cx } from '@emotion/css';
 import { useHistory } from 'react-router-dom';
@@ -16,7 +16,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
     const { activeWidget, agentActiveWidget } = state;
 
     const taskInfo = useSelector(state=>state.TASK_INFO);
-    const { userInfo={} } = taskInfo;
+    const { userInfo={}, planComponents=[] } = taskInfo;
     const { profile={}, cases={} } = userInfo;
     const { plan ={}} = cases;
     const { first_name='' } = profile;
@@ -82,6 +82,29 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
         });
     }
 
+    const showOptions = useMemo(()=>{
+        let showTasks = false;
+        let showDocuments = false;
+        let showChat = false;
+        let showCalendly = false;
+        let showBilling = false;
+        planComponents.map((val)=>{
+            const { name='' } = val;
+            if(name=="TASKS"){
+                showTasks = true;
+            }else if(name=='DOCUMENTS'){
+                showDocuments = true;
+            }else if(name=='CHAT'){
+                showChat = true;
+            }else if(name=='CALENDLY'){
+                showCalendly = true;
+            }else if(name=='BILLING'){
+                showBilling = true;
+            }
+        })
+        return { showTasks, showDocuments, showChat, showCalendly, showBilling };
+    },[planComponents])
+
     const mainClass = cx({
         [container]: true,
         [mobileView]: isMobileView
@@ -92,6 +115,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
         disableWidget: !isProfileExist
     })
 
+    const { showTasks, showDocuments, showChat, showCalendly, showBilling } = showOptions;
     return(
         <div className={leftBarCont + " " + "sideBarMainContainer"}>
             {
@@ -137,22 +161,35 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                                         <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/dashboardIcons.svg"} alt="home"/>
                                         <span className="heading">Dashboard</span>
                                     </div>
-                                    <div className={`${widgetClass} ${activeWidget==='tasks'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('tasks')}>
-                                        <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/tasks.svg"} alt="tasks"/>
-                                        <span className="heading">Tasks</span>
-                                    </div>
+                                    {
+                                        showTasks?
+                                        <div className={`${widgetClass} ${activeWidget==='tasks'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('tasks')}>
+                                            <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/tasks.svg"} alt="tasks"/>
+                                            <span className="heading">Tasks</span>
+                                        </div>
+                                        :null
+                                    }
+                                    
                                     {/* <div className={`widget ${activeWidget==='profile'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('profile')}>
                                         <img className="icon" src={ASSETS_BASE_URL+"/images/common/customer.svg"} alt="profile"/>
                                         <span className="heading">Customer</span>
                                     </div> */}
-                                    <div className={`${widgetClass} ${activeWidget==='vault'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('vault')}>
-                                        <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/valutIcon.svg"} alt="documents"/>
-                                        <span className="heading">Document Vault</span>
-                                    </div>
-                                    {/* <div className={`${widgetClass} ${activeWidget==='billing'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('billing')}>
-                                        <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/billingIcon.svg"} alt="billing"/>
-                                        <span className="heading">Billing</span>
-                                    </div> */}
+                                    {
+                                        showDocuments?
+                                        <div className={`${widgetClass} ${activeWidget==='vault'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('vault')}>
+                                            <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/valutIcon.svg"} alt="documents"/>
+                                            <span className="heading">Document Vault</span>
+                                        </div>
+                                        :null
+                                    }
+                                    {
+                                        showBilling?
+                                        <div className={`${widgetClass} ${activeWidget==='billing'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('billing')}>
+                                            <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/billingIcon.svg"} alt="billing"/>
+                                            <span className="heading">Billing</span>
+                                        </div>
+                                        :null
+                                    }
                                 </Fragment>
                             }
                             <div className={`widget ${activeWidget==='logout'?'activeWidget':''}`} onClick={handleLogout}>

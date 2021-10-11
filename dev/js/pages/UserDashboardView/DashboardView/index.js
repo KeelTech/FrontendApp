@@ -15,7 +15,7 @@ import { getFormattedDate, getFormattedTime } from '@helpers/utils.js';
 import { container, pendingTasks, scheduleCallCta, upcomingSchedules } from './style.js';
 import { body } from '../style.js';
 
-const DashboardView = ({ scheduleList, calendlyURL }) => {
+const DashboardView = ({ scheduleList, calendlyURL, showCalendly=false, showChat=false }) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const taskInfo = useSelector(state => state.TASK_INFO);
@@ -118,10 +118,12 @@ const DashboardView = ({ scheduleList, calendlyURL }) => {
                         }
                     </div>
                     <div className="chat">
-                        {caseId && userId? <ChatWidget caseId={caseId} currentUserId={userId} chatHeaderName={agentName} /> : ""}
+                        {caseId && userId && showChat? <ChatWidget caseId={caseId} currentUserId={userId} chatHeaderName={agentName} /> : ""}
                     </div>
                 </div>
             </div>
+            {
+            showCalendly?
             <div className={upcomingSchedules+ " " +"sideScheduleCard"}  >
                 <div className="headerView">
                     <NotificationWidget />
@@ -167,6 +169,8 @@ const DashboardView = ({ scheduleList, calendlyURL }) => {
                     </div>
                 }
             </div>
+            :null
+            }
         </div>
     )
 }

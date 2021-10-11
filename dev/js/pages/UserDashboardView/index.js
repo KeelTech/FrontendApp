@@ -1,8 +1,8 @@
-import React, { useEffect, Fragment, useState } from 'react';
+import React, { useEffect, Fragment, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import FloatingChatWidget from '@components/FloatingChatWidget';
 import LeftMenuBar from '@components/LeftMenuBar';
-import { getUserProfile, getCalendlyLink, scheduleCall, getScheduleDetail } from '@actions';
+import { getUserProfile, getCalendlyLink, scheduleCall, getScheduleDetail, getPlansComponents } from '@actions';
 import { loaderView } from '@constants';
 import LoadingWidget from '@components/LoadingWidget';
 import { container } from './style.js';
@@ -20,7 +20,7 @@ const UserDashboardView = (props)=>{
     const url  = props.match.path;
     const dispatch = useDispatch();
     const taskInfo = useSelector(state=>state.TASK_INFO);
-    const { userInfo={}, userInfoLoading, calendlyURL, scheduleList } = taskInfo;
+    const { userInfo={}, userInfoLoading, calendlyURL, scheduleList, planComponents=[] } = taskInfo;
     const { cases={}, profile_exists, agent={}, profile={} } = userInfo;
     const { id } = profile;
     const { case_id, user } = cases;
@@ -30,6 +30,9 @@ const UserDashboardView = (props)=>{
         getUserProfile({}, dispatch);
         getCalendlyLink({}, dispatch);
         fetchScheduleList();
+        if(!planComponents.length){
+            getPlansComponents({}, dispatch);
+        }
         function isCalendlyEvent(e) {
             return e.data.event &&
                     e.data.event.indexOf('calendly') === 0;
@@ -48,7 +51,6 @@ const UserDashboardView = (props)=>{
          
          observer.observe(document, {attributes: false, childList: true, characterData: false, subtree:true});
          
-
         function listenCalendlyEvents(e) {
             if (isCalendlyEvent(e)) {
                 if(e.data.event=='calendly.event_scheduled'){
@@ -74,23 +76,48 @@ const UserDashboardView = (props)=>{
         getScheduleDetail({}, dispatch);
     }
 
+    const showOptions = useMemo(()=>{
+        let showTasks = false;
+        let showDocuments = false;
+        let showChat = false;
+        let showCalendly = false;
+        let showBilling = false;
+        planComponents.map((val)=>{
+            const { name='' } = val;
+            if(name=="TASKS"){
+                showTasks = true;
+            }else if(name=='DOCUMENTS'){
+                showDocuments = true;
+            }else if(name=='CHAT'){
+                showChat = true;
+            }else if(name=='CALENDLY'){
+                showCalendly = true;
+            }else if(name=='BILLING'){
+                showBilling = true;
+            }
+        })
+        return { showTasks, showDocuments, showChat, showCalendly, showBilling };
+    },[planComponents])
+
+    const { showTasks, showDocuments, showChat, showBilling, showCalendly } = showOptions;
+
     const renderRoutes = ()=>{
         
         if(!profile_exists){
             return <CustomerView {...props}/>;
         }else if(url.includes('dashboard') || url==='/'){
             if(isPlanPurchased){
-                return <DashboardView scheduleList={scheduleList} calendlyURL={calendlyURL}/>
+                return <DashboardView scheduleList={scheduleList} calendlyURL={calendlyURL} showCalendly={showCalendly} showChat={showChat}/>
             }else{
-                return <UserOnboardingView calendlyURL={calendlyURL}/>
+                return <UserOnboardingView calendlyURL={calendlyURL} showCalendly={showCalendly}/>
             }
         }else {
             return <Fragment>
                 {
-                    url.includes('tasks') && <TaskView/>
+                    url.includes('tasks') && showTasks && <TaskView/>
                 }
                 {
-                    url.includes('vault') && <DocumentValutView/>
+                    url.includes('vault') && showDocuments && <DocumentValutView/>
                 }
                 {
                     url.includes('profile') && <ProfileView {...props}/>
@@ -102,10 +129,10 @@ const UserDashboardView = (props)=>{
                     url.includes('create') && <CustomerView {...props}/>
                 }
                 {
-                    url.includes('billing') && <BillingView/>
+                    url.includes('billing') && showBilling && <BillingView/>
                 }
                 {
-                    url.includes('plan') && <SelectedPlanView {...props}/>
+                    url.includes('plan') && showBilling && <SelectedPlanView {...props}/>
                 }
             </Fragment>
         }
@@ -118,7 +145,7 @@ const UserDashboardView = (props)=>{
             {
                 userInfoLoading && !id?<div className={loaderView}><LoadingWidget/></div>:renderRoutes()
             }
-            {isPlanPurchased && user && case_id && <FloatingChatWidget caseId={case_id} currentUserId={user} chatHeaderName={agentName}/>}
+            {isPlanPurchased && user && case_id && showChat && <FloatingChatWidget caseId={case_id} currentUserId={user} chatHeaderName={agentName}/>}
         </div>
     )
 }

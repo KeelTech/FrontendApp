@@ -5,7 +5,7 @@ import Header from '@components/Header';
 import ProfileWidget from '@components/ProfileWidget';
 import { body } from '../style.js';
 
-const UserOnboardingView = ({ calendlyURL }) => {
+const UserOnboardingView = ({ calendlyURL, showCalendly, showBilling }) => {
     const history = useHistory();
     const taskInfo = useSelector(state => state.TASK_INFO);
     const { userInfo = {}, userInfoLoading } = taskInfo;
@@ -78,7 +78,9 @@ const UserOnboardingView = ({ calendlyURL }) => {
                         </div>
                         <div className="planPurchase">
                             <p>Upgrade for one on one call, unlimited chats, and premium support.</p>
-                            {/* <button onClick={() => history.push('/billing')}>Upgrade Now</button> */}
+                            {
+                                showBilling?<button onClick={() => history.push('/billing')}>Upgrade Now</button>:null
+                            }
                         </div>
                     </div>
                 </div>
