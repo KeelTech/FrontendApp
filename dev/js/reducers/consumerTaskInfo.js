@@ -21,7 +21,8 @@ const defaultState = {
     calendlyURL: '',
     scheduleList: [],
     countryList: [],
-    planComponents: []
+    planComponents: [],
+    planLoaded: false
 }
 
 export default function (state = defaultState, action) {
@@ -147,6 +148,7 @@ export default function (state = defaultState, action) {
         case GET_PLAN_COMPONENT: {
             let newState = {...state};
             newState.planComponents = action.payload;
+            newState.planLoaded = true;
             return newState;
         }
     }
