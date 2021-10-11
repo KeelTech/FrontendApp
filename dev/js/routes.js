@@ -26,7 +26,7 @@ let CUSTOMER_ROUTES = [
   { path: '/task/detail/:id', exact: true, component: TaskDetailMobileEntry, isPrivate: true },
   { path: '/tasks', exact: true, component: UserDashboardView, isPrivate: true },
   { path: '/vault', exact: true, component: UserDashboardView, isPrivate: true  },
-  // { path: '/billing', exact: true, component: UserDashboardView, isPrivate: true  },
+  { path: '/billing', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/profile', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/create', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/edit/:id', exact: true, component: UserDashboardView, isPrivate: true  },
