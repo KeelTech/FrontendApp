@@ -107,7 +107,7 @@ const UserDashboardView = (props)=>{
             return <CustomerView {...props}/>;
         }else if(url.includes('dashboard') || url==='/'){
             if(isPlanPurchased){
-                return <DashboardView scheduleList={scheduleList} calendlyURL={calendlyURL} showCalendly={showCalendly} showChat={showChat}/>
+                return <DashboardView scheduleList={scheduleList} calendlyURL={calendlyURL} showCalendly={showCalendly} showChat={showChat} showTasks={showTasks}/>
             }else{
                 return <UserOnboardingView calendlyURL={calendlyURL} showCalendly={showCalendly}/>
             }

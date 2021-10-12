@@ -15,7 +15,7 @@ import { getFormattedDate, getFormattedTime } from '@helpers/utils.js';
 import { container, pendingTasks, scheduleCallCta, upcomingSchedules } from './style.js';
 import { body } from '../style.js';
 
-const DashboardView = ({ scheduleList, calendlyURL, showCalendly=false, showChat=false }) => {
+const DashboardView = ({ scheduleList, calendlyURL, showCalendly=false, showChat=false, showTasks=false }) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const taskInfo = useSelector(state => state.TASK_INFO);
@@ -108,7 +108,7 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly=false, showChat
                                         }
                                     </div>
                                     {
-                                        taskList.length>0?
+                                        taskList.length>0 && showTasks?
                                             <div className="allTasks">
                                             <div className="moreTasks" onClick={redirectToTaskList}>Show All</div>
                                         </div>
