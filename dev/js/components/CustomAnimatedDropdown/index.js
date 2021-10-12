@@ -11,20 +11,34 @@ export const container = css`
     justify-content: space-between;
     align-items: center;
     min-width: 100px;
+    margin-top:4px;
     input{
         ${inputField};
-        border: 0px;
-        border-bottom: 2px solid grey;
+        border: 1px solid #090909;
+        -webkit-transition: all 0.4s ease-in;
         transition: all 0.4s ease-in;
         width: 300px;
+        border-radius: 4px;
+        padding: 4px 5px;
+        font-size: 14px;
+        color: #3a3f67;
+        font-weight: 500;
         &:focus{
             outline: none;
-            border: 0px;
+            border: 1px solid #090909;
+            // border: 0px;
         }
     }
     .selectedOptionVal{
-        border-bottom: 2px solid blue !important;
+        border: 2px solid #4267b2!important;
         transition: all 0.4s ease-in;
+    }
+    .customMultiDrop h4 {
+        font-size: 16px;
+        margin: 5px 0;
+        padding: 8px 10px;
+        background: #dee2e6;
+        // color: #4267b2;
     }
     .optionList{
         position: absolute;
@@ -34,11 +48,14 @@ export const container = css`
         width: 300px;
         overflow-y: auto;
         overflow-x: hidden;
+        // padding: 8px;
+        box-shadow: 4px 4px 8px #d8dce4;
     }
     span{
         display: block;
         padding: 10px;
         white-space: break-spaces;
+        font-size:14px;
         &:hover{
             background: #EBEBEB;
         }
@@ -48,10 +65,10 @@ export const container = css`
     }
     @media(max-width: ${tabScreenWidth}){
         display: flex;
-        padding: 5px 20px;
+        // padding: 5px 20px;
         font-size: 14px;
         input{
-            font-size: 14px;
+            font-size: 12px;
             width: 240px;
         }
         .optionList{
@@ -79,8 +96,8 @@ const CustomAnimatedDropdown = ({ options, handleSelect, selectedProgam })=>{
                     {
                         Object.values(options).map((programCategory, categoryKey)=>{
                             const { name, subCategory } = programCategory;
-                            return <div className="" key={categoryKey}>
-                                <p>{name}</p>
+                            return <div className="customMultiDrop" key={categoryKey}>
+                                <h4>{name}</h4>
                                 {
                                     subCategory.map((state, key) => {
                                         const { choice } = state;

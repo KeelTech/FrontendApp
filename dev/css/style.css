@@ -21,6 +21,16 @@ button.primary-button {
   font: normal normal bold 16px/18px Roboto;
   cursor: pointer;
 }
+.LandbotLivechat{
+  /* display: none!important; */
+}
+.customMultiDrop{
+  
+}
+.LivechatLauncher{
+  display: none!important;
+
+}
 .text-center{
   text-align: center !important;
 }
@@ -6470,7 +6480,7 @@ span.userChatIco {
 }
 .customSelects{
   display: flex;
-  align-items: center;
+  flex-direction: column;
 }
 .customSelects label{
   font-size: 14px;

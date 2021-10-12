@@ -128,7 +128,7 @@ function CustomerInfoView(props) {
                   </div>
                 </div>
               </div>
-              <div className="buttonWrapper justify-content-between ">
+              <div className="buttonWrapper justify-content-between align-items-end ">
                 {/* <div className="customSelects">
                   <label>Case Type:</label>
                   {
@@ -144,6 +144,7 @@ function CustomerInfoView(props) {
                   }
                 </div> */}
                 <div className="customSelects">
+                <label>Case Type:</label>
                   <CustomAnimatedDropdown options={filterProgramList} handleSelect={updateProgramStatus} selectedProgam={selectedProgam}/>
                 </div>
                 <div className="agntTaskBtns buttonWrapper">
