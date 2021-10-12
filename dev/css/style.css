@@ -21,6 +21,16 @@ button.primary-button {
   font: normal normal bold 16px/18px Roboto;
   cursor: pointer;
 }
+.LandbotLivechat{
+  /* display: none!important; */
+}
+.customMultiDrop{
+  
+}
+.LivechatLauncher{
+  display: none!important;
+
+}
 .text-center{
   text-align: center !important;
 }
@@ -6470,7 +6480,20 @@ span.userChatIco {
 }
 .customSelects{
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.multiSelect {
+  display: flex;
+  align-items: flex-end;
+}
+
+.multiSelect button.taskButton {
+  border-radius: 4px;
+  background: #4267B2;
+  margin-left: 10px;
+  height: auto;
+  padding: 4px 30px;
 }
 .customSelects label{
   font-size: 14px;

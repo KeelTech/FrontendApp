@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import FloatingChatWidget from '@components/FloatingChatWidget';
@@ -42,10 +42,10 @@ function CustomerInfoView(props) {
     })
   }, [])
 
-  const updateProgramStatus = (type) => {
-    setProgram(type);
+  const updateProgramStatus = () => {
+    
     const postDataParams = {
-      "program": type,
+      "program": selectedProgam,
       caseId
     }
     updateProgram(postDataParams, dispatch, (resp, err) => {
@@ -53,6 +53,10 @@ function CustomerInfoView(props) {
         alert('Failed to update');
       }
     })
+  }
+
+  const selectProgramType = (type)=>{
+    setProgram(type);
   }
 
   const {
@@ -74,6 +78,21 @@ function CustomerInfoView(props) {
   const redirectToDocument = () => {
     history.push(`/agent/documents/${caseId}`);
   }
+
+  const filterProgramList = useMemo(() => {
+    const filterData = {};
+    programStateList.map((val) => {
+      const { category } = val;
+      if (filterData[category] && filterData[category].subCategory) {
+        filterData[category].subCategory.push(val);
+      } else {
+        filterData[category] = {};
+        filterData[category].name = category;
+        filterData[category].subCategory = [val];
+      }
+    })
+    return filterData;
+  }, [programStateList])
 
   return (
     <div className={body}>
@@ -113,7 +132,7 @@ function CustomerInfoView(props) {
                   </div>
                 </div>
               </div>
-              <div className="buttonWrapper justify-content-between ">
+              <div className="buttonWrapper justify-content-between align-items-end ">
                 {/* <div className="customSelects">
                   <label>Case Type:</label>
                   {
@@ -128,15 +147,20 @@ function CustomerInfoView(props) {
                       : null
                   }
                 </div> */}
-                <div className="customSelects">
-                  <CustomAnimatedDropdown options={programStateList} handleSelect={updateProgramStatus} selectedProgam={selectedProgam}/>
-                </div>
+                
                 <div className="agntTaskBtns buttonWrapper">
                   <button className="taskButton" onClick={redirectToTask}>Tasks</button>
                   <button className="taskButton" onClick={redirectToDocument}>Documents</button>
                 </div>
               </div>
+              <div className="multiSelect">
+              <div className="customSelects">
+                  <label>Program Type:</label>
+                  <CustomAnimatedDropdown options={filterProgramList} handleSelect={selectProgramType} selectedProgam={selectedProgam} />
+                </div>
+                <button className="taskButton" onClick={updateProgramStatus}>Save</button>
 
+              </div>
             </div>
             {/* <div className="meetingInfoWrapperADD meetingNewAd">
               <div className="meetingInfoFlexWrapper">
