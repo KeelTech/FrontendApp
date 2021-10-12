@@ -6481,6 +6481,19 @@ span.userChatIco {
 .customSelects{
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
+}
+.multiSelect {
+  display: flex;
+  align-items: flex-end;
+}
+
+.multiSelect button.taskButton {
+  border-radius: 4px;
+  background: #4267B2;
+  margin-left: 10px;
+  height: auto;
+  padding: 4px 30px;
 }
 .customSelects label{
   font-size: 14px;

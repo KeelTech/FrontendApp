@@ -75,20 +75,20 @@ function CustomerInfoView(props) {
     history.push(`/agent/documents/${caseId}`);
   }
 
-  const filterProgramList = useMemo(()=>{
+  const filterProgramList = useMemo(() => {
     const filterData = {};
-    programStateList.map((val)=>{
+    programStateList.map((val) => {
       const { category } = val;
-      if(filterData[category] && filterData[category].subCategory){
+      if (filterData[category] && filterData[category].subCategory) {
         filterData[category].subCategory.push(val);
-      }else{
+      } else {
         filterData[category] = {};
         filterData[category].name = category;
-        filterData[category].subCategory =[val];
+        filterData[category].subCategory = [val];
       }
     })
     return filterData;
-  },[programStateList])
+  }, [programStateList])
 
   return (
     <div className={body}>
@@ -143,16 +143,20 @@ function CustomerInfoView(props) {
                       : null
                   }
                 </div> */}
-                <div className="customSelects">
-                <label>Case Type:</label>
-                  <CustomAnimatedDropdown options={filterProgramList} handleSelect={updateProgramStatus} selectedProgam={selectedProgam}/>
-                </div>
+                
                 <div className="agntTaskBtns buttonWrapper">
                   <button className="taskButton" onClick={redirectToTask}>Tasks</button>
                   <button className="taskButton" onClick={redirectToDocument}>Documents</button>
                 </div>
               </div>
+              <div className="multiSelect">
+              <div className="customSelects">
+                  <label>Program Type:</label>
+                  <CustomAnimatedDropdown options={filterProgramList} handleSelect={updateProgramStatus} selectedProgam={selectedProgam} />
+                </div>
+                <button className="taskButton" >Save</button>
 
+              </div>
             </div>
             {/* <div className="meetingInfoWrapperADD meetingNewAd">
               <div className="meetingInfoFlexWrapper">

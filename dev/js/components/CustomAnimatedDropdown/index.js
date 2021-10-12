@@ -30,7 +30,7 @@ export const container = css`
         }
     }
     .selectedOptionVal{
-        border: 2px solid #4267b2!important;
+        border: 1px solid #4267b2!important;
         transition: all 0.4s ease-in;
     }
     .customMultiDrop h4 {
