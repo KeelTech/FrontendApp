@@ -42,10 +42,10 @@ function CustomerInfoView(props) {
     })
   }, [])
 
-  const updateProgramStatus = (type) => {
-    setProgram(type);
+  const updateProgramStatus = () => {
+    
     const postDataParams = {
-      "program": type,
+      "program": selectedProgam,
       caseId
     }
     updateProgram(postDataParams, dispatch, (resp, err) => {
@@ -53,6 +53,10 @@ function CustomerInfoView(props) {
         alert('Failed to update');
       }
     })
+  }
+
+  const selectProgramType = (type)=>{
+    setProgram(type);
   }
 
   const {
@@ -152,9 +156,9 @@ function CustomerInfoView(props) {
               <div className="multiSelect">
               <div className="customSelects">
                   <label>Program Type:</label>
-                  <CustomAnimatedDropdown options={filterProgramList} handleSelect={updateProgramStatus} selectedProgam={selectedProgam} />
+                  <CustomAnimatedDropdown options={filterProgramList} handleSelect={selectProgramType} selectedProgam={selectedProgam} />
                 </div>
-                <button className="taskButton" >Save</button>
+                <button className="taskButton" onClick={updateProgramStatus}>Save</button>
 
               </div>
             </div>
