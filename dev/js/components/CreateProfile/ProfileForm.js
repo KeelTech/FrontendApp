@@ -34,11 +34,34 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
         updateUserProfile(updatedParams, dispatch);
     }
 
+    const handleCheckboxSelection = (val)=>{
+        let updatedParams = {
+            data: {
+                [fieldType]: {...dataParams, value: val, showError: false}
+            },
+            type: widget
+        }
+        updateUserProfile(updatedParams, dispatch);
+    }
+
     const showCustomFields = fieldType.includes('city') || fieldType.includes('country') || fieldType.includes('state');
     const showDate = fieldType.includes('date');
 
     if(fieldType.includes('full_address')){
         return <SelectCountry saveSelectedOption={handleAddressUpdate} dataParams={dataParams}/>
+    }
+
+    if(type==="checkbox"){
+        const { lables='', value:selectedCheckboxValue=false } = dataParams;
+        return <div className="formWrapper">
+            <div className="checkBoxContainer">
+                <label className="check_container">
+                    <p>{lables||''}</p>
+                    <input type="checkbox" checked={selectedCheckboxValue} onClick={()=>handleCheckboxSelection(!selectedCheckboxValue)}/>
+                    <span className="checkmark"></span>
+                </label>
+            </div>
+        </div>
     }
 
     if(!labels || showCustomFields) return null;
