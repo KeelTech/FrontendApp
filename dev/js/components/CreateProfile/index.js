@@ -18,7 +18,7 @@ const CreateProfile = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const taskInfo = useSelector(state => state.TASK_INFO);
-    const { fullProfileInfo, fullProfileLoading, userInfo = {}, countryList=[], originalFullProfileInfo={} } = taskInfo;
+    const { fullProfileInfo, fullProfileLoading, userInfo = {}, countryList = [], originalFullProfileInfo = {} } = taskInfo;
     const isProfileExist = userInfo && userInfo.profile_exists;
     const [activeState, setActive] = useState(editID ? parseInt(editID) : 1);
     const [loading, setLoading] = useState(false);
@@ -83,7 +83,7 @@ const CreateProfile = (props) => {
         if (!editID || !(fullProfileInfo && fullProfileInfo.profile)) {
             getFullUserProfile({}, dispatch);
         }
-        if(!countryList.length){
+        if (!countryList.length) {
             getCountryList({}, dispatch);
         }
     }, [])
@@ -98,13 +98,13 @@ const CreateProfile = (props) => {
             if (isMultiple) {
                 newDataParams = [];
                 let subFieldItems = {};
-                let startDate=null, endDate=null;
+                let startDate = null, endDate = null;
                 dataParams.map((subField, subIndex) => {
                     subFieldItems = {};
                     //newDataParams[subIndex] = {};
-                    startDate=null;
-                    endDate=null;
-                    subFieldItems= {};
+                    startDate = null;
+                    endDate = null;
+                    subFieldItems = {};
                     Object.entries(subField).map((val, key) => {
                         const [fieldType, dataValues] = val;
                         const { value, labels } = dataValues;
@@ -113,14 +113,14 @@ const CreateProfile = (props) => {
                         const showCustomFields = fieldType.includes('city') || fieldType.includes('country') || fieldType.includes('state');
                         const isAddressType = fieldType.includes('full_address');
 
-                        if ((!labels||showCustomFields) && !isAddressType) return;
+                        if ((!labels || showCustomFields) && !isAddressType) return;
                         const newLabel = labels && labels.toLowerCase() || '';
-                        if(newLabel.includes('start') && newLabel.includes('date')){
+                        if (newLabel.includes('start') && newLabel.includes('date')) {
                             startDate = value;
-                        }else if(newLabel.includes('end') && newLabel.includes('date') && startDate){
+                        } else if (newLabel.includes('end') && newLabel.includes('date') && startDate) {
                             let startD = new Date(startDate);
                             let endD = new Date(value);
-                            if(+startD >= +endD){
+                            if (+startD >= +endD) {
                                 isError = true;
                                 showError = true;
                                 errorMsg = 'End Date should less then Start Date';
@@ -310,7 +310,7 @@ const CreateProfile = (props) => {
                                                                         }
                                                                         {
                                                                             dataParams.length == 1 ? null : <div className="delBtnHeight">
-                                                                                <h5>{subIndex==0?'':'Additional Information'}</h5>
+                                                                                <h5>{subIndex == 0 ? '' : 'Additional Information'}</h5>
                                                                                 <button className="formdelBtn" onClick={() => handleWidgetUpdate(subIndex, true)}><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
                                                                             </div>
                                                                         }
@@ -326,10 +326,28 @@ const CreateProfile = (props) => {
                                                         return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} />
                                                     })
                                             }
+                                            <div className="formWrapper">
+                                                <div className="checkBoxContainer">
+                                                    <label className="check_container">
+                                                        <p>Please Check</p>
+                                                        <input type="checkbox" />
+                                                        <span className="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div className="formWrapper">
+                                                <div className="customRadio">
+                                                    <label className="radio_container">
+                                                        <p>Please Select</p>
+                                                        <input type="radio" name="radio" />
+                                                        <span className="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div className="btnCont">
                                             {
-                                                editID ? <button onClick={()=>handleFormNavigation(true)}>Update</button>
+                                                editID ? <button onClick={() => handleFormNavigation(true)}>Update</button>
                                                     : <Fragment>
                                                         {
                                                             activeState > 1 ? <button onClick={() => handleFormNavigation(false)}>Previous</button> : null

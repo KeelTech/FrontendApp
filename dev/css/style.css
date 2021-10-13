@@ -21,20 +21,18 @@ button.primary-button {
   font: normal normal bold 16px/18px Roboto;
   cursor: pointer;
 }
-.LandbotLivechat{
+.LandbotLivechat {
   /* display: none!important; */
 }
-.customMultiDrop{
-  
+.customMultiDrop {
 }
-.LivechatLauncher{
-  display: none!important;
-
+.LivechatLauncher {
+  display: none !important;
 }
-.text-center{
+.text-center {
   text-align: center !important;
 }
-button.payment-disabled{
+button.payment-disabled {
   background-color: gray !important;
   cursor: not-allowed !important;
 }
@@ -43,7 +41,7 @@ button.primary-button.disabled {
   background-color: #ffe6d3;
   pointer-events: none;
 }
-.alignEnd{
+.alignEnd {
   display: flex;
   justify-content: flex-end;
 }
@@ -62,7 +60,7 @@ button.primary-button.disabled {
   margin-top: 24px;
   cursor: pointer;
 }
-.HamMobile{
+.HamMobile {
   position: fixed;
   background: white;
   width: 100%;
@@ -75,14 +73,14 @@ button.primary-button.disabled {
   right: 0;
   z-index: 99;
 }
-.innerFixedHeader{
+.innerFixedHeader {
   display: flex !important;
   justify-content: space-between !important;
   align-items: center;
-  width:100%;
-    margin: auto;
+  width: 100%;
+  margin: auto;
 }
-img.homeIcon.mobileHamburger{
+img.homeIcon.mobileHamburger {
   display: none;
 }
 .dashed-button:focus {
@@ -5641,13 +5639,13 @@ body .health-id-dashboard .health-id-dashboard-side-popup .edit-profile-conatine
 }
 
 .payData h2 {
-  color: #4267B2;
+  color: #4267b2;
   font-size: 20px;
   margin-bottom: 20px;
 }
 
 .payData h4 {
-  color: #343A40;
+  color: #343a40;
   font-weight: 700;
   margin: 19px 0;
   font-size: 30px;
@@ -5656,8 +5654,8 @@ body .health-id-dashboard .health-id-dashboard-side-popup .edit-profile-conatine
 .payButtons button {
   width: 100%;
   margin-bottom: 12px;
-  background: #FFFFFF;
-  box-shadow: 4px 4px 8px #D8DCE4;
+  background: #ffffff;
+  box-shadow: 4px 4px 8px #d8dce4;
   border-radius: 4px;
   outline: none;
   border: none;
@@ -5971,11 +5969,11 @@ button:focus {
 }
 
 .addStaticBtn button {
-  background: #4267B2;
+  background: #4267b2;
   /* margin-right: 10px; */
   color: white;
   border-radius: 4px !important;
-  border: 1px solid #4267B2;
+  border: 1px solid #4267b2;
   padding: 4px 10px;
   font-size: 14px;
 }
@@ -6081,7 +6079,7 @@ input:focus + label {
     max-width: 1180px;
     margin: auto;
   }
-  .innerFixedHeader{
+  .innerFixedHeader {
     max-width: 1180px;
     margin: auto;
   }
@@ -6110,13 +6108,13 @@ input:focus + label {
   .customForFirst {
     height: 100% !important;
   }
-  .chatMainContainer{
+  .chatMainContainer {
     height: auto !important;
   }
-  .forMobileChat{
+  .forMobileChat {
     max-height: 40vh;
   }
-  .taskList{
+  .taskList {
     max-height: 41vh;
   }
 }
@@ -6148,7 +6146,7 @@ img.img-fluid.keelTopLogo {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 }
-.commonProfWidget{
+.commonProfWidget {
   display: flex;
   align-items: center;
 }
@@ -6204,13 +6202,13 @@ img.img-fluid.keelTopLogo {
 .taskScrollSection {
   overflow: auto;
   height: calc(100% - 115px);
-  padding-right:22px;
+  padding-right: 22px;
   margin-right: -12px;
 }
 .taskScrollSection.forCustomTaskHeight {
   height: calc(100% - 55px);
 }
-.menuOPT .menuItemSr{
+.menuOPT .menuItemSr {
   min-height: 200px;
   display: flex;
   flex-direction: column;
@@ -6237,7 +6235,10 @@ img.img-fluid.keelTopLogo {
   width: 90px;
 }
 
-.noMeeting .upcoming {margin-top: 20px;margin-bottom: 0;}
+.noMeeting .upcoming {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
 .tasksCta .cta.ctaActive span i {
   background: aliceblue;
 }
@@ -6258,11 +6259,11 @@ img.img-fluid.keelTopLogo {
 }
 .editProfSteps hr {
   display: block;
-    width: 100%;
-    border-bottom: 8px solid #e7e6e3;
-    height: 0px;
-    border-top: transparent;
-    margin: 25px 0;
+  width: 100%;
+  border-bottom: 8px solid #e7e6e3;
+  height: 0px;
+  border-top: transparent;
+  margin: 25px 0;
 }
 .editProfSteps hr:last-child {
   border-bottom: transparent;
@@ -6279,14 +6280,13 @@ button.formdelBtn {
   font-weight: 500;
 }
 
-
 .delBtnHeight h5 {
   font-size: 14px;
   margin: 0px;
   font-weight: 500;
   color: #757575;
 }
-.delBtnHeight{
+.delBtnHeight {
   display: flex;
   align-items: flex-end;
   position: absolute;
@@ -6300,36 +6300,181 @@ button.formAddMore {
   background: transparent;
   border: none;
   font-size: 14px;
-  font-weight:500;
+  font-weight: 500;
   color: #466cad;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   margin-left: 10px;
 }
-.d-block{
+.d-block {
   display: block !important;
 }
-.multipleForms{
+.multipleForms {
   display: flex;
   flex-wrap: wrap;
-  background: #F8F9FA;
+  background: #f8f9fa;
   border-radius: 4px;
   margin-bottom: 20px;
   padding: 5px 0;
   border: 1px solid #e3e3e3;
 }
 input:disabled {
-    background: white;
-    cursor: no-drop;
+  background: white;
+  cursor: no-drop;
 }
 h3.addMoreBtnHead {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.formsScroll.forCustomAddOnForm{
+.formsScroll.forCustomAddOnForm {
   max-height: calc(100vh - 250px) !important;
   overflow: auto !important;
 }
+/* ================= check and radio ================= */
+.checkBoxContainer p {
+  margin: 0;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.customRadio p {
+  margin: 0;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+.check_container {
+  display: flex;
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.check_container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.check_container .checkmark {
+  position: absolute;
+  top: 1px;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  background-color: #eee;
+  border: 1px solid #888888;
+}
+
+/* On mouse-over, add a grey background color */
+.check_container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.check_container input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.check_container .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.check_container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.check_container .checkmark:after {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.radio_container {
+  display: flex;
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.radio_container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.radio_container .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  background-color: #eee;
+  border-radius: 50%;
+  border: 1px solid #888888;
+}
+
+/* On mouse-over, add a grey background color */
+.radio_container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.radio_container input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.radio_container .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio_container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radio_container .checkmark:after {
+  top: 4px;
+  left: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+/* ================= check and radio ================= */
 span.userChatIco {
   border-radius: 40px;
   height: 20px;
@@ -6350,7 +6495,7 @@ span.userChatIco {
 .msg {
   position: relative;
 }
-.receiver span.userChatIco{
+.receiver span.userChatIco {
   background-color: blueviolet;
   left: -10px;
 }
@@ -6365,14 +6510,14 @@ span.userChatIco {
 }
 .addNewTask button {
   width: 100%;
-    margin-bottom: 10px;
-    color: #4267B2;
-    background: transparent;
-    border-radius: 4px !important;
-    border: 1px solid #4267B2;
-    padding: 8px 5px;
-    font-size: 14px;
-    font-weight: 500;
+  margin-bottom: 10px;
+  color: #4267b2;
+  background: transparent;
+  border-radius: 4px !important;
+  border: 1px solid #4267b2;
+  padding: 8px 5px;
+  font-size: 14px;
+  font-weight: 500;
 }
 .agentMainContainer {
   width: 98% !important;
@@ -6383,13 +6528,13 @@ span.userChatIco {
   /* padding-top: 48px; */
   height: calc(100vh - 30px);
 }
-.agentPadding{
+.agentPadding {
   padding-top: 48px !important;
 }
-.optionList span{
+.optionList span {
   text-transform: uppercase;
 }
-.mainSectionTopSpace{
+.mainSectionTopSpace {
   margin-top: 45px !important;
 }
 .consultWidgets {
@@ -6401,7 +6546,7 @@ span.userChatIco {
 
 .widgetCardMain {
   width: calc(50% - 16px);
-  background: #8686EA;
+  background: #8686ea;
   height: 80px;
   margin: 8px;
   border-radius: 4px;
@@ -6409,7 +6554,6 @@ span.userChatIco {
   align-items: center;
   padding: 10px;
 }
-
 
 .widgetContent .cover {
   margin-left: 10px;
@@ -6429,7 +6573,9 @@ span.userChatIco {
   height: 100%;
 }
 
-.widgetImg img {width: 60px;}
+.widgetImg img {
+  width: 60px;
+}
 
 .widgetContent .cover .no {
   font-size: 24px;
@@ -6437,17 +6583,16 @@ span.userChatIco {
 }
 
 .widgetContent .cover span.value {
-  color: #343A40;
+  color: #343a40;
   font-size: 12px;
   font-weight: 500;
 }
 .widgetCardMain.inProg {
-  background: #F6D998;
+  background: #f6d998;
 }
 
-
 .widgetCardMain.checkIn {
-  background: #A5FC9C;
+  background: #a5fc9c;
 }
 
 .widgetCardMain.checkIn .cover .no {
@@ -6455,11 +6600,11 @@ span.userChatIco {
 }
 
 .widgetCardMain.inProg .cover .no {
-  color: #BC8710;
+  color: #bc8710;
 }
 
 .widgetCardMain.totalRevenue {
-  background: #71F4AA;
+  background: #71f4aa;
 }
 
 .widgetCardMain.totalRevenue .cover .no {
@@ -6478,7 +6623,7 @@ span.userChatIco {
   flex-direction: column;
   justify-content: space-between;
 }
-.customSelects{
+.customSelects {
   display: flex;
   flex-direction: column;
   margin-top: 20px;
@@ -6490,12 +6635,12 @@ span.userChatIco {
 
 .multiSelect button.taskButton {
   border-radius: 4px;
-  background: #4267B2;
+  background: #4267b2;
   margin-left: 10px;
   height: auto;
   padding: 4px 30px;
 }
-.customSelects label{
+.customSelects label {
   font-size: 14px;
   font-weight: 500;
   margin-right: 8px;
@@ -6549,19 +6694,19 @@ span.showTasks:hover {
 
 .tableMain .tableHeadMain .tableRow .tableHead {
   background: #213969;
-    color: white;
-    font-size: 12px;
-    border: 1px solid white;
+  color: white;
+  font-size: 12px;
+  border: 1px solid white;
 }
 
 .tableRow.cursor-pointer {
-  background: #FFFFFF;
-  box-shadow: 4px 4px 8px #D8DCE4;
+  background: #ffffff;
+  box-shadow: 4px 4px 8px #d8dce4;
   border-radius: 4px;
 }
 
 .tableRow.cursor-pointer td {
-  color: #363B64;
+  color: #363b64;
   font-weight: 500;
 }
 .tableMain .tableRow th:first-child {
@@ -6572,8 +6717,12 @@ span.showTasks:hover {
   border-radius: 0px 4px 4px 0px;
 }
 
-.tableMain .tableRow td:last-child { border-radius: 0px 4px 4px 0px!important;}
-.tableMain .tableRow td:first-child { border-radius: 4px 0px 0px 4px!important;}
+.tableMain .tableRow td:last-child {
+  border-radius: 0px 4px 4px 0px !important;
+}
+.tableMain .tableRow td:first-child {
+  border-radius: 4px 0px 0px 4px !important;
+}
 
 .paginationBtn {
   display: flex;
@@ -6609,12 +6758,12 @@ button.prevBtn {
   font-size: 14px;
   border: 1px solid #6c757d;
   font-weight: 500;
-  color: #4267B2;
+  color: #4267b2;
 }
 .paginationBtn ul li span.active {
-background: #4267B2;
-box-shadow: 0px 4.525px 10.3429px rgba(0, 0, 0, 0.14);
-color: white;
+  background: #4267b2;
+  box-shadow: 0px 4.525px 10.3429px rgba(0, 0, 0, 0.14);
+  color: white;
 }
 
 .paginationBtn ul li {
@@ -6639,8 +6788,8 @@ img.img-fluid.userProfileXn {
 
 .customerDetails {
   padding: 12px;
-  background: #FFFFFF;
-  box-shadow: 4px 4px 8px #D8DCE4;
+  background: #ffffff;
+  box-shadow: 4px 4px 8px #d8dce4;
   border-radius: 4px;
   margin-bottom: 15px;
 }
@@ -6651,7 +6800,7 @@ img.img-fluid.userProfileXn {
 
 .userInfoHeaderWrapper .userName {
   font-size: 16px;
-  color: #363B64;
+  color: #363b64;
 }
 
 .customerDetails .buttonWrapper {
@@ -6660,11 +6809,11 @@ img.img-fluid.userProfileXn {
 
 .customerDetails .buttonWrapper button.taskButton {
   border-radius: 4px;
-  background: #4267B2;
+  background: #4267b2;
 }
 .meetingNewAd {
   padding: 12px;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 4px 4px 8px #d8dce4;
   border-radius: 4px;
   margin-bottom: 15px;
@@ -6676,7 +6825,7 @@ img.img-fluid.userProfileXn {
 
 .meetingNewAd .meetingInfoFlexWrapper p.meetingHeader {
   margin: 0;
-  color: #6B7494;
+  color: #6b7494;
 }
 
 .meetingNewAd .meetingInfoFlexWrapper .meetingDateWrapper img {
@@ -6691,7 +6840,7 @@ img.img-fluid.userProfileXn {
 .meetingNewAd .meetingInfoFlexWrapper .meetingDateWrapper p {
   margin: 0;
   font-weight: 500;
-  color: #6B7494;
+  color: #6b7494;
 }
 
 .meetingNewAd .meetingInfoFlexWrapper .meetingDateWrapper {
@@ -6700,23 +6849,23 @@ img.img-fluid.userProfileXn {
 
 .meetingBtnWrapper button {
   border-radius: 4px !important;
-  background: #4267B2 !important;
+  background: #4267b2 !important;
   width: auto !important;
-  border: 1px solid #4267B2 !important;
+  border: 1px solid #4267b2 !important;
   font-size: 14px;
   font-weight: 500 !important;
 }
 
 .meetingBtnWrapper button.scheduleBtn {
-  color: #4267B2 !important;
+  color: #4267b2 !important;
   width: auto !important;
   background: transparent !important;
-  border: 1px solid #4267B2 !important;
+  border: 1px solid #4267b2 !important;
 }
 
 .userCompleteInfo {
   padding: 12px;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 4px 4px 8px #d8dce4;
   border-radius: 4px;
   margin-bottom: 15px;
@@ -6727,7 +6876,7 @@ img.img-fluid.userProfileXn {
 }
 
 .userCompleteInfo ul li span {
-  color: #7E8197 !important;
+  color: #7e8197 !important;
 }
 
 .userCompleteInfo ul li span.key {
@@ -6742,7 +6891,7 @@ img.img-fluid.userProfileXn {
   background: transparent;
   font-size: 12px;
   font-weight: 500;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   color: #4267b2;
 }
 
@@ -6758,13 +6907,13 @@ img.img-fluid.userProfileXn {
 /* ============ Agent Dashboard Update ============== */
 /* ============ TakCardUi ============== */
 .taskName span {
-  color: #7E8197;
+  color: #7e8197;
   font-weight: 500;
   font-size: 10px;
 }
 
 .signDoc .sign {
-  color: #343A40;
+  color: #343a40;
   font-size: 16px;
 }
 /* ============ TakCardUi ============== */
@@ -6957,8 +7106,6 @@ li {
 }
 /* ============ User Profile ============== */
 /* ============ on board  ============== */
-
-
 
 .planSelectionScreen {
   padding: 0px 25px;
@@ -7233,7 +7380,7 @@ button.fillBtn {
   position: absolute;
   top: -11px;
   margin: auto;
-  background: #4CBC9A;
+  background: #4cbc9a;
   font-size: 12px;
   font-weight: 600;
   color: white;
@@ -7263,8 +7410,8 @@ button.fillBtn {
 
 .planPrices p {
   font-size: 26px;
-    font-weight: 600;
-    color: #343A40;
+  font-weight: 600;
+  color: #343a40;
 }
 
 .planPrices p span {
@@ -7272,7 +7419,7 @@ button.fillBtn {
   margin-left: 6px;
   text-decoration: line-through;
   font-weight: 500;
-  color: #6C757D;
+  color: #6c757d;
 }
 
 .planPurchaseCont ul {
@@ -7310,44 +7457,43 @@ button.fillBtn {
 }
 
 .tabButtonPlan button {
-  background: #E7EFF8;
+  background: #e7eff8;
   border: 1px solid white;
   border-radius: 4px;
   padding: 15px 15px;
   min-width: 220px;
   font-size: 16px;
   font-weight: 600;
-  color: #3F526D;
-  font-family: 'Poppins';
+  color: #3f526d;
+  font-family: "Poppins";
 }
 
 .tabButtonPlan button.actPlan {
-  background: linear-gradient(180.38deg, #FFFFFF 0.33%, #F8F9FF 99.67%);
+  background: linear-gradient(180.38deg, #ffffff 0.33%, #f8f9ff 99.67%);
 }
 .popCntrImg {
   margin: 10px 0 20px;
 }
 
 .popCntrImg img {
-    width: 70px;
-    height: 70px;
+  width: 70px;
+  height: 70px;
 }
 
 p.popSubPera {
-    color: gray;
-    font-size: 12px;
+  color: gray;
+  font-size: 12px;
 }
 
 button.ProceedBtnPop {
-    background: #4267b2;
-    color: white;
-    border: none;
-    padding: 10px 30px;
+  background: #4267b2;
+  color: white;
+  border: none;
+  padding: 10px 30px;
 }
 
-
 .popBtn {
-    margin-top: 25px;
+  margin-top: 25px;
 }
 .plnImgTop {
   background: #f8f9fa;
@@ -7486,7 +7632,7 @@ p.tblData {
 
 .dropWhiteBox {
   padding: 12px !important;
-    margin: 0px !important;
+  margin: 0px !important;
 }
 
 .dropWhiteBox img {
@@ -7513,10 +7659,9 @@ p.tblData {
 
 .listDropItem li {
   padding: 5px 12px !important;
-  transition: all .2s ease;
-
+  transition: all 0.2s ease;
 }
-.listDropItem li:hover{
+.listDropItem li:hover {
   background: #d8dce4;
 }
 
@@ -7545,7 +7690,7 @@ p.tblData {
 }
 .userFormsMainContainer.customEditProfile {
   max-width: 660px !important;
-    width: 100%;
+  width: 100%;
 }
 
 .formsScroll {
@@ -7559,8 +7704,12 @@ p.tblData {
   max-width: 720px;
 }
 
-.formsScroll div.formWrapper {width: 50%;padding-left: 15px;padding-right: 15px; margin-bottom: 10px !important;}
-
+.formsScroll div.formWrapper {
+  width: 50%;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 10px !important;
+}
 
 div.editProfSteps .btnCont {
   margin: 10px;
@@ -7592,10 +7741,10 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
-.MaxWithFull{
+.MaxWithFull {
   max-width: 100% !important;
 }
 .btnCont.sendOtPBtn {
@@ -7610,27 +7759,27 @@ input[type=number] {
 }
 
 .btnCont.sendOtPBtn button {
-  background: transparent!important;
-  color: #466CAD!important;
+  background: transparent !important;
+  color: #466cad !important;
   margin-right: 8px !important;
   padding: 0 !important;
-  min-width: auto!important;
-  min-height: auto!important;
+  min-width: auto !important;
+  min-height: auto !important;
   font-size: 12px !important;
-  font-weight: 500!important;
-  cursor: pointer!important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
 }
-.formWrapper div.optionList{
+.formWrapper div.optionList {
   height: 150px;
   overflow: auto;
 }
-.formsScroll.newUserForm div.formWrapper{
-margin-bottom: 30px !important;
+.formsScroll.newUserForm div.formWrapper {
+  margin-bottom: 30px !important;
 }
 .userFormsMainContainer.MaxWithFull {
   margin-top: 30px;
 }
-.formsScroll.newUserForm div.formWrapper .noVerified{
+.formsScroll.newUserForm div.formWrapper .noVerified {
   position: absolute;
   bottom: -22px;
 }
@@ -7650,31 +7799,33 @@ span.statusText {
   border-radius: 2px !important;
   margin-left: 10px !important;
 }
-.tskMainHed{
+.tskMainHed {
   font-size: 12px;
   font-weight: 600;
 }
-.taskStatusNew .status {padding: 5px 12px;}
+.taskStatusNew .status {
+  padding: 5px 12px;
+}
 
 span.discussionTxt {
-    color: #7E8197 !important;
+  color: #7e8197 !important;
 }
 
 .taskName.addAttachment {
-    border: 1px solid #4267B2;
-    color: #4267B2;
-    padding: 7px 10px;
-    line-height: 8px;
-    border-radius: 2px;
+  border: 1px solid #4267b2;
+  color: #4267b2;
+  padding: 7px 10px;
+  line-height: 8px;
+  border-radius: 2px;
 }
 
 .taskName.addAttachment img.icon {
-    display: none;
+  display: none;
 }
 
 .taskName.addAttachment span {
-    color: #4267B2;
-    font-weight: 500;
+  color: #4267b2;
+  font-weight: 500;
 }
 
 .taskStatusNew {
@@ -7683,20 +7834,21 @@ span.discussionTxt {
   border-radius: 4px;
   border: 1px solid #9eadcd;
 }
-.taskStatusNew .selectedOption,.taskStatusNew .taskInputBlock{
+.taskStatusNew .selectedOption,
+.taskStatusNew .taskInputBlock {
   margin: 0px !important;
-  border: 1px solid #CED4DA !important;
+  border: 1px solid #ced4da !important;
   padding: 4px 10px !important;
   font-size: 12px !important;
   min-width: 120px !important;
   background: white !important;
   border-radius: 4px !important;
-  color: #343A40 !important;
+  color: #343a40 !important;
 }
 span.notiPus {
-  background: #FAFBFF;
-  border: 1.575px solid #DEDEDE;
-  color: #6B7494;
+  background: #fafbff;
+  border: 1.575px solid #dedede;
+  color: #6b7494;
   padding: 0px 8px;
   margin-left: 5px;
   border-radius: 4px;
@@ -7709,19 +7861,22 @@ span.notiPus {
 }
 
 .discussionSectionNew .discussionTxt textarea {
-  border: 1px solid #CED4DA !important;
+  border: 1px solid #ced4da !important;
   background: white !important;
   height: 80px;
   border-radius: 4px;
 }
 .attachmentList div.taskAttachments {
-  border: 1px solid #EAEAEF;
+  border: 1px solid #eaeaef;
   width: 150px;
   flex-shrink: 0;
 }
 
-
-.attachmentList {width: 100%;overflow: auto;flex-wrap: inherit !important;}
+.attachmentList {
+  width: 100%;
+  overflow: auto;
+  flex-wrap: inherit !important;
+}
 .attachDropMenu {
   top: 10px !important;
   right: 2px !important;
@@ -7732,22 +7887,22 @@ span.notiPus {
 }
 
 span.progressNo {
-  color: #7E8197;
+  color: #7e8197;
   font-weight: 500;
 }
 
 span.percent {
-  background: #ECECF1 !important;
+  background: #ececf1 !important;
 }
 
 span.percent:after {
-  background: #4267B2 !important;
+  background: #4267b2 !important;
 }
 
 .msgView input {
   background: white !important;
   border-radius: 4px !important;
-  border: 1px solid #CED4DA !important;
+  border: 1px solid #ced4da !important;
 }
 
 .msgView {
@@ -7757,9 +7912,9 @@ span.percent:after {
 .msgView span.profile {
   margin-top: 0px;
 }
-.checklist  div.addBtnCmnt {
-  border: 1px solid #4267B2 !important;
-  color: #4267B2 !important;
+.checklist div.addBtnCmnt {
+  border: 1px solid #4267b2 !important;
+  color: #4267b2 !important;
   padding: 7px 10px !important;
   line-height: 10px !important;
   border-radius: 2px !important;
@@ -7767,10 +7922,9 @@ span.percent:after {
   font-weight: 500 !important;
 }
 
-
 .item .checkItem {
   cursor: pointer;
-  color: #3F526D !important;
+  color: #3f526d !important;
 }
 
 .item .checkItem span {
@@ -7778,10 +7932,10 @@ span.percent:after {
 }
 
 .checkedItem .checkedText {
-  color: #4267B2 !important;
+  color: #4267b2 !important;
 }
-.fixedThis{
-  position: fixed!important;
+.fixedThis {
+  position: fixed !important;
 }
 .postCommentCancel {
   display: flex;
@@ -7790,12 +7944,12 @@ span.percent:after {
 }
 
 .postCommentCancel .addBtnCmnt {
-  background: #FFFFFF;
-/* primary */
-  border: 1px solid #4267B2;
+  background: #ffffff;
+  /* primary */
+  border: 1px solid #4267b2;
   box-sizing: border-box;
   border-radius: 4px !important;
-  color: #4267B2;
+  color: #4267b2;
   padding: 5px 20px;
   height: 30px;
   margin-right: 10px;
@@ -7805,11 +7959,11 @@ span.percent:after {
 }
 
 .postCommentCancel button {
-  background: #FFFFFF;
-  border: 1px solid #4267B2;
+  background: #ffffff;
+  border: 1px solid #4267b2;
   box-sizing: border-box;
   border-radius: 4px !important;
-  color: #4267B2;
+  color: #4267b2;
   padding: 5px 20px;
   height: 30px;
   font-size: 14px !important;
@@ -7825,11 +7979,11 @@ span.percent:after {
 }
 
 .checklistCta div.addBtnCmnt {
-  background: #FFFFFF;
-  border: 1px solid #4267B2;
+  background: #ffffff;
+  border: 1px solid #4267b2;
   box-sizing: border-box;
   border-radius: 4px !important;
-  color: #4267B2;
+  color: #4267b2;
   padding: 5px 20px;
   height: 30px;
   margin-right: 10px;
@@ -7844,7 +7998,7 @@ span.percent:after {
 
 .checklistItems input {
   border-radius: 4px !important;
-  border: 1px solid #CED4DA !important;
+  border: 1px solid #ced4da !important;
   background: white !important;
 }
 
@@ -7870,7 +8024,7 @@ span.percent:after {
 .postCommentSection {
   margin-bottom: 15px;
 }
-.deleteIcon{
+.deleteIcon {
   cursor: pointer;
 }
 
@@ -7881,48 +8035,50 @@ span.percent:after {
 }
 
 .deleteTask.customEditFor .submitCta .addBtnCmnt:first-child {
-  background: #4267B2;
+  background: #4267b2;
   margin-right: 10px;
   color: white;
   border-radius: 4px !important;
-  border: 1px solid #4267B2;
+  border: 1px solid #4267b2;
 }
 
 .deleteTask.customEditFor .submitCta .addBtnCmnt {
-  color: #4267B2;
+  color: #4267b2;
   margin-right: 10px;
   background: white;
   border-radius: 4px !important;
-  border: 1px solid #4267B2;
+  border: 1px solid #4267b2;
 }
 .checklistItems .item img {
   cursor: pointer;
 }
-.newTaskMainContainer{
+.newTaskMainContainer {
   max-width: 100%;
-    position: relative;
-    background: white !important;
-    box-shadow: 2px 2px 8px #eae8ee;
-    border-radius: 4px !important;
-    padding: 12px !important;
-    overflow-y: auto;
-    width: 100%;
+  position: relative;
+  background: white !important;
+  box-shadow: 2px 2px 8px #eae8ee;
+  border-radius: 4px !important;
+  padding: 12px !important;
+  overflow-y: auto;
+  width: 100%;
 }
 
-.newTaskMainContainer .formView .field input,.newTaskMainContainer .formView .view input,.newTaskMainContainer .formView .field textarea{
+.newTaskMainContainer .formView .field input,
+.newTaskMainContainer .formView .view input,
+.newTaskMainContainer .formView .field textarea {
   background: white !important;
-    border-radius: 4px !important;
-    border: 1px solid #CED4DA !important;
+  border-radius: 4px !important;
+  border: 1px solid #ced4da !important;
 }
 .newTaskMainContainer .formView {
   max-height: calc(100vh - 255px) !important;
   overflow: auto !important;
   margin-right: -12px;
-    padding-right: 12px;
+  padding-right: 12px;
 }
 
-.newTaskMainContainer .customEditFor div.forNewTskBtn:first-child{
-  background: #CF3030!important;
+.newTaskMainContainer .customEditFor div.forNewTskBtn:first-child {
+  background: #cf3030 !important;
 }
 span.SelecTFileText {
   height: auto;
@@ -7942,14 +8098,14 @@ span.SelecTFileText {
 div.DDContNew {
   height: auto !important;
 }
-.backBtn{
-  border: 1px solid #4267B2 !important;
-    color: #4267B2 !important;
-    padding: 7px 10px !important;
-    line-height: 8px !important;
-    border-radius: 2px !important;
+.backBtn {
+  border: 1px solid #4267b2 !important;
+  color: #4267b2 !important;
+  padding: 7px 10px !important;
+  line-height: 8px !important;
+  border-radius: 2px !important;
 }
-.docOverlay{
+.docOverlay {
   background: url(/assets/images/common/files.jpg) !important;
   background-repeat: no-repeat !important;
   background-position: center center !important;
@@ -7957,7 +8113,7 @@ div.DDContNew {
   border: 1px solid #f3f2ef;
   min-height: 50px !important;
 }
-.resetBtnFrg{
+.resetBtnFrg {
   cursor: pointer;
   width: 100%;
   min-height: 34px;
@@ -7969,8 +8125,8 @@ div.DDContNew {
   color: white;
   font-size: 14px;
 }
-.splitTImer{
-  margin:0px 5px;
+.splitTImer {
+  margin: 0px 5px;
   font-weight: 600;
   color: #ef4f4f;
 }
@@ -7979,7 +8135,7 @@ div.DDContNew {
   display: block !important;
   overflow: auto;
 }
-.infoHeadingName{
+.infoHeadingName {
   font-size: 12px;
   text-align: center;
   font-weight: 500;
@@ -7991,37 +8147,36 @@ div.DDContNew {
   width: 100%;
   font-size: 14px;
   line-height: 24px;
-  color: #6C757D;
+  color: #6c757d;
   text-align: center;
   margin-bottom: 8px;
-  background: #E7EFF8;
+  background: #e7eff8;
   font-weight: 500;
   padding: 10px 5px;
   border-radius: 4px;
   border: 1px solid white;
   margin-top: 12px;
 }
-.sideScheduleCard div.info{
+.sideScheduleCard div.info {
   margin-top: 20px;
-    font-size: 18px;
-    line-height: 27px;
-    color: #363B64;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0px 2px 8px #d8dce4;
-    border-radius: 4px;
-    padding: 8px;
+  font-size: 18px;
+  line-height: 27px;
+  color: #363b64;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 2px 8px #d8dce4;
+  border-radius: 4px;
+  padding: 8px;
 }
 /* ============ Task Container  ============== */
 /* ============ Media Queries ============== */
 @media (min-width: 670px) {
- 
 }
 @media (max-width: 767px) {
-  .customEditProfile{
+  .customEditProfile {
     min-width: 100%;
   }
-  .formsScroll div.formWrapper{
+  .formsScroll div.formWrapper {
     width: 100%;
   }
   .mobileHide {
@@ -8038,29 +8193,29 @@ div.DDContNew {
     top: 0;
     margin-bottom: 20px;
   }
-  .widgetCardMain{
+  .widgetCardMain {
     width: 100%;
     margin-left: 0px;
     margin-right: 0px;
   }
-  .loginImg{
+  .loginImg {
     padding-top: 30px;
   }
-  .schCallSection p{
+  .schCallSection p {
     padding-right: 10px;
     font-size: 12px;
   }
-  .schCallSection button{
+  .schCallSection button {
     flex-shrink: 0;
     font-size: 12px;
     padding: 0 11px;
     margin-top: 10px;
   }
-  .schCallSection{
+  .schCallSection {
     flex-direction: column;
     text-align: center;
   }
-  .formsScroll.newUserForm div.formWrapper{
+  .formsScroll.newUserForm div.formWrapper {
     width: 100%;
   }
 }
@@ -8079,7 +8234,6 @@ div.DDContNew {
   .loginContainer {
     align-items: unset;
   }
-  
 }
 @media (min-width: 1900px) {
   .chat {
@@ -8090,34 +8244,34 @@ div.DDContNew {
   }
 }
 @media (max-width: 520px) {
-  .accrdContent ul li{
+  .accrdContent ul li {
     flex-direction: column;
     margin-bottom: 10px;
   }
   .dashTaskSchSection {
     flex-wrap: wrap;
-}
-.documentList .docCardUpdate {
-  width: 100%;
-}
+  }
+  .documentList .docCardUpdate {
+    width: 100%;
+  }
 
-div.sideScheduleCard {
-  width: 100%;
-  margin: 15px !important;
-}
+  div.sideScheduleCard {
+    width: 100%;
+    margin: 15px !important;
+  }
 }
 @media (max-width: 992px) {
-  .accrdHead .alignEnd{
+  .accrdHead .alignEnd {
     flex-direction: column;
     flex-shrink: 0;
   }
-  .accrdHead .alignEnd .editPrfl{
+  .accrdHead .alignEnd .editPrfl {
     margin: 0 0 8px 0;
   }
-  .accrdHead{
+  .accrdHead {
     padding: 0px;
   }
-  .accrdHead h5{
+  .accrdHead h5 {
     font-size: 14px;
   }
 }
@@ -8125,7 +8279,6 @@ div.sideScheduleCard {
   .headerContent {
     padding-left: 70px;
   }
-  
 }
 @media (max-width: 1100px) {
   .sideScheduleCard {
@@ -8134,20 +8287,20 @@ div.sideScheduleCard {
     margin-right: 10px !important;
     margin-top: 35px !important;
   }
-  .subHeaderTop{
+  .subHeaderTop {
     display: none;
   }
-  
+
   .sideScheduleCard div.upcoming span {
     display: inline-block;
     cursor: pointer;
     width: 100%;
     font-size: 14px;
     line-height: 24px;
-    color: #6C757D;
+    color: #6c757d;
     text-align: center;
     margin-bottom: 8px;
-    background: #E7EFF8;
+    background: #e7eff8;
     font-weight: 500;
     padding: 10px 5px;
     border-radius: 4px;
@@ -8167,24 +8320,23 @@ div.sideScheduleCard {
     height: 100%;
     padding-right: 0px;
   } */
-  
-  
+
   .mblMssgViewCmnt {
     max-height: 200px;
     overflow: auto;
-}
+  }
   .popUpInClose {
     position: relative;
     left: -4px;
     top: 8px;
     width: unset !important;
-}
+  }
   .tastMobileContNew {
     padding: 12px !important;
     height: auto !important;
     margin-top: 40px !important;
-}
-  .HamMobile{
+  }
+  .HamMobile {
     position: fixed;
     background: white;
     width: 100%;
@@ -8229,23 +8381,22 @@ div.sideScheduleCard {
     height: 100%;
   }
 
-  
   .openWidgetView .widgetView .bgForUser {
     border-radius: 0px;
   }
-  .chatMsg{
-  word-break: break-word;
+  .chatMsg {
+    word-break: break-word;
   }
-  .widgetCardMain{
+  .widgetCardMain {
     height: 90px;
   }
-  .intro{
+  .intro {
     max-width: 100%;
   }
-  .mainSectionTopSpace{
+  .mainSectionTopSpace {
     margin-top: 15px !important;
   }
-  img.homeIcon.mobileHamburger{
+  img.homeIcon.mobileHamburger {
     display: inline-block;
   }
 }
@@ -8385,11 +8536,11 @@ div.sideScheduleCard {
   justify-content: center;
 }
 
-:global(img.Media.is-contain){
+:global(img.Media.is-contain) {
   display: none !important;
 }
 .LivechatLauncher {
-  display: none !important; 
+  display: none !important;
 }
 :global(.LivechatLauncher) {
   display: none !important;
