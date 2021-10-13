@@ -326,7 +326,7 @@ const CreateProfile = (props) => {
                                                         return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} />
                                                     })
                                             }
-                                            <div className="formWrapper">
+                                            {/* <div className="formWrapper">
                                                 <div className="checkBoxContainer">
                                                     <label className="check_container">
                                                         <p>Please Check</p>
@@ -334,8 +334,8 @@ const CreateProfile = (props) => {
                                                         <span className="checkmark"></span>
                                                     </label>
                                                 </div>
-                                            </div>
-                                            <div className="formWrapper">
+                                            </div> */}
+                                            {/* <div className="formWrapper">
                                                 <div className="customRadio">
                                                     <label className="radio_container">
                                                         <p>Please Select</p>
@@ -343,7 +343,7 @@ const CreateProfile = (props) => {
                                                         <span className="checkmark"></span>
                                                     </label>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                         </div>
                                         <div className="btnCont">
                                             {
