@@ -16,7 +16,6 @@ export const getFormattedDate = (date)=>{
             day = dateObj.getDate();
             formattedDate = `${MONTH[month]} ${day}, ${fullYear}`;
         }catch(e){
-            console.log('error in parsing date', e);
             formattedDate ='';
         }
     }
