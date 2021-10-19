@@ -6209,7 +6209,7 @@ img.img-fluid.keelTopLogo {
   height: calc(100% - 55px);
 }
 .menuOPT .menuItemSr {
-  min-height: 200px;
+  min-height: 120px;
   display: flex;
   flex-direction: column;
   justify-content: end;
