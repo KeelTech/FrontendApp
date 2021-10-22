@@ -8168,6 +8168,9 @@ div.DDContNew {
   border-radius: 4px;
   padding: 8px;
 }
+.chat{
+  position: relative;
+}
 /* ============ Task Container  ============== */
 /* ============ Media Queries ============== */
 @media (min-width: 670px) {

@@ -3,8 +3,7 @@ import { css } from '@emotion/css';
 
 export const container = css`
     .loader-for-chat-div{
-        position: relative;
-        position: fixed;
+        position: absolute;
         top: 0;
         bottom: 0;
         left: 0;
