@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "@components/Header";
-import NotificationWidget from "@components/NotificationWidget";
-import ProfileWidget from "@components/ProfileWidget";
 import { SET_AGENT_MENUBAR_STATE } from "@constants/types";
 import { getAgentDetails, getAgentSchedule } from '@actions';
-import { loaderView } from '@constants';
-import LoadingWidget from '@components/LoadingWidget';
 import CustomToaster from '@components/CustomToaster';
 import { header, wrapper, container, mobileView, rightBar, widgets } from "./style.js";
 import UpcomingSchedule from "@components/UpcomingSchedule";
+import ComponentLoader from '@components/ComponentLoader';
+
 const CompletedImg = `${ASSETS_BASE_URL}/images/common/completed.svg`;
 const PendingImg = `${ASSETS_BASE_URL}/images/common/pending.svg`;
 const RevenueImg = `${ASSETS_BASE_URL}/images/common/revenue.svg`;
@@ -84,9 +82,6 @@ const AgentDashboardView = () => {
       </Header>
       <div className={wrapper + " " + "consultDash agentPadding"}>
         <div className={container + " " + "consultDasLoad"}>
-          {
-            loading && <div className={loaderView}><LoadingWidget /></div>
-          }
           <CustomToaster {...toasterInfo} hideToaster={hideToaster} />
           <div className="performance">
             <div className="intro">
@@ -101,6 +96,11 @@ const AgentDashboardView = () => {
               }
               {/* <span className="showTasks">Show Tasks</span> */}
             </div>
+            {
+            loading?
+            <div className={widgets + " " + "consultWidgets"}>
+              <ComponentLoader/>
+            </div>:
             <div className={widgets + " " + "consultWidgets"}>
               <div className="widgetCardMain">
                 <div className="widgetImg">
@@ -146,47 +146,8 @@ const AgentDashboardView = () => {
                   </div>
                 </div>
               </div>
-
-              {/* <div
-                className="widget widget1"
-                style={{ backgroundImage: `url(${PendingImg})` }}>
-                <div className="cover">
-                  <span className="no">{booked_count}</span>
-                  <span className="value">New</span>
-                  <span className="value">Applications</span>
-                </div>
-              </div>
-
-              <div
-                className="widget widget2"
-                style={{ backgroundImage: `url(${ReviewImg})` }}>
-                <div className="cover progressADD">
-                  <span className="no">{in_progress_count || 0}</span>
-                  <span className="value">In Progress</span>
-                  <span className="value">Applications</span>
-                </div>
-              </div>
-
-              <div
-                className="widget widget3"
-                style={{ backgroundImage: `url(${CompletedImg})` }}>
-                <div className="cover completed">
-                  <span className="no">{completed_count || 0}</span>
-                  <span className="value">Completed</span>
-                  <span className="value">Applications</span>
-                </div>
-              </div>
-
-              <div
-                className="widget widget4"
-                style={{ backgroundImage: `url(${RevenueImg})` }}>
-                <div className="cover revenue">
-                  <span className="no">{earnings_count}</span>
-                  <span className="value">Total</span>
-                  <span className="value">Applications</span>
-                </div>
-              </div> */}
             </div>
+          }
           </div>
           <div className={mobileView}>
             <UpcomingSchedule agentScheduleDetails={agentScheduleDetails} />

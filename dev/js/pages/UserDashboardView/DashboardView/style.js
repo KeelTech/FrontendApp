@@ -24,6 +24,7 @@ export const container = css`
 `
 
 export const pendingTasks = css`
+    position: relative;
     max-width: 429px;
     margin-right: 22px;
     max-width: 40%;
@@ -135,6 +136,7 @@ export const scheduleCallCta = css`
 export const upcomingSchedules = css`
     // min-width: 240px;
     // min-height: 100vh;
+    position: relative;
     margin-top: 40px;
     padding: 0px 12px;
     display: none;

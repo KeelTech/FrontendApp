@@ -9,8 +9,7 @@ import Header from '@components/Header';
 import NotificationWidget from '@components/NotificationWidget';
 import ProfileWidget from '@components/ProfileWidget';
 import BlankScreen from '@components/BlankScreen';
-import LoadingWidget from '@components/LoadingWidget';
-import { loaderView, isMobileView } from '@constants';
+import { isMobileView } from '@constants';
 import { getFormattedDate, getFormattedTime } from '@helpers/utils.js';
 import ComponentLoader from '@components/ComponentLoader';
 import { container, pendingTasks, scheduleCallCta, upcomingSchedules } from './style.js';
@@ -78,19 +77,7 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly=false, showChat
     return (
         <div className={body + '    ' + 'p-relative pt-5 dashTaskSchSection '}>
             <div className="mainView mainSectionTopSpace">
-                {/* <div className="subHeaderTop">
-                    <div className="headerContent">
-                        <img className="img-fluid keelTopLogo" src={ASSETS_BASE_URL + "/images/common/keelIcon.svg"} alt="home" onClick={() => history.push('/')} />
-                        <ProfileWidget />
-                    </div>
-                </div> */}
                 <Header headerText={`Welcome ${first_name}`}>
-                    <div className="headerView">
-                        {/* <div className={scheduleCallCta}>
-                            <span>Schedule Call</span>
-                            <img src={ASSETS_BASE_URL + "/images/common/callIcon.svg"} alt="home" />
-                        </div> */}
-                    </div>
                 </Header>
                 <div className={container}>
                     <div className={pendingTasks + ' ' + 'pandingLeftTask'}>
@@ -129,14 +116,20 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly=false, showChat
                 </div>
             </div>
             {
-            showCalendly?
+                !planLoaded?<div className={upcomingSchedules+ " " +"sideScheduleCard"}  >
+                    <ComponentLoader/>
+                </div>
+                :null
+            }
+            {
+            planLoaded?
             <div className={upcomingSchedules+ " " +"sideScheduleCard"}  >
                 <div className="headerView">
                     <NotificationWidget />
                     {/* <ProfileWidget /> */}
                 </div>
                 {
-                    scheduleList.length?
+                    scheduleList.length && showCalendly?
                     <div className="upcoming mt-3" onClick={()=>scheduleCall(calendlyURL)}><button><i class="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div>
                     :null
                 }
@@ -171,7 +164,9 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly=false, showChat
                     :<div className="noMeeting">
                         <h5>No meetings scheduled</h5>
                         <img className="icon" src={ASSETS_BASE_URL + "/images/common/sch.svg"} alt="time" />
-                        <div className="upcoming" onClick={()=>scheduleCall(calendlyURL)}><button><i class="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div>
+                        {
+                            showCalendly?<div className="upcoming" onClick={()=>scheduleCall(calendlyURL)}><button><i class="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div>:null
+                        }                        
                     </div>
                 }
             </div>

@@ -128,6 +128,7 @@ export const rightBar = css`
 
 export const widgets = css`
   margin-left: 16px;
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   .widget {

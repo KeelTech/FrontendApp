@@ -2,10 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Header from '@components/Header';
-import ProfileWidget from '@components/ProfileWidget';
+import ComponentLoader from '@components/ComponentLoader';
 import { body } from '../style.js';
 
-const UserOnboardingView = ({ calendlyURL, showCalendly, showBilling }) => {
+const UserOnboardingView = ({ calendlyURL, showCalendly, showBilling, planLoaded }) => {
     const history = useHistory();
     const taskInfo = useSelector(state => state.TASK_INFO);
     const { userInfo = {}, userInfoLoading } = taskInfo;
@@ -21,18 +21,8 @@ const UserOnboardingView = ({ calendlyURL, showCalendly, showBilling }) => {
     return (
         <div className={body + '    ' + 'p-relative pt-5'}>
             <div className="mainView mainSectionTopSpace">
-                {/* <div className="subHeaderTop">
-                    <div className="headerContent">
-                        <img className="img-fluid keelTopLogo" src={ASSETS_BASE_URL + "/images/common/keelIcon.svg"} onClick={() => history.push('/')} />
-                        <ProfileWidget />
-                    </div>
-                </div> */}
                 <Header headerText="">
                     <div className="headerView">
-                        {/* <div className={scheduleCallCta}>
-                        <span>Schedule Call</span>
-                        <img src={ASSETS_BASE_URL + "/images/common/callIcon.svg"} alt="home" />
-                    </div> */}
                     </div>
                 </Header>
                 <div className="planSelectionScreen">
@@ -42,10 +32,16 @@ const UserOnboardingView = ({ calendlyURL, showCalendly, showBilling }) => {
                             <a>Dashboard</a>
                         </div>
                     </div>
-                    <div className="schCallSection">
-                        <p>Schedule a free call to know how Keel can help you in your immigration journey.</p>
-                        <button onClick={scheduleCall}>Schedule Call</button>
-                    </div>
+                    {
+                        !planLoaded?<ComponentLoader/>:null
+                    }
+                    {
+                        planLoaded && showCalendly?<div className="schCallSection">
+                            <p>Schedule a free call to know how Keel can help you in your immigration journey.</p>
+                            <button onClick={scheduleCall}>Schedule Call</button>
+                        </div>:null
+                    }
+                    
                     <div className="planCardSection">
                         <div className="row">
                             <div className="col-md-4 col-12 mb-4">
