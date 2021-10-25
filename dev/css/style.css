@@ -8548,5 +8548,8 @@ div.DDContNew {
 :global(.is-contain) {
   display: none !important;
 }
+.LandbotPopup{display: none}
+.LandbotPopup.is-open{display: block}
+.LivechatLauncher { display: none !important}
 
 /* // ================ Page Loader   ================ */
