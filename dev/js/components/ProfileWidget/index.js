@@ -43,28 +43,28 @@ const ProfileWidget = () => {
     //   configUrl: 'https://chats.landbot.io/v3/H-973102-9X9CDMX47L0KP823/index.json'
     // });
     //setBotInstance(myLandbotpop);
-    var myLandbot;
-    function initLandbot() {
-      if (!myLandbot) {
-        var s = document.createElement('script');s.type = 'text/javascript';s.async = true;
-        s.addEventListener('load', function() {
-          var myLandbot = new Landbot.Livechat({
-            configUrl: 'https://chats.landbot.io/v3/H-973102-9X9CDMX47L0KP823/index.json',
-          });
-          setBotInstance(myLandbot);
-        });
-        s.src = 'https://static.landbot.io/landbot-3/landbot-3.0.0.js';
-        var x = document.getElementsByTagName('script')[0];
-        x.parentNode.insertBefore(s, x);
-      }
-    }
-    window.addEventListener('mouseover', initLandbot, { once: true });
-    window.addEventListener('touchstart', initLandbot, { once: true });
+    // var myLandbot;
+    // function initLandbot() {
+    //   if (!myLandbot) {
+    //     var s = document.createElement('script');s.type = 'text/javascript';s.async = true;
+    //     s.addEventListener('load', function() {
+    //       var myLandbot = new Landbot.Livechat({
+    //         configUrl: 'https://chats.landbot.io/v3/H-973102-9X9CDMX47L0KP823/index.json',
+    //       });
+    //       setBotInstance(myLandbot);
+    //     });
+    //     s.src = 'https://static.landbot.io/landbot-3/landbot-3.0.0.js';
+    //     var x = document.getElementsByTagName('script')[0];
+    //     x.parentNode.insertBefore(s, x);
+    //   }
+    // }
+    // window.addEventListener('mouseover', initLandbot, { once: true });
+    // window.addEventListener('touchstart', initLandbot, { once: true });
   },[])
 
   const handleHelpClick = ()=>{
-    if(landbotInstance){
-      landbotInstance.open();
+    if(myLandbot){
+      myLandbot.open();
     }
   }
 
