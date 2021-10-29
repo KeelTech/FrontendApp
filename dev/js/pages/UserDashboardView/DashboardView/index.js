@@ -77,8 +77,8 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly=false, showChat
     return (
         <div className={body + '    ' + 'p-relative pt-5 dashTaskSchSection '}>
             <div className="mainView mainSectionTopSpace">
-                <Header headerText={`Welcome ${first_name}`}>
-                </Header>
+                {/* <Header headerText={`Welcome ${first_name}`}>
+                </Header> */}
                 <div className={container}>
                     <div className={pendingTasks + ' ' + 'pandingLeftTask'}>
                         {taskListLoading?<ComponentLoader/>:null}

@@ -14,6 +14,7 @@ import UserOnboardingView from './UserOnboardingView';
 import BillingView from './BillingView';
 import SelectedPlanView from './SelectedPlanView';
 import ProfileView from './ProfileView';
+import Header from '@components/Header';
 
 let isCalendlyClosed= 0;
 const UserDashboardView = (props)=>{
@@ -142,6 +143,7 @@ const UserDashboardView = (props)=>{
 
     return(
         <div className={container + " " + 'mainContainer' }>
+            <Header></Header>
             <LeftMenuBar/>
             {
                 userInfoLoading && !id?<div className={loaderView}><LoadingWidget/></div>:renderRoutes()

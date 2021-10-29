@@ -11,6 +11,7 @@ import CreateTaskMobileView from '@pages/CreateTaskMobileView';
 import CustomerView from './CustomerView';
 import CustomerInfoView from './CustomerView/CustomerInfoView';
 import DocumentView from '@pages/UserDashboardView/DocumentValutView';
+import Header from '@components/Header';
 
 const UserDashboardView = ({ match }) => {
     const history = useHistory();
@@ -22,6 +23,7 @@ const UserDashboardView = ({ match }) => {
 
     return (
         <div className={container + " " + "agentMainContainer"}>
+            <Header></Header>
             <LeftMenuBar isAgent />
             <div className={body + ' ' + "mainContainerADD agentDashboardMain"}>
                 <Switch>
