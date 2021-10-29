@@ -6542,6 +6542,8 @@ span.userChatIco {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  min-height: 260px;
+      width: 100%;
 }
 
 .widgetCardMain {
@@ -6631,6 +6633,7 @@ span.userChatIco {
 .multiSelect {
   display: flex;
   align-items: flex-end;
+  flex-wrap: wrap;
 }
 
 .multiSelect button.taskButton {
@@ -8173,8 +8176,12 @@ div.DDContNew {
 }
 /* ============ Task Container  ============== */
 /* ============ Media Queries ============== */
-@media (min-width: 670px) {
+@media (max-width: 400px) {
+  .multiSelect button.taskButton{
+    margin-left: 0px;
+  }
 }
+
 @media (max-width: 767px) {
   .customEditProfile {
     min-width: 100%;
@@ -8262,6 +8269,7 @@ div.DDContNew {
     width: 100%;
     margin: 15px !important;
   }
+  
 }
 @media (max-width: 992px) {
   .accrdHead .alignEnd {
