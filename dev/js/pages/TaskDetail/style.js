@@ -138,6 +138,7 @@ width: 100%;
                 width: 70px;
                 flex-shrink: 0;
                 margin-left: 10px;
+                
             }
         }
         .taskStatus{
