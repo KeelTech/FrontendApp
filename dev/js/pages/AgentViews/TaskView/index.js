@@ -99,13 +99,9 @@ const TaskView = (props) => {
                 {/* <div className="addStaticBtn">
                             <button clickHandler={addMoreTasks}>Add New Task</button>
                         </div> */}
-                <Header headerText="Task" isAgent>
-                    <div className="headerView">
-                        {/* <CustomButton text="Add New Task" clickHandler={addMoreTasks} margin="0px 16px 0px 0px" /> */}
-                        <NotificationWidget />
-                        {/* <ProfileWidget/> */}
-                    </div>
-                </Header>
+                {/* <Header headerText="Task" isAgent>
+                    
+                </Header> */}
                 <div className={container + '    ' +"taskHandlersCnt"}>
                     <div className={tasksView}>
                         <div className="tasksCta">

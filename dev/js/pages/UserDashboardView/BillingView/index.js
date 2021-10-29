@@ -60,14 +60,9 @@ const BillingView = () => {
                         <ProfileWidget />
                     </div>
                 </div> */}
-                <Header headerText="">
-                    <div className="headerView">
-                        {/* <div className={scheduleCallCta}>
-                        <span>Schedule Call</span>
-                        <img src={ASSETS_BASE_URL + "/images/common/callIcon.svg"} alt="home" />
-                    </div> */}
-                    </div>
-                </Header>
+                {/* <Header headerText="">
+                    
+                </Header> */}
                 {
                     pendingPaymentLoaded || loading ? <LoadingWidget /> : <PlanList first_name={first_name} planClick={planClick} planData={planListData} pendingPayment={pendingPayment} caseInfo={cases} refetchPaymentList={refetchPaymentList} />
                 }

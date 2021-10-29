@@ -23,7 +23,7 @@ const UserDashboardView = ({ match }) => {
 
     return (
         <div className={container + " " + "agentMainContainer"}>
-            <Header></Header>
+            <Header isAgent></Header>
             <LeftMenuBar isAgent />
             <div className={body + ' ' + "mainContainerADD agentDashboardMain"}>
                 <Switch>

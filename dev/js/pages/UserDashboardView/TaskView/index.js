@@ -98,12 +98,9 @@ const TaskView = () => {
                         <ProfileWidget />
                     </div>
                 </div> */}
-                <Header headerText="Task">
-                    <div className="headerView">
-                        <NotificationWidget />
-                        {/* <ProfileWidget/> */}
-                    </div>
-                </Header>
+                {/* <Header headerText="Task">
+                    
+                </Header> */}
                 <div className={container + " " + "UserDashBoardMain"}>
                     <div className={tasksView + " " + "taskViewMainCust"}>
                         <div className="tasksCta">

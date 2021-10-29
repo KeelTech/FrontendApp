@@ -6,7 +6,7 @@ const AgentDashboardView = ()=>{
     return(
         <div className={body}>
             <div className="mainView mainSectionTopSpace">
-                <Header headerText="Welcome Shubh!">
+                {/* <Header headerText="Welcome Shubh!">
                     <div className="headerView">
                         <div className={scheduleCallCta}>
                             <span>Schedule Call</span>
@@ -14,7 +14,7 @@ const AgentDashboardView = ()=>{
                         </div>
                     </div>
                     
-                </Header>
+                </Header> */}
             </div>
         </div>
     )

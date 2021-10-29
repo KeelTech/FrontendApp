@@ -229,15 +229,13 @@ const TaskView = (props) => {
                         <ProfileWidget />
                     </div>
                 </div> */}
-                <Header headerText="All your documents are safe with us!">
+                {/* <Header headerText="All your documents are safe with us!">
                     <div className="headerView">
                         <div className={uploadMobileCta}>
                             <CustomButton text="Upload Document" icon={`${ASSETS_BASE_URL}/images/common/uploadedDocs.svg`} clickHandler={toggleUploadModal} margin="0px 8px 0px 0px" padding="6px 20px" borderRadius="10px" backgroundColor="#363B64" fontSize="12px" />
                         </div>
-                        {/* <NotificationWidget/>
-                        <ProfileWidget/> */}
                     </div>
-                </Header>
+                </Header> */}
                 <div className={container}>
                     <CustomToaster {...toasterInfo} hideToaster={hideToaster} />
                     {

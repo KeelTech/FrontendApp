@@ -21,10 +21,10 @@ const UserOnboardingView = ({ calendlyURL, showCalendly, showBilling, planLoaded
     return (
         <div className={body + '    ' + 'p-relative pt-5'}>
             <div className="mainView mainSectionTopSpace">
-                <Header headerText="">
+                {/* <Header headerText="">
                     <div className="headerView">
                     </div>
-                </Header>
+                </Header> */}
                 <div className="planSelectionScreen">
                     <div className="dashMainHeading">
                         <h2>Welcome {first_name}</h2>

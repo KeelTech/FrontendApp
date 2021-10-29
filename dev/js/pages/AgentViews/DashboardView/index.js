@@ -78,8 +78,8 @@ const AgentDashboardView = () => {
   const { booked_count, in_progress_count, completed_count, earnings_count, task_count } = cases_count;
   return (
     <div className="mainView mainSectionTopSpace">
-      <Header headerText="Dashboard" isAgent>
-      </Header>
+      {/* <Header headerText="Dashboard" isAgent>
+      </Header> */}
       <div className={wrapper + " " + "consultDash agentPadding"}>
         <div className={container + " " + "consultDasLoad"}>
           <CustomToaster {...toasterInfo} hideToaster={hideToaster} />
