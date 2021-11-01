@@ -35,7 +35,7 @@ const client_dev = {
             "DHM_PRODUCTION": false,
             "DHM_STAGING": false,
             "ASSETS_BASE_URL": JSON.stringify("/assets"),
-            "API_BASE_URL": JSON.stringify(process.env.API_BASE_URL) || "https://getkeel.com/api",
+            "API_BASE_URL": JSON.stringify(process.env.API_BASE_URL) || "https://staging.getkeel.com/api",
             "STRIPE_API_KEY": JSON.stringify(process.env.STRIPE_API_KEY)
         }),
         new HtmlWebpackPlugin({
@@ -75,6 +75,11 @@ const client_prod = {
             filename: "style.[hash].css",
         }),
         new webpack.DefinePlugin({
+            "DHM_PRODUCTION": false,
+            "DHM_STAGING": false,
+            "ASSETS_BASE_URL": JSON.stringify("/assets"),
+            "API_BASE_URL": JSON.stringify(process.env.API_BASE_URL) || "https://app.getkeel.com/api",
+            "STRIPE_API_KEY": JSON.stringify(process.env.STRIPE_API_KEY)
         }),
         new HtmlWebpackPlugin({
             filename: 'index.new.ejs',
@@ -112,7 +117,7 @@ const client_staging = {
             "DHM_PRODUCTION": false,
             "DHM_STAGING": true,
             "ASSETS_BASE_URL": JSON.stringify("/assets"),
-            "API_BASE_URL": JSON.stringify(process.env.API_BASE_URL) || "https://getkeel.com/api",
+            "API_BASE_URL": JSON.stringify(process.env.API_BASE_URL) || "https://staging.getkeel.com/api",
             "STRIPE_API_KEY": JSON.stringify(process.env.STRIPE_API_KEY)
         }),
         new HtmlWebpackPlugin({

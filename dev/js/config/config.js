@@ -4,18 +4,18 @@ const BASE_CONFIG = {
 }
 
 const PROD_CONFIG = {
-    API_BASE_URL: "https://getkeel.com/api",
+    API_BASE_URL: "https://app.getkeel.com/api",
     env: "production",
     NDHMID: '@ndhm'
 }
 
 const STAGING_CONFIG = {
-    API_BASE_URL: "https://getkeel.com/api",
+    API_BASE_URL: "https://staging.getkeel.com/api",
     env: "staging",
 }
 
 const DEV_CONFIG = {
-    API_BASE_URL: "https://getkeel.com/api",
+    API_BASE_URL: "https://staging.getkeel.com/api",
     env: "dev",
 }
 
