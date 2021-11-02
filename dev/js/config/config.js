@@ -10,7 +10,7 @@ const PROD_CONFIG = {
 }
 
 const STAGING_CONFIG = {
-    API_BASE_URL: "https://staging.getkeel.com/api",
+    API_BASE_URL: "https://app.getkeel.com/api",
     env: "staging",
 }
 
