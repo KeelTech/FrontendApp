@@ -93,28 +93,33 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly=false, showChat
                 </Header>
                 <div className={container}>
                     <div className={pendingTasks + ' ' + 'pandingLeftTask'}>
-                        <div className="taskHeading">Pending Tasks</div>
                         {
                             userInfoLoading || taskListLoading ? <div className={loaderView}><LoadingWidget /></div>
-                                : <Fragment>
-                                    <div className="taskList">
-                                        {
-                                            taskList.length ?
-                                                taskList.slice(0, 3).map((val) => {
-                                                    const { task_id } = val;
-                                                    return (<TaskCard key={task_id} isView clickHandler={() => handleTaskClick(task_id)} data={val} />)
-                                                })
-                                                : <BlankScreen message="You have no pending tasks" />
-                                        }
-                                    </div>
+                                :null
+                        }
+                        {
+                            (!(userInfoLoading || taskListLoading) && showTasks)?
+                            <Fragment>
+                                <div className="taskHeading">Pending Tasks</div>
+                                <div className="taskList">
                                     {
-                                        taskList.length>0 && showTasks?
-                                            <div className="allTasks">
-                                            <div className="moreTasks" onClick={redirectToTaskList}>Show All</div>
-                                        </div>
-                                        :null
+                                        taskList.length ?
+                                            taskList.slice(0, 3).map((val) => {
+                                                const { task_id } = val;
+                                                return (<TaskCard key={task_id} isView clickHandler={() => handleTaskClick(task_id)} data={val} />)
+                                            })
+                                            : <BlankScreen message="You have no pending tasks" />
                                     }
-                                </Fragment>
+                                </div>
+                                {
+                                    taskList.length>0?
+                                        <div className="allTasks">
+                                        <div className="moreTasks" onClick={redirectToTaskList}>Show All</div>
+                                    </div>
+                                    :null
+                                }
+                            </Fragment>
+                            :null
                         }
                     </div>
                     <div className="chat">
