@@ -14,9 +14,6 @@ export const container = css`
         height: 100%;
         // border-radius: 4px;
     }
-    .onboardingView{
-        max-height: 400px;
-    }
     @media(max-width: ${tabScreenWidth}){
         padding: 20px;
         margin: 0px;
