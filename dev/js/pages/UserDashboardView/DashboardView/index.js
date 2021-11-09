@@ -78,39 +78,74 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly=false, showChat
                 {/* <Header headerText={`Welcome ${first_name}`}>
                 </Header> */}
                 <div className={container}>
-                    <div className={pendingTasks + ' ' + 'pandingLeftTask'}>
-                        {taskListLoading?<ComponentLoader/>:null}
-                        {
-                            (!(userInfoLoading || taskListLoading) && showTasks)?
-                            <Fragment>
-                                <div className="taskHeading">Pending Tasks</div>
-                                    <div className="taskList">
-                                        {
-                                            taskList.length ?
-                                                taskList.slice(0, 3).map((val) => {
-                                                    const { task_id } = val;
-                                                    return (<TaskCard key={task_id} isView clickHandler={() => handleTaskClick(task_id)} data={val} />)
-                                                })
-                                                : <BlankScreen message="You have no pending tasks" />
-                                        }
+                    {
+                        (!(userInfoLoading || taskListLoading) && !showTasks && !showChat)?
+                        <div className="row onboardingView">
+                            <div className="col-md-4 col-12 mb-4">
+                                <div className="planCards">
+                                    <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/step1.svg"} />
+                                    <div className="plnCardCont">
+                                        <h5>Schedule Calls  </h5>
+                                        <p>Get on a video call with licensed immigration consultant.</p>
                                     </div>
-                                    {
-                                        taskList.length>0?
-                                            <div className="allTasks">
-                                            <div className="moreTasks" onClick={redirectToTaskList}>Show All</div>
-                                        </div>
-                                        :null
-                                    }
-                            </Fragment>
-                            :null
-                        }
-                    </div>
-                    <div className="chat">
-                        {
-                            !planLoaded?<ComponentLoader/>:null
-                        }
-                        {planLoaded && caseId && userId && showChat? <ChatWidget caseId={caseId} currentUserId={userId} chatHeaderName={agentName} /> : ""}
-                    </div>
+                                </div>
+                                </div>
+                            <div className="col-md-4 col-12 mb-4">
+                                <div className="planCards">
+                                    <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/step2.svg"} />
+                                    <div className="plnCardCont">
+                                        <h5>Live Chat  </h5>
+                                        <p>Uninterrupted chat with Licensed consultant</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-4 col-12 mb-4">
+                                <div className="planCards">
+                                    <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/step3.svg"} />
+                                    <div className="plnCardCont">
+                                        <h5>End to end support  </h5>
+                                        <p>We handhold you throughout the process</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        :<Fragment>
+                            <div className={pendingTasks + ' ' + 'pandingLeftTask'}>
+                                {taskListLoading?<ComponentLoader/>:null}
+                                {
+                                    (!(userInfoLoading || taskListLoading) && showTasks)?
+                                    <Fragment>
+                                        <div className="taskHeading">Pending Tasks</div>
+                                            <div className="taskList">
+                                                {
+                                                    taskList.length ?
+                                                        taskList.slice(0, 3).map((val) => {
+                                                            const { task_id } = val;
+                                                            return (<TaskCard key={task_id} isView clickHandler={() => handleTaskClick(task_id)} data={val} />)
+                                                        })
+                                                        : <BlankScreen message="You have no pending tasks" />
+                                                }
+                                            </div>
+                                            {
+                                                taskList.length>0?
+                                                    <div className="allTasks">
+                                                    <div className="moreTasks" onClick={redirectToTaskList}>Show All</div>
+                                                </div>
+                                                :null
+                                            }
+                                    </Fragment>
+                                    :null
+                                }
+                            </div>
+                            <div className="chat">
+                                {
+                                    !planLoaded?<ComponentLoader/>:null
+                                }
+                                {planLoaded && caseId && userId && showChat? <ChatWidget caseId={caseId} currentUserId={userId} chatHeaderName={agentName} /> : ""}
+                            </div>
+                        </Fragment>
+                    }
+                    
                 </div>
             </div>
             {
