@@ -68,7 +68,7 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly=false, showChat
     }
 
     const scheduleCall = (url) => {
-        console.log({url});
+        console.log({ url });
         Calendly.initPopupWidget({ url });
     }
 
@@ -201,9 +201,7 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly=false, showChat
                             showCalendly?<div className="upcoming" onClick={()=>scheduleCall(calendlyURL)}><button><i class="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div>:null
                         }                        
                     </div>
-                }
-            </div>
-            :null
+                    : null
             }
         </div>
     )

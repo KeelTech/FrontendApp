@@ -8,6 +8,7 @@ import LoadingWidget from '@components/LoadingWidget';
 import { logoutUser } from '@actions';
 import { container } from "./style.js";
 import ProfileDropdown from "./ProfileDropdown.js";
+import NotificationWidget from '@components/NotificationWidget';
 
 const ProfileWidget = () => {
   const [isClicked, setIsClicked] = useState(false);
@@ -70,6 +71,7 @@ const ProfileWidget = () => {
 
   return (
     <div className="commonProfWidget">
+      <NotificationWidget/>
       <div className="getHelp" onClick={handleHelpClick}>
         <button>Get Help</button>
       </div>
