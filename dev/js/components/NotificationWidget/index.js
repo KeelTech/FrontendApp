@@ -1,9 +1,22 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import DetectClickOutside from '@helpers/DetectClickOutside.js'
+import { getNotification } from '@actions';
 import { container } from "./style.js";
 import NotificationDropdown from "./NotificationDropdown.js";
 
 const NotificationWidget = () => {
+
+  const taskInfo = useSelector(state=>state.TASK_INFO);
+  const { notificationList=[] } = taskInfo;
+
+
+  useEffect(()=>{
+    getNotification({}, null, (resp)=>{
+
+    });
+  },[]);
+  
   const notificationsList = [
     {
       id: 1,

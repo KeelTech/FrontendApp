@@ -1,4 +1,4 @@
-import { TASK_LIST_LOADING, SET_TASK_LIST, TASK_DETAIL_INFO, GET_USER_PROFILE, LOADING_USER_PROFILE, GET_FULL_USER_PROFILE, LOADING_FULL_USER_PROFILE, UPDATE_USER_PROFILE, SAVE_PLACE_INFO, SET_ACTIVE_TASK, CASE_DETAIL_LOADING, CASE_DETAILS, CALENDLY_URL_LOADING, FETCH_CALENDLY_URL, GET_SCHEDULE_DETAIL, FETCH_COUNTRY_LIST, GET_PLAN_COMPONENT } from '@constants/types';
+import { TASK_LIST_LOADING, SET_TASK_LIST, TASK_DETAIL_INFO, GET_USER_PROFILE, LOADING_USER_PROFILE, GET_FULL_USER_PROFILE, LOADING_FULL_USER_PROFILE, UPDATE_USER_PROFILE, SAVE_PLACE_INFO, SET_ACTIVE_TASK, CASE_DETAIL_LOADING, CASE_DETAILS, CALENDLY_URL_LOADING, FETCH_CALENDLY_URL, GET_SCHEDULE_DETAIL, FETCH_COUNTRY_LIST, GET_PLAN_COMPONENT, FETCH_NOTIFICATION } from '@constants/types';
 
 const defaultState = {
     taskListLoading: false,
@@ -22,7 +22,8 @@ const defaultState = {
     scheduleList: [],
     countryList: [],
     planComponents: [],
-    planLoaded: false
+    planLoaded: false,
+    notificationList: []
 }
 
 export default function (state = defaultState, action) {
@@ -150,6 +151,11 @@ export default function (state = defaultState, action) {
             let newState = {...state};
             newState.planComponents = action.payload;
             newState.planLoaded = true;
+            return newState;
+        }
+        case FETCH_NOTIFICATION: {
+            let newState = {...state};
+            newState.notificationList = action.payload;
             return newState;
         }
     }

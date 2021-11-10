@@ -1,4 +1,4 @@
-import { TASK_LIST_LOADING, SET_TASK_LIST, TASK_DETAIL_INFO, GET_USER_PROFILE,  LOADING_USER_PROFILE, GET_FULL_USER_PROFILE, LOADING_FULL_USER_PROFILE, UPDATE_USER_PROFILE, SAVE_PLACE_INFO, CASE_DETAIL_LOADING, CASE_DETAILS, CALENDLY_URL_LOADING, FETCH_CALENDLY_URL, GET_SCHEDULE_DETAIL, FETCH_COUNTRY_LIST, GET_PLAN_COMPONENT } from '@constants/types';
+import { TASK_LIST_LOADING, SET_TASK_LIST, TASK_DETAIL_INFO, GET_USER_PROFILE,  LOADING_USER_PROFILE, GET_FULL_USER_PROFILE, LOADING_FULL_USER_PROFILE, UPDATE_USER_PROFILE, SAVE_PLACE_INFO, CASE_DETAIL_LOADING, CASE_DETAILS, CALENDLY_URL_LOADING, FETCH_CALENDLY_URL, GET_SCHEDULE_DETAIL, FETCH_COUNTRY_LIST, GET_PLAN_COMPONENT, FETCH_NOTIFICATION } from '@constants/types';
 import { API_POST, API_GET } from '../../api/api.js';
 
 export const getTaskList = (dataParams, dispatch, cb=null)=>{
@@ -309,10 +309,26 @@ export const getPlansComponents = (dataParams, dispatch, cb=null)=>{
     API_GET(`${API_BASE_URL}/v1/plans/get-plan-components`, {
         ...dataParams
     }).then((response)=>{
-        console.log(response);
         if(response && response.status==1){
             dispatch({
                 type: GET_PLAN_COMPONENT,
+                payload: response.message||[]
+            })
+        }
+        if(cb)cb(response);
+    }).catch((e)=>{
+        if(cb) cb(null, true);
+    })
+}
+
+export const getNotification = (dataParams, dispatch, cb=null)=>{
+
+    API_GET(`${API_BASE_URL}/v1/notification/get-notifications`, {
+        ...dataParams
+    }).then((response)=>{
+        if(response && response.status==1){
+            dispatch({
+                type: FETCH_NOTIFICATION,
                 payload: response.message||[]
             })
         }
