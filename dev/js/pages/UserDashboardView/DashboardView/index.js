@@ -201,7 +201,9 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly=false, showChat
                             showCalendly?<div className="upcoming" onClick={()=>scheduleCall(calendlyURL)}><button><i class="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div>:null
                         }                        
                     </div>
-                    : null
+                }
+            </div>
+            :null
             }
         </div>
     )
