@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Header from '@components/Header';
 import { css } from '@emotion/css';
 
@@ -18,36 +19,31 @@ export const body = css`
 `
 
 const NotificationView = ()=>{
+    const taskInfo = useSelector(state=>state.TASK_INFO);
+    const { notificationList=[] } = taskInfo;
 
     return(
         <div className={body + '    ' + 'p-relative pt-5 dashTaskSchSection '}>
             <div className="mainView mainSectionTopSpace">
                 <Header />
                 <div className="pushNotification">
-                    <div className="pushCards">
-                        <div className="icoContent">
-                            <div className="notifyIcon">
-                                <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/video.svg"} alt="video" />
-                            </div>
-                            <div className="pushContent">
-                                <h2>New Meeting: Your meeting is starting in 5 minutes</h2>
-                                <p>5 mins ago</p>
-                            </div>
+                {
+                    notificationList.map((val)=>{
+                    const { id, seen, text } = val;
+                    return <div className={`pushCards ${seen?'':'clickedPush'}`} key={id}>
+                    <div className="icoContent">
+                        <div className="notifyIcon">
+                        <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/video.svg"} alt="video" />
                         </div>
-                        <button className="pushNotifyBtn">Join Meeting</button>
-                    </div>
-                    <div className="pushCards clickedPush">
-                        <div className="icoContent">
-                            <div className="notifyIcon">
-                                <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/video.svg"} alt="video" />
-                            </div>
-                            <div className="pushContent">
-                                <h2>New Meeting: Your meeting is starting in 5 minutes</h2>
-                                <p>5 mins ago</p>
-                            </div>
+                        <div className="pushContent">
+                        <h2>{text}</h2>
+                        {/* <p>5 mins ago</p> */}
                         </div>
-                        <button className="pushNotifyBtn">Join Meeting</button>
                     </div>
+                    {/* <button className="pushNotifyBtn">Join Meeting</button> */}
+                    </div>
+                    })
+                }
                 </div>
             </div>
         </div>
