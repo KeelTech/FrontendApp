@@ -8254,6 +8254,9 @@ div.DDContNew {
   }
 }
 @media (max-width: 520px) {
+  .row.onboardingView{
+    max-height: 100% !important;
+  }
   .accrdContent ul li {
     flex-direction: column;
     margin-bottom: 10px;
