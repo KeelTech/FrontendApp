@@ -47,6 +47,7 @@ const CustomerView = () => {
               :<Fragment>
                 <div className="desktopView">
                   <DesktopViewList handleCustomerClick={handleCustomerClick} caseList={caseList} />
+                  
                   {/* <div className="paginationBtn">
                     <button className="prevBtn">
                     <img className="img-fluid" src={ASSETS_BASE_URL+"/images/common/vector.svg"} alt="pagination" />
