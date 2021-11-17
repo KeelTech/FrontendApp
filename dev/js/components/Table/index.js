@@ -42,7 +42,7 @@ class Table extends Component {
 
     render() {
         return (
-            <table className={tableClass + " " + "tableMain"}>
+            <table className={tableClass + " " + "tableMain tableUpdated"}>
                 <thead className={headerClass + " " + "tableHeadMain"}>
                     <tr className={headerRowClass + " " + "tableRow"}>
                         {this.props.cols.map(col =>

@@ -43,7 +43,7 @@ export const rowItemClass = css`
     padding-right: 10px;
     padding-top: 0px;
     padding-bottom: 0px;
-    height: 40px;
+    height: 44px;
     font-style: normal;
     font-weight: normal;
     font-size: 12px;

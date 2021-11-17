@@ -66,8 +66,8 @@ export const capitalizeFirstLetter = (string) =>{
 
 export const statusStyle = props =>css`
     // background: ${props.bgColor};
-    background: ${props.bgColor};;
-    border: 1px solid ${props.bgBorder};
+    // background: ${props.bgColor};
+    // border: 1px solid ${props.bgBorder};
     padding: 0px 5px;
     color: ${props.bgBorder};
     width: 100%;
