@@ -18,10 +18,10 @@ const TaskDetailMobileView = (props)=>{
             <div className={`${body} ${mobileScrollView}`}>
                 <div className="mainView mainSectionTopSpace">
                     <Header headerText="">
-                        <div className="headerView">
+                        {/* <div className="headerView">
                             <NotificationWidget/>
                             <ProfileWidget/>
-                        </div>
+                        </div> */}
                     </Header>
                     <div className={taskMobileCont + " " + "tastMobileContNew"}>
                         <TaskDetail activeTask={taskId}/>

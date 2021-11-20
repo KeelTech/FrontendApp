@@ -44,10 +44,10 @@ const PlanDetail = (props) => {
                         <ProfileWidget />
                     </div>
                 </div> */}
-                <Header headerText="">
+                {/* <Header headerText="">
                     <div className="headerView">
                     </div>
-                </Header>
+                </Header> */}
                 {
                     selectedUpgradePlan && selectedUpgradePlan.id ? <SelectedPlanView selectedUpgradePlan={selectedUpgradePlan} redirectDashboard={redirectDashboard} first_name={first_name} planId={planId} />
                         : <LoadingWidget />

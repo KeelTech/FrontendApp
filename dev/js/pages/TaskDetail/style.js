@@ -135,6 +135,10 @@ width: 100%;
                 border-radius: 8px;
                 padding: 8px 12px;
                 cursor: pointer;
+                width: 70px;
+                flex-shrink: 0;
+                margin-left: 10px;
+                
             }
         }
         .taskStatus{

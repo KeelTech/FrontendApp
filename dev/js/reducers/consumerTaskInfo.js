@@ -138,6 +138,7 @@ export default function (state = defaultState, action) {
         case 'RESET_USER_INFO': {
             let newState = { ...state}
             newState.userInfo = {};
+            newState.planLoaded = false;
             return newState;
         }
         case FETCH_COUNTRY_LIST: {

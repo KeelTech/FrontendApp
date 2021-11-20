@@ -5,17 +5,15 @@ import { SET_MENUBAR_STATE, SET_ACTIVE_TASK } from '@constants/types';
 import { getTaskList } from '@actions';
 import TaskCard from '@components/TaskCard';
 import ChatWidget from '@components/ChatWidget';
-import Header from '@components/Header';
 import NotificationWidget from '@components/NotificationWidget';
-import ProfileWidget from '@components/ProfileWidget';
 import BlankScreen from '@components/BlankScreen';
-import LoadingWidget from '@components/LoadingWidget';
-import { loaderView, isMobileView } from '@constants';
+import { isMobileView } from '@constants';
 import { getFormattedDate, getFormattedTime } from '@helpers/utils.js';
+import ComponentLoader from '@components/ComponentLoader';
 import { container, pendingTasks, scheduleCallCta, upcomingSchedules } from './style.js';
 import { body } from '../style.js';
 
-const DashboardView = ({ scheduleList, calendlyURL, showCalendly=false, showChat=false, showTasks=false }) => {
+const DashboardView = ({ scheduleList, calendlyURL, showCalendly=false, showChat=false, showTasks=false, planLoaded=false }) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const taskInfo = useSelector(state => state.TASK_INFO);
@@ -77,65 +75,94 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly=false, showChat
     return (
         <div className={body + '    ' + 'p-relative pt-5 dashTaskSchSection '}>
             <div className="mainView mainSectionTopSpace">
-                {/* <div className="subHeaderTop">
-                    <div className="headerContent">
-                        <img className="img-fluid keelTopLogo" src={ASSETS_BASE_URL + "/images/common/keelIcon.svg"} alt="home" onClick={() => history.push('/')} />
-                        <ProfileWidget />
-                    </div>
-                </div> */}
-                <Header headerText={`Welcome ${first_name}`}>
-                    <div className="headerView">
-                        {/* <div className={scheduleCallCta}>
-                            <span>Schedule Call</span>
-                            <img src={ASSETS_BASE_URL + "/images/common/callIcon.svg"} alt="home" />
-                        </div> */}
-                    </div>
-                </Header>
+                {/* <Header headerText={`Welcome ${first_name}`}>
+                </Header> */}
                 <div className={container}>
-                    <div className={pendingTasks + ' ' + 'pandingLeftTask'}>
-                        {
-                            userInfoLoading || taskListLoading ? <div className={loaderView}><LoadingWidget /></div>
-                                :null
-                        }
-                        {
-                            (!(userInfoLoading || taskListLoading) && showTasks)?
-                            <Fragment>
-                                <div className="taskHeading">Pending Tasks</div>
-                                <div className="taskList">
-                                    {
-                                        taskList.length ?
-                                            taskList.slice(0, 3).map((val) => {
-                                                const { task_id } = val;
-                                                return (<TaskCard key={task_id} isView clickHandler={() => handleTaskClick(task_id)} data={val} />)
-                                            })
-                                            : <BlankScreen message="You have no pending tasks" />
-                                    }
-                                </div>
-                                {
-                                    taskList.length>0?
-                                        <div className="allTasks">
-                                        <div className="moreTasks" onClick={redirectToTaskList}>Show All</div>
+                    {
+                        (!(userInfoLoading || taskListLoading) && !showTasks && !showChat)?
+                        <div className="row onboardingView">
+                            <div className="col-md-4 col-12 mb-4">
+                                <div className="planCards">
+                                    <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/step1.svg"} />
+                                    <div className="plnCardCont">
+                                        <h5>Schedule Calls  </h5>
+                                        <p>Get on a video call with licensed immigration consultant.</p>
                                     </div>
+                                </div>
+                                </div>
+                            <div className="col-md-4 col-12 mb-4">
+                                <div className="planCards">
+                                    <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/step2.svg"} />
+                                    <div className="plnCardCont">
+                                        <h5>Live Chat  </h5>
+                                        <p>Uninterrupted chat with Licensed consultant</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-4 col-12 mb-4">
+                                <div className="planCards">
+                                    <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/step3.svg"} />
+                                    <div className="plnCardCont">
+                                        <h5>End to end support  </h5>
+                                        <p>We handhold you throughout the process</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        :<Fragment>
+                            <div className={pendingTasks + ' ' + 'pandingLeftTask'}>
+                                {taskListLoading?<ComponentLoader/>:null}
+                                {
+                                    (!(userInfoLoading || taskListLoading) && showTasks)?
+                                    <Fragment>
+                                        <div className="taskHeading">Pending Tasks</div>
+                                            <div className="taskList">
+                                                {
+                                                    taskList.length ?
+                                                        taskList.slice(0, 3).map((val) => {
+                                                            const { task_id } = val;
+                                                            return (<TaskCard key={task_id} isView clickHandler={() => handleTaskClick(task_id)} data={val} />)
+                                                        })
+                                                        : <BlankScreen message="You have no pending tasks" />
+                                                }
+                                            </div>
+                                            {
+                                                taskList.length>0?
+                                                    <div className="allTasks">
+                                                    <div className="moreTasks" onClick={redirectToTaskList}>Show All</div>
+                                                </div>
+                                                :null
+                                            }
+                                    </Fragment>
                                     :null
                                 }
-                            </Fragment>
-                            :null
-                        }
-                    </div>
-                    <div className="chat">
-                        {caseId && userId && showChat? <ChatWidget caseId={caseId} currentUserId={userId} chatHeaderName={agentName} /> : ""}
-                    </div>
+                            </div>
+                            <div className="chat">
+                                {
+                                    !planLoaded?<ComponentLoader/>:null
+                                }
+                                {planLoaded && caseId && userId && showChat? <ChatWidget caseId={caseId} currentUserId={userId} chatHeaderName={agentName} /> : ""}
+                            </div>
+                        </Fragment>
+                    }
+                    
                 </div>
             </div>
             {
-            showCalendly?
+                !planLoaded?<div className={upcomingSchedules+ " " +"sideScheduleCard"}  >
+                    <ComponentLoader/>
+                </div>
+                :null
+            }
+            {
+            planLoaded?
             <div className={upcomingSchedules+ " " +"sideScheduleCard"}  >
                 <div className="headerView">
                     <NotificationWidget />
                     {/* <ProfileWidget /> */}
                 </div>
                 {
-                    scheduleList.length?
+                    scheduleList.length && showCalendly?
                     <div className="upcoming mt-3" onClick={()=>scheduleCall(calendlyURL)}><button><i class="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div>
                     :null
                 }
@@ -170,7 +197,9 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly=false, showChat
                     :<div className="noMeeting">
                         <h5>No meetings scheduled</h5>
                         <img className="icon" src={ASSETS_BASE_URL + "/images/common/sch.svg"} alt="time" />
-                        <div className="upcoming" onClick={()=>scheduleCall(calendlyURL)}><button><i class="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div>
+                        {
+                            showCalendly?<div className="upcoming" onClick={()=>scheduleCall(calendlyURL)}><button><i class="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div>:null
+                        }                        
                     </div>
                 }
             </div>

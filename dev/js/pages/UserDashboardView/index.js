@@ -14,6 +14,7 @@ import UserOnboardingView from './UserOnboardingView';
 import BillingView from './BillingView';
 import SelectedPlanView from './SelectedPlanView';
 import ProfileView from './ProfileView';
+import Header from '@components/Header';
 
 let isCalendlyClosed= 0;
 const UserDashboardView = (props)=>{
@@ -59,6 +60,7 @@ const UserDashboardView = (props)=>{
                         calendly_invitee_url: url
                     }
                     scheduleCall(postDataParams, dispatch, (resp, req)=>{
+                        getPlansComponents({}, dispatch);
                         getCalendlyLink({}, dispatch);
                         fetchScheduleList();  
                     })
@@ -96,7 +98,7 @@ const UserDashboardView = (props)=>{
                 showBilling = true;
             }
         })
-        return { showTasks, showDocuments, showChat, showCalendly, showBilling };
+        return { showTasks, showDocuments, showChat, showCalendly, showBilling, planLoaded: planLoaded };
     },[planComponents])
 
     const { showTasks, showDocuments, showChat, showBilling, showCalendly } = showOptions;
@@ -107,9 +109,9 @@ const UserDashboardView = (props)=>{
             return <CustomerView {...props}/>;
         }else if(url.includes('dashboard') || url==='/'){
             if(isPlanPurchased){
-                return <DashboardView scheduleList={scheduleList} calendlyURL={calendlyURL} showCalendly={showCalendly} showChat={showChat} showTasks={showTasks}/>
+                return <DashboardView scheduleList={scheduleList} calendlyURL={calendlyURL} showCalendly={showCalendly} showChat={showChat} showTasks={showTasks} planLoaded={planLoaded}/>
             }else{
-                return <UserOnboardingView calendlyURL={calendlyURL} showCalendly={showCalendly}/>
+                return <UserOnboardingView calendlyURL={calendlyURL} showCalendly={showCalendly} planLoaded={planLoaded}/>
             }
         }else {
             return <Fragment>
@@ -141,6 +143,7 @@ const UserDashboardView = (props)=>{
 
     return(
         <div className={container + " " + 'mainContainer' }>
+            <Header></Header>
             <LeftMenuBar/>
             {
                 userInfoLoading && !id?<div className={loaderView}><LoadingWidget/></div>:renderRoutes()

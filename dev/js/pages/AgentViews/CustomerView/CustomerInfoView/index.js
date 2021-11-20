@@ -97,8 +97,8 @@ function CustomerInfoView(props) {
   return (
     <div className={body}>
       <div className="mainView mainSectionTopSpace">
-        <Header headerText="Customer Details" isAgent>
-        </Header>
+        {/* <Header headerText="Customer Details" isAgent>
+        </Header> */}
       </div>
       {caseDetailLoading ? (
         <div>

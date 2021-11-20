@@ -35,12 +35,9 @@ const CustomerView = (props) => {
                         <ProfileWidget />
                     </div>
                 </div> */}
-                <Header headerText={isProfileExist ? "Profile" : ""}>
-                    <div className="headerView">
-                        {/* <NotificationWidget/> */}
-                        {/* <ProfileWidget/> */}
-                    </div>
-                </Header>
+                {/* <Header headerText={isProfileExist ? "Profile" : ""}>
+                    
+                </Header> */}
                 <div className="customerView">
                     <CreateProfile isProfileView {...props} />
                 </div>

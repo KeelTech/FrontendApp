@@ -2,7 +2,7 @@ import { css } from '@emotion/css'
 import { primaryFont, tabScreenWidth } from '@constants';
 
 export const container = css`
-    width: 100%;
+    // width: 100%;
 `
 export const desktopView = css`
     margin: 30px 26px;

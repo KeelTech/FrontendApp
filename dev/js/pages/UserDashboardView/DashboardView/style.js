@@ -14,6 +14,9 @@ export const container = css`
         height: 100%;
         // border-radius: 4px;
     }
+    .onboardingView{
+        max-height: 400px;
+    }
     @media(max-width: ${tabScreenWidth}){
         padding: 20px;
         margin: 0px;
@@ -24,6 +27,7 @@ export const container = css`
 `
 
 export const pendingTasks = css`
+    position: relative;
     max-width: 429px;
     margin-right: 22px;
     max-width: 40%;
@@ -34,8 +38,9 @@ export const pendingTasks = css`
         overflow-y: auto;
         max-height: calc(100vh - 240px);
         // box-shadow: 2px 2px 8px #eae8ee;
-    border-radius: 4px;
-    padding:5px;
+        border-radius: 4px;
+        padding:5px;
+        position: relative;
     }
     .taskHeading{
         width: 100%;
@@ -134,6 +139,7 @@ export const scheduleCallCta = css`
 export const upcomingSchedules = css`
     // min-width: 240px;
     // min-height: 100vh;
+    position: relative;
     margin-top: 40px;
     padding: 0px 12px;
     display: none;
