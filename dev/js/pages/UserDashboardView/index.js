@@ -16,6 +16,7 @@ import SelectedPlanView from './SelectedPlanView';
 import ProfileView from './ProfileView';
 import Header from '@components/Header';
 import NotificationView from '@components/NotificationView';
+import NotificationWidget from '@components/NotificationView/notificationFloatingWidget.js'
 
 let isCalendlyClosed= 0;
 const UserDashboardView = (props)=>{
@@ -153,6 +154,7 @@ const UserDashboardView = (props)=>{
             {
                 userInfoLoading && !id?<div className={loaderView}><LoadingWidget/></div>:renderRoutes()
             }
+            <NotificationWidget/>
             {isPlanPurchased && user && case_id && showChat && <FloatingChatWidget caseId={case_id} currentUserId={user} chatHeaderName={agentName}/>}
         </div>
     )

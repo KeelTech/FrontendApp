@@ -322,16 +322,30 @@ export const getPlansComponents = (dataParams, dispatch, cb=null)=>{
 }
 
 export const getNotification = (dataParams, dispatch, cb=null)=>{
-
-    API_GET(`${API_BASE_URL}/v1/notification/get-notifications`, {
-        ...dataParams
-    }).then((response)=>{
+    let url = `${API_BASE_URL}/v1/notification/get-notifications`
+    if(dataParams && dataParams.recent){
+        url+=`?recent=true`;
+    }
+    API_GET(url).then((response)=>{
         if(response && response.status==1){
-            dispatch({
-                type: FETCH_NOTIFICATION,
-                payload: response.message||[]
-            })
+            if(dataParams && dataParams.recent && cb){
+                url+=`?recent=true`;
+                cb(response.data||{});
+            }else{
+                dispatch({
+                    type: FETCH_NOTIFICATION,
+                    payload: response.message||[]
+                })
+            }
         }
+    }).catch((e)=>{
+        if(cb) cb(null, true);
+    })
+}
+
+export const readNotification = (dataParams, dispatch, cb=null)=>{
+    const { id } = dataParams;
+    API_POST(`${API_BASE_URL}/v1/notification/mark-notification/${id}`, {}).then((response)=>{
         if(cb)cb(response);
     }).catch((e)=>{
         if(cb) cb(null, true);

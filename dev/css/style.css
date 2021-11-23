@@ -7806,6 +7806,18 @@ input[type="number"] {
   padding: 12px;
   margin-bottom: 20px;
 }
+.floatingNorificationCont{
+  width: 100%;
+  position: relative;
+}
+.floatingNorificationCont .cross{
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 99;
+  height: 24px;
+  width: 24px;
+}
 
 .clickedPush .notifyIcon:before {
   display: none;
@@ -7815,6 +7827,9 @@ input[type="number"] {
 }
 .clickedPush .notifyIcon img{
   filter: grayscale(1);
+}
+.floatingWidget{
+  margin-bottom: 0px;
 }
 .pushContent h2 {
   color: #6C757D;
