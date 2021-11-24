@@ -35,7 +35,7 @@ const UserDashboardView = (props)=>{
         fetchScheduleList();
         if(!planLoaded){
             getPlansComponents({}, dispatch);
-            getNotification();
+            getNotification({}, dispatch);
         }
         function isCalendlyEvent(e) {
             return e.data.event &&

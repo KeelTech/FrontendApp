@@ -33,7 +33,7 @@ const NotificationDropdown = () => {
       <div>
         <div className="pushNotification">
           {
-            notificationList.map((val)=>{
+            notificationList.slice(0, 3).map((val)=>{
               const { id, seen, text } = val;
               return <div className={`pushCards ${seen?'':'clickedPush'}`} key={id} onClick={()=>clickHandler(val)}>
               <div className="icoContent">
@@ -50,6 +50,9 @@ const NotificationDropdown = () => {
             })
           }
         </div>
+        {
+          notificationList.length>2?<div onClick={()=>history.push('/notification')}>View all</div>:null
+        }
       </div>
       {/* ============ static content dropdown  */}
     </div>

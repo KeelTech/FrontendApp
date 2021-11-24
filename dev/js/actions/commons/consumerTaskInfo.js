@@ -334,7 +334,7 @@ export const getNotification = (dataParams, dispatch, cb=null)=>{
             }else{
                 dispatch({
                     type: FETCH_NOTIFICATION,
-                    payload: response.message||[]
+                    payload: response.data||[]
                 })
             }
         }
