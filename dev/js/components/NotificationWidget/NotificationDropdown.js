@@ -23,14 +23,14 @@ const NotificationDropdown = () => {
   }
 
   return (
-    <div className={notification}>
+    <div className={notification + " " + "testify"}>
       <div className={header}>
         <h2>NOTIFICATIONS</h2>
         {/* ============ static content dropdown  */}
 
         {/* <button>Mark as read</button> */}
       </div>
-      <div>
+      <div className="dropNotification">
         <div className="pushNotification">
           {
             notificationList.slice(0, 3).map((val)=>{
@@ -51,7 +51,7 @@ const NotificationDropdown = () => {
           }
         </div>
         {
-          notificationList.length>2?<div onClick={()=>history.push('/notification')}>View all</div>:null
+          notificationList.length>2?<div className="viewAllNotify" onClick={()=>history.push('/notification')}>View all</div>:null
         }
       </div>
       {/* ============ static content dropdown  */}

@@ -48,7 +48,7 @@ const ProfileWidget = () => {
     <div className="commonProfWidget">
       <NotificationWidget/>
       <div className="getHelp" onClick={handleHelpClick}>
-        <button>Get Help</button>
+        <button>Help</button>
       </div>
       <div
         className={container}

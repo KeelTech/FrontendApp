@@ -43,6 +43,7 @@ export const notification = css`
 
   @media (max-width: ${mobileScreenWidth}) {
     width: 300px;
+    transform: translate(25%, 0%);
   }
   &:before {
     content: "";
