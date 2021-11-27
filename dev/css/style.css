@@ -7803,7 +7803,13 @@ input[type="number"] {
 .dropNotification {
   padding: 12px;
 }
-
+.notificationLoading{
+  position: relative;
+  height: 64px;
+  margin-bottom: 20px;
+  width: 100%;
+  background-color: #FFF;
+}
 .viewAllNotify {
   text-align: center;
   color: #4267B2;

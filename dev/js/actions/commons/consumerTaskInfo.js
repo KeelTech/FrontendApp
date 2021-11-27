@@ -1,4 +1,4 @@
-import { TASK_LIST_LOADING, SET_TASK_LIST, TASK_DETAIL_INFO, GET_USER_PROFILE,  LOADING_USER_PROFILE, GET_FULL_USER_PROFILE, LOADING_FULL_USER_PROFILE, UPDATE_USER_PROFILE, SAVE_PLACE_INFO, CASE_DETAIL_LOADING, CASE_DETAILS, CALENDLY_URL_LOADING, FETCH_CALENDLY_URL, GET_SCHEDULE_DETAIL, FETCH_COUNTRY_LIST, GET_PLAN_COMPONENT, FETCH_NOTIFICATION, TOGGLE_NOTIFICATION_CHAT } from '@constants/types';
+import { TASK_LIST_LOADING, SET_TASK_LIST, TASK_DETAIL_INFO, GET_USER_PROFILE,  LOADING_USER_PROFILE, GET_FULL_USER_PROFILE, LOADING_FULL_USER_PROFILE, UPDATE_USER_PROFILE, SAVE_PLACE_INFO, CASE_DETAIL_LOADING, CASE_DETAILS, CALENDLY_URL_LOADING, FETCH_CALENDLY_URL, GET_SCHEDULE_DETAIL, FETCH_COUNTRY_LIST, GET_PLAN_COMPONENT, FETCH_NOTIFICATION, TOGGLE_NOTIFICATION_CHAT, NOTIFICATION_LOADING } from '@constants/types';
 import { API_POST, API_GET } from '../../api/api.js';
 
 export const getTaskList = (dataParams, dispatch, cb=null)=>{
@@ -325,6 +325,11 @@ export const getNotification = (dataParams, dispatch, cb=null)=>{
     let url = `${API_BASE_URL}/v1/notification/get-notifications`
     if(dataParams && dataParams.recent){
         url+=`?recent=true`;
+    }else{
+        dispatch({
+            type: NOTIFICATION_LOADING,
+            payload: true
+        })
     }
     API_GET(url).then((response)=>{
         if(response && response.status==1){
@@ -332,6 +337,10 @@ export const getNotification = (dataParams, dispatch, cb=null)=>{
                 url+=`?recent=true`;
                 cb(response.data||{});
             }else{
+                dispatch({
+                    type: NOTIFICATION_LOADING,
+                    payload: false
+                })
                 dispatch({
                     type: FETCH_NOTIFICATION,
                     payload: response.data||[]
