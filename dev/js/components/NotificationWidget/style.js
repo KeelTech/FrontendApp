@@ -9,7 +9,7 @@ export const container = css`
   height: 40px;
   width: 37px;
   position: relative;
-  background: #fcfcfc;
+  background: #ffcfc;
   box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
   border-radius: 4px;
   img {
@@ -32,7 +32,7 @@ export const notification = css`
   color: #363b64;
   cursor: default;
   z-index: 99;
-  background-color: #fcfcfc;
+  background-color: white;
   position: absolute;
   top: 56px;
   right: -55px;
@@ -43,6 +43,7 @@ export const notification = css`
 
   @media (max-width: ${mobileScreenWidth}) {
     width: 300px;
+    transform: translate(25%, 0%);
   }
   &:before {
     content: "";

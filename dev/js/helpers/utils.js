@@ -98,3 +98,18 @@ export const renderStatusText = (val) =>{
     }
     return <span className={statusStyle({ bgColor,bgBorder })}>{status}</span>
 }
+
+export const renderNotificationIcons = (val)=>{
+    let icon =''
+    const { category='' } = val||{};
+    if(category=='TASKS'){
+        icon = `${ASSETS_BASE_URL}/images/task_notification.svg`;
+    }else if(category=='DOCUMENT'){
+        icon = `${ASSETS_BASE_URL}/images/document.svg`;
+    }else if(category=='CHATS'){
+        icon = `${ASSETS_BASE_URL}/images/message_notification.svg`;
+    }else if(category=='HOME'){
+        icon = `${ASSETS_BASE_URL}/images/document.svg`;
+    }
+    return icon;
+}

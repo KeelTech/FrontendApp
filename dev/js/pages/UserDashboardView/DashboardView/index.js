@@ -5,7 +5,7 @@ import { SET_MENUBAR_STATE, SET_ACTIVE_TASK } from '@constants/types';
 import { getTaskList } from '@actions';
 import TaskCard from '@components/TaskCard';
 import ChatWidget from '@components/ChatWidget';
-import NotificationWidget from '@components/NotificationWidget';
+//import NotificationWidget from '@components/NotificationWidget';
 import BlankScreen from '@components/BlankScreen';
 import { isMobileView } from '@constants';
 import { getFormattedDate, getFormattedTime } from '@helpers/utils.js';
@@ -68,7 +68,7 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly=false, showChat
     }
 
     const scheduleCall = (url) => {
-        console.log({url});
+        console.log({ url });
         Calendly.initPopupWidget({ url });
     }
 
@@ -158,7 +158,7 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly=false, showChat
             planLoaded?
             <div className={upcomingSchedules+ " " +"sideScheduleCard"}  >
                 <div className="headerView">
-                    <NotificationWidget />
+                    {/* <NotificationWidget /> */}
                     {/* <ProfileWidget /> */}
                 </div>
                 {

@@ -2,7 +2,7 @@ import React, { useEffect, Fragment, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import FloatingChatWidget from '@components/FloatingChatWidget';
 import LeftMenuBar from '@components/LeftMenuBar';
-import { getUserProfile, getCalendlyLink, scheduleCall, getScheduleDetail, getPlansComponents } from '@actions';
+import { getUserProfile, getCalendlyLink, scheduleCall, getScheduleDetail, getPlansComponents, getNotification } from '@actions';
 import { loaderView } from '@constants';
 import LoadingWidget from '@components/LoadingWidget';
 import { container } from './style.js';
@@ -15,13 +15,15 @@ import BillingView from './BillingView';
 import SelectedPlanView from './SelectedPlanView';
 import ProfileView from './ProfileView';
 import Header from '@components/Header';
+import NotificationView from '@components/NotificationView';
+import NotificationWidget from '@components/NotificationView/notificationFloatingWidget.js'
 
 let isCalendlyClosed= 0;
 const UserDashboardView = (props)=>{
     const url  = props.match.path;
     const dispatch = useDispatch();
     const taskInfo = useSelector(state=>state.TASK_INFO);
-    const { userInfo={}, userInfoLoading, calendlyURL, scheduleList, planComponents=[], planLoaded=false } = taskInfo;
+    const { userInfo={}, userInfoLoading, calendlyURL, scheduleList, planComponents=[], planLoaded=false, showNotificationChatWidget=false } = taskInfo;
     const { cases={}, profile_exists, agent={}, profile={} } = userInfo;
     const { id } = profile;
     const { case_id, user } = cases;
@@ -33,6 +35,7 @@ const UserDashboardView = (props)=>{
         fetchScheduleList();
         if(!planLoaded){
             getPlansComponents({}, dispatch);
+            getNotification({}, dispatch);
         }
         function isCalendlyEvent(e) {
             return e.data.event &&
@@ -136,6 +139,9 @@ const UserDashboardView = (props)=>{
                 {
                     url.includes('plan') && showBilling && <SelectedPlanView {...props}/>
                 }
+                {
+                    url.includes('notification') && <NotificationView {...props}/>
+                }
             </Fragment>
         }
 
@@ -148,7 +154,11 @@ const UserDashboardView = (props)=>{
             {
                 userInfoLoading && !id?<div className={loaderView}><LoadingWidget/></div>:renderRoutes()
             }
+            <NotificationWidget/>
             {isPlanPurchased && user && case_id && showChat && <FloatingChatWidget caseId={case_id} currentUserId={user} chatHeaderName={agentName}/>}
+            {
+                showNotificationChatWidget && <FloatingChatWidget caseId={case_id} currentUserId={user} chatHeaderName={agentName} isHideable/>
+            }
         </div>
     )
 }
