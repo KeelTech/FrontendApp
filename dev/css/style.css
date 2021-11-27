@@ -7823,6 +7823,7 @@ input[type="number"] {
   border-radius: 5px;
   padding: 12px;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 .floatingNorificationCont{
   width: 100%;

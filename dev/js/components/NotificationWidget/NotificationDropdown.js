@@ -1,25 +1,34 @@
 import React from "react";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { readNotification, toggleNotificationChat } from '@actions';
+import { renderNotificationIcons } from '@helpers/utils';
+import { isMobileView } from '@constants';
 import { notification, header, content, content__list, message } from "./style";
 
 const NotificationDropdown = () => {
   const taskInfo = useSelector(state=>state.TASK_INFO);
   const { notificationList=[] } = taskInfo;
-
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const clickHandler = (val)=>{
-      const { category, case_id } = val;
-      if(category=='TASKS'){
-          history.push('/tasks');
-      }else if(category=='DOCUMENT'){
-          history.push('/vault');
-      }else if(category=='CHATS'){
-          history.push('/');
-      }else if(category=='HOME'){
-          history.push('/');
-      }
+    const { category, id } = val;
+    readNotification({id}, null, ()=>{
+        if(category=='TASKS'){
+            history.push('/tasks');
+        }else if(category=='DOCUMENT'){
+            history.push('/vault');
+        }else if(category=='CHATS'){
+            if(isMobileView()){
+                toggleNotificationChat({value: true}, dispatch);   
+            }else{
+                history.push('/');
+            }
+        }else if(category=='HOME'){
+            history.push('/');
+        }
+    })
   }
 
   return (
@@ -35,10 +44,11 @@ const NotificationDropdown = () => {
           {
             notificationList.slice(0, 3).map((val)=>{
               const { id, seen, text } = val;
+              const icon = renderNotificationIcons(val);
               return <div className={`pushCards ${seen?'':'clickedPush'}`} key={id} onClick={()=>clickHandler(val)}>
               <div className="icoContent">
                 <div className="notifyIcon">
-                  <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/video.svg"} alt="video" />
+                  <img className="img-fluid" src={icon} alt="video" />
                 </div>
                 <div className="pushContent">
                   <h2>{text}</h2>

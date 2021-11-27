@@ -23,7 +23,7 @@ const UserDashboardView = (props)=>{
     const url  = props.match.path;
     const dispatch = useDispatch();
     const taskInfo = useSelector(state=>state.TASK_INFO);
-    const { userInfo={}, userInfoLoading, calendlyURL, scheduleList, planComponents=[], planLoaded=false } = taskInfo;
+    const { userInfo={}, userInfoLoading, calendlyURL, scheduleList, planComponents=[], planLoaded=false, showNotificationChatWidget=false } = taskInfo;
     const { cases={}, profile_exists, agent={}, profile={} } = userInfo;
     const { id } = profile;
     const { case_id, user } = cases;
@@ -156,6 +156,9 @@ const UserDashboardView = (props)=>{
             }
             <NotificationWidget/>
             {isPlanPurchased && user && case_id && showChat && <FloatingChatWidget caseId={case_id} currentUserId={user} chatHeaderName={agentName}/>}
+            {
+                showNotificationChatWidget && <FloatingChatWidget caseId={case_id} currentUserId={user} chatHeaderName={agentName} isHideable/>
+            }
         </div>
     )
 }

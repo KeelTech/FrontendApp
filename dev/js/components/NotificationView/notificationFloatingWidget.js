@@ -3,7 +3,9 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import ReactNotification, { store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
-import { getNotification, readNotification } from '@actions';
+import { getNotification, readNotification, toggleNotificationChat } from '@actions';
+import { renderNotificationIcons } from '@helpers/utils';
+import { isMobileView } from '@constants';
 
 const NotificationFloatingWidget = ()=>{
     const dispatch = useDispatch();
@@ -23,6 +25,7 @@ const NotificationFloatingWidget = ()=>{
         timeInterval.current = setInterval(()=>{
             getNotification({recent: true}, dispatch, (val)=>{
                 if(val && val.id){
+                    const icon = renderNotificationIcons(val);
                     try{
                         const { text } = val;
                         if(notificationId.current){
@@ -38,7 +41,7 @@ const NotificationFloatingWidget = ()=>{
                                         <div className={`pushCards clickedPush floatingWidget`} onClick={()=>clickHandler(val)}>
                                             <div className="icoContent">
                                                 <div className="notifyIcon">
-                                                <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/video.svg"} alt="video" />
+                                                <img className="img-fluid" src={icon} alt="video" />
                                                 </div>
                                                 <div className="pushContent">
                                                 <h2>{text}</h2>
@@ -81,7 +84,11 @@ const NotificationFloatingWidget = ()=>{
             }else if(category=='DOCUMENT'){
                 history.push('/vault');
             }else if(category=='CHATS'){
-                history.push('/');
+                if(isMobileView()){
+                    toggleNotificationChat({value: true}, dispatch);   
+                }else{
+                    history.push('/');
+                }
             }else if(category=='HOME'){
                 history.push('/');
             }
