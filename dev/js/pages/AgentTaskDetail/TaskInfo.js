@@ -300,14 +300,15 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
             }
             <FloatingChatWidget caseId={case_id} currentUserId={agent} chatHeaderName={first_name}/>
             <CustomToaster {...toasterInfo} hideToaster={hideToaster} />
-            <div className="topTaskHead">
+            <div className="topTaskHead forAgent">
                 <div className="taskName">
                     <img className="icon" src={ASSETS_BASE_URL + "/images/common/task.svg"} alt="task" />
                     <span className="tskMainHed">Task Name</span>
-                    <span className="status mobileView">{status_name}</span>
+                    {/* <span className="status mobileView">{status_name}</span> */}
+                    <span className="status ml-2">{status_name}</span>
                 </div>
                 <div className="statusCont">
-                    <span className="status">{status_name}</span>
+                    {/* <span className="status">{status_name}</span> */}
                     {renderStatusOptions(status_name)}
                 </div>
 
