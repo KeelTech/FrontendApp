@@ -45,7 +45,7 @@ const NotificationDropdown = () => {
             notificationList.slice(0, 3).map((val)=>{
               const { id, seen, text } = val;
               const icon = renderNotificationIcons(val);
-              return <div className={`pushCards ${seen?'':'clickedPush'}`} key={id} onClick={()=>clickHandler(val)}>
+              return <div className={`pushCards ${seen?'clickedPush':''}`} key={id} onClick={()=>clickHandler(val)}>
               <div className="icoContent">
                 <div className="notifyIcon">
                   <img className="img-fluid" src={icon} alt="video" />

@@ -69,7 +69,7 @@ const NotificationView = () => {
                                 const { id, seen, text, category } = val;
                                 const icon = renderNotificationIcons(val);
 
-                                return <div className={`pushCards ${seen ? '' : 'clickedPush'}`} key={id} onClick={() => clickHandler(val)}>
+                                return <div className={`pushCards ${seen ? 'clickedPush' : ''}`} key={id} onClick={() => clickHandler(val)}>
                                     <div className="icoContent">
                                         <div className="notifyIcon">
                                             <img className="img-fluid" src={icon} alt="video" />
