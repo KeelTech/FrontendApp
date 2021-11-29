@@ -265,7 +265,7 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
     }
 
     const renderStatusOptions = (val)=>{
-        if(val && val.includes('Progress')){
+        if(val && ( val.includes('Progress') || val.includes('Review'))){
             return <Fragment>
                 <span className="statusText" onClick={()=>handleTaskStatusUpdate(2)}>Mark as completed</span>
                 <span className="statusText" onClick={()=>handleTaskStatusUpdate(0)}>Mark as In Progress</span>
@@ -300,14 +300,15 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
             }
             <FloatingChatWidget caseId={case_id} currentUserId={agent} chatHeaderName={first_name}/>
             <CustomToaster {...toasterInfo} hideToaster={hideToaster} />
-            <div className="topTaskHead">
+            <div className="topTaskHead forAgent">
                 <div className="taskName">
                     <img className="icon" src={ASSETS_BASE_URL + "/images/common/task.svg"} alt="task" />
                     <span className="tskMainHed">Task Name</span>
-                    <span className="status mobileView">{status_name}</span>
+                    {/* <span className="status mobileView">{status_name}</span> */}
+                    <span className="status ml-2">{status_name}</span>
                 </div>
                 <div className="statusCont">
-                    <span className="status">{status_name}</span>
+                    {/* <span className="status">{status_name}</span> */}
                     {renderStatusOptions(status_name)}
                 </div>
 

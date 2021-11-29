@@ -6204,7 +6204,7 @@ img.img-fluid.keelTopLogo {
 }
 .taskScrollSection {
   overflow: auto;
-  height: calc(100% - 115px);
+  height: calc(100% - 138px);
   padding-right: 22px;
   margin-right: -12px;
 }

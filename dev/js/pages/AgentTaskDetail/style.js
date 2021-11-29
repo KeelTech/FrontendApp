@@ -113,8 +113,15 @@ width: 100%;
     @media(max-width: ${tabScreenWidth}){
         // background: unset;
         // padding: 0px 4px;
+        .topTaskHead {
+            &.forAgent{
+                flex-wrap:wrap;
+            }
+        }
         .statusCont{
-            display: none;
+            // display: none;
+            width:100%;
+            flex-shrink:0;
         }
         .loadingScrn{
             top: calc(50% - 100px);
