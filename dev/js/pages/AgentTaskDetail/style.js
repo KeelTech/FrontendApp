@@ -83,6 +83,17 @@ width: 100%;
         .backBtn{
             display: none;
         }
+        input{
+            ${inputField};
+            border: 1px solid #A098AE;
+            border-radius: 4px;
+            width: 100%;
+            padding: 8px !important;
+            font-size: 12px;
+            line-height: 18px;
+            color: #363B64;
+            background: #FFF;
+        }
     }
     .member{
         display: flex;

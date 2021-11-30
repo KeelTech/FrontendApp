@@ -141,6 +141,9 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
         updateTask(postDataParams, dispatch, (resp, err) => {
             setLoading(false);
             updateTaskStatus(resp, err, 'Failed, Try again later', 'Task Updated successfully');
+            if (!isMobileView()) {
+                refetchTaskList();
+            }
         })
     }
 
@@ -314,7 +317,8 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
 
             </div>
             <div className="signDoc">
-                <span className="sign">{title}</span>
+                <input type="text" value={title} onChange={(e) => setDataValues({ title: e.target.value })}/>
+                {/* <span className="sign">{title}</span> */}
                 <span className="backBtn" onClick={handleBackBtnClick}><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</span>
             </div>
             {/* <div className="taskStatus">Mark as completed</div> */}
