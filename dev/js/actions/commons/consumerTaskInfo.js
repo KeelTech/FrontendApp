@@ -368,3 +368,15 @@ export const toggleNotificationChat = (dataParams, dispatch) =>{
         payload: value
     })
 }
+
+export const getQuestions = ({}, dispatch, cb=null)=>{
+    let url = `${API_BASE_URL}/v1/questionnaire/get-questions`
+    API_GET(url).then((response)=>{
+        if(response && response.status==1){
+            if(cb) cb(response.data, null)
+        }
+    }).catch((e)=>{
+        if(cb) cb(null, true);
+    })
+}
+ 

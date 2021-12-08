@@ -63,7 +63,7 @@ function CustomerInfoView(props) {
     case_details = {},
     user_details = {},
     user_qualifications = [],
-    task_count = null,
+    pending_task_count=''
   } = caseDetails;
 
   const { first_name, last_name } = user_details;
@@ -128,7 +128,7 @@ function CustomerInfoView(props) {
                       src={ASSETS_BASE_URL + "/images/common/list.svg"}
                       alt="list"
                     />
-                    <p className="taskDetails">{task_count} Task Pending for review</p>
+                    <p className="taskDetails">{pending_task_count} Task Pending for review</p>
                   </div>
                 </div>
               </div>
