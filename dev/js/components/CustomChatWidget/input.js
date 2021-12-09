@@ -1,7 +1,7 @@
 import React, { Fragment, useRef, useEffect } from 'react';
 
 const InputView = ({data, setData})=>{
-    const { question_text, text_choice='', id, is_submitted=false } = data;
+    const { question_text, text_choice='', id, is_submitted=false, dataVal='' } = data;
     const focusRef = useRef();
 
     useEffect(()=>{
@@ -13,7 +13,7 @@ const InputView = ({data, setData})=>{
         if(e.key==="Enter" && text_choice){
             setData(id, {is_submitted: true})
         }else{
-            setData(id, {text_choice: e.target.value})
+            setData(id, {text_choice: e.target.value, dataVal: e.target.value})
         }
     }
     return(
@@ -45,7 +45,7 @@ const InputView = ({data, setData})=>{
                 </div>
                 <div className="msg-bubble">
                     <div className="msg-text">
-                        <p>{text_choice}</p>
+                        <p>{dataVal}</p>
                     </div>
                 </div>
             </div>

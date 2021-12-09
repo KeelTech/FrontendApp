@@ -5,7 +5,7 @@ import { getQuestions } from '@actions';
 import MessageView from './message.js';
 import OptionView from './option.js'
 import InputView from './input.js';
-import InfoView from './info.js';
+import CheckboxView from './checkbox.js';
 import { container } from './style.js';
 
 const CustomChatWidget = ()=>{
@@ -45,9 +45,10 @@ const CustomChatWidget = ()=>{
                 </header>
                 <main className="msger-chat">
                     {
+                        //filter(x=>x.answer_type_value==='Checkbox').
                         questionList.map((val, key)=>{
                             const { answer_type, is_submitted } = val;
-                            if(!is_submitted && (answer_type===1|| answer_type===3)){
+                            if(!is_submitted && (answer_type===1|| answer_type===2 || answer_type===3)){
                                 count++;
                             }
                             return <Fragment key={key}>
@@ -60,6 +61,11 @@ const CustomChatWidget = ()=>{
                                 {
                                     (count===1 || is_submitted) && answer_type===3?
                                     <OptionView data={val} setData={setData}/>
+                                    :null
+                                }
+                                {
+                                    (count===1 || is_submitted ) && answer_type===2?
+                                    <CheckboxView data={val} setData={setData}/>
                                     :null
                                 }
                             </Fragment>
