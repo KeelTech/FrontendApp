@@ -95,7 +95,7 @@ const CustomChatWidget = ()=>{
                         })
                     }
                     {
-                        showSubmit?<button onClick={clickSubmit}>Submit</button>:null
+                        showSubmit?<button className="submitCht" onClick={clickSubmit}>Submit</button>:null
                     }
                     {/* <MessageView data={{left:false}}/>
                     <InfoView left/>
