@@ -7,6 +7,21 @@ import InputView from './input.js';
 import CheckboxView from './checkbox.js';
 import { container } from './style.js';
 
+const SubmitCta = ({clickSubmit})=>{
+
+    useEffect(()=>{
+        try{
+            document.getElementsByClassName('msger-chat')[0].scrollTop= document.getElementsByClassName('msger-chat')[0].scrollHeight;
+        }catch(e){
+            
+        }
+    },[])
+
+    return(
+        <button className="submitCht" onClick={clickSubmit}>Submit</button>
+    )
+}
+
 const CustomChatWidget = ()=>{
 
     const [questionList, setQuestions] = useState([]);
@@ -95,7 +110,7 @@ const CustomChatWidget = ()=>{
                         })
                     }
                     {
-                        showSubmit?<button className="submitCht" onClick={clickSubmit}>Submit</button>:null
+                        showSubmit?<SubmitCta clickSubmit={clickSubmit}/>:null
                     }
                     {/* <MessageView data={{left:false}}/>
                     <InfoView left/>
