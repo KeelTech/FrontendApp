@@ -6,6 +6,11 @@ const InputView = ({data, setData})=>{
 
     useEffect(()=>{
         focusRef.current.focus();
+        try{
+            document.getElementsByClassName('msger-chat')[0].scrollTop= document.getElementsByClassName('msger-chat')[0].scrollHeight;
+        }catch(e){
+            
+        }
     },[])
     
     const saveData = (e)=>{

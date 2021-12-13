@@ -1,8 +1,7 @@
 import React, { useEffect, useState, Fragment } from 'react';
 
-import { getQuestions } from '@actions';
+import { getQuestions, submitQuestions } from '@actions';
 
-import MessageView from './message.js';
 import OptionView from './option.js'
 import InputView from './input.js';
 import CheckboxView from './checkbox.js';
@@ -11,7 +10,7 @@ import { container } from './style.js';
 const CustomChatWidget = ()=>{
 
     const [questionList, setQuestions] = useState([]);
-
+    const[showSubmit, setSubmit] = useState(false);
     useEffect(()=>{
         getQuestions({}, {}, (resp)=>{
             if(resp){
@@ -21,13 +20,37 @@ const CustomChatWidget = ()=>{
     },[])
 
     const setData = (id, value)=>{
-        const newQuestions = questionList.map((val)=>{
+        let questionIndex = 0;
+        const newQuestions = questionList.map((val, index)=>{
             if(val.id===id){
+                questionIndex = index;
                 return {...val, ...value}
             }
             return val;
         })
+        if(questionIndex===questionList.length-1){
+            setSubmit(true);
+        }
         setQuestions(newQuestions);
+    }
+
+    const clickSubmit = ()=>{
+        let dataParams = [];
+        questionList.map((val)=>{
+            const { dataVal='', id } = val;
+            dataParams.push({
+                question: id,
+                answer: dataVal
+            })
+        })
+        const postParams = {
+            answered_questionnaires: dataParams
+        }
+        console.log('data params is', postParams);
+        submitQuestions(postParams, null, (resp, error)=>{
+            console.log('resp is', resp);
+            console.log('error is ', error)
+        })
     }
 
     let count = 0;
@@ -70,6 +93,9 @@ const CustomChatWidget = ()=>{
                                 }
                             </Fragment>
                         })
+                    }
+                    {
+                        showSubmit?<button onClick={clickSubmit}>Submit</button>:null
                     }
                     {/* <MessageView data={{left:false}}/>
                     <InfoView left/>

@@ -1,7 +1,16 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 
 const OptionView = ({data, setData})=>{
     const { id, question_text, dropdown_choice, is_submitted=false, dataVal=[] } = data;
+
+    useEffect(()=>{
+        try{
+            document.getElementsByClassName('msger-chat')[0].scrollTop= document.getElementsByClassName('msger-chat')[0].scrollHeight;
+        }catch(e){
+            
+        }
+    },[])
+    
     return(
         <Fragment>
             <div className="chooseOpt">

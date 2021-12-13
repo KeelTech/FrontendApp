@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 
 const CheckboxView = ({data, setData})=>{
     const { id, checkbox_choice=[], question_text='', dataVal= [] } = data;
@@ -24,6 +24,14 @@ const CheckboxView = ({data, setData})=>{
             setData(id, {dataVal, is_submitted: true})
         }
     }
+
+    useEffect(()=>{
+        try{
+            document.getElementsByClassName('msger-chat')[0].scrollTop= document.getElementsByClassName('msger-chat')[0].scrollHeight;
+        }catch(e){
+            
+        }
+    },[])
 
     return(
         <div className={`msg left-msg`}>
