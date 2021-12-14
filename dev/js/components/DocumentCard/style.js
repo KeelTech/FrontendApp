@@ -41,7 +41,7 @@ export const container = css`
         margin-bottom: 6px;
     }
     .docTime{
-        font-size: 8px;
+        font-size: 10px;
     }
     .dotMenu{
         height: 24px;

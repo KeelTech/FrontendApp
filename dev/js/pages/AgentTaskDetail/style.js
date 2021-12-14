@@ -311,7 +311,7 @@ export const checklistSection = props=> css`
         padding: 0 5px;
     }
     .progressNo{
-        font-size: 8px;
+        font-size: 10px;
         line-height: 12px;
         display: flex;
         align-items: center;

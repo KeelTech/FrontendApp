@@ -10,7 +10,7 @@ export const container = css`
   width: 37px;
   position: relative;
   background: #ffcfc;
-  box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
+  // box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
   border-radius: 4px;
   img {
     width: 13px;

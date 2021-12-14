@@ -6153,6 +6153,9 @@ img.img-fluid.keelTopLogo {
   display: flex;
   align-items: center;
 }
+.getHelp{
+margin-left: 10px;
+}
 .getHelp button {
   border: 2px solid #4267b2;
   background: white;
