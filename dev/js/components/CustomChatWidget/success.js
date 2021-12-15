@@ -3,7 +3,7 @@ import React from 'react';
 const SuccessModal = () => {
 
     const mainPaymentModal = () => {
-        window.open('/');
+        window.open('/', '_self');
     }
 
     return (

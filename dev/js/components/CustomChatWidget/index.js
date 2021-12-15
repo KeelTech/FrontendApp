@@ -44,7 +44,7 @@ const CustomChatWidget = ()=>{
             }
             return val;
         })
-        if(questionIndex===questionList.length-1){
+        if(questionIndex===questionList.length-1 && value.is_submitted){
             setSubmit(true);
         }
         setQuestions(newQuestions);
