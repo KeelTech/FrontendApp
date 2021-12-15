@@ -19,7 +19,7 @@ const SubmitCta = ({clickSubmit})=>{
     },[])
 
     return(
-        <button className="submitCht" onClick={clickSubmit}>Submit</button>
+        <button className="submitCht finalSubmit" onClick={clickSubmit}>Submit</button>
     )
 }
 

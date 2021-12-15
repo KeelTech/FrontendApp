@@ -477,7 +477,7 @@ export const container = css`
   left: 0;
   height: 25px;
   width: 25px;
-  background-color: #eee;
+  background-color: #fcfcfe;
   border: 1px solid #FD5B5B;
   
 }

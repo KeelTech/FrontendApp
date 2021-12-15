@@ -1,17 +1,17 @@
 import React from 'react';
 
-const SuccessModal = ()=>{
+const SuccessModal = () => {
 
-    const mainPaymentModal = ()=>{
+    const mainPaymentModal = () => {
         window.open('/');
     }
 
-    return(
+    return (
         <div className="commonPopUpOverlay">
-            <div className="commonPopUpConten">
-                <img className="closePop" src={ASSETS_BASE_URL + "/images/common/x.svg"} alt="time" onClick={mainPaymentModal}/>
+            <div className="commonPopUpConten chatCustomPop">
+                <img className="closePop" src={ASSETS_BASE_URL + "/images/common/x.svg"} alt="time" onClick={mainPaymentModal} />
                 <div className="popCntrImg">
-                <img src={ASSETS_BASE_URL + "/images/common/right.svg"} alt="time" />
+                    <img src={ASSETS_BASE_URL + "/images/common/right.svg"} alt="time" />
                 </div>
                 <p>We’ve sucessfully received your response</p>
                 <p className="popSubPera">Redirect to homepage to access the service right now</p>

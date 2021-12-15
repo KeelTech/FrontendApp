@@ -7297,7 +7297,18 @@ button.disableBtn {
   text-align: center;
   max-width: 380px;
 }
+.commonPopUpConten.chatCustomPop {
+  padding: 15px;
+}
 
+.commonPopUpConten.chatCustomPop button {
+  background: #FD5B5B;
+}
+
+button.finalSubmit{
+  margin-left: 60px;
+    width: 200px;
+}
 .popBtn button {
   margin: 0 8px;
   min-width: 80px;
