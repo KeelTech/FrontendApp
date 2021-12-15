@@ -5,6 +5,7 @@ import { getQuestions, submitQuestions } from '@actions';
 import OptionView from './option.js'
 import InputView from './input.js';
 import CheckboxView from './checkbox.js';
+import SuccessModal from './success.js';
 import { container } from './style.js';
 
 const SubmitCta = ({clickSubmit})=>{
@@ -23,7 +24,7 @@ const SubmitCta = ({clickSubmit})=>{
 }
 
 const CustomChatWidget = ()=>{
-
+    const [showSuccess, setSuccess] = useState(false);
     const [questionList, setQuestions] = useState([]);
     const[showSubmit, setSubmit] = useState(false);
     useEffect(()=>{
@@ -50,6 +51,7 @@ const CustomChatWidget = ()=>{
     }
 
     const clickSubmit = ()=>{
+        setSuccess(true);
         let dataParams = [];
         questionList.map((val)=>{
             const { dataVal='', id } = val;
@@ -72,6 +74,7 @@ const CustomChatWidget = ()=>{
 
     return(
         <div className={container}>
+            {showSuccess?<SuccessModal/>:null}
             <section className="msger">
                 <header className="msger-header">
                     <div className="msger-header-title">
