@@ -55,7 +55,7 @@ export const container = css`
     }
     .msg {
         display: flex;
-        align-items: flex-end;
+        align-items: flex-start;
         margin-bottom: 10px;
     }
     .msg:last-of-type {
@@ -67,6 +67,7 @@ export const container = css`
     }
 }
     .msg-img {
+        flex-shrink:0;
         width: 50px;
         height: 50px;
         margin-right: 10px;
@@ -148,7 +149,7 @@ export const container = css`
     
     
         .chooseOpt {
-            margin: 30px 0;
+            // margin: 30px 0;
         }
         
         .chooseOpt h5 {
@@ -277,13 +278,14 @@ export const container = css`
         }
         .msg {
             display: flex;
-            align-items: flex-end;
+            align-items: flex-start;
             margin-bottom: 10px;
         }
         .msg:last-of-type {
             margin: 0;
         }
         .msg-img {
+            flex-shrink:0;
             width: 50px;
             height: 50px;
             margin-right: 10px;
@@ -366,8 +368,8 @@ export const container = css`
         
         
             .chooseOpt {
-                margin: 30px 0;
-                padding-left:60px;
+                // margin: 30px 0;
+                // padding-left:60px;
             }
             
             // .chooseOpt h5 {

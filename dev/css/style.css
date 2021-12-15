@@ -7299,6 +7299,15 @@ button.disableBtn {
 }
 .commonPopUpConten.chatCustomPop {
   padding: 15px;
+  height: 100%;
+    width: 100%;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .commonPopUpConten.chatCustomPop button {
@@ -7308,6 +7317,13 @@ button.disableBtn {
 button.finalSubmit{
   margin-left: 60px;
     width: 200px;
+}
+.chooseOpt.selectedBtnQus button:hover{
+  color: #FD5B5B !important;
+  background: white !important;
+}
+.chooseOpt.selectedBtnQus{
+  text-align: right;
 }
 .popBtn button {
   margin: 0 8px;

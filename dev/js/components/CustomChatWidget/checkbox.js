@@ -34,40 +34,57 @@ const CheckboxView = ({ data, setData }) => {
     }, [])
 
     return (
-        <div className={`msg left-msg`}>
-            <div className="msg-img" >
-            </div>
-            <div className="msg-bubble">
-                <div className="msg-text">
-                    <p>{question_text}</p>
-                    {
-                        dataVal && dataVal.length ?
-                            <Fragment>
-                                {
-                                    dataVal.map((val, key) => {
-                                        return <p key={key}>{val.checkbox_text}</p>
-                                    })
-                                }
-                            </Fragment>
-                            :
-                            <Fragment>
-                                {
-                                    currentChoice.map((val, key) => {
-                                        const { checkbox_text, selected = false } = val;
-                                        return <div className="nameInp" key={key}>
-                                            <label className="containerInput"><p>{checkbox_text}</p>
-                                                <input type="checkbox" checked={selected} onChange={() => handleChange(val)}/>
+        <Fragment>
+            <div className={`msg left-msg`}>
+                <div className="msg-img" >
+                </div>
+                <div className="msg-bubble">
+                    <div className="msg-text">
+                        <p>{question_text}</p>
+                        {
+                            dataVal && dataVal.length ?
+                                // <Fragment>
+                                //     {
+                                //         dataVal.map((val, key) => {
+                                //             return <p key={key}>{val.checkbox_text}</p>
+                                //         })
+                                //     }
+                                // </Fragment>
+                                null :
+                                <Fragment>
+                                    {
+                                        currentChoice.map((val, key) => {
+                                            const { checkbox_text, selected = false } = val;
+                                            return <div className="nameInp" key={key}>
+                                                <label className="containerInput"><p>{checkbox_text}</p>
+                                                    <input type="checkbox" checked={selected} onChange={() => handleChange(val)} />
                                                     <span className="checkmark"></span>
-                                            </label>
-                                        </div>
-                                    })
-                                }
-                                <button className="submitCht" onClick={saveData}>Submit</button>
-                            </Fragment>
-                    }
+                                                </label>
+                                            </div>
+                                        })
+                                    }
+                                    <button className="submitCht" onClick={saveData}>Submit</button>
+                                </Fragment>
+                        }
+                    </div>
                 </div>
             </div>
-        </div>
+            {dataVal && dataVal.length ?
+                <div className='msg right-msg'>
+                    <div className="msg-img" >
+                    </div>
+                    <div className="chooseOpt selectedBtnQus">
+                        {
+                            dataVal.map((val, key) => {
+                                return <button key={key}>{val.checkbox_text}</button>
+                            })
+                        }
+                    </div>
+                </div>
+                : null
+            }
+
+        </Fragment>
     )
 }
 
