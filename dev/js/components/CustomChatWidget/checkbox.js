@@ -35,7 +35,7 @@ const CheckboxView = ({ data, setData }) => {
 
     return (
         <div className={`msg left-msg`}>
-            <div className="msg-img">
+            <div className="msg-img" >
             </div>
             <div className="msg-bubble">
                 <div className="msg-text">

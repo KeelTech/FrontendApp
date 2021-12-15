@@ -5,7 +5,7 @@ export const container = css`
     --msger-bg: #fff;
     --border: 2px solid #ddd;
     --left-msg-bg: #ececec;
-    --right-msg-bg: #3e9ec9;
+    --right-msg-bg: #DEDEDE;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -61,6 +61,11 @@ export const container = css`
     .msg:last-of-type {
         margin: 0;
     }
+    .msg.right-msg{
+        .msg-img{
+        background-image:url("../../../../assets/images/common/chatAv.svg");
+    }
+}
     .msg-img {
         width: 50px;
         height: 50px;
@@ -100,7 +105,7 @@ export const container = css`
     }
     .right-msg .msg-bubble {
         background: var(--right-msg-bg);
-        color: #fff;
+        color: black;
         border-bottom-right-radius: 0;
     }
     .right-msg .msg-img {
@@ -154,15 +159,22 @@ export const container = css`
         }
         
         .chooseOpt button {
+            max-width:50%;
+            border:1px solid #FD5B5B;
             min-width: 150px;
             margin: 0 2px;
-            background: #0A66C2;
-            color: white;
-            border: none;
+            color: #FD5B5B;
+            background: white;
+            
             padding: 8px 5px;
             border-radius: 5px;
             font-family: inherit;
             text-transform: uppercase;
+            transition: all .3s ease;
+            &:hover{
+                background:#FD5B5B;
+                color:white;
+            }
         }
         
         .nameInp {
@@ -172,13 +184,13 @@ export const container = css`
         
         .nameInp input {
             width: 100%;
-            border: 2px solid #0a66c2;
+            border: 2px solid #FD5B5B;
             border-radius: 5px;
             padding: 10px 35px 10px 10px;
         }
         
         .nameInp svg {
-            fill: #0a66c2;
+            fill: #FD5B5B;
             position: absolute;
             right: 6px;
             top: 0;
@@ -202,7 +214,7 @@ export const container = css`
             --msger-bg: #fff;
             --border: 2px solid #ddd;
             --left-msg-bg: #ececec;
-            --right-msg-bg: #3e9ec9;
+            --right-msg-bg: #DEDEDE;
         }
         
         html {
@@ -278,7 +290,8 @@ export const container = css`
             background: #ddd;
             background-repeat: no-repeat;
             background-position: center;
-            background-size: cover;
+            background-size: auto;
+        background-image:url("../../../../assets/images/common/keel.svg");
             border-radius: 50%;
         }
         .msg-bubble {
@@ -310,7 +323,7 @@ export const container = css`
         }
         .right-msg .msg-bubble {
             background: var(--right-msg-bg);
-            color: #fff;
+            color: black;
             border-bottom-right-radius: 0;
         }
         .right-msg .msg-img {
@@ -364,16 +377,23 @@ export const container = css`
             // }
             
             .chooseOpt button {
+                max-width:50%;
+                border:1px solid #FD5B5B;
                 min-width: 150px;
                 margin: 0 2px;
-                background: #0A66C2;
-                color: white;
-                border: none;
+                color: #FD5B5B;
+                background: white;
+                
                 padding: 8px 5px;
                 border-radius: 5px;
                 font-family: inherit;
                 text-transform: uppercase;
                 font-size:14px;
+                transition: all .3s ease;
+                &:hover{
+                    background:#FD5B5B;
+                    color:white;
+                }
             }
             
             .nameInp {
@@ -383,13 +403,14 @@ export const container = css`
             
             .nameInp input {
                 width: 100%;
-                border: 2px solid #0a66c2;
+                border: 2px solid #FD5B5B;
                 border-radius: 5px;
                 padding: 10px 35px 10px 10px;
+                outline:none;
             }
             
             .nameInp svg {
-                fill: #0a66c2;
+                fill: #FD5B5B;
                 position: absolute;
                 right: 6px;
                 top: 0;
@@ -429,7 +450,7 @@ export const container = css`
 }
 }
 .submitCht{
-    background: #80C801;
+    background: #FD5B5B;
     font-size: 14px;
     padding: 8px 16px;
     margin-top: 18px;
@@ -457,7 +478,7 @@ export const container = css`
   height: 25px;
   width: 25px;
   background-color: #eee;
-  border: 1px solid #0a66c2;
+  border: 1px solid #FD5B5B;
   
 }
 
@@ -468,7 +489,7 @@ export const container = css`
 
 /* When the checkbox is checked, add a blue background */
 .containerInput input:checked ~ .checkmark {
-  background-color: #2196F3;
+  background-color: #FD5B5B;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */

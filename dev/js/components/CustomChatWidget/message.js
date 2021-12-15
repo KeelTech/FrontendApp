@@ -1,10 +1,12 @@
 import React from 'react';
+// import ChatIco from "../../../../assets/images/common/keel.svg"
 
 const Message = ({data})=>{
     const { left=false, is_active } = data;
     return(
         <div className={`msg ${left?'left-msg':'right-msg'}`}>
             <div className="msg-img msg-type">
+
             </div>
 
             <div className="msg-bubble">
