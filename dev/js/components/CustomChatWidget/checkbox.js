@@ -1,6 +1,6 @@
 import React, { useState, Fragment, useEffect } from 'react';
 
-const CheckboxView = ({ data, setData }) => {
+const CheckboxView = ({ data, setData, name }) => {
     const { id, checkbox_choice = [], question_text = '', dataVal = [] } = data;
     const [currentChoice, setCurrentChoice] = useState(checkbox_choice);
 
@@ -40,7 +40,7 @@ const CheckboxView = ({ data, setData }) => {
                 </div>
                 <div className="msg-bubble">
                     <div className="msg-text">
-                        <p>{question_text}</p>
+                        <p>{question_text.replaceAll('{name}', name)}</p>
                         {
                             dataVal && dataVal.length ?
                                 // <Fragment>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState, Fragment, useMemo } from 'react';
 
 import { getQuestions, submitQuestions } from '@actions';
 
@@ -72,6 +72,10 @@ const CustomChatWidget = ()=>{
 
     let count = 0;
 
+    const name = useMemo(()=>{
+        if(questionList && questionList.length) return questionList[0].dataVal||''
+        return ''
+    },[questionList])
     return(
         <div className={container}>
             {showSuccess?<SuccessModal/>:null}
@@ -96,17 +100,17 @@ const CustomChatWidget = ()=>{
 
                                 {
                                     (count===1 || is_submitted) && answer_type===1?
-                                    <InputView data={val} setData={setData}/>
+                                    <InputView data={val} setData={setData} name={name}/>
                                     :null
                                 }
                                 {
                                     (count===1 || is_submitted) && answer_type===3?
-                                    <OptionView data={val} setData={setData}/>
+                                    <OptionView data={val} setData={setData} name={name}/>
                                     :null
                                 }
                                 {
                                     (count===1 || is_submitted ) && answer_type===2?
-                                    <CheckboxView data={val} setData={setData}/>
+                                    <CheckboxView data={val} setData={setData} name={name}/>
                                     :null
                                 }
                             </Fragment>

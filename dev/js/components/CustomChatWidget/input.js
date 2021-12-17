@@ -1,6 +1,6 @@
 import React, { Fragment, useRef, useEffect } from 'react';
 
-const InputView = ({data, setData})=>{
+const InputView = ({data, setData, name})=>{
     const { question_text, text_choice='', id, is_submitted=false, dataVal='' } = data;
     const focusRef = useRef();
 
@@ -21,6 +21,7 @@ const InputView = ({data, setData})=>{
             setData(id, {text_choice: e.target.value, dataVal: e.target.value})
         }
     }
+    console.log({name});
     return(
         <Fragment>
         <div className={`msg left-msg`}>
@@ -28,11 +29,11 @@ const InputView = ({data, setData})=>{
             </div>
             <div className="msg-bubble">
                 <div className="msg-text">
-                    <p>{question_text}</p>
+                    <p>{question_text.replaceAll('{name}', name)}</p>
                     {
                         is_submitted?null:
                         <div className="nameInp">
-                            <input type="text" ref={focusRef} placeholder="Type your name here..." value={text_choice} onChange={saveData} onKeyDown={saveData}/>
+                            <input type="text" ref={focusRef} placeholder="Type here..." value={text_choice} onChange={saveData} onKeyDown={saveData}/>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" x="3650" y="3688" onClick={()=>setData(id, {is_submitted: true})}>
                                 <path fill="var(--form_inputs_border_color)"
                                     d="M1.1 21.757l22.7-9.73L1.1 2.3l.012 7.912 13.623 1.816-13.623 1.817-.01 7.912z">
