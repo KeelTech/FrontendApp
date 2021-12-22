@@ -29,8 +29,8 @@ const CustomChatWidget = ()=>{
     const[showSubmit, setSubmit] = useState(false);
     useEffect(()=>{
         getQuestions({}, {}, (resp)=>{
-            if(resp){
-                setQuestions(resp);
+            if(resp && resp.questions){
+                setQuestions(resp.questions);
             }
         })
     },[])
