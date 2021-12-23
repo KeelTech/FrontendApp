@@ -6569,6 +6569,15 @@ span.userChatIco {
   box-shadow: 0px 1px 2px 0px #e4e4e4;
   z-index: 1;
 }
+.chkBtn .check_container {
+  margin: auto;
+}
+
+.chkBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
 .withDropDown {
   position: relative;

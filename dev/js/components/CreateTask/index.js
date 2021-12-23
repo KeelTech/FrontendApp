@@ -261,7 +261,18 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
             </div>
             <div className={cta + " " + "deleteTask customEditFor"}>
                 <CustomButton text="Cancel" clickHandler={() => toggleAddTaskView(false)} />
-                <CustomButton text="Save Task" clickHandler={createTaskClicked} />
+                <div className='chkBtn'>
+                    <div className="formWrapper">
+                        <div className="checkBoxContainer">
+                            <label className="check_container">
+                                <p>Save as draft</p>
+                                <input type="checkbox" />
+                                <span className="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <CustomButton text="Save Task" clickHandler={createTaskClicked} />
+                </div>
             </div>
         </div>
     )
