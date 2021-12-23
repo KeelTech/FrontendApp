@@ -146,16 +146,16 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
                         <img className="icon" src={ASSETS_BASE_URL + "/images/common/task.svg"} alt="task" />
                         <span>Task Name</span>
                     </div>
-                    {/* <div className="withDropDown"> */}
+                    <div className="withDropDown">
                         <input type="text" placeholder="Enter Task Name" value={title} onChange={(e) => setDataValues({ title: e.target.value })} />
-                        {/* <div className='dropValue'>
+                        <div className='dropValue'>
                             <ul>
                                 <li>Dummy Data listing</li>
                                 <li>Dummy Data listing</li>
                                 <li>Dummy Data listing</li>
                             </ul>
                         </div>
-                    </div> */}
+                    </div>
                 </div>
                 <div className={taskStatus}>
                     <div className="view">
