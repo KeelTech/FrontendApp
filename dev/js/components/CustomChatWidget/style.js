@@ -518,4 +518,42 @@ export const container = css`
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+@media (max-width:767px){
+    .chooseOpt .gridbtns button{
+        font-size:12px;
+    }
+    .msger-chat{
+        font-size:12px;
+    }
+    .chooseOpt.selectedBtnQus button {
+        font-size: 12px;
+    }
+    .chooseOpt h5{
+        font-size:12px !important;
+        line-height:20px;
+    }
+    .msg.left-msg .chooseOpt .gridbtns button {
+        font-size: 12px;
+        width: 100%;
+        max-width: 100%;
+    }
+    c {}
+
+main.msger-chat .msg-img {
+    width: 35px;
+    height: 35px;
+    background-size: contain;
+}
+
+main.msger-chat .msg.left-msg .msg-img {
+    background-size: 80% !important;
+}
+span.checkmark {
+    height: 20px !important;
+    width: 20px !important;
+}
+
+
+.containerInput input:checked~.checkmark:after {top: 3px;left: 7px;}
+}
 `
