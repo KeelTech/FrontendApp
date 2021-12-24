@@ -8887,3 +8887,88 @@ li.infofield:last-child {
 .react-calendar{
   margin: auto;
 }
+/* // ================ doc upload   ================ */
+.uploadStatus {
+  margin-top: 50px;
+  margin-left: 90px;
+  width: 100%;
+}
+
+.uploadStatus h2 {
+  font-size: 18px;
+  color: #343A40;
+  font-weight: 600;
+}
+
+.uploadSection {
+  margin-top: 40px;
+}
+
+.uploadCardCont {
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.uploadCardCont h3 {
+  font-size: 16px;
+  color: #343A40;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.uloadCardWhite {
+}
+
+.uloadCardWhite ul {
+  list-style: none;
+  padding: 0;
+  background: #FFFFFF;
+  box-shadow: 4px 4px 8px #D8DCE4;
+  border-radius: 4px;
+  padding: 10px 10px 10px 20px;
+  position: relative;
+  margin-bottom:0px;
+}
+
+.uloadCardWhite li {
+  padding: 5px 0;
+}
+
+.customCheck_box .check_container p {
+  color: #8A95A8;
+  text-decoration: line-through;
+}
+
+.customCheck_box .check_container {
+  margin: 0;
+}
+
+.uloadCardWhite ul:before {content: '';position: absolute;width: 6px;height: 100%;background: #4267B2;border-radius: 10px;left: 0;top: 0;}
+.customCheck_box span.checkmark {
+  background: linear-gradient(180.38deg, #FFFFFF 0.33%, #F8F9FF 99.67%);
+  border: 0.5px solid #E0E0FF !important;
+  box-sizing: border-box;
+  box-shadow: 0px 8.57861px 7.96585px -3.06379px rgba(50, 77, 171, 0.12);
+  border-radius: 4.90206px;
+}
+
+.customCheck_box .check_container .checkmark:after {border-color:#4267B2;}
+.uploadCardCont:before {
+  height: auto;
+  width: 2px;
+  content: '';
+  position: absolute;
+  left: -45px;
+  top: 0;
+  bottom: -40px;
+  margin: auto;
+  background: #4267B2;
+}
+
+.uploadCardCont:after {content: '';position: absolute;width: 50px;height: 50px;background: #4267B2;border-radius: 40px;left: -70px;top: -14px;
+background-image: url(/assets/images/checkWhite.svg);
+background-repeat: no-repeat;
+background-position: center;
+}
+.uploadCardCont:last-child:before {height: calc(100% - 33px);}
+/* // ================ doc upload   ================ */
