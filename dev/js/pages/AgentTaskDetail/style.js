@@ -429,7 +429,7 @@ export const messageSection = css`
     }
     .time{
         font-weight: 600;
-        font-size: 8px;
+        font-size: 10px;
         line-height: 12px;
         color: #A098AE;
         padding-left: 4px;
