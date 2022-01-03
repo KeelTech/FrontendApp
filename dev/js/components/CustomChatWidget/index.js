@@ -52,17 +52,21 @@ const CustomChatWidget = ()=>{
 
     const clickSubmit = ()=>{
         setSuccess(true);
-        let dataParams = [];
+        const postParams = {}
         questionList.map((val)=>{
-            const { dataVal='', id } = val;
-            dataParams.push({
-                question: id,
-                answer: dataVal
-            })
+            const { dataVal='', id, key='' } = val;
+            if(Array.isArray(dataVal)){
+                let multipleSelectedIds=''
+                try{
+                    multipleSelectedIds = dataVal.map(x=>x.id).join(',');
+                }catch(e){
+                    multipleSelectedIds=''
+                }
+                postParams[key] = multipleSelectedIds;
+            }else{
+                postParams[key] = dataVal;
+            }
         })
-        const postParams = {
-            answered_questionnaires: dataParams
-        }
         console.log('data params is', postParams);
         submitQuestions(postParams, null, (resp, error)=>{
             console.log('resp is', resp);

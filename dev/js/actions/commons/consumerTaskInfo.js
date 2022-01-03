@@ -370,7 +370,7 @@ export const toggleNotificationChat = (dataParams, dispatch) =>{
 }
 
 export const getQuestions = ({}, dispatch, cb=null)=>{
-    let url = `${API_BASE_URL}/v1/questionnaire/get-questions`
+    let url = `${API_BASE_URL}/v1/questionnaire/get-questions?is_active=true`
     API_GET(url).then((response)=>{
         if(response && response.status==1){
             if(cb) cb(response.data, null)
