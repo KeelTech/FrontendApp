@@ -8,7 +8,8 @@
     "client": "webpack --progress --watch",
     "build-dev": "webpack --progress",
     "build-stg": "webpack --env.staging --progress",
-    "build-prod": "webpack --env.production --progress"
+    "build-prod": "webpack --env.production --progress",
+    "build-apk":  "webpack --config webpack.apk.js --progress --watch"
   },
   "repository": {
     "type": "git",

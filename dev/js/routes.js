@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+//import Loadable from 'react-loadable';
 import { connect } from 'react-redux';
 import CONFIG from './config';
 import CustomRoute from './CustomRoute.js';
@@ -14,6 +15,12 @@ import EmailVerification from './pages/UserLoginView/EmailConfirmation';
 import AgentDashBoardView from './pages/AgentViews';
 import HomePageView from './HomePageView.js';
 import NotFoundPage from './pages/NotFoundPage';
+import CustomChat from './components/CustomChatWidget';
+
+// const CustomChat = Loadable({
+//   loader: () => import('./components/CustomChatWidget'),
+//   loading: <p></p>,
+// });
 
 let CUSTOMER_ROUTES = [
   { path: '/', exact: true, component: HomePageView },
@@ -32,12 +39,14 @@ let CUSTOMER_ROUTES = [
   { path: '/edit/:id', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/notification', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/plan/detail/:id', exact: true, component: UserDashboardView, isPrivate: true },
+  { path: '/chat', exact: true, component: CustomChat, isPrivate: true },
   { path: '*', component: NotFoundPage, isPrivate: false  },
 ];
 
 let AGENT_ROUTES = [
   { path: '/', exact: true, component: AgentDashBoardView },
   { path: '/agent', component: AgentDashBoardView, isPrivate: true  },
+  { path: '/chat', exact: true, component: CustomChat, isPrivate: true },
   { path: '*', component: NotFoundPage, isPrivate: false  },
 ]
 
@@ -51,6 +60,7 @@ let LOGIN_ROUTES = [
   { path: '/linkedin', exact: true, component: LinkedInPopUp, isSignin: true },
   { path: '/agent/reset-password', exact: true, component: PasswordReset, isSignin: true },
   { path: '/agent/confirm-email', exact: true, component: EmailVerification, isSignin: true },
+  { path: '/chat', exact: true, component: CustomChat, isPrivate: true },
   { path: '*', component: NotFoundPage, isPrivate: false  },
 ]
 
