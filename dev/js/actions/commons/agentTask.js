@@ -176,3 +176,15 @@ export const updateProgram = (dataParams={}, dispatch, cb=null)=>{
         if(cb)cb(null, true);
     })
 }
+
+export const getTemplateList = (dataParams={}, dispatch, cb=null)=>{
+    API_GET(`${API_BASE_URL}v1/tasks/template-task`).then((response)=>{
+        if(response && response.data){
+            if(cb)cb(response.data, false);
+        }else{
+            if(cb)cb(null, true);    
+        }
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}

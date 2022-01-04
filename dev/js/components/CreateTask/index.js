@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { isMobileView } from '@constants';
 import CustomSelect from '@components/CustomSelect';
 import CustomButton from '@components/CustomButton';
-import { createTask } from '@actions';
+import { createTask, getTemplateList } from '@actions';
 import LoadingWidget from '@components/LoadingWidget';
 import CustomToaster from '@components/CustomToaster';
 import { loaderView } from '@constants';
@@ -49,6 +49,10 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
         isSuccess: false,
         msg: ''
     })
+
+    useEffect(()=>{
+        getTemplateList();
+    },[])
 
     const addMember = () => {
 
