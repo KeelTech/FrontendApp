@@ -53,16 +53,26 @@ const CustomChatWidget = ()=>{
     const clickSubmit = ()=>{
         setSuccess(true);
         const postParams = {}
+        console.log(questionList);
         questionList.map((val)=>{
-            const { dataVal='', id, key='' } = val;
+            const { dataVal='', id, key='', answer_type_value } = val;
             if(Array.isArray(dataVal)){
+                let answer_id='';
                 let multipleSelectedIds=''
                 try{
                     multipleSelectedIds = dataVal.map(x=>x.id).join(',');
                 }catch(e){
                     multipleSelectedIds=''
                 }
-                postParams[key] = multipleSelectedIds;
+                if(answer_type_value=="Checkbox"){
+                    answer_id = multipleSelectedIds;
+                }else{
+                    answer_id = dataVal && dataVal[0] && dataVal[0].id;
+                }
+                postParams[key] = {
+                    question_id: id,
+                    answer_id
+                }
             }else{
                 postParams[key] = dataVal;
             }
