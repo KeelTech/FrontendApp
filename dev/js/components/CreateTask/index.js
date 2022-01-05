@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { isMobileView } from '@constants';
+import DetectClickOutside from '@helpers/DetectClickOutside.js'
 import CustomSelect from '@components/CustomSelect';
 import CustomButton from '@components/CustomButton';
 import { createTask, getTemplateList } from '@actions';
 import LoadingWidget from '@components/LoadingWidget';
 import CustomToaster from '@components/CustomToaster';
 import { loaderView } from '@constants';
+import { getFormattedDate } from '@helpers/utils.js';
 import { container, taskStatus, messageSection, checkListCont, attachmentCont, cta } from './style.js';
 
 const PriorityList = [
@@ -24,6 +26,11 @@ const PriorityList = [
         val: 'Low'
     }
 ]
+const PriorityMapping = {
+    'High': 1,
+    'Medium': 2,
+    'Low': 0
+}
 
 const CreateTask = ({ toggleAddTaskView, caseId }) => {
     const dispatch = useDispatch();
@@ -35,14 +42,16 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
         due_date: '',
         check_list: {},
         tags: 'important',
-        case: caseId || ''
+        case: caseId || '',
+        is_template: false
     })
+    const templateRef = useRef();
     const [loading, setLoading] = useState(false);
     const [checkList, setCheckList] = useState('');
     const [showAddCheckList, setShowChecklist] = useState(false);
-
-    const { title, description, check_list, tags } = dataParams;
-
+    const [templateList, setTemplateList] = useState([]);
+    const { title, description, check_list, tags, is_template, due_date } = dataParams;
+    const [openTemplateView, setTemplateView] = useState(false);
     const [toasterInfo, setToasterInfo] = useState({
         isVisible: false,
         isError: false,
@@ -51,7 +60,14 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
     })
 
     useEffect(()=>{
-        getTemplateList();
+        const dataParams = {
+            case: caseId
+        }
+        getTemplateList(dataParams, null, (resp, error)=>{
+            if(resp){
+                setTemplateList(resp);
+            }
+        });
     },[])
 
     const addMember = () => {
@@ -137,6 +153,25 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
         setDataValues({ check_list: newCheckList });
     }
 
+    const handleTemplateSelection = (val)=>{
+        setDataValues({
+            title: val.title,
+            description: val.description||'',
+            priority: PriorityMapping && PriorityMapping[val.priority_name],
+            due_date: val.due_date,
+            check_list: val.check_list,
+            tags: val.tags,
+            case: caseId || ''
+        })
+        toggleTemplateBlock();
+    }
+
+    const toggleTemplateBlock = ()=>{
+        setTemplateView(val=>!val);
+    }
+    const { fullYear, day, month } = getFormattedDate(due_date);
+    let formattedDate =`${fullYear}-${month+1<=9?`0${month+1}`:month+1}-${day<=9?`0${day}`:day}`;
+
     return (
         <div className={container + " " + "newTaskMainContainer"}>
             {
@@ -150,15 +185,23 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
                         <img className="icon" src={ASSETS_BASE_URL + "/images/common/task.svg"} alt="task" />
                         <span>Task Name</span>
                     </div>
-                    <div className="withDropDown">
-                        <input type="text" placeholder="Enter Task Name" value={title} onChange={(e) => setDataValues({ title: e.target.value })} />
-                        <div className='dropValue'>
-                            <ul>
-                                <li>Dummy Data listing</li>
-                                <li>Dummy Data listing</li>
-                                <li>Dummy Data listing</li>
-                            </ul>
-                        </div>
+                    <div className="withDropDown" ref={templateRef}>
+                        <input type="text" onFocus={toggleTemplateBlock} placeholder="Enter Task Name" value={title} onChange={(e) => setDataValues({ title: e.target.value })} />
+                        {
+                            templateList.length && openTemplateView?
+                            <DetectClickOutside targetRef={templateRef} clickOutside={toggleTemplateBlock}>
+                                <div className='dropValue'>
+                                    <ul>
+                                        {
+                                            templateList.map((val, key)=>{
+                                                return <li key={key} onClick={()=>handleTemplateSelection(val)}>{val.title}</li>
+                                            })
+                                        }
+                                    </ul>
+                                </div>
+                            </DetectClickOutside>
+                            :null
+                        }
                     </div>
                 </div>
                 <div className={taskStatus}>
@@ -186,7 +229,7 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
                             <img className="icon" src={ASSETS_BASE_URL + "/images/common/blueCalendar.svg"} alt="home" />
                             <span className="hideMobile">Select</span><span>Due Date</span>
                         </div>
-                        <input type="date" id="dueDate" name="dueDate" onChange={(e) => setDataValues({ due_date: new Date(e.target.value) })} />
+                        <input type="date" id="dueDate" name="dueDate" onChange={(e) => setDataValues({ due_date: new Date(e.target.value) })} value={formattedDate}/>
                     </div>
                 </div>
 
@@ -270,7 +313,7 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
                         <div className="checkBoxContainer">
                             <label className="check_container">
                                 <p>Save as draft</p>
-                                <input type="checkbox" />
+                                <input type="checkbox" onChange={()=>setDataValues({is_template: !is_template})} checked={is_template}/>
                                 <span className="checkmark"></span>
                             </label>
                         </div>
