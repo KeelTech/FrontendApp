@@ -56,6 +56,14 @@ const CustomChatWidget = ()=>{
         console.log(questionList);
         questionList.map((val)=>{
             const { dataVal='', id, key='', answer_type_value } = val;
+            // if(key=="spouse_exist"){
+            //     let answer = false;
+            //     if(Array.isArray(dataVal) && dataVal.length){
+            //         answer = dataVal[0].dropdown_text=="No"?false:true
+            //     }
+            //     postParams[key] = answer;
+            // }else
+            
             if(Array.isArray(dataVal)){
                 let answer_id='';
                 let multipleSelectedIds=''
@@ -87,7 +95,12 @@ const CustomChatWidget = ()=>{
     let count = 0;
 
     const name = useMemo(()=>{
-        if(questionList && questionList.length) return questionList[0].dataVal||''
+        if(questionList && questionList.length){
+            const nameField = questionList.filter(x=>x.key=='name')
+            if(nameField && nameField.length){
+                return nameField[0].dataVal||''
+            }
+        }
         return ''
     },[questionList])
     return(
