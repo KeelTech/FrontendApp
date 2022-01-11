@@ -27,23 +27,43 @@ const CustomChatWidget = ()=>{
     const [showSuccess, setSuccess] = useState(false);
     const [questionList, setQuestions] = useState([]);
     const[showSubmit, setSubmit] = useState(false);
+    const [spouseQuestions, setSpouseQuestions] = useState([]);
     useEffect(()=>{
         getQuestions({}, {}, (resp)=>{
             if(resp && resp.questions){
                 setQuestions(resp.questions);
+                setSpouseQuestions(resp.spouse_questions);
             }
         })
     },[])
-
+console.log(questionList);
+console.log(spouseQuestions);
     const setData = (id, value)=>{
         let questionIndex = 0;
+        let isSpouse = false;
+        let spouseIndex = 0;
         const newQuestions = questionList.map((val, index)=>{
             if(val.id===id){
+                if(val.key=="spouse_exist" && value && value.dataVal && Array.isArray(value.dataVal)){
+                    value.dataVal.map((spouseData)=>{
+                        if(spouseData.dropdown_text=="Yes"){
+                            isSpouse = true;   
+                        }
+                    })
+                    spouseIndex = index;
+                }
                 questionIndex = index;
                 return {...val, ...value}
             }
             return val;
         })
+        if(isSpouse){
+            let newQuestionsSet = newQuestions.slice(0, spouseIndex+1);
+            newQuestionsSet = newQuestionsSet.concat(spouseQuestions);
+            newQuestionsSet = newQuestionsSet.concat(newQuestions.slice(spouseIndex+1));
+            setQuestions(newQuestionsSet);
+            return;
+        }
         if(questionIndex===questionList.length-1 && value.is_submitted){
             setSubmit(true);
         }
