@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DetectClickOutside from '@helpers/DetectClickOutside.js'
 import STORAGE from '@helpers/storage';
 import { loaderView } from '@constants';
@@ -16,6 +16,8 @@ const ProfileWidget = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [showLoader, setLoader] = useState(false);
+  const logginInfo = useSelector(state => state.LOGIN);
+  const { isAgent } = logginInfo||{};
 
   const handleLogout = () => {
     setLoader(true);
@@ -46,7 +48,9 @@ const ProfileWidget = () => {
 
   return (
     <div className="commonProfWidget">
-      <NotificationWidget/>
+      {
+        isAgent?null:<NotificationWidget/>
+      }
       <div className="getHelp" onClick={handleHelpClick}>
         <button>Help</button>
       </div>

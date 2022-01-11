@@ -45,6 +45,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                     }
                 }
             )
+            toggleMenuBar();
             history.push(`/${value}`);
         }
     }
@@ -58,6 +59,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                 }
             }
         )
+        toggleMenuBar();
         history.push(`/agent/${value}`);
     }
 
