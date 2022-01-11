@@ -163,6 +163,9 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
             tags: val.tags,
             case: caseId || ''
         })
+        if(val && val.check_list && Object.entries(val.check_list).length){
+            setShowChecklist(true);
+        }
         toggleTemplateBlock();
     }
 
