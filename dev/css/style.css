@@ -8409,6 +8409,34 @@ div.DDContNew {
 .chat{
   position: relative;
 }
+
+.hisTabs ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  /* justify-content: space-between; */
+  overflow: auto;
+  /* border-bottom: 3px solid gray; */
+}
+
+.hisTabs li {
+  border-bottom: 3px solid transparent;
+  color: black;
+  font-size: 12px;
+  font-weight: 500;
+  flex-shrink: 0;
+  cursor: pointer;
+  padding-bottom: 5px;
+}
+.hisTabs li.tabsAct {
+border-bottom: 3px solid #4267b2;
+color: #4267b2;
+}
+.hisTabs li:hover {
+  border-bottom: 3px solid #4267b2;
+  color: #4267b2;
+}
+
 /* ============ Task Container  ============== */
 /* ============ Media Queries ============== */
 @media (max-width: 400px) {

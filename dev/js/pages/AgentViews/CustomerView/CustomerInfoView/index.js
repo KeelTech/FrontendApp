@@ -43,7 +43,7 @@ function CustomerInfoView(props) {
   }, [])
 
   const updateProgramStatus = () => {
-    
+
     const postDataParams = {
       "program": selectedProgam,
       caseId
@@ -55,7 +55,7 @@ function CustomerInfoView(props) {
     })
   }
 
-  const selectProgramType = (type)=>{
+  const selectProgramType = (type) => {
     setProgram(type);
   }
 
@@ -63,7 +63,7 @@ function CustomerInfoView(props) {
     case_details = {},
     user_details = {},
     user_qualifications = [],
-    pending_task_count=''
+    pending_task_count = ''
   } = caseDetails;
 
   const { first_name, last_name } = user_details;
@@ -147,14 +147,14 @@ function CustomerInfoView(props) {
                       : null
                   }
                 </div> */}
-                
+
                 <div className="agntTaskBtns buttonWrapper">
                   <button className="taskButton" onClick={redirectToTask}>Tasks</button>
                   <button className="taskButton" onClick={redirectToDocument}>Documents</button>
                 </div>
               </div>
               <div className="multiSelect">
-              <div className="customSelects">
+                <div className="customSelects">
                   <label>Program Type:</label>
                   <CustomAnimatedDropdown options={filterProgramList} handleSelect={selectProgramType} selectedProgam={selectedProgam} />
                 </div>
@@ -182,6 +182,15 @@ function CustomerInfoView(props) {
               </div>
             </div> */}
             <div className="completeInfoWrapperADD userCompleteInfo">
+              <div className='hisTabs'>
+                <ul>
+                  <li className='tabsAct'>Billing History</li>
+                  <li>Bill Payment</li>
+                  <li>Purchases</li>
+                  <li>Add-ons</li>
+                  <li>Top Ups</li>
+                </ul>
+              </div>
               <InfoList info={caseDetails} />
             </div>
           </div>
