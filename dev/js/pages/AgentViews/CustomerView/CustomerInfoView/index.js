@@ -1,12 +1,15 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import RichTextEditor from 'react-rte';
+
 import FloatingChatWidget from '@components/FloatingChatWidget';
 import ChatWidget from '@components/ChatWidget';
 import Header from '@components/Header';
 import LoadingWidget from "@components/LoadingWidget";
 import { getCaseDetail, getProgramList, updateProgram } from "@actions";
 import CustomAnimatedDropdown from '@components/CustomAnimatedDropdown';
+import EditorView from '@components/EditorView';
 import InfoList from './InfoList';
 import { body } from './style';
 
@@ -28,6 +31,15 @@ function CustomerInfoView(props) {
 
   const [programStateList, getProgramState] = useState([]);
   const [selectedProgam, setProgram] = useState('');
+  const [activeTab, setActiveTab] = useState(1);
+  
+  const [editorState, setEditorState] = useState(RichTextEditor.createValueFromString("<p>hello<strong> Start typing </strong> kumar</p>",'html')
+    )
+  
+    const onChange = (value) => {
+      setEditorState(value);
+      console.log(value.toString('html'))
+  };
 
   const redirectToTask = () => {
     history.push(`/agent/tasks/${caseId}`);
@@ -184,11 +196,13 @@ function CustomerInfoView(props) {
             <div className="completeInfoWrapperADD userCompleteInfo">
               <div className='hisTabs'>
                 <ul>
-                  <li className='tabsAct'>User Details</li>
-                  <li>Demo Tab</li>
+                  <li className={activeTab==1?"tabsAct":''} onClick={()=>setActiveTab(1)}>User Details</li>
+                  <li className={activeTab==2?"tabsAct":''} onClick={()=>setActiveTab(2)}>Notes</li>
                 </ul>
               </div>
-              <InfoList info={caseDetails} />
+              {
+                activeTab==1?<InfoList info={caseDetails} />:<EditorView onChange={onChange} editorState={editorState}/>
+              }
             </div>
           </div>
           <div className="chat">
