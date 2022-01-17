@@ -184,11 +184,8 @@ function CustomerInfoView(props) {
             <div className="completeInfoWrapperADD userCompleteInfo">
               <div className='hisTabs'>
                 <ul>
-                  <li className='tabsAct'>Billing History</li>
-                  <li>Bill Payment</li>
-                  <li>Purchases</li>
-                  <li>Add-ons</li>
-                  <li>Top Ups</li>
+                  <li className='tabsAct'>User Details</li>
+                  <li>Demo Tab</li>
                 </ul>
               </div>
               <InfoList info={caseDetails} />
