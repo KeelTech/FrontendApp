@@ -8855,3 +8855,17 @@ color: #4267b2;
 .LivechatLauncher { display: none !important}
 
 /* // ================ Page Loader   ================ */
+
+/* editor style */
+.DraftEditor-editorContainer{
+  min-height: 260px;
+}
+li.infofield {
+  border-bottom: 1px solid #ededed;
+  padding: 0;
+  margin: 0;
+  padding: 14px 0;
+}
+li.infofield:last-child {
+  border-bottom: none;
+}

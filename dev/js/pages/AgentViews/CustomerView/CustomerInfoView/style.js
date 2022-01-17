@@ -319,15 +319,21 @@ export const list = css`
     flex-direction: row;
     width: 100%;
     @media (max-width: ${tabScreenWidth}) {
-      // flex-direction: column;
+      flex-direction: column;
+      border-bottom: 1px solid #ededed;
+    border-top: 1px solid #ededed;
+    border-right: 1px solid #ededed;
+    border-left: 3px solid #4267b2;
+    margin-bottom: 20px;
+    padding-left: 10px;
     }
     .key {
       width: 120px;
       margin: 0;
-      color: #363b64;
+      color: #363b64 !important;
       font-weight: 600;
       font-size: 14px;
-      padding-bottom: 16px;
+      // padding-bottom: 16px;
       margin-right: 24px;
       @media (max-width: ${tabScreenWidth}) {
         font-size: 12px;
@@ -342,7 +348,7 @@ export const list = css`
       @media (max-width: ${tabScreenWidth}) {
         width: 100%;
         font-size: 12px;
-        padding-bottom: 6px;
+        // padding-bottom: 6px;
       }
     }
   }
