@@ -1,12 +1,15 @@
 import React from 'react';
 import RichTextEditor from 'react-rte';
 
-const EditorView = ({ editorState, onChange})=>{
+const EditorView = ({ editorState, onChange, saveNotes})=>{
 
-    return <RichTextEditor
-    value={editorState}
-    onChange={onChange}
-/>
+    return <div>
+        <RichTextEditor
+            value={editorState}
+            onChange={onChange}
+        />
+        <button onClick={saveNotes}>Save</button>
+    </div>
 }
 
 export default EditorView; 

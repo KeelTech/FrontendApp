@@ -7,7 +7,7 @@ import FloatingChatWidget from '@components/FloatingChatWidget';
 import ChatWidget from '@components/ChatWidget';
 import Header from '@components/Header';
 import LoadingWidget from "@components/LoadingWidget";
-import { getCaseDetail, getProgramList, updateProgram } from "@actions";
+import { getCaseDetail, getProgramList, updateProgram, createNotes } from "@actions";
 import CustomAnimatedDropdown from '@components/CustomAnimatedDropdown';
 import EditorView from '@components/EditorView';
 import InfoList from './InfoList';
@@ -76,6 +76,7 @@ function CustomerInfoView(props) {
     user_details = {},
     user_qualifications = [],
     pending_task_count = '',
+    agent_notes,
     in_review_task_count
   } = caseDetails;
 
@@ -106,6 +107,20 @@ function CustomerInfoView(props) {
     })
     return filterData;
   }, [programStateList])
+
+  const saveNotes = ()=>{
+    const postParams = 
+      {
+        title: 'Dummy',
+        notes: editorState.toString('html')
+      }
+    createNotes({postParams, caseId}, null, (resp, err)=>{
+      if(resp){
+        const dataParams = { customerId: caseId };
+        getCaseDetail(dataParams, dispatch);
+      }
+    });
+  }
 
   return (
     <div className={body}>
@@ -202,7 +217,7 @@ function CustomerInfoView(props) {
                 </ul>
               </div>
               {
-                activeTab==1?<InfoList info={caseDetails} />:<EditorView onChange={onChange} editorState={editorState}/>
+                activeTab==1?<InfoList info={caseDetails} />:<EditorView onChange={onChange} editorState={editorState} saveNotes={saveNotes}/>
               }
             </div>
           </div>
