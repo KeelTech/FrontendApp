@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment, useMemo } from 'react';
 
 import { getQuestions, submitQuestions } from '@actions';
-
+import LoadingWidget from '@components/LoadingWidget';
 import OptionView from './option.js'
 import InputView from './input.js';
 import CheckboxView from './checkbox.js';
@@ -9,7 +9,6 @@ import SuccessModal from './success.js';
 import { container } from './style.js';
 
 const SubmitCta = ({clickSubmit})=>{
-
     useEffect(()=>{
         try{
             document.getElementsByClassName('msger-chat')[0].scrollTop= document.getElementsByClassName('msger-chat')[0].scrollHeight;
@@ -24,6 +23,7 @@ const SubmitCta = ({clickSubmit})=>{
 }
 
 const CustomChatWidget = ()=>{
+    const [showLoader, setLoader] = useState(false);
     const [showSuccess, setSuccess] = useState(false);
     const [questionList, setQuestions] = useState([]);
     const[showSubmit, setSubmit] = useState(false);
@@ -32,38 +32,37 @@ const CustomChatWidget = ()=>{
         getQuestions({}, {}, (resp)=>{
             if(resp && resp.questions){
                 setQuestions(resp.questions);
-                setSpouseQuestions(resp.spouse_questions);
+                setSpouseQuestions(resp.spouse_questions||[]);
             }
         })
     },[])
-console.log(questionList);
-console.log(spouseQuestions);
+
     const setData = (id, value)=>{
         let questionIndex = 0;
         let isSpouse = false;
         let spouseIndex = 0;
         const newQuestions = questionList.map((val, index)=>{
             if(val.id===id){
-                if(val.key=="spouse_exist" && value && value.dataVal && Array.isArray(value.dataVal)){
-                    value.dataVal.map((spouseData)=>{
-                        if(spouseData.dropdown_text=="Yes"){
-                            isSpouse = true;   
-                        }
-                    })
-                    spouseIndex = index;
-                }
+                // if(val.key=="spouse_exist" && value && value.dataVal && Array.isArray(value.dataVal)){
+                //     value.dataVal.map((spouseData)=>{
+                //         if(spouseData.dropdown_text=="Yes"){
+                //             isSpouse = true;   
+                //         }
+                //     })
+                //     spouseIndex = index;
+                // }
                 questionIndex = index;
                 return {...val, ...value}
             }
             return val;
         })
-        if(isSpouse){
-            let newQuestionsSet = newQuestions.slice(0, spouseIndex+1);
-            newQuestionsSet = newQuestionsSet.concat(spouseQuestions);
-            newQuestionsSet = newQuestionsSet.concat(newQuestions.slice(spouseIndex+1));
-            setQuestions(newQuestionsSet);
-            return;
-        }
+        // if(isSpouse){
+        //     let newQuestionsSet = newQuestions.slice(0, spouseIndex+1);
+        //     newQuestionsSet = newQuestionsSet.concat(spouseQuestions);
+        //     newQuestionsSet = newQuestionsSet.concat(newQuestions.slice(spouseIndex+1));
+        //     setQuestions(newQuestionsSet);
+        //     return;
+        // }
         if(questionIndex===questionList.length-1 && value.is_submitted){
             setSubmit(true);
         }
@@ -71,9 +70,8 @@ console.log(spouseQuestions);
     }
 
     const clickSubmit = ()=>{
-        setSuccess(true);
         const postParams = {}
-        console.log(questionList);
+        setLoader(true);
         questionList.map((val)=>{
             const { dataVal='', id, key='', answer_type_value } = val;
             // if(key=="spouse_exist"){
@@ -105,10 +103,13 @@ console.log(spouseQuestions);
                 postParams[key] = dataVal;
             }
         })
-        console.log('data params is', postParams);
         submitQuestions(postParams, null, (resp, error)=>{
-            console.log('resp is', resp);
-            console.log('error is ', error)
+            setLoader(false);
+            if(resp.status==1){
+                setSuccess(true);
+            }else{
+                alert('failed to submit');
+            }
         })
     }
 
@@ -125,6 +126,9 @@ console.log(spouseQuestions);
     },[questionList])
     return(
         <div className={container}>
+            {
+                showLoader && <LoadingWidget/>
+            }
             {showSuccess?<SuccessModal/>:null}
             <section className="msger">
                 <header className="msger-header">
