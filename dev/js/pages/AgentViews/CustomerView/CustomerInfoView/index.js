@@ -24,6 +24,7 @@ function CustomerInfoView(props) {
   const { id = '', agent = "" } = agent_profile;
 
   let caseId = '';
+  let throttlePause;
   if (props && props.match && props.match.params) {
     caseId = props.match.params.caseId;
   }
@@ -35,11 +36,6 @@ function CustomerInfoView(props) {
   
   const [editorState, setEditorState] = useState(RichTextEditor.createValueFromString("<p>hello<strong> Start typing </strong> kumar</p>",'html')
     )
-  
-    const onChange = (value) => {
-      setEditorState(value);
-      console.log(value.toString('html'))
-  };
 
   const redirectToTask = () => {
     history.push(`/agent/tasks/${caseId}`);
@@ -89,6 +85,12 @@ function CustomerInfoView(props) {
     }
   }, [program]);
 
+  useEffect(()=>{
+    if(agent_notes && agent_notes.length){
+      setEditorState(RichTextEditor.createValueFromString(agent_notes[0].notes,'html'))
+    }
+  },[agent_notes])
+
   const redirectToDocument = () => {
     history.push(`/agent/documents/${caseId}`);
   }
@@ -108,7 +110,7 @@ function CustomerInfoView(props) {
     return filterData;
   }, [programStateList])
 
-  const saveNotes = ()=>{
+  const saveNotes = (isClicked=false)=>{
     const postParams = 
       {
         title: 'Dummy',
@@ -117,10 +119,28 @@ function CustomerInfoView(props) {
     createNotes({postParams, caseId}, null, (resp, err)=>{
       if(resp){
         const dataParams = { customerId: caseId };
-        getCaseDetail(dataParams, dispatch);
+        if(isClicked){
+          getCaseDetail(dataParams, dispatch);
+        }
       }
     });
   }
+
+  const saveNotesOnChange = () => {
+    if (throttlePause) return;
+    throttlePause = true;
+    
+    setTimeout(() => {
+      saveNotes(false);
+      throttlePause = false;
+    }, 2000);
+  };
+
+  const onChange = (value) => {
+    setEditorState(value);
+    saveNotesOnChange();
+    console.log(value.toString('html'))
+  };
 
   return (
     <div className={body}>
