@@ -84,8 +84,8 @@ const CustomSearchSelect = ({placeholder="Search", value='', border="0px" ,handl
         selectedVal(value);
     },[value])
 
-    const toggleOptionList = ()=>{
-        setOptionsVisibility(val=>!val)
+    const toggleOptionList = (toggleVal)=>{
+        setOptionsVisibility(toggleVal);
         selectedVal(value);
     }
 
@@ -124,19 +124,27 @@ const CustomSearchSelect = ({placeholder="Search", value='', border="0px" ,handl
 
             <div className="searchBox">
                 <img className="searchIcon" src={ASSETS_BASE_URL+"/images/common/search.svg"} alt="open"/>
-                <input type="text" disabled={allOptions.length==0} autoComplete="new-password" placeholder={placeholder} value={searchField} onChange={(e)=>onChange(e.target.value)} onFocus={toggleOptionList}/>
+                <input type="text" autoComplete="new-password" placeholder={placeholder} value={searchField} onChange={(e)=>onChange(e.target.value)} onFocus={()=>toggleOptionList(true)}/>
             </div>
             {
-                showOptions && allOptions.length &&
-                <div className="optionList">
-                    <DetectClickOutside targetRef={optionListRef} clickOutside={toggleOptionList}>
+                showOptions?
+                
+                    <DetectClickOutside targetRef={optionListRef} clickOutside={()=>{
+                        toggleOptionList(false);
+                    }}>
                     {
-                        allOptions.map((val, key)=>{
-                            return <span key={key} onClick={()=>handleSelect(val)}>{val.name}</span>
-                        })
+                        allOptions.length?
+                        <div className="optionList">
+                        {
+                            allOptions.map((val, key)=>{
+                                return <span key={key} onClick={()=>handleSelect(val)}>{val.name}</span>
+                            })
+                        }
+                        </div>
+                        :null
                     }
                     </DetectClickOutside>
-                </div>
+                :null
             }
         </div>
     )

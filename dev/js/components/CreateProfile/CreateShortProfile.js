@@ -268,10 +268,11 @@ const CreateProfile = () => {
 }
 
 const ProfileForm = ({ dataParams, fieldType, handleChange, sendOTPClicked, verifyOTPClicked })=>{
-    const { labels, type, value, showError=false, lastVerifiedNo, otpSent, otpVerify, showOtpError } = dataParams;
+    const { labels, type, value, showError=false, lastVerifiedNo, otpSent, otpVerify, showOtpError, countryName='' } = dataParams;
     const [otp, setOTP] = useState('');
+    const showCustomFields = fieldType.includes('country');
 
-    const handleFieldChange = (val) => {
+    const handleFieldChange = (val, allParams) => {
         if(fieldType.includes('age')){
             let age = parseInt(val, 10);
             if(age>125) return null;
@@ -281,11 +282,15 @@ const ProfileForm = ({ dataParams, fieldType, handleChange, sendOTPClicked, veri
         let updatedParams = {
             [fieldType]: { ...dataParams, value: val, showError: false }
         }
+        if(showCustomFields){
+            updatedParams = {
+                [fieldType]: { ...dataParams, value: val, showError: false, countryName: allParams.name }
+            }
+        }
         handleChange(updatedParams);
     }
     const isNumber = fieldType.includes('age');
     if (!labels) return null;
-    const showCustomFields = fieldType.includes('country');
     return (
         <div className="formWrapper">
             {
@@ -335,7 +340,7 @@ const ProfileForm = ({ dataParams, fieldType, handleChange, sendOTPClicked, veri
             }
             {
                 fieldType.includes('country') ?
-                    <SelectMainCountry saveSelectedOption={handleFieldChange} placeholder={`Search ${labels}`} isDesired={fieldType.includes('desired_country')}/>
+                    <SelectMainCountry saveSelectedOption={handleFieldChange} value={countryName} placeholder={`Search ${labels}`} isDesired={fieldType.includes('desired_country')}/>
                     : null
             }
             <p className={showError ? "errorMsg" : "hideMsg"}>Please Fill {labels}</p>
