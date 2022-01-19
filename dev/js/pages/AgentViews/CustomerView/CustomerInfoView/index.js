@@ -24,7 +24,7 @@ function CustomerInfoView(props) {
   const { id = '', agent = "" } = agent_profile;
 
   let caseId = '';
-  let throttlePause;
+  let [throttlePause, setThrottle] = useState(false);
   if (props && props.match && props.match.params) {
     caseId = props.match.params.caseId;
   }
@@ -110,36 +110,28 @@ function CustomerInfoView(props) {
     return filterData;
   }, [programStateList])
 
-  const saveNotes = (isClicked=false)=>{
+  const saveNotes = ()=>{
     const postParams = 
       {
         title: 'Dummy',
         notes: editorState.toString('html')
       }
-    createNotes({postParams, caseId}, null, (resp, err)=>{
-      if(resp){
-        const dataParams = { customerId: caseId };
-        if(isClicked){
-          getCaseDetail(dataParams, dispatch);
-        }
-      }
-    });
+    createNotes({postParams, caseId});
   }
 
   const saveNotesOnChange = () => {
     if (throttlePause) return;
-    throttlePause = true;
-    
+    setThrottle(true);
     setTimeout(() => {
       saveNotes(false);
-      throttlePause = false;
-    }, 2000);
+      setThrottle(false);
+    }, 3000);
   };
 
   const onChange = (value) => {
     setEditorState(value);
     saveNotesOnChange();
-    console.log(value.toString('html'))
+    //console.log(value.toString('html'))
   };
 
   return (
