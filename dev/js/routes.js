@@ -46,7 +46,7 @@ let CUSTOMER_ROUTES = [
 let AGENT_ROUTES = [
   { path: '/', exact: true, component: AgentDashBoardView },
   { path: '/agent', component: AgentDashBoardView, isPrivate: true  },
-  { path: '/chat', exact: true, component: CustomChat, isPrivate: false },
+  { path: '/chat', exact: true, component: CustomChat, isPrivate: false},
   { path: '*', component: NotFoundPage, isPrivate: false  },
 ]
 
