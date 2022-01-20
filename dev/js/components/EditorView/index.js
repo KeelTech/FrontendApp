@@ -13,7 +13,7 @@ const EditorView = ({ editorState, onChange, saveNotes})=>{
             value={editorState}
             onChange={onChange}
         />
-        <button onClick={saveNotes} ref={notesCtaRef}>Save</button>
+        <button className='edtrSave' onClick={saveNotes} ref={notesCtaRef}>Save</button>
     </div>
 }
 

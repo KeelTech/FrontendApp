@@ -8869,3 +8869,15 @@ li.infofield {
 li.infofield:last-child {
   border-bottom: none;
 }
+.edtrSave{
+  border-radius: 4px;
+  background: #4267b2;
+  height: auto;
+  padding: 4px 30px;
+  color: white;
+  display: block;
+  margin-top: 10px;
+  border: none;
+  min-width: 150px;
+  margin-left: auto;
+}
