@@ -39,14 +39,14 @@ let CUSTOMER_ROUTES = [
   { path: '/edit/:id', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/notification', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/plan/detail/:id', exact: true, component: UserDashboardView, isPrivate: true },
-  { path: '/chat', exact: true, component: CustomChat, isPrivate: true },
+  { path: '/chat', exact: true, component: CustomChat, isPrivate: false },
   { path: '*', component: NotFoundPage, isPrivate: false  },
 ];
 
 let AGENT_ROUTES = [
   { path: '/', exact: true, component: AgentDashBoardView },
   { path: '/agent', component: AgentDashBoardView, isPrivate: true  },
-  { path: '/chat', exact: true, component: CustomChat, isPrivate: true },
+  { path: '/chat', exact: true, component: CustomChat, isPrivate: false },
   { path: '*', component: NotFoundPage, isPrivate: false  },
 ]
 
@@ -60,7 +60,7 @@ let LOGIN_ROUTES = [
   { path: '/linkedin', exact: true, component: LinkedInPopUp, isSignin: true },
   { path: '/agent/reset-password', exact: true, component: PasswordReset, isSignin: true },
   { path: '/agent/confirm-email', exact: true, component: EmailVerification, isSignin: true },
-  { path: '/chat', exact: true, component: CustomChat, isPrivate: true },
+  { path: '/chat', exact: true, component: CustomChat, isPrivate: false },
   { path: '*', component: NotFoundPage, isPrivate: false  },
 ]
 
