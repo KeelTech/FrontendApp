@@ -34,7 +34,7 @@ function CustomerInfoView(props) {
   const [selectedProgam, setProgram] = useState('');
   const [activeTab, setActiveTab] = useState(1);
   
-  const [editorState, setEditorState] = useState(RichTextEditor.createValueFromString("<p>hello<strong> Start typing </strong> kumar</p>",'html')
+  const [editorState, setEditorState] = useState(RichTextEditor.createValueFromString("<p></p>",'html')
     )
 
   const redirectToTask = () => {
