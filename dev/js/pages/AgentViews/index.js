@@ -12,6 +12,7 @@ import CustomerView from './CustomerView';
 import CustomerInfoView from './CustomerView/CustomerInfoView';
 import DocumentView from '@pages/UserDashboardView/DocumentValutView';
 import Header from '@components/Header';
+import EditorView from '@components/EditorView'
 
 const UserDashboardView = ({ match }) => {
     const history = useHistory();
@@ -35,6 +36,7 @@ const UserDashboardView = ({ match }) => {
                     <Route exact path={`${match.path}/customer`} component={CustomerView} />
                     <Route exact path={`${match.path}/customer/:caseId`} component={CustomerInfoView} />
                     <Route exact path={`${match.path}/documents/:caseId`} component={DocumentView} />
+                    <Route exact path={`${match.path}/editor`} component={EditorView} />
                 </Switch>
             </div>
         </div>

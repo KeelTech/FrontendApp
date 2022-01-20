@@ -6,7 +6,7 @@ const EditorView = ({ editorState, onChange, saveNotes})=>{
 
     useEffect(()=>{
         notesCtaRef.current.scrollIntoView();
-    })
+    },[])
 
     return <div>
         <RichTextEditor
