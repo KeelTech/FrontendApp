@@ -1,12 +1,15 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import RichTextEditor from 'react-rte';
+
 import FloatingChatWidget from '@components/FloatingChatWidget';
 import ChatWidget from '@components/ChatWidget';
 import Header from '@components/Header';
 import LoadingWidget from "@components/LoadingWidget";
-import { getCaseDetail, getProgramList, updateProgram } from "@actions";
+import { getCaseDetail, getProgramList, updateProgram, createNotes } from "@actions";
 import CustomAnimatedDropdown from '@components/CustomAnimatedDropdown';
+import EditorView from '@components/EditorView';
 import InfoList from './InfoList';
 import { body } from './style';
 
@@ -21,6 +24,7 @@ function CustomerInfoView(props) {
   const { id = '', agent = "" } = agent_profile;
 
   let caseId = '';
+  let [throttlePause, setThrottle] = useState(false);
   if (props && props.match && props.match.params) {
     caseId = props.match.params.caseId;
   }
@@ -28,6 +32,10 @@ function CustomerInfoView(props) {
 
   const [programStateList, getProgramState] = useState([]);
   const [selectedProgam, setProgram] = useState('');
+  const [activeTab, setActiveTab] = useState(1);
+  
+  const [editorState, setEditorState] = useState(RichTextEditor.createValueFromString("<p></p>",'html')
+    )
 
   const redirectToTask = () => {
     history.push(`/agent/tasks/${caseId}`);
@@ -43,7 +51,7 @@ function CustomerInfoView(props) {
   }, [])
 
   const updateProgramStatus = () => {
-    
+
     const postDataParams = {
       "program": selectedProgam,
       caseId
@@ -55,7 +63,7 @@ function CustomerInfoView(props) {
     })
   }
 
-  const selectProgramType = (type)=>{
+  const selectProgramType = (type) => {
     setProgram(type);
   }
 
@@ -63,7 +71,9 @@ function CustomerInfoView(props) {
     case_details = {},
     user_details = {},
     user_qualifications = [],
-    pending_task_count=''
+    pending_task_count = '',
+    agent_notes,
+    in_review_task_count
   } = caseDetails;
 
   const { first_name, last_name } = user_details;
@@ -74,6 +84,12 @@ function CustomerInfoView(props) {
       setProgram(program)
     }
   }, [program]);
+
+  useEffect(()=>{
+    if(agent_notes && agent_notes.length){
+      setEditorState(RichTextEditor.createValueFromString(agent_notes[0].notes,'html'))
+    }
+  },[agent_notes])
 
   const redirectToDocument = () => {
     history.push(`/agent/documents/${caseId}`);
@@ -93,6 +109,30 @@ function CustomerInfoView(props) {
     })
     return filterData;
   }, [programStateList])
+
+  const saveNotes = ()=>{
+    const postParams = 
+      {
+        title: 'Dummy',
+        notes: editorState.toString('html')
+      }
+    createNotes({postParams, caseId});
+  }
+
+  const saveNotesOnChange = () => {
+    if (throttlePause) return;
+    setThrottle(true);
+    setTimeout(() => {
+      saveNotes(false);
+      setThrottle(false);
+    }, 3000);
+  };
+
+  const onChange = (value) => {
+    setEditorState(value);
+    saveNotesOnChange();
+    //console.log(value.toString('html'))
+  };
 
   return (
     <div className={body}>
@@ -128,7 +168,7 @@ function CustomerInfoView(props) {
                       src={ASSETS_BASE_URL + "/images/common/list.svg"}
                       alt="list"
                     />
-                    <p className="taskDetails">{pending_task_count} Task Pending for review</p>
+                    <p className="taskDetails">{in_review_task_count} Task Pending for review</p>
                   </div>
                 </div>
               </div>
@@ -147,14 +187,14 @@ function CustomerInfoView(props) {
                       : null
                   }
                 </div> */}
-                
+
                 <div className="agntTaskBtns buttonWrapper">
                   <button className="taskButton" onClick={redirectToTask}>Tasks</button>
                   <button className="taskButton" onClick={redirectToDocument}>Documents</button>
                 </div>
               </div>
               <div className="multiSelect">
-              <div className="customSelects">
+                <div className="customSelects">
                   <label>Program Type:</label>
                   <CustomAnimatedDropdown options={filterProgramList} handleSelect={selectProgramType} selectedProgam={selectedProgam} />
                 </div>
@@ -182,7 +222,15 @@ function CustomerInfoView(props) {
               </div>
             </div> */}
             <div className="completeInfoWrapperADD userCompleteInfo">
-              <InfoList info={caseDetails} />
+              <div className='hisTabs'>
+                <ul>
+                  <li className={activeTab==1?"tabsAct":''} onClick={()=>setActiveTab(1)}>User Details</li>
+                  <li className={activeTab==2?"tabsAct":''} onClick={()=>setActiveTab(2)}>Notes</li>
+                </ul>
+              </div>
+              {
+                activeTab==1?<InfoList info={caseDetails} />:<EditorView onChange={onChange} editorState={editorState} saveNotes={saveNotes}/>
+              }
             </div>
           </div>
           <div className="chat">

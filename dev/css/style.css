@@ -8409,6 +8409,34 @@ div.DDContNew {
 .chat{
   position: relative;
 }
+
+.hisTabs ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  /* justify-content: space-between; */
+  overflow: auto;
+  /* border-bottom: 3px solid gray; */
+}
+
+.hisTabs li {
+  border-bottom: 3px solid transparent;
+  color: black;
+  font-size: 12px;
+  font-weight: 500;
+  flex-shrink: 0;
+  cursor: pointer;
+  padding-bottom: 5px;
+}
+.hisTabs li.tabsAct {
+border-bottom: 3px solid #4267b2;
+color: #4267b2;
+}
+.hisTabs li:hover {
+  border-bottom: 3px solid #4267b2;
+  color: #4267b2;
+}
+
 /* ============ Task Container  ============== */
 /* ============ Media Queries ============== */
 @media (max-width: 400px) {
@@ -8827,3 +8855,29 @@ div.DDContNew {
 .LivechatLauncher { display: none !important}
 
 /* // ================ Page Loader   ================ */
+
+/* editor style */
+.DraftEditor-editorContainer{
+  min-height: 260px;
+}
+li.infofield {
+  border-bottom: 1px solid #ededed;
+  padding: 0;
+  margin: 0;
+  padding: 14px 0;
+}
+li.infofield:last-child {
+  border-bottom: none;
+}
+.edtrSave{
+  border-radius: 4px;
+  background: #4267b2;
+  height: auto;
+  padding: 4px 30px;
+  color: white;
+  display: block;
+  margin-top: 10px;
+  border: none;
+  min-width: 150px;
+  margin-left: auto;
+}

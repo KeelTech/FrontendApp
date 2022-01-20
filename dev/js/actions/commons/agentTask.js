@@ -189,3 +189,16 @@ export const getTemplateList = (dataParams={}, dispatch, cb=null)=>{
         if(cb)cb(null, true);
     })
 }
+
+export const createNotes = (dataParams={}, dispatch, cb=null)=>{
+    const { caseId, postParams } = dataParams
+    API_POST(`${API_BASE_URL}/v1/cases/create-agent-notes?case_id=${caseId}`, postParams).then((response)=>{
+        if(response && response.data){
+            if(cb)cb(response.data, false);
+        }else{
+            if(cb)cb(null, true);
+        }
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}
