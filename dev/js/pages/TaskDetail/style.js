@@ -285,6 +285,9 @@ export const checklistSection = props=> css`
             }
         }
     }
+    .disableCheckbox{
+        opacity: 0.2;
+    }
     @media(max-width: ${tabScreenWidth}){
         margin-top: 20px;
         .progressNo{

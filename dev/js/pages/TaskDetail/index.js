@@ -159,7 +159,7 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
         })
     }
 
-    const { title, priority_name, status_name = '', description, tasks_comment = [], tasks_docs = [], check_list = [] } = taskDetail && taskDetail[activeTask] || {};
+    const { title, priority_name, status_name = '', description, tasks_comment = [], tasks_docs = [], check_list = [], due_date } = taskDetail && taskDetail[activeTask] || {};
 
     const checklistPercentage = useMemo(() => {
         let checked = 0;
@@ -185,6 +185,8 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
             return false;
         }
     });
+
+    const { formatMonth='', day='', fullYear=''} = getFormattedDate(due_date);
 
     return (
         <div className={container + ' ' + 'innerTask'}>
@@ -241,7 +243,7 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
                             <img className="icon" src={ASSETS_BASE_URL + "/images/common/blueCalendar.svg"} alt="home" />
                             <span>Due Date</span>
                         </div>
-                        <span className="dueDate">29 Feb 2020</span>
+                        <span className="dueDate">{`${day} ${formatMonth && formatMonth.substring(0,3)} ${fullYear}`}</span>
                     </div>
                 </div>
                 <div className={discussionSection + " " + "discussionSectionNew"}>
@@ -286,7 +288,7 @@ const TaskDetail = ({ activeTask, refetchTaskList = () => { } }) => {
                                 const checked = val[1] && val[1].action;
                                 const icon = checked ? `${ASSETS_BASE_URL}/images/common/checkedTicker.svg` : `${ASSETS_BASE_URL}/images/common/emptyTicker.svg`;
                                 return <div className={`item ${checked ? 'checkedItem' : ''}`} key={key}>
-                                    <img src={icon} alt="discuss" />
+                                    <img src={icon} alt="discuss" className={checked?"":"disableCheckbox"}/>
                                     <span className="checkedText">{val[0]}</span>
                                 </div>
                             })
