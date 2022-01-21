@@ -1,4 +1,4 @@
-import { ADD_CASE_LIST, CASE_LIST_LOADING, FETCH_AGENT_PROFILE, AGENT_PROFILE_LOADING, AGENT_SCHEDULE_DETAILS, AGENT_SCHEDULE_LOADING } from '@constants/types';
+import { ADD_CASE_LIST, CASE_LIST_LOADING, FETCH_AGENT_PROFILE, AGENT_PROFILE_LOADING, AGENT_SCHEDULE_DETAILS, AGENT_SCHEDULE_LOADING, FETCH_TEMPLATE_LIST, FETCH_TEMPLATE_LIST_LOADING } from '@constants/types';
 import { API_GET, API_POST, API_PUT, API_DELETE } from '../../api/api.js';
 
 export const createTask = (dataParams, dispatch, cb=null)=>{
@@ -179,8 +179,20 @@ export const updateProgram = (dataParams={}, dispatch, cb=null)=>{
 
 export const getTemplateList = (dataParams={}, dispatch, cb=null)=>{
     const caseId = dataParams.case;
+    dispatch({
+        type: FETCH_TEMPLATE_LIST_LOADING,
+        payload: true
+    })
     API_GET(`${API_BASE_URL}v1/tasks/template-task?case=${caseId}`).then((response)=>{
         if(response && response.data){
+            dispatch({
+                type: FETCH_TEMPLATE_LIST_LOADING,
+                payload: false
+            })
+            dispatch({
+                type: FETCH_TEMPLATE_LIST,
+                payload: response.data
+            })
             if(cb)cb(response.data, false);
         }else{
             if(cb)cb(null, true);    

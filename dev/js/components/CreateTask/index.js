@@ -63,7 +63,7 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
         const dataParams = {
             case: caseId
         }
-        getTemplateList(dataParams, null, (resp, error)=>{
+        getTemplateList(dataParams, dispatch, (resp, error)=>{
             if(resp){
                 setTemplateList(resp);
             }
