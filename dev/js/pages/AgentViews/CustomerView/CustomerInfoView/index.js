@@ -86,8 +86,8 @@ function CustomerInfoView(props) {
   }, [program]);
 
   useEffect(()=>{
-    if(agent_notes && agent_notes.length){
-      setEditorState(RichTextEditor.createValueFromString(agent_notes[0].notes,'html'))
+    if(agent_notes && agent_notes.notes){
+      setEditorState(RichTextEditor.createValueFromString(agent_notes.notes,'html'))
     }
   },[agent_notes])
 
