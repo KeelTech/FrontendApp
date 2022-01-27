@@ -1,5 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react';
+import { useDispatch } from 'react-redux';
 
+import { isMobileView, loaderView } from '@constants';
+import { updateTemplateDetail } from '@actions';
 import CustomButton from '@components/CustomButton';
 import CustomSelect from '@components/CustomSelect';
 import LoadingWidget from '@components/LoadingWidget';
@@ -22,6 +25,7 @@ const PriorityList = [
 ]
 
 const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClick })=>{
+    const dispatch = useDispatch();
     const [checkList, setCheckList] = useState('');
     const [dataParams, setDataParams] = useState(activeTask);
     const [loading, setLoading] = useState(false);
@@ -148,22 +152,14 @@ const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClic
 
     const updateTemplateDetails = () => {
         setLoading(true);
-        // let postDataParams = {
-        //     task_id: dataParams.task_id,
-        //     title: dataParams.title,
-        //     description: dataParams.description,
-        //     due_date: dataParams.due_date,
-        //     check_list: dataParams.check_list,
-        //     tags: '12',
-        //     priority: priorityInfo.id
-        // }
-        // updateTask(postDataParams, dispatch, (resp, err) => {
-        //     setLoading(false);
-        //     updateTaskStatus(resp, err, 'Failed, Try again later', 'Task Updated successfully');
-        //     if (!isMobileView()) {
-        //         refetchList();
-        //     }
-        // })
+        let postDataParams = {...dataParams }
+        updateTemplateDetail(postDataParams, dispatch, (resp, err) => {
+            setLoading(false);
+            updateTaskStatus(resp, err, 'Failed, Try again later', 'Template Updated successfully');
+            if (!isMobileView() && refetchList) {
+                refetchList();
+            }
+        })
     }
 
     return(

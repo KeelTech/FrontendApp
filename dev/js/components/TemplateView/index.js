@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { getTemplateList } from '@actions';
+import { getTemplateListDetail } from '@actions';
 import { isMobileView, loaderView } from '@constants';
 import BlankScreen from '@components/BlankScreen';
 import LoadingWidget from '@components/LoadingWidget';
@@ -21,7 +21,7 @@ const TemplateView = ()=>{
 
     const fetchList = ()=>{
         const dataParams = {}
-        getTemplateList(dataParams, dispatch, (resp, error)=>{
+        getTemplateListDetail(dataParams, dispatch, (resp, error)=>{
             if(resp && resp.length){
                 setActiveTask(resp[0]);
             }

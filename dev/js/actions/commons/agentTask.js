@@ -179,6 +179,32 @@ export const updateProgram = (dataParams={}, dispatch, cb=null)=>{
 
 export const getTemplateList = (dataParams={}, dispatch, cb=null)=>{
     const caseId = dataParams.case;
+    API_GET(`${API_BASE_URL}v1/tasks/template-task?case=${caseId}`).then((response)=>{
+        if(response && response.data){
+            if(cb)cb(response.data, false);
+        }else{
+            if(cb)cb(null, true);    
+        }
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}
+
+export const createNotes = (dataParams={}, dispatch, cb=null)=>{
+    const { caseId, postParams } = dataParams
+    API_POST(`${API_BASE_URL}/v1/cases/create-agent-notes?case_id=${caseId}`, postParams).then((response)=>{
+        if(response && response.data){
+            if(cb)cb(response.data, false);
+        }else{
+            if(cb)cb(null, true);
+        }
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}
+
+export const getTemplateListDetail = (dataParams={}, dispatch, cb=null)=>{
+    const caseId = dataParams.case;
     dispatch({
         type: FETCH_TEMPLATE_LIST_LOADING,
         payload: true
@@ -202,13 +228,13 @@ export const getTemplateList = (dataParams={}, dispatch, cb=null)=>{
     })
 }
 
-export const createNotes = (dataParams={}, dispatch, cb=null)=>{
-    const { caseId, postParams } = dataParams
-    API_POST(`${API_BASE_URL}/v1/cases/create-agent-notes?case_id=${caseId}`, postParams).then((response)=>{
+export const updateTemplateDetail = (dataParams={}, dispatch, cb=null)=>{
+    const templateId = dataParams.id;
+    API_POST(`${API_BASE_URL}v1/tasks/update-task-template/${templateId}`, dataParams).then((response)=>{
         if(response && response.data){
             if(cb)cb(response.data, false);
         }else{
-            if(cb)cb(null, true);
+            if(cb)cb(null, true);    
         }
     }).catch((e)=>{
         if(cb)cb(null, true);

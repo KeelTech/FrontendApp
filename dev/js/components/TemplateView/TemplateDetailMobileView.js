@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { getTemplateList } from '@actions';
+import { getTemplateListDetail } from '@actions';
 import { loaderView } from '@constants';
 import LoadingWidget from '@components/LoadingWidget';
 import MobileHeaderWrapper from '@components/MobileHeaderWrapper'
@@ -31,7 +31,7 @@ const TaskDetailMobileView = (props)=>{
 
     useEffect(()=>{
         if(templateList.length===0){
-            getTemplateList({}, dispatch)
+            getTemplateListDetail({}, dispatch)
         }
     },[])
     const handleBackBtnClick = ()=>{
