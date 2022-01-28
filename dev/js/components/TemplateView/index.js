@@ -15,7 +15,6 @@ const TemplateView = ()=>{
     const history = useHistory();
     const agentInfo = useSelector(state => state.AGENT_STORE);
     const { templateList, templateListLoading} = agentInfo;
-    const[loading, setLoading] = useState(false); 
     const [activeTask, setActiveTask] = useState(null);
     const[addNewTask, setNewTask] = useState(false);
 
@@ -74,7 +73,7 @@ const TemplateView = ()=>{
                     </div> */}
                     {/* =========== Custom Add Task Button =========== */}
                     {
-                        loading || templateListLoading? <div className={loaderView + '    ' + "CstmLoaderView"}><LoadingWidget /></div>
+                        templateListLoading && templateList.length==0? <div className={loaderView + '    ' + "CstmLoaderView"}><LoadingWidget /></div>
                             : <div className="taskList agentTaskList">
                                 {
                                     templateList.length ?

@@ -18,7 +18,7 @@ const TaskDetailMobileView = (props)=>{
         taskId = props.match.params.taskId;
     }
 
-    const selectedTask = templateList.filter(x=>x.task_id==taskId);
+    const selectedTask = templateList.filter(x=>x.id==taskId);
     let activeTask = {};
     let addNewTask = false;
     if(selectedTask && selectedTask.length){
@@ -44,7 +44,7 @@ const TaskDetailMobileView = (props)=>{
                 templateListLoading?<div className={loaderView + '    ' + "CstmLoaderView"}><LoadingWidget /></div>:null
             }
             {
-                (activeTask.task_id || addNewTask) ?<TemplateDetail activeTask={activeTask} addNewTask={addNewTask} handleBackBtnClick={handleBackBtnClick} />:null
+                (activeTask.id || addNewTask) ?<TemplateDetail activeTask={activeTask} addNewTask={addNewTask} handleBackBtnClick={handleBackBtnClick} />:null
             }            
         </MobileHeaderWrapper>
     )

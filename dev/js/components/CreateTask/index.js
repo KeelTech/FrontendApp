@@ -32,6 +32,12 @@ const PriorityMapping = {
     'Low': 0
 }
 
+const PriorityMappingNo = {
+    "1": 'High',
+    "2": 'Medium',
+    "0": 'Low'
+}
+
 const CreateTask = ({ toggleAddTaskView, caseId }) => {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -157,12 +163,12 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
         setDataValues({
             title: val.title,
             description: val.description||'',
-            priority: PriorityMapping && PriorityMapping[val.priority],
+            priority: PriorityMappingNo && PriorityMappingNo[val.priority],
             check_list: val.checklist,
             tags: val.tags,
             case: caseId || ''
         })
-        if(val && val.check_list && Object.entries(val.check_list).length){
+        if(val && val.checklist && Object.entries(val.checklist).length){
             setShowChecklist(true);
         }
         toggleTemplateBlock();

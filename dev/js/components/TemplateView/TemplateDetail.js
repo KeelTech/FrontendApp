@@ -12,18 +12,24 @@ import { containerView, taskStatus, discussionSection, checklistSection } from '
 
 const PriorityList = [
     {
-        id: 1,
+        id: "1",
         val: 'High'
     },
     {
-        id: 2,
+        id: "2",
         val: 'Medium'
     },
     {
-        id: 0,
+        id: "0",
         val: 'Low'
     }
 ]
+
+const PriorityMappingNo = {
+    "1": 'High',
+    "2": 'Medium',
+    "0": 'Low'
+}
 
 const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClick })=>{
     const dispatch = useDispatch();
@@ -33,7 +39,7 @@ const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClic
     const [showAddCheckList, setShowChecklist] = useState(false);
     const [showDeleteConfirmation, setDeleteConfirmation] = useState(false);
 
-    const { title='', checklist: check_list=[], priority_name='Low', description=''} = dataParams||{};
+    const { title='', checklist: check_list=[], priority='1', description=''} = dataParams||{};
     const [toasterInfo, setToasterInfo] = useState({
         isVisible: false,
         isError: false,
@@ -42,7 +48,7 @@ const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClic
     })
 
     const [priorityInfo, setPriorityInfo] = useState(() => {
-        let selectedVal = PriorityList.filter(x => x.val == priority_name);
+        let selectedVal = PriorityList.filter(x => x.id == priority);
         if (selectedVal.length) {
             return selectedVal[0]
         }
@@ -54,7 +60,7 @@ const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClic
             setDataParams({
                 title: '',
                 checklist: [],
-                priority_name: 'Low',
+                priority: '1',
                 description: ''
             });
         }else{
@@ -154,7 +160,7 @@ const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClic
         let postDataParams = {
             id: dataParams.id,
             checklist: dataParams.checklist,
-            priority_name: dataParams.priority_name,
+            priority: priorityInfo.id,
             title: dataParams.title,
             description: dataParams.description
         }
