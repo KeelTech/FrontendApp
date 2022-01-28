@@ -8057,7 +8057,7 @@ span.discussionTxt {
   font-weight: 500;
 }
 .RichTextEditor__root___2QXK-{
-  margin-top: 84px;
+  /* margin-top: 84px; */
 }
 .taskStatusNew {
   background: #f5faff;
@@ -8424,9 +8424,10 @@ div.DDContNew {
 .hisTabs li {
   border-bottom: 3px solid transparent;
   color: black;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   flex-shrink: 0;
+  text-transform: uppercase;
   cursor: pointer;
   padding-bottom: 5px;
 }
