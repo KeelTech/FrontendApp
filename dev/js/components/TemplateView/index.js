@@ -34,7 +34,7 @@ const TemplateView = ()=>{
 
     const taskClickHandler = (val)=>{
         if(isMobileView()){
-            history.push(`/agent/template/${val.task_id}`);
+            history.push(`/agent/template/${val.id}`);
         }else{
             setActiveTask(val)
             setNewTask(false);
@@ -69,9 +69,9 @@ const TemplateView = ()=>{
             <div className={container + '    ' +"taskHandlersCnt"}>
                 <div className={tasksView}>
                     {/* =========== Custom Add Task Button =========== */}
-                    <div className="addNewTask" onClick={addNewTemplate}>
+                    {/* <div className="addNewTask" onClick={addNewTemplate}>
                         <button >Add New Template</button>
-                    </div>
+                    </div> */}
                     {/* =========== Custom Add Task Button =========== */}
                     {
                         loading || templateListLoading? <div className={loaderView + '    ' + "CstmLoaderView"}><LoadingWidget /></div>
@@ -79,8 +79,8 @@ const TemplateView = ()=>{
                                 {
                                     templateList.length ?
                                     templateList.map((val) => {
-                                            const { task_id } = val;
-                                            return (<TaskCard key={task_id} isView showStatus={false} active={activeTask && activeTask.task_id === task_id} clickHandler={() => taskClickHandler(val)} data={val} />)
+                                            const { id } = val;
+                                            return (<TaskCard key={id} isView showStatus={false} active={activeTask && activeTask.id === id} clickHandler={() => taskClickHandler(val)} data={val} />)
                                         })
                                         : <div className="emptyData"><BlankScreen message="You have no Templates" /></div>
                                 }

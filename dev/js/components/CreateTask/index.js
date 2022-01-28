@@ -157,9 +157,8 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
         setDataValues({
             title: val.title,
             description: val.description||'',
-            priority: PriorityMapping && PriorityMapping[val.priority_name],
-            due_date: val.due_date,
-            check_list: val.check_list,
+            priority: PriorityMapping && PriorityMapping[val.priority],
+            check_list: val.checklist,
             tags: val.tags,
             case: caseId || ''
         })

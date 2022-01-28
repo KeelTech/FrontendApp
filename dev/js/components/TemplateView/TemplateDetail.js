@@ -2,9 +2,10 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { isMobileView, loaderView } from '@constants';
-import { updateTemplateDetail } from '@actions';
+import { updateTemplateDetail, deleteTemplate } from '@actions';
 import CustomButton from '@components/CustomButton';
 import CustomSelect from '@components/CustomSelect';
+import CustomToaster from '@components/CustomToaster';
 import LoadingWidget from '@components/LoadingWidget';
 
 import { containerView, taskStatus, discussionSection, checklistSection } from './style.js';
@@ -32,7 +33,7 @@ const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClic
     const [showAddCheckList, setShowChecklist] = useState(false);
     const [showDeleteConfirmation, setDeleteConfirmation] = useState(false);
 
-    const { title='', check_list=[], priority_name='Low', description=''} = dataParams||{};
+    const { title='', checklist: check_list=[], priority_name='Low', description=''} = dataParams||{};
     const [toasterInfo, setToasterInfo] = useState({
         isVisible: false,
         isError: false,
@@ -52,7 +53,7 @@ const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClic
         if(!activeTask){
             setDataParams({
                 title: '',
-                check_list: [],
+                checklist: [],
                 priority_name: 'Low',
                 description: ''
             });
@@ -77,7 +78,7 @@ const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClic
                 updated_at: new Date()
             }
             setCheckList('');
-            setDataValues({ check_list: newCheckList });
+            setDataValues({ checklist: newCheckList });
         } else {
             setToasterInfo({
                 isVisible: true,
@@ -98,7 +99,7 @@ const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClic
         } else {
             newCheckList[id] = { ...newCheckList[id], action: !newCheckList[id].action };
         }
-        setDataValues({ check_list: newCheckList });
+        setDataValues({ checklist: newCheckList });
     }
 
     const toggleDeletePopup = () => {
@@ -137,26 +138,30 @@ const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClic
         }, 1000);
     }
 
-    const deleteTemplate = () => {
+    const clickDeleteTemplate = () => {
         setLoading(true);
-        // deleteTaskInfo({ taskId: dataParams.task_id }, dispatch, (resp, err) => {
-        //     setLoading(false);
-        //     updateTaskStatus(resp, !resp, 'Failed, Please try again later', 'Deleted Successfully');
-        //     if (isMobileView()) {
-        //         handleBackBtnClick();
-        //     } else if (refetchList) {
-        //         refetchList();
-        //     }
-        // })
+        deleteTemplate({ id: dataParams.id }, dispatch, (resp, err) => {
+            setLoading(false);
+            updateTaskStatus(resp, !resp, 'Failed, Please try again later', 'Deleted Successfully');
+            if (isMobileView() && handleBackBtnClick) {
+                handleBackBtnClick();
+            }
+        })
     }
 
     const updateTemplateDetails = () => {
         setLoading(true);
-        let postDataParams = {...dataParams }
+        let postDataParams = {
+            id: dataParams.id,
+            checklist: dataParams.checklist,
+            priority_name: dataParams.priority_name,
+            title: dataParams.title,
+            description: dataParams.description
+        }
         updateTemplateDetail(postDataParams, dispatch, (resp, err) => {
             setLoading(false);
             updateTaskStatus(resp, err, 'Failed, Try again later', 'Template Updated successfully');
-            if (!isMobileView() && refetchList) {
+            if (!isMobileView() && refetchList && !resp) {
                 refetchList();
             }
         })
@@ -167,6 +172,7 @@ const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClic
             {
                 loading && <div className="loadingScrn"><LoadingWidget /></div>
             }
+            <CustomToaster {...toasterInfo} hideToaster={hideToaster} /> 
             {
                 // showDeleteConfirmation ? <DeleteConfirmationPopup togglePopup={toggleDeletePopup} deletePopupHandler={deletePopupHandler} /> : null
             }
@@ -239,7 +245,7 @@ const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClic
             </div>
             <div className="deleteTask customEditFor">
                 {
-                    addNewTask?null:<CustomButton text="Delete" clickHandler={deleteTemplate} margin="0px 0px 8px 0px" padding="10px 50px" borderRadius="5px" backgroundColor="#CF3030" />
+                    addNewTask?null:<CustomButton text="Delete" clickHandler={clickDeleteTemplate} margin="0px 0px 8px 0px" padding="10px 50px" borderRadius="5px" backgroundColor="#CF3030" />
                 }
                 
                 <div className="submitCta">
