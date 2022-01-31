@@ -47,7 +47,7 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
     const [dataParams, setDataParams] = useState({
         ...taskDetail
     });
-    const { title, priority_name, due_date, status_name, description, tasks_docs = [], check_list = {}, case_id } = dataParams || {};
+    const { title, priority_name, due_date, status_name, description, tasks_docs = [], check_list = {}, case: case_id } = dataParams || {};
     const [checkList, setCheckList] = useState('');
     const [loading, setLoading] = useState(false);
     const [showAddCheckList, setShowChecklist] = useState(false);
@@ -317,9 +317,13 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
 
             </div>
             <div className="signDoc">
+                <span className="backBtn" onClick={handleBackBtnClick}><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</span>
+
+            </div>
+            <div className="signDoc">
                 <input type="text" value={title} onChange={(e) => setDataValues({ title: e.target.value })}/>
                 {/* <span className="sign">{title}</span> */}
-                <span className="backBtn" onClick={handleBackBtnClick}><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</span>
+                {/* <span className="backBtn" onClick={handleBackBtnClick}><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</span> */}
             </div>
             {/* <div className="taskStatus">Mark as completed</div> */}
             <div className="taskScrollSection">
