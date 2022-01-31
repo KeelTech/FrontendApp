@@ -34,6 +34,10 @@ const MobileViewList = ({ handleCustomerClick, caseList }) => {
               <h2 className='key'>Task Status:</h2>
               <h2 className='value status'>{renderStatusText(status)}</h2>
             </li>
+            <li className={customer}>
+              <h2 className='key'>Task Count:</h2>
+              <h2 className='value taskCount'>Task Count dummy</h2>
+            </li>
           </ul>
         )
 

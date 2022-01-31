@@ -14,7 +14,9 @@ class Table extends Component {
         //     return <td className={rowItemClass} key={key.key}><TableCustomRows id={key.CustomView} optionId={row.case_id}/></td>
         // }
         let dataLabel = row[key.key];
-        if(key.isPlanName){
+        if(key.isTaskCount){
+            return <td className={rowItemClass}><span className="taskCount">Dummy Task Count</span></td>
+        }else if(key.isPlanName){
             dataLabel = dataLabel && dataLabel.name||'';
         }else if(key.isDate){
             dataLabel = `${getFormattedDate(dataLabel).formattedDate} ${getFormattedTime(dataLabel)}`
