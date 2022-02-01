@@ -9,7 +9,7 @@ const DesktopViewList = ({ handleCustomerClick, caseList }) => {
     { key: 'created_at', label: 'Start Date', isDate: true },
     { key: 'updated_at', label: 'Last Update', isDate: true },
     { key: 'status', label: 'Task Status', CustomView: 'TaskStatusRow' },
-    { key: 'taskCount', label: 'Task Count:', CustomView: 'TaskStatusRow', isTaskCount: true },
+    { key: 'action_items', label: 'Action Items', CustomView: 'TaskStatusRow', isTaskCount: true },
 
   ]
   return (

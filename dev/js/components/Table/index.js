@@ -15,7 +15,7 @@ class Table extends Component {
         // }
         let dataLabel = row[key.key];
         if(key.isTaskCount){
-            return <td className={rowItemClass}><span className="taskCount">Dummy Task Count</span></td>
+            return <td className={rowItemClass}><span className="taskCount">{dataLabel}</span></td>
         }else if(key.isPlanName){
             dataLabel = dataLabel && dataLabel.name||'';
         }else if(key.isDate){
