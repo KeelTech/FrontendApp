@@ -25,12 +25,6 @@ const PriorityList = [
     }
 ]
 
-const PriorityMappingNo = {
-    "1": 'High',
-    "2": 'Medium',
-    "0": 'Low'
-}
-
 const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClick })=>{
     const dispatch = useDispatch();
     const [checkList, setCheckList] = useState('');

@@ -14,22 +14,22 @@ import { container, taskStatus, messageSection, checkListCont, attachmentCont, c
 
 const PriorityList = [
     {
-        id: 1,
+        id: "1",
         val: 'High'
     },
     {
-        id: 2,
+        id: "2",
         val: 'Medium'
     },
     {
-        id: 0,
+        id: "0",
         val: 'Low'
     }
 ]
 const PriorityMapping = {
-    'High': 1,
-    'Medium': 2,
-    'Low': 0
+    'High': "1",
+    'Medium': "2",
+    'Low': "0"
 }
 
 const PriorityMappingNo = {
@@ -44,7 +44,7 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
     const [dataParams, setDataParams] = useState({
         title: '',
         description: '',
-        priority: 1,
+        priority: "1",
         due_date: '',
         check_list: {},
         tags: 'important',
@@ -163,7 +163,7 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
         setDataValues({
             title: val.title,
             description: val.description||'',
-            priority: PriorityMappingNo && PriorityMappingNo[val.priority],
+            priority: val.priority,
             check_list: val.checklist,
             tags: val.tags,
             case: caseId || ''

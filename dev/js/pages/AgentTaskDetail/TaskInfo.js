@@ -278,7 +278,7 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
     }
 
     let { fullYear, day, month } = getFormattedDate(due_date);
-    let defaultDueDate = `${fullYear}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`;
+    let defaultDueDate =`${fullYear}-${month+1<=9?`0${month+1}`:month+1}-${day<=9?`0${day}`:day}`;
 
     const sortedComments = dataParams.tasks_comment.sort((a, b) => {
         try{
