@@ -420,6 +420,7 @@ export const checklistSection = props=> css`
     .checkItem{
         display: flex;
         align-items: flex-start;
+        cursor: default;
     }
     .percent{
         position: relative;
@@ -442,10 +443,12 @@ export const checklistSection = props=> css`
         align-items: center;
         justify-content: space-between;
         margin-bottom: 4px;
+        cursor: default;
         img{
             margin-right: 4px;
             width: 16px;
             height: 16px;
+            cursor: default;
         }
         .checkedText{
             font-size: 12px;

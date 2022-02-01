@@ -226,11 +226,11 @@ const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClic
                                 const checked = val[1].action;
                                 const icon = checked ? `${ASSETS_BASE_URL}/images/common/checkedTicker.svg` : `${ASSETS_BASE_URL}/images/common/emptyTicker.svg`;
                                 return <div className={`item ${checked ? 'checkedItem' : ''}`} key={key}>
-                                    <div className="checkItem" onClick={() => updateCheckList(val[0])}>
+                                    <div className="checkItem">
                                         <img src={icon} alt="discuss" />
                                         <span className="checkedText">{val[0]}</span>
                                     </div>
-                                    <img src={`${ASSETS_BASE_URL}/images/common/delete.svg`} className="deleteIcon" onClick={() => updateCheckList(val[0], true)} />
+                                    <img src={`${ASSETS_BASE_URL}/images/common/delete.svg`} className="deleteIcon"/>
                                 </div>
                             })
                         }
