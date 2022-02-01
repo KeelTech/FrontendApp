@@ -224,7 +224,7 @@ const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClic
                                         <img src={icon} alt="discuss" />
                                         <span className="checkedText">{val[0]}</span>
                                     </div>
-                                    <img src={`${ASSETS_BASE_URL}/images/common/delete.svg`} className="deleteIcon"/>
+                                    <img src={`${ASSETS_BASE_URL}/images/common/delete.svg`} className="deleteIcon" onClick={() => updateCheckList(val[0], true)} />
                                 </div>
                             })
                         }

@@ -448,7 +448,6 @@ export const checklistSection = props=> css`
             margin-right: 4px;
             width: 16px;
             height: 16px;
-            cursor: default;
         }
         .checkedText{
             font-size: 12px;
