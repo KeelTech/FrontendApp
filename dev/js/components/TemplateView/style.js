@@ -283,7 +283,7 @@ width: 100%;
                 cursor: pointer;
                 width: 70px;
                 flex-shrink: 0;
-                margin-left: auto;
+                margin-left: 0px;
                 margin-bottom: 12px;
             }
         }
