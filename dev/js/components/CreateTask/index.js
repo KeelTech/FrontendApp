@@ -56,7 +56,7 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
     const [checkList, setCheckList] = useState('');
     const [showAddCheckList, setShowChecklist] = useState(false);
     const [templateList, setTemplateList] = useState([]);
-    const { title, description, check_list, tags, is_template, due_date } = dataParams;
+    const { title, description, check_list, tags, is_template, due_date, priority } = dataParams;
     const [openTemplateView, setTemplateView] = useState(false);
     const [toasterInfo, setToasterInfo] = useState({
         isVisible: false,
@@ -179,7 +179,8 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
     }
     const { fullYear, day, month } = getFormattedDate(due_date);
     let formattedDate =`${fullYear}-${month+1<=9?`0${month+1}`:month+1}-${day<=9?`0${day}`:day}`;
-
+    const defaultOptions = PriorityList.filter(x=>x.id==priority);
+    
     return (
         <div className={container + " " + "newTaskMainContainer"}>
             {
@@ -230,7 +231,7 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
                             <img className="icon" src={ASSETS_BASE_URL + "/images/common/chevron.svg"} alt="home" />
                             <span className="hideMobile">Select</span><span>Priority</span>
                         </div>
-                        <CustomSelect options={PriorityList} defaultOption={PriorityList[0]} clickHandler={handlePriorityChange} />
+                        <CustomSelect options={PriorityList} value={defaultOptions && defaultOptions.length?defaultOptions[0]:{}} handleValueChange defaultOption={defaultOptions && defaultOptions.length?defaultOptions[0]:{}} clickHandler={handlePriorityChange} />
                     </div>
                     <div className="view">
                         <div className="taskName">

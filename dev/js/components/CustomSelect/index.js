@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { css } from '@emotion/css';
 import DetectClickOutside from '@helpers/DetectClickOutside.js'
 import { tabScreenWidth } from '@constants';
@@ -59,7 +59,7 @@ export const container = props => css`
     }
 `
 
-const CustomSelect = ({border="0px" ,mpadding="8px 20px", mfontSize, options=[], defaultOption={}, clickHandler=()=>{}, borderRadius="8px", backgroundColor="#FFF", fontColor="#363B64", fontSize="16px", fontWeight="normal", padding="10px 16px", margin="4px 0px", borderBottom="0.8px solid #EAEAEF"})=>{
+const CustomSelect = ({value='', handleValueChange=false , border="0px" ,mpadding="8px 20px", mfontSize, options=[], defaultOption={}, clickHandler=()=>{}, borderRadius="8px", backgroundColor="#FFF", fontColor="#363B64", fontSize="16px", fontWeight="normal", padding="10px 16px", margin="4px 0px", borderBottom="0.8px solid #EAEAEF"})=>{
     const [showOptions, setOptionsVisibility] = useState(false);
     const [selectedOption, setOptions] = useState(defaultOption);
 
@@ -74,6 +74,12 @@ const CustomSelect = ({border="0px" ,mpadding="8px 20px", mfontSize, options=[],
         setOptionsVisibility(false);
         clickHandler(val);
     }
+
+    useEffect(()=>{
+        if(handleValueChange && value){
+            handleSelect(value);
+        }
+    },[value])
     return(
         <div className={container({border, mpadding, mfontSize, borderBottom, borderRadius, backgroundColor, fontColor, fontSize, fontWeight, padding, margin})} ref={optionListRef}>
             <div className="selectedOption" onClick={toggleOptionList}>
