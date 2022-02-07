@@ -20,7 +20,10 @@ const UserDashboardView = ({ match }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        getAgentProfile({}, dispatch);
+        const pathName = window.location.pathname;
+        if(pathName!= '/agent/customer'){
+            getAgentProfile({}, dispatch);
+        }
     }, [])
 
     return (
