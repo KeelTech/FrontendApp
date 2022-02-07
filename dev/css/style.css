@@ -8889,7 +8889,7 @@ li.infofield:last-child {
 }
 .popOverNotifiy{
   position: absolute;
-  top: 100%;
+  top: 30px;
   right: 20px;
   max-width: 280px;
   padding: 12px;

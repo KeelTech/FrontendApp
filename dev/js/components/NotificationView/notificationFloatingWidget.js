@@ -7,50 +7,53 @@ import { getNotification, readNotification, toggleNotificationChat } from '@acti
 import { renderNotificationIcons } from '@helpers/utils';
 import { isMobileView } from '@constants';
 
-const NotificationFloatingWidget = ()=>{
+const NotificationFloatingWidget = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const timeInterval = useRef();
     let notificationId = useRef();
 
-    const closeClicked = (e)=>{
+    const closeClicked = (e) => {
         e.stopPropagation();
-        if(notificationId.current){
+        if (notificationId.current) {
             store.removeNotification(notificationId.current);
             notificationId.current = null;
         }
     }
 
-    useEffect(()=>{
-        timeInterval.current = setInterval(()=>{
-            getNotification({recent: true}, dispatch, (val)=>{
-                if(val && val.id){
+    useEffect(() => {
+        timeInterval.current = setInterval(() => {
+            getNotification({ recent: true }, dispatch, (val) => {
+                if (true || val && val.id) {
                     const icon = renderNotificationIcons(val);
-                    try{
+                    try {
                         const { text } = val;
-                        if(notificationId.current){
+                        if (notificationId.current) {
                             store.removeNotification(notificationId.current);
                             notificationId.current = null;
                         }
-                        if(text){
+                        if (true || text) {
                             let newId = store.addNotification({
-                                content: ()=>{
-                                    return(
-                                    <div className="pushNotification floatingNorificationCont">
-                                        <img src={ASSETS_BASE_URL+"/images/common/crossIcon.svg"} className="cross" onClick={closeClicked}/>
-                                        <div className={`pushCards clickedPush floatingWidget`} onClick={()=>clickHandler(val)}>
-                                            <div className="icoContent">
-                                                <div className="notifyIcon">
-                                                <img className="img-fluid" src={icon} alt="video" />
-                                                </div>
-                                                <div className="pushContent">
-                                                <h2>{text}</h2>
-                                                {/* <p>5 mins ago</p> */}
-                                                </div>
-                                            </div>
-                                            {/* <button className="pushNotifyBtn">Join Meeting</button> */}
-                                        </div>
-                                    </div>
+                                content: () => {
+                                    return (
+                                        // <div className="pushNotification floatingNorificationCont">
+                                        //     <img src={ASSETS_BASE_URL+"/images/common/crossIcon.svg"} className="cross" onClick={closeClicked}/>
+                                        //     <div className={`pushCards clickedPush floatingWidget`} onClick={()=>clickHandler(val)}>
+                                        //         <div className="icoContent">
+                                        //             <div className="notifyIcon">
+                                        //             <img className="img-fluid" src={icon} alt="video" />
+                                        //             </div>
+                                        //             <div className="pushContent">
+                                        //             <h2>{text}</h2>
+                                        //             {/* <p>5 mins ago</p> */}
+                                        //             </div>
+                                        //         </div>
+                                        //         {/* <button className="pushNotifyBtn">Join Meeting</button> */}
+                                        //     </div>
+                                        // </div>
+                                        <ul className="popOverNotifiy">
+                                            <li onClick={()=>clickHandler(val)}>{text || 'the quick brown fox jumps over the lazy dog' }</li>
+                                        </ul>
                                     )
                                 },
                                 type: "success",
@@ -63,42 +66,42 @@ const NotificationFloatingWidget = ()=>{
                             });
                             notificationId.current = newId;
                         }
-                    }catch(e){
+                    } catch (e) {
                         console.log('error is', e);
                     }
                 }
             });
-        },5000)
-        
+        }, 5000)
 
-        return ()=>{
+
+        return () => {
             clearInterval(timeInterval.current)
         }
-    },[])
+    }, [])
 
-    const clickHandler = (val)=>{
+    const clickHandler = (val) => {
         const { category, id } = val;
-        readNotification({id}, null, ()=>{
-            if(category=='TASKS'){
+        readNotification({ id }, null, () => {
+            if (category == 'TASKS') {
                 history.push('/tasks');
-            }else if(category=='DOCUMENT'){
+            } else if (category == 'DOCUMENT') {
                 history.push('/vault');
-            }else if(category=='CHATS'){
-                if(isMobileView()){
-                    toggleNotificationChat({value: true}, dispatch);   
-                }else{
+            } else if (category == 'CHATS') {
+                if (isMobileView()) {
+                    toggleNotificationChat({ value: true }, dispatch);
+                } else {
                     history.push('/');
                 }
-            }else if(category=='HOME'){
+            } else if (category == 'HOME') {
                 history.push('/');
             }
         })
     }
 
-    return(
+    return (
         <Fragment>
             <ReactNotification />
-        </Fragment> 
+        </Fragment>
     )
 }
 
