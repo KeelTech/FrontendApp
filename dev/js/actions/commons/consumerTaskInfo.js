@@ -390,3 +390,14 @@ export const submitQuestions = (dataParams, dispatch, cb=null)=>{
         if(cb) cb(null, true);
     })
 }
+
+export const getApplicationProgress = (dataParams, dispatch, cb=null)=>{
+    const { id } = dataParams;
+    API_GET(`${API_BASE_URL}/v1/cases/get-case-tracker`, {
+        ...dataParams
+    }).then((response)=>{
+        if(cb)cb(response);
+    }).catch((e)=>{
+        if(cb) cb(null, true);
+    })
+}

@@ -172,6 +172,10 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                                         <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/dashboardIcons.svg"} alt="home"/>
                                         <span className="heading">Dashboard</span>
                                     </div>
+                                    <div className={`${widgetClass} ${activeWidget==='application'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('application')}>
+                                        <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/tasks.svg"} alt="application"/>
+                                        <span className="heading">My Application</span>
+                                    </div>
                                     {
                                         showTasks?
                                         <div className={`${widgetClass} ${activeWidget==='tasks'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('tasks')}>

@@ -17,6 +17,7 @@ import ProfileView from './ProfileView';
 import Header from '@components/Header';
 import NotificationView from '@components/NotificationView';
 import NotificationWidget from '@components/NotificationView/notificationFloatingWidget.js'
+import ApplicationStatus from './ApplicationStatus';
 
 let isCalendlyClosed= 0;
 const UserDashboardView = (props)=>{
@@ -141,6 +142,9 @@ const UserDashboardView = (props)=>{
                 }
                 {
                     url.includes('notification') && <NotificationView {...props}/>
+                }
+                {
+                    url.includes('application') && <ApplicationStatus {...props}/>
                 }
             </Fragment>
         }
