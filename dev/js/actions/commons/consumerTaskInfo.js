@@ -334,8 +334,15 @@ export const getNotification = (dataParams, dispatch, cb=null)=>{
     API_GET(url).then((response)=>{
         if(response && response.status==1){
             if(dataParams && dataParams.recent && cb){
-                url+=`?recent=true`;
                 cb(response.data||{});
+                if(dispatch){
+                    dispatch({
+                        type: FETCH_NOTIFICATION,
+                        payload: response.data,
+                        isRecent: true
+                    })
+                }
+                
             }else{
                 dispatch({
                     type: NOTIFICATION_LOADING,

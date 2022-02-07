@@ -48,9 +48,9 @@ const ProfileWidget = () => {
 
   return (
     <div className="commonProfWidget">
-       <ul className="popOverNotifiy">
+       {/* <ul className="popOverNotifiy">
         <li>the quick brown fox jumps over the lazy dog.</li>
-      </ul>
+      </ul> */}
       {
         isAgent?null:<NotificationWidget/>
       }
