@@ -8915,6 +8915,16 @@ li.infofield:last-child {
   background-image: linear-gradient(top, #d3f0b1, #8bc34a);
   -webkit-box-shadow: inset 0 0 0 1px rgb(189 232 140), 0 2px 4px rgb(130 177 77);
   box-shadow: inset 0 0 0 1px rgb(189 232 140), 0 2px 4px rgb(130 177 77);
+  min-width: 275px;
+  padding: 20px 12px;
+}
+
+.crossNoti {
+    top: 5px;
+        width: 22px;
+    right: 5px;
+    cursor:pointer;
+    position: absolute;
 }
 .popOverNotifiy:before{
   
@@ -9036,19 +9046,19 @@ li.infofield:last-child {
 }
 
 .uploadCardCont:after {content: '';position: absolute;width: 50px;height: 50px;background: #4267B2;border-radius: 40px;left: -70px;top: -14px;
-background-image: url(/assets/images/checkWhite.svg);
+background-image: url(/assets/images/lightning.svg);
 background-repeat: no-repeat;
 background-position: center;
 }
 .uploadStatus .uploadCardCont.successApp:after{
   
   background-color: #d9e3fa;
-  background-image: url(/assets/images/lightning.svg), -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eef3fe), color-stop(100%, #d9e3fa));
-  background-image: url(/assets/images/lightning.svg), -webkit-linear-gradient(top, #d3f0b1, #8bc34a);
-  background-image: url(/assets/images/lightning.svg), -moz-linear-gradient(top, #d3f0b1, #8bc34a);
-  background-image: url(/assets/images/lightning.svg), -ms-linear-gradient(top, #d3f0b1, #8bc34a);
-  background-image: url(/assets/images/lightning.svg), -o-linear-gradient(top, #d3f0b1, #8bc34a);
-  background-image: url(/assets/images/lightning.svg), linear-gradient(top, #d3f0b1, #8bc34a);
+  background-image: url(/assets/images/checkWhite.svg), -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eef3fe), color-stop(100%, #d9e3fa));
+  background-image: url(/assets/images/checkWhite.svg), -webkit-linear-gradient(top, #d3f0b1, #8bc34a);
+  background-image: url(/assets/images/checkWhite.svg), -moz-linear-gradient(top, #d3f0b1, #8bc34a);
+  background-image: url(/assets/images/checkWhite.svg), -ms-linear-gradient(top, #d3f0b1, #8bc34a);
+  background-image: url(/assets/images/checkWhite.svg), -o-linear-gradient(top, #d3f0b1, #8bc34a);
+  background-image: url(/assets/images/checkWhite.svg), linear-gradient(top, #d3f0b1, #8bc34a);
   /* background-image: url(/assets/images/lightning.svg); */
 }
 .uploadStatus .uploadCardCont.successApp:before{
@@ -9056,6 +9066,9 @@ background-position: center;
 }
 .uploadStatus .uploadCardCont.successApp .uloadCardWhite ul:before{
   background: -webkit-linear-gradient(top, #d3f0b1, #8bc34a);
+}
+.uploadStatus .uploadCardCont.successApp .customCheck_box .check_container p{
+  text-decoration: none;
 }
 .uploadCardCont:last-child:before {height: calc(100% - 33px);}
 .uploadCardCont.pendingApp{

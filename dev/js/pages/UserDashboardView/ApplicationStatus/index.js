@@ -38,8 +38,8 @@ const ApplicationStatus = ()=>{
                                     <div className="checkBoxContainer">
                                         <label className="check_container">
                                             <p>{description}</p>
-                                            {/* <input type="checkbox" />
-                                            <span className="checkmark"></span> */}
+                                            <input type="checkbox" checked />
+                                            <span className="checkmark"></span>
                                         </label>
                                     </div>
                                 </div>
