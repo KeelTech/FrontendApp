@@ -8959,7 +8959,7 @@ li.infofield:last-child {
   top: -13px;
 }/* // ================ doc upload   ================ */
 .uploadStatus {
-  margin-top: 50px;
+  margin-top: 100px;
   margin-left: 90px;
   width: 100%;
 }
@@ -9040,5 +9040,25 @@ background-image: url(/assets/images/checkWhite.svg);
 background-repeat: no-repeat;
 background-position: center;
 }
+.uploadStatus .uploadCardCont.successApp:after{
+  
+  background-color: #d9e3fa;
+  background-image: url(/assets/images/lightning.svg), -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eef3fe), color-stop(100%, #d9e3fa));
+  background-image: url(/assets/images/lightning.svg), -webkit-linear-gradient(top, #d3f0b1, #8bc34a);
+  background-image: url(/assets/images/lightning.svg), -moz-linear-gradient(top, #d3f0b1, #8bc34a);
+  background-image: url(/assets/images/lightning.svg), -ms-linear-gradient(top, #d3f0b1, #8bc34a);
+  background-image: url(/assets/images/lightning.svg), -o-linear-gradient(top, #d3f0b1, #8bc34a);
+  background-image: url(/assets/images/lightning.svg), linear-gradient(top, #d3f0b1, #8bc34a);
+  /* background-image: url(/assets/images/lightning.svg); */
+}
+.uploadStatus .uploadCardCont.successApp:before{
+  background: -webkit-linear-gradient(top, #d3f0b1, #8bc34a);;
+}
+.uploadStatus .uploadCardCont.successApp .uloadCardWhite ul:before{
+  background: -webkit-linear-gradient(top, #d3f0b1, #8bc34a);
+}
 .uploadCardCont:last-child:before {height: calc(100% - 33px);}
+.uploadCardCont.pendingApp{
+  filter: grayscale(1);
+}
 /* // ================ doc upload   ================ */
