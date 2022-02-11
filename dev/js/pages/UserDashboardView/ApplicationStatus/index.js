@@ -21,9 +21,15 @@ const ApplicationStatus = ()=>{
         <div className='uploadSection'>
             {
                 progressData.map((val, key)=>{
-                    const {case_checkpoint, } = val;
+                    const {case_checkpoint, status} = val;
                     const {  title, description } = case_checkpoint;
-                    return <div className='uploadCardCont' key={key}>
+                    let statusCls = '';
+                    if(status==1){
+                        statusCls = 'pendingApp'
+                    }else if(status==3){
+                        statusCls = 'successApp';
+                    }
+                    return <div className={`uploadCardCont ${statusCls}`} key={key}>
                     <h3>{title}</h3>
                     <div className='uloadCardWhite'>
                         <ul>
