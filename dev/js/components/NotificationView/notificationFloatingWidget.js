@@ -24,7 +24,7 @@ const NotificationFloatingWidget = () => {
     useEffect(() => {
         timeInterval.current = setInterval(() => {
             getNotification({ recent: true }, dispatch, (val) => {
-                if (true || val && val.id) {
+                if (val && val.id) {
                     const icon = renderNotificationIcons(val);
                     try {
                         const { text } = val;
@@ -32,7 +32,7 @@ const NotificationFloatingWidget = () => {
                             store.removeNotification(notificationId.current);
                             notificationId.current = null;
                         }
-                        if (true || text) {
+                        if (text) {
                             let newId = store.addNotification({
                                 content: () => {
                                     return (
@@ -52,7 +52,7 @@ const NotificationFloatingWidget = () => {
                                         //     </div>
                                         // </div>
                                         <ul className="popOverNotifiy">
-                                            <li onClick={()=>clickHandler(val)}>{text || 'the quick brown fox jumps over the lazy dog' }</li>
+                                            <li onClick={()=>clickHandler(val)}>{text}</li>
                                         </ul>
                                     )
                                 },
