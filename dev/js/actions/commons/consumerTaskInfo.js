@@ -334,8 +334,15 @@ export const getNotification = (dataParams, dispatch, cb=null)=>{
     API_GET(url).then((response)=>{
         if(response && response.status==1){
             if(dataParams && dataParams.recent && cb){
-                url+=`?recent=true`;
                 cb(response.data||{});
+                if(dispatch){
+                    dispatch({
+                        type: FETCH_NOTIFICATION,
+                        payload: response.data,
+                        isRecent: true
+                    })
+                }
+                
             }else{
                 dispatch({
                     type: NOTIFICATION_LOADING,
@@ -383,6 +390,17 @@ export const getQuestions = ({}, dispatch, cb=null)=>{
 export const submitQuestions = (dataParams, dispatch, cb=null)=>{
     const { id } = dataParams;
     API_POST(`${API_BASE_URL}/v1/questionnaire/submit-questionnaires`, {
+        ...dataParams
+    }).then((response)=>{
+        if(cb)cb(response);
+    }).catch((e)=>{
+        if(cb) cb(null, true);
+    })
+}
+
+export const getApplicationProgress = (dataParams, dispatch, cb=null)=>{
+    const { id } = dataParams;
+    API_GET(`${API_BASE_URL}/v1/cases/get-case-tracker`, {
         ...dataParams
     }).then((response)=>{
         if(cb)cb(response);

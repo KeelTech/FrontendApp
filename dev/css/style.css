@@ -6355,7 +6355,6 @@ h3.addMoreBtnHead {
   position: relative;
   padding-left: 25px;
   margin-bottom: 12px;
-  cursor: pointer;
   font-size: 22px;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -8887,3 +8886,194 @@ li.infofield:last-child {
 .react-calendar{
   margin: auto;
 }
+.popOverNotifiy{
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  max-width: 280px;
+  padding: 12px;
+  border: 1px solid;
+  border-color: #777 #6c6c6c #666;
+  border-radius: 5px;
+  -webkit-transition-property: opacity, padding, visibility;
+  -moz-transition-property: opacity, padding, visibility;
+  -ms-transition-property: opacity, padding, visibility;
+  -o-transition-property: opacity, padding, visibility;
+  transition-property: opacity, padding, visibility;
+  -webkit-transition: 0.2s ease-out;
+  -moz-transition: 0.2s ease-out;
+  -ms-transition: 0.2s ease-out;
+  -o-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
+  background-color: #d9e3fa;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eef3fe), color-stop(100%, #d9e3fa));
+  background-image: -webkit-linear-gradient(top, #d3f0b1, #8bc34a);
+  background-image: -moz-linear-gradient(top, #d3f0b1, #8bc34a);
+  background-image: -ms-linear-gradient(top, #d3f0b1, #8bc34a);
+  background-image: -o-linear-gradient(top, #d3f0b1, #8bc34a);
+  background-image: linear-gradient(top, #d3f0b1, #8bc34a);
+  -webkit-box-shadow: inset 0 0 0 1px rgb(189 232 140), 0 2px 4px rgb(130 177 77);
+  box-shadow: inset 0 0 0 1px rgb(189 232 140), 0 2px 4px rgb(130 177 77);
+  min-width: 275px;
+  padding: 20px 12px;
+}
+
+.crossNoti {
+    top: 5px;
+        width: 22px;
+    right: 5px;
+    cursor:pointer;
+    position: absolute;
+}
+.popOverNotifiy:before{
+  
+  display: block;
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 110px;
+    border: 7px outset transparent;
+    border-bottom: 7px solid #555;
+    top: -14px;
+    
+}
+.popOverNotifiy:after{
+
+  display: block;
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 110px;
+    border: 7px outset transparent;
+    border-bottom: 7px solid #caeaa4;
+    top: -12px;
+}
+.popOverNotifiy li{
+  list-style: none;
+  color: #162900;
+  text-shadow: 0px 2px 4px #88a862;
+}
+.popOverNotifiy li:first-child:after {
+ 
+  display: block;
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 110px;
+  border: 7px outset transparent;
+  border-bottom: 7px solid #fff;
+  top: -13px;
+}/* // ================ doc upload   ================ */
+.uploadStatus {
+  margin-top: 100px;
+  margin-left: 90px;
+  width: 100%;
+}
+
+.uploadStatus h2 {
+  font-size: 18px;
+  color: #343A40;
+  font-weight: 600;
+}
+
+.uploadSection {
+  margin-top: 40px;
+}
+
+.uploadCardCont {
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.uploadCardCont h3 {
+  font-size: 16px;
+  color: #343A40;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.uloadCardWhite {
+}
+
+.uloadCardWhite ul {
+  list-style: none;
+  padding: 0;
+  background: #FFFFFF;
+  box-shadow: 4px 4px 8px #D8DCE4;
+  border-radius: 4px;
+  padding: 10px 10px 10px 20px;
+  position: relative;
+  margin-bottom:0px;
+}
+
+.uloadCardWhite li {
+  padding: 5px 0;
+}
+
+.customCheck_box .check_container p {
+  color: #8A95A8;
+  text-decoration: line-through;
+}
+
+.customCheck_box .check_container {
+  margin: 0;
+}
+
+.uloadCardWhite ul:before {content: '';position: absolute;width: 6px;height: 100%;background: #4267B2;border-radius: 10px;left: 0;top: 0;}
+.customCheck_box span.checkmark {
+  background: linear-gradient(180.38deg, #FFFFFF 0.33%, #F8F9FF 99.67%);
+  border: 0.5px solid #E0E0FF !important;
+  box-sizing: border-box;
+  box-shadow: 0px 8.57861px 7.96585px -3.06379px rgba(50, 77, 171, 0.12);
+  border-radius: 4.90206px;
+}
+
+.customCheck_box .check_container .checkmark:after {border-color:#4267B2;}
+.uploadCardCont:before {
+  height: auto;
+  width: 2px;
+  content: '';
+  position: absolute;
+  left: -45px;
+  top: 0;
+  bottom: -40px;
+  margin: auto;
+  background: #4267B2;
+}
+
+.uploadCardCont:after {content: '';position: absolute;width: 50px;height: 50px;background: #4267B2;border-radius: 40px;left: -70px;top: -14px;
+background-image: url(/assets/images/lightning.svg);
+background-repeat: no-repeat;
+background-position: center;
+}
+.uploadStatus .uploadCardCont.successApp:after{
+  
+  background-color: #d9e3fa;
+  background-image: url(/assets/images/checkWhite.svg), -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eef3fe), color-stop(100%, #d9e3fa));
+  background-image: url(/assets/images/checkWhite.svg), -webkit-linear-gradient(top, #d3f0b1, #8bc34a);
+  background-image: url(/assets/images/checkWhite.svg), -moz-linear-gradient(top, #d3f0b1, #8bc34a);
+  background-image: url(/assets/images/checkWhite.svg), -ms-linear-gradient(top, #d3f0b1, #8bc34a);
+  background-image: url(/assets/images/checkWhite.svg), -o-linear-gradient(top, #d3f0b1, #8bc34a);
+  background-image: url(/assets/images/checkWhite.svg), linear-gradient(top, #d3f0b1, #8bc34a);
+  /* background-image: url(/assets/images/lightning.svg); */
+}
+.uploadStatus .uploadCardCont.successApp:before{
+  background: -webkit-linear-gradient(top, #d3f0b1, #8bc34a);;
+}
+.uploadStatus .uploadCardCont.successApp .uloadCardWhite ul:before{
+  background: -webkit-linear-gradient(top, #d3f0b1, #8bc34a);
+}
+.uploadStatus .uploadCardCont.successApp .customCheck_box .check_container p{
+  text-decoration: none;
+}
+.uploadCardCont:last-child:before {height: calc(100% - 33px);}
+.uploadCardCont.pendingApp{
+  filter: grayscale(1);
+}
+.uploadStatus .checkmark,input{
+  cursor: default;
+}
+/* // ================ doc upload   ================ */
