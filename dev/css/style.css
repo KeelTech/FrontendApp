@@ -6355,7 +6355,6 @@ h3.addMoreBtnHead {
   position: relative;
   padding-left: 25px;
   margin-bottom: 12px;
-  cursor: pointer;
   font-size: 22px;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -9073,5 +9072,8 @@ background-position: center;
 .uploadCardCont:last-child:before {height: calc(100% - 33px);}
 .uploadCardCont.pendingApp{
   filter: grayscale(1);
+}
+.uploadStatus .checkmark,input{
+  cursor: default;
 }
 /* // ================ doc upload   ================ */

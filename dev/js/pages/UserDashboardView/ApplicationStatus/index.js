@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 
 import { getApplicationProgress } from '@actions';
 
@@ -17,7 +17,7 @@ const ApplicationStatus = ()=>{
 
     return(
         <div className='uploadStatus'>
-        <h2>Itineraries</h2>
+        <h2>My Application</h2>
         <div className='uploadSection'>
             {
                 progressData.map((val, key)=>{
@@ -38,8 +38,14 @@ const ApplicationStatus = ()=>{
                                     <div className="checkBoxContainer">
                                         <label className="check_container">
                                             <p>{description}</p>
-                                            <input type="checkbox" checked />
-                                            <span className="checkmark"></span>
+                                            {
+                                                status==3?
+                                                <Fragment>
+                                                    <input type="checkbox" checked />
+                                                    <span className="checkmark"></span>
+                                                </Fragment>
+                                                :null
+                                            }
                                         </label>
                                     </div>
                                 </div>
