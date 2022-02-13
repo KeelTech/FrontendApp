@@ -9049,6 +9049,9 @@ background-repeat: no-repeat;
 background-position: center;
 background-size: 15px;
 }
+.pendingApp.uploadCardCont:after{
+  background-image: url(/assets/images/Question.svg);
+}
 .uploadStatus .uploadCardCont.successApp:after{
   
   background-color: #d9e3fa;
