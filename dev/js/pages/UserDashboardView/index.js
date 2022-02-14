@@ -88,6 +88,7 @@ const UserDashboardView = (props)=>{
         let showChat = false;
         let showCalendly = false;
         let showBilling = false;
+        let showApplication = false;
         planComponents.map((val)=>{
             const { name='' } = val;
             if(name=="TASKS"){
@@ -100,12 +101,14 @@ const UserDashboardView = (props)=>{
                 showCalendly = true;
             }else if(name=='BILLING'){
                 showBilling = true;
+            }else if(name=='MYAPPLICATION'){
+                showApplication = true;
             }
         })
-        return { showTasks, showDocuments, showChat, showCalendly, showBilling, planLoaded: planLoaded };
+        return { showTasks, showDocuments, showChat, showCalendly, showBilling, planLoaded: planLoaded, showApplication };
     },[planComponents])
 
-    const { showTasks, showDocuments, showChat, showBilling, showCalendly } = showOptions;
+    const { showTasks, showDocuments, showChat, showBilling, showCalendly, showApplication } = showOptions;
 
     const renderRoutes = ()=>{
         
@@ -144,7 +147,7 @@ const UserDashboardView = (props)=>{
                     url.includes('notification') && <NotificationView {...props}/>
                 }
                 {
-                    url.includes('application') && <ApplicationStatus {...props}/>
+                    url.includes('application') && showApplication && <ApplicationStatus {...props}/>
                 }
             </Fragment>
         }
