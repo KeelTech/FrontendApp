@@ -13,12 +13,13 @@ const NotificationFloatingWidget = () => {
     const timeInterval = useRef();
     let notificationId = useRef();
 
-    const closeClicked = (e) => {
+    const closeClicked = (e, val) => {
         e.stopPropagation();
         if (notificationId.current) {
             store.removeNotification(notificationId.current);
             notificationId.current = null;
         }
+        clickHandler(val, false)
     }
 
     useEffect(() => {
@@ -52,7 +53,7 @@ const NotificationFloatingWidget = () => {
                                         //     </div>
                                         // </div>
                                         <ul className="popOverNotifiy">
-                                            <img src={ASSETS_BASE_URL+"/images/common/crossIcon.svg"} className="crossNoti" onClick={closeClicked}/>
+                                            <img src={ASSETS_BASE_URL+"/images/common/crossIcon.svg"} className="crossNoti" onClick={(e)=>closeClicked(e, val)}/>
                                             <li onClick={()=>clickHandler(val)}>{text}</li>
                                         </ul>
                                     )
@@ -80,21 +81,23 @@ const NotificationFloatingWidget = () => {
         }
     }, [])
 
-    const clickHandler = (val) => {
+    const clickHandler = (val, isRedirect=true) => {
         const { category, id } = val;
         readNotification({ id }, null, () => {
-            if (category == 'TASKS') {
-                history.push('/tasks');
-            } else if (category == 'DOCUMENT') {
-                history.push('/vault');
-            } else if (category == 'CHATS') {
-                if (isMobileView()) {
-                    toggleNotificationChat({ value: true }, dispatch);
-                } else {
+            if(isRedirect){
+                if (category == 'TASKS') {
+                    history.push('/tasks');
+                } else if (category == 'DOCUMENT') {
+                    history.push('/vault');
+                } else if (category == 'CHATS') {
+                    if (isMobileView()) {
+                        toggleNotificationChat({ value: true }, dispatch);
+                    } else {
+                        history.push('/');
+                    }
+                } else if (category == 'HOME') {
                     history.push('/');
                 }
-            } else if (category == 'HOME') {
-                history.push('/');
             }
         })
     }

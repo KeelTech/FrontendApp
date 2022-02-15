@@ -44,7 +44,10 @@ const ApplicationStatus = ()=>{
                                                     <input type="checkbox" checked />
                                                     <span className="checkmark"></span>
                                                 </Fragment>
-                                                :null
+                                                :<Fragment>
+                                                <input type="checkbox" checked={false}/>
+                                                <span className="checkmark"></span>
+                                            </Fragment>
                                             }
                                         </label>
                                     </div>
