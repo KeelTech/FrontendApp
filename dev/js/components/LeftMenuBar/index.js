@@ -95,6 +95,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
         let showChat = false;
         let showCalendly = false;
         let showBilling = false;
+        let showApplication = false;
         planComponents.map((val)=>{
             const { name='' } = val;
             if(name=="TASKS"){
@@ -107,9 +108,11 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                 showCalendly = true;
             }else if(name=='BILLING'){
                 showBilling = true;
+            }else if(name=='MYAPPLICATION'){
+                showApplication = true;
             }
         })
-        return { showTasks, showDocuments, showChat, showCalendly, showBilling };
+        return { showTasks, showDocuments, showChat, showCalendly, showBilling, showApplication };
     },[planComponents])
 
     const mainClass = cx({
@@ -122,7 +125,7 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
         disableWidget: !isProfileExist
     })
 
-    const { showTasks, showDocuments, showChat, showCalendly, showBilling } = showOptions;
+    const { showTasks, showDocuments, showChat, showCalendly, showBilling, showApplication } = showOptions;
     return(
         <div className={leftBarCont + " " + "sideBarMainContainer"}>
             {
@@ -162,12 +165,24 @@ const LeftMenuBar = ({ isMobileView, toggleMenuBar, isAgent })=>{
                                         <img className="icon" src={ASSETS_BASE_URL+"/images/common/customer.svg"} alt="tasks"/>
                                         <span className="heading">Customers</span>
                                     </div>
+                                    <div className={`widget ${agentActiveWidget==='templates'?'activeWidget':''}`} onClick={()=>handleAgentMenuOptionsClick('templates')}>
+                                        <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/valutIcon.svg"} alt="home"/>
+                                        <span className="heading">Templates</span>
+                                    </div>
                                 </Fragment>
                                 :<Fragment>
                                     <div className={`${widgetClass} ${activeWidget==='dashboard'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('dashboard')}>
                                         <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/dashboardIcons.svg"} alt="home"/>
                                         <span className="heading">Dashboard</span>
                                     </div>
+                                    {
+                                        showApplication?
+                                        <div className={`${widgetClass} ${activeWidget==='application'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('application')}>
+                                            <img className="icon" src={ASSETS_BASE_URL+"/images/leftmenubar/tasks.svg"} alt="application"/>
+                                            <span className="heading">My Application</span>
+                                        </div>
+                                        :null
+                                    }
                                     {
                                         showTasks?
                                         <div className={`${widgetClass} ${activeWidget==='tasks'?'activeWidget':''}`} onClick={()=>handleMenuOptionsClick('tasks')}>

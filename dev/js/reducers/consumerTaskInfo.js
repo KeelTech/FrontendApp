@@ -25,7 +25,8 @@ const defaultState = {
     planLoaded: false,
     notificationList: [],
     showNotificationChatWidget: false,
-    notificationLoading: false
+    notificationLoading: false,
+    recentNotification:{}
 }
 
 export default function (state = defaultState, action) {
@@ -157,7 +158,11 @@ export default function (state = defaultState, action) {
         }
         case FETCH_NOTIFICATION: {
             let newState = {...state};
-            newState.notificationList = action.payload;
+            if(action.isRecent){
+                newState.recentNotification = action.payload;
+            }else{
+                newState.notificationList = action.payload;
+            }
             return newState;
         }
         case TOGGLE_NOTIFICATION_CHAT: {

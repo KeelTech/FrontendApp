@@ -14,22 +14,28 @@ import { container, taskStatus, messageSection, checkListCont, attachmentCont, c
 
 const PriorityList = [
     {
-        id: 1,
+        id: "1",
         val: 'High'
     },
     {
-        id: 2,
+        id: "2",
         val: 'Medium'
     },
     {
-        id: 0,
+        id: "0",
         val: 'Low'
     }
 ]
 const PriorityMapping = {
-    'High': 1,
-    'Medium': 2,
-    'Low': 0
+    'High': "1",
+    'Medium': "2",
+    'Low': "0"
+}
+
+const PriorityMappingNo = {
+    "1": 'High',
+    "2": 'Medium',
+    "0": 'Low'
 }
 
 const CreateTask = ({ toggleAddTaskView, caseId }) => {
@@ -38,7 +44,7 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
     const [dataParams, setDataParams] = useState({
         title: '',
         description: '',
-        priority: 1,
+        priority: "1",
         due_date: '',
         check_list: {},
         tags: 'important',
@@ -50,7 +56,7 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
     const [checkList, setCheckList] = useState('');
     const [showAddCheckList, setShowChecklist] = useState(false);
     const [templateList, setTemplateList] = useState([]);
-    const { title, description, check_list, tags, is_template, due_date } = dataParams;
+    const { title, description, check_list, tags, is_template, due_date, priority } = dataParams;
     const [openTemplateView, setTemplateView] = useState(false);
     const [toasterInfo, setToasterInfo] = useState({
         isVisible: false,
@@ -63,7 +69,7 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
         const dataParams = {
             case: caseId
         }
-        getTemplateList(dataParams, null, (resp, error)=>{
+        getTemplateList(dataParams, dispatch, (resp, error)=>{
             if(resp){
                 setTemplateList(resp);
             }
@@ -157,13 +163,12 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
         setDataValues({
             title: val.title,
             description: val.description||'',
-            priority: PriorityMapping && PriorityMapping[val.priority_name],
-            due_date: val.due_date,
-            check_list: val.check_list,
+            priority: val.priority,
+            check_list: val.checklist,
             tags: val.tags,
             case: caseId || ''
         })
-        if(val && val.check_list && Object.entries(val.check_list).length){
+        if(val && val.checklist && Object.entries(val.checklist).length){
             setShowChecklist(true);
         }
         toggleTemplateBlock();
@@ -174,7 +179,8 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
     }
     const { fullYear, day, month } = getFormattedDate(due_date);
     let formattedDate =`${fullYear}-${month+1<=9?`0${month+1}`:month+1}-${day<=9?`0${day}`:day}`;
-
+    const defaultOptions = PriorityList.filter(x=>x.id==priority);
+    
     return (
         <div className={container + " " + "newTaskMainContainer"}>
             {
@@ -225,7 +231,7 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
                             <img className="icon" src={ASSETS_BASE_URL + "/images/common/chevron.svg"} alt="home" />
                             <span className="hideMobile">Select</span><span>Priority</span>
                         </div>
-                        <CustomSelect options={PriorityList} defaultOption={PriorityList[0]} clickHandler={handlePriorityChange} />
+                        <CustomSelect options={PriorityList} value={defaultOptions && defaultOptions.length?defaultOptions[0]:{}} handleValueChange defaultOption={defaultOptions && defaultOptions.length?defaultOptions[0]:{}} clickHandler={handlePriorityChange} />
                     </div>
                     <div className="view">
                         <div className="taskName">

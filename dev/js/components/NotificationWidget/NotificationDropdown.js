@@ -8,27 +8,29 @@ import { notification, header, content, content__list, message } from "./style";
 
 const NotificationDropdown = () => {
   const taskInfo = useSelector(state=>state.TASK_INFO);
-  const { notificationList=[] } = taskInfo;
+  const { notificationList=[], recentNotification } = taskInfo;
   const dispatch = useDispatch();
   const history = useHistory();
 
   const clickHandler = (val)=>{
     const { category, id } = val;
-    readNotification({id}, null, ()=>{
+    if(id){
+      readNotification({id}, null, ()=>{
         if(category=='TASKS'){
             history.push('/tasks');
         }else if(category=='DOCUMENT'){
             history.push('/vault');
         }else if(category=='CHATS'){
             if(isMobileView()){
-                toggleNotificationChat({value: true}, dispatch);   
+                toggleNotificationChat({value: true}, dispatch);
             }else{
                 history.push('/');
             }
         }else if(category=='HOME'){
             history.push('/');
         }
-    })
+      })
+    }
   }
 
   return (
@@ -42,22 +44,20 @@ const NotificationDropdown = () => {
       <div className="dropNotification">
         <div className="pushNotification">
           {
-            notificationList.slice(0, 3).map((val)=>{
-              const { id, seen, text } = val;
-              const icon = renderNotificationIcons(val);
-              return <div className={`pushCards ${seen?'clickedPush':''}`} key={id} onClick={()=>clickHandler(val)}>
+            recentNotification && recentNotification.text?
+              <div className={`pushCards ${recentNotification.seen?'clickedPush':''}`} onClick={()=>clickHandler(recentNotification)}>
               <div className="icoContent">
                 <div className="notifyIcon">
-                  <img className="img-fluid" src={icon} alt="video" />
+                  <img className="img-fluid" src={renderNotificationIcons(recentNotification)} alt="video" />
                 </div>
                 <div className="pushContent">
-                  <h2>{text}</h2>
+                  <h2>{recentNotification.text}</h2>
                   {/* <p>5 mins ago</p> */}
                 </div>
               </div>
               {/* <button className="pushNotifyBtn">Join Meeting</button> */}
             </div>
-            })
+            :null
           }
         </div>
         {

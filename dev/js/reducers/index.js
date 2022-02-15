@@ -51,7 +51,7 @@ const TASK_INFO_PERSIST = {
 const AGENT_STORE_PERSIST = {
   key: 'AGENT_STORE',
   storage: storage,
-  whitelist: ['agentProfile']
+  whitelist: ['agentProfile', 'templateList']
 }
 
 const DOCUMENT_VAULT_PERSIST = {

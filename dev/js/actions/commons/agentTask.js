@@ -1,4 +1,4 @@
-import { ADD_CASE_LIST, CASE_LIST_LOADING, FETCH_AGENT_PROFILE, AGENT_PROFILE_LOADING, AGENT_SCHEDULE_DETAILS, AGENT_SCHEDULE_LOADING } from '@constants/types';
+import { ADD_CASE_LIST, CASE_LIST_LOADING, FETCH_AGENT_PROFILE, AGENT_PROFILE_LOADING, AGENT_SCHEDULE_DETAILS, AGENT_SCHEDULE_LOADING, FETCH_TEMPLATE_LIST, FETCH_TEMPLATE_LIST_LOADING } from '@constants/types';
 import { API_GET, API_POST, API_PUT, API_DELETE } from '../../api/api.js';
 
 export const createTask = (dataParams, dispatch, cb=null)=>{
@@ -179,7 +179,7 @@ export const updateProgram = (dataParams={}, dispatch, cb=null)=>{
 
 export const getTemplateList = (dataParams={}, dispatch, cb=null)=>{
     const caseId = dataParams.case;
-    API_GET(`${API_BASE_URL}v1/tasks/template-task?case=${caseId}`).then((response)=>{
+    API_GET(`${API_BASE_URL}v1/tasks/list-task-template`).then((response)=>{
         if(response && response.data){
             if(cb)cb(response.data, false);
         }else{
@@ -197,6 +197,57 @@ export const createNotes = (dataParams={}, dispatch, cb=null)=>{
             if(cb)cb(response.data, false);
         }else{
             if(cb)cb(null, true);
+        }
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}
+
+export const getTemplateListDetail = (dataParams={}, dispatch, cb=null)=>{
+    const caseId = dataParams.case;
+    dispatch({
+        type: FETCH_TEMPLATE_LIST_LOADING,
+        payload: true
+    })
+    API_GET(`${API_BASE_URL}v1/tasks/list-task-template`).then((response)=>{
+        if(response && response.data){
+            dispatch({
+                type: FETCH_TEMPLATE_LIST_LOADING,
+                payload: false
+            })
+            dispatch({
+                type: FETCH_TEMPLATE_LIST,
+                payload: response.data
+            })
+            if(cb)cb(response.data, false);
+        }else{
+            if(cb)cb(null, true);    
+        }
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}
+
+export const updateTemplateDetail = (dataParams={}, dispatch, cb=null)=>{
+    const id = dataParams.id;
+    API_POST(`${API_BASE_URL}v1/tasks/update-task-template/${id}`, dataParams).then((response)=>{
+        if(response && response.data){
+            if(cb)cb(response.data, false);
+        }else{
+            if(cb)cb(null, true);    
+        }
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}
+
+export const deleteTemplate = (dataParams={}, dispatch, cb=null)=>{
+    const id = dataParams.id;
+    API_DELETE(`${API_BASE_URL}v1/tasks/delete-task-template/${id}`, dataParams).then((response)=>{
+        if(response && response.data){
+            if(cb)cb(response.data, false);
+        }else{
+            if(cb)cb(null, true);    
         }
     }).catch((e)=>{
         if(cb)cb(null, true);

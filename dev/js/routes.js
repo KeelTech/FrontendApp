@@ -39,6 +39,7 @@ let CUSTOMER_ROUTES = [
   { path: '/edit/:id', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/notification', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/plan/detail/:id', exact: true, component: UserDashboardView, isPrivate: true },
+  { path: '/application', exact: true, component: UserDashboardView, isPrivate: true },
   { path: '/chat', exact: true, component: CustomChat, isPrivate: false },
   { path: '*', component: NotFoundPage, isPrivate: false  },
 ];

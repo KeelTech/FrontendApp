@@ -2,7 +2,7 @@ import React from 'react';
 import { getFormattedDate } from '@helpers/utils.js';
 import { card } from './style.js';
 
-const TaskCard = ({ data={}, active=false, isView=false, clickHandler=()=>{}})=>{
+const TaskCard = ({ data={}, active=false, isView=false, clickHandler=()=>{}, showStatus=true})=>{
 
     const { title='', status_name='',  created_at='', due_date='' } = data;
     return(
@@ -13,7 +13,9 @@ const TaskCard = ({ data={}, active=false, isView=false, clickHandler=()=>{}})=>
                     <img className="calendar img-fluid" src={ASSETS_BASE_URL+"/images/common/calendar.svg"} alt="date"/>
                     <span className="date">{getFormattedDate(due_date?due_date:created_at).formattedDate}</span>
                 </div>
-                <div className="status">{status_name}</div>
+                {
+                    status_name && showStatus?<div className="status">{status_name}</div>:null
+                }
             </div>
         </div>
     )
