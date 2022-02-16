@@ -84,3 +84,20 @@ export const hrClass = css`
         border-radius:0px 10px 10px 0px;
     }
 `
+export const actionItemColor = props=>css`
+    background: ${props.colorFormat};
+    border: 1px solid #4891d1;
+    color: #4891d1;
+    position: relative;
+    font-size: 12px;
+    border-radius: 25px;
+    text-align: center;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    overflow: hidden;
+    box-shadow: 1px 1px 3px #cbcbcb;
+`

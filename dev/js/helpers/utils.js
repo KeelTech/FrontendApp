@@ -113,3 +113,11 @@ export const renderNotificationIcons = (val)=>{
     }
     return icon;
 }
+
+export const renderActionItem = (val)=>{
+    let color = '#C6F090'
+    if(val>2){
+        color = '#FFCC00'
+    }
+    return color;
+}

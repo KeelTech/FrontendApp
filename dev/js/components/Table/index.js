@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { getFormattedTime, getFormattedDate, renderStatusText } from '@helpers/utils';
+import { getFormattedTime, getFormattedDate, renderStatusText, renderActionItem } from '@helpers/utils';
 import TableCustomRows from '@components/TableCustomRows';
-import { headerClass, headerRowClass, tableClass, rowClass, hrClass, rowItemClass, rowItemClassEmpty } from './style.js';
+import { headerClass, headerRowClass, tableClass, rowClass, hrClass, rowItemClass, rowItemClassEmpty, actionItemColor } from './style.js';
 
 class Table extends Component {
     constructor(props) {
@@ -15,7 +15,8 @@ class Table extends Component {
         // }
         let dataLabel = row[key.key];
         if(key.isTaskCount){
-            return <td className={rowItemClass}><span className="taskCount">{dataLabel}</span></td>
+            const colorFormat = renderActionItem(dataLabel);
+            return <td className={rowItemClass}><span className={actionItemColor({colorFormat})}>{dataLabel}</span></td>
         }else if(key.isPlanName){
             dataLabel = dataLabel && dataLabel.name||'';
         }else if(key.isDate){
