@@ -115,8 +115,10 @@ export const renderNotificationIcons = (val)=>{
 }
 
 export const renderActionItem = (val)=>{
-    let color = '#C6F090'
-    if(val>2){
+    let color = '#FFFFFF'
+    if(val>0 && val<=2){
+        color = '#C6F090'
+    }else if(val>2){
         color = '#FFCC00'
     }
     return color;
