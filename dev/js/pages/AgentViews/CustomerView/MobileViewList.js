@@ -6,7 +6,7 @@ const MobileViewList = ({ handleCustomerClick, caseList }) => {
   return (
     <Fragment>
       {caseList.map((list) => {
-        const { case_id, plan, created_at, updated_at, status, display_id, user_details={} } = list;
+        const { case_id, plan, created_at, updated_at, status, display_id, user_details={}, action_items } = list;
         const { user_name ='' } = user_details;
         return (
           <ul key={case_id} className={lists} onClick={() => handleCustomerClick(case_id)}>
@@ -30,9 +30,13 @@ const MobileViewList = ({ handleCustomerClick, caseList }) => {
               <h2 className='key'>Start Date:</h2>
               <h2 className='value'>{`${getFormattedDate(created_at).formattedDate} ${getFormattedTime(created_at)}`}</h2>
             </li>
-            <li className={customer}>
+            {/* <li className={customer}>
               <h2 className='key'>Task Status:</h2>
               <h2 className='value status'>{renderStatusText(status)}</h2>
+            </li> */}
+            <li className={customer}>
+              <h2 className='key'>Action Items</h2>
+              <h2 className='value taskCount'>{action_items}</h2>
             </li>
           </ul>
         )

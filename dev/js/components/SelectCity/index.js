@@ -93,7 +93,7 @@ const SelectMainCountry = ({ saveSelectedOption, value="", placeholder="Select C
     const { countryList=[] } = taskInfo;
 
     const handleChange = (val)=>{
-        saveSelectedOption(val && val.id);
+        saveSelectedOption(val && val.id, val);
     }
 
     return(

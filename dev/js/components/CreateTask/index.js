@@ -321,7 +321,7 @@ const CreateTask = ({ toggleAddTaskView, caseId }) => {
                     <div className="formWrapper">
                         <div className="checkBoxContainer">
                             <label className="check_container">
-                                <p>Save as draft</p>
+                                <p>Save as Template</p>
                                 <input type="checkbox" onChange={()=>setDataValues({is_template: !is_template})} checked={is_template}/>
                                 <span className="checkmark"></span>
                             </label>

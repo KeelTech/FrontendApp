@@ -50,7 +50,9 @@ const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClic
     });
 
     useEffect(()=>{
+        let newPriority = {}, selectedVal={};
         if(!activeTask){
+            selectedVal = PriorityList.filter(x => x.id == '1');
             setDataParams({
                 title: '',
                 checklist: [],
@@ -58,8 +60,15 @@ const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClic
                 description: ''
             });
         }else{
+            selectedVal = PriorityList.filter(x => x.id == activeTask.priority);
             setDataParams(activeTask);
         }
+        if (selectedVal.length) {
+            newPriority =  selectedVal[0]
+        }else{
+            newPriority = PriorityList[0];
+        }
+        setPriorityInfo(newPriority);
     },[activeTask, addNewTask])
 
     const setDataValues = (dataVal) => {
@@ -191,7 +200,7 @@ const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClic
                             <img className="icon" src={ASSETS_BASE_URL + "/images/common/chevron.svg"} alt="home" />
                             <span className="hideMobile">Select</span><span>Priority</span>
                         </div>
-                        <CustomSelect options={PriorityList} defaultOption={priorityInfo} clickHandler={handlePriorityChange} />
+                        <CustomSelect handleValueChange options={PriorityList} value={priorityInfo} defaultOption={priorityInfo} clickHandler={handlePriorityChange} />
                     </div>
                 </div>
                 <div className={discussionSection + " " + "discussionSectionNew"}>
