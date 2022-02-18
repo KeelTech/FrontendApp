@@ -60,6 +60,10 @@ const ChatWidget = ({ floatingChat = false, toggleChat, caseId = "", currentUser
                 setinputMessage("")
             })
         }
+        setTimeout(() => {
+            var objDiv = document.getElementById('chatScrollableWindow');
+            objDiv.scrollTop = objDiv.scrollHeight
+        }, 300)
     }
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
@@ -86,6 +90,12 @@ const ChatWidget = ({ floatingChat = false, toggleChat, caseId = "", currentUser
             elem.scrollTop = elem.scrollHeight - elem.clientHeight
         }
     }
+    // const scrollChat = () => {
+    //     setTimeout(() => {
+    //         var objDiv = document.getElementById('chatScrollableWindow');
+    //         objDiv.scrollTop = objDiv.scrollHeight
+    //     }, 300)
+    // }
 
     return (
         <div className={mainClass + " " + "chatMainContainer"}>
@@ -103,6 +113,7 @@ const ChatWidget = ({ floatingChat = false, toggleChat, caseId = "", currentUser
                 <img className="close" src={ASSETS_BASE_URL + "/images/common/crossIcon.svg"} alt="close" onClick={toggleChat} />
             </div>
             <div className={chatWidget({ floatingChat }) + " " + "forMobileChat"} id="chatScrollableWindow">
+                {/* <div onClick={scrollChat}>chat</div> */}
                 <ChatCard floatingChat={floatingChat} messages={chatData.chatMessages} currentUserId={currentUserId} />
             </div>
             <div className={msgWidget({ floatingChat })}>
