@@ -43,6 +43,7 @@ const ChatWidget = ({ floatingChat = false, toggleChat, caseId = "", currentUser
     // chat mobile/desktop handler
     useEffect(() => {
         if (floatingChat) {
+            maintainScrollPosition();
             document.body.style.overflow = "hidden";
         }
         return () => {
@@ -61,7 +62,12 @@ const ChatWidget = ({ floatingChat = false, toggleChat, caseId = "", currentUser
             })
         }
         setTimeout(() => {
-            var objDiv = document.getElementById('chatScrollableWindow');
+            var objDiv;
+            if(floatingChat){
+                objDiv = document.getElementById('mobleChat');
+            }else{
+                objDiv = document.getElementById("chatScrollableWindow")
+            }
             objDiv.scrollTop = objDiv.scrollHeight
         }, 300)
     }
@@ -75,8 +81,14 @@ const ChatWidget = ({ floatingChat = false, toggleChat, caseId = "", currentUser
     useEffect(() => {
         maintainScrollPosition()
     }, [chatData.chatMessages])
+
     const maintainScrollPosition = () => {
-        let elem = document.getElementById("chatScrollableWindow")
+        let elem;
+        if(floatingChat){
+            elem = document.getElementById('mobleChat');
+        }else{
+            elem = document.getElementById("chatScrollableWindow")
+        }
         if (elem) {
             // 100px is assumed to be the heigh of a message
             if (elem.scrollHeight - elem.scrollTop - elem.clientHeight < 100) {
@@ -85,7 +97,12 @@ const ChatWidget = ({ floatingChat = false, toggleChat, caseId = "", currentUser
         }
     }
     const scrollToBottom = () => {
-        let elem = document.getElementById("chatScrollableWindow")
+        let elem;
+        if(floatingChat){
+            elem = document.getElementById('mobleChat');
+        }else{
+            elem = document.getElementById("chatScrollableWindow")
+        }
         if (elem) {
             elem.scrollTop = elem.scrollHeight - elem.clientHeight
         }
@@ -112,7 +129,7 @@ const ChatWidget = ({ floatingChat = false, toggleChat, caseId = "", currentUser
                 </div>
                 <img className="close" src={ASSETS_BASE_URL + "/images/common/crossIcon.svg"} alt="close" onClick={toggleChat} />
             </div>
-            <div className={chatWidget({ floatingChat }) + " " + "forMobileChat"} id="chatScrollableWindow">
+            <div className={chatWidget({ floatingChat }) + " " + "forMobileChat"} id={floatingChat?"mobleChat":"chatScrollableWindow"}>
                 {/* <div onClick={scrollChat}>chat</div> */}
                 <ChatCard floatingChat={floatingChat} messages={chatData.chatMessages} currentUserId={currentUserId} />
             </div>
