@@ -188,7 +188,7 @@ const TemplateDetail = ({ activeTask, refetchList, addNewTask, handleBackBtnClic
              {/* <FloatingChatWidget caseId={case_id} currentUserId={agent} chatHeaderName={first_name}/>
             <CustomToaster {...toasterInfo} hideToaster={hideToaster} /> */}
             <div className="signDoc">
-                <span className="backBtn" onClick={handleBackBtnClick}><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</span>
+                <span className="backBtn" onClick={handleBackBtnClick}><i className="fa fa-arrow-left" aria-hidden="true"></i> Back</span>
             </div>
             <div className="signDoc">
                 <input type="text" value={title} onChange={(e) => setDataValues({ title: e.target.value })}/>

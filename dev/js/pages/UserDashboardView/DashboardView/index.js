@@ -163,10 +163,10 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly = false, showCh
                         </div>
                         {
                             scheduleList.length && showCalendly ?
-                                <div className="upcoming mt-3" onClick={() => scheduleCall(calendlyURL)}><button><i class="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div>
+                                <div className="upcoming mt-3" onClick={() => scheduleCall(calendlyURL)}><button><i className="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div>
                                 : null
                         }
-                        <div className="upcoming mt-0"><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Upcoming Schedule</span></div>
+                        <div className="upcoming mt-0"><span><i className="fa fa-calendar-check-o" aria-hidden="true"></i> Upcoming Schedule</span></div>
                         {
                             scheduleList.length ?
                                 scheduleList.map((val, key) => {
@@ -198,7 +198,7 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly = false, showCh
                                     <h5>No meetings scheduled</h5>
                                     <img className="icon" src={ASSETS_BASE_URL + "/images/common/sch.svg"} alt="time" />
                                     {
-                                        showCalendly ? <div className="upcoming" onClick={() => scheduleCall(calendlyURL)}><button><i class="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div> : null
+                                        showCalendly ? <div className="upcoming" onClick={() => scheduleCall(calendlyURL)}><button><i className="fa fa-phone" aria-hidden="true"></i> Schedule Call</button></div> : null
                                     }
                                 </div>
                         }

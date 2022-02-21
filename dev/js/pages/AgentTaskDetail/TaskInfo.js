@@ -317,7 +317,7 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
 
             </div>
             <div className="signDoc">
-                <span className="backBtn" onClick={handleBackBtnClick}><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</span>
+                <span className="backBtn" onClick={handleBackBtnClick}><i className="fa fa-arrow-left" aria-hidden="true"></i> Back</span>
 
             </div>
             <div className="signDoc">
