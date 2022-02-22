@@ -9,6 +9,7 @@ import { logoutUser } from '@actions';
 import { container } from "./style.js";
 import ProfileDropdown from "./ProfileDropdown.js";
 import NotificationWidget from '@components/NotificationWidget';
+import AgentNotificationWidget from '@components/AgentNotificationWidget';
 
 const ProfileWidget = () => {
   const [isClicked, setIsClicked] = useState(false);
@@ -52,7 +53,7 @@ const ProfileWidget = () => {
         <li>the quick brown fox jumps over the lazy dog.</li>
       </ul> */}
       {
-        isAgent?null:<NotificationWidget/>
+        isAgent?<AgentNotificationWidget/>:<NotificationWidget/>
       }
       <div className="getHelp" onClick={handleHelpClick}>
         <button>Help</button>
