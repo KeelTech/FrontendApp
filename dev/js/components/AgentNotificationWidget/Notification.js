@@ -1,44 +1,44 @@
 import React from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { readNotification, toggleNotificationChat } from '@actions';
-import { renderNotificationIcons } from '@helpers/utils';
+import { getNameInitialHelper } from '@helpers/utils';
 import { isMobileView } from '@constants'; 
-import { notification, header, content, content__list, message } from "./style";
+import { notification, header } from "./style";
 
 const Notification = () => {
-const chatMessage = [
-    {
-        "user_name": "Pratik M",
-        "new_message": "hello"
-    },
-    {
-        "user_name": "Shivam A",
-        "new_message": "hi"
-    },
-    {
-        "user_name": "jayant arora",
-        "new_message": "hi"
-    }
+  const history = useHistory();
+  const agentTaskInfo = useSelector(state=>state.AGENT_STORE);
+  const { agentNotificationData } = agentTaskInfo;
 
-]
+  const clickHandler = (case_id)=>{
+    history.push(`/agent/customer/${case_id}`);
+  }
+
   return (
     <div className={notification + " " + "testify"}>
       <div className={header}>
         <h2>NOTIFICATIONS</h2>
-        {/* ============ static content dropdown  */}
-
-        {/* <button>Mark as read</button> */}
       </div>
       <div className="dropNotification">
-      {chatMessage.map(chat => (
-          <div>
-        <p>{chat.user_name}</p>
-        <p>{chat.new_message}</p>
-        </div>
-      ))}
+        {
+          agentNotificationData.map((val, key)=>{
+            const { user_details, chat_details, case_id } = val;
+            const { user_name } = user_details;
+            const { new_message, last_message } = chat_details;
+            return <div key={key} className={`pushCards ${new_message?'':'clickedPush'}`} onClick={()=>clickHandler(case_id)}>
+              <div className="icoContent">
+                <div className="notifyIcon">
+                  <p>{getNameInitialHelper(user_name)}</p>
+                </div>
+                <div className="pushContent">
+                  <h2>{user_name}</h2>
+                  <p>{last_message}</p>
+                </div>
+              </div>
+            </div>
+          })
+        }
       </div>
-      {/* ============ static content dropdown  */}
     </div>
   );
 };

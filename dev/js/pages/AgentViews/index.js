@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Switch, Route, useHistory } from 'react-router-dom';
-import { getAgentProfile } from '@actions';
+import { getAgentProfile, getAgentNotification } from '@actions';
 import LeftMenuBar from '@components/LeftMenuBar';
 import { container, body } from './style.js';
 import DashboardView from './DashboardView';
@@ -24,6 +24,7 @@ const UserDashboardView = ({ match }) => {
         if(pathName!= '/agent/customer'){
             getAgentProfile({}, dispatch);
         }
+        getAgentNotification({}, dispatch);
     }, [])
 
     return (
