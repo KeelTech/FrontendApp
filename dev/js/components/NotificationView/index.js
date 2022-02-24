@@ -83,6 +83,11 @@ const NotificationView = () => {
                                 </div>
                             })
                         }
+                        {
+                            notificationList.length==0 && !notificationLoading?
+                            <p className="emptyNotification">No New Notification</p>
+                            :null
+                        }
                     </div>
                 </div>
             </div>

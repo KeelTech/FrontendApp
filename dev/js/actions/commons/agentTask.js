@@ -259,17 +259,17 @@ export const getAgentNotification = (dataParams={}, dispatch, cb=null)=>{
         type: AGENT_NOTIFICATION_LOADING,
         payload: true
     })
-    API_GET(`${API_BASE_URL}v1/cases/get-unread-chats`).then((response)=>{
-        if(response && response.data){
+    API_GET(`${API_BASE_URL}v1/cases/get-case-unread-chats`).then((response)=>{
+        if(response && response.message){
             dispatch({
                 type: AGENT_NOTIFICATION_LOADING,
                 payload: false
             })
             dispatch({
                 type: AGENT_NOTIFICATION_INFO,
-                payload: response.data
+                payload: response.message
             })
-            if(cb)cb(response.data, false);
+            if(cb)cb(response.message, false);
         }else{
             if(cb)cb(null, true);    
         }

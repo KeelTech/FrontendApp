@@ -8,7 +8,7 @@ import { notification, header, content, content__list, message } from "./style";
 
 const NotificationDropdown = () => {
   const taskInfo = useSelector(state=>state.TASK_INFO);
-  const { notificationList=[], recentNotification } = taskInfo;
+  const { notificationList=[], recentNotification, notificationLoading } = taskInfo;
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -59,9 +59,14 @@ const NotificationDropdown = () => {
             </div>
             :null
           }
+          {
+              notificationList.length==0?
+              <p className="emptyNotification">No New Notification</p>
+              :null
+          }
         </div>
         {
-          notificationList.length>2?<div className="viewAllNotify" onClick={()=>history.push('/notification')}>View all</div>:null
+          notificationList.length>0?<div className="viewAllNotify" onClick={()=>history.push('/notification')}>View all</div>:null
         }
       </div>
       {/* ============ static content dropdown  */}

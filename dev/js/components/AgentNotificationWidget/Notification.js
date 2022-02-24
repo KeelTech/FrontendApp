@@ -1,14 +1,11 @@
 import React from "react";
-import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getNameInitialHelper } from '@helpers/utils';
-import { isMobileView } from '@constants'; 
+import ComponentLoader from '@components/ComponentLoader';
 import { notification, header } from "./style";
 
-const Notification = () => {
+const Notification = ({agentNotificationData, agentNotificationLoading}) => {
   const history = useHistory();
-  const agentTaskInfo = useSelector(state=>state.AGENT_STORE);
-  const { agentNotificationData } = agentTaskInfo;
 
   const clickHandler = (case_id)=>{
     history.push(`/agent/customer/${case_id}`);
@@ -19,7 +16,14 @@ const Notification = () => {
       <div className={header}>
         <h2>NOTIFICATIONS</h2>
       </div>
-      <div className="dropNotification">
+      <div className="dropNotification agentNotification">
+        {
+          agentNotificationLoading && agentNotificationData && agentNotificationData.length==0?
+          <div className='pushCards'>
+            <ComponentLoader/>
+          </div>
+          :null
+        }
         {
           agentNotificationData.map((val, key)=>{
             const { user_details, chat_details, case_id } = val;
@@ -37,6 +41,11 @@ const Notification = () => {
               </div>
             </div>
           })
+        }
+        {
+            !agentNotificationLoading && agentNotificationData.length==0?
+            <p className="emptyNotification">No New Notification</p>
+            :null
         }
       </div>
     </div>

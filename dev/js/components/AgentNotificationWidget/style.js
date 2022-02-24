@@ -12,19 +12,9 @@ export const container = css`
   background: #ffcfc;
   // box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
   border-radius: 4px;
-  img {
-    width: 13px;
-    height: 18px;
-  }
-  &:after {
-    content: "";
-    position: absolute;
-    background: #fe9874;
-    height: 5px;
-    width: 5px;
-    right: 8px;
-    top: 6px;
-    border-radius: 50%;
+  .agentNotification{
+    max-height: 450px;
+    overflow: auto;
   }
 `;
 

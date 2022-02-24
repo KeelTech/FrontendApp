@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import ReactNotification, { store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
+import { CURRENT_VISIBLE_NOTIFICATION } from '@constants/types';
 import { getNotification, readNotification, toggleNotificationChat } from '@actions';
 import { renderNotificationIcons } from '@helpers/utils';
 import { isMobileView } from '@constants';
@@ -25,7 +26,11 @@ const NotificationFloatingWidget = () => {
     useEffect(() => {
         timeInterval.current = setInterval(() => {
             getNotification({ recent: true }, dispatch, (val) => {
-                if (val && val.id) {
+                if (val && val.id && lastVisibleNotification!=val.id) {
+                    dispatch({
+                        type: CURRENT_VISIBLE_NOTIFICATION,
+                        payload: val.id
+                    })
                     const icon = renderNotificationIcons(val);
                     try {
                         const { text } = val;
