@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ReactNotification, { store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import { CURRENT_VISIBLE_NOTIFICATION } from '@constants/types';
@@ -13,6 +13,9 @@ const NotificationFloatingWidget = () => {
     const history = useHistory();
     const timeInterval = useRef();
     let notificationId = useRef();
+
+    const taskInfo = useSelector(state => state.TASK_INFO);
+    const { lastVisibleNotification } = taskInfo;
 
     const closeClicked = (e, val) => {
         e.stopPropagation();
