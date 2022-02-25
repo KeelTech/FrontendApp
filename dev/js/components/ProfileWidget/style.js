@@ -16,7 +16,7 @@ export const container = css`
   cursor: pointer;
   display: none;
   @media(min-width: ${mobileScreenWidth}){
-    display: block;
+    display: flex;
   }
 `;
 
