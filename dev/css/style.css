@@ -8452,6 +8452,11 @@ color: #4267b2;
     margin-left: 0px;
   }
 }
+@media (max-width: 600px) {
+  .popOverNotifiy:after,.popOverNotifiy:before,.popOverNotifiy li:first-child:after{
+    left: 156px !important;
+}
+}
 
 @media (max-width: 767px) {
   .customEditProfile {
