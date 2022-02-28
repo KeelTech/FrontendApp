@@ -62,7 +62,7 @@ const NotificationFloatingWidget = () => {
                                         // </div>
                                         <ul className="popOverNotifiy">
                                             <img src={ASSETS_BASE_URL+"/images/common/crossIcon.svg"} className="crossNoti" onClick={(e)=>closeClicked(e, val)}/>
-                                            <li onClick={()=>clickHandler(val)}>{text}</li>
+                                            <li onClick={()=>clickHandler(val)}>{text.title}</li>
                                         </ul>
                                     )
                                 },
@@ -87,7 +87,7 @@ const NotificationFloatingWidget = () => {
         return () => {
             clearInterval(timeInterval.current)
         }
-    }, [])
+    }, [lastVisibleNotification])
 
     const clickHandler = (val, isRedirect=true) => {
         const { category, id } = val;
