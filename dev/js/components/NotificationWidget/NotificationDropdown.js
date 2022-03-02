@@ -60,13 +60,13 @@ const NotificationDropdown = () => {
             :null
           }
           {
-              notificationList.length==0?
+              !(recentNotification && recentNotification.text) && notificationList.length==0?
               <p className="emptyNotification">No New Notification</p>
               :null
           }
         </div>
         {
-          notificationList.length>0?<div className="viewAllNotify" onClick={()=>history.push('/notification')}>View all</div>:null
+          ((recentNotification && recentNotification.text) || notificationList.length>0)?<div className="viewAllNotify" onClick={()=>history.push('/notification')}>View all</div>:null
         }
       </div>
       {/* ============ static content dropdown  */}
