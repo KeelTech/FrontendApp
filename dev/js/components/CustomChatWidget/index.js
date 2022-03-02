@@ -63,7 +63,7 @@ const CustomChatWidget = ()=>{
         })
         if(value.is_submitted){
             let isDependentQuestion;
-            if(Array.isArray(value.dataVal) && value.dataVal.length){
+            if(value.dataVal && Array.isArray(value.dataVal) && value.dataVal.length){
                 isDependentQuestion = value.dataVal[0].dependent_question;
             }else{
                 isDependentQuestion = value.dependent_question;
