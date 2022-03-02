@@ -89,7 +89,7 @@ const CustomChatWidget = ()=>{
     const clickSubmit = ()=>{
         const postParams = {}
         setLoader(true);
-        questionList.map((val)=>{
+        selectedQuestionList.map((val)=>{
             const { dataVal='', id, key='', answer_type_value } = val;
             // if(key=="spouse_exist"){
             //     let answer = false;
@@ -122,9 +122,14 @@ const CustomChatWidget = ()=>{
         })
         submitQuestions(postParams, null, (resp, error)=>{
             setLoader(false);
-            if(resp.status==1){
-                setSuccess(true);
-            }else{
+            try{
+
+                if(resp.status==1){
+                    setSuccess(true);
+                }else{
+                    alert('failed to submit');
+                }
+            }catch(e){
                 alert('failed to submit');
             }
         })
@@ -167,17 +172,17 @@ const CustomChatWidget = ()=>{
                             return <Fragment key={key}>
 
                                 {
-                                    (count===1 || is_submitted|| true) && answer_type===1?
+                                    answer_type===1?
                                     <InputView data={val} setData={setData} name={name}/>
                                     :null
                                 }
                                 {
-                                    (count===1 || is_submitted || true) && answer_type===3?
+                                    answer_type===3?
                                     <OptionView data={val} setData={setData} name={name}/>
                                     :null
                                 }
                                 {
-                                    (count===1 || is_submitted || true) && answer_type===2?
+                                    answer_type===2?
                                     <CheckboxView data={val} setData={setData} name={name}/>
                                     :null
                                 }
