@@ -50,7 +50,7 @@ export const container = props => css`
             border-bottom: ${props.borderBottom};
             color: ${props.fontColor};
             font-weight: ${props.fontWeight};
-            font-size: ${props.fontSize};
+            font-size: 14px;
             &:hover{
                 background: #F6F5FA;
             }
