@@ -52,7 +52,7 @@ const ChatWidget = ({ floatingChat = false, toggleChat, caseId = "", currentUser
 
     // chat input handlers
     const sendButtonHandler = () => {
-        if (inputMessage && inputMessage.length < 256) {
+        if (inputMessage && inputMessage.length < 9999) {
             sendChatMessage({ "message": inputMessage, "case_id": caseId }, (res, err) => {
                 if (caseId) {
                     getChatMessages(caseId, { limit: 10, offset: 0 }, dispatch)
