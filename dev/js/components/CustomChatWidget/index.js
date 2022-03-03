@@ -35,7 +35,7 @@ const CustomChatWidget = ()=>{
         getQuestions({}, {}, (resp)=>{
             if(resp && resp.questions){
                 setQuestions(resp.questions);
-                const firstQuestion = resp.questions.filter(x=>x.index==1);
+                const firstQuestion = resp.questions.filter(x=>x.index==0);
                 setSelectedQuestion(firstQuestion);
                 setSpouseQuestions(resp.spouse_questions||[]);
             }
