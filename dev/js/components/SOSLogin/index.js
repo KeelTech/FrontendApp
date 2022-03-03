@@ -1,54 +1,48 @@
-import React, { useEffect, useState, Fragment, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-
-import { getQuestions, submitQuestions } from '@actions';
+import { userLoginWithEmail } from '@actions';
 import LoadingWidget from '@components/LoadingWidget';
-import {
-    userLoginWithEmail
-  } from '../../actions/index.js';
-import { style, Loader } from './style.js';
+import { loader } from './style.js';
 
+const queryString = require('query-string');
 
 const SOSLogin = (props)=>{
-    let email = '';
-    if(props && props.match && props.match.params.emailId){
-        email = props.match.params.emailId;
+    const parsed = queryString.parse(props.location.search);
+    let email='';
+    if(parsed && parsed.email){
+      email = parsed.email;
     }
-    const [showLoader, setLoader] = useState(true);
     const [loginFail, setLoginFail] = useState(false);
-
-
     const dispatch = useDispatch();
 
     const loginAfterLoginSuccess = ()=>{
         setTimeout(() => {
           props.history.push('/');
-        }, 1000);
-      }
+        }, 2000);
+    }
 
-    userLoginWithEmail({ email }, dispatch, (err, data) => {
+    useEffect(()=>{
+      userLoginWithEmail({ email }, dispatch, (err, data) => {
         if (data) {
-          setLoader(false);
-          setLoginFail(false);    
           loginAfterLoginSuccess()    
         }
         if (err) {
-          setLoader(false);
           setLoginFail(true);
         }
       });
+    },[]);
+
+    useEffect(()=>{
+      if(loginFail){
+        alert('Failed to login, Please contact Consultant')
+      }
+    },[loginFail])
 
     return(
-        <Fragment>
-        {showLoader && (
-          <div className={Loader}>
-            <LoadingWidget />
-          </div>
-        )}
-        <p>Shivani premi</p>
-        </Fragment>
-        
+        <div className={loader}>
+          <LoadingWidget />
+        </div>        
     )
 }
 

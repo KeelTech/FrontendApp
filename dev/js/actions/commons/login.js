@@ -70,7 +70,7 @@ export const userLoginWithEmail = (data, dispatch, cb) => {
       loading: true,
     },
   });
-  API_GET(`${API_BASE_URL}/v1/user/new-user-from-get?email=${email}}`)
+  API_GET(`${API_BASE_URL}/v1/user/new-user-from-get?email=${email}`)
     .then(function (response) {
       if (response && response.message && response.message.token) {
         dispatch({

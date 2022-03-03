@@ -1,9 +1,7 @@
 import { css } from '@emotion/css';
 import { tabScreenWidth } from '@constants';
 
-
-
-export const Loader = css`
+export const loader = css`
   position: absolute;
   display: flex;
   left: 25%;
