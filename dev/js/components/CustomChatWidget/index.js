@@ -29,7 +29,7 @@ const CustomChatWidget = ()=>{
     const[showSubmit, setSubmit] = useState(false);
     const [spouseQuestions, setSpouseQuestions] = useState([]);
     const [selectedQuestionList, setSelectedQuestion] = useState([]);
-    const [currentIndex, setCurrentIndex] = useState(1);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(()=>{
         getQuestions({}, {}, (resp)=>{
@@ -82,6 +82,8 @@ const CustomChatWidget = ()=>{
             }else{
                 setSubmit(true);
             }
+        }else{
+            setSelectedQuestion(newQuestions);
         }
         //setQuestions(newQuestions);
     }
