@@ -13,7 +13,7 @@ export const container = css`
   // box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
   border-radius: 4px;
   .agentNotification{
-    max-height: 450px;
+    max-height: 420px;
     overflow: auto;
   }
 `;

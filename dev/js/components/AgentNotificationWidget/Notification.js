@@ -37,7 +37,7 @@ const Notification = ({agentNotificationData, agentNotificationLoading}) => {
                 <div className="pushContent">
                   <h2>{user_name}</h2>
                   <p>{message}</p> 
-                  <p className="msgTime">{(new Date(sent_date)).toLocaleString()}</p>
+                  <p className="msgTime notifyTime">{(new Date(sent_date)).toLocaleString()}</p>
                 </div>
               </div>
             </div>
