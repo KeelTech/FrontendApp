@@ -14,11 +14,13 @@ const InputView = ({data, setData, name})=>{
     },[])
     
     const saveData = (e)=>{
-        console.log('code is',e.key);
+        const val = e.target.value;
+        setData(id, {text_choice: val, dataVal: val})
+    }
+
+    const keyDown = (e)=>{
         if(e.key==="Enter" && text_choice){
             setData(id, {is_submitted: true})
-        }else{
-            setData(id, {text_choice: e.target.value, dataVal: e.target.value})
         }
     }
     console.log({name});
@@ -33,7 +35,7 @@ const InputView = ({data, setData, name})=>{
                     {
                         is_submitted?null:
                         <div className="nameInp">
-                            <input type="text" ref={focusRef} placeholder="Type here..." value={text_choice} onChange={saveData} onKeyDown={saveData}/>
+                            <input type="text" ref={focusRef} placeholder="Type here..." value={text_choice} onChange={saveData} onKeyDown={keyDown}/>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" x="3650" y="3688" onClick={()=>setData(id, {is_submitted: true})}>
                                 <path fill="var(--form_inputs_border_color)"
                                     d="M1.1 21.757l22.7-9.73L1.1 2.3l.012 7.912 13.623 1.816-13.623 1.817-.01 7.912z">

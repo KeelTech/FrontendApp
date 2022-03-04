@@ -28,10 +28,15 @@ const CustomChatWidget = ()=>{
     const [questionList, setQuestions] = useState([]);
     const[showSubmit, setSubmit] = useState(false);
     const [spouseQuestions, setSpouseQuestions] = useState([]);
+    const [selectedQuestionList, setSelectedQuestion] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
+
     useEffect(()=>{
         getQuestions({}, {}, (resp)=>{
             if(resp && resp.questions){
                 setQuestions(resp.questions);
+                const firstQuestion = resp.questions.filter(x=>x.index==0);
+                setSelectedQuestion(firstQuestion);
                 setSpouseQuestions(resp.spouse_questions||[]);
             }
         })
@@ -41,7 +46,7 @@ const CustomChatWidget = ()=>{
         let questionIndex = 0;
         let isSpouse = false;
         let spouseIndex = 0;
-        const newQuestions = questionList.map((val, index)=>{
+        const newQuestions = selectedQuestionList.map((val, index)=>{
             if(val.id===id){
                 // if(val.key=="spouse_exist" && value && value.dataVal && Array.isArray(value.dataVal)){
                 //     value.dataVal.map((spouseData)=>{
@@ -56,23 +61,37 @@ const CustomChatWidget = ()=>{
             }
             return val;
         })
-        // if(isSpouse){
-        //     let newQuestionsSet = newQuestions.slice(0, spouseIndex+1);
-        //     newQuestionsSet = newQuestionsSet.concat(spouseQuestions);
-        //     newQuestionsSet = newQuestionsSet.concat(newQuestions.slice(spouseIndex+1));
-        //     setQuestions(newQuestionsSet);
-        //     return;
-        // }
-        if(questionIndex===questionList.length-1 && value.is_submitted){
-            setSubmit(true);
+        if(value.is_submitted){
+            let isDependentQuestion;
+            if(value.dataVal && Array.isArray(value.dataVal) && value.dataVal.length){
+                isDependentQuestion = value.dataVal[0].dependent_question;
+            }else{
+                isDependentQuestion = value.dependent_question;
+            }
+            let newQuestionAdded = [];
+            if(isDependentQuestion){
+                newQuestionAdded = questionList.filter(x=>x.id==isDependentQuestion);
+            }else{
+                const newIndex = currentIndex+1;
+                newQuestionAdded = questionList.filter(x=>x.index == newIndex);
+                setCurrentIndex(newIndex);
+            }
+            if(newQuestionAdded.length){
+                const newSelectedQuestions = newQuestions.concat(newQuestionAdded)
+                setSelectedQuestion(newSelectedQuestions);
+            }else{
+                setSubmit(true);
+            }
+        }else{
+            setSelectedQuestion(newQuestions);
         }
-        setQuestions(newQuestions);
+        //setQuestions(newQuestions);
     }
 
     const clickSubmit = ()=>{
         const postParams = {}
         setLoader(true);
-        questionList.map((val)=>{
+        selectedQuestionList.map((val)=>{
             const { dataVal='', id, key='', answer_type_value } = val;
             // if(key=="spouse_exist"){
             //     let answer = false;
@@ -105,9 +124,14 @@ const CustomChatWidget = ()=>{
         })
         submitQuestions(postParams, null, (resp, error)=>{
             setLoader(false);
-            if(resp.status==1){
-                setSuccess(true);
-            }else{
+            try{
+
+                if(resp.status==1){
+                    setSuccess(true);
+                }else{
+                    alert('failed to submit');
+                }
+            }catch(e){
                 alert('failed to submit');
             }
         })
@@ -142,25 +166,25 @@ const CustomChatWidget = ()=>{
                 <main className="msger-chat">
                     {
                         //filter(x=>x.answer_type_value==='Checkbox').
-                        questionList.map((val, key)=>{
+                        selectedQuestionList.map((val, key)=>{
                             const { answer_type, is_submitted } = val;
-                            if(!is_submitted && (answer_type===1|| answer_type===2 || answer_type===3)){
-                                count++;
-                            }
+                            // if(!is_submitted && (answer_type===1|| answer_type===2 || answer_type===3)){
+                            //     count++;
+                            // }
                             return <Fragment key={key}>
 
                                 {
-                                    (count===1 || is_submitted) && answer_type===1?
+                                    answer_type===1?
                                     <InputView data={val} setData={setData} name={name}/>
                                     :null
                                 }
                                 {
-                                    (count===1 || is_submitted) && answer_type===3?
+                                    answer_type===3?
                                     <OptionView data={val} setData={setData} name={name}/>
                                     :null
                                 }
                                 {
-                                    (count===1 || is_submitted ) && answer_type===2?
+                                    answer_type===2?
                                     <CheckboxView data={val} setData={setData} name={name}/>
                                     :null
                                 }
