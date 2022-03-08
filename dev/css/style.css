@@ -7966,6 +7966,9 @@ input[type="number"] {
 .floatingWidget{
   margin-bottom: 0px;
 }
+.pushContent{
+  width: 100%;
+}
 .pushContent h2 {
   color: #6C757D;
   font-size: 14px;
@@ -7984,6 +7987,10 @@ input[type="number"] {
 .icoContent {
   display: flex;
   padding-right: 10px;
+  width: 100%;
+}
+p.msgTime.notifyTime {
+  text-align: right;
 }
 
 .notifyIcon {

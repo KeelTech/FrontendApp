@@ -27,8 +27,8 @@ const Notification = ({agentNotificationData, agentNotificationLoading}) => {
         {
           agentNotificationData.map((val, key)=>{
             const { user_details, chat_details, case_id } = val;
-            const { user_name } = user_details;
-            const { new_message, last_message } = chat_details;
+            const { user_name, email } = user_details;
+            const { new_message, message, sent_date, sent_by } = chat_details;
             return <div key={key} className={`pushCards ${new_message?'':'clickedPush'}`} onClick={()=>clickHandler(case_id)}>
               <div className="icoContent">
                 <div className="notifyIcon">
@@ -36,7 +36,8 @@ const Notification = ({agentNotificationData, agentNotificationLoading}) => {
                 </div>
                 <div className="pushContent">
                   <h2>{user_name}</h2>
-                  <p>{last_message}</p>
+                  <p>{email!=sent_by?<strong className="sendRecvHead">You : </strong>:null } {message}</p> 
+                  <p className="msgTime notifyTime">{(new Date(sent_date)).toLocaleString()}</p>
                 </div>
               </div>
             </div>

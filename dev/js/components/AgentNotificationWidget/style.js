@@ -13,7 +13,7 @@ export const container = css`
   // box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
   border-radius: 4px;
   .agentNotification{
-    max-height: 450px;
+    max-height: 420px;
     overflow: auto;
   }
 `;
@@ -30,6 +30,7 @@ export const notification = css`
   height: auto;
   box-shadow: -10px 10px 64px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
+  padding-bottom:5px;
 
   @media (max-width: ${mobileScreenWidth}) {
     width: 300px;
