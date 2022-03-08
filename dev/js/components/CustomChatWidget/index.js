@@ -140,14 +140,14 @@ const CustomChatWidget = ()=>{
     let count = 0;
 
     const name = useMemo(()=>{
-        if(questionList && questionList.length){
-            const nameField = questionList.filter(x=>x.key=='name')
+        if(selectedQuestionList && selectedQuestionList.length){
+            const nameField = selectedQuestionList.filter(x=>x.key=='name')
             if(nameField && nameField.length){
                 return nameField[0].dataVal||''
             }
         }
         return ''
-    },[questionList])
+    },[selectedQuestionList])
     return(
         <div className={container}>
             {
