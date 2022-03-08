@@ -36,8 +36,7 @@ const Notification = ({agentNotificationData, agentNotificationLoading}) => {
                 </div>
                 <div className="pushContent">
                   <h2>{user_name}</h2>
-                  {email!=sent_by?<strong>You</strong>:null }
-                  <p>{message}</p> 
+                  <p>{email!=sent_by?<strong className="sendRecvHead">You : </strong>:null } {message}</p> 
                   <p className="msgTime notifyTime">{(new Date(sent_date)).toLocaleString()}</p>
                 </div>
               </div>
