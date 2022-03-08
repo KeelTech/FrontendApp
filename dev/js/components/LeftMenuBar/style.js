@@ -188,7 +188,7 @@ export const mobileView = css`
         align-items: center;
         margin-top: 35px;
         margin-left: 27px;
-        background: #363B64;
+        background: #4267B2;
         box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
         border-radius: 4px;
         padding: 10px 16px;

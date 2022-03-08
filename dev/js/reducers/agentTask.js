@@ -1,4 +1,4 @@
-import { ADD_CASE_LIST, CASE_LIST_LOADING, FETCH_AGENT_PROFILE, AGENT_PROFILE_LOADING, AGENT_SCHEDULE_DETAILS, AGENT_SCHEDULE_LOADING, FETCH_TEMPLATE_LIST, FETCH_TEMPLATE_LIST_LOADING } from '@constants/types';
+import { ADD_CASE_LIST, CASE_LIST_LOADING, FETCH_AGENT_PROFILE, AGENT_PROFILE_LOADING, AGENT_SCHEDULE_DETAILS, AGENT_SCHEDULE_LOADING, FETCH_TEMPLATE_LIST, FETCH_TEMPLATE_LIST_LOADING, AGENT_NOTIFICATION_LOADING, AGENT_NOTIFICATION_INFO } from '@constants/types';
 
 const defaultState = {
     caseListLoading: false,
@@ -8,7 +8,9 @@ const defaultState = {
     agentScheduleLoading: false,
     agentScheduleDetails: [],
     templateList: [],
-    templateListLoading: false
+    templateListLoading: false,
+    agentNotificationLoading: false,
+    agentNotificationData: []
 }
 
 export default function (state = defaultState, action) {
@@ -66,6 +68,16 @@ export default function (state = defaultState, action) {
             let newState = { ...state}
             newState.templateList = action.payload;
             return newState
+        }
+        case AGENT_NOTIFICATION_LOADING: {
+            let newState = { ...state };
+            newState.agentNotificationLoading = action.payload;
+            return newState;
+        }
+        case AGENT_NOTIFICATION_INFO : {
+            let newState = { ...state};
+            newState.agentNotificationData = action.payload;
+            return newState;
         }
     }
     return state

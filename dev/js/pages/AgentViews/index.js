@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Switch, Route, useHistory } from 'react-router-dom';
-import { getAgentProfile } from '@actions';
+import { getAgentProfile, getAgentNotification } from '@actions';
 import LeftMenuBar from '@components/LeftMenuBar';
 import { container, body } from './style.js';
 import DashboardView from './DashboardView';
@@ -14,6 +14,7 @@ import DocumentView from '@pages/UserDashboardView/DocumentValutView';
 import Header from '@components/Header';
 import TemplateView from '@components/TemplateView'
 import TemplateDetailMobileView from '@components/TemplateView/TemplateDetailMobileView.js';
+import AgentNotificationMobileWidget from '@components/AgentNotificationMobileWidget';
 
 const UserDashboardView = ({ match }) => {
     const history = useHistory();
@@ -24,6 +25,7 @@ const UserDashboardView = ({ match }) => {
         if(pathName!= '/agent/customer'){
             getAgentProfile({}, dispatch);
         }
+        getAgentNotification({}, dispatch);
     }, [])
 
     return (
@@ -42,6 +44,7 @@ const UserDashboardView = ({ match }) => {
                     <Route exact path={`${match.path}/documents/:caseId`} component={DocumentView} />
                     <Route exact path={`${match.path}/templates`} component={TemplateView} />
                     <Route exact path={`${match.path}/template/:taskId`} component={TemplateDetailMobileView} />
+                    <Route exact path={`${match.path}/notification`} component={AgentNotificationMobileWidget} />
                 </Switch>
             </div>
         </div>

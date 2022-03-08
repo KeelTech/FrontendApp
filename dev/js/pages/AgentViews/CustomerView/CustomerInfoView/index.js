@@ -48,7 +48,7 @@ function CustomerInfoView(props) {
     getProgramList({}, dispatch, (resp, err) => {
       getProgramState(resp);
     })
-  }, [])
+  }, [caseId])
 
   const updateProgramStatus = () => {
 
@@ -83,13 +83,13 @@ function CustomerInfoView(props) {
     if (program) {
       setProgram(program)
     }
-  }, [program]);
+  }, [program, caseId]);
 
   useEffect(()=>{
     if(agent_notes && agent_notes.notes){
       setEditorState(RichTextEditor.createValueFromString(agent_notes.notes,'html'))
     }
-  },[agent_notes])
+  },[agent_notes, caseId])
 
   const redirectToDocument = () => {
     history.push(`/agent/documents/${caseId}`);
