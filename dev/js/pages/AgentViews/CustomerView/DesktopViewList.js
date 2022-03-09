@@ -1,24 +1,40 @@
 import React, { Fragment } from "react";
-import Table from "@components/Table";
 
-const DesktopViewList = ({ handleCustomerClick, caseList }) => {
-  const columnList = [
-    { key: 'display_id', label: 'Case ID' },
-    { key: 'user_details', label: 'Name', isUser: true },
-    { key: 'plan', label: 'Case Type', isPlanName: true },
-    { key: 'created_at', label: 'Start Date', isDate: true },
-    { key: 'updated_at', label: 'Last Update', isDate: true },
-//    { key: 'status', label: 'Task Status', CustomView: 'TaskStatusRow' },
-    { key: 'action_items', label: 'Action Items', CustomView: 'TaskStatusRow', isTaskCount: true },
-
-  ]
+  const DesktopViewList = ({ handleCustomerClick, caseList }) => {
   return (
     <Fragment>
-      <Table data={caseList} cols={columnList} handleCustomerClick={handleCustomerClick}>
-        {/* <template id="is_active">
-          <button className={greenBtnClass}>Pending on you</button>
-        </template> */}
-      </Table>
+      {
+        <table>
+        <thead>
+        <tr>
+          <th>Case ID</th>
+          <th>Name</th>
+          <th>Case Type</th>
+          <th>Last Update</th>
+          <th>Start Date</th>
+          <th>Action Items</th>
+        </tr>
+        </thead>
+        <tbody>
+        {caseList.map((list) => {
+           const { case_id, plan, created_at, updated_at, display_id, user_details={}, action_items } = list;
+           const { user_name ='' } = user_details;
+          return (
+            <tr key={case_id} onClick={() => handleCustomerClick(case_id)}>
+              <td>{display_id}</td>
+              <td>{user_name}</td>
+              <td>{plan && plan.name||''}</td>
+              {/* <td>{`${getFormattedDate(updated_at).formattedDate} ${getFormattedTime(updated_at)}`}</td> */}
+              <td>{(new Date(updated_at)).toLocaleString()}</td>
+              <td>{(new Date(created_at)).toLocaleString()}</td>
+              {/* <td>{`${getFormattedDate(created_at).formattedDate} ${getFormattedTime(created_at)}`}</td> */}
+              <td>{action_items}</td>
+            </tr>
+          )
+        })}
+        </tbody>
+      </table>
+      }
     </Fragment>
   );
 };
