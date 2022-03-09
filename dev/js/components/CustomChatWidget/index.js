@@ -80,6 +80,7 @@ const CustomChatWidget = ()=>{
                 const newSelectedQuestions = newQuestions.concat(newQuestionAdded)
                 setSelectedQuestion(newSelectedQuestions);
             }else{
+                setSelectedQuestion(newQuestions);
                 setSubmit(true);
             }
         }else{

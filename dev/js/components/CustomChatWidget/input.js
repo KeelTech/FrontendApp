@@ -23,7 +23,14 @@ const InputView = ({data, setData, name})=>{
             setData(id, {is_submitted: true})
         }
     }
-    console.log({name});
+
+    const renderHtmlContent = ()=>{
+        if(question_text && question_text.startsWith('<div>')){
+            return <div dangerouslySetInnerHTML={{__html: question_text}} />
+        }
+        return question_text.replaceAll('{name}', name)
+    }
+    
     return(
         <Fragment>
         <div className={`msg left-msg`}>
@@ -31,7 +38,7 @@ const InputView = ({data, setData, name})=>{
             </div>
             <div className="msg-bubble">
                 <div className="msg-text">
-                    <p>{question_text.replaceAll('{name}', name)}</p>
+                    <p>{renderHtmlContent()}</p>
                     {
                         is_submitted?null:
                         <div className="nameInp">

@@ -33,6 +33,13 @@ const CheckboxView = ({ data, setData, name }) => {
         }
     }, [])
 
+    const renderHtmlContent = ()=>{
+        if(question_text && question_text.startsWith('<div>')){
+            return <div dangerouslySetInnerHTML={{__html: question_text}} />
+        }
+        return question_text.replaceAll('{name}', name)
+    }
+
     return (
         <Fragment>
             <div className={`msg left-msg`}>
@@ -40,7 +47,7 @@ const CheckboxView = ({ data, setData, name }) => {
                 </div>
                 <div className="msg-bubble">
                     <div className="msg-text">
-                        <p>{question_text.replaceAll('{name}', name)}</p>
+                        <p>{renderHtmlContent()}</p>
                         {
                             dataVal && dataVal.length ?
                                 // <Fragment>
