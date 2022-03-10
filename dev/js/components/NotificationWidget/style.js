@@ -16,8 +16,7 @@ export const container = css`
     width: 13px;
     height: 18px;
   }
-  &:after {
-    content: "";
+  .tick{
     position: absolute;
     background: #fe9874;
     height: 5px;
