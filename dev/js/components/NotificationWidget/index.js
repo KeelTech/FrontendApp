@@ -15,9 +15,9 @@ const NotificationWidget = () => {
 
   const isVisible = useMemo(()=>{
     let visible = false;
-    if(notificationList.filter(x=>!x.seen).length){
-      visible = true;
-    }
+    // if(notificationList.filter(x=>!x.seen).length){
+    //   visible = true;
+    // }
     if(recentNotification && recentNotification.text){
       if(!recentNotification.seen){
         visible = true;
