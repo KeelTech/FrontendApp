@@ -73,8 +73,13 @@ const CustomChatWidget = ()=>{
                 newQuestionAdded = questionList.filter(x=>x.id==isDependentQuestion);
             }else{
                 const newIndex = currentIndex+1;
-                newQuestionAdded = questionList.filter(x=>x.index == newIndex);
-                setCurrentIndex(newIndex);
+                for(let i=newIndex; i<=12;i++){
+                    newQuestionAdded = questionList.filter(x=>x.index == i);
+                    if(newQuestionAdded.length>0){
+                        setCurrentIndex(i);
+                        break;
+                    }
+                }
             }
             if(newQuestionAdded.length){
                 const newSelectedQuestions = newQuestions.concat(newQuestionAdded)
