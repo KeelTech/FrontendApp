@@ -20,7 +20,6 @@ export const body = css`
         align-items: center;
     }
 `
-
 const AgentNotificationMobileWidget = () => {
     const agentTaskInfo = useSelector(state=>state.AGENT_STORE);
       const { agentNotificationLoading, agentNotificationData } = agentTaskInfo;
@@ -28,7 +27,7 @@ const AgentNotificationMobileWidget = () => {
     const history = useHistory();
 
     const clickHandler = (case_id)=>{
-        history.push(`/agent/customer/${case_id}`);
+         history.push(`/agent/customer/${case_id}`);
     }
 
     return (
@@ -49,8 +48,8 @@ const AgentNotificationMobileWidget = () => {
                         {
                             agentNotificationData.map((val, key)=>{
                                 const { user_details, chat_details, case_id } = val;
-                                const { user_name } = user_details;
-                                const { new_message, last_message } = chat_details;
+                                const { user_name, email } = user_details;
+                                const { new_message, message, sent_date, sent_by } = chat_details;
                                 return <div key={key} className={`pushCards ${new_message?'':'clickedPush'}`} onClick={()=>clickHandler(case_id)}>
                                 <div className="icoContent">
                                     <div className="notifyIcon">
@@ -58,7 +57,8 @@ const AgentNotificationMobileWidget = () => {
                                     </div>
                                     <div className="pushContent">
                                     <h2>{user_name}</h2>
-                                    <p>{last_message}</p>
+                                    <p numberOfLines={1}>{email!=sent_by?<strong className="sendRecvHead">You : </strong>:null } { message.length < 35? message: `${message.substring(0, 32)}...` }</p>  
+                                    <p className="msgTime notifyTime">{(new Date(sent_date)).toLocaleString()}</p>
                                     </div>
                                 </div>
                                 </div>
@@ -66,7 +66,7 @@ const AgentNotificationMobileWidget = () => {
                         }
                         {
                             agentNotificationData.length==0 && !agentNotificationLoading?
-                            <p className="emptyNotification">No New Notification</p>
+                            <p className="emptyNotification">No New Messages</p>
                             :null
                         }
                     </div>

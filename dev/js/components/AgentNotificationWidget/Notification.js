@@ -14,7 +14,7 @@ const Notification = ({agentNotificationData, agentNotificationLoading}) => {
   return (
     <div className={notification + " " + "testify"}>
       <div className={header}>
-        <h2>NOTIFICATIONS</h2>
+        <h2>MESSAGES</h2>
       </div>
       <div className="dropNotification agentNotification">
         {
@@ -45,7 +45,7 @@ const Notification = ({agentNotificationData, agentNotificationLoading}) => {
         }
         {
             !agentNotificationLoading && agentNotificationData.length==0?
-            <p className="emptyNotification">No New Notification</p>
+            <p className="emptyNotification">No New Messages</p>
             :null
         }
       </div>
