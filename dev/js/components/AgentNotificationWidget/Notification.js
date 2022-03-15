@@ -29,6 +29,7 @@ const Notification = ({agentNotificationData, agentNotificationLoading}) => {
             const { user_details, chat_details, case_id } = val;
             const { user_name, email } = user_details;
             const { new_message, message, sent_date, sent_by } = chat_details;
+            const xyz = message.length;
             return <div key={key} className={`pushCards ${new_message?'':'clickedPush'}`} onClick={()=>clickHandler(case_id)}>
               <div className="icoContent">
                 <div className="notifyIcon">
@@ -36,7 +37,7 @@ const Notification = ({agentNotificationData, agentNotificationLoading}) => {
                 </div>
                 <div className="pushContent">
                   <h2>{user_name}</h2>
-                  <p>{email!=sent_by?<strong className="sendRecvHead">You : </strong>:null } {message}</p> 
+                  <p numberOfLines={1}>{email!=sent_by?<strong className="sendRecvHead">You : </strong>:null } { message.length < 35? message: `${message.substring(0, 32)}...` }</p> 
                   <p className="msgTime notifyTime">{(new Date(sent_date)).toLocaleString()}</p>
                 </div>
               </div>
