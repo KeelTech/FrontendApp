@@ -11,13 +11,20 @@ const OptionView = ({ data, setData, name }) => {
         }
     }, [])
 
+    const renderHtmlContent = ()=>{
+        if(question_text && question_text.startsWith('<div>')){
+            return <div dangerouslySetInnerHTML={{__html: question_text}} />
+        }
+        return question_text.replaceAll('{name}', name)
+    }
+
     return (
         <Fragment>
             <div className='msg left-msg'>
                 <div className="msg-img" >
                 </div>
                 <div className="chooseOpt">
-                    <h5>{question_text.replaceAll('{name}', name)}</h5>
+                    <h5>{renderHtmlContent()}</h5>
                     <div className="gridbtns">
                         {
                             !is_submitted && dropdown_choice.map((val, key) => {

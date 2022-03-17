@@ -233,7 +233,7 @@ export const mobileChatView = css`
     overflow: hidden;
     border-radius: 0px;
     // padding-top: 16px;
-    z-index: 99;
+    z-index: 999;
     border:0px;
     .header{
         padding: 0px 21px;

@@ -206,7 +206,7 @@ export const container = css`
         .chooseOpt .gridbtns button {
             width: 25%;
             height: 100%;
-            max-height: 220px;
+            min-height: auto;
             font-size:14px;
         }
         

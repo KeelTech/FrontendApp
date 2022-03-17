@@ -1,8 +1,9 @@
 import React, { Fragment, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ReactNotification, { store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
+import { CURRENT_VISIBLE_NOTIFICATION } from '@constants/types';
 import { getNotification, readNotification, toggleNotificationChat } from '@actions';
 import { renderNotificationIcons } from '@helpers/utils';
 import { isMobileView } from '@constants';
@@ -12,6 +13,9 @@ const NotificationFloatingWidget = () => {
     const history = useHistory();
     const timeInterval = useRef();
     let notificationId = useRef();
+
+    const taskInfo = useSelector(state => state.TASK_INFO);
+    const { lastVisibleNotification } = taskInfo;
 
     const closeClicked = (e, val) => {
         e.stopPropagation();
@@ -25,7 +29,11 @@ const NotificationFloatingWidget = () => {
     useEffect(() => {
         timeInterval.current = setInterval(() => {
             getNotification({ recent: true }, dispatch, (val) => {
-                if (val && val.id) {
+                if (val && val.id && lastVisibleNotification!=val.id) {
+                    dispatch({
+                        type: CURRENT_VISIBLE_NOTIFICATION,
+                        payload: val.id
+                    })
                     const icon = renderNotificationIcons(val);
                     try {
                         const { text } = val;
@@ -54,7 +62,7 @@ const NotificationFloatingWidget = () => {
                                         // </div>
                                         <ul className="popOverNotifiy">
                                             <img src={ASSETS_BASE_URL+"/images/common/crossIcon.svg"} className="crossNoti" onClick={(e)=>closeClicked(e, val)}/>
-                                            <li onClick={()=>clickHandler(val)}>{text}</li>
+                                            <li onClick={()=>clickHandler(val)}>{text.title}</li>
                                         </ul>
                                     )
                                 },
@@ -79,7 +87,7 @@ const NotificationFloatingWidget = () => {
         return () => {
             clearInterval(timeInterval.current)
         }
-    }, [])
+    }, [lastVisibleNotification])
 
     const clickHandler = (val, isRedirect=true) => {
         const { category, id } = val;

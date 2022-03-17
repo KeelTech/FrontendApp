@@ -12,18 +12,9 @@ export const container = css`
   background: #ffcfc;
   // box-shadow: 0px 20px 50px rgba(191, 21, 108, 0.05);
   border-radius: 4px;
-  img {
-    width: 13px;
-    height: 18px;
-  }
-  .tick{
-    position: absolute;
-    background: #fe9874;
-    height: 5px;
-    width: 5px;
-    right: 8px;
-    top: 6px;
-    border-radius: 50%;
+  .agentNotification{
+    max-height: 420px;
+    overflow: auto;
   }
 `;
 
@@ -39,6 +30,7 @@ export const notification = css`
   height: auto;
   box-shadow: -10px 10px 64px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
+  padding-bottom:5px;
 
   @media (max-width: ${mobileScreenWidth}) {
     width: 300px;

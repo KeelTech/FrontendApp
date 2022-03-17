@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import Header from '@components/Header';
 import { css } from '@emotion/css';
-import { readNotification, toggleNotificationChat } from '@actions';
+import { readNotification, toggleNotificationChat, getNotification } from '@actions';
 import { renderNotificationIcons } from '@helpers/utils';
 import ComponentLoader from '@components/ComponentLoader';
 import { isMobileView } from '@constants';
@@ -49,6 +49,9 @@ const NotificationView = () => {
         })
     }
 
+    useEffect(()=>{
+        getNotification({}, dispatch);
+    },[])
     return (
         <div className={body + '    ' + 'p-relative pt-5 dashTaskSchSection '}>
             <div className="mainView mainSectionTopSpace">
@@ -75,13 +78,18 @@ const NotificationView = () => {
                                             <img className="img-fluid" src={icon} alt="video" />
                                         </div>
                                         <div className="pushContent">
-                                            <h2>{text}</h2>
+                                            <h2>{text.title}</h2>
                                             {/* <p>5 mins ago</p> */}
                                         </div>
                                     </div>
                                     {/* <button className="pushNotifyBtn">Join Meeting</button> */}
                                 </div>
                             })
+                        }
+                        {
+                            notificationList.length==0 && !notificationLoading?
+                            <p className="emptyNotification">No New Notification</p>
+                            :null
                         }
                     </div>
                 </div>

@@ -7967,6 +7967,9 @@ input[type="number"] {
 .floatingWidget{
   margin-bottom: 0px;
 }
+.pushContent{
+  width: 100%;
+}
 .pushContent h2 {
   color: #6C757D;
   font-size: 14px;
@@ -7985,6 +7988,10 @@ input[type="number"] {
 .icoContent {
   display: flex;
   padding-right: 10px;
+  width: 100%;
+}
+p.msgTime.notifyTime {
+  text-align: right;
 }
 
 .notifyIcon {
@@ -8000,9 +8007,15 @@ input[type="number"] {
   position: relative;
   flex-shrink: 0;
 }
-
+.notifyIcon p{
+  margin-bottom: 0px;
+}
 .notifyIcon:before {content: '';position: absolute;height: 8px;width: 8px;background: #4267B2;border-radius: 20px;left: 0;top: 2px;}
-
+.emptyNotification{
+  text-align: center;
+  font-weight: 600;
+  font-size: 20px;
+}
 button.pushNotifyBtn {
   background: #4267B2;
   color: white;
@@ -8446,6 +8459,11 @@ color: #4267b2;
   .multiSelect button.taskButton{
     margin-left: 0px;
   }
+}
+@media (max-width: 600px) {
+  .popOverNotifiy:after,.popOverNotifiy:before,.popOverNotifiy li:first-child:after{
+    left: 170px !important;
+}
 }
 
 @media (max-width: 767px) {

@@ -14,6 +14,10 @@ export const container = css`
   border-radius: 4px;
   background: #fcfcfc;
   cursor: pointer;
+  display: none;
+  @media(min-width: ${mobileScreenWidth}){
+    display: flex;
+  }
 `;
 
 export const profile = css`

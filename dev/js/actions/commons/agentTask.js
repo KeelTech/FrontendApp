@@ -1,4 +1,4 @@
-import { ADD_CASE_LIST, CASE_LIST_LOADING, FETCH_AGENT_PROFILE, AGENT_PROFILE_LOADING, AGENT_SCHEDULE_DETAILS, AGENT_SCHEDULE_LOADING, FETCH_TEMPLATE_LIST, FETCH_TEMPLATE_LIST_LOADING } from '@constants/types';
+import { ADD_CASE_LIST, CASE_LIST_LOADING, FETCH_AGENT_PROFILE, AGENT_PROFILE_LOADING, AGENT_SCHEDULE_DETAILS, AGENT_SCHEDULE_LOADING, FETCH_TEMPLATE_LIST, FETCH_TEMPLATE_LIST_LOADING, AGENT_NOTIFICATION_LOADING, AGENT_NOTIFICATION_INFO } from '@constants/types';
 import { API_GET, API_POST, API_PUT, API_DELETE } from '../../api/api.js';
 
 export const createTask = (dataParams, dispatch, cb=null)=>{
@@ -246,6 +246,30 @@ export const deleteTemplate = (dataParams={}, dispatch, cb=null)=>{
     API_DELETE(`${API_BASE_URL}v1/tasks/delete-task-template/${id}`, dataParams).then((response)=>{
         if(response && response.data){
             if(cb)cb(response.data, false);
+        }else{
+            if(cb)cb(null, true);    
+        }
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}
+
+export const getAgentNotification = (dataParams={}, dispatch, cb=null)=>{
+    dispatch({
+        type: AGENT_NOTIFICATION_LOADING,
+        payload: true
+    })
+    API_GET(`${API_BASE_URL}v1/cases/get-case-unread-chats`).then((response)=>{
+        if(response && response.message){
+            dispatch({
+                type: AGENT_NOTIFICATION_LOADING,
+                payload: false
+            })
+            dispatch({
+                type: AGENT_NOTIFICATION_INFO,
+                payload: response.message
+            })
+            if(cb)cb(response.message, false);
         }else{
             if(cb)cb(null, true);    
         }

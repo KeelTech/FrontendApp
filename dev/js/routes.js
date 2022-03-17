@@ -16,7 +16,7 @@ import AgentDashBoardView from './pages/AgentViews';
 import HomePageView from './HomePageView.js';
 import NotFoundPage from './pages/NotFoundPage';
 import CustomChat from './components/CustomChatWidget';
-
+import SSOLogin from  './components/SOSLogin';
 // const CustomChat = Loadable({
 //   loader: () => import('./components/CustomChatWidget'),
 //   loading: <p></p>,
@@ -41,6 +41,7 @@ let CUSTOMER_ROUTES = [
   { path: '/plan/detail/:id', exact: true, component: UserDashboardView, isPrivate: true },
   { path: '/application', exact: true, component: UserDashboardView, isPrivate: true },
   { path: '/chat', exact: true, component: CustomChat, isPrivate: false },
+  { path: '/sso', exact: true, component: SSOLogin, isPrivate: false },
   { path: '*', component: NotFoundPage, isPrivate: false  },
 ];
 
@@ -48,6 +49,7 @@ let AGENT_ROUTES = [
   { path: '/', exact: true, component: AgentDashBoardView },
   { path: '/agent', component: AgentDashBoardView, isPrivate: true  },
   { path: '/chat', exact: true, component: CustomChat, isPrivate: false},
+  { path: '/sso', exact: true, component: SSOLogin, isPrivate: false },
   { path: '*', component: NotFoundPage, isPrivate: false  },
 ]
 
@@ -61,6 +63,7 @@ let LOGIN_ROUTES = [
   { path: '/linkedin', exact: true, component: LinkedInPopUp, isSignin: true },
   { path: '/agent/reset-password', exact: true, component: PasswordReset, isSignin: true },
   { path: '/agent/confirm-email', exact: true, component: EmailVerification, isSignin: true },
+  { path: '/sso', exact: true, component: SSOLogin, isPrivate: false },
   { path: '/chat', exact: true, component: CustomChat, isPrivate: false },
   { path: '*', component: NotFoundPage, isPrivate: false  },
 ]
