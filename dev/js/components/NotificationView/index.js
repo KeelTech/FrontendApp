@@ -78,7 +78,7 @@ const NotificationView = () => {
                                             <img className="img-fluid" src={icon} alt="video" />
                                         </div>
                                         <div className="pushContent">
-                                            <h2>{text.title}</h2>
+                                            <h2>{text||text.title}</h2>
                                             {/* <p>5 mins ago</p> */}
                                         </div>
                                     </div>

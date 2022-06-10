@@ -51,7 +51,7 @@ const NotificationDropdown = () => {
                   <img className="img-fluid" src={renderNotificationIcons(recentNotification)} alt="video" />
                 </div>
                 <div className="pushContent">
-                  <h2>{recentNotification.text.title}</h2>
+                  <h2>{recentNotification.text || recentNotification.text.title}</h2>
                   {/* <p>5 mins ago</p> */}
                 </div>
               </div>

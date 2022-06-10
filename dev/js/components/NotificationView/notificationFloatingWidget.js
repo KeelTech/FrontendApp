@@ -62,7 +62,7 @@ const NotificationFloatingWidget = () => {
                                         // </div>
                                         <ul className="popOverNotifiy">
                                             <img src={ASSETS_BASE_URL+"/images/common/crossIcon.svg"} className="crossNoti" onClick={(e)=>closeClicked(e, val)}/>
-                                            <li onClick={()=>clickHandler(val)}>{text.title}</li>
+                                            <li onClick={()=>clickHandler(val)}>{text||text.title}</li>
                                         </ul>
                                     )
                                 },
