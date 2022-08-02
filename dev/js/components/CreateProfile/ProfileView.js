@@ -48,7 +48,7 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
                     let widgetName = '';
                     let selectedType = 0;
                     if (type.includes('profile')) {
-                        widgetName = 'Personal Details';
+                        widgetName = 'Personal Details (as on Passport)';
                         selectedType = 1;
                     } else if (type.includes('education_assessment')) {
                         widgetName = 'Educational Credential Assessment';

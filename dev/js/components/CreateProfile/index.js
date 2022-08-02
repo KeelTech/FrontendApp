@@ -45,7 +45,7 @@ const CreateProfile = (props) => {
                 activeWidgetInfo = {
                     widget: 'profile',
                     dataParams: { ...profile },
-                    displayText: 'Personal Details'
+                    displayText: 'Personal Details (as on Passport)'
                 }
             } else if (activeState === 2) {
                 activeWidgetInfo = {
