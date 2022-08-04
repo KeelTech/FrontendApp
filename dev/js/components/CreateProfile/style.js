@@ -63,7 +63,7 @@ export const progressBar = css`
     // visibility: hidden;
     display:none;
 }
-.inpCont input, textarea {
+.inpCont input, textarea, select {
     width: 100%;
     border: 1px solid #CED4DA;
     min-height: 36px;
@@ -71,8 +71,8 @@ export const progressBar = css`
     border-radius: 4px;
     font-size:14px;
 }
-.showError input, .showError textarea{
-    border: 1px solid red;
+.showError input, .showError textarea, select{
+    border: 1px solid red !important;
 }
 .inpCont {
     position: relative;

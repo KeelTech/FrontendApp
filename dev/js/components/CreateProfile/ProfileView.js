@@ -62,6 +62,9 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
                     } else if (type.includes('relative_in_canada')) {
                         widgetName = 'Relative in Canada (if any)';
                         selectedType = 5;
+                    } else if (type.includes('language_scores')) {
+                        widgetName = 'Language Test scores';
+                        selectedType = 6;
                     }
                     const isHide = activeWidgets.includes(type);
                     return <div className="prflDtlsAccordionContainer" key={type}>

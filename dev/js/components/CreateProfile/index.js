@@ -40,7 +40,7 @@ const CreateProfile = (props) => {
             displayText: ''
         }
         if (!fullProfileLoading && fullProfileInfo.profile) {
-            const { profile, education_assessment, qualification, work_experience, relative_in_canada } = fullProfileInfo;
+            const { profile, education_assessment, qualification, work_experience, relative_in_canada, language_scores } = fullProfileInfo;
             if (activeState === 1) {
                 activeWidgetInfo = {
                     widget: 'profile',
@@ -73,6 +73,13 @@ const CreateProfile = (props) => {
                     widget: 'relative_in_canada',
                     dataParams: { ...relative_in_canada },
                     displayText: 'Relative in Canada (if any)'
+                }
+            } else if (activeState === 6) {
+                activeWidgetInfo = {
+                    widget: 'language_scores',
+                    dataParams: [ ...language_scores ],
+                    displayText: 'Language Test scores',
+                    isMultiple: true
                 }
             }
         }
