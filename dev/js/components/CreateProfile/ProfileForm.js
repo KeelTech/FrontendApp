@@ -83,9 +83,9 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
         
         return(
             <div className="formWrapper">
-                {/* <label>Select the {labels}<sup>*</sup></label> */}
+                <label>{labels}<sup>*</sup></label>
                 <div className={`selectBox inpCont ${showError?'showError':''}`}>
-                    <select placeholder="India" onChange={handleTypeChange}>
+                    <select placeholder="India" value={value||''} onChange={handleTypeChange}>
                     <option value="">Select the {labels}</option>
                         {
                             choices && choices.map((choiceVal, key)=>{

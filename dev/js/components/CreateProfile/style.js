@@ -71,7 +71,7 @@ export const progressBar = css`
     border-radius: 4px;
     font-size:14px;
 }
-.showError input, .showError textarea, select{
+.showError input, .showError textarea,.showError select{
     border: 1px solid red !important;
 }
 .inpCont {
