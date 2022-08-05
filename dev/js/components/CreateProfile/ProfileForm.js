@@ -5,7 +5,7 @@ import { SelectCountry } from '@components/SelectCity';
 
 const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=false })=>{
     const dispatch = useDispatch();
-    const { labels, type, value, showError=false, errorMsg='', name='' } = dataParams;
+    const { labels, type, value, showError=false, errorMsg='', name='', choices } = dataParams;
     const handleChange = (val)=>{
         let updatedParams = {
             data: {
@@ -44,6 +44,21 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
         updateUserProfile(updatedParams, dispatch);
     }
 
+    const handleTypeChange = (e)=>{
+        const val = e.target.value;
+        let updatedParams = {
+            data: {
+                [fieldType]: {...dataParams, value: val, showError: false}
+            },
+            type: widget
+        }
+        if(isMultiple){
+            updatedParams.subIndex = subIndex;
+            updatedParams.isMultiple = true;
+        }
+        updateUserProfile(updatedParams, dispatch);
+    }
+
     const showCustomFields = fieldType.includes('city') || fieldType.includes('country') || fieldType.includes('state');
     const showDate = fieldType.includes('date');
 
@@ -62,6 +77,26 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
                 </label>
             </div>
         </div>
+    }
+
+    if(type==="drop-down" && labels=="Test Type"){
+        
+        return(
+            <div className="formWrapper">
+                <label>{labels}<sup>*</sup></label>
+                <div className={`selectBox inpCont ${showError?'showError':''}`}>
+                    <select placeholder="India" value={value||''} onChange={handleTypeChange}>
+                    <option value="">Select the {labels}</option>
+                        {
+                            choices && choices.map((choiceVal, key)=>{
+                                return <option key={key} value={choiceVal[0]||''}>{choiceVal[1]||''}</option>
+                            })
+                        }
+                    </select>
+                </div>
+                <p className={showError?"errorMsg":"hideMsg"}>{errorMsg?errorMsg:`Please Select ${labels}`}</p>
+            </div>
+        )
     }
 
     if(!labels || showCustomFields) return null;
