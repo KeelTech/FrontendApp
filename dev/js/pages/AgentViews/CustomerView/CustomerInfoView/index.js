@@ -11,6 +11,7 @@ import { getCaseDetail, getProgramList, updateProgram, createNotes } from "@acti
 import CustomAnimatedDropdown from '@components/CustomAnimatedDropdown';
 import EditorView from '@components/EditorView';
 import InfoList from './InfoList';
+import StageView from './StageView';
 import { body } from './style';
 
 function CustomerInfoView(props) {
@@ -226,10 +227,17 @@ function CustomerInfoView(props) {
                 <ul>
                   <li className={activeTab==1?"tabsAct":''} onClick={()=>setActiveTab(1)}>User Details</li>
                   <li className={activeTab==2?"tabsAct":''} onClick={()=>setActiveTab(2)}>Notes</li>
+                  <li className={activeTab==3?"tabsAct":''} onClick={()=>setActiveTab(3)}>Status</li>
                 </ul>
               </div>
               {
-                activeTab==1?<InfoList info={caseDetails} />:<EditorView onChange={onChange} editorState={editorState} saveNotes={saveNotes}/>
+                activeTab==1?<InfoList info={caseDetails} />:null
+              }
+              {
+                activeTab==2?<EditorView onChange={onChange} editorState={editorState} saveNotes={saveNotes}/>:null
+              }
+              {
+                activeTab===3?<StageView />:null
               }
             </div>
           </div>
