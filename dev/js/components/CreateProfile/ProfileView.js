@@ -93,7 +93,7 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
                                                                 Object.values(widgetObject).map((widgetVal) => {
                                                                     const { labels, value = '', name='', choices } = widgetVal;
                                                                     if (!labels) return null;
-                                                                    if(labels=="Test Type" && choices && choices.length && value){
+                                                                    if(choices && choices.length && value){
                                                                         const selectedVal = choices.find(val=>val[0]==value);
                                                                         return (
                                                                             <li key={dataVal + labels}>
@@ -116,8 +116,17 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
                                                         </Fragment>
                                                     })
                                                     : Object.values(values).map((widgetVal, dataKeys) => {
-                                                        const { labels, value = '', name='' } = widgetVal;
+                                                        const { labels, value = '', name='', choices } = widgetVal;
                                                         if (!labels) return null;
+                                                        if(choices && choices.length && value){
+                                                            const selectedVal = choices.find(val=>val[0]==value);
+                                                            return (
+                                                                <li key={dataKeys}>
+                                                                    <h5>{labels}:</h5>
+                                                                    <p>{selectedVal && selectedVal[1]||''}</p>
+                                                                </li>
+                                                            )
+                                                        }
                                                         return (
                                                             <li key={dataKeys}>
                                                                 <h5>{labels}:</h5>
