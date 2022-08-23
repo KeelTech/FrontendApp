@@ -277,3 +277,28 @@ export const getAgentNotification = (dataParams={}, dispatch, cb=null)=>{
         if(cb)cb(null, true);
     })
 }
+
+export const listCaseComments = (dataParams={}, dispatch, cb=null)=>{
+    const { caseId } = dataParams;
+    API_GET(`${API_BASE_URL}v1/cases/list-case-comments/${caseId}`).then((response)=>{
+        if(response && response.message){
+            if(cb)cb(response.message, false);
+        }else{
+            if(cb)cb(null, true);    
+        }
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}
+
+export const postCaseComments = (dataParams={}, dispatch, cb=null)=>{
+    API_POST(`${API_BASE_URL}/v1/cases/post-case-comments`, dataParams).then((response)=>{
+        if(response && response.data){
+            if(cb)cb(response.data, false);
+        }else{
+            if(cb)cb(null, true);
+        }
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}

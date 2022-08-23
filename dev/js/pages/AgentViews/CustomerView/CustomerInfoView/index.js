@@ -7,7 +7,7 @@ import FloatingChatWidget from '@components/FloatingChatWidget';
 import ChatWidget from '@components/ChatWidget';
 import Header from '@components/Header';
 import LoadingWidget from "@components/LoadingWidget";
-import { getCaseDetail, getProgramList, updateProgram, createNotes } from "@actions";
+import { getCaseDetail, getProgramList, updateProgram, createNotes, listCaseComments } from "@actions";
 import CustomAnimatedDropdown from '@components/CustomAnimatedDropdown';
 import EditorView from '@components/EditorView';
 import InfoList from './InfoList';
@@ -34,7 +34,7 @@ function CustomerInfoView(props) {
   const [programStateList, getProgramState] = useState([]);
   const [selectedProgam, setProgram] = useState('');
   const [activeTab, setActiveTab] = useState(1);
-  
+  const [listComments, setListComments] = useState([]);
   const [editorState, setEditorState] = useState(RichTextEditor.createValueFromString("<p></p>",'html')
     )
 
@@ -42,10 +42,20 @@ function CustomerInfoView(props) {
     history.push(`/agent/tasks/${caseId}`);
   }
 
+  const fetchCommentList = ()=>{
+    listCaseComments({caseId}, '', (resp, error)=>{
+      console.log(resp);
+      if(resp){
+        setListComments(resp);
+      }
+    })
+  }
+
   useEffect(() => {
     window.scrollTo(0, 0);
     const dataParams = { customerId: caseId };
     getCaseDetail(dataParams, dispatch);
+    fetchCommentList();
     getProgramList({}, dispatch, (resp, err) => {
       getProgramState(resp);
     })
@@ -237,7 +247,7 @@ function CustomerInfoView(props) {
                 activeTab==2?<EditorView onChange={onChange} editorState={editorState} saveNotes={saveNotes}/>:null
               }
               {
-                activeTab===3?<StageView />:null
+                activeTab===3?<StageView listComments={listComments} caseId={caseId} fetchCommentList={fetchCommentList}/>:null
               }
             </div>
           </div>

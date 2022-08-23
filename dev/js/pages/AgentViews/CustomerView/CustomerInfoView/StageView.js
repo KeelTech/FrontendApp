@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import PostCommentView from './PostComment';
+import {  postCaseComments } from "@actions";
 
-const StageView = ()=>{
+const StageView = ({caseId, fetchCommentList, listComments})=>{
+    console.log({listComments});
     const [sortedComments, setSortComment] = useState([]);
     const addComments = (newVal)=>{
+        postCaseComments({case_id: caseId, msg: newVal}, '', (resp, error)=>{
+            if(resp){
+                fetchCommentList();
+            }
+        });
         setSortComment((val)=>val.concat(newVal));
     }
     const deleteCommentClicked= (index)=>{
