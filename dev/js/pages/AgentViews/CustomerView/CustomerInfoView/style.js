@@ -399,3 +399,92 @@ export const postComment = css`
         }
     }
 `
+export const messageSection = css`
+    margin-top: 30px;
+    .msgView{
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        &:last-child{
+            margin-bottom: 0px;
+        }
+        input{
+            ${inputField};
+            width: 100%;
+            padding: 8px;
+            font-size: 10px;
+            line-height: 15px;
+            border: 0.5px solid #A098AE;
+            border-radius:47px;
+        }
+    }
+    .commentSection{
+        width: 100%;
+    }
+    .msgSection{
+        display : flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        border: 1px solid #b5bed1;
+    padding: 8px;
+    border-radius: 4px;
+    min-height: 50px;
+    }
+    .profile{
+        margin-right: 6px;
+        min-height: 26px;
+        min-width: 26px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #363B64;
+        font-size: 12px;
+        line-height: 18px;
+        color: #DBDBDB;
+    }
+    .info{
+        display: flex;
+        align-items: center;
+    }
+    .name{
+        font-weight: 600;
+        font-size: 10px;
+        line-height: 16px;
+        color: #363B64;
+    }
+    .time{
+        font-weight: 600;
+        font-size: 10px;
+        line-height: 12px;
+        color: #A098AE;
+        padding-left: 4px;
+    }
+    .msg{
+        // margin-top: 4px;
+        font-size: 10px;
+        line-height: 15px;
+        color: #363B64
+    }
+    .deleteTask{
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-end;
+    }
+    @media(max-width: ${tabScreenWidth}){
+        margin-top: 20px;
+        .profile{
+            width: 28px;
+            height: 28px;
+            font-size: 14px;
+            line-height: 21px;
+        }
+        input{
+            font-size: 12px;
+        }
+        .msg{
+            font-size: 12px;
+            line-height: 18px;
+        }
+    }
+`

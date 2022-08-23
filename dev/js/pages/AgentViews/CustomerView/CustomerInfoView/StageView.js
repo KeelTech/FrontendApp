@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PostCommentView from './PostComment';
 import {  postCaseComments } from "@actions";
+import { messageSection } from './style';
 
 const StageView = ({caseId, fetchCommentList, listComments})=>{
     console.log({listComments});
@@ -22,7 +23,7 @@ const StageView = ({caseId, fetchCommentList, listComments})=>{
             <PostCommentView addComments={addComments}/>
             {
                 sortedComments && sortedComments.map((val, key) => {
-                    return <div className="msgView" key={key}>
+                    return <div className={messageSection + '    ' + "msgView" }key={key}>
                         <div className="commentSection">
                             <div className="info">
                                 {/* <span className="name">{capitalizeFirstLetter(user_details.user_name||agentName)}</span> */}
