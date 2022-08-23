@@ -281,8 +281,8 @@ export const getAgentNotification = (dataParams={}, dispatch, cb=null)=>{
 export const listCaseComments = (dataParams={}, dispatch, cb=null)=>{
     const { caseId } = dataParams;
     API_GET(`${API_BASE_URL}v1/cases/list-case-comments/${caseId}`).then((response)=>{
-        if(response && response.message){
-            if(cb)cb(response.message, false);
+        if(response && response.data){
+            if(cb)cb(response.data, false);
         }else{
             if(cb)cb(null, true);    
         }

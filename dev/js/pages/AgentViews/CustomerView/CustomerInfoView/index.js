@@ -44,7 +44,6 @@ function CustomerInfoView(props) {
 
   const fetchCommentList = ()=>{
     listCaseComments({caseId}, '', (resp, error)=>{
-      console.log(resp);
       if(resp){
         setListComments(resp);
       }

@@ -5,7 +5,7 @@ import CustomButton from '@components/CustomButton';
 import { getNameInitialHelper } from '@helpers/utils';
 import { postComment } from './style.js';
 
-const PostComments = ({ addComments, title = "" }) => {
+const PostComments = ({ addComments, }) => {
     const dispatch = useDispatch();
     const [comment, setComment] = useState('');
 
@@ -28,6 +28,7 @@ const PostComments = ({ addComments, title = "" }) => {
         //     }
         // })
         addComments(comment);
+        setComment('');
     }
 
     return (
@@ -37,7 +38,7 @@ const PostComments = ({ addComments, title = "" }) => {
             </div>
             <div className="postCommentCancel">
                 <CustomButton text="Add" clickHandler={addComment}  />
-                <button>Cancel</button>
+                <button onClick={()=>setComment('')}>Cancel</button>
             </div>
         </div>
     )
