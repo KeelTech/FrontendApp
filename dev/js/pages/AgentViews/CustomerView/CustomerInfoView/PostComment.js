@@ -32,9 +32,10 @@ const PostComments = ({ addComments, }) => {
     }
 
     return (
-        <div className={postComment + " " + "postCommentSection"}>
-            <div className="msgView">
-                <input type="text" placeholder="Write a Comment" value={comment} onChange={(e) => setComment(e.target.value)} />
+        <div className={postComment + " " + "postCommentSection newPostSection"}>
+            <div className="msgView newComment">
+                {/* <input type="text" placeholder="Write a Comment" value={comment} onChange={(e) => setComment(e.target.value)} /> */}
+                <textarea placeholder="Write a Comment" value={comment} onChange={(e) => setComment(e.target.value)}></textarea>
             </div>
             <div className="postCommentCancel">
                 <CustomButton text="Add" clickHandler={addComment}  />
