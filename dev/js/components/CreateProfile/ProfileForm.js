@@ -79,7 +79,9 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
         </div>
     }
 
-    if(type==="drop-down" && labels=="Test Type"){
+    if(!labels || showCustomFields) return null;
+
+    if(type==="drop-down"){
         
         return(
             <div className="formWrapper">
@@ -99,20 +101,17 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
         )
     }
 
-    if(!labels || showCustomFields) return null;
-
     return(
         <div className="formWrapper">
             
             <label>{labels}<sup>*</sup></label>
             
-            {
-                !showCustomFields?
-                <div className={`inpCont ${showError?'showError':''}`}>
-                    <input type={showDate?"date":"text"} autoComplete="new-password" onChange={(e)=>handleChange(e.target.value)} value={value}/>
-                </div>
-                :null
-            }  
+            <div className={`inpCont ${showError?'showError':''}`}>
+                {
+                    type==="textarea"?<textarea onChange={(e)=>handleChange(e.target.value)} value={value}></textarea>:<input type={showDate?"date":"text"} autoComplete="new-password" onChange={(e)=>handleChange(e.target.value)} value={value}/>
+
+                }
+            </div>  
             <p className={showError?"errorMsg":"hideMsg"}>{errorMsg?errorMsg:`Please Fill ${labels}`}</p>
             {
                 type ==='dropdown' && false?
