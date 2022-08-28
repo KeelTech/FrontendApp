@@ -1,8 +1,9 @@
 import { css } from "@emotion/css";
 import { primaryFont } from "@constants";
-import { tabScreenWidth } from "@constants";
+import { inputField, tabScreenWidth } from "@constants";
 
 export const body = css`
+
   // background: rgba(252, 252, 252, 0.5);
   display: flex;
   flex-direction: column;
@@ -10,6 +11,13 @@ export const body = css`
   max-height: 100vh;
   @media (max-width: ${tabScreenWidth}) {
     max-height: 100%;
+  }
+  .commentBoxScroll{
+    max-height: 220px;
+  overflow: auto;
+  overflow-x: hidden;
+  margin: 0 -12px;
+  padding: 0 12px;
   }
   .head {
     display: flex;
@@ -353,3 +361,192 @@ export const list = css`
     }
   }
 `;
+
+
+export const postComment = css`
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+      &.newPostSection {
+        margin: 0 -12px;
+        padding: 12px;
+        box-shadow: 0px -4px 3px 1px #f7f7f7;
+    }
+    .newComment{
+      textarea{
+        padding: 8px;
+        font-size: 10px;
+        line-height: 15px;
+        border:0.5px solid #e7e7e7;
+        border-radius: 4px;
+        height: 120px;
+    width: 100%;
+    background: #f9f9f9;
+      }
+    }
+    .msgView{
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+    input{
+        ${inputField};
+        width: 100%;
+        padding: 8px;
+        font-size: 10px;
+        line-height: 15px;
+        border: 0.5px solid #A098AE;
+        border-radius: 4px;
+    }
+    .profile{
+        margin-right: 6px;
+        min-height: 26px;
+        min-width: 26px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #363B64;
+        font-size: 12px;
+        line-height: 18px;
+        color: #DBDBDB;
+    }
+    @media(max-width: ${tabScreenWidth}){
+        input{
+            font-size: 12px;
+        }
+        .profile{
+            width: 28px;
+            height: 28px;
+            font-size: 14px;
+            line-height: 21px;
+        }
+    }
+`
+export const messageSection = css`
+    margin-top: 10px;
+    position:relative;
+    &:before{
+      content:'';
+      position: absolute;
+      width: calc(100% + 24px);
+      height: 1px;
+      background: #d5d5d5;
+      bottom: -10px;
+      right: 0;
+      left: -12px;
+      margin: auto;
+    }
+    .commentUiUpdated{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:4px;
+      padding:4px 0px;
+      .info{
+        // display:flex;
+        // flex-direction: column;
+        // width: 40px;
+        // justify-content: center;
+        // align-items: center;
+        // background: white;
+        align-items: center;
+    width: 100%;
+    justify-content: space-between;
+      }
+    }
+    .msgView{
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        &:last-child{
+            margin-bottom: 0px;
+        }
+        input{
+            ${inputField};
+            width: 100%;
+            padding: 8px;
+            font-size: 10px;
+            line-height: 15px;
+            border: 0.5px solid #A098AE;
+            border-radius:47px;
+        }
+    }
+    .commentSection{
+        width: 100%;
+    }
+    .msgSection{
+        display : flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        border: 1px solid #d1d1d1;
+    padding: 8px;
+    border-radius: 4px;
+    min-height: 30px;
+    width:100%;
+    background: #f9f9f9;
+    }
+    .profile{
+        margin-right: 6px;
+        min-height: 26px;
+        min-width: 26px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #363B64;
+        font-size: 12px;
+        line-height: 18px;
+        color: #DBDBDB;
+    }
+    .info{
+        display: flex;
+        align-items: center;
+    }
+    .name{
+        font-weight: 600;
+        font-size: 10px;
+        line-height: 16px;
+        color: #363B64;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        width: inherit;
+    }
+    .time{
+        font-weight: 600;
+        font-size: 10px;
+        line-height: 12px;
+        color: #A098AE;
+        padding-left: 4px;
+        flex-shrink:0;
+    }
+    .msg{
+        // margin-top: 4px;
+        font-size: 10px;
+        line-height: 15px;
+        color: #363B64
+    }
+    .deleteTask{
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-end;
+    }
+    @media(max-width: ${tabScreenWidth}){
+        margin-top: 20px;
+        .profile{
+            width: 28px;
+            height: 28px;
+            font-size: 14px;
+            line-height: 21px;
+        }
+        input{
+            font-size: 12px;
+        }
+        .msg{
+            font-size: 12px;
+            line-height: 18px;
+        }
+    }
+`

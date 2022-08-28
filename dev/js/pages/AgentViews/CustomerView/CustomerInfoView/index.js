@@ -7,10 +7,11 @@ import FloatingChatWidget from '@components/FloatingChatWidget';
 import ChatWidget from '@components/ChatWidget';
 import Header from '@components/Header';
 import LoadingWidget from "@components/LoadingWidget";
-import { getCaseDetail, getProgramList, updateProgram, createNotes } from "@actions";
+import { getCaseDetail, getProgramList, updateProgram, createNotes, listCaseComments } from "@actions";
 import CustomAnimatedDropdown from '@components/CustomAnimatedDropdown';
 import EditorView from '@components/EditorView';
 import InfoList from './InfoList';
+import StageView from './StageView';
 import { body } from './style';
 
 function CustomerInfoView(props) {
@@ -33,7 +34,7 @@ function CustomerInfoView(props) {
   const [programStateList, getProgramState] = useState([]);
   const [selectedProgam, setProgram] = useState('');
   const [activeTab, setActiveTab] = useState(1);
-  
+  const [listComments, setListComments] = useState([]);
   const [editorState, setEditorState] = useState(RichTextEditor.createValueFromString("<p></p>",'html')
     )
 
@@ -41,10 +42,19 @@ function CustomerInfoView(props) {
     history.push(`/agent/tasks/${caseId}`);
   }
 
+  const fetchCommentList = ()=>{
+    listCaseComments({caseId}, '', (resp, error)=>{
+      if(resp){
+        setListComments(resp);
+      }
+    })
+  }
+
   useEffect(() => {
     window.scrollTo(0, 0);
     const dataParams = { customerId: caseId };
     getCaseDetail(dataParams, dispatch);
+    fetchCommentList();
     getProgramList({}, dispatch, (resp, err) => {
       getProgramState(resp);
     })
@@ -226,10 +236,17 @@ function CustomerInfoView(props) {
                 <ul>
                   <li className={activeTab==1?"tabsAct":''} onClick={()=>setActiveTab(1)}>User Details</li>
                   <li className={activeTab==2?"tabsAct":''} onClick={()=>setActiveTab(2)}>Notes</li>
+                  <li className={activeTab==3?"tabsAct":''} onClick={()=>setActiveTab(3)}>Status</li>
                 </ul>
               </div>
               {
-                activeTab==1?<InfoList info={caseDetails} />:<EditorView onChange={onChange} editorState={editorState} saveNotes={saveNotes}/>
+                activeTab==1?<InfoList info={caseDetails} />:null
+              }
+              {
+                activeTab==2?<EditorView onChange={onChange} editorState={editorState} saveNotes={saveNotes}/>:null
+              }
+              {
+                activeTab===3?<StageView listComments={listComments} caseId={caseId} fetchCommentList={fetchCommentList}/>:null
               }
             </div>
           </div>
