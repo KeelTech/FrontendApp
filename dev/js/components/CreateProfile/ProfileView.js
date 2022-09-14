@@ -2,6 +2,7 @@ import React, { useState, Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 
 const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
+    const { spouse_profile={} } = fullProfileInfo||{};
     const { profile = {} } = userInfo;
     const { first_name = '', last_name = '' } = profile;
     const [activeWidgets, setActiveWidget] = useState(() => {
@@ -27,6 +28,39 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
         setActiveWidget(newVal);
     }
 
+    const renderListView = (val, dataKeys)=>{
+        const [fieldType, widgetVal] = val;
+        const { labels, value = '', name='', choices } = widgetVal;
+        if (!labels) return null;
+
+        if(fieldType=="marital_status" && value==2){
+            return <Fragment>
+                <li key={dataKeys}>
+                    <h5>{labels}:</h5>
+                    <p>{name||value}</p>
+                </li>
+                {
+                    Object.entries(spouse_profile).map((val1, key1)=>{
+                        return renderListView(val1, key1);
+                    })
+                }
+            </Fragment>
+        }else if(choices && choices.length && value){
+            const selectedVal = choices.find(val=>val[0]==value);
+            return (
+                <li key={dataKeys}>
+                    <h5>{labels}:</h5>
+                    <p>{selectedVal && selectedVal[1]||''}</p>
+                </li>
+            )
+        }
+        return (
+            <li key={dataKeys}>
+                <h5>{labels}:</h5>
+                <p>{name||value}</p>
+            </li>
+        )
+    }
     const history = useHistory();
     return (
         <div className="useDetailsContainer ">
@@ -115,24 +149,10 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
                                                             }
                                                         </Fragment>
                                                     })
-                                                    : Object.values(values).map((widgetVal, dataKeys) => {
-                                                        const { labels, value = '', name='', choices } = widgetVal;
-                                                        if (!labels) return null;
-                                                        if(choices && choices.length && value){
-                                                            const selectedVal = choices.find(val=>val[0]==value);
-                                                            return (
-                                                                <li key={dataKeys}>
-                                                                    <h5>{labels}:</h5>
-                                                                    <p>{selectedVal && selectedVal[1]||''}</p>
-                                                                </li>
-                                                            )
-                                                        }
-                                                        return (
-                                                            <li key={dataKeys}>
-                                                                <h5>{labels}:</h5>
-                                                                <p>{name||value}</p>
-                                                            </li>
-                                                        )
+                                                    : Object.entries(values).map((val, dataKeys) => {
+
+                                                        return renderListView(val, dataKeys);
+                                                        
                                                     })
                                             }
                                         </ul>
@@ -142,75 +162,6 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
                     </div>
                 })
             }
-            {/*<div className="prflDtlsAccordionContainer">
-                <div className="prfAccrd">
-                    <div className="accrdHead">
-                        <h5>Personal  Details</h5>
-                        <button>Hide Details <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/drop.svg"} /></button>
-                    </div>
-                    <div className="accrdContent">
-                        <ul>
-                            <li>
-                                <h5>Email:</h5>
-                                <p>samantha.williams@gmail.com</p>
-                            </li>
-                            <li>
-                                <h5>Number:</h5>
-                                <p>lorem Sed ut perspiciatis, unde omnis iste natus</p>
-                            </li>
-                            <li>
-                                <h5>Date of Birth:</h5>
-                                <p>lorem Sed ut perspiciatis, unde omnis iste natus</p>
-                            </li>
-                            <li>
-                                <h5>Place of Birth:</h5>
-                                <p>lorem Sed ut perspiciatis, unde omnis iste natus</p>
-                            </li>
-                            <li>
-                                <h5>City:</h5>
-                                <p>lorem Sed ut , unde omnis iste natus</p>
-                            </li>
-                            <li>
-                                <h5>Country:</h5>
-                                <p>lorem  ut perspiciatis, unde omnis iste natus</p>
-                            </li>
-                            <li>
-                                <h5>Nationality:</h5>
-                                <p>lorem Sed ut perspiciatis, unde omnis iste natus</p>
-                            </li>
-                            <li>
-                                <h5>National Identity Number:</h5>
-                                <p>lorem Sed ut , unde omnis iste natus</p>
-                            </li>
-                            <li>
-                                <h5>Date of Issue:</h5>
-                                <p>lorem Sed ut perspiciatis,  omnis iste natus</p>
-                            </li>
-                            <li>
-                                <h5>Date of Expiry:</h5>
-                                <p>lorem Sed ut perspiciatis, unde omnis iste natus</p>
-                            </li>
-                            <li>
-                                <h5>Passport Number:</h5>
-                                <p> Sed ut perspiciatis, unde omnis iste natus</p>
-                            </li>
-                            <li>
-                                <h5>Passport Number:</h5>
-                                <p>lorem Sed ut , unde omnis iste natus</p>
-                            </li>
-                            <li>
-                                <h5>Passport Number:</h5>
-                                <p>lorem Sed ut perspiciatis, unde omnis iste natus</p>
-                            </li>
-                            <li>
-                                <h5>Current Address:</h5>
-                                <p>lorem Sed ut perspiciatis, unde omnis iste natus</p>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-            </div>*/}
         </div>
     )
 }

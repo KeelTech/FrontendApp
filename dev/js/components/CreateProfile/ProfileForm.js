@@ -80,7 +80,7 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
     }
 
     if(!labels || showCustomFields) return null;
-
+    
     if(type==="drop-down"){
         
         return(
