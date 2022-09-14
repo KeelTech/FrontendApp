@@ -19,6 +19,7 @@ const CreateProfile = (props) => {
     const history = useHistory();
     const taskInfo = useSelector(state => state.TASK_INFO);
     const { fullProfileInfo, fullProfileLoading, userInfo = {}, countryList = [], originalFullProfileInfo = {} } = taskInfo;
+    const { spouse_profile={} } = fullProfileInfo||{};
     const isProfileExist = userInfo && userInfo.profile_exists;
     const [activeState, setActive] = useState(editID ? parseInt(editID) : 1);
     const [loading, setLoading] = useState(false);
@@ -156,8 +157,34 @@ const CreateProfile = (props) => {
                         showError = true;
                     }
                     newDataParams[fieldType] = { ...dataValues, showError }
+
+                    if(fieldType=="marital_status" && dataValues && dataValues.value==2 && spouse_profile){
+                        const newDataParams1 = {};
+                        let isError1=false;
+                        Object.entries(spouse_profile).map((val1)=>{
+                            const [fieldType1, dataValues1] = val1;
+
+                            if (!dataValues1.labels) return;
+                            let showError1 = false;
+                            if (!dataValues1.value && !isAddressType) {
+                                isError1 = true;
+                                showError1 = true;
+                            }
+                            newDataParams1[fieldType1] = { ...dataValues1, showError: showError1 }
+                        })
+                        if(isError1){
+                            let updatedParams = {
+                                data: newDataParams1,
+                                type: "spouse_profile",
+                                isUpdate: false
+                            }
+                            updateUserProfile(updatedParams, dispatch);
+                        }
+                        
+                    }
                 })
             }
+            
             let updatedParams = {
                 data: newDataParams,
                 type: widget,
@@ -325,32 +352,25 @@ const CreateProfile = (props) => {
                                                                 </div>
                                                             })
                                                         }
-
                                                     </Fragment>
 
                                                     : Object.entries(dataParams).map((val, key) => {
                                                         const [fieldType, dataValues] = val;
-                                                        return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} />
+                                                        if(fieldType=="marital_status" && dataValues && dataValues.value==2 ){
+                                                            return <Fragment>
+                                                                    <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} />
+                                                                    {
+                                                                        spouse_profile && Object.entries(spouse_profile).map((val, key) => {
+                                                                            const [fieldType1, dataValues1] = val;
+                                                                            return <ProfileForm fieldType={fieldType1} dataParams={dataValues1} key={`${widget}_${key}`} widget="spouse_profile" />
+                                                                        })
+                                                                    }
+                                                                </Fragment>
+                                                        }else{
+                                                            return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} />
+                                                        }
                                                     })
                                             }
-                                            {/* <div className="formWrapper">
-                                                <div className="checkBoxContainer">
-                                                    <label className="check_container">
-                                                        <p>Please Check</p>
-                                                        <input type="checkbox" />
-                                                        <span className="checkmark"></span>
-                                                    </label>
-                                                </div>
-                                            </div> */}
-                                            {/* <div className="formWrapper">
-                                                <div className="customRadio">
-                                                    <label className="radio_container">
-                                                        <p>Please Select</p>
-                                                        <input type="radio" name="radio" />
-                                                        <span className="checkmark"></span>
-                                                    </label>
-                                                </div>
-                                            </div> */}
                                         </div>
                                         <div className="btnCont">
                                             {
@@ -368,9 +388,6 @@ const CreateProfile = (props) => {
                                             }
                                         </div>
                                     </div>
-                                    {/* <div className="stepAddImg">
-                                        <img className="img-fluid" />
-                                    </div> */}
                                 </div>
                             </div>
                         </div>
