@@ -184,6 +184,7 @@ const CreateProfile = (props) => {
                     }
                 })
             }
+            
             let updatedParams = {
                 data: newDataParams,
                 type: widget,
