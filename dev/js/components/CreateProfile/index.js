@@ -41,7 +41,7 @@ const CreateProfile = (props) => {
             displayText: ''
         }
         if (!fullProfileLoading && fullProfileInfo.profile) {
-            const { profile, education_assessment, qualification, work_experience, relative_in_canada, language_scores } = fullProfileInfo;
+            const { profile, education_assessment, qualification, work_experience, relative_in_canada, language_scores, family_information } = fullProfileInfo;
             if (activeState === 1) {
                 activeWidgetInfo = {
                     widget: 'profile',
@@ -80,6 +80,13 @@ const CreateProfile = (props) => {
                     widget: 'language_scores',
                     dataParams: [ ...language_scores ],
                     displayText: 'Language Test scores',
+                    isMultiple: true
+                }
+            }else if(activeState===7){
+                activeWidgetInfo = {
+                    widget: 'family_information',
+                    dataParams: [ ...family_information ],
+                    displayText: 'Customer Family Information',
                     isMultiple: true
                 }
             }
