@@ -41,7 +41,7 @@ const CreateProfile = (props) => {
             displayText: ''
         }
         if (!fullProfileLoading && fullProfileInfo.profile) {
-            const { profile, education_assessment, qualification, work_experience, relative_in_canada, language_scores } = fullProfileInfo;
+            const { profile, education_assessment, qualification, work_experience, relative_in_canada, language_scores, family_information } = fullProfileInfo;
             if (activeState === 1) {
                 activeWidgetInfo = {
                     widget: 'profile',
@@ -80,6 +80,13 @@ const CreateProfile = (props) => {
                     widget: 'language_scores',
                     dataParams: [ ...language_scores ],
                     displayText: 'Language Test scores',
+                    isMultiple: true
+                }
+            }else if(activeState===7){
+                activeWidgetInfo = {
+                    widget: 'family_information',
+                    dataParams: [ ...family_information ],
+                    displayText: 'Customer Family Information',
                     isMultiple: true
                 }
             }
@@ -302,6 +309,7 @@ const CreateProfile = (props) => {
     }
 
     const renderView = () => {
+        let isSpouseExist = false;
         return (
             <Fragment>
                 {
@@ -354,22 +362,33 @@ const CreateProfile = (props) => {
                                                         }
                                                     </Fragment>
 
-                                                    : Object.entries(dataParams).map((val, key) => {
-                                                        const [fieldType, dataValues] = val;
-                                                        if(fieldType=="marital_status" && dataValues && dataValues.value==2 ){
-                                                            return <Fragment>
-                                                                    <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} />
-                                                                    {
-                                                                        spouse_profile && Object.entries(spouse_profile).map((val, key) => {
-                                                                            const [fieldType1, dataValues1] = val;
-                                                                            return <ProfileForm fieldType={fieldType1} dataParams={dataValues1} key={`${widget}_${key}`} widget="spouse_profile" />
-                                                                        })
-                                                                    }
-                                                                </Fragment>
-                                                        }else{
-                                                            return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} />
+                                                    : <Fragment>
+                                                        {
+                                                            Object.entries(dataParams).map((val, key) => {
+                                                                const [fieldType, dataValues] = val;
+
+                                                                if(!isSpouseExist){
+                                                                    isSpouseExist = fieldType=="marital_status" && dataValues && dataValues.value==2;
+                                                                }
+                                                                    return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} />
+                                                            })
                                                         }
-                                                    })
+                                                        {
+                                                            isSpouseExist?
+                                                            <div className="userFormsMainContainer customEditProfile">
+                                                                <div className="editProfSteps">
+                                                                <h3 className="addMoreBtnHead">Spouse Details</h3>
+                                                                {
+                                                                    spouse_profile && Object.entries(spouse_profile).map((val, key) => {
+                                                                        const [fieldType1, dataValues1] = val;
+                                                                        return <ProfileForm fieldType={fieldType1} dataParams={dataValues1} key={`${widget}_${key}`} widget="spouse_profile" />
+                                                                    })
+                                                                }
+                                                                </div>
+                                                            </div>
+                                                            :null
+                                                        }
+                                                    </Fragment>
                                             }
                                         </div>
                                         <div className="btnCont">

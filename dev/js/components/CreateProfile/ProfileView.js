@@ -99,6 +99,9 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
                     } else if (type.includes('language_scores')) {
                         widgetName = 'Language Test scores';
                         selectedType = 6;
+                    } else if (type.includes('family_information')) {
+                        widgetName = 'Customer Family Information';
+                        selectedType = 7;
                     }
                     const isHide = activeWidgets.includes(type);
                     return <div className="prflDtlsAccordionContainer" key={type}>
