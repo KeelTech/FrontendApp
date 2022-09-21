@@ -9117,4 +9117,8 @@ background-size: 15px;
 .uploadStatus .checkmark,input{
   cursor: default;
 }
+.accrdHead .spouseName{
+  font-size: 20px;
+  margin: 8px 0px;
+}
 /* // ================ doc upload   ================ */

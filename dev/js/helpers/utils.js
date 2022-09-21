@@ -19,7 +19,7 @@ export const getFormattedDate = (date)=>{
             formattedDate ='';
         }
     }
-    return { formattedDate, fullYear, day, month, formatMonth: MONTH[month]};
+    return { formattedDate, fullYear, day: day<10?`0${day}`:day, month: month<10?`0${month}`:month, formatMonth: MONTH[month]};
 }
 
 export const getFormattedTime = (val)=>{

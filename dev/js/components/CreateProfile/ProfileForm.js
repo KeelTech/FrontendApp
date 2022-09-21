@@ -1,15 +1,23 @@
 import React, { Fragment } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateUserProfile } from '@actions';
-import { SelectCountry } from '@components/SelectCity';
+import { SelectCountry, SelectMainProfileCountry } from '@components/SelectCity';
+import { getFormattedDate } from '@helpers/utils.js';
 
 const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=false })=>{
     const dispatch = useDispatch();
+    const showDate = fieldType.includes('date');
+
     const { labels, type, value, showError=false, errorMsg='', name='', choices } = dataParams;
     const handleChange = (val)=>{
+        let date;
+        if(showDate){
+            const { fullYear, day, month } = getFormattedDate(val);
+            date = `${fullYear}-${month}-${day}`;
+        }
         let updatedParams = {
             data: {
-                [fieldType]: {...dataParams, value: val, showError: false}
+                [fieldType]: {...dataParams, value: date?date:val, showError: false}
             },
             type: widget
         }
@@ -59,11 +67,19 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
         updateUserProfile(updatedParams, dispatch);
     }
 
-    const showCustomFields = fieldType.includes('city') || fieldType.includes('country') || fieldType.includes('state');
-    const showDate = fieldType.includes('date');
+    const handleMainAddressUpdate = (id, val)=>{
+        handleChange(id);
+    }
+
+    const showCustomFields = false
+    const locationDropDown = fieldType.includes('city') || fieldType.includes('country') || fieldType.includes('state');
 
     if(fieldType.includes('full_address')){
         return <SelectCountry saveSelectedOption={handleAddressUpdate} dataParams={dataParams}/>
+    }
+
+    if(fieldType.includes('country')){
+        return <SelectMainProfileCountry saveSelectedOption={handleMainAddressUpdate} value={value} placeholder={labels} showError={showError}/>
     }
 
     if(type==="checkbox"){
@@ -81,7 +97,7 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
 
     if(!labels || showCustomFields) return null;
     
-    if(type==="drop-down"){
+    if(type==="drop-down" && !locationDropDown){
         
         return(
             <div className="formWrapper">
