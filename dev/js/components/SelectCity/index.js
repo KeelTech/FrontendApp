@@ -104,4 +104,29 @@ const SelectMainCountry = ({ saveSelectedOption, value="", placeholder="Select C
     )
 }
 
-export  { SelectMainCountry, SelectCountry }
+const SelectMainProfileCountry = ({ saveSelectedOption, value="", placeholder="Select Country", showError })=>{
+    const taskInfo = useSelector(state => state.TASK_INFO);
+    const [countryInfo, setCountryInfo] = useState('');
+    const { countryList=[] } = taskInfo;
+
+    useEffect(()=>{
+        const selectedCountry = countryList.filter(x=>x.id===value);
+        if(selectedCountry && selectedCountry.length){
+            setCountryInfo(selectedCountry[0]);
+        }
+    },[value])
+
+    const handleChange = (val)=>{
+        saveSelectedOption(val && val.id, val);
+    }
+
+    return(
+        <div className="formWrapper">
+            <label>{placeholder}<sup>*</sup></label>
+            <CustomSearchSelect options={countryList} placeholder={placeholder} value={countryInfo && countryInfo.name||''} handleChange={handleChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>
+            <p className={showError?"errorMsg":"hideMsg"}>{`Please Select ${placeholder}`}</p>
+        </div>
+    )
+}
+
+export  { SelectMainCountry, SelectCountry, SelectMainProfileCountry }

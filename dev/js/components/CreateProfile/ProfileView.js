@@ -79,9 +79,10 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
             {
                 Object.entries(fullProfileInfo).map((val) => {
                     const [type, values] = val;
+                    let isSpouseExist = false;
                     let widgetName = '';
                     let selectedType = 0;
-                    if (type.includes('profile')) {
+                    if (type == 'profile') {
                         widgetName = 'Personal Details (as on Passport)';
                         selectedType = 1;
                     } else if (type.includes('education_assessment')) {
@@ -102,6 +103,8 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
                     } else if (type.includes('family_information')) {
                         widgetName = 'Customer Family Information';
                         selectedType = 7;
+                    }else {
+                        return null;
                     }
                     const isHide = activeWidgets.includes(type);
                     return <div className="prflDtlsAccordionContainer" key={type}>
@@ -153,10 +156,28 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
                                                         </Fragment>
                                                     })
                                                     : Object.entries(values).map((val, dataKeys) => {
-
+                                                        const [fieldType, widgetVal] = val;
+                                                        const { value = '' } = widgetVal;
+                                                        if(!isSpouseExist){
+                                                            isSpouseExist = fieldType=="marital_status" && value==2;
+                                                        }
                                                         return renderListView(val, dataKeys);
                                                         
                                                     })
+                                            }
+                                            {
+                                                isSpouseExist?
+                                                <Fragment>
+                                                    <div className="accrdHead">
+                                                        <h5 className="spouseName">Spouse Details</h5>
+                                                    </div>
+                                                    {
+                                                        Object.entries(spouse_profile).map((val1, key1)=>{
+                                                            return renderListView(val1, key1);
+                                                        })
+                                                    }
+                                                </Fragment>
+                                                :null
                                             }
                                         </ul>
                                     </div>

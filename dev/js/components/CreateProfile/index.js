@@ -122,10 +122,10 @@ const CreateProfile = (props) => {
                     subFieldItems = {};
                     Object.entries(subField).map((val, key) => {
                         const [fieldType, dataValues] = val;
-                        const { value, labels } = dataValues;
+                        const { value, labels, is_optional } = dataValues;
                         let showError = false;
                         let errorMsg = '';
-                        const showCustomFields = fieldType.includes('city') || fieldType.includes('country') || fieldType.includes('state');
+                        const showCustomFields = false//fieldType.includes('city') || fieldType.includes('country') || fieldType.includes('state');
                         const isAddressType = fieldType.includes('full_address');
 
                         if ((!labels || showCustomFields) && !isAddressType) return;
@@ -142,7 +142,7 @@ const CreateProfile = (props) => {
                             }
                         }
 
-                        if (!value && !isAddressType) {
+                        if (!value && !isAddressType && !is_optional) {
                             isError = true;
                             showError = true;
                         }
@@ -153,13 +153,13 @@ const CreateProfile = (props) => {
             } else {
                 Object.entries(dataParams).map((val, key) => {
                     const [fieldType, dataValues] = val;
-                    const { value, labels } = dataValues;
-                    const showCustomFields = fieldType.includes('city') || fieldType.includes('country') || fieldType.includes('state');
+                    const { value, labels, is_optional } = dataValues;
+                    const showCustomFields = false//fieldType.includes('city') || fieldType.includes('country') || fieldType.includes('state');
                     const isAddressType = fieldType.includes('full_address');
                     if ((!labels || showCustomFields) && !isAddressType) return;
 
                     let showError = false;
-                    if (!value && !isAddressType) {
+                    if (!value && !isAddressType && !is_optional) {
                         isError = true;
                         showError = true;
                     }
@@ -173,7 +173,7 @@ const CreateProfile = (props) => {
 
                             if (!dataValues1.labels) return;
                             let showError1 = false;
-                            if (!dataValues1.value && !isAddressType) {
+                            if (!dataValues1.value && !isAddressType && !dataValues1.is_optional) {
                                 isError1 = true;
                                 showError1 = true;
                             }
@@ -191,7 +191,6 @@ const CreateProfile = (props) => {
                     }
                 })
             }
-            
             let updatedParams = {
                 data: newDataParams,
                 type: widget,
