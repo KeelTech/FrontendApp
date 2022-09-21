@@ -33,7 +33,7 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
         const { labels, value = '', name='', choices } = widgetVal;
         if (!labels) return null;
 
-        if(fieldType=="marital_status" && value==2){
+        if(fieldType=="marital_status" && value==2 && false){
             return <Fragment>
                 <li key={dataKeys}>
                     <h5>{labels}:</h5>
