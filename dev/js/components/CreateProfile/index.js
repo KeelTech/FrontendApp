@@ -19,7 +19,7 @@ const CreateProfile = (props) => {
     const history = useHistory();
     const taskInfo = useSelector(state => state.TASK_INFO);
     const { fullProfileInfo, fullProfileLoading, userInfo = {}, countryList = [], originalFullProfileInfo = {} } = taskInfo;
-    const { spouse_profile={} } = fullProfileInfo||{};
+    const { spouse_profile = {} } = fullProfileInfo || {};
     const isProfileExist = userInfo && userInfo.profile_exists;
     const [activeState, setActive] = useState(editID ? parseInt(editID) : 1);
     const [loading, setLoading] = useState(false);
@@ -78,14 +78,14 @@ const CreateProfile = (props) => {
             } else if (activeState === 6) {
                 activeWidgetInfo = {
                     widget: 'language_scores',
-                    dataParams: [ ...language_scores ],
+                    dataParams: [...language_scores],
                     displayText: 'Language Test scores',
                     isMultiple: true
                 }
-            }else if(activeState===7){
+            } else if (activeState === 7) {
                 activeWidgetInfo = {
                     widget: 'family_information',
-                    dataParams: [ ...family_information ],
+                    dataParams: [...family_information],
                     displayText: 'Customer Family Information',
                     isMultiple: true
                 }
@@ -175,10 +175,10 @@ const CreateProfile = (props) => {
                     }
                     newDataParams[fieldType] = { ...dataValues, showError }
 
-                    if(fieldType=="marital_status" && dataValues && dataValues.value==2 && spouse_profile){
+                    if (fieldType == "marital_status" && dataValues && dataValues.value == 2 && spouse_profile) {
                         const newDataParams1 = {};
-                        let isError1=false;
-                        Object.entries(spouse_profile).map((val1)=>{
+                        let isError1 = false;
+                        Object.entries(spouse_profile).map((val1) => {
                             const [fieldType1, dataValues1] = val1;
                             const elementIndex1 = `spouse_profile_${fieldType1}_0`;
 
@@ -193,7 +193,7 @@ const CreateProfile = (props) => {
                             }
                             newDataParams1[fieldType1] = { ...dataValues1, showError: showError1 }
                         })
-                        if(isError1){
+                        if (isError1) {
                             let updatedParams = {
                                 data: newDataParams1,
                                 type: "spouse_profile",
@@ -201,7 +201,7 @@ const CreateProfile = (props) => {
                             }
                             updateUserProfile(updatedParams, dispatch);
                         }
-                        
+
                     }
                 })
             }
@@ -384,26 +384,26 @@ const CreateProfile = (props) => {
                                                             Object.entries(dataParams).map((val, key) => {
                                                                 const [fieldType, dataValues] = val;
 
-                                                                if(!isSpouseExist){
-                                                                    isSpouseExist = fieldType=="marital_status" && dataValues && dataValues.value==2;
+                                                                if (!isSpouseExist) {
+                                                                    isSpouseExist = fieldType == "marital_status" && dataValues && dataValues.value == 2;
                                                                 }
-                                                                    return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} />
+                                                                return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} />
                                                             })
                                                         }
                                                         {
-                                                            isSpouseExist?
-                                                            <div className="userFormsMainContainer customEditProfile">
-                                                                <div className="editProfSteps">
-                                                                <h3 className="addMoreBtnHead">Spouse Details</h3>
-                                                                {
-                                                                    spouse_profile && Object.entries(spouse_profile).map((val, key) => {
-                                                                        const [fieldType1, dataValues1] = val;
-                                                                        return <ProfileForm fieldType={fieldType1} dataParams={dataValues1} key={`${widget}_${key}`} widget="spouse_profile" />
-                                                                    })
-                                                                }
+                                                            isSpouseExist ?
+                                                                <div className="customSpouseAdd">
+                                                                    <h3 className="addMoreBtnHead">Spouse Details</h3>
+                                                                    <div className="spouseGrids">
+                                                                        {
+                                                                            spouse_profile && Object.entries(spouse_profile).map((val, key) => {
+                                                                                const [fieldType1, dataValues1] = val;
+                                                                                return <ProfileForm fieldType={fieldType1} dataParams={dataValues1} key={`${widget}_${key}`} widget="spouse_profile" />
+                                                                            })
+                                                                        }
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            :null
+                                                                : null
                                                         }
                                                     </Fragment>
                                             }

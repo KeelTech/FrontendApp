@@ -215,6 +215,26 @@ body {
         border-radius: 20px;
     }
 }
+.customSpouseAdd {
+    width: 98%;
+    margin: auto;
+    margin-top: 30px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    padding: 5px 0;
+    border: 1px solid #e3e3e3;
+}
+
+.spouseGrids {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.customSpouseAdd h3 {
+    margin-top:8px;
+    padding-left: 13px;
+}
 .multipleWidgetWrapper{
     width: 100%;
 }
