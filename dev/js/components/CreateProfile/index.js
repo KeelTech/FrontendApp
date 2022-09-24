@@ -104,6 +104,7 @@ const CreateProfile = (props) => {
     }, [])
 
     const handleFormNavigation = (isNext = false) => {
+        let errorItem;
         if (isNext) {
             const { widget, dataParams, isMultiple = false } = activeWidgetData;
 
@@ -125,6 +126,8 @@ const CreateProfile = (props) => {
                         const { value, labels, is_optional } = dataValues;
                         let showError = false;
                         let errorMsg = '';
+                        const elementIndex = `${widget}_${fieldType}_${subIndex}`;
+
                         const showCustomFields = false//fieldType.includes('city') || fieldType.includes('country') || fieldType.includes('state');
                         const isAddressType = fieldType.includes('full_address');
 
@@ -145,6 +148,9 @@ const CreateProfile = (props) => {
                         if (!value && !isAddressType && !is_optional) {
                             isError = true;
                             showError = true;
+                            if(!errorItem){
+                                errorItem = elementIndex;
+                            }
                         }
                         subFieldItems[fieldType] = { ...dataValues, showError, errorMsg };
                     })
@@ -157,11 +163,15 @@ const CreateProfile = (props) => {
                     const showCustomFields = false//fieldType.includes('city') || fieldType.includes('country') || fieldType.includes('state');
                     const isAddressType = fieldType.includes('full_address');
                     if ((!labels || showCustomFields) && !isAddressType) return;
+                    const elementIndex = `${widget}_${fieldType}_0`;
 
                     let showError = false;
                     if (!value && !isAddressType && !is_optional) {
                         isError = true;
                         showError = true;
+                        if(!errorItem){
+                            errorItem = elementIndex;
+                        }
                     }
                     newDataParams[fieldType] = { ...dataValues, showError }
 
@@ -170,12 +180,16 @@ const CreateProfile = (props) => {
                         let isError1=false;
                         Object.entries(spouse_profile).map((val1)=>{
                             const [fieldType1, dataValues1] = val1;
+                            const elementIndex1 = `spouse_profile_${fieldType1}_0`;
 
                             if (!dataValues1.labels) return;
                             let showError1 = false;
                             if (!dataValues1.value && !isAddressType && !dataValues1.is_optional) {
                                 isError1 = true;
                                 showError1 = true;
+                                if(!errorItem){
+                                    errorItem = elementIndex1;
+                                }
                             }
                             newDataParams1[fieldType1] = { ...dataValues1, showError: showError1 }
                         })
@@ -197,7 +211,11 @@ const CreateProfile = (props) => {
                 isUpdate: isMultiple
             }
             if (isError) {
+                console.log("errorItem", errorItem);
                 updateUserProfile(updatedParams, dispatch);
+                if(errorItem && document.getElementById(errorItem)){
+                    document.getElementById(errorItem).scrollIntoView();
+                }
                 return;
             };
             if (activeState == 5 || isProfileExist) {
