@@ -30,15 +30,15 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly = false, showCh
     const [activeTask, setActiveTask] = useState('');
     const [listComments, setListComments] = useState([]);
 
-    const fetchCommentList = ()=>{
-        if(caseId){
-            listCaseComments({caseId}, '', (resp, error)=>{
-                if(resp){
-                  setListComments(resp);
+    const fetchCommentList = () => {
+        if (caseId) {
+            listCaseComments({ caseId }, '', (resp, error) => {
+                if (resp) {
+                    setListComments(resp);
                 }
             })
         }
-      }
+    }
 
     useEffect(() => {
         dispatch(
@@ -150,15 +150,15 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly = false, showCh
                                             : null
                                     }
                                     {
-                                        caseId?
-                                        <Fragment>
-                                            <div className='statusUpdateSec'>
-                                            <p>Status</p>
-                                            <StageView hideInput listComments={listComments} caseId={caseId} fetchCommentList={fetchCommentList}/>
-                                            </div>
-                                        </Fragment>
-                                        :null
-                                    }                                    
+                                        caseId ?
+                                            <Fragment>
+                                                <p style={{marginTop:'30px'}} className='taskHeading'>Status</p>
+                                                <div className='statusUpdateSec'>
+                                                    <StageView hideInput listComments={listComments} caseId={caseId} fetchCommentList={fetchCommentList} />
+                                                </div>
+                                            </Fragment>
+                                            : null
+                                    }
                                 </div>
                                 <div className="chat">
                                     {

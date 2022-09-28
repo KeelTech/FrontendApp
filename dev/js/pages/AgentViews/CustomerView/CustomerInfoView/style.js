@@ -427,6 +427,11 @@ export const postComment = css`
 export const messageSection = css`
     margin-top: 10px;
     position:relative;
+    &:last-child{
+      &:before{
+        display:none;
+      }
+    }
     &:before{
       content:'';
       position: absolute;

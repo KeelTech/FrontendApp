@@ -36,7 +36,8 @@ export const pendingTasks = css`
     .taskList{
         margin-top: 14px;
         overflow-y: auto;
-        max-height: calc(100vh - 240px);
+        // max-height: calc(100vh - 240px);
+        max-height: calc(100vh - 620px);
         // box-shadow: 2px 2px 8px #eae8ee;
         border-radius: 4px;
         padding:5px;
@@ -102,10 +103,13 @@ export const pendingTasks = css`
     }
     .statusUpdateSec {
         padding: 10px 10px 0px;
-        background: #ffffff;
-        margin-top: 30px;
-        border: 1px solid #00000020;
-        box-shadow: 2px 2px 8px #eae8ee;
+    background: #ffffff;
+    margin-top: 16px;
+    border: 1px solid #00000020;
+    box-shadow: 2px 2px 8px #eae8ee;
+    max-height: 295px;
+    overflow: auto;
+    overflow-x: hidden;
     }
     
 `
