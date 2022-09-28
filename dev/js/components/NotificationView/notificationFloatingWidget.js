@@ -77,7 +77,7 @@ const NotificationFloatingWidget = () => {
                             notificationId.current = newId;
                         }
                     } catch (e) {
-                        console.log('error is', e);
+                        console.error('error is', e);
                     }
                 }
             });
