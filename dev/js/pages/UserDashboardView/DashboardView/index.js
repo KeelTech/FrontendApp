@@ -152,8 +152,10 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly = false, showCh
                                     {
                                         caseId?
                                         <Fragment>
+                                            <div className='statusUpdateSec'>
                                             <p>Status</p>
                                             <StageView hideInput listComments={listComments} caseId={caseId} fetchCommentList={fetchCommentList}/>
+                                            </div>
                                         </Fragment>
                                         :null
                                     }                                    

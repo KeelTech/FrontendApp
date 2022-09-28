@@ -100,6 +100,13 @@ export const pendingTasks = css`
             width:100%
         }
     }
+    .statusUpdateSec {
+        padding: 10px 10px 0px;
+        background: #ffffff;
+        margin-top: 30px;
+        border: 1px solid #00000020;
+        box-shadow: 2px 2px 8px #eae8ee;
+    }
     
 `
 export const scheduleCallCta = css`
