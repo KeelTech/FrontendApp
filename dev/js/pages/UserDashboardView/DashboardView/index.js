@@ -150,7 +150,7 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly = false, showCh
                                             : null
                                     }
                                     {
-                                        caseId ?
+                                        caseId && listComments && listComments.length?
                                             <Fragment>
                                                 <p style={{marginTop:'50px'}} className='taskHeading'>Status</p>
                                                 <div className='statusUpdateSec'>
