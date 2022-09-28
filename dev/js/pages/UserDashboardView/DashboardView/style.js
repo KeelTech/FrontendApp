@@ -37,7 +37,7 @@ export const pendingTasks = css`
         margin-top: 14px;
         overflow-y: auto;
         // max-height: calc(100vh - 240px);
-        max-height: calc(100vh - 620px);
+        max-height: calc(100vh - 640px);
         // box-shadow: 2px 2px 8px #eae8ee;
         border-radius: 4px;
         padding:5px;

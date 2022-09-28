@@ -152,7 +152,7 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly = false, showCh
                                     {
                                         caseId ?
                                             <Fragment>
-                                                <p style={{marginTop:'30px'}} className='taskHeading'>Status</p>
+                                                <p style={{marginTop:'50px'}} className='taskHeading'>Status</p>
                                                 <div className='statusUpdateSec'>
                                                     <StageView hideInput listComments={listComments} caseId={caseId} fetchCommentList={fetchCommentList} />
                                                 </div>
