@@ -370,7 +370,7 @@ export const postComment = css`
       &.newPostSection {
         margin: 0 -12px;
         padding: 12px;
-        box-shadow: 0px -4px 3px 1px #f7f7f7;
+        // box-shadow: 0px -4px 3px 1px #f7f7f7;
     }
     .newComment{
       textarea{
