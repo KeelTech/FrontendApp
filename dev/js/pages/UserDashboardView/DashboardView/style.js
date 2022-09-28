@@ -42,6 +42,9 @@ export const pendingTasks = css`
         border-radius: 4px;
         padding:5px;
         position: relative;
+        @media(max-width:1100px){
+                max-height: 220px;
+        }
     }
     .taskHeading{
         width: 100%;
