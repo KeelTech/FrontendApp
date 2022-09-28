@@ -5,7 +5,7 @@ import { getFormattedTime, getFormattedDate } from '@helpers/utils';
 
 import { messageSection } from './style';
 
-const StageView = ({ caseId, fetchCommentList, listComments }) => {
+const StageView = ({ caseId, fetchCommentList, listComments, hideInput }) => {
     const addComments = (newVal) => {
         postCaseComments({ case: caseId, msg: newVal }, '', (resp, error) => {
             if (resp) {
@@ -46,7 +46,9 @@ const StageView = ({ caseId, fetchCommentList, listComments }) => {
                 })
             }
             </div>
-            <PostCommentView addComments={addComments} />
+            {
+                !hideInput? <PostCommentView addComments={addComments} />:null
+            }           
         </div>
     )
 }
