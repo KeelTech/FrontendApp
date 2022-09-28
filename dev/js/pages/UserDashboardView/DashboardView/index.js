@@ -2,7 +2,7 @@ import React, { useEffect, useState, Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_MENUBAR_STATE, SET_ACTIVE_TASK } from '@constants/types';
-import { getTaskList } from '@actions';
+import { getTaskList, listCaseComments } from '@actions';
 import TaskCard from '@components/TaskCard';
 import ChatWidget from '@components/ChatWidget';
 //import NotificationWidget from '@components/NotificationWidget';
@@ -10,6 +10,7 @@ import BlankScreen from '@components/BlankScreen';
 import { isMobileView } from '@constants';
 import { getFormattedDate, getFormattedTime } from '@helpers/utils.js';
 import ComponentLoader from '@components/ComponentLoader';
+import StageView from '@pages/AgentViews/CustomerView/CustomerInfoView/StageView.js';
 import { container, pendingTasks, scheduleCallCta, upcomingSchedules } from './style.js';
 import { body } from '../style.js';
 
@@ -27,6 +28,17 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly = false, showCh
     const caseId = caseDetails && caseDetails.case_id;
     const userId = caseDetails && caseDetails.user;
     const [activeTask, setActiveTask] = useState('');
+    const [listComments, setListComments] = useState([]);
+
+    const fetchCommentList = ()=>{
+        if(caseId){
+            listCaseComments({caseId}, '', (resp, error)=>{
+                if(resp){
+                  setListComments(resp);
+                }
+            })
+        }
+      }
 
     useEffect(() => {
         dispatch(
@@ -37,6 +49,7 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly = false, showCh
                 }
             }
         )
+        fetchCommentList();
     }, [])
 
     useEffect(() => {
@@ -136,6 +149,14 @@ const DashboardView = ({ scheduleList, calendlyURL, showCalendly = false, showCh
                                             </Fragment>
                                             : null
                                     }
+                                    {
+                                        caseId?
+                                        <Fragment>
+                                            <p>Status</p>
+                                            <StageView listComments={listComments} caseId={caseId} fetchCommentList={fetchCommentList}/>
+                                        </Fragment>
+                                        :null
+                                    }                                    
                                 </div>
                                 <div className="chat">
                                     {
