@@ -12,8 +12,9 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
     const handleChange = (val)=>{
         let date;
         if(showDate){
-            const { fullYear, day, month } = getFormattedDate(val);
-            date = `${fullYear}-${month}-${day}`;
+            date = val;
+            // const { fullYear, day, month } = getFormattedDate(val);
+            // date = `${fullYear}-${month}-${day}`;
         }
         let updatedParams = {
             data: {
@@ -116,7 +117,6 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
             </div>
         )
     }
-
     return(
         <div className="formWrapper">
             
@@ -129,22 +129,6 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
                 }
             </div>  
             <p className={showError?"errorMsg":"hideMsg"}>{errorMsg?errorMsg:`Please Fill ${labels}`}</p>
-            {
-                type ==='dropdown' && false?
-                <div className="formWrapper">
-                    <label>Select the Country to Travel<sup>*</sup></label>
-                    <div className="selectBox">
-                        <select placeholder="India">
-                            <option>Name 1</option>
-                            <option>Name 2</option>
-                            <option>Name 3</option>
-                            <option>Name 4</option>
-                        </select>
-                    </div>
-                </div>
-                :null
-            }
-            
         </div>
     )
 }
