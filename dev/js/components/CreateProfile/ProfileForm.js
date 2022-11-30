@@ -9,6 +9,7 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
     const showDate = fieldType.includes('date');
 
     const { labels, type, value, showError=false, errorMsg='', name='', choices } = dataParams;
+    const elementIndex = `${widget}_${fieldType}_${subIndex||0}`;
     const handleChange = (val)=>{
         let date;
         if(showDate){
@@ -112,7 +113,7 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
                         }
                     </select>
                 </div>
-                <p className={showError?"errorMsg":"hideMsg"}>{errorMsg?errorMsg:`Please Select ${labels}`}</p>
+                <p className={showError?"errorMsg":"hideMsg"} id={elementIndex}>{errorMsg?errorMsg:`Please Select ${labels}`}</p>
             </div>
         )
     }
@@ -128,7 +129,7 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
 
                 }
             </div>  
-            <p className={showError?"errorMsg":"hideMsg"}>{errorMsg?errorMsg:`Please Fill ${labels}`}</p>
+            <p className={showError?"errorMsg":"hideMsg"} id={elementIndex}>{errorMsg?errorMsg:`Please Fill ${labels}`}</p>
             {
                 type ==='dropdown' && false?
                 <div className="formWrapper">
