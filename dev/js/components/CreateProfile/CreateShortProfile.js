@@ -177,7 +177,8 @@ const CreateProfile = () => {
     const verifyOTPClicked = (otp)=>{
         const mobileNo = dataParams && dataParams.phone_number && dataParams.phone_number.value;
         const postParams = {
-            otp
+            otp,
+            phone_number: mobileNo
         }
         if(!otp){
             setToasterInfo({
