@@ -48,7 +48,6 @@ const UserDashboardView = (props)=>{
             if (elem && elem[0] && document.contains(elem[0])) {
                  isCalendlyClosed=1;
              }else if(isCalendlyClosed==1){
-                console.log('CALENDLY CLOSED');
                 fetchScheduleList();
                 isCalendlyClosed=0;
              }
