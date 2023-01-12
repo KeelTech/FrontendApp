@@ -33,7 +33,6 @@ const CreateProfile = (props) => {
     const editProfileRedirect = () => {
         history.push('/profile');
     }
-
     const activeWidgetData = useMemo(() => {
         let activeWidgetInfo = {
             widget: '',
@@ -209,11 +208,15 @@ const CreateProfile = (props) => {
             setActive(val => val - 1);
         }
     }
+    console.log({fullProfileInfo, activeWidgetData})
 
     const handleCreateForm = () => {
         setLoading(true);
         if (isProfileExist) {
-            updateProfile(fullProfileInfo, dispatch, (resp, err) => {
+            const postData = {
+                [activeWidgetData.widget]: activeWidgetData && fullProfileInfo[activeWidgetData.widget]
+            }
+            updateProfile(postData, dispatch, (resp, err) => {
                 setLoading(false);
                 if (resp) {
                     setToasterInfo({
