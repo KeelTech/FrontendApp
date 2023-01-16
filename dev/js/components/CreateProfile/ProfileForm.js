@@ -51,6 +51,10 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
             },
             type: widget
         }
+        if(isMultiple){
+            updatedParams.subIndex = subIndex;
+            updatedParams.isMultiple = true;
+        }
         updateUserProfile(updatedParams, dispatch);
     }
 
