@@ -189,6 +189,7 @@ const CreateProfile = (props) => {
                             if (!dataValues1.value && !isAddressType && !dataValues1.is_optional) {
                                 isError1 = true;
                                 showError1 = true;
+                                isError = true;
                                 if(!errorItem){
                                     errorItem = elementIndex1;
                                 }
@@ -234,6 +235,9 @@ const CreateProfile = (props) => {
         if (isProfileExist) {
             const postData = {
                 [activeWidgetData.widget]: activeWidgetData && fullProfileInfo[activeWidgetData.widget]
+            }
+            if(activeWidgetData.widget==="profile"){
+                postData["spouse_profile"] = fullProfileInfo["spouse_profile"]
             }
             updateProfile(postData, dispatch, (resp, err) => {
                 setLoading(false);
