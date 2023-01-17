@@ -185,27 +185,28 @@ const TaskView = (props) => {
         })
     }
 
-    const downloadImg = (data, contentType) => {
+    const downloadImg = (data, contentType, orignal_file_name) => {
         let type = 'png';
         if (contentType) {
             type = contentType.split('/')[1];
         }
+        const fileName = orignal_file_name && orignal_file_name.split('.')[0]
         const resp = `data:${contentType};base64, ${data}`;
         var link = document.createElement('a');
         console.log('link is', link);
         link.href = resp;
-        link.download = `new.${type}`;
+        link.download = `${fileName?fileName:'new'}.${type}`;
         link.click();
     }
 
-    const downloadDocumentClicked = ({ id, docId }) => {
+    const downloadDocumentClicked = ({ id, docId, orignal_file_name }) => {
         setLoading(true);
         downloadDocument({ docId }, dispatch, (resp, err) => {
             setLoading(false);
             if (resp && resp.file_data) {
                 let contentType = resp.content_type;
 
-                downloadImg(resp.file_data, contentType);
+                downloadImg(resp.file_data, contentType, orignal_file_name);
             }
         })
     }
