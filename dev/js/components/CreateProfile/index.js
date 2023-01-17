@@ -133,8 +133,9 @@ const CreateProfile = (props) => {
                         const newLabel = labels && labels.toLowerCase() || '';
                         if (newLabel.includes('start') && newLabel.includes('date')) {
                             startDate = value;
-                        } else if (newLabel.includes('end') && newLabel.includes('date') && startDate) {
+                        } else if (newLabel.includes('end') && newLabel.includes('date') && startDate && value) {
                             let startD = new Date(startDate);
+                            startDate = null;
                             let endD = new Date(value);
                             if (+startD >= +endD) {
                                 isError = true;
@@ -206,7 +207,6 @@ const CreateProfile = (props) => {
                     }
                 })
             }
-            console.log({errorItem});
             if(errorItem && document.getElementById(errorItem)){
                 document.getElementById(errorItem).scrollIntoView();
             }
@@ -228,7 +228,6 @@ const CreateProfile = (props) => {
             setActive(val => val - 1);
         }
     }
-    console.log({fullProfileInfo, activeWidgetData})
 
     const handleCreateForm = () => {
         setLoading(true);
@@ -364,12 +363,13 @@ const CreateProfile = (props) => {
                                                     <Fragment>
                                                         {
                                                             dataParams.map((subField, subIndex) => {
-                                                                return <div className="mutliFromMain">
+                                                                return <div className="mutliFromMain" key={`${widget}_${subIndex}`}>
                                                                     <div className="multipleForms">
                                                                         {
                                                                             Object.entries(subField).map((val, key) => {
                                                                                 const [fieldType, dataValues] = val;
-                                                                                return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} subIndex={subIndex} isMultiple />
+                                                                                return <Fragment key={`${widget}_${key}_${subIndex}`}><ProfileForm fieldType={fieldType} dataParams={dataValues}  widget={widget} subIndex={subIndex} isMultiple />
+                                                                                </Fragment>
                                                                             })
                                                                         }
                                                                         {
