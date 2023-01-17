@@ -144,11 +144,23 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
                                                     values.map((widgetObject, dataVal) => {
                                                         return <Fragment key={dataVal}>
                                                             {
-                                                                Object.values(widgetObject).map((widgetVal) => {
+                                                                Object.entries(widgetObject).map((val) => {
+                                                                    const [fieldType, widgetVal] = val;
+                                                                   // console.log("val is", val);
                                                                     const { labels, value = '', name='', choices, type: fieldTypeValue } = widgetVal;
-                                                                    if (!labels) return null;
+                                                                    if (!labels && fieldType!=="full_address") return null;
                                                                     let fieldValue = name||value;
-                                                                    if(choices && choices.length && value){
+
+                                                                    if(fieldType=="full_address"){
+                                                                        const { countryLabel, countryId, stateLabel, stateId, state, country, cityId, cityLabel, city} = widgetVal;
+                                                                        return (
+                                                                            <Fragment>
+                                                                                {renderLabelValue(dataVal + countryLabel, countryLabel, country)}
+                                                                                {renderLabelValue(dataVal + stateLabel, stateLabel, state)}
+                                                                                {renderLabelValue(dataVal + cityLabel, cityLabel, city)}
+                                                                            </Fragment>
+                                                                        )
+                                                                    }else if(choices && choices.length && value){
                                                                         const selectedVal = choices.find(val=>val[0]==value);
                                                                         fieldValue = selectedVal && selectedVal[1]||'';
                                                                     }

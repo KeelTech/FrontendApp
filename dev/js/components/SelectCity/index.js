@@ -55,10 +55,10 @@ const SelectCountry = ({ saveSelectedOption, dataParams={}, elementIndex='' })=>
         saveSelectedOption({city:name, cityId:id})
     }
     return(
-        <div id={elementIndex}>
+        <Fragment>
             {
                 countryLabel?
-                <div className="formWrapper">
+                <div className="formWrapper" id={elementIndex}>
                     <label>{countryLabel}<sup>*</sup></label>
                     <CustomSearchSelect options={countryList} placeholder="Search Country" value={country} handleChange={handleCountryChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>
                     <p className={showError && !country?"errorMsg":"hideMsg"}>Please Select Country</p>
@@ -83,8 +83,7 @@ const SelectCountry = ({ saveSelectedOption, dataParams={}, elementIndex='' })=>
                 </div>
                 :null
             }
-            
-        </div>
+        </Fragment>
     )
 }
 
