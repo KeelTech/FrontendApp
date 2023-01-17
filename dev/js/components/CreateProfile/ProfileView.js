@@ -28,9 +28,33 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
         setActiveWidget(newVal);
     }
 
+    const renderValue = (valueField, fieldTypeValue)=>{
+        let value = valueField;
+        if(fieldTypeValue==="checkbox"){
+            if(valueField){
+                value = "Yes"
+            }else{
+                value = "No"
+            }
+        }
+        return <p>{value}</p>
+    }
+
+    const renderLabelValue = (dataKeys, labelField, valueField, fieldTypeValue)=>{
+        return (
+            <li key={dataKeys}>
+                <h5>{labelField}:</h5>
+                {renderValue(valueField, fieldTypeValue)}
+                
+            </li>
+        )
+
+    }
+
     const renderListView = (val, dataKeys)=>{
         const [fieldType, widgetVal] = val;
-        const { labels, value = '', name='', choices } = widgetVal;
+        const { labels, value = '', name='', choices, type } = widgetVal;
+        let fieldValue = name||value;
         if (!labels) return null;
 
         if(fieldType=="marital_status" && value==2 && false){
@@ -47,19 +71,9 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
             </Fragment>
         }else if(choices && choices.length && value){
             const selectedVal = choices.find(val=>val[0]==value);
-            return (
-                <li key={dataKeys}>
-                    <h5>{labels}:</h5>
-                    <p>{selectedVal && selectedVal[1]||''}</p>
-                </li>
-            )
+            fieldValue = selectedVal && selectedVal[1]||'';
         }
-        return (
-            <li key={dataKeys}>
-                <h5>{labels}:</h5>
-                <p>{name||value}</p>
-            </li>
-        )
+        return renderLabelValue(dataKeys, labels, fieldValue, type);
     }
     const history = useHistory();
     return (
@@ -130,24 +144,27 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
                                                     values.map((widgetObject, dataVal) => {
                                                         return <Fragment key={dataVal}>
                                                             {
-                                                                Object.values(widgetObject).map((widgetVal) => {
-                                                                    const { labels, value = '', name='', choices } = widgetVal;
-                                                                    if (!labels) return null;
-                                                                    if(choices && choices.length && value){
-                                                                        const selectedVal = choices.find(val=>val[0]==value);
+                                                                Object.entries(widgetObject).map((val) => {
+                                                                    const [fieldType, widgetVal] = val;
+                                                                   // console.log("val is", val);
+                                                                    const { labels, value = '', name='', choices, type: fieldTypeValue } = widgetVal;
+                                                                    if (!labels && fieldType!=="full_address") return null;
+                                                                    let fieldValue = name||value;
+
+                                                                    if(fieldType=="full_address"){
+                                                                        const { countryLabel, countryId, stateLabel, stateId, state, country, cityId, cityLabel, city} = widgetVal;
                                                                         return (
-                                                                            <li key={dataVal + labels}>
-                                                                                <h5>{labels}:</h5>
-                                                                                <p>{selectedVal && selectedVal[1]||''}</p>
-                                                                            </li>
+                                                                            <Fragment>
+                                                                                {renderLabelValue(dataVal + countryLabel, countryLabel, country)}
+                                                                                {renderLabelValue(dataVal + stateLabel, stateLabel, state)}
+                                                                                {renderLabelValue(dataVal + cityLabel, cityLabel, city)}
+                                                                            </Fragment>
                                                                         )
+                                                                    }else if(choices && choices.length && value){
+                                                                        const selectedVal = choices.find(val=>val[0]==value);
+                                                                        fieldValue = selectedVal && selectedVal[1]||'';
                                                                     }
-                                                                    return (
-                                                                        <li key={dataVal + labels}>
-                                                                            <h5>{labels}:</h5>
-                                                                            <p>{name||value}</p>
-                                                                        </li>
-                                                                    )
+                                                                    return renderLabelValue(dataVal + labels, labels, fieldValue, fieldTypeValue);
                                                                 })
                                                             }
                                                             {

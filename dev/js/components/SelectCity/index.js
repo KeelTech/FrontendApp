@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCityList, getStateList, savePlaceInfo } from '@actions';
 import CustomSearchSelect from '@components/CustomSearchSelect';
 
-const SelectCountry = ({ saveSelectedOption, dataParams={} })=>{
+const SelectCountry = ({ saveSelectedOption, dataParams={}, elementIndex='' })=>{
     const { city='', cityId='', cityLabel='', country='', countryId='', countryLabel='', state='', stateId='', stateLabel='', showError=false } = dataParams;
 
     const [cityList, setCityList] = useState([]);
@@ -58,7 +58,7 @@ const SelectCountry = ({ saveSelectedOption, dataParams={} })=>{
         <Fragment>
             {
                 countryLabel?
-                <div className="formWrapper">
+                <div className="formWrapper" id={elementIndex}>
                     <label>{countryLabel}<sup>*</sup></label>
                     <CustomSearchSelect options={countryList} placeholder="Search Country" value={country} handleChange={handleCountryChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>
                     <p className={showError && !country?"errorMsg":"hideMsg"}>Please Select Country</p>
@@ -83,7 +83,6 @@ const SelectCountry = ({ saveSelectedOption, dataParams={} })=>{
                 </div>
                 :null
             }
-            
         </Fragment>
     )
 }
@@ -104,7 +103,7 @@ const SelectMainCountry = ({ saveSelectedOption, value="", placeholder="Select C
     )
 }
 
-const SelectMainProfileCountry = ({ saveSelectedOption, value="", placeholder="Select Country", showError })=>{
+const SelectMainProfileCountry = ({ saveSelectedOption, value="", placeholder="Select Country", showError, elementIndex='' })=>{
     const taskInfo = useSelector(state => state.TASK_INFO);
     const [countryInfo, setCountryInfo] = useState('');
     const { countryList=[] } = taskInfo;
@@ -121,7 +120,7 @@ const SelectMainProfileCountry = ({ saveSelectedOption, value="", placeholder="S
     }
 
     return(
-        <div className="formWrapper">
+        <div className="formWrapper" id={elementIndex}>
             <label>{placeholder}<sup>*</sup></label>
             <CustomSearchSelect options={countryList} placeholder={placeholder} value={countryInfo && countryInfo.name||''} handleChange={handleChange} border="1px solid #CED4DA" minHeight="44px" padding="5px 10px" borderRadius="4px"/>
             <p className={showError?"errorMsg":"hideMsg"}>{`Please Select ${placeholder}`}</p>

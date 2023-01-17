@@ -9,6 +9,7 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
     const showDate = fieldType.includes('date');
 
     const { labels, type, value, showError=false, errorMsg='', name='', choices } = dataParams;
+    const elementIndex = `${widget}_${fieldType}_${subIndex||0}`;
     const handleChange = (val)=>{
         let date;
         if(showDate){
@@ -50,6 +51,10 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
             },
             type: widget
         }
+        if(isMultiple){
+            updatedParams.subIndex = subIndex;
+            updatedParams.isMultiple = true;
+        }
         updateUserProfile(updatedParams, dispatch);
     }
 
@@ -76,19 +81,19 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
     const locationDropDown = fieldType.includes('city') || fieldType.includes('country') || fieldType.includes('state');
 
     if(fieldType.includes('full_address')){
-        return <SelectCountry saveSelectedOption={handleAddressUpdate} dataParams={dataParams}/>
+        return <SelectCountry saveSelectedOption={handleAddressUpdate} dataParams={dataParams} elementIndex={elementIndex}/>
     }
 
     if(fieldType.includes('country')){
-        return <SelectMainProfileCountry saveSelectedOption={handleMainAddressUpdate} value={value} placeholder={labels} showError={showError}/>
+        return <SelectMainProfileCountry saveSelectedOption={handleMainAddressUpdate} value={value} placeholder={labels} showError={showError} elementIndex={elementIndex}/>
     }
 
     if(type==="checkbox"){
-        const { lables='', value:selectedCheckboxValue=false } = dataParams;
-        return <div className="formWrapper">
+        const { labels='', value:selectedCheckboxValue=false } = dataParams;
+        return <div className="formWrapper" id={elementIndex}>
             <div className="checkBoxContainer">
                 <label className="check_container">
-                    <p>{lables||''}</p>
+                    <p>{labels||''}</p>
                     <input type="checkbox" checked={selectedCheckboxValue} onClick={()=>handleCheckboxSelection(!selectedCheckboxValue)}/>
                     <span className="checkmark"></span>
                 </label>
@@ -101,7 +106,7 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
     if(type==="drop-down" && !locationDropDown){
         
         return(
-            <div className="formWrapper">
+            <div className="formWrapper" id={elementIndex}>
                 <label>{labels}<sup>*</sup></label>
                 <div className={`selectBox inpCont ${showError?'showError':''}`}>
                     <select placeholder="India" value={value||''} onChange={handleTypeChange}>
@@ -118,7 +123,7 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
         )
     }
     return(
-        <div className="formWrapper">
+        <div className="formWrapper" id={elementIndex}>
             
             <label>{labels}<sup>*</sup></label>
             
