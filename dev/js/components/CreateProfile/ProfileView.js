@@ -1,10 +1,16 @@
 import React, { useState, Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 
-const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
-    const { spouse_profile={} } = fullProfileInfo||{};
-    const { profile = {} } = userInfo;
-    const { first_name = '', last_name = '' } = profile;
+const ProfileView = ({ fullProfileInfo = {}, activeTabType}) => {
+    const { spouse_profile={}, profile } = fullProfileInfo||{};
+    const { first_name: fname, last_name:lname} = profile ||{};
+    let first_name='', last_name=''
+    if((fname && fname.value) || (lname && lname.value)){
+        first_name=fname.value||'';
+        last_name = lname.value||'';
+    }
+
+    console.log({first_name, fullProfileInfo});
     const [activeWidgets, setActiveWidget] = useState(() => {
         const widgets = [];
         Object.entries(fullProfileInfo).filter((val) => {
@@ -76,6 +82,7 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
         return renderLabelValue(dataKeys, labels, fieldValue, type);
     }
     const history = useHistory();
+
     return (
         <div className="useDetailsContainer ">
             <div className="userProfile">
@@ -129,7 +136,7 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
                                 <div className="alignEnd">
                                     {
                                         selectedType ?
-                                            <button className="editPrfl" onClick={() => history.push(`/edit/${selectedType}`)}>Edit Profile</button>
+                                            <button className="editPrfl" onClick={() => history.push(`/edit/${activeTabType}/${selectedType}`)}>Edit Profile</button>
                                             : null
                                     }
                                     <button onClick={() => handleClick(type)}>{isHide ? 'Show Details' : 'Hide Details'} <img className={`img-fluid ${isHide ? '' : 'rotateAcordion'}`} src={ASSETS_BASE_URL + "/images/common/drop.svg"} /></button>

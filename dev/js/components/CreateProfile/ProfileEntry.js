@@ -9,7 +9,8 @@ import ProfileForm from './ProfileForm.js';
 import ProfileView from './ProfileView.js';
 import { progressBar } from './style.js';
 
-const CreateProfile = ({editID, isProfileView, taskInfo}) => {    
+const CreateProfile = ({editID, isProfileView, taskInfo, type}) => {    
+    console.log("type is", type);
     const dispatch = useDispatch();
     const history = useHistory();
     const { fullProfileInfo, fullProfileLoading, userInfo = {}, countryList = [], originalFullProfileInfo = {} } = taskInfo;
@@ -33,8 +34,8 @@ const CreateProfile = ({editID, isProfileView, taskInfo}) => {
             dataParams: {},
             displayText: ''
         }
-        if (!fullProfileLoading && fullProfileInfo.profile) {
-            const { profile, education_assessment, qualification, work_experience, relative_in_canada, language_scores, family_information } = fullProfileInfo;
+        if (!fullProfileLoading && fullProfileInfo && fullProfileInfo[type] && fullProfileInfo[type].profile) {
+            const { profile, education_assessment, qualification, work_experience, relative_in_canada, language_scores, family_information } = fullProfileInfo[type];
             if (activeState === 1) {
                 activeWidgetInfo = {
                     widget: 'profile',
@@ -85,7 +86,7 @@ const CreateProfile = ({editID, isProfileView, taskInfo}) => {
             }
         }
         return activeWidgetInfo;
-    }, [activeState, fullProfileInfo, fullProfileLoading])
+    }, [activeState, fullProfileInfo, fullProfileLoading, type])
 
     const handleFormNavigation = (isNext = false) => {
         let errorItem;
@@ -219,10 +220,11 @@ const CreateProfile = ({editID, isProfileView, taskInfo}) => {
         setLoading(true);
         if (isProfileExist) {
             const postData = {
-                [activeWidgetData.widget]: activeWidgetData && fullProfileInfo[activeWidgetData.widget]
+                [activeWidgetData.widget]: activeWidgetData && fullProfileInfo[type] && fullProfileInfo[type][activeWidgetData.widget],
+                type
             }
             if(activeWidgetData.widget==="profile"){
-                postData["spouse_profile"] = fullProfileInfo["spouse_profile"]
+                postData["spouse_profile"] = fullProfileInfo[type]["spouse_profile"]
             }
             updateProfile(postData, dispatch, (resp, err) => {
                 setLoading(false);
@@ -297,10 +299,10 @@ const CreateProfile = ({editID, isProfileView, taskInfo}) => {
                     return true;
                 })
 
-            } else if (originalFullProfileInfo && originalFullProfileInfo[widget] && originalFullProfileInfo[widget].length) {
+            } else if (originalFullProfileInfo && originalFullProfileInfo[type] && originalFullProfileInfo[type][widget] && originalFullProfileInfo[type][widget].length) {
                 let newAddedEntity = {};
                 newDataParams = [...dataParams];
-                Object.entries(originalFullProfileInfo[widget][0]).map((val, key) => {
+                Object.entries(originalFullProfileInfo[type][widget][0]).map((val, key) => {
                     const [fieldType, dataValues] = val;
                     newAddedEntity[fieldType] = { ...dataValues, value: '', name: '' };
                 })
@@ -323,6 +325,7 @@ const CreateProfile = ({editID, isProfileView, taskInfo}) => {
         return (
             <Fragment>
                 {
+                    //Edit View
                     !isProfileView ?
                         <div className={progressBar + " " + "progMainCont"}>
                             <div className="desktopProgressBar">
@@ -357,7 +360,7 @@ const CreateProfile = ({editID, isProfileView, taskInfo}) => {
                                                                         {
                                                                             Object.entries(subField).map((val, key) => {
                                                                                 const [fieldType, dataValues] = val;
-                                                                                return <Fragment key={`${widget}_${key}_${subIndex}`}><ProfileForm fieldType={fieldType} dataParams={dataValues}  widget={widget} subIndex={subIndex} isMultiple />
+                                                                                return <Fragment key={`${widget}_${key}_${subIndex}`}><ProfileForm fieldType={fieldType} dataParams={dataValues}  widget={widget} subIndex={subIndex} isMultiple activeTabType={type}/>
                                                                                 </Fragment>
                                                                             })
                                                                         }
@@ -381,7 +384,7 @@ const CreateProfile = ({editID, isProfileView, taskInfo}) => {
                                                                 if (!isSpouseExist) {
                                                                     isSpouseExist = fieldType == "marital_status" && dataValues && dataValues.value == 2;
                                                                 }
-                                                                return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} />
+                                                                return <ProfileForm fieldType={fieldType} dataParams={dataValues} key={`${widget}_${key}`} widget={widget} activeTabType={type}/>
                                                             })
                                                         }
                                                         {
@@ -392,7 +395,7 @@ const CreateProfile = ({editID, isProfileView, taskInfo}) => {
                                                                         {
                                                                             spouse_profile && Object.entries(spouse_profile).map((val, key) => {
                                                                                 const [fieldType1, dataValues1] = val;
-                                                                                return <ProfileForm fieldType={fieldType1} dataParams={dataValues1} key={`${widget}_${key}`} widget="spouse_profile" />
+                                                                                return <ProfileForm fieldType={fieldType1} dataParams={dataValues1} key={`${widget}_${key}`} widget="spouse_profile"  activeTabType={type}/>
                                                                             })
                                                                         }
                                                                     </div>
@@ -421,7 +424,7 @@ const CreateProfile = ({editID, isProfileView, taskInfo}) => {
                                 </div>
                             </div>
                         </div>
-                        : <ProfileView fullProfileInfo={fullProfileInfo} userInfo={userInfo} />
+                        : <ProfileView fullProfileInfo={fullProfileInfo[type]} activeTabType={type}/>
                 }
             </Fragment>
         )

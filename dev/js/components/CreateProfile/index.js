@@ -8,7 +8,6 @@ import { container } from './style.js';
 import ProfileEntry from './ProfileEntry.js';
 
 const Index = (props)=>{
-    console.log("hello", props);
     const [activeTab, setActiveTab] = useState("self");
     const dispatch = useDispatch();
 
@@ -20,6 +19,7 @@ const Index = (props)=>{
 
     const taskInfo = useSelector(state => state.TASK_INFO);
     const { fullProfileInfo, countryList = [], fullProfileLoading} = taskInfo;
+    console.log("hello", taskInfo);
 
     useEffect(() => {
         if (!editID || !(fullProfileInfo && fullProfileInfo.profile)) {
@@ -27,6 +27,9 @@ const Index = (props)=>{
         }
         if (!countryList.length) {
             getCountryList({}, dispatch);
+        }
+        if(props && props.match && props.match.params && props.match.params.type){
+            setActiveTab(props.match.params.type);
         }
     }, [])
 

@@ -83,19 +83,20 @@ export default function (state = defaultState, action) {
         case UPDATE_USER_PROFILE: {
             let newState = { ...state}
             newState.fullProfileInfo = {...newState.fullProfileInfo};
-            const { type, data, isMultiple, subIndex, isUpdate } = action.payload;
+            const { type, data, isMultiple, subIndex, isUpdate, activeTabType } = action.payload;
+            newState.fullProfileInfo[activeTabType] = {...newState.fullProfileInfo[activeTabType]};
             if(isUpdate){
-                newState.fullProfileInfo[type] = [...data];
+                newState.fullProfileInfo[activeTabType][type] = [...data];
             }else if(isMultiple){
-                const updatedList = newState.fullProfileInfo[type].map((subItem, key)=>{
+                const updatedList = newState.fullProfileInfo[activeTabType][type].map((subItem, key)=>{
                     if(key==subIndex){
                         return {...subItem, ...data};
                     }
                     return subItem;
                 })
-                newState.fullProfileInfo[type] = updatedList;
+                newState.fullProfileInfo[activeTabType][type] = updatedList;
             }else{
-                newState.fullProfileInfo[type] = {...newState.fullProfileInfo[type], ...data};
+                newState.fullProfileInfo[activeTabType][type] = {...newState.fullProfileInfo[activeTabType][type], ...data};
             }
             return newState;
         }
