@@ -91,6 +91,12 @@ const ProfileView = ({ fullProfileInfo = {}, activeTabType}) => {
                     <h3>{`${first_name} ${last_name}`}</h3>
                 </div>
             </div>
+            <div className='newCustomTabCont'>
+                <ul>
+                    <li><button className='tabActiv'>self</button></li>
+                    <li><button>Spouse</button></li>
+                </ul>
+            </div>
             {/* <div className="editProgress">
                 <label>30% complete</label>
                 <div className="progressBar">

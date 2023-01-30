@@ -7123,7 +7123,7 @@ div.alignEnd button.editPrfl {
 }
 
 .prflDtlsAccordionContainer {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .prfAccrd {
@@ -9122,3 +9122,35 @@ background-size: 15px;
   margin: 8px 0px;
 }
 /* // ================ doc upload   ================ */
+
+.newCustomTabCont ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  margin: 0;
+  gap: 10px;
+}
+
+.newCustomTabCont li button {
+  background: transparent;
+  border: none;
+  outline: none;
+  min-width: 100px;
+  border-bottom: 3px solid transparent;
+  transition: all .2s ease;
+  color: black;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 12px;
+  font-weight: 600;
+}
+
+.newCustomTabCont li button:hover {
+  border-bottom: 3px solid #4267b2;
+  color: #4267b2;
+}
+.newCustomTabCont li button.tabActiv {
+  border-bottom: 3px solid #4267b2;
+  color: #4267b2;
+}

@@ -112,7 +112,7 @@ const NotificationFloatingWidget = () => {
 
     return (
         <Fragment>
-            <ReactNotification />
+            {/* <ReactNotification /> */}
         </Fragment>
     )
 }
