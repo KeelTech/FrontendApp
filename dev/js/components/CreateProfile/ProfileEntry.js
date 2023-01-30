@@ -221,7 +221,7 @@ const CreateProfile = ({editID, isProfileView, taskInfo, type}) => {
         if (isProfileExist) {
             const postData = {
                 [activeWidgetData.widget]: activeWidgetData && fullProfileInfo[type] && fullProfileInfo[type][activeWidgetData.widget],
-                type
+                owner: type
             }
             if(activeWidgetData.widget==="profile"){
                 postData["spouse_profile"] = fullProfileInfo[type]["spouse_profile"]
