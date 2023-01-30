@@ -19,7 +19,6 @@ const Index = (props)=>{
 
     const taskInfo = useSelector(state => state.TASK_INFO);
     const { fullProfileInfo, countryList = [], fullProfileLoading} = taskInfo;
-    console.log("hello", taskInfo);
 
     useEffect(() => {
         if (!editID || !(fullProfileInfo && fullProfileInfo.profile)) {
@@ -41,20 +40,8 @@ const Index = (props)=>{
     return (
         <div className={container}>
             {
-                isProfileView?
-                <div className="completeInfoWrapperADD userCompleteInfo">
-                    <div className='hisTabs'>
-                        <ul>
-                        <li className={activeTab=="self"?"tabsAct":''} onClick={()=>handleTabClick("self")}>Self</li>
-                        <li className={activeTab=="spouse"?"tabsAct":''} onClick={()=>handleTabClick("spouse")}>Spouse</li>
-                        </ul>
-                    </div>
-                </div>
-                :null
-            }
-            {
                 fullProfileLoading ? <div className={loaderView}><LoadingWidget /></div> :
-                <ProfileEntry editID={editID} isProfileView={isProfileView} taskInfo={taskInfo} type={activeTab}/>
+                <ProfileEntry editID={editID} isProfileView={isProfileView} taskInfo={taskInfo} type={activeTab} handleTabClick={handleTabClick}/>
             }
         </div>
     )

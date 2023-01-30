@@ -9,8 +9,7 @@ import ProfileForm from './ProfileForm.js';
 import ProfileView from './ProfileView.js';
 import { progressBar } from './style.js';
 
-const CreateProfile = ({editID, isProfileView, taskInfo, type}) => {    
-    console.log("type is", type);
+const CreateProfile = ({editID, isProfileView, taskInfo, type, handleTabClick}) => {    
     const dispatch = useDispatch();
     const history = useHistory();
     const { fullProfileInfo, fullProfileLoading, userInfo = {}, countryList = [], originalFullProfileInfo = {} } = taskInfo;
@@ -424,7 +423,7 @@ const CreateProfile = ({editID, isProfileView, taskInfo, type}) => {
                                 </div>
                             </div>
                         </div>
-                        : <ProfileView fullProfileInfo={fullProfileInfo[type]} activeTabType={type}/>
+                        : <ProfileView fullProfileInfo={fullProfileInfo[type]} activeTabType={type} handleTabClick={handleTabClick} userInfo={userInfo}/>
                 }
             </Fragment>
         )

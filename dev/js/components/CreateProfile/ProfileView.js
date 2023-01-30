@@ -1,16 +1,11 @@
 import React, { useState, Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 
-const ProfileView = ({ fullProfileInfo = {}, activeTabType}) => {
-    const { spouse_profile={}, profile } = fullProfileInfo||{};
-    const { first_name: fname, last_name:lname} = profile ||{};
-    let first_name='', last_name=''
-    if((fname && fname.value) || (lname && lname.value)){
-        first_name=fname.value||'';
-        last_name = lname.value||'';
-    }
-
-    console.log({first_name, fullProfileInfo});
+const ProfileView = ({ fullProfileInfo = {}, activeTabType, handleTabClick, userInfo}) => {
+    const { spouse_profile={} } = fullProfileInfo||{};
+    const { profile } = userInfo ||{};
+    const { first_name='', last_name=''} = profile ||{};
+    
     const [activeWidgets, setActiveWidget] = useState(() => {
         const widgets = [];
         Object.entries(fullProfileInfo).filter((val) => {
@@ -93,8 +88,8 @@ const ProfileView = ({ fullProfileInfo = {}, activeTabType}) => {
             </div>
             <div className='newCustomTabCont'>
                 <ul>
-                    <li><button className='tabActiv'>self</button></li>
-                    <li><button>Spouse</button></li>
+                    <li onClick={()=>handleTabClick("self")}><button className={activeTabType==="self"?'tabActiv':""}>self</button></li>
+                    <li onClick={()=>handleTabClick("spouse")}><button className={activeTabType==="spouse"?'tabActiv':""}>Spouse</button></li>
                 </ul>
             </div>
             {/* <div className="editProgress">
