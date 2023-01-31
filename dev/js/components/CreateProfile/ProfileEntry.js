@@ -13,7 +13,6 @@ const CreateProfile = ({editID, isProfileView, taskInfo, type, handleTabClick}) 
     const dispatch = useDispatch();
     const history = useHistory();
     const { fullProfileInfo, fullProfileLoading, userInfo = {}, countryList = [], originalFullProfileInfo = {} } = taskInfo;
-    const { spouse_profile = {} } = fullProfileInfo || {};
     const isProfileExist = userInfo && userInfo.profile_exists;
     const [activeState, setActive] = useState(editID ? parseInt(editID) : 1);
     const [loading, setLoading] = useState(false);
@@ -33,12 +32,14 @@ const CreateProfile = ({editID, isProfileView, taskInfo, type, handleTabClick}) 
             dataParams: {},
             displayText: ''
         }
-        if (!fullProfileLoading && fullProfileInfo && fullProfileInfo[type] && fullProfileInfo[type].profile) {
-            const { profile, education_assessment, qualification, work_experience, relative_in_canada, language_scores, family_information } = fullProfileInfo[type];
+        if (!fullProfileLoading && fullProfileInfo && fullProfileInfo[type] && fullProfileInfo[type]) {
+            const { profile, spouse_profile, education_assessment, qualification, work_experience, relative_in_canada, language_scores, family_information } = fullProfileInfo[type];
             if (activeState === 1) {
+                const profileData = type==="self"?profile:spouse_profile
+                console.log("profileData", profileData);
                 activeWidgetInfo = {
-                    widget: 'profile',
-                    dataParams: { ...profile },
+                    widget: type==="self"?'profile':"spouse_profile",
+                    dataParams: { ...profileData },
                     displayText: 'Personal Details (as on Passport)'
                 }
             } else if (activeState === 2) {
@@ -162,7 +163,8 @@ const CreateProfile = ({editID, isProfileView, taskInfo, type, handleTabClick}) 
                     }
                     newDataParams[fieldType] = { ...dataValues, showError }
 
-                    if (fieldType == "marital_status" && dataValues && dataValues.value == 2 && spouse_profile) {
+                    //comment spouse check, as new tab is created for spouse details
+                    if (fieldType == "marital_status" && dataValues && dataValues.value == 2 && spouse_profile && false) {
                         const newDataParams1 = {};
                         let isError1 = false;
                         Object.entries(spouse_profile).map((val1) => {
@@ -222,9 +224,9 @@ const CreateProfile = ({editID, isProfileView, taskInfo, type, handleTabClick}) 
                 [activeWidgetData.widget]: activeWidgetData && fullProfileInfo[type] && fullProfileInfo[type][activeWidgetData.widget],
             }
             postData[activeWidgetData.widget]['owner'] = type;
-            if(activeWidgetData.widget==="profile"){
-                postData["spouse_profile"] = fullProfileInfo[type]["spouse_profile"]
-            }
+            // if(activeWidgetData.widget==="profile"){
+            //     postData["spouse_profile"] = fullProfileInfo[type]["spouse_profile"]
+            // }
             updateProfile(postData, dispatch, (resp, err) => {
                 setLoading(false);
                 if (resp) {
@@ -318,6 +320,14 @@ const CreateProfile = ({editID, isProfileView, taskInfo, type, handleTabClick}) 
             updateUserProfile(updatedParams, dispatch);
         }
     }
+    const isSpouseValid = useMemo(()=>{
+        let isSpouse = false;
+        if(fullProfileInfo && fullProfileInfo.self && fullProfileInfo.self.profile && fullProfileInfo.self.profile.marital_status){
+            isSpouse = fullProfileInfo.self.profile.marital_status.value===2;
+        }
+        return isSpouse;
+    },[fullProfileInfo])
+console.log({isSpouseValid});
 
     const renderView = () => {
         let isSpouseExist = false;
@@ -387,7 +397,7 @@ const CreateProfile = ({editID, isProfileView, taskInfo, type, handleTabClick}) 
                                                             })
                                                         }
                                                         {
-                                                            isSpouseExist ?
+                                                            isSpouseExist && false ?
                                                                 <div className="customSpouseAdd">
                                                                     <h3 className="addMoreBtnHead">Spouse Details</h3>
                                                                     <div className="spouseGrids">
@@ -423,7 +433,7 @@ const CreateProfile = ({editID, isProfileView, taskInfo, type, handleTabClick}) 
                                 </div>
                             </div>
                         </div>
-                        : <ProfileView fullProfileInfo={fullProfileInfo[type]} activeTabType={type} handleTabClick={handleTabClick} userInfo={userInfo}/>
+                        : <ProfileView fullProfileInfo={fullProfileInfo[type]} activeTabType={type} handleTabClick={handleTabClick} userInfo={userInfo} isSpouseValid={isSpouseValid}/>
                 }
             </Fragment>
         )

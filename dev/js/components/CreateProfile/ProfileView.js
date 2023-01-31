@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 
-const ProfileView = ({ fullProfileInfo = {}, activeTabType, handleTabClick, userInfo}) => {
+const ProfileView = ({ fullProfileInfo = {}, activeTabType, handleTabClick, userInfo, isSpouseValid}) => {
     const { spouse_profile={} } = fullProfileInfo||{};
     const { profile } = userInfo ||{};
     const { first_name='', last_name=''} = profile ||{};
@@ -89,7 +89,9 @@ const ProfileView = ({ fullProfileInfo = {}, activeTabType, handleTabClick, user
             <div className='newCustomTabCont'>
                 <ul>
                     <li onClick={()=>handleTabClick("self")}><button className={activeTabType==="self"?'tabActiv':""}>self</button></li>
-                    <li onClick={()=>handleTabClick("spouse")}><button className={activeTabType==="spouse"?'tabActiv':""}>Spouse</button></li>
+                    {
+                        isSpouseValid?<li onClick={()=>handleTabClick("spouse")}><button className={activeTabType==="spouse"?'tabActiv':""}>Spouse</button></li>:null
+                    }            
                 </ul>
             </div>
             {/* <div className="editProgress">
@@ -104,7 +106,7 @@ const ProfileView = ({ fullProfileInfo = {}, activeTabType, handleTabClick, user
                     let isSpouseExist = false;
                     let widgetName = '';
                     let selectedType = 0;
-                    if (type == 'profile') {
+                    if (type == 'profile' || type=='spouse_profile') {
                         widgetName = 'Personal Details (as on Passport)';
                         selectedType = 1;
                     } else if (type.includes('education_assessment')) {
@@ -191,7 +193,8 @@ const ProfileView = ({ fullProfileInfo = {}, activeTabType, handleTabClick, user
                                                     })
                                             }
                                             {
-                                                isSpouseExist?
+                                                //hide spouse detail, as new tab is created for spouse detail
+                                                false && isSpouseExist?
                                                 <Fragment>
                                                     <div className="accrdHead">
                                                         <h5 className="spouseName">Spouse Details</h5>
