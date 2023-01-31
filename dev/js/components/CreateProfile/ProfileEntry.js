@@ -164,35 +164,35 @@ const CreateProfile = ({editID, isProfileView, taskInfo, type, handleTabClick}) 
                     newDataParams[fieldType] = { ...dataValues, showError }
 
                     //comment spouse check, as new tab is created for spouse details
-                    if (fieldType == "marital_status" && dataValues && dataValues.value == 2 && spouse_profile && false) {
-                        const newDataParams1 = {};
-                        let isError1 = false;
-                        Object.entries(spouse_profile).map((val1) => {
-                            const [fieldType1, dataValues1] = val1;
-                            const elementIndex1 = `spouse_profile_${fieldType1}_0`;
+                    // if (fieldType == "marital_status" && dataValues && dataValues.value == 2 && spouse_profile && false) {
+                    //     const newDataParams1 = {};
+                    //     let isError1 = false;
+                    //     Object.entries(spouse_profile).map((val1) => {
+                    //         const [fieldType1, dataValues1] = val1;
+                    //         const elementIndex1 = `spouse_profile_${fieldType1}_0`;
 
-                            if (!dataValues1.labels) return;
-                            let showError1 = false;
-                            if (!dataValues1.value && !isAddressType && !dataValues1.is_optional) {
-                                isError1 = true;
-                                showError1 = true;
-                                isError = true;
-                                if(!errorItem){
-                                    errorItem = elementIndex1;
-                                }
-                            }
-                            newDataParams1[fieldType1] = { ...dataValues1, showError: showError1 }
-                        })
-                        if (isError1) {
-                            let updatedParams = {
-                                data: newDataParams1,
-                                type: "spouse_profile",
-                                isUpdate: false
-                            }
-                            updateUserProfile(updatedParams, dispatch);
-                        }
+                    //         if (!dataValues1.labels) return;
+                    //         let showError1 = false;
+                    //         if (!dataValues1.value && !isAddressType && !dataValues1.is_optional) {
+                    //             isError1 = true;
+                    //             showError1 = true;
+                    //             isError = true;
+                    //             if(!errorItem){
+                    //                 errorItem = elementIndex1;
+                    //             }
+                    //         }
+                    //         newDataParams1[fieldType1] = { ...dataValues1, showError: showError1 }
+                    //     })
+                    //     if (isError1) {
+                    //         let updatedParams = {
+                    //             data: newDataParams1,
+                    //             type: "spouse_profile",
+                    //             isUpdate: false
+                    //         }
+                    //         updateUserProfile(updatedParams, dispatch);
+                    //     }
 
-                    }
+                    // }
                 })
             }
             if(errorItem && document.getElementById(errorItem)){
@@ -397,19 +397,19 @@ console.log({isSpouseValid});
                                                             })
                                                         }
                                                         {
-                                                            isSpouseExist && false ?
-                                                                <div className="customSpouseAdd">
-                                                                    <h3 className="addMoreBtnHead">Spouse Details</h3>
-                                                                    <div className="spouseGrids">
-                                                                        {
-                                                                            spouse_profile && Object.entries(spouse_profile).map((val, key) => {
-                                                                                const [fieldType1, dataValues1] = val;
-                                                                                return <ProfileForm fieldType={fieldType1} dataParams={dataValues1} key={`${widget}_${key}`} widget="spouse_profile"  activeTabType={type}/>
-                                                                            })
-                                                                        }
-                                                                    </div>
-                                                                </div>
-                                                                : null
+                                                            // isSpouseExist && false ?
+                                                            //     <div className="customSpouseAdd">
+                                                            //         <h3 className="addMoreBtnHead">Spouse Details</h3>
+                                                            //         <div className="spouseGrids">
+                                                            //             {
+                                                            //                 spouse_profile && Object.entries(spouse_profile).map((val, key) => {
+                                                            //                     const [fieldType1, dataValues1] = val;
+                                                            //                     return <ProfileForm fieldType={fieldType1} dataParams={dataValues1} key={`${widget}_${key}`} widget="spouse_profile"  activeTabType={type}/>
+                                                            //                 })
+                                                            //             }
+                                                            //         </div>
+                                                            //     </div>
+                                                            //     : null
                                                         }
                                                     </Fragment>
                                             }

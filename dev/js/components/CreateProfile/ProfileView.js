@@ -58,19 +58,20 @@ const ProfileView = ({ fullProfileInfo = {}, activeTabType, handleTabClick, user
         let fieldValue = name||value;
         if (!labels) return null;
 
-        if(fieldType=="marital_status" && value==2 && false){
-            return <Fragment>
-                <li key={dataKeys}>
-                    <h5>{labels}:</h5>
-                    <p>{name||value}</p>
-                </li>
-                {
-                    Object.entries(spouse_profile).map((val1, key1)=>{
-                        return renderListView(val1, key1);
-                    })
-                }
-            </Fragment>
-        }else if(choices && choices.length && value){
+        // if(fieldType=="marital_status" && value==2 && false){
+        //     return <Fragment>
+        //         <li key={dataKeys}>
+        //             <h5>{labels}:</h5>
+        //             <p>{name||value}</p>
+        //         </li>
+        //         {
+        //             Object.entries(spouse_profile).map((val1, key1)=>{
+        //                 return renderListView(val1, key1);
+        //             })
+        //         }
+        //     </Fragment>
+        // }else 
+        if(choices && choices.length && value){
             const selectedVal = choices.find(val=>val[0]==value);
             fieldValue = selectedVal && selectedVal[1]||'';
         }
@@ -193,19 +194,19 @@ const ProfileView = ({ fullProfileInfo = {}, activeTabType, handleTabClick, user
                                                     })
                                             }
                                             {
-                                                //hide spouse detail, as new tab is created for spouse detail
-                                                false && isSpouseExist?
-                                                <Fragment>
-                                                    <div className="accrdHead">
-                                                        <h5 className="spouseName">Spouse Details</h5>
-                                                    </div>
-                                                    {
-                                                        Object.entries(spouse_profile).map((val1, key1)=>{
-                                                            return renderListView(val1, key1);
-                                                        })
-                                                    }
-                                                </Fragment>
-                                                :null
+                                                // //hide spouse detail, as new tab is created for spouse detail
+                                                // false && isSpouseExist?
+                                                // <Fragment>
+                                                //     <div className="accrdHead">
+                                                //         <h5 className="spouseName">Spouse Details</h5>
+                                                //     </div>
+                                                //     {
+                                                //         Object.entries(spouse_profile).map((val1, key1)=>{
+                                                //             return renderListView(val1, key1);
+                                                //         })
+                                                //     }
+                                                // </Fragment>
+                                                // :null
                                             }
                                         </ul>
                                     </div>
