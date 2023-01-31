@@ -4,7 +4,7 @@ import { updateUserProfile } from '@actions';
 import { SelectCountry, SelectMainProfileCountry } from '@components/SelectCity';
 import { getFormattedDate } from '@helpers/utils.js';
 
-const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=false })=>{
+const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=false, activeTabType })=>{
     const dispatch = useDispatch();
     const showDate = fieldType.includes('date');
 
@@ -21,7 +21,8 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
             data: {
                 [fieldType]: {...dataParams, value: date?date:val, showError: false}
             },
-            type: widget
+            type: widget,
+            activeTabType
         }
         if(isMultiple){
             updatedParams.subIndex = subIndex;
@@ -35,7 +36,8 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
             data: {
                 [fieldType]: {...dataParams, ...val, showError: false}
             },
-            type: widget
+            type: widget,
+            activeTabType
         }
         if(isMultiple){
             updatedParams.subIndex = subIndex;
@@ -49,7 +51,8 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
             data: {
                 [fieldType]: {...dataParams, value: val, showError: false}
             },
-            type: widget
+            type: widget,
+            activeTabType
         }
         if(isMultiple){
             updatedParams.subIndex = subIndex;
@@ -64,7 +67,8 @@ const ProfileForm = ({ dataParams, widget, fieldType, subIndex=0, isMultiple=fal
             data: {
                 [fieldType]: {...dataParams, value: val, showError: false}
             },
-            type: widget
+            type: widget,
+            activeTabType
         }
         if(isMultiple){
             updatedParams.subIndex = subIndex;

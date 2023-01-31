@@ -36,7 +36,7 @@ let CUSTOMER_ROUTES = [
   { path: '/billing', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/profile', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/create', exact: true, component: UserDashboardView, isPrivate: true  },
-  { path: '/edit/:id', exact: true, component: UserDashboardView, isPrivate: true  },
+  { path: '/edit/:type/:id', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/notification', exact: true, component: UserDashboardView, isPrivate: true  },
   { path: '/plan/detail/:id', exact: true, component: UserDashboardView, isPrivate: true },
   { path: '/application', exact: true, component: UserDashboardView, isPrivate: true },

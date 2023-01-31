@@ -1,10 +1,11 @@
 import React, { useState, Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 
-const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
+const ProfileView = ({ fullProfileInfo = {}, activeTabType, handleTabClick, userInfo, isSpouseValid}) => {
     const { spouse_profile={} } = fullProfileInfo||{};
-    const { profile = {} } = userInfo;
-    const { first_name = '', last_name = '' } = profile;
+    const { profile } = userInfo ||{};
+    const { first_name='', last_name=''} = profile ||{};
+    
     const [activeWidgets, setActiveWidget] = useState(() => {
         const widgets = [];
         Object.entries(fullProfileInfo).filter((val) => {
@@ -57,25 +58,27 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
         let fieldValue = name||value;
         if (!labels) return null;
 
-        if(fieldType=="marital_status" && value==2 && false){
-            return <Fragment>
-                <li key={dataKeys}>
-                    <h5>{labels}:</h5>
-                    <p>{name||value}</p>
-                </li>
-                {
-                    Object.entries(spouse_profile).map((val1, key1)=>{
-                        return renderListView(val1, key1);
-                    })
-                }
-            </Fragment>
-        }else if(choices && choices.length && value){
+        // if(fieldType=="marital_status" && value==2 && false){
+        //     return <Fragment>
+        //         <li key={dataKeys}>
+        //             <h5>{labels}:</h5>
+        //             <p>{name||value}</p>
+        //         </li>
+        //         {
+        //             Object.entries(spouse_profile).map((val1, key1)=>{
+        //                 return renderListView(val1, key1);
+        //             })
+        //         }
+        //     </Fragment>
+        // }else 
+        if(choices && choices.length && value){
             const selectedVal = choices.find(val=>val[0]==value);
             fieldValue = selectedVal && selectedVal[1]||'';
         }
         return renderLabelValue(dataKeys, labels, fieldValue, type);
     }
     const history = useHistory();
+
     return (
         <div className="useDetailsContainer ">
             <div className="userProfile">
@@ -83,6 +86,14 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
                     <img className="img-fluid" src={ASSETS_BASE_URL + "/images/common/user.svg"} />
                     <h3>{`${first_name} ${last_name}`}</h3>
                 </div>
+            </div>
+            <div className='newCustomTabCont'>
+                <ul>
+                    <li onClick={()=>handleTabClick("self")}><button className={activeTabType==="self"?'tabActiv':""}>self</button></li>
+                    {
+                        isSpouseValid?<li onClick={()=>handleTabClick("spouse")}><button className={activeTabType==="spouse"?'tabActiv':""}>Spouse</button></li>:null
+                    }            
+                </ul>
             </div>
             {/* <div className="editProgress">
                 <label>30% complete</label>
@@ -96,7 +107,7 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
                     let isSpouseExist = false;
                     let widgetName = '';
                     let selectedType = 0;
-                    if (type == 'profile') {
+                    if (type == 'profile' || type=='spouse_profile') {
                         widgetName = 'Personal Details (as on Passport)';
                         selectedType = 1;
                     } else if (type.includes('education_assessment')) {
@@ -129,7 +140,7 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
                                 <div className="alignEnd">
                                     {
                                         selectedType ?
-                                            <button className="editPrfl" onClick={() => history.push(`/edit/${selectedType}`)}>Edit Profile</button>
+                                            <button className="editPrfl" onClick={() => history.push(`/edit/${activeTabType}/${selectedType}`)}>Edit Profile</button>
                                             : null
                                     }
                                     <button onClick={() => handleClick(type)}>{isHide ? 'Show Details' : 'Hide Details'} <img className={`img-fluid ${isHide ? '' : 'rotateAcordion'}`} src={ASSETS_BASE_URL + "/images/common/drop.svg"} /></button>
@@ -183,18 +194,19 @@ const ProfileView = ({ fullProfileInfo = {}, userInfo = {} }) => {
                                                     })
                                             }
                                             {
-                                                isSpouseExist?
-                                                <Fragment>
-                                                    <div className="accrdHead">
-                                                        <h5 className="spouseName">Spouse Details</h5>
-                                                    </div>
-                                                    {
-                                                        Object.entries(spouse_profile).map((val1, key1)=>{
-                                                            return renderListView(val1, key1);
-                                                        })
-                                                    }
-                                                </Fragment>
-                                                :null
+                                                // //hide spouse detail, as new tab is created for spouse detail
+                                                // false && isSpouseExist?
+                                                // <Fragment>
+                                                //     <div className="accrdHead">
+                                                //         <h5 className="spouseName">Spouse Details</h5>
+                                                //     </div>
+                                                //     {
+                                                //         Object.entries(spouse_profile).map((val1, key1)=>{
+                                                //             return renderListView(val1, key1);
+                                                //         })
+                                                //     }
+                                                // </Fragment>
+                                                // :null
                                             }
                                         </ul>
                                     </div>
