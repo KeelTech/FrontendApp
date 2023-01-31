@@ -223,7 +223,11 @@ const CreateProfile = ({editID, isProfileView, taskInfo, type, handleTabClick}) 
             const postData = {
                 [activeWidgetData.widget]: activeWidgetData && fullProfileInfo[type] && fullProfileInfo[type][activeWidgetData.widget],
             }
-            postData[activeWidgetData.widget]['owner'] = type;
+            postData[activeWidgetData.widget]['owner'] = {
+                labels: "",
+                type:"char",
+                value: type
+            }
             // if(activeWidgetData.widget==="profile"){
             //     postData["spouse_profile"] = fullProfileInfo[type]["spouse_profile"]
             // }
