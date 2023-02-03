@@ -36,7 +36,6 @@ const CreateProfile = ({editID, isProfileView, taskInfo, type, handleTabClick}) 
             const { profile, spouse_profile, education_assessment, qualification, work_experience, relative_in_canada, language_scores, family_information } = fullProfileInfo[type];
             if (activeState === 1) {
                 const profileData = type==="self"?profile:spouse_profile
-                console.log("profileData", profileData);
                 activeWidgetInfo = {
                     widget: type==="self"?'profile':"spouse_profile",
                     dataParams: { ...profileData },
@@ -201,7 +200,8 @@ const CreateProfile = ({editID, isProfileView, taskInfo, type, handleTabClick}) 
             let updatedParams = {
                 data: newDataParams,
                 type: widget,
-                isUpdate: isMultiple
+                isUpdate: isMultiple,
+                activeTabType:type
             }
             if (isError) {
                 updateUserProfile(updatedParams, dispatch);
@@ -319,7 +319,8 @@ const CreateProfile = ({editID, isProfileView, taskInfo, type, handleTabClick}) 
             const updatedParams = {
                 data: newDataParams,
                 type: widget,
-                isUpdate: true
+                isUpdate: true,
+                activeTabType:type
             }
             updateUserProfile(updatedParams, dispatch);
         }
@@ -331,7 +332,6 @@ const CreateProfile = ({editID, isProfileView, taskInfo, type, handleTabClick}) 
         }
         return isSpouse;
     },[fullProfileInfo])
-console.log({isSpouseValid});
 
     const renderView = () => {
         let isSpouseExist = false;
