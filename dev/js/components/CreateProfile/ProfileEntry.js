@@ -314,6 +314,11 @@ const CreateProfile = ({editID, isProfileView, taskInfo, type, handleTabClick}) 
                 if (newAddedEntity.id) {
                     delete newAddedEntity.id;
                 }
+                newAddedEntity["owner"] = {
+                    labels: "",
+                    type:"char",
+                    value: type
+                }
                 newDataParams.push(newAddedEntity);
             }
             const updatedParams = {
