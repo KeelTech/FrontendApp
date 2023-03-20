@@ -258,3 +258,8 @@ export const LANDBOT_JSON = {
     }
 }
 
+export const LEAD_SQUARED_ACCESS_ID = `u$r9538ca002d0f679810a27e8f254a2f62`;
+export const LEAD_SQUARED_SECRET_KEY = `e342f6d83be820cc15fb10378cc31e6c33e66843`;
+export const LEAD_SQUARED_X_API = 'ZMy4nAMclj8hnKpGQg7DD369ZRNj0Oqy3fZ5Wczl';
+
+
