@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useRef } from 'react';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import { LinkedIn as LinkedInLogin } from 'react-linkedin-login-oauth2';
@@ -13,6 +13,7 @@ import {
 } from '../../actions/index.js';
 import { Link } from 'react-router-dom';
 import { style, Loader } from './style.js';
+import LeadForm from '@components/LeadForm';
 
 const LoginView = (props) => {
   const isAgent = props.match.path.includes('agent');
@@ -105,6 +106,11 @@ const LoginView = (props) => {
     }
   }
 
+  const leadRef = useRef(null);
+  const openLead = ()=>{
+    leadRef.current.openPopup();
+  }
+
   // Function for linkedin Login
   // const responseLinkedin = (response) => {
   //   axios
@@ -124,6 +130,7 @@ const LoginView = (props) => {
           <LoadingWidget />
         </div>
       )}
+      <LeadForm ref={leadRef} props={props}/>
       <div className={'loginMainContainer' + ' ' + style({})}>
         <div className="row no-gutters fullHeight">
           <div className="col-md-6 col-12">
@@ -188,9 +195,9 @@ const LoginView = (props) => {
                   :<Fragment>
                     <div className="signUp">
                       <p className="signup-divider">
-                        <span>Not registered yet? <Link className="signup-button-wrapper" to="/signup">
+                        <span>Not registered yet? <a className="signup-button-wrapper" to="/signup" onClick={openLead}>
                           Create an Account
-                        </Link></span>
+                        </a></span>
                       </p>
                     </div>
                     <p className="login-divider">

@@ -302,3 +302,15 @@ export const postCaseComments = (dataParams={}, dispatch, cb=null)=>{
         if(cb)cb(null, true);
     })
 }
+
+export const createLeadSquareLead = (dataParams={}, cb)=>{
+    API_POST(`${API_BASE_URL}/v1/web/push-lead`, dataParams).then((response)=>{
+        if(response && response){
+            if(cb)cb(response, false);
+        }else{
+            if(cb)cb(null, true);
+        }
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}

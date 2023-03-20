@@ -198,6 +198,7 @@ const client_base = {
             '@utils': path.resolve(__dirname, 'dev/js/utils'),
             '@actions': path.resolve(__dirname, 'dev/js/actions'),
             '@pages': path.resolve(__dirname, 'dev/js/pages'),
+            '@': path.resolve(__dirname, 'dev/js'),
           }
     }
 
