@@ -156,7 +156,7 @@ const FileUpload = ({ fileUploadModalClosed, uploadFile, isUploadToServer=false,
             <span onClick={close} className={closeWrapper + " " + "mr-1 popUpInClose"}><img className="crossIcon" src={ASSETS_BASE_URL+"/images/common/x_black.svg"} alt="close"/></span>
             <div className={innerShell  + " " + "InnerShellN"}>
                 <div className={fileUploadWrapper  + " " + "FileUpldWrap"}>
-                    <input id="file" className={fileUpload  + " " + "FileUpLoad"} type="file" onChange={onFileChange} />
+                    <input id="file" className={fileUpload  + " " + "FileUpLoad"} type="file" onChange={onFileChange} accept="image/*;capture=camera"/>
                 </div>
                 <div className={fileData  + " " + "FileDataN"}>{displayFileData()}</div>
                 <CustomDropDown list={documentTypes} optionSelected={handleOptionChange}></CustomDropDown>
