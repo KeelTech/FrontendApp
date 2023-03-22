@@ -32,7 +32,7 @@ export const container = css`
     }
     .name{
         font-weight: 600;
-        font-size: 12px;
+        font-size: 16px;
         color: #363B64;
     }
     .docDate{

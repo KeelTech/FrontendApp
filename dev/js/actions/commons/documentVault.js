@@ -71,3 +71,12 @@ export const downloadDocument = (dataParams, dispatch, cb=null)=>{
         if(cb)cb(null, true);
     })
 }
+
+export const verifyDocument = (dataParams, dispatch, cb=null)=>{
+    API_POST(`${API_BASE_URL}/v1/doc/status-update`, dataParams
+    ).then((response)=>{
+        if(cb)cb(response, null);
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}
