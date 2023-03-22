@@ -9190,3 +9190,6 @@ span.verfyStatus.apprvSp {
 span.verfyStatus.rjctSp {
   color: #fa2f2f;
 }
+span.verfyStatus.pendingState {
+  color: #6C757D;
+}

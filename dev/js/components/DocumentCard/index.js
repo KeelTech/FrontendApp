@@ -43,16 +43,16 @@ const DocumentCard = ({ documentData, downloadDocumentClicked, deleteDocumentCli
             }
             return <div></div>
         }
-        let status = 'Pending'
-        if(verification_status==2){
-            status= 'Rejected';
-        }else if(verification_status==3){
-            status = 'Approved';
-        }
-        return <div className="docDate">
-            <p className="docHeading">Verification Status:<span className={`verfyStatus ${verification_status==3 ? 'apprvSp' : 'rjctSp'}`}>{status}</span></p>
-            
-        </div>
+    }
+
+    let status = 'Pending'
+    let verifyCls = 'verfyStatus pendingState';
+    if(verification_status==2){
+        status= 'Rejected';
+        verifyCls='verfyStatus rjctSp'
+    }else if(verification_status==3){
+        status = 'Approved';
+        verifyCls = 'verfyStatus apprvSp'
     }
     return (
         <div className={container + " " + "docCardUpdate"}>
@@ -64,6 +64,9 @@ const DocumentCard = ({ documentData, downloadDocumentClicked, deleteDocumentCli
                 <span className="docDate"><span className="docHeading">Uploaded By:</span>{uploadedBy}</span>
                 <span className="docDate"><span className="docHeading">File name:</span>{orignal_file_name}</span>
                 <span className="docDate docTime"><span className="docHeading">Uploaded On:</span>{formattedDate} {getFormattedTime(created_at)}</span>
+                <div className="docDate">
+                    <span className="docHeading">Verification Status:<span className={`${verifyCls}`}>{status}</span></span>
+                </div>
                 {verificationWidget()}
             </div>
             {/* <div className="docOverlay"></div> */}
