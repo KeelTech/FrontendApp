@@ -4,47 +4,51 @@ import DocumentModal from '@components/DocumentModal';
 import { getFormattedTime, getFormattedDate } from '@helpers/utils.js';
 import { container } from './style.js';
 
-const DocumentCard = ({ documentData, downloadDocumentClicked, deleteDocumentClicked, verifyDocumentClicked })=>{
+const DocumentCard = ({ documentData, downloadDocumentClicked, deleteDocumentClicked, verifyDocumentClicked }) => {
     const logginInfo = useSelector(state => state.LOGIN);
-    const { isAgent } = logginInfo||{};
+    const { isAgent } = logginInfo || {};
 
     const [showMenuBar, setMenuBar] = useState(false);
 
-    const { doc_type, created_at, id, doc_id, orignal_file_name, user_type='' } = documentData;
+    const { doc_type, created_at, id, doc_id, orignal_file_name, user_type = '' } = documentData;
 
     const { formattedDate } = getFormattedDate(created_at);
 
-    const toggleMenuBar = ()=>{
-        setMenuBar(val=>!val)
+    const toggleMenuBar = () => {
+        setMenuBar(val => !val)
     }
     let uploadedBy = '';
-    if(isAgent){
-        if(user_type=='CUSTOMER'){
+    if (isAgent) {
+        if (user_type == 'CUSTOMER') {
             uploadedBy = 'Customer'
-        }else{
+        } else {
             uploadedBy = 'You'
         }
-    }else{
-        if(user_type=='CUSTOMER'){
+    } else {
+        if (user_type == 'CUSTOMER') {
             uploadedBy = 'You'
-        }else{
+        } else {
             uploadedBy = 'Consultant'
         }
     }
 
-    const verificationWidget = ()=>{
-        if(isAgent){
-            return <div>
-                <button onClick={()=>verifyDocumentClicked(id)}>Approve</button>
+    const verificationWidget = () => {
+        if (isAgent) {
+            return <div className='ctaDtls'>
+                <button className='aprvBtn'  onClick={() => verifyDocumentClicked(id)}>Approve</button>
+                <button className='rjctBtn' onClick={() => verifyDocumentClicked(id)}>Rejected</button>
             </div>
         }
-        return <span className="docDate"><span className="docHeading">Verification Status:</span>{true?'Approved':'Rejected'}</span>
+        return <div className="docDate">
+            <p className="docHeading">Verification Status:<span className={'verfyStatus ' + (false ? 'apprvSp' : 'rjctSp')}>{false ? 'Approved' : 'Rejected'}</span></p>
+            
+        </div>
     }
-    return(
+    return (
         <div className={container + " " + "docCardUpdate"}>
             <div className="topRow">
                 <span className="name">{doc_type}</span>
-                <img className="dotMenu" src={ASSETS_BASE_URL+"/images/common/dotMenu.svg"} alt="menu" onClick={toggleMenuBar}/>
+                <img className="dotMenu" src={ASSETS_BASE_URL + "/images/common/dotMenu.svg"} alt="menu" onClick={toggleMenuBar} />
             </div>
             <div className="bottomRow">
                 <span className="docDate"><span className="docHeading">Uploaded By:</span>{uploadedBy}</span>
@@ -54,7 +58,7 @@ const DocumentCard = ({ documentData, downloadDocumentClicked, deleteDocumentCli
             </div>
             {/* <div className="docOverlay"></div> */}
             {
-                showMenuBar?<DocumentModal id={id} docId={doc_id} toggle={toggleMenuBar} orignal_file_name={orignal_file_name} downloadDocumentClicked={downloadDocumentClicked} deleteDocumentClicked={deleteDocumentClicked}/>:null
+                showMenuBar ? <DocumentModal id={id} docId={doc_id} toggle={toggleMenuBar} orignal_file_name={orignal_file_name} downloadDocumentClicked={downloadDocumentClicked} deleteDocumentClicked={deleteDocumentClicked} /> : null
             }
         </div>
     )
