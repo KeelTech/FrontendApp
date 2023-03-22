@@ -10,7 +10,7 @@ const DocumentCard = ({ documentData, downloadDocumentClicked, deleteDocumentCli
 
     const [showMenuBar, setMenuBar] = useState(false);
 
-    const { doc_type, created_at, id, doc_id, orignal_file_name, user_type = '' } = documentData;
+    const { doc_type, created_at, id, doc_id, orignal_file_name, user_type = '', verification_status } = documentData;
 
     const { formattedDate } = getFormattedDate(created_at);
 
@@ -34,13 +34,23 @@ const DocumentCard = ({ documentData, downloadDocumentClicked, deleteDocumentCli
 
     const verificationWidget = () => {
         if (isAgent) {
-            return <div className='ctaDtls'>
-                <button className='aprvBtn'  onClick={() => verifyDocumentClicked(id)}>Approve</button>
-                <button className='rjctBtn' onClick={() => verifyDocumentClicked(id)}>Rejected</button>
-            </div>
+
+            if(verification_status==1){
+                return <div className='ctaDtls'>
+                    <button className='aprvBtn'  onClick={() => verifyDocumentClicked(doc_id, 'Approve')}>Approve</button>
+                    <button className='rjctBtn' onClick={() => verifyDocumentClicked(doc_id, 'Reject')}>Reject</button>
+                </div>
+            }
+            return <div></div>
+        }
+        let status = 'Pending'
+        if(verification_status==2){
+            status= 'Rejected';
+        }else if(verification_status==3){
+            status = 'Approved';
         }
         return <div className="docDate">
-            <p className="docHeading">Verification Status:<span className={'verfyStatus ' + (false ? 'apprvSp' : 'rjctSp')}>{false ? 'Approved' : 'Rejected'}</span></p>
+            <p className="docHeading">Verification Status:<span className={`verfyStatus ${verification_status==3 ? 'apprvSp' : 'rjctSp'}`}>{status}</span></p>
             
         </div>
     }

@@ -73,8 +73,7 @@ export const downloadDocument = (dataParams, dispatch, cb=null)=>{
 }
 
 export const verifyDocument = (dataParams, dispatch, cb=null)=>{
-    const { docId } = dataParams;
-    API_GET(`${API_BASE_URL}/v1/doc/get-single-doc/${docId}`
+    API_POST(`${API_BASE_URL}/v1/doc/status-update`, dataParams
     ).then((response)=>{
         if(cb)cb(response, null);
     }).catch((e)=>{

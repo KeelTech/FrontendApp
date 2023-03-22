@@ -57,8 +57,10 @@ const TaskView = (props) => {
     const [loading, setLoading] = useState('');
     const [selectedDeleteDocument, setDeleteDocument] = useState('');
     const [filterList, setFilterList] = useState([]);
-    const [selectedApprovedDocument, setApprovedDocument] = useState('');
-
+    const [selectedApprovedDocument, setApprovedDocument] = useState({
+        status: '',
+        id: ''
+    });
     
     let caseId = '';
     if (props && props.match && props.match.params) {
@@ -214,21 +216,24 @@ const TaskView = (props) => {
     }
 
     const toggleApproveDocumentPopup = ()=>{
-        setApprovedDocument(val=>!val);
+        setApprovedDocument({
+            id:'',
+            status: ''
+        });
     }
 
-    const verifyDocumentClicked = ({ id }) => {
-        setApprovedDocument(id);
-        toggleApproveDocumentPopup()
+    const verifyDocumentClicked = (id, status) => {
+        setApprovedDocument({id, status});
     }
 
-    const verifyDocumentHandler = ({ id, docId, orignal_file_name }) => {
+    const verifyDocumentHandler = () => {
         setLoading(true);
-        verifyDocument({ docId }, dispatch, (resp, err) => {
+        verifyDocument({ doc_id: selectedApprovedDocument.id, status: selectedApprovedDocument.status=='Approve'?3:2 }, dispatch, (resp, err) => {
             setLoading(false);
-            if (resp && resp.file_data) {
+            if (resp && resp) {
                 setLoading(false);
-                handleResponse(resp, 'Approved Successfully');
+                handleResponse(resp, `${selectedApprovedDocument.status} Successfully`);
+                toggleApproveDocumentPopup();
             }
         })
     }
@@ -265,7 +270,7 @@ const TaskView = (props) => {
                         openUploadDocumentModal ? <FileUpload isUploadToServer fileUploadModalClosed={toggleUploadModal} uploadFile={uploadFile} caseId={caseId}/> : null
                     }
                     {
-                        selectedApprovedDocument ? <DeleteConfirmationPopup togglePopup={toggleApproveDocumentPopup} deletePopupHandler={verifyDocumentHandler} heading="Are you sure you want to Approve?"/> : null
+                        selectedApprovedDocument && selectedApprovedDocument.id ? <DeleteConfirmationPopup togglePopup={toggleApproveDocumentPopup} deletePopupHandler={verifyDocumentHandler} heading={`Are you sure you want to ${selectedApprovedDocument.status}?`} cta={selectedApprovedDocument.status}/> : null
                     }
                     {
                         showDeleteConfirmation ? <DeleteConfirmationPopup togglePopup={toggleDeletePopup} deletePopupHandler={deletePopupHandler} /> : null

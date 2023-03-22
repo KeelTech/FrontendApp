@@ -103,7 +103,7 @@ export const overlay = css`{
 	}
 }`
 
-const CustomPopup = ({ deletePopupHandler=()=>{}, togglePopup, heading })=>{
+const CustomPopup = ({ deletePopupHandler=()=>{}, togglePopup, heading, cta })=>{
 
     const bodyRef = useRef();
 
@@ -129,7 +129,7 @@ const CustomPopup = ({ deletePopupHandler=()=>{}, togglePopup, heading })=>{
                                 <CustomButton text="Cancel" clickHandler={togglePopup} margin="0px 8px 0px 0px" padding="10px 16px" borderRadius="16px" backgroundColor="#212529" fontSize="12px" mFontSize="12px" mpadding="10px" borderRadius="4px"/>
                             </div>
                             <div className="delAction">
-                                <CustomButton text="Delete" clickHandler={deletePopupHandler} margin="0px" padding="10px 16px" borderRadius="16px" backgroundColor="#CF3030" fontSize="12px" mFontSize="12px" mpadding="10px" borderRadius="4px"/>    
+                                <CustomButton text={cta?cta:"Delete"} clickHandler={deletePopupHandler} margin="0px" padding="10px 16px" borderRadius="16px" backgroundColor="#CF3030" fontSize="12px" mFontSize="12px" mpadding="10px" borderRadius="4px"/>    
                             </div>                        
                         </div>
                     </Fragment>
