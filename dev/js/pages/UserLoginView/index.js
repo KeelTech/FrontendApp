@@ -37,7 +37,7 @@ const LoginView = (props) => {
 
   const loginAfterLoginSuccess = ()=>{
     setTimeout(() => {
-      props.history.push('/');
+      props.history.push('/vault');
     }, 1000);
   }
 

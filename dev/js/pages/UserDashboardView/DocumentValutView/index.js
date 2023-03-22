@@ -9,7 +9,7 @@ import LoadingWidget from '@components/LoadingWidget';
 import CustomButton from '@components/CustomButton';
 import CustomSelect from '@components/CustomSelect';
 import CustomSearch from '@components/CustomSearch';
-import { getDocumentsList, deleteDocument, downloadDocument } from '@actions';
+import { getDocumentsList, deleteDocument, downloadDocument, verifyDocument } from '@actions';
 import DocumentCard from '@components/DocumentCard';
 import FileUpload from '@components/FileUpload';
 import CustomToaster from '@components/CustomToaster';
@@ -57,7 +57,9 @@ const TaskView = (props) => {
     const [loading, setLoading] = useState('');
     const [selectedDeleteDocument, setDeleteDocument] = useState('');
     const [filterList, setFilterList] = useState([]);
+    const [selectedApprovedDocument, setApprovedDocument] = useState('');
 
+    
     let caseId = '';
     if (props && props.match && props.match.params) {
         caseId = props.match.params.caseId;
@@ -211,6 +213,26 @@ const TaskView = (props) => {
         })
     }
 
+    const toggleApproveDocumentPopup = ()=>{
+        setApprovedDocument(val=>!val);
+    }
+
+    const verifyDocumentClicked = ({ id }) => {
+        setApprovedDocument(id);
+        toggleApproveDocumentPopup()
+    }
+
+    const verifyDocumentHandler = ({ id, docId, orignal_file_name }) => {
+        setLoading(true);
+        verifyDocument({ docId }, dispatch, (resp, err) => {
+            setLoading(false);
+            if (resp && resp.file_data) {
+                setLoading(false);
+                handleResponse(resp, 'Approved Successfully');
+            }
+        })
+    }
+
     const toggleDeletePopup = () => {
         setDeleteConfirmation(val => !val);
     }
@@ -243,6 +265,9 @@ const TaskView = (props) => {
                         openUploadDocumentModal ? <FileUpload isUploadToServer fileUploadModalClosed={toggleUploadModal} uploadFile={uploadFile} caseId={caseId}/> : null
                     }
                     {
+                        selectedApprovedDocument ? <DeleteConfirmationPopup togglePopup={toggleApproveDocumentPopup} deletePopupHandler={verifyDocumentHandler} heading="Are you sure you want to Approve?"/> : null
+                    }
+                    {
                         showDeleteConfirmation ? <DeleteConfirmationPopup togglePopup={toggleDeletePopup} deletePopupHandler={deletePopupHandler} /> : null
                     }
                     <div className={filters}>
@@ -270,7 +295,7 @@ const TaskView = (props) => {
                                 {
                                     documentListFiltered.length ?
                                         documentListFiltered.map((document) => {
-                                            return <DocumentCard key={document.id} documentData={document} deleteDocumentClicked={deleteDocumentClicked} downloadDocumentClicked={downloadDocumentClicked} />
+                                            return <DocumentCard key={document.id} documentData={document} deleteDocumentClicked={deleteDocumentClicked} downloadDocumentClicked={downloadDocumentClicked} verifyDocumentClicked={verifyDocumentClicked}/>
                                         })
                                         : <BlankScreen message="" />
                                 }

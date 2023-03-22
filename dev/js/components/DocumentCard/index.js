@@ -4,7 +4,7 @@ import DocumentModal from '@components/DocumentModal';
 import { getFormattedTime, getFormattedDate } from '@helpers/utils.js';
 import { container } from './style.js';
 
-const DocumentCard = ({ documentData, downloadDocumentClicked, deleteDocumentClicked })=>{
+const DocumentCard = ({ documentData, downloadDocumentClicked, deleteDocumentClicked, verifyDocumentClicked })=>{
     const logginInfo = useSelector(state => state.LOGIN);
     const { isAgent } = logginInfo||{};
 
@@ -31,6 +31,15 @@ const DocumentCard = ({ documentData, downloadDocumentClicked, deleteDocumentCli
             uploadedBy = 'Consultant'
         }
     }
+
+    const verificationWidget = ()=>{
+        if(isAgent){
+            return <div>
+                <button onClick={()=>verifyDocumentClicked(id)}>Approve</button>
+            </div>
+        }
+        return <span className="docDate"><span className="docHeading">Verification Status:</span>{true?'Approved':'Rejected'}</span>
+    }
     return(
         <div className={container + " " + "docCardUpdate"}>
             <div className="topRow">
@@ -41,6 +50,7 @@ const DocumentCard = ({ documentData, downloadDocumentClicked, deleteDocumentCli
                 <span className="docDate"><span className="docHeading">Uploaded By:</span>{uploadedBy}</span>
                 <span className="docDate"><span className="docHeading">File name:</span>{orignal_file_name}</span>
                 <span className="docDate docTime"><span className="docHeading">Uploaded On:</span>{formattedDate} {getFormattedTime(created_at)}</span>
+                {verificationWidget()}
             </div>
             {/* <div className="docOverlay"></div> */}
             {

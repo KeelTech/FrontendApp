@@ -71,3 +71,13 @@ export const downloadDocument = (dataParams, dispatch, cb=null)=>{
         if(cb)cb(null, true);
     })
 }
+
+export const verifyDocument = (dataParams, dispatch, cb=null)=>{
+    const { docId } = dataParams;
+    API_GET(`${API_BASE_URL}/v1/doc/get-single-doc/${docId}`
+    ).then((response)=>{
+        if(cb)cb(response, null);
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}
