@@ -15,6 +15,8 @@ import FileUpload from '@components/FileUpload';
 import CustomToaster from '@components/CustomToaster';
 import DeleteConfirmationPopup from '@components/DeleteConfirmationPopup';
 import { container, filters, uploadMobileCta } from './style.js';
+import Check from '../../../../../assets/images/checkmark.svg'
+import Cancel from '../../../../../assets/images/cancel.svg'
 import { body } from '../style.js';
 
 const PriorityList = [
@@ -62,7 +64,7 @@ const TaskView = (props) => {
         id: ''
     });
 
-    const[docTypeList, setDocTypeList] = useState({});
+    const [docTypeList, setDocTypeList] = useState({});
 
     let caseId = '';
     if (props && props.match && props.match.params) {
@@ -81,9 +83,9 @@ const TaskView = (props) => {
             }
         )
         fetchDocuments();
-        getDocumentType({}, (resp, err)=>{
+        getDocumentType({}, (resp, err) => {
             console.log("resp", resp);
-            if(resp && resp.data){
+            if (resp && resp.data) {
                 setDocTypeList(resp.data);
             }
         })
@@ -305,22 +307,27 @@ const TaskView = (props) => {
                     {
                         documentListLoading || loading ? <div className={loaderView}><LoadingWidget /></div> :
                             <div className="documentList addingListCont">
-                                {
-                                    documentListFiltered.length ?
-                                        documentListFiltered.map((document) => {
-                                            return <DocumentCard key={document.id} documentData={document} deleteDocumentClicked={deleteDocumentClicked} downloadDocumentClicked={downloadDocumentClicked} verifyDocumentClicked={verifyDocumentClicked} />
-                                        })
-                                        : <BlankScreen message="" />
-                                }
+                                <div className='listDocCont'>
+                                    {
+                                        documentListFiltered.length ?
+                                            documentListFiltered.map((document) => {
+                                                return <DocumentCard key={document.id} documentData={document} deleteDocumentClicked={deleteDocumentClicked} downloadDocumentClicked={downloadDocumentClicked} verifyDocumentClicked={verifyDocumentClicked} />
+                                            })
+                                            : <BlankScreen message="" />
+                                    }
+                                </div>
                                 <div className='newListContainer'>
                                     <h4>Document Details</h4>
                                     <ul>
                                         {
-                                            Object.entries(docTypeList).map((val, key)=>{
+                                            Object.entries(docTypeList).map((val, key) => {
                                                 return (<li key={key}>
-                                                <h6>{val[0]}</h6>
-                                                <p>{val[1]==1?'checked':'cross'}</p>
-                                            </li>)
+                                                    <p>
+                                                        {val[1] == 1 ? <img src={Check} /> : <img src={Cancel} />}
+                                                    </p>
+                                                    <h6>{val[0]}</h6>
+
+                                                </li>)
                                             })
                                         }
                                     </ul>

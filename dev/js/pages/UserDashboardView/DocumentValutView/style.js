@@ -28,6 +28,11 @@ export const container = css`
         flex-flow: inherit;
         gap: 25px;
     }
+    .listDocCont {
+        width: 100%;
+        display: flex;
+        flex-flow: wrap;
+    }
     
     .newListContainer {
         width: 214px;
@@ -37,6 +42,8 @@ export const container = css`
         background: white;
         border-radius: 4px;
         border: 1px solid #e8e8e8;
+        height:min-content;
+        
     }
     
     .newListContainer h4 {
@@ -47,7 +54,7 @@ export const container = css`
     
     .newListContainer ul li h6 {
         font-size: 11px;
-        margin-bottom: 3px;
+        margin-bottom: 0px;
         font-weight: 500;
     }
     
@@ -56,15 +63,21 @@ export const container = css`
         color: #898888;
         margin-bottom: 0px;
     }
+    .newListContainer li p img {
+        width: 15px;
+    }
     
     .newListContainer ul {
-        padding-left: 15px;
-        max-height: 240px;
+        padding-left: 0px;
         overflow: auto;
+        list-style:none;
     }
     
     .newListContainer li {
         padding: 4px 0;
+        display: flex;
+    align-items: center;
+    gap: 5px;
     }
 `
 
