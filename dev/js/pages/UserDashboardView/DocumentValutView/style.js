@@ -23,6 +23,49 @@ export const container = css`
             margin-top: 20px;
         }
     }
+    .documentList.addingListCont {
+        display: flex;
+        flex-flow: inherit;
+        gap: 25px;
+    }
+    
+    .newListContainer {
+        width: 214px;
+        background: white;
+        flex-shrink: 0;
+        padding: 8px;
+        background: white;
+        border-radius: 4px;
+        border: 1px solid #e8e8e8;
+    }
+    
+    .newListContainer h4 {
+        font-size: 14px;
+        font-weight: 400;
+        margin-top:5px;
+    }
+    
+    .newListContainer ul li h6 {
+        font-size: 11px;
+        margin-bottom: 3px;
+        font-weight: 500;
+    }
+    
+    .newListContainer ul li p {
+        font-size: 10px;
+        color: #898888;
+        margin-bottom: 0px;
+    }
+    
+    .newListContainer ul {
+        padding-left: 15px;
+        max-height: 240px;
+        overflow: auto;
+    }
+    
+    .newListContainer li {
+        padding: 4px 0;
+    }
 `
 
 export const filters = css`

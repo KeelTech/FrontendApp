@@ -61,11 +61,11 @@ const TaskView = (props) => {
         status: '',
         id: ''
     });
-    
+
     let caseId = '';
     if (props && props.match && props.match.params) {
         caseId = props.match.params.caseId;
-    }else{
+    } else {
         caseId = case_id;
     }
 
@@ -82,7 +82,7 @@ const TaskView = (props) => {
     }, [])
 
     const fetchDocuments = () => {
-        getDocumentsList({caseId}, dispatch);
+        getDocumentsList({ caseId }, dispatch);
     }
 
     const handleUploadedByChange = (val) => {
@@ -199,7 +199,7 @@ const TaskView = (props) => {
         var link = document.createElement('a');
         console.log('link is', link);
         link.href = resp;
-        link.download = `${fileName?fileName:'new'}.${type}`;
+        link.download = `${fileName ? fileName : 'new'}.${type}`;
         link.click();
     }
 
@@ -215,20 +215,20 @@ const TaskView = (props) => {
         })
     }
 
-    const toggleApproveDocumentPopup = ()=>{
+    const toggleApproveDocumentPopup = () => {
         setApprovedDocument({
-            id:'',
+            id: '',
             status: ''
         });
     }
 
     const verifyDocumentClicked = (id, status) => {
-        setApprovedDocument({id, status});
+        setApprovedDocument({ id, status });
     }
 
     const verifyDocumentHandler = () => {
         setLoading(true);
-        verifyDocument({ doc_id: selectedApprovedDocument.id, status: selectedApprovedDocument.status=='Approve'?3:2 }, dispatch, (resp, err) => {
+        verifyDocument({ doc_id: selectedApprovedDocument.id, status: selectedApprovedDocument.status == 'Approve' ? 3 : 2 }, dispatch, (resp, err) => {
             setLoading(false);
             if (resp && resp) {
                 setLoading(false);
@@ -267,10 +267,10 @@ const TaskView = (props) => {
                 <div className={container}>
                     <CustomToaster {...toasterInfo} hideToaster={hideToaster} />
                     {
-                        openUploadDocumentModal ? <FileUpload isUploadToServer fileUploadModalClosed={toggleUploadModal} uploadFile={uploadFile} caseId={caseId}/> : null
+                        openUploadDocumentModal ? <FileUpload isUploadToServer fileUploadModalClosed={toggleUploadModal} uploadFile={uploadFile} caseId={caseId} /> : null
                     }
                     {
-                        selectedApprovedDocument && selectedApprovedDocument.id ? <DeleteConfirmationPopup togglePopup={toggleApproveDocumentPopup} deletePopupHandler={verifyDocumentHandler} heading={`Are you sure you want to ${selectedApprovedDocument.status}?`} cta={selectedApprovedDocument.status}/> : null
+                        selectedApprovedDocument && selectedApprovedDocument.id ? <DeleteConfirmationPopup togglePopup={toggleApproveDocumentPopup} deletePopupHandler={verifyDocumentHandler} heading={`Are you sure you want to ${selectedApprovedDocument.status}?`} cta={selectedApprovedDocument.status} /> : null
                     }
                     {
                         showDeleteConfirmation ? <DeleteConfirmationPopup togglePopup={toggleDeletePopup} deletePopupHandler={deletePopupHandler} /> : null
@@ -296,14 +296,43 @@ const TaskView = (props) => {
                     </div>
                     {
                         documentListLoading || loading ? <div className={loaderView}><LoadingWidget /></div> :
-                            <div className="documentList">
+                            <div className="documentList addingListCont">
                                 {
                                     documentListFiltered.length ?
                                         documentListFiltered.map((document) => {
-                                            return <DocumentCard key={document.id} documentData={document} deleteDocumentClicked={deleteDocumentClicked} downloadDocumentClicked={downloadDocumentClicked} verifyDocumentClicked={verifyDocumentClicked}/>
+                                            return <DocumentCard key={document.id} documentData={document} deleteDocumentClicked={deleteDocumentClicked} downloadDocumentClicked={downloadDocumentClicked} verifyDocumentClicked={verifyDocumentClicked} />
                                         })
                                         : <BlankScreen message="" />
                                 }
+                                <div className='newListContainer'>
+                                    <h4>Document Details</h4>
+                                    <ul>
+                                        <li>
+                                            <h6>There is likely additional logging output above.</h6>
+                                            <p>1d ago • 1,896 readers</p>
+                                        </li>
+                                        <li>
+                                            <h6>There is likely additional logging output above.</h6>
+                                            <p>1d ago • 1,896 readers</p>
+                                        </li>
+                                        <li>
+                                            <h6>There is likely additional logging output above.</h6>
+                                            <p>1d ago • 1,896 readers</p>
+                                        </li>
+                                        <li>
+                                            <h6>There is likely additional logging output above.</h6>
+                                            <p>1d ago • 1,896 readers</p>
+                                        </li>
+                                        <li>
+                                            <h6>There is likely additional logging output above.</h6>
+                                            <p>1d ago • 1,896 readers</p>
+                                        </li>
+                                        <li>
+                                            <h6>There is likely additional logging output above.</h6>
+                                            <p>1d ago • 1,896 readers</p>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                     }
                 </div>

@@ -7,7 +7,7 @@ export const ddContainer = css`
     box-shadow: 0px 6.74px 16.85px rgba(191, 21, 108, 0.05);
     border-radius: 6.74px;
     border: 1px solid #363b64;
-    width: 230px;
+    width: 320px;
     margin-left: auto;
     margin-right: auto;
     margin-top:20px;
@@ -101,10 +101,16 @@ export const optionMenu = css`
     padding-top: 3px;
     cursor: pointer;
     outline:none;
-    max-height: 150px;
+    max-height: 140px;
     overflow-y: auto;
     position: absolute;
     z-index: 99;
+    padding: 5px;
+    border-radius: 4px;
+    
+     button:last-child {
+        border-bottom: 1px solid #404040;
+    }
     ::-webkit-scrollbar {
         width: 7px;
     }
@@ -131,6 +137,7 @@ export const optionMenu = css`
         background: none;
         outline:none;
     }
+    
 `
 
 export const innerWrapper = css`
