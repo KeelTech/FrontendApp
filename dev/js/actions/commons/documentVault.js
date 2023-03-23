@@ -80,3 +80,12 @@ export const verifyDocument = (dataParams, dispatch, cb=null)=>{
         if(cb)cb(null, true);
     })
 }
+
+export const getDocumentType = (dataParams, cb=null)=>{
+    API_GET(`${API_BASE_URL}/v1/doc/user-uploaded-docs`
+    ).then((response)=>{
+        if(cb)cb(response, null);
+    }).catch((e)=>{
+        if(cb)cb(null, true);
+    })
+}

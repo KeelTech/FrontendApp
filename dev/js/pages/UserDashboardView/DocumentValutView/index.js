@@ -9,7 +9,7 @@ import LoadingWidget from '@components/LoadingWidget';
 import CustomButton from '@components/CustomButton';
 import CustomSelect from '@components/CustomSelect';
 import CustomSearch from '@components/CustomSearch';
-import { getDocumentsList, deleteDocument, downloadDocument, verifyDocument } from '@actions';
+import { getDocumentsList, deleteDocument, downloadDocument, verifyDocument, getDocumentType } from '@actions';
 import DocumentCard from '@components/DocumentCard';
 import FileUpload from '@components/FileUpload';
 import CustomToaster from '@components/CustomToaster';
@@ -62,6 +62,8 @@ const TaskView = (props) => {
         id: ''
     });
 
+    const[docTypeList, setDocTypeList] = useState({});
+
     let caseId = '';
     if (props && props.match && props.match.params) {
         caseId = props.match.params.caseId;
@@ -79,6 +81,12 @@ const TaskView = (props) => {
             }
         )
         fetchDocuments();
+        getDocumentType({}, (resp, err)=>{
+            console.log("resp", resp);
+            if(resp && resp.data){
+                setDocTypeList(resp.data);
+            }
+        })
     }, [])
 
     const fetchDocuments = () => {
@@ -307,30 +315,14 @@ const TaskView = (props) => {
                                 <div className='newListContainer'>
                                     <h4>Document Details</h4>
                                     <ul>
-                                        <li>
-                                            <h6>There is likely additional logging output above.</h6>
-                                            <p>1d ago • 1,896 readers</p>
-                                        </li>
-                                        <li>
-                                            <h6>There is likely additional logging output above.</h6>
-                                            <p>1d ago • 1,896 readers</p>
-                                        </li>
-                                        <li>
-                                            <h6>There is likely additional logging output above.</h6>
-                                            <p>1d ago • 1,896 readers</p>
-                                        </li>
-                                        <li>
-                                            <h6>There is likely additional logging output above.</h6>
-                                            <p>1d ago • 1,896 readers</p>
-                                        </li>
-                                        <li>
-                                            <h6>There is likely additional logging output above.</h6>
-                                            <p>1d ago • 1,896 readers</p>
-                                        </li>
-                                        <li>
-                                            <h6>There is likely additional logging output above.</h6>
-                                            <p>1d ago • 1,896 readers</p>
-                                        </li>
+                                        {
+                                            Object.entries(docTypeList).map((val, key)=>{
+                                                return (<li key={key}>
+                                                <h6>{val[0]}</h6>
+                                                <p>{val[1]==1?'checked':'cross'}</p>
+                                            </li>)
+                                            })
+                                        }
                                     </ul>
                                 </div>
                             </div>
