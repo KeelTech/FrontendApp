@@ -8324,6 +8324,11 @@ span.percent:after {
 .newTaskMainContainer .customEditFor div.forNewTskBtn:first-child {
   background: #cf3030 !important;
 }
+div.forNewTskBtn{
+  width: 214px;
+  font-size: 12px;
+  margin: 0px;
+}
 span.SelecTFileText {
   height: auto;
   font-size: 12px;

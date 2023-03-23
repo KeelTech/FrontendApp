@@ -41,15 +41,16 @@ export const container = css`
         padding: 8px;
         background: white;
         border-radius: 4px;
-        border: 1px solid #e8e8e8;
+        border: 1px solid #4267b2;
         height:min-content;
         
     }
     
     .newListContainer h4 {
-        font-size: 14px;
-        font-weight: 400;
-        margin-top:5px;
+        margin-top: 5px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
     }
     
     .newListContainer ul li h6 {
@@ -78,6 +79,22 @@ export const container = css`
         display: flex;
     align-items: center;
     gap: 5px;
+    }
+    @media (max-width:767px){
+        .documentList.addingListCont {flex-flow: column-reverse wrap !important;}
+        .newListContainer {
+            width: calc(100% - 15px) !important;
+        }
+        
+        .newListContainer ul {display: flex;flex-wrap: wrap;gap: 15px;margin-bottom: 0;margin-top: 15px !important;}
+        
+        .newListContainer li {
+            padding: 0 !important;
+        }
+        
+        .newListContainer h4 {
+            font-size: 14px !important;
+        }
     }
 `
 

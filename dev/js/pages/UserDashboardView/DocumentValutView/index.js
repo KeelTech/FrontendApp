@@ -317,7 +317,7 @@ const TaskView = (props) => {
                                     }
                                 </div>
                                 <div className='newListContainer'>
-                                    <h4>Document Details</h4>
+                                    <h4>Uploaded Documents</h4>
                                     <ul>
                                         {
                                             Object.entries(docTypeList).map((val, key) => {
