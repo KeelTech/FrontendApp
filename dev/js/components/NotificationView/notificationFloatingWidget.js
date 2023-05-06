@@ -26,6 +26,13 @@ const NotificationFloatingWidget = () => {
         clickHandler(val, false)
     }
 
+    const getMessage = (msg)=>{
+        if(typeof msg ==="string"){
+            return msg;
+        }
+        return msg.title||''
+    }
+
     useEffect(() => {
         timeInterval.current = setInterval(() => {
             getNotification({ recent: true }, dispatch, (val) => {
@@ -62,7 +69,7 @@ const NotificationFloatingWidget = () => {
                                         // </div>
                                         <ul className="popOverNotifiy">
                                             <img src={ASSETS_BASE_URL+"/images/common/crossIcon.svg"} className="crossNoti" onClick={(e)=>closeClicked(e, val)}/>
-                                            <li onClick={()=>clickHandler(val)}>{text||text.title}</li>
+                                            <li onClick={()=>clickHandler(val)}>{getMessage(text)}</li>
                                         </ul>
                                     )
                                 },

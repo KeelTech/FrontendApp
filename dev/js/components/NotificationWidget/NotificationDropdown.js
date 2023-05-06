@@ -33,6 +33,13 @@ const NotificationDropdown = () => {
     }
   }
 
+  const getMessage = (msg)=>{
+    if(typeof msg ==="string"){
+        return msg;
+    }
+    return msg.title||''
+}
+
   return (
     <div className={notification + " " + "testify"}>
       <div className={header}>
@@ -51,7 +58,7 @@ const NotificationDropdown = () => {
                   <img className="img-fluid" src={renderNotificationIcons(recentNotification)} alt="video" />
                 </div>
                 <div className="pushContent">
-                  <h2>{recentNotification.text || recentNotification.text.title}</h2>
+                  <h2>{getMessage(recentNotification.text)}</h2>
                   {/* <p>5 mins ago</p> */}
                 </div>
               </div>

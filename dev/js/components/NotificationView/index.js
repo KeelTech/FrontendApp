@@ -52,6 +52,14 @@ const NotificationView = () => {
     useEffect(()=>{
         getNotification({}, dispatch);
     },[])
+
+    const getMessage = (msg)=>{
+        if(typeof msg ==="string"){
+            return msg;
+        }
+        return msg.title||''
+    }
+    
     return (
         <div className={body + '    ' + 'p-relative pt-5 dashTaskSchSection '}>
             <div className="mainView mainSectionTopSpace">
@@ -78,7 +86,7 @@ const NotificationView = () => {
                                             <img className="img-fluid" src={icon} alt="video" />
                                         </div>
                                         <div className="pushContent">
-                                            <h2>{text||text.title}</h2>
+                                            <h2>{getMessage(text)}</h2>
                                             {/* <p>5 mins ago</p> */}
                                         </div>
                                     </div>
