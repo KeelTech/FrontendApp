@@ -6629,8 +6629,9 @@ span.userChatIco {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  min-height: 260px;
+  /* min-height: 260px; */
       width: 100%;
+      /* margin-top: 8px; */
 }
 
 .widgetCardMain {
@@ -6711,6 +6712,7 @@ span.userChatIco {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-top: 8px;
 }
 .customSelects {
   display: flex;
