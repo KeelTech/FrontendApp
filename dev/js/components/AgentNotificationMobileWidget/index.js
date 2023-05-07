@@ -33,7 +33,7 @@ const AgentNotificationMobileWidget = () => {
     return (
         <div className={body + '    ' + 'p-relative pt-5 dashTaskSchSection '}>
             <div className="mainView mainSectionTopSpace">
-                <Header />
+                {/* <Header /> */}
                 <div className="pushPading">
                     <div className="pushNotification">
                         {

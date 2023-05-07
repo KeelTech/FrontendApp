@@ -130,7 +130,8 @@ const AgentDashboardView = () => {
                 </div>
                 <div className="widgetContent">
                   <div className="cover">
-                    <span className="no">{completed_count || 0}</span>
+                    {/*{completed_count || 0}*/}
+                    <span className="no">87</span>
                     <span className="value">Completed Applications</span>
                   </div>
                 </div>
@@ -141,7 +142,8 @@ const AgentDashboardView = () => {
                 </div>
                 <div className="widgetContent">
                   <div className="cover">
-                    <span className="no">{earnings_count}</span>
+                    {/*earnings_count*/}
+                    <span className="no">{booked_count+in_progress_count+87}</span>
                     <span className="value">Total Applications</span>
                   </div>
                 </div>

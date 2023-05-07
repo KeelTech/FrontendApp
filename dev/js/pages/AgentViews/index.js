@@ -25,7 +25,13 @@ const UserDashboardView = ({ match }) => {
         if(pathName!= '/agent/customer'){
             getAgentProfile({}, dispatch);
         }
-        getAgentNotification({}, dispatch);
+        const interval = setInterval(() => {
+            getAgentNotification({}, dispatch);            
+        }, 5000);
+
+        return ()=>{
+            clearInterval(interval);
+        }
     }, [])
 
     return (
