@@ -51,6 +51,7 @@ export const container = css`
     .deleteCta{
         display: flex;
         width: 100%;
+        gap:10px;
     }
     .delAction{
         flex: 1;
