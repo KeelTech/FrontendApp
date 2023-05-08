@@ -27,11 +27,7 @@ const FileUpload = ({ fileUploadModalClosed, uploadFile, isUploadToServer=false,
 
     useEffect(()=>{
         setLoading(true);
-        const dataType = {};
-        if(isAgent){
-            dataType['case_id']=caseId;
-        }
-        getDocumentTypes(dataType, dispatch, (resp, err)=>{
+        getDocumentTypes({}, dispatch, (resp, err)=>{
             setLoading(false);
             if(resp && resp.data && resp.data.length){
                 const filterData = resp.data.map((val)=>{

@@ -65,6 +65,8 @@ const TaskView = (props) => {
     });
 
     const [docTypeList, setDocTypeList] = useState({});
+    const logginInfo = useSelector(state => state.LOGIN);
+    const { isAgent } = logginInfo || {};
 
     let caseId = '';
     if (props && props.match && props.match.params) {
@@ -83,7 +85,11 @@ const TaskView = (props) => {
             }
         )
         fetchDocuments();
-        getDocumentType({}, (resp, err) => {
+        const dataType = {};
+        if(isAgent){
+            dataType['case_id']=caseId;
+        }
+        getDocumentType(dataType, (resp, err) => {
             console.log("resp", resp);
             if (resp && resp.data) {
                 setDocTypeList(resp.data);
