@@ -71,7 +71,7 @@ const DocumentCard = ({ documentData, downloadDocumentClicked, deleteDocumentCli
             </div>
             {/* <div className="docOverlay"></div> */}
             {
-                showMenuBar ? <DocumentModal id={id} docId={doc_id} toggle={toggleMenuBar} orignal_file_name={orignal_file_name} downloadDocumentClicked={downloadDocumentClicked} deleteDocumentClicked={deleteDocumentClicked} /> : null
+                showMenuBar ? <DocumentModal id={id} docId={doc_id} toggle={toggleMenuBar} orignal_file_name={orignal_file_name} downloadDocumentClicked={downloadDocumentClicked} deleteDocumentClicked={deleteDocumentClicked} hideDelete={isAgent?true:false}/> : null
             }
         </div>
     )
