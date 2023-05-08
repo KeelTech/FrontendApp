@@ -90,7 +90,6 @@ const TaskView = (props) => {
             dataType['case_id']=caseId;
         }
         getDocumentType(dataType, (resp, err) => {
-            console.log("resp", resp);
             if (resp && resp.data) {
                 setDocTypeList(resp.data);
             }
@@ -317,7 +316,7 @@ const TaskView = (props) => {
                                     {
                                         documentListFiltered.length ?
                                             documentListFiltered.map((document) => {
-                                                return <DocumentCard key={document.id} documentData={document} deleteDocumentClicked={deleteDocumentClicked} downloadDocumentClicked={downloadDocumentClicked} verifyDocumentClicked={verifyDocumentClicked} />
+                                                return <DocumentCard key={document.id} documentData={document} deleteDocumentClicked={deleteDocumentClicked} downloadDocumentClicked={downloadDocumentClicked} verifyDocumentClicked={verifyDocumentClicked}/>
                                             })
                                             : <BlankScreen message="" />
                                     }
