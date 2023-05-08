@@ -296,7 +296,7 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
                 loading && <div className="loadingScrn"><LoadingWidget /></div>
             }
             {
-                openUploadDocumentModal ? <FileUpload maxWidth="600px" isUploadToServer fileUploadModalClosed={toggleUploadModal} uploadFile={uploadFile} task_id={dataParams && dataParams.task_id} /> : null
+                openUploadDocumentModal ? <FileUpload caseId={case_id} maxWidth="600px" isUploadToServer fileUploadModalClosed={toggleUploadModal} uploadFile={uploadFile} task_id={dataParams && dataParams.task_id} /> : null
             }
             {
                 showDeleteConfirmation ? <DeleteConfirmationPopup togglePopup={toggleDeletePopup} deletePopupHandler={deletePopupHandler} /> : null

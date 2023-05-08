@@ -41,8 +41,8 @@ export const uploadDocument = (dataParams, dispatch, cb=null)=>{
 }
 
 export const getDocumentTypes = (dataParams, dispatch, cb=null)=>{
-    
-    API_GET(`${API_BASE_URL}/v1/doc/doc-type-list`, {
+    const case_id=dataParams && dataParams.case_id||"";
+    API_GET(`${API_BASE_URL}/v1/doc/doc-type-list?case_id=${case_id}`, {
         ...dataParams
     }).then((response)=>{
         if(cb)cb(response, null);

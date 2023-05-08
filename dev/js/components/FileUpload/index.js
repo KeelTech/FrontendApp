@@ -6,6 +6,7 @@ import CustomDropDown from '@components/CustomDropdown';
 import CustomToaster from '@components/CustomToaster';
 import LoadingWidget from '@components/LoadingWidget';
 import { loaderView } from '@constants';
+import { useSelector } from 'react-redux';
 
 const FileUpload = ({ fileUploadModalClosed, uploadFile, isUploadToServer=false, task_id, maxWidth="890px", caseId="" }) => {
     const dispatch = useDispatch();
@@ -21,9 +22,16 @@ const FileUpload = ({ fileUploadModalClosed, uploadFile, isUploadToServer=false,
     const [documentTypes, setDocumentTypes] = useState([]);
     const [loading, setLoading] = useState('');
 
+    const logginInfo = useSelector(state => state.LOGIN);
+    const { isAgent } = logginInfo || {};
+
     useEffect(()=>{
         setLoading(true);
-        getDocumentTypes({}, dispatch, (resp, err)=>{
+        const dataType = {};
+        if(isAgent){
+            dataType['case_id']=caseId;
+        }
+        getDocumentTypes(dataType, dispatch, (resp, err)=>{
             setLoading(false);
             if(resp && resp.data && resp.data.length){
                 const filterData = resp.data.map((val)=>{
