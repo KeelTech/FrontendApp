@@ -82,8 +82,12 @@ export const verifyDocument = (dataParams, dispatch, cb=null)=>{
 }
 
 export const getDocumentType = (dataParams, cb=null)=>{
-    API_GET(`${API_BASE_URL}/v1/doc/user-uploaded-docs`
-    ).then((response)=>{
+    const case_id=dataParams && dataParams.case_id||"";
+    let url = `${API_BASE_URL}/v1/doc/user-uploaded-docs`;
+    if(case_id){
+        url+=`?case_id=${case_id}`
+    }
+    API_GET(url).then((response)=>{
         if(cb)cb(response, null);
     }).catch((e)=>{
         if(cb)cb(null, true);

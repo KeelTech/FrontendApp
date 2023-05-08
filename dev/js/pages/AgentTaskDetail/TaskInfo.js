@@ -354,7 +354,7 @@ const TaskInfo = ({ taskDetail, refetchTaskDetail, refetchTaskList }) => {
                             <img className="icon" src={ASSETS_BASE_URL + "/images/common/blueCalendar.svg"} alt="home" />
                             <span className="hideMobile">Select</span><span>Due Date</span>
                         </div>
-                        <input className="taskInputBlock" type="date" id="dueDate" name="dueDate" defaultValue={defaultDueDate} onChange={(e) => setDataValues({ due_date: new Date(e.target.value) })} />
+                        <input className="taskInputBlock" type="date" id="dueDate" name="dueDate" defaultValue={new Date(defaultDueDate).toLocaleDateString('en-CA')} onChange={(e) => setDataValues({ due_date: new Date(e.target.value) })} />
                     </div>
                 </div>
                 <div className={discussionSection + " " + "discussionSectionNew"}>
